@@ -49,19 +49,25 @@
 
 ### **🟡 REFERENCE DOCUMENTS (Supporting)**
 
-4. **[CURRENT_VS_SPOTIFY_COMPARISON.md](./CURRENT_VS_SPOTIFY_COMPARISON.md)**
+4. **[EXTRACTION_AUTOMATION.md](./EXTRACTION_AUTOMATION.md)** ⭐ **NEW**
+   - **Purpose**: Copy-paste ready DevTools scripts for automated extraction
+   - **Audience**: Reverse Engineering Specialist
+   - **Contains**: Complete JavaScript scripts for colors, typography, sidebar, player, spacing
+   - **Status**: ✅ Ready to use
+
+5. **[CURRENT_VS_SPOTIFY_COMPARISON.md](./CURRENT_VS_SPOTIFY_COMPARISON.md)**
    - **Purpose**: Baseline comparison (what we have vs what we need)
    - **Audience**: Reverse Engineering Specialist, Front-End Specialist
    - **Contains**: Current implementation analysis, discrepancies
    - **Status**: ✅ Baseline documented
 
-5. **[AUDIT_STATUS.md](./AUDIT_STATUS.md)**
+6. **[AUDIT_STATUS.md](./AUDIT_STATUS.md)**
    - **Purpose**: Real-time progress tracking
    - **Audience**: Project Manager, All agents
    - **Contains**: Progress metrics, checklist status, blocker tracking
    - **Status**: ✅ Ready for updates
 
-6. **[REVERSE_ENGINEERING_SUMMARY.md](./REVERSE_ENGINEERING_SUMMARY.md)**
+7. **[REVERSE_ENGINEERING_SUMMARY.md](./REVERSE_ENGINEERING_SUMMARY.md)**
    - **Purpose**: Executive summary of preparation
    - **Audience**: Project Manager, Orchestrator
    - **Contains**: Overview, key findings, success criteria
@@ -71,17 +77,17 @@
 
 ### **🟢 RELATED DOCUMENTS (Project Context)**
 
-7. **[COMPLETE_REQUIREMENTS_CHECKLIST.md](./COMPLETE_REQUIREMENTS_CHECKLIST.md)**
+8. **[COMPLETE_REQUIREMENTS_CHECKLIST.md](./COMPLETE_REQUIREMENTS_CHECKLIST.md)**
    - **Purpose**: All project requirements verification
    - **Audience**: All agents
    - **Contains**: Feature requirements, agent mappings
 
-8. **[AGENT_SPECIFIC_PLAN.md](./AGENT_SPECIFIC_PLAN.md)**
+9. **[AGENT_SPECIFIC_PLAN.md](./AGENT_SPECIFIC_PLAN.md)**
    - **Purpose**: Agent-specific task breakdown
    - **Audience**: Individual agents
    - **Contains**: 17 agent role definitions, dependencies
 
-9. **[GAP_ANALYSIS.md](./GAP_ANALYSIS.md)**
+10. **[GAP_ANALYSIS.md](./GAP_ANALYSIS.md)**
    - **Purpose**: Missing features analysis
    - **Audience**: Project Manager, Orchestrator
    - **Contains**: Identified gaps, prioritization
@@ -125,6 +131,7 @@
 
 ### **"I need to extract values from Spotify"**
 → Start: [`EXTRACTION_QUICK_START.md`](./EXTRACTION_QUICK_START.md)  
+→ **NEW**: Use automated scripts: [`EXTRACTION_AUTOMATION.md`](./EXTRACTION_AUTOMATION.md)  
 → Checklist: [`REVERSE_ENGINEERING_AUDIT.md`](./REVERSE_ENGINEERING_AUDIT.md)
 
 ### **"What do we currently have vs what we need?"**
