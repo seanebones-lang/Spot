@@ -25,6 +25,23 @@ class AudioPlayer {
       src: [audioUrl],
       html5: true,
       format: ['mp3', 'wav', 'm4a', 'flac'],
+      onload: () => {
+        console.log('Audio loaded successfully:', audioUrl);
+      },
+      onloaderror: (id, error) => {
+        console.error('Audio load error:', audioUrl, error);
+      },
+      onplayerror: (id, error) => {
+        console.error('Audio play error:', audioUrl, error);
+        // Try reloading
+        if (this.sound) {
+          this.sound.once('unlock', () => {
+            if (this.sound) {
+              this.sound.play();
+            }
+          });
+        }
+      },
       onend: () => {
         if (this.onEnd) {
           this.onEnd();

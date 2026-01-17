@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { mockData } from '@/lib/data';
@@ -232,10 +233,17 @@ const browseCategories: BrowseCategory[] = [
 ];
 
 export default function SearchPage() {
+  const searchParams = useSearchParams();
   const [query, setQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState<'all' | 'music' | 'podcasts' | 'audiobooks'>('all');
   const { addSearch } = useSearchStore();
   const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying } = usePlayerStore();
+  
+  // Sync query from URL search params
+  useEffect(() => {
+    const urlQuery = searchParams.get('q') || '';
+    setQuery(urlQuery);
+  }, [searchParams]);
   
   const tracks = mockData.getTracks();
   const artists = mockData.getArtists();
@@ -482,11 +490,8 @@ export default function SearchPage() {
       </div>
 
       <div className="p-8">
-
-      {query && (
-        <>
-          {/* Songs */}
-          {filteredTracks.length > 0 && (
+        {/* Songs */}
+        {filteredTracks.length > 0 && (
             <section className="mb-8">
               <h2 className="text-2xl font-bold mb-4 text-white">Songs</h2>
               <div className="space-y-2">
@@ -518,10 +523,10 @@ export default function SearchPage() {
                 ))}
               </div>
             </section>
-          )}
+        )}
 
-          {/* Artists */}
-          {filteredArtists.length > 0 && (
+        {/* Artists */}
+        {filteredArtists.length > 0 && (
             <section className="mb-8">
               <h2 className="text-2xl font-bold mb-4 text-white">Artists</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -545,10 +550,10 @@ export default function SearchPage() {
                 ))}
               </div>
             </section>
-          )}
+        )}
 
-          {/* Playlists */}
-          {filteredPlaylists.length > 0 && (
+        {/* Playlists */}
+        {filteredPlaylists.length > 0 && (
             <section className="mb-8">
               <h2 className="text-2xl font-bold mb-4 text-white">Playlists</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -572,10 +577,10 @@ export default function SearchPage() {
                 ))}
               </div>
             </section>
-          )}
+        )}
 
-          {/* Albums */}
-          {filteredAlbums.length > 0 && (
+        {/* Albums */}
+        {filteredAlbums.length > 0 && (
             <section className="mb-8">
               <h2 className="text-2xl font-bold mb-4 text-white">Albums</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -602,13 +607,11 @@ export default function SearchPage() {
             </section>
           )}
 
-          {filteredTracks.length === 0 && filteredArtists.length === 0 && filteredPlaylists.length === 0 && filteredAlbums.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-spotify-text-gray text-lg">No results found for &quot;{query}&quot;</p>
-            </div>
-          )}
-        </>
-      )}
+        {filteredTracks.length === 0 && filteredArtists.length === 0 && filteredPlaylists.length === 0 && filteredAlbums.length === 0 && (
+          <div className="text-center py-16">
+            <p className="text-spotify-text-gray text-lg">No results found for &quot;{query}&quot;</p>
+          </div>
+        )}
       </div>
     </div>
   );

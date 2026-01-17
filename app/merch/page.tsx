@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 
 // Mock merch data
 const merchItems = [
+  // Apparel
   {
     id: '1',
     name: 'EmPulse Music T-Shirt',
@@ -25,10 +26,147 @@ const merchItems = [
   },
   {
     id: '3',
+    name: 'EmPulse Logo Cap',
+    price: '$24.99',
+    image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop&q=80',
+    category: 'Apparel'
+  },
+  {
+    id: '4',
+    name: 'Music Note Crewneck',
+    price: '$49.99',
+    image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=400&fit=crop&q=80',
+    category: 'Apparel'
+  },
+  {
+    id: '5',
+    name: 'Vintage Band Tee',
+    price: '$34.99',
+    image: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=400&h=400&fit=crop&q=80',
+    category: 'Apparel'
+  },
+  {
+    id: '6',
+    name: 'Wellness Tank Top',
+    price: '$27.99',
+    image: 'https://images.unsplash.com/photo-1607344645866-009c8c4069aa?w=400&h=400&fit=crop&q=80',
+    category: 'Apparel'
+  },
+  // Music & Vinyl
+  {
+    id: '7',
     name: 'Metal Essentials Vinyl',
     price: '$24.99',
     image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80',
     category: 'Music'
+  },
+  {
+    id: '8',
+    name: 'Chill Vibes LP',
+    price: '$27.99',
+    image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80',
+    category: 'Music'
+  },
+  {
+    id: '9',
+    name: 'Electronic Dreams Record',
+    price: '$26.99',
+    image: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop&q=80',
+    category: 'Music'
+  },
+  {
+    id: '10',
+    name: 'Jazz Collection Vinyl',
+    price: '$29.99',
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80',
+    category: 'Music'
+  },
+  // Accessories
+  {
+    id: '11',
+    name: 'Music Festival Tote Bag',
+    price: '$19.99',
+    image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop&q=80',
+    category: 'Accessories'
+  },
+  {
+    id: '12',
+    name: 'EmPulse Water Bottle',
+    price: '$22.99',
+    image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop&q=80',
+    category: 'Accessories'
+  },
+  {
+    id: '13',
+    name: 'Studio Headphones',
+    price: '$79.99',
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop&q=80',
+    category: 'Accessories'
+  },
+  {
+    id: '14',
+    name: 'Vinyl Record Stand',
+    price: '$39.99',
+    image: 'https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=400&h=400&fit=crop&q=80',
+    category: 'Accessories'
+  },
+  {
+    id: '15',
+    name: 'Music Note Keychain',
+    price: '$12.99',
+    image: 'https://images.unsplash.com/photo-1583385276756-6d7556590b53?w=400&h=400&fit=crop&q=80',
+    category: 'Accessories'
+  },
+  // Collectibles
+  {
+    id: '16',
+    name: 'Limited Edition Poster',
+    price: '$34.99',
+    image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516?w=400&h=400&fit=crop&q=80',
+    category: 'Collectibles'
+  },
+  {
+    id: '17',
+    name: 'Artist Autograph Book',
+    price: '$18.99',
+    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=400&fit=crop&q=80',
+    category: 'Collectibles'
+  },
+  {
+    id: '18',
+    name: 'Concert Ticket Stub Frame',
+    price: '$29.99',
+    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&q=80',
+    category: 'Collectibles'
+  },
+  // Home & Lifestyle
+  {
+    id: '19',
+    name: 'Record Player',
+    price: '$149.99',
+    image: 'https://images.unsplash.com/photo-1566108005-0ce11d9c8fd5?w=400&h=400&fit=crop&q=80',
+    category: 'Home & Lifestyle'
+  },
+  {
+    id: '20',
+    name: 'Music Mood Candle',
+    price: '$24.99',
+    image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=400&fit=crop&q=80',
+    category: 'Home & Lifestyle'
+  },
+  {
+    id: '21',
+    name: 'Vinyl Storage Box',
+    price: '$44.99',
+    image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=400&fit=crop&q=80',
+    category: 'Home & Lifestyle'
+  },
+  {
+    id: '22',
+    name: 'Music Notes Throw Pillow',
+    price: '$32.99',
+    image: 'https://images.unsplash.com/photo-1584100936595-6086aae25d72?w=400&h=400&fit=crop&q=80',
+    category: 'Home & Lifestyle'
   },
 ];
 
@@ -94,7 +232,7 @@ export default function MerchPage() {
               <p className="text-spotify-green font-medium mb-3">{item.price}</p>
               <button
                 onClick={() => handleAddToCart(item)}
-                className="w-full bg-spotify-green hover:bg-spotify-green/80 text-black py-2 rounded-full font-medium text-sm transition-colors"
+                className="w-full bg-transparent border-2 border-spotify-green text-spotify-green hover:shadow-[0_0_20px_rgba(29,185,84,0.6)] py-2 rounded-full font-medium text-sm transition-all duration-300"
               >
                 Add to Cart
               </button>
@@ -167,7 +305,7 @@ export default function MerchPage() {
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
-                <button className="w-full bg-spotify-green hover:bg-spotify-green/80 text-black py-3 rounded-full font-semibold transition-colors">
+                <button className="w-full bg-transparent border-2 border-spotify-green text-spotify-green hover:shadow-[0_0_20px_rgba(29,185,84,0.6)] py-3 rounded-full font-semibold transition-all duration-300">
                   Checkout
                 </button>
               </div>

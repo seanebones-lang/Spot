@@ -109,7 +109,7 @@ export default function TopBar() {
         )}
 
         {/* Daily Affirmation Button */}
-        <button className="bg-empulse-purple hover:bg-empulse-purple/80 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
+        <button className="bg-transparent border-2 border-empulse-purple text-empulse-purple hover:shadow-[0_0_20px_rgba(139,92,246,0.6)] px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
           Affirmations
         </button>
 

@@ -44,6 +44,7 @@ export default function Player() {
 
   useEffect(() => {
     if (currentTrack) {
+      console.log('🎧 Player: Loading track:', currentTrack.name, currentTrack.audioUrl);
       audioPlayer.loadTrack(
         currentTrack.audioUrl,
         currentTrack.id,
@@ -58,13 +59,18 @@ export default function Player() {
           }
         }
       );
+    } else {
+      console.log('⚠️ Player: No currentTrack set');
     }
   }, [currentTrack, repeat, playNext, setProgress]);
 
   useEffect(() => {
+    console.log('🎮 Player: isPlaying changed to:', isPlaying);
     if (isPlaying) {
+      console.log('▶️ Player: Starting playback');
       audioPlayer.play();
     } else {
+      console.log('⏸️ Player: Pausing playback');
       audioPlayer.pause();
     }
   }, [isPlaying]);
@@ -90,29 +96,37 @@ export default function Player() {
     ? (progress / 100) * currentTrack.duration 
     : 0;
 
-  if (!currentTrack) {
-    return null;
-  }
-
   return (
     <div className="fixed bottom-0 left-0 right-0 h-player-height bg-spotify-dark-gray border-t border-spotify-light-gray px-4 z-50">
       <div className="flex items-center justify-between h-full max-w-screen-2xl mx-auto">
         {/* Left - Now Playing */}
         <div className="flex items-center gap-4 flex-1 min-w-0">
           <div className="w-14 h-14 bg-spotify-light-gray rounded flex-shrink-0">
-            {currentTrack.coverArt && (
+            {currentTrack?.coverArt ? (
               <img
                 src={currentTrack.coverArt}
                 alt={currentTrack.name}
                 className="w-full h-full object-cover rounded"
               />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-2xl">🎵</span>
+              </div>
             )}
           </div>
-          <div className="min-w-0">
-            <div className="text-sm font-medium text-white truncate">{currentTrack.name}</div>
-            <div className="text-xs text-spotify-text-gray truncate">{currentTrack.artist}</div>
-          </div>
-          <MoodWidget track={currentTrack} />
+          {currentTrack ? (
+            <>
+              <div className="min-w-0">
+                <div className="text-sm font-medium text-white truncate">{currentTrack.name}</div>
+                <div className="text-xs text-spotify-text-gray truncate">{currentTrack.artist}</div>
+              </div>
+              <MoodWidget track={currentTrack} />
+            </>
+          ) : (
+            <div className="text-sm text-spotify-text-gray">
+              No track selected
+            </div>
+          )}
         </div>
 
         {/* Center - Controls */}
@@ -120,7 +134,8 @@ export default function Player() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShuffle(!shuffle)}
-              className={`text-spotify-text-gray hover:text-white transition-colors ${
+              disabled={!currentTrack}
+              className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                 shuffle ? 'text-spotify-green' : ''
               }`}
             >
@@ -128,14 +143,21 @@ export default function Player() {
             </button>
             <button
               onClick={playPrevious}
-              className="text-spotify-text-gray hover:text-white transition-colors"
+              disabled={!currentTrack}
+              className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <SkipBack size={20} />
             </button>
-            <PlayButton isPlaying={isPlaying} onClick={handlePlayPause} size="md" />
+            <PlayButton 
+              isPlaying={isPlaying} 
+              onClick={handlePlayPause} 
+              size="md"
+              disabled={!currentTrack}
+            />
             <button
               onClick={playNext}
-              className="text-spotify-text-gray hover:text-white transition-colors"
+              disabled={!currentTrack}
+              className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <SkipForward size={20} />
             </button>
@@ -145,19 +167,22 @@ export default function Player() {
                 const currentIndex = modes.indexOf(repeat);
                 setRepeat(modes[(currentIndex + 1) % modes.length]);
               }}
-              className={`text-spotify-text-gray hover:text-white transition-colors ${
+              disabled={!currentTrack}
+              className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                 repeat !== 'off' ? 'text-spotify-green' : ''
               }`}
             >
               <Repeat size={16} />
             </button>
           </div>
-          <ProgressBar
-            progress={progress}
-            duration={currentTrack.duration * 1000}
-            currentTime={currentTime * 1000}
-            onSeek={handleSeek}
-          />
+          {currentTrack && (
+            <ProgressBar
+              progress={progress}
+              duration={currentTrack.duration * 1000}
+              currentTime={currentTime * 1000}
+              onSeek={handleSeek}
+            />
+          )}
         </div>
 
         {/* Right - Volume & Extras */}
@@ -171,19 +196,22 @@ export default function Player() {
           )}
           <button
             onClick={() => setIsQueueOpen(true)}
-            className="text-spotify-text-gray hover:text-white transition-colors"
+            disabled={!currentTrack}
+            className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             title="Queue"
           >
             <List size={20} />
           </button>
-          <button
-            onClick={() => setIsFullScreen(true)}
-            className="text-spotify-text-gray hover:text-white transition-colors"
-            title="Full screen"
-          >
-            <Maximize2 size={20} />
-          </button>
-          <PictureInPicturePlayer />
+          {currentTrack && (
+            <button
+              onClick={() => setIsFullScreen(true)}
+              className="text-spotify-text-gray hover:text-white transition-colors"
+              title="Full screen"
+            >
+              <Maximize2 size={20} />
+            </button>
+          )}
+          {currentTrack && <PictureInPicturePlayer />}
           <VolumeControl volume={volume} onVolumeChange={setVolume} />
         </div>
       </div>

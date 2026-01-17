@@ -8,9 +8,10 @@ interface PlayButtonProps {
   onClick: (e?: React.MouseEvent) => void;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  disabled?: boolean;
 }
 
-export default function PlayButton({ isPlaying, onClick, size = 'md', className }: PlayButtonProps) {
+export default function PlayButton({ isPlaying, onClick, size = 'md', className, disabled = false }: PlayButtonProps) {
   const sizes = {
     sm: 'w-8 h-8',
     md: 'w-12 h-12',
@@ -20,9 +21,11 @@ export default function PlayButton({ isPlaying, onClick, size = 'md', className 
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       className={cn(
         "bg-spotify-green hover:scale-105 rounded-full flex items-center justify-center transition-transform shadow-lg",
         sizes[size],
+        disabled && "opacity-50 cursor-not-allowed hover:scale-100",
         className
       )}
     >
