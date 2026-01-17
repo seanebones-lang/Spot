@@ -1,9 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Award, Flame } from 'lucide-react';
+import { Search, Award, Flame, PanelRight, X } from 'lucide-react';
 import { usePointsStore } from '@/stores/pointsStore';
 import { useCheckInStore } from '@/stores/checkInStore';
+import { useUIStore } from '@/stores/uiStore';
+import UserMenu from '@/components/UserMenu';
+import { cn } from '@/lib/utils';
 
 export default function TopBar() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -11,8 +14,16 @@ export default function TopBar() {
   const { getStreak } = useCheckInStore();
   const streak = getStreak();
 
+  const { leftSidebarCollapsed, rightSidebarOpen, toggleRightSidebar } = useUIStore();
+
   return (
-    <div className="fixed top-0 left-64 right-0 h-16 bg-spotify-dark/80 backdrop-blur-md z-40 flex items-center justify-between px-8">
+    <div 
+      className={cn(
+        "fixed top-0 h-16 bg-spotify-dark/80 backdrop-blur-md z-40 flex items-center justify-between px-8 transition-all duration-300 ease-in-out",
+        leftSidebarCollapsed ? "left-16" : "left-64",
+        rightSidebarOpen ? "right-80" : "right-0"
+      )}
+    >
       {/* Search Bar */}
       <div className="flex-1 max-w-md relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-spotify-text-gray" size={20} />
@@ -46,11 +57,21 @@ export default function TopBar() {
           Affirmations
         </button>
 
+        {/* Right Sidebar Toggle */}
+        <button
+          onClick={toggleRightSidebar}
+          className={cn(
+            "w-8 h-8 flex items-center justify-center text-spotify-text-gray hover:text-white hover:bg-spotify-light-gray/50 rounded-full transition-colors",
+            rightSidebarOpen && "text-white bg-spotify-light-gray/50"
+          )}
+          aria-label={rightSidebarOpen ? "Close right sidebar" : "Open right sidebar"}
+          title={rightSidebarOpen ? "Close sidebar" : "Open sidebar"}
+        >
+          {rightSidebarOpen ? <X size={20} /> : <PanelRight size={20} />}
+        </button>
+
         {/* User Menu */}
-        <div className="flex items-center gap-3 cursor-pointer hover:bg-spotify-light-gray/50 rounded-full p-1 pr-3 transition-colors">
-          <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full"></div>
-          <span className="text-sm font-medium">User</span>
-        </div>
+        <UserMenu userName="Bones" userEmail="bones@nextEleven.com" subscriptionTier="Premium" />
       </div>
     </div>
   );
