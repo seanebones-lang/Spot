@@ -1,0 +1,27 @@
+[
+  {
+    "id": "artist-1",
+    "name": "Kendrick Lamar",
+    "image": "https://i.scdn.co/image/ab6761610000e5eb1234567890abcdef",
+    "followers": 25000000,
+    "verified": true,
+    "bio": "Award-winning artist",
+    "genre": ["Hip-Hop", "Rap"]
+  },
+  {
+    "id": "artist-2",
+    "name": "Drake",
+    "image": "https://i.scdn.co/image/ab6761610000e5ebabcdef1234567890",
+    "followers": 45000000,
+    "verified": true,
+    "genre": ["Hip-Hop", "R&B"]
+  },
+  {
+    "id": "artist-3",
+    "name": "The Weeknd",
+    "image": "https://i.scdn.co/image/ab6761610000e5ebfedcba9876543210",
+    "followers": 35000000,
+    "verified": true,
+    "genre": ["R&B", "Pop"]
+  }
+]

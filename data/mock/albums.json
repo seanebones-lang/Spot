@@ -1,0 +1,25 @@
+[
+  {
+    "id": "album-1",
+    "name": "Example Album",
+    "artist": {
+      "id": "artist-1",
+      "name": "Example Artist",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb1234567890abcdef",
+      "followers": 1000000,
+      "verified": true
+    },
+    "coverArt": "https://i.scdn.co/image/ab67616d0000b2731234567890abcdef",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "I Just Might",
+        "duration": 210000
+      }
+    ],
+    "releaseDate": "2024-01-15",
+    "label": "Example Records",
+    "copyright": "© 2024 Example Records",
+    "totalDuration": 210000
+  }
+]

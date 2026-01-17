@@ -1,0 +1,55 @@
+[
+  {
+    "id": "playlist-1",
+    "name": "Trending Songs",
+    "description": "The hottest tracks right now",
+    "coverArt": "https://i.scdn.co/image/ab67706f000000021234567890abcdef",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "I Just Might",
+        "duration": 210000
+      },
+      {
+        "id": "track-2",
+        "name": "HELICOPTER",
+        "duration": 195000
+      }
+    ],
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": ["Great", "Excited"],
+      "vibe": 80,
+      "genres": ["Pop", "Electronic"]
+    },
+    "totalDuration": 405000,
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-15T00:00:00Z"
+  },
+  {
+    "id": "playlist-2",
+    "name": "Chill Vibes",
+    "description": "Relax and unwind",
+    "coverArt": "https://i.scdn.co/image/ab67706f00000002abcdef1234567890",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-3",
+        "name": "Die On This Hill",
+        "duration": 220000
+      }
+    ],
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": ["Relaxed", "Reflective"],
+      "vibe": 25,
+      "genres": ["Folk", "Indie"]
+    },
+    "totalDuration": 220000,
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-15T00:00:00Z"
+  }
+]
