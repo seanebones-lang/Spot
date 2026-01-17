@@ -1,0 +1,60 @@
+[
+  {
+    "id": "track-1",
+    "name": "I Just Might",
+    "artist": "Example Artist",
+    "artistId": "artist-1",
+    "album": "Example Album",
+    "albumId": "album-1",
+    "duration": 210000,
+    "audioUrl": "/audio/placeholder.mp3",
+    "coverArt": "https://i.scdn.co/image/ab67616d0000b2731234567890abcdef",
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": ["Great", "Confident"],
+      "vibe": 85,
+      "genres": ["Pop", "Electronic"]
+    },
+    "format": "MP3",
+    "quality": "high",
+    "releaseDate": "2024-01-15"
+  },
+  {
+    "id": "track-2",
+    "name": "HELICOPTER",
+    "artist": "Another Artist",
+    "artistId": "artist-2",
+    "album": "Another Album",
+    "albumId": "album-2",
+    "duration": 195000,
+    "audioUrl": "/audio/placeholder2.mp3",
+    "coverArt": "https://i.scdn.co/image/ab67616d0000b273abcdef1234567890",
+    "moodTags": {
+      "mood": "Energetic",
+      "feelings": ["Excited", "Energetic"],
+      "vibe": 95,
+      "genres": ["Rock", "Alternative"]
+    },
+    "format": "MP3",
+    "quality": "high"
+  },
+  {
+    "id": "track-3",
+    "name": "Die On This Hill",
+    "artist": "Third Artist",
+    "artistId": "artist-3",
+    "album": "Third Album",
+    "albumId": "album-3",
+    "duration": 220000,
+    "audioUrl": "/audio/placeholder3.mp3",
+    "coverArt": "https://i.scdn.co/image/ab67616d0000b273fedcba9876543210",
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": ["Reflective", "Nostalgic"],
+      "vibe": 30,
+      "genres": ["Folk", "Indie"]
+    },
+    "format": "WAV",
+    "quality": "lossless"
+  }
+]
