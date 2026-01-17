@@ -1,16 +1,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, Check } from 'lucide-react';
+import { X, Check, Mic } from 'lucide-react';
 import { useUIStore } from '@/stores/uiStore';
 import { usePlayerStore } from '@/stores/playerStore';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import LyricsView from './LyricsView';
+
+type SidebarView = 'details' | 'lyrics';
 
 export default function RightSidebar() {
   const { rightSidebarOpen, rightSidebarWidth, setRightSidebarOpen, setRightSidebarWidth } = useUIStore();
   const { currentTrack } = usePlayerStore();
   const [isResizing, setIsResizing] = useState(false);
+  const [view, setView] = useState<SidebarView>('details');
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -64,12 +68,40 @@ export default function RightSidebar() {
             <X size={20} />
           </button>
 
+          {/* View Toggle Buttons */}
+          <div className="flex items-center gap-2 p-4 border-b border-white/10">
+            <button
+              onClick={() => setView('details')}
+              className={cn(
+                "px-4 py-2 rounded-full text-sm font-medium transition-colors",
+                view === 'details'
+                  ? 'bg-white text-black'
+                  : 'bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10'
+              )}
+            >
+              Details
+            </button>
+            <button
+              onClick={() => setView('lyrics')}
+              className={cn(
+                "px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2",
+                view === 'lyrics'
+                  ? 'bg-white text-black'
+                  : 'bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10'
+              )}
+            >
+              <Mic size={16} />
+              Lyrics
+            </button>
+          </div>
+
           {/* Content */}
-          <div className="p-6">
-            {/* Playlist/Album Title */}
-            <h2 className="text-sm font-medium text-white mb-6 uppercase tracking-wider">
-              {playlistName}
-            </h2>
+          {view === 'details' ? (
+            <div className="p-6">
+              {/* Playlist/Album Title */}
+              <h2 className="text-sm font-medium text-white mb-6 uppercase tracking-wider">
+                {playlistName}
+              </h2>
 
             {/* Album Art & Info */}
             {currentTrack && (
@@ -126,12 +158,6 @@ export default function RightSidebar() {
                   </button>
                 </div>
 
-                {currentTrack?.composer && (
-                  <div>
-                    <div className="text-sm text-white font-medium">{currentTrack.composer}</div>
-                    <div className="text-xs text-spotify-text-gray">Composer, Lyricist</div>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -145,6 +171,11 @@ export default function RightSidebar() {
               </div>
             </div>
           </div>
+          ) : (
+            <div className="h-[calc(100vh-200px)]">
+              <LyricsView />
+            </div>
+          )}
         </>
       )}
       </div>

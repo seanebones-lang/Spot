@@ -1,9 +1,10 @@
 'use client';
 
-import { X } from 'lucide-react';
+import { X, Trash2, GripVertical, Power } from 'lucide-react';
+import { useState } from 'react';
 import { usePlayerStore } from '@/stores/playerStore';
 import PlayButton from './PlayButton';
-import { formatDuration } from '@/lib/utils';
+import { formatDuration, cn } from '@/lib/utils';
 
 interface QueuePanelProps {
   isOpen: boolean;
@@ -11,21 +12,94 @@ interface QueuePanelProps {
 }
 
 export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
-  const { queue, currentTrack, setCurrentTrack, setIsPlaying } = usePlayerStore();
+  const { 
+    queue, 
+    currentTrack, 
+    setCurrentTrack, 
+    setIsPlaying,
+    removeFromQueue,
+    clearQueue,
+    reorderQueue,
+    autoplay,
+    smartShuffle,
+    setAutoplay,
+    setSmartShuffle
+  } = usePlayerStore();
+  
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+
+  const handleDragStart = (index: number) => {
+    setDraggedIndex(index);
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    setDragOverIndex(index);
+  };
+
+  const handleDragEnd = () => {
+    if (draggedIndex !== null && dragOverIndex !== null && draggedIndex !== dragOverIndex) {
+      reorderQueue(draggedIndex, dragOverIndex);
+    }
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
-      <div className="bg-spotify-dark-gray w-full max-w-md h-[60vh] rounded-t-2xl flex flex-col">
+      <div className="bg-spotify-dark-gray w-full max-w-md h-[70vh] rounded-t-2xl flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <h2 className="text-xl font-bold">Queue</h2>
-          <button
-            onClick={onClose}
-            className="text-spotify-text-gray hover:text-white transition-colors"
-          >
-            <X size={24} />
-          </button>
+          <div className="flex items-center gap-2">
+            {queue.length > 0 && (
+              <button
+                onClick={clearQueue}
+                className="text-xs text-spotify-text-gray hover:text-white transition-colors px-2 py-1"
+                title="Clear queue"
+              >
+                Clear
+              </button>
+            )}
+            <button
+              onClick={onClose}
+              className="text-spotify-text-gray hover:text-white transition-colors"
+            >
+              <X size={24} />
+            </button>
+          </div>
+        </div>
+
+        {/* Autoplay and Smart Shuffle Toggles */}
+        <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setAutoplay(!autoplay)}
+              className={cn(
+                "flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
+                autoplay 
+                  ? "bg-white text-black" 
+                  : "bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10"
+              )}
+            >
+              <Power size={14} className={cn(!autoplay && "opacity-50")} />
+              Autoplay
+            </button>
+            <button
+              onClick={() => setSmartShuffle(!smartShuffle)}
+              className={cn(
+                "flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
+                smartShuffle 
+                  ? "bg-white text-black" 
+                  : "bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10"
+              )}
+            >
+              <Power size={14} className={cn(!smartShuffle && "opacity-50")} />
+              Smart Shuffle
+            </button>
+          </div>
         </div>
         <div className="flex-1 overflow-y-auto p-4 space-y-2">
           {currentTrack && (
@@ -50,16 +124,28 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
               <p>Your queue is empty</p>
             </div>
           )}
-          {queue.map((track) => (
+          {queue.map((track, index) => (
             <div
               key={track.id}
+              draggable
+              onDragStart={() => handleDragStart(index)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDragEnd={handleDragEnd}
               onClick={() => {
                 setCurrentTrack(track);
                 setIsPlaying(true);
               }}
-              className="flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg cursor-pointer group"
+              className={cn(
+                "flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg cursor-pointer group transition-all",
+                draggedIndex === index && "opacity-50",
+                dragOverIndex === index && "bg-white/20 border-l-2 border-spotify-green"
+              )}
             >
-              <div className="w-12 h-12 bg-spotify-light-gray rounded">
+              <GripVertical 
+                size={16} 
+                className="text-spotify-text-gray opacity-0 group-hover:opacity-100 cursor-grab active:cursor-grabbing" 
+              />
+              <div className="w-12 h-12 bg-spotify-light-gray rounded flex-shrink-0">
                 {track.coverArt && (
                   <img src={track.coverArt} alt={track.name} className="w-full h-full object-cover rounded" />
                 )}
@@ -68,15 +154,18 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
                 <div className="font-medium truncate text-white">{track.name}</div>
                 <div className="text-sm text-spotify-text-gray truncate">{track.artist}</div>
               </div>
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                <PlayButton
-                  isPlaying={false}
-                  onClick={() => {
-                    setCurrentTrack(track);
-                    setIsPlaying(true);
+              <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-xs text-spotify-text-gray">{formatDuration(track.duration)}</span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeFromQueue(track.id);
                   }}
-                  size="sm"
-                />
+                  className="p-1.5 text-spotify-text-gray hover:text-white transition-colors"
+                  title="Remove from queue"
+                >
+                  <Trash2 size={16} />
+                </button>
               </div>
             </div>
           ))}

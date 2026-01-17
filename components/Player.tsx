@@ -11,7 +11,9 @@ import MoodWidget from './mood/MoodWidget';
 import PictureInPicturePlayer from './PictureInPicturePlayer';
 import QualitySelector from './QualitySelector';
 import QueuePanel from './QueuePanel';
+import FullScreenPlayer from './FullScreenPlayer';
 import { formatDuration } from '@/lib/utils';
+import { Maximize2 } from 'lucide-react';
 import type { Quality } from './QualitySelector';
 
 export default function Player() {
@@ -33,6 +35,7 @@ export default function Player() {
 
   const [quality, setQuality] = useState<Quality>('high');
   const [isQueueOpen, setIsQueueOpen] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
   
   // Detect available formats from track
   const availableFormats = currentTrack?.format 
@@ -151,8 +154,8 @@ export default function Player() {
           </div>
           <ProgressBar
             progress={progress}
-            duration={currentTrack.duration}
-            currentTime={currentTime}
+            duration={currentTrack.duration * 1000}
+            currentTime={currentTime * 1000}
             onSeek={handleSeek}
           />
         </div>
@@ -173,12 +176,20 @@ export default function Player() {
           >
             <List size={20} />
           </button>
+          <button
+            onClick={() => setIsFullScreen(true)}
+            className="text-spotify-text-gray hover:text-white transition-colors"
+            title="Full screen"
+          >
+            <Maximize2 size={20} />
+          </button>
           <PictureInPicturePlayer />
           <VolumeControl volume={volume} onVolumeChange={setVolume} />
         </div>
       </div>
       
       <QueuePanel isOpen={isQueueOpen} onClose={() => setIsQueueOpen(false)} />
+      <FullScreenPlayer isOpen={isFullScreen} onClose={() => setIsFullScreen(false)} />
     </div>
   );
 }

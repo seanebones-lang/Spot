@@ -5,6 +5,8 @@ import Sidebar from '@/components/Sidebar';
 import TopBar from '@/components/TopBar';
 import Player from '@/components/Player';
 import RightSidebar from '@/components/RightSidebar';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 
 export default function LayoutContent({ children }: { children: React.ReactNode }) {
@@ -18,8 +20,12 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
         style={{ marginLeft: `${leftSidebarWidth}px`, marginRight: rightSidebarOpen ? `${rightSidebarWidth}px` : '0' }}
       >
         <TopBar />
-        <main className="flex-1 overflow-y-auto pt-16 pb-player-height">
-          {children}
+        <main className="flex-1 flex flex-col overflow-y-auto pt-16 pb-player-height">
+          <div className="flex-1">
+            <Breadcrumbs />
+            {children}
+          </div>
+          <Footer />
         </main>
       </div>
       <RightSidebar />
