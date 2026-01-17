@@ -1,9 +1,11 @@
 # EmPulse Music - Master Todo List
 ## NextEleven Agentic Agent Implementation Roadmap
 
-**Last Updated**: January 15, 2026  
-**Current Date Verification**: ✅ January 15, 2026 confirmed  
-**Project Status**: ~95% Frontend Complete, Backend/Infrastructure Pending
+**Last Updated**: January 16, 2026  
+**Current Date Verification**: ✅ January 16, 2026 confirmed  
+**Project Status**: 🛑 **PAUSED - Reverse Engineering Audit in Progress**
+
+**⚠️ CRITICAL**: All development PAUSED until Reverse Engineering Specialist completes full Spotify.com audit (January 16, 2026).
 
 ---
 
@@ -17,6 +19,7 @@
 - ⚠️ DevOps/Infrastructure: ~0% complete (planned but not implemented)
 
 **Critical Path to MVP:**
+0. 🛑 **REVERSE ENGINEERING SPECIALIST** → Complete Spotify.com audit (BLOCKING ALL WORK)
 1. Backend Specialist → API/OAuth Specialist → Front-End Specialist (API integration)
 2. Subscription Tiers UI (Front-End Specialist)
 3. Ad System UI (Front-End Specialist)
@@ -30,26 +33,108 @@
 
 ## 1️⃣ **REVERSE ENGINEERING SPECIALIST AGENT**
 
-### ✅ **COMPLETED**
-- ✅ Spotify design token extraction (colors, typography, spacing)
-- ✅ Tailwind config with Spotify theme
-- ✅ Pixel-perfect component specifications
-- ✅ 90px player bar height implementation
+### 🛑 **BLOCKING ALL OTHER WORK - TOP PRIORITY**
 
-### ⚠️ **IN PROGRESS / VALIDATION NEEDED**
-- ⚠️ Pixel-perfect validation (screenshot comparisons)
-- ⚠️ Component-level matching verification (<1% difference validation)
+**CRITICAL DIRECTIVE**: All other agent work is **PAUSED** until Reverse Engineering Specialist completes full Spotify.com audit.
 
-### 🔴 **PENDING TASKS**
-1. **Pixel-Perfect Validation Audit**
-   - **Task**: Run automated pixel-diff comparison with Spotify UI
+---
+
+### 🔴 **IMMEDIATE CRITICAL TASK** (BLOCKS ALL OTHER WORK)
+
+**1. Complete Spotify.com Reverse Engineering Audit (January 16, 2026)**
+   - **Status**: 🟡 **IN PROGRESS - BLOCKING ALL OTHER AGENTS**
+   - **Task**: Comprehensive reverse engineering of spotify.com as of January 16, 2026
+   - **Scope**: ENTIRE Spotify.com web application - every page, component, interaction
+   - **Deliverable**: Complete pixel-perfect matching report and updated design system
+   
+   **Specification (Step-by-Step):**
+   
+   **Phase 1: Complete Site Analysis**
+   - Analyze every page on spotify.com (Home, Search, Library, Playlist, Album, Artist, etc.)
+   - Extract ALL design tokens using Chrome DevTools:
+     - Colors (hex codes for every color used - backgrounds, text, accents, hover states)
+     - Typography (font families, sizes, weights, line heights for every text style)
+     - Spacing (margins, padding, gaps - exact pixel values)
+     - Border radius (every rounded corner - exact pixels)
+     - Shadows (box shadows, text shadows - exact values)
+     - Transitions/animations (duration, easing functions)
+   - Player bar: Exact dimensions (height, width, padding), all controls positioning
+   - Sidebar: Width, spacing, hover effects, active states
+   - TopBar: Height, search bar dimensions, button sizes
+   
+   **Phase 2: Component-Level Extraction**
+   - Extract EVERY component:
+     - Buttons (all variants: primary, secondary, tertiary, icon buttons)
+     - Inputs (search bars, forms, text inputs)
+     - Cards (track cards, album cards, playlist cards)
+     - Modals/Dialogs (dimensions, backdrop, animations)
+     - Dropdowns/Menus (positioning, hover states, animations)
+     - Tooltips (styling, positioning, animations)
+     - Progress bars (player progress, loading states)
+     - Sliders (volume, seek bar - exact track and thumb styling)
+   - Extract component states: default, hover, active, disabled, focused, selected
+   
+   **Phase 3: Layout & Grid Systems**
+   - Grid layouts (how many columns, gutters, responsive breakpoints)
+   - Flexbox configurations (alignments, justifications, gaps)
+   - Responsive breakpoints (exact pixel values where layouts change)
+   - Container max-widths and padding
+   
+   **Phase 4: Interaction Patterns**
+   - Hover effects (color changes, scale transforms, opacity)
+   - Click/active states (exact styling changes)
+   - Transitions (timing functions, durations)
+   - Loading states (skeleton loaders, spinners)
+   - Empty states (messaging, icons, CTAs)
+   
+   **Phase 5: Visual Validation**
+   - Screenshot EVERY page and component
+   - Compare screenshots with EmPulse Music implementation
+   - Pixel-diff analysis (target: <1% difference per component)
+   - Document ALL discrepancies
+   
+   **Phase 6: Updated Design System**
+   - Update `tailwind.config.js` with ALL extracted tokens
+   - Create comprehensive `design-tokens.json` (W3C standard format)
+   - Document every component specification with exact values
+   - Create component reference guide (Spotify component → EmPulse implementation mapping)
+   
+   **Tools Required:**
+   - Chrome DevTools (Computed styles, computed layout)
+   - Figma or design tool for measurements
+   - ImageMagick or Playwright for screenshot comparisons
+   - Browser extension for color picking and measurement
+   
+   **Priority**: 🔴 **CRITICAL - BLOCKS ALL OTHER AGENTS**
+   - Front-End Specialist: PAUSED (waiting for updated design tokens)
+   - UI Specialist: PAUSED (waiting for component specs)
+   - All other agents: PAUSED until Reverse Engineering complete
+   
+   **Timeline**: Complete before any other development proceeds
+   - **Due Date**: ASAP (January 16, 2026)
+   - **Status**: 🟡 IN PROGRESS
+   
+   **Dependencies**: None (can start immediately)
+   - **Blocks**: ALL other agent work until complete
+
+---
+
+### ✅ **PARTIALLY COMPLETED** (Needs Full Audit)
+- ⚠️ Initial Spotify design token extraction (colors, typography, spacing)
+- ⚠️ Tailwind config with Spotify theme (incomplete - needs full audit)
+- ⚠️ Pixel-perfect component specifications (partial - needs complete audit)
+- ⚠️ 90px player bar height (needs verification against current Spotify.com)
+
+### 🔴 **PENDING TASKS** (After Complete Audit)
+2. **Pixel-Perfect Validation Audit**
+   - **Task**: Run automated pixel-diff comparison with Spotify UI (after full audit)
    - **Deliverable**: Pixel-perfect validation report with <1% difference threshold
    - **Tool**: Use ImageMagick or Playwright screenshot comparison
    - **Specification**: Match exact spacing, border-radius, shadows from Spotify
    - **Priority**: 🔴 CRITICAL (before launch)
-   - **Dependencies**: None
+   - **Dependencies**: Task #1 (Complete Audit) must be finished first
 
-2. **Design Token Documentation Export**
+3. **Design Token Documentation Export**
    - **Task**: Export complete design token system to JSON/YAML
    - **Deliverable**: `design-tokens.json` with all colors, spacing, typography
    - **Format**: Standard Design Tokens format (W3C spec)
