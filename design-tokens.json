@@ -1,0 +1,439 @@
+{
+  "$schema": "https://schemas.tokens.studio/design-tokens",
+  "version": "1.0.0",
+  "name": "EmPulse Music Design Tokens",
+  "source": "Spotify.com Reverse Engineering - January 16, 2026",
+  "status": "draft",
+  
+  "colors": {
+    "spotify": {
+      "background": {
+        "primary": {
+          "value": "#121212",
+          "type": "color",
+          "description": "Primary background color",
+          "status": "verified"
+        },
+        "secondary": {
+          "value": "#181818",
+          "type": "color",
+          "description": "Secondary background color",
+          "status": "verified"
+        },
+        "tertiary": {
+          "value": "#282828",
+          "type": "color",
+          "description": "Tertiary background color",
+          "status": "verified"
+        },
+        "card": {
+          "value": "#1a1a1a",
+          "type": "color",
+          "description": "Card background color",
+          "status": "needs-verification"
+        },
+        "hover": {
+          "value": "#2a2a2a",
+          "type": "color",
+          "description": "Hover background color",
+          "status": "needs-verification"
+        },
+        "active": {
+          "value": "#333333",
+          "type": "color",
+          "description": "Active background color",
+          "status": "needs-verification"
+        }
+      },
+      "text": {
+        "primary": {
+          "value": "#FFFFFF",
+          "type": "color",
+          "description": "Primary text color",
+          "status": "verified"
+        },
+        "secondary": {
+          "value": "#B3B3B3",
+          "type": "color",
+          "description": "Secondary text color",
+          "status": "verified"
+        },
+        "tertiary": {
+          "value": "#727272",
+          "type": "color",
+          "description": "Tertiary text color",
+          "status": "needs-verification"
+        },
+        "disabled": {
+          "value": "#535353",
+          "type": "color",
+          "description": "Disabled text color",
+          "status": "needs-verification"
+        }
+      },
+      "accent": {
+        "primary": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Spotify Green - Primary accent",
+          "status": "verified"
+        },
+        "hover": {
+          "value": "#1ed760",
+          "type": "color",
+          "description": "Accent hover state",
+          "status": "needs-verification"
+        },
+        "active": {
+          "value": "#1aa34a",
+          "type": "color",
+          "description": "Accent active state",
+          "status": "needs-verification"
+        }
+      },
+      "link": {
+        "default": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Link color",
+          "status": "verified"
+        },
+        "hover": {
+          "value": "#1ed760",
+          "type": "color",
+          "description": "Link hover color",
+          "status": "needs-verification"
+        }
+      },
+      "border": {
+        "default": {
+          "value": "#2a2a2a",
+          "type": "color",
+          "description": "Default border color",
+          "status": "needs-verification"
+        },
+        "hover": {
+          "value": "#3a3a3a",
+          "type": "color",
+          "description": "Border hover color",
+          "status": "needs-verification"
+        },
+        "focus": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Border focus color",
+          "status": "needs-verification"
+        }
+      }
+    },
+    "empulse": {
+      "red": {
+        "value": "#E63946",
+        "type": "color",
+        "description": "EmPulse brand red"
+      },
+      "blue": {
+        "value": "#457B9D",
+        "type": "color",
+        "description": "EmPulse brand blue"
+      },
+      "purple": {
+        "value": "#7209B7",
+        "type": "color",
+        "description": "EmPulse brand purple"
+      }
+    }
+  },
+  
+  "typography": {
+    "fontFamily": {
+      "primary": {
+        "value": "Circular, Helvetica Neue, Helvetica, Arial, sans-serif",
+        "type": "fontFamily",
+        "description": "Primary font family",
+        "status": "verified"
+      }
+    },
+    "fontSize": {
+      "heading1": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Heading 1 font size",
+        "status": "needs-extraction"
+      },
+      "heading2": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Heading 2 font size",
+        "status": "needs-extraction"
+      },
+      "heading3": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Heading 3 font size",
+        "status": "needs-extraction"
+      },
+      "bodyLarge": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Large body text",
+        "status": "needs-extraction"
+      },
+      "bodyMedium": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Medium body text",
+        "status": "needs-extraction"
+      },
+      "bodySmall": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Small body text",
+        "status": "needs-extraction"
+      },
+      "button": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Button text size",
+        "status": "needs-extraction"
+      },
+      "caption": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Caption text size",
+        "status": "needs-extraction"
+      }
+    },
+    "fontWeight": {
+      "light": {
+        "value": "300",
+        "type": "fontWeight",
+        "description": "Light font weight",
+        "status": "needs-verification"
+      },
+      "regular": {
+        "value": "400",
+        "type": "fontWeight",
+        "description": "Regular font weight",
+        "status": "verified"
+      },
+      "medium": {
+        "value": "500",
+        "type": "fontWeight",
+        "description": "Medium font weight",
+        "status": "needs-verification"
+      },
+      "bold": {
+        "value": "700",
+        "type": "fontWeight",
+        "description": "Bold font weight",
+        "status": "needs-verification"
+      }
+    },
+    "lineHeight": {
+      "tight": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Tight line height",
+        "status": "needs-extraction"
+      },
+      "normal": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Normal line height",
+        "status": "needs-extraction"
+      },
+      "relaxed": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Relaxed line height",
+        "status": "needs-extraction"
+      }
+    },
+    "letterSpacing": {
+      "normal": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Normal letter spacing",
+        "status": "needs-extraction"
+      },
+      "wide": {
+        "value": "TBD",
+        "type": "dimension",
+        "description": "Wide letter spacing",
+        "status": "needs-extraction"
+      }
+    }
+  },
+  
+  "spacing": {
+    "scale": {
+      "0": { "value": "0px", "type": "dimension" },
+      "1": { "value": "4px", "type": "dimension", "status": "needs-verification" },
+      "2": { "value": "8px", "type": "dimension", "status": "needs-verification" },
+      "3": { "value": "12px", "type": "dimension", "status": "needs-verification" },
+      "4": { "value": "16px", "type": "dimension", "status": "needs-verification" },
+      "5": { "value": "20px", "type": "dimension", "status": "needs-verification" },
+      "6": { "value": "24px", "type": "dimension", "status": "needs-verification" },
+      "8": { "value": "32px", "type": "dimension", "status": "needs-verification" },
+      "10": { "value": "40px", "type": "dimension", "status": "needs-verification" },
+      "12": { "value": "48px", "type": "dimension", "status": "needs-verification" }
+    },
+    "component": {
+      "sidebar": {
+        "width": {
+          "value": "256px",
+          "type": "dimension",
+          "description": "Sidebar width (currently using 256px, needs verification)",
+          "status": "needs-verification"
+        },
+        "padding": {
+          "value": "TBD",
+          "type": "dimension",
+          "description": "Sidebar padding",
+          "status": "needs-extraction"
+        }
+      },
+      "player": {
+        "height": {
+          "value": "90px",
+          "type": "dimension",
+          "description": "Player bar height",
+          "status": "needs-verification"
+        },
+        "padding": {
+          "value": "TBD",
+          "type": "dimension",
+          "description": "Player bar padding",
+          "status": "needs-extraction"
+        }
+      }
+    }
+  },
+  
+  "borderRadius": {
+    "small": {
+      "value": "4px",
+      "type": "dimension",
+      "description": "Small border radius (buttons, inputs)",
+      "status": "needs-verification",
+      "note": "Current code uses 6px (rounded-md), config says 4px - needs verification"
+    },
+    "medium": {
+      "value": "8px",
+      "type": "dimension",
+      "description": "Medium border radius (cards)",
+      "status": "needs-extraction"
+    },
+    "large": {
+      "value": "12px",
+      "type": "dimension",
+      "description": "Large border radius (modals)",
+      "status": "needs-extraction"
+    },
+    "pill": {
+      "value": "9999px",
+      "type": "dimension",
+      "description": "Pill shape (rounded buttons)",
+      "status": "needs-extraction"
+    },
+    "circular": {
+      "value": "50%",
+      "type": "dimension",
+      "description": "Circular (avatars, icons)",
+      "status": "needs-extraction"
+    }
+  },
+  
+  "shadows": {
+    "card": {
+      "value": "TBD",
+      "type": "shadow",
+      "description": "Card shadow",
+      "status": "needs-extraction"
+    },
+    "modal": {
+      "value": "TBD",
+      "type": "shadow",
+      "description": "Modal shadow",
+      "status": "needs-extraction"
+    }
+  },
+  
+  "transitions": {
+    "duration": {
+      "fast": {
+        "value": "TBD",
+        "type": "duration",
+        "description": "Fast transition duration",
+        "status": "needs-extraction"
+      },
+      "normal": {
+        "value": "TBD",
+        "type": "duration",
+        "description": "Normal transition duration",
+        "status": "needs-extraction"
+      },
+      "slow": {
+        "value": "TBD",
+        "type": "duration",
+        "description": "Slow transition duration",
+        "status": "needs-extraction"
+      }
+    },
+    "easing": {
+      "default": {
+        "value": "TBD",
+        "type": "cubicBezier",
+        "description": "Default easing function",
+        "status": "needs-extraction"
+      }
+    }
+  },
+  
+  "sidebar": {
+    "resizable": {
+      "divider": {
+        "width": {
+          "value": "TBD",
+          "type": "dimension",
+          "description": "Divider line width",
+          "status": "needs-extraction",
+          "note": "USER REQUESTED FEATURE - horizontal divider that moves left/right"
+        },
+        "color": {
+          "value": "TBD",
+          "type": "color",
+          "description": "Divider line color",
+          "status": "needs-extraction"
+        },
+        "cursor": {
+          "value": "TBD",
+          "type": "string",
+          "description": "Cursor style on hover (col-resize or ew-resize)",
+          "status": "needs-extraction"
+        },
+        "minWidth": {
+          "value": "TBD",
+          "type": "dimension",
+          "description": "Minimum sidebar width",
+          "status": "needs-extraction"
+        },
+        "maxWidth": {
+          "value": "TBD",
+          "type": "dimension",
+          "description": "Maximum sidebar width",
+          "status": "needs-extraction"
+        },
+        "persistence": {
+          "localStorageKey": {
+            "value": "TBD",
+            "type": "string",
+            "description": "localStorage key for width persistence",
+            "status": "needs-extraction"
+          }
+        }
+      }
+    }
+  }
+}
