@@ -12,11 +12,30 @@ export default function HomePage() {
   const tracks = mockData.getTracks();
   const playlists = mockData.getPlaylists();
   const artists = mockData.getArtists();
-  const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying } = usePlayerStore();
+  const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying, addToQueue } = usePlayerStore();
 
-  const handlePlayTrack = (track: Track) => {
-    setCurrentTrack(track);
-    setIsPlaying(true);
+  const handlePlayTrack = (track: Track, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    console.log('🎵 handlePlayTrack called:', track.name, track.audioUrl);
+    console.log('🎵 Track data:', { id: track.id, name: track.name, audioUrl: track.audioUrl });
+    
+    try {
+      // Add track to queue first if not already there
+      addToQueue(track);
+      
+      // Set as current track first
+      setCurrentTrack(track);
+      console.log('✅ Track set in store:', track.name);
+      
+      // Then set playing - Player component will handle loading
+      setIsPlaying(true);
+      console.log('✅ Playing set to true');
+    } catch (error) {
+      console.error('❌ Error in handlePlayTrack:', error);
+    }
   };
 
   const handlePlayPlaylist = (playlist: typeof playlists[0]) => {
@@ -30,8 +49,8 @@ export default function HomePage() {
 
   return (
     <div className="p-8 bg-gradient-to-b from-spotify-dark via-spotify-dark-gray to-spotify-dark min-h-full">
-      {/* Ad Banner (for free tier) */}
-      <AdBanner type="banner" className="mb-8" />
+      {/* Ad Banner (for free tier) - Temporarily disabled for testing */}
+      {/* <AdBanner type="banner" className="mb-8" /> */}
 
       {/* Daily Check-in Card */}
       <div className="mb-8 bg-gradient-to-r from-empulse-purple to-empulse-blue rounded-lg p-6 text-white">
@@ -39,7 +58,7 @@ export default function HomePage() {
           <div>
             <h2 className="text-2xl font-bold mb-2">Daily Mood Check-in</h2>
             <p className="text-white/80 mb-4">Track your mood and earn points</p>
-            <Link href="/check-in" className="btn-primary inline-block">
+            <Link href="/check-in" className="px-6 py-3 bg-transparent border-2 border-spotify-green text-spotify-green hover:shadow-[0_0_20px_rgba(29,185,84,0.6)] rounded-full font-semibold transition-all duration-300 inline-block">
               Check In Now
             </Link>
           </div>
@@ -115,30 +134,49 @@ export default function HomePage() {
           {tracks.map((track, index) => (
             <div
               key={track.id}
-              className="flex items-center gap-4 p-3 hover:bg-white/10 transition-colors group"
+              className="flex items-center gap-4 p-3 hover:bg-white/10 transition-colors group cursor-pointer"
+              onClick={(e) => {
+                // Only trigger if clicking the row, not the button
+                if ((e.target as HTMLElement).closest('button')) return;
+                console.log('🎯 Track row clicked:', track.name);
+                handlePlayTrack(track);
+              }}
             >
-              <div className="w-8 text-center text-spotify-text-gray group-hover:text-white">
+              <div className="w-8 text-center text-spotify-text-gray group-hover:text-white flex-shrink-0">
                 {currentTrack?.id === track.id && isPlaying ? (
                   <Music size={16} className="mx-auto text-spotify-green" />
                 ) : (
-                  index + 1
+                  <span className="opacity-0 group-hover:opacity-100">{index + 1}</span>
                 )}
               </div>
-              <div className="w-12 h-12 bg-spotify-dark-gray rounded flex-shrink-0">
+              <div className="w-12 h-12 bg-spotify-dark-gray rounded flex-shrink-0 relative group/cover">
                 <img
                   src={track.coverArt}
                   alt={track.name}
                   className="w-full h-full object-cover rounded"
                 />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/cover:opacity-100 transition-opacity bg-black/30 rounded">
+                  <PlayButton
+                    isPlaying={currentTrack?.id === track.id && isPlaying}
+                    onClick={(e) => {
+                      console.log('🔘 PlayButton (cover) clicked for track:', track.name);
+                      handlePlayTrack(track, e);
+                    }}
+                    size="sm"
+                  />
+                </div>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="font-medium truncate">{track.name}</div>
+                <div className={`font-medium truncate ${currentTrack?.id === track.id ? 'text-spotify-green' : ''}`}>{track.name}</div>
                 <div className="text-sm text-spotify-text-gray truncate">{track.artist}</div>
               </div>
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className={`flex-shrink-0 transition-opacity ${currentTrack?.id === track.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                 <PlayButton
                   isPlaying={currentTrack?.id === track.id && isPlaying}
-                  onClick={() => handlePlayTrack(track)}
+                  onClick={(e) => {
+                    console.log('🔘 PlayButton (right) clicked for track:', track.name);
+                    handlePlayTrack(track, e);
+                  }}
                   size="sm"
                 />
               </div>

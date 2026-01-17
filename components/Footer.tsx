@@ -62,13 +62,16 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex flex-wrap gap-x-4 gap-y-2">
-              <Link href="/legal" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Legal</Link>
+              <Link href="/legal" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Legal Hub</Link>
+              <Link href="/legal/terms" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Terms of Service</Link>
+              <Link href="/legal/privacy" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Privacy Policy</Link>
+              <Link href="/legal/dmca" className="text-spotify-text-gray hover:text-white text-xs transition-colors">DMCA Policy</Link>
+              <Link href="/legal/royalty-policy" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Royalty Policy</Link>
+              <Link href="/legal/pro-guide" className="text-spotify-text-gray hover:text-white text-xs transition-colors">PRO Guide</Link>
               <Link href="/safety-privacy" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Safety & Privacy Center</Link>
-              <Link href="/privacy-policy" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Privacy Policy</Link>
               <Link href="/cookies" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Cookies</Link>
               <Link href="/about-ads" className="text-spotify-text-gray hover:text-white text-xs transition-colors">About Ads</Link>
               <Link href="/accessibility" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Accessibility</Link>
-              <Link href="/notice-at-collection" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Notice at Collection</Link>
               <Link href="/privacy-choices" className="text-spotify-text-gray hover:text-white text-xs transition-colors flex items-center gap-1">
                 Your Privacy Choices
                 <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">

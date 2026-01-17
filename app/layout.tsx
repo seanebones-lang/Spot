@@ -1,9 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Sidebar from '@/components/Sidebar';
-import TopBar from '@/components/TopBar';
-import Player from '@/components/Player';
-import RightSidebar from '@/components/RightSidebar';
 import KeyboardShortcutsProvider from '@/components/KeyboardShortcutsProvider';
 import LayoutContent from '@/components/LayoutContent';
 

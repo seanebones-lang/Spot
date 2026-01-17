@@ -1,25 +1,1292 @@
 [
   {
     "id": "album-1",
-    "name": "Example Album",
+    "name": "Midnight Dreams Album",
     "artist": {
       "id": "artist-1",
-      "name": "Example Artist",
-      "image": "https://i.scdn.co/image/ab6761610000e5eb1234567890abcdef",
-      "followers": 1000000,
+      "name": "Luna Shadows",
+      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+      "followers": 33205681,
       "verified": true
     },
-    "coverArt": "https://i.scdn.co/image/ab67616d0000b2731234567890abcdef",
+    "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-90",
+        "name": "Peaceful Place",
+        "duration": 264605
+      },
+      {
+        "id": "track-120",
+        "name": "Inner Thoughts",
+        "duration": 170957
+      },
+      {
+        "id": "track-150",
+        "name": "Emotional Wave",
+        "duration": 279416
+      }
+    ],
+    "releaseDate": "2024-04-17",
+    "label": "NextEleven Label",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1170403
+  },
+  {
+    "id": "album-2",
+    "name": "Afternoon Rain Album",
+    "artist": {
+      "id": "artist-2",
+      "name": "Echo River",
+      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+      "followers": 23891572,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "tracks": [
       {
         "id": "track-1",
-        "name": "I Just Might",
-        "duration": 210000
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-91",
+        "name": "Steam Rising",
+        "duration": 277329
+      },
+      {
+        "id": "track-121",
+        "name": "Green Fields",
+        "duration": 243122
       }
     ],
-    "releaseDate": "2024-01-15",
-    "label": "Example Records",
-    "copyright": "© 2024 Example Records",
-    "totalDuration": 210000
+    "releaseDate": "2024-04-23",
+    "label": "EmPulse Records",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1042995
+  },
+  {
+    "id": "album-3",
+    "name": "Ocean Breeze Album",
+    "artist": {
+      "id": "artist-3",
+      "name": "Solar Flare",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+      "followers": 49258278,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-92",
+        "name": "Water Flow",
+        "duration": 232081
+      },
+      {
+        "id": "track-122",
+        "name": "Snow Flakes",
+        "duration": 203303
+      }
+    ],
+    "releaseDate": "2024-04-25",
+    "label": "EmPulse Records",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1246579
+  },
+  {
+    "id": "album-4",
+    "name": "Spring Bloom Album",
+    "artist": {
+      "id": "artist-4",
+      "name": "Neon Nights",
+      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+      "followers": 32385151,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-93",
+        "name": "Calm Classical",
+        "duration": 181468
+      },
+      {
+        "id": "track-123",
+        "name": "Unstable Ground",
+        "duration": 204085
+      }
+    ],
+    "releaseDate": "2024-10-01",
+    "label": "NextEleven Label",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1106852
+  },
+  {
+    "id": "album-5",
+    "name": "Neon Signs Album",
+    "artist": {
+      "id": "artist-5",
+      "name": "Crystal Sound",
+      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+      "followers": 46331011,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-94",
+        "name": "Dark Ambient",
+        "duration": 162328
+      },
+      {
+        "id": "track-124",
+        "name": "Green Fields",
+        "duration": 274011
+      }
+    ],
+    "releaseDate": "2024-11-15",
+    "label": "NextEleven Label",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1075541
+  },
+  {
+    "id": "album-6",
+    "name": "Electric Soul Album",
+    "artist": {
+      "id": "artist-6",
+      "name": "Mystic Waves",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+      "followers": 11329321,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-95",
+        "name": "Circadian Rhythm",
+        "duration": 293861
+      },
+      {
+        "id": "track-125",
+        "name": "Air Lift",
+        "duration": 191439
+      }
+    ],
+    "releaseDate": "2024-05-19",
+    "label": "Universal",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1273364
+  },
+  {
+    "id": "album-7",
+    "name": "Forest Path Album",
+    "artist": {
+      "id": "artist-7",
+      "name": "Electric Dreams",
+      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+      "followers": 46544409,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-36",
+        "name": "Green Fields",
+        "duration": 181921
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-96",
+        "name": "Slow Motion",
+        "duration": 231563
+      },
+      {
+        "id": "track-126",
+        "name": "Flame Burning",
+        "duration": 299509
+      }
+    ],
+    "releaseDate": "2024-07-22",
+    "label": "EmPulse Records",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1080782
+  },
+  {
+    "id": "album-8",
+    "name": "Ocean Breeze Album",
+    "artist": {
+      "id": "artist-8",
+      "name": "Cosmic Harmony",
+      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+      "followers": 2129478,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-97",
+        "name": "Morning Dew",
+        "duration": 169090
+      },
+      {
+        "id": "track-127",
+        "name": "Gaseous Thoughts",
+        "duration": 272333
+      }
+    ],
+    "releaseDate": "2024-09-21",
+    "label": "Independent",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1121122
+  },
+  {
+    "id": "album-9",
+    "name": "Midnight Dreams Album",
+    "artist": {
+      "id": "artist-9",
+      "name": "Urban Pulse",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+      "followers": 32703102,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-98",
+        "name": "Future Sound",
+        "duration": 202848
+      },
+      {
+        "id": "track-128",
+        "name": "Lunar Cycle",
+        "duration": 257624
+      }
+    ],
+    "releaseDate": "2024-11-14",
+    "label": "Independent",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1123007
+  },
+  {
+    "id": "album-10",
+    "name": "Morning Dew Album",
+    "artist": {
+      "id": "artist-10",
+      "name": "Wild Sky",
+      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+      "followers": 15791445,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-39",
+        "name": "Future Sound",
+        "duration": 174167
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-99",
+        "name": "Peaceful Place",
+        "duration": 293830
+      },
+      {
+        "id": "track-129",
+        "name": "Spirit Rise",
+        "duration": 244881
+      }
+    ],
+    "releaseDate": "2024-12-16",
+    "label": "NextEleven Label",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1157383
+  },
+  {
+    "id": "album-11",
+    "name": "Midnight Dreams Album",
+    "artist": {
+      "id": "artist-11",
+      "name": "Deep Ocean",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+      "followers": 29330088,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-40",
+        "name": "Urban Nights",
+        "duration": 249290
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-100",
+        "name": "Discord Resolved",
+        "duration": 246508
+      },
+      {
+        "id": "track-130",
+        "name": "Calm Before",
+        "duration": 161768
+      }
+    ],
+    "releaseDate": "2024-09-02",
+    "label": "EmPulse Records",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1132088
+  },
+  {
+    "id": "album-12",
+    "name": "Midnight Dreams Album",
+    "artist": {
+      "id": "artist-12",
+      "name": "High Mountain",
+      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+      "followers": 40132002,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-71",
+        "name": "Balanced State",
+        "duration": 183568
+      },
+      {
+        "id": "track-101",
+        "name": "Flame Burning",
+        "duration": 267221
+      },
+      {
+        "id": "track-131",
+        "name": "Hot Disco",
+        "duration": 252320
+      }
+    ],
+    "releaseDate": "2024-08-21",
+    "label": "EmPulse Records",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1173101
+  },
+  {
+    "id": "album-13",
+    "name": "Electric Soul Album",
+    "artist": {
+      "id": "artist-13",
+      "name": "Dark Forest",
+      "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+      "followers": 15975205,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-42",
+        "name": "Inner Thoughts",
+        "duration": 159909
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      },
+      {
+        "id": "track-102",
+        "name": "Treble Sparkled",
+        "duration": 297674
+      },
+      {
+        "id": "track-132",
+        "name": "Purple Haze",
+        "duration": 205887
+      }
+    ],
+    "releaseDate": "2024-11-20",
+    "label": "Sony Music",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1116511
+  },
+  {
+    "id": "album-14",
+    "name": "Golden Hour Album",
+    "artist": {
+      "id": "artist-14",
+      "name": "Bright City",
+      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+      "followers": 33370070,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-103",
+        "name": "Gust Striking",
+        "duration": 166618
+      },
+      {
+        "id": "track-133",
+        "name": "Circadian Rhythm",
+        "duration": 261370
+      }
+    ],
+    "releaseDate": "2024-03-02",
+    "label": "Independent",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1100177
+  },
+  {
+    "id": "album-15",
+    "name": "Golden Hour Album",
+    "artist": {
+      "id": "artist-15",
+      "name": "Quiet Valley",
+      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+      "followers": 11942556,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-104",
+        "name": "Summer Heat",
+        "duration": 176960
+      },
+      {
+        "id": "track-134",
+        "name": "Distant Echoes",
+        "duration": 239052
+      }
+    ],
+    "releaseDate": "2024-11-06",
+    "label": "Sony Music",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1113479
+  },
+  {
+    "id": "album-16",
+    "name": "Afternoon Rain Album",
+    "artist": {
+      "id": "artist-16",
+      "name": "Loud Canyon",
+      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+      "followers": 4305458,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-45",
+        "name": "Fog Rolling",
+        "duration": 229626
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-105",
+        "name": "Chaotic Zone",
+        "duration": 233602
+      },
+      {
+        "id": "track-135",
+        "name": "Modern Beat",
+        "duration": 233473
+      }
+    ],
+    "releaseDate": "2024-11-09",
+    "label": "NextEleven Label",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1182101
+  },
+  {
+    "id": "album-17",
+    "name": "Starlight Album",
+    "artist": {
+      "id": "artist-17",
+      "name": "Soft Breeze",
+      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+      "followers": 29239871,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-76",
+        "name": "Seasonal Shift",
+        "duration": 175808
+      },
+      {
+        "id": "track-106",
+        "name": "Wind Chimes",
+        "duration": 161085
+      },
+      {
+        "id": "track-136",
+        "name": "Gust Striking",
+        "duration": 293755
+      }
+    ],
+    "releaseDate": "2024-09-19",
+    "label": "Sony Music",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1169268
+  },
+  {
+    "id": "album-18",
+    "name": "Mountain View Album",
+    "artist": {
+      "id": "artist-18",
+      "name": "Hard Rain",
+      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+      "followers": 38120655,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-77",
+        "name": "Unstable Ground",
+        "duration": 213229
+      },
+      {
+        "id": "track-107",
+        "name": "Discord Resolved",
+        "duration": 221433
+      },
+      {
+        "id": "track-137",
+        "name": "Storm Clouds",
+        "duration": 175168
+      }
+    ],
+    "releaseDate": "2024-05-11",
+    "label": "Independent",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1085192
+  },
+  {
+    "id": "album-19",
+    "name": "Silent Streets Album",
+    "artist": {
+      "id": "artist-19",
+      "name": "Gentle Wind",
+      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+      "followers": 20110413,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-48",
+        "name": "Cyclone Spin",
+        "duration": 154098
+      },
+      {
+        "id": "track-78",
+        "name": "Full Spectrum",
+        "duration": 287253
+      },
+      {
+        "id": "track-108",
+        "name": "Rain Drops",
+        "duration": 160208
+      },
+      {
+        "id": "track-138",
+        "name": "Bright Pop",
+        "duration": 279193
+      }
+    ],
+    "releaseDate": "2024-07-03",
+    "label": "Independent",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1152985
+  },
+  {
+    "id": "album-20",
+    "name": "Morning Dew Album",
+    "artist": {
+      "id": "artist-20",
+      "name": "Strong Current",
+      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+      "followers": 5058816,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-79",
+        "name": "Classic Style",
+        "duration": 206629
+      },
+      {
+        "id": "track-109",
+        "name": "Heavy Metal",
+        "duration": 249452
+      },
+      {
+        "id": "track-139",
+        "name": "Feeling Free",
+        "duration": 197689
+      }
+    ],
+    "releaseDate": "2024-01-10",
+    "label": "Independent",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1024940
+  },
+  {
+    "id": "album-21",
+    "name": "Morning Dew Album",
+    "artist": {
+      "id": "artist-21",
+      "name": "Smooth Operator",
+      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+      "followers": 5165769,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-50",
+        "name": "Smooth R&B",
+        "duration": 211782
+      },
+      {
+        "id": "track-80",
+        "name": "Water Flow",
+        "duration": 270096
+      },
+      {
+        "id": "track-110",
+        "name": "Light Folk",
+        "duration": 212957
+      },
+      {
+        "id": "track-140",
+        "name": "Smooth R&B",
+        "duration": 263119
+      }
+    ],
+    "releaseDate": "2024-08-18",
+    "label": "EmPulse Records",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1254626
+  },
+  {
+    "id": "album-22",
+    "name": "Neon Signs Album",
+    "artist": {
+      "id": "artist-22",
+      "name": "Rough Diamond",
+      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+      "followers": 4867640,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-81",
+        "name": "Yellow Sun",
+        "duration": 279948
+      },
+      {
+        "id": "track-111",
+        "name": "Reaction Swift",
+        "duration": 291275
+      },
+      {
+        "id": "track-141",
+        "name": "Tornado Twist",
+        "duration": 193718
+      }
+    ],
+    "releaseDate": "2024-07-03",
+    "label": "Universal",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1174201
+  },
+  {
+    "id": "album-23",
+    "name": "Afternoon Rain Album",
+    "artist": {
+      "id": "artist-23",
+      "name": "Pure Gold",
+      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+      "followers": 35622803,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-82",
+        "name": "Wind Chimes",
+        "duration": 255374
+      },
+      {
+        "id": "track-112",
+        "name": "Cold Blues",
+        "duration": 262450
+      },
+      {
+        "id": "track-142",
+        "name": "Water Flow",
+        "duration": 187768
+      }
+    ],
+    "releaseDate": "2024-12-09",
+    "label": "EmPulse Records",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1171113
+  },
+  {
+    "id": "album-24",
+    "name": "Winter Chill Album",
+    "artist": {
+      "id": "artist-24",
+      "name": "Silver Lining",
+      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+      "followers": 23863730,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-53",
+        "name": "Smoke Clearing",
+        "duration": 172683
+      },
+      {
+        "id": "track-83",
+        "name": "Storm During",
+        "duration": 157600
+      },
+      {
+        "id": "track-113",
+        "name": "Midnight Dreams",
+        "duration": 235054
+      },
+      {
+        "id": "track-143",
+        "name": "Balanced State",
+        "duration": 232874
+      }
+    ],
+    "releaseDate": "2024-04-07",
+    "label": "Sony Music",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1010166
+  },
+  {
+    "id": "album-25",
+    "name": "Desert Highway Album",
+    "artist": {
+      "id": "artist-25",
+      "name": "Bronze Age",
+      "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+      "followers": 4763361,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-84",
+        "name": "Starlight",
+        "duration": 214404
+      },
+      {
+        "id": "track-114",
+        "name": "Chaos Within",
+        "duration": 275152
+      },
+      {
+        "id": "track-144",
+        "name": "Past Memory",
+        "duration": 189086
+      }
+    ],
+    "releaseDate": "2024-11-24",
+    "label": "NextEleven Label",
+    "copyright": "\u00a9 2024 EmPulse Records",
+    "totalDuration": 1131206
+  },
+  {
+    "id": "album-26",
+    "name": "Neon Signs Album",
+    "artist": {
+      "id": "artist-26",
+      "name": "Iron Will",
+      "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+      "followers": 32606161,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      },
+      {
+        "id": "track-85",
+        "name": "Analytic Mode",
+        "duration": 184745
+      },
+      {
+        "id": "track-115",
+        "name": "Cyclone Spin",
+        "duration": 263998
+      },
+      {
+        "id": "track-145",
+        "name": "Balanced State",
+        "duration": 289169
+      }
+    ],
+    "releaseDate": "2024-03-26",
+    "label": "Independent",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1268395
+  },
+  {
+    "id": "album-27",
+    "name": "Urban Nights Album",
+    "artist": {
+      "id": "artist-27",
+      "name": "Steel Mind",
+      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+      "followers": 25970160,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-56",
+        "name": "Winter Chill",
+        "duration": 188417
+      },
+      {
+        "id": "track-86",
+        "name": "Yellow Sun",
+        "duration": 233366
+      },
+      {
+        "id": "track-116",
+        "name": "Spirit Rise",
+        "duration": 168657
+      },
+      {
+        "id": "track-146",
+        "name": "Golden Hour",
+        "duration": 247624
+      }
+    ],
+    "releaseDate": "2024-06-13",
+    "label": "Sony Music",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1131790
+  },
+  {
+    "id": "album-28",
+    "name": "Ocean Breeze Album",
+    "artist": {
+      "id": "artist-28",
+      "name": "Copper Wire",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+      "followers": 27976273,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-57",
+        "name": "Steam Rising",
+        "duration": 227897
+      },
+      {
+        "id": "track-87",
+        "name": "Chaotic Zone",
+        "duration": 197923
+      },
+      {
+        "id": "track-117",
+        "name": "Circadian Rhythm",
+        "duration": 258424
+      },
+      {
+        "id": "track-147",
+        "name": "Light Folk",
+        "duration": 193956
+      }
+    ],
+    "releaseDate": "2024-08-22",
+    "label": "Sony Music",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1080888
+  },
+  {
+    "id": "album-29",
+    "name": "Evening Glow Album",
+    "artist": {
+      "id": "artist-29",
+      "name": "Tin Can",
+      "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+      "followers": 15750782,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-58",
+        "name": "Outer Space",
+        "duration": 289347
+      },
+      {
+        "id": "track-88",
+        "name": "Storm Clouds",
+        "duration": 217391
+      },
+      {
+        "id": "track-118",
+        "name": "Sunset Drive",
+        "duration": 297314
+      },
+      {
+        "id": "track-148",
+        "name": "Modern Beat",
+        "duration": 234063
+      }
+    ],
+    "releaseDate": "2024-11-24",
+    "label": "NextEleven Label",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1333805
+  },
+  {
+    "id": "album-30",
+    "name": "Winter Chill Album",
+    "artist": {
+      "id": "artist-30",
+      "name": "Lead Weight",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+      "followers": 28615920,
+      "verified": true
+    },
+    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
+    "tracks": [
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-59",
+        "name": "Rhythm Locked",
+        "duration": 288683
+      },
+      {
+        "id": "track-89",
+        "name": "Water Flow",
+        "duration": 269240
+      },
+      {
+        "id": "track-119",
+        "name": "Mist Lifting",
+        "duration": 204877
+      },
+      {
+        "id": "track-149",
+        "name": "Full Spectrum",
+        "duration": 222195
+      }
+    ],
+    "releaseDate": "2024-06-21",
+    "label": "Independent",
+    "copyright": "\u00a9 2024 NextEleven Label",
+    "totalDuration": 1154033
   }
 ]

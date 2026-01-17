@@ -1,27 +1,609 @@
 [
   {
     "id": "artist-1",
-    "name": "Kendrick Lamar",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb1234567890abcdef",
-    "followers": 25000000,
+    "name": "Luna Shadows",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 23630951,
     "verified": true,
-    "bio": "Award-winning artist",
-    "genre": ["Hip-Hop", "Rap"]
+    "bio": "Award-winning artist specializing in K-Pop, Pop",
+    "genre": [
+      "K-Pop",
+      "Pop"
+    ]
   },
   {
     "id": "artist-2",
-    "name": "Drake",
-    "image": "https://i.scdn.co/image/ab6761610000e5ebabcdef1234567890",
-    "followers": 45000000,
+    "name": "Echo River",
+    "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "followers": 37824696,
     "verified": true,
-    "genre": ["Hip-Hop", "R&B"]
+    "bio": "Award-winning artist specializing in Punk, Techno",
+    "genre": [
+      "Punk",
+      "Techno",
+      "Trap"
+    ]
   },
   {
     "id": "artist-3",
-    "name": "The Weeknd",
-    "image": "https://i.scdn.co/image/ab6761610000e5ebfedcba9876543210",
-    "followers": 35000000,
+    "name": "Solar Flare",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 17062466,
     "verified": true,
-    "genre": ["R&B", "Pop"]
+    "bio": "Award-winning artist specializing in Afrobeats, Reggae",
+    "genre": [
+      "Afrobeats",
+      "Reggae",
+      "Country"
+    ]
+  },
+  {
+    "id": "artist-4",
+    "name": "Neon Nights",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 32655121,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Punk",
+    "genre": [
+      "Punk"
+    ]
+  },
+  {
+    "id": "artist-5",
+    "name": "Crystal Sound",
+    "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "followers": 14426593,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Soul",
+    "genre": [
+      "Soul"
+    ]
+  },
+  {
+    "id": "artist-6",
+    "name": "Mystic Waves",
+    "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "followers": 14797121,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Indie, Metal",
+    "genre": [
+      "Indie",
+      "Metal",
+      "Blues"
+    ]
+  },
+  {
+    "id": "artist-7",
+    "name": "Electric Dreams",
+    "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "followers": 36395088,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Indie, Metal",
+    "genre": [
+      "Indie",
+      "Metal",
+      "Classical"
+    ]
+  },
+  {
+    "id": "artist-8",
+    "name": "Cosmic Harmony",
+    "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "followers": 34013233,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Classical, Electronic",
+    "genre": [
+      "Classical",
+      "Electronic",
+      "Afrobeats"
+    ]
+  },
+  {
+    "id": "artist-9",
+    "name": "Urban Pulse",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 3352889,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Funk, House",
+    "genre": [
+      "Funk",
+      "House"
+    ]
+  },
+  {
+    "id": "artist-10",
+    "name": "Wild Sky",
+    "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "followers": 22120750,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Hip-Hop, Funk",
+    "genre": [
+      "Hip-Hop",
+      "Funk"
+    ]
+  },
+  {
+    "id": "artist-11",
+    "name": "Deep Ocean",
+    "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "followers": 35797837,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Punk, Soul",
+    "genre": [
+      "Punk",
+      "Soul"
+    ]
+  },
+  {
+    "id": "artist-12",
+    "name": "High Mountain",
+    "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "followers": 45553758,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Metal, Afrobeats",
+    "genre": [
+      "Metal",
+      "Afrobeats",
+      "Blues"
+    ]
+  },
+  {
+    "id": "artist-13",
+    "name": "Dark Forest",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "followers": 15057018,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Indie",
+    "genre": [
+      "Indie"
+    ]
+  },
+  {
+    "id": "artist-14",
+    "name": "Bright City",
+    "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "followers": 45828233,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Metal",
+    "genre": [
+      "Metal"
+    ]
+  },
+  {
+    "id": "artist-15",
+    "name": "Quiet Valley",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 27248861,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Techno, Blues",
+    "genre": [
+      "Techno",
+      "Blues",
+      "K-Pop"
+    ]
+  },
+  {
+    "id": "artist-16",
+    "name": "Loud Canyon",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 33694051,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Trap, Disco",
+    "genre": [
+      "Trap",
+      "Disco"
+    ]
+  },
+  {
+    "id": "artist-17",
+    "name": "Soft Breeze",
+    "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "followers": 25146031,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Latin, Metal",
+    "genre": [
+      "Latin",
+      "Metal",
+      "Hip-Hop"
+    ]
+  },
+  {
+    "id": "artist-18",
+    "name": "Hard Rain",
+    "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "followers": 17014126,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Trap, Metal",
+    "genre": [
+      "Trap",
+      "Metal",
+      "Soul"
+    ]
+  },
+  {
+    "id": "artist-19",
+    "name": "Gentle Wind",
+    "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "followers": 35889739,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Trap, Disco",
+    "genre": [
+      "Trap",
+      "Disco"
+    ]
+  },
+  {
+    "id": "artist-20",
+    "name": "Strong Current",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 45763216,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Classical, Blues",
+    "genre": [
+      "Classical",
+      "Blues",
+      "World"
+    ]
+  },
+  {
+    "id": "artist-21",
+    "name": "Smooth Operator",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "followers": 38571388,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Trap",
+    "genre": [
+      "Trap"
+    ]
+  },
+  {
+    "id": "artist-22",
+    "name": "Rough Diamond",
+    "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "followers": 40661819,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Jazz, Classical",
+    "genre": [
+      "Jazz",
+      "Classical"
+    ]
+  },
+  {
+    "id": "artist-23",
+    "name": "Pure Gold",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "followers": 13292116,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Blues, Indie",
+    "genre": [
+      "Blues",
+      "Indie",
+      "House"
+    ]
+  },
+  {
+    "id": "artist-24",
+    "name": "Silver Lining",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "followers": 9605991,
+    "verified": true,
+    "bio": "Award-winning artist specializing in R&B",
+    "genre": [
+      "R&B"
+    ]
+  },
+  {
+    "id": "artist-25",
+    "name": "Bronze Age",
+    "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "followers": 17424234,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Funk",
+    "genre": [
+      "Funk"
+    ]
+  },
+  {
+    "id": "artist-26",
+    "name": "Iron Will",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 12281256,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Pop, Hip-Hop",
+    "genre": [
+      "Pop",
+      "Hip-Hop"
+    ]
+  },
+  {
+    "id": "artist-27",
+    "name": "Steel Mind",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 9929261,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Country, Folk",
+    "genre": [
+      "Country",
+      "Folk"
+    ]
+  },
+  {
+    "id": "artist-28",
+    "name": "Copper Wire",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 43274924,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Soul, K-Pop",
+    "genre": [
+      "Soul",
+      "K-Pop",
+      "Trap"
+    ]
+  },
+  {
+    "id": "artist-29",
+    "name": "Tin Can",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 4729872,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Electronic",
+    "genre": [
+      "Electronic"
+    ]
+  },
+  {
+    "id": "artist-30",
+    "name": "Lead Weight",
+    "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "followers": 22566075,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Trap",
+    "genre": [
+      "Trap"
+    ]
+  },
+  {
+    "id": "artist-31",
+    "name": "Mercury Rising",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 23871555,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Techno, Indie",
+    "genre": [
+      "Techno",
+      "Indie"
+    ]
+  },
+  {
+    "id": "artist-32",
+    "name": "Venus Fly",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 10229878,
+    "verified": true,
+    "bio": "Award-winning artist specializing in K-Pop",
+    "genre": [
+      "K-Pop"
+    ]
+  },
+  {
+    "id": "artist-33",
+    "name": "Mars Walk",
+    "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "followers": 11530130,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Jazz, Trap",
+    "genre": [
+      "Jazz",
+      "Trap",
+      "Funk"
+    ]
+  },
+  {
+    "id": "artist-34",
+    "name": "Jupiter Jump",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 48445912,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Jazz, World",
+    "genre": [
+      "Jazz",
+      "World",
+      "Techno"
+    ]
+  },
+  {
+    "id": "artist-35",
+    "name": "Saturn Ring",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 20874384,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Pop, World",
+    "genre": [
+      "Pop",
+      "World"
+    ]
+  },
+  {
+    "id": "artist-36",
+    "name": "Uranus Spin",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "followers": 2433280,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Ambient",
+    "genre": [
+      "Ambient"
+    ]
+  },
+  {
+    "id": "artist-37",
+    "name": "Neptune Dive",
+    "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "followers": 19076069,
+    "verified": false,
+    "bio": "Award-winning artist specializing in World, Funk",
+    "genre": [
+      "World",
+      "Funk",
+      "Folk"
+    ]
+  },
+  {
+    "id": "artist-38",
+    "name": "Pluto Orbit",
+    "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "followers": 14765959,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Trap, Electronic",
+    "genre": [
+      "Trap",
+      "Electronic",
+      "Funk"
+    ]
+  },
+  {
+    "id": "artist-39",
+    "name": "Star Light",
+    "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "followers": 45459323,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Trap",
+    "genre": [
+      "Trap"
+    ]
+  },
+  {
+    "id": "artist-40",
+    "name": "Moon Beam",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 31104100,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Techno, Metal",
+    "genre": [
+      "Techno",
+      "Metal"
+    ]
+  },
+  {
+    "id": "artist-41",
+    "name": "Sun Ray",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 2952376,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Funk",
+    "genre": [
+      "Funk"
+    ]
+  },
+  {
+    "id": "artist-42",
+    "name": "Comet Tail",
+    "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "followers": 36534367,
+    "verified": true,
+    "bio": "Award-winning artist specializing in World, Electronic",
+    "genre": [
+      "World",
+      "Electronic"
+    ]
+  },
+  {
+    "id": "artist-43",
+    "name": "Meteor Shower",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 37175124,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Electronic, Latin",
+    "genre": [
+      "Electronic",
+      "Latin"
+    ]
+  },
+  {
+    "id": "artist-44",
+    "name": "Asteroid Belt",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 14184720,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Pop, Indie",
+    "genre": [
+      "Pop",
+      "Indie",
+      "Techno"
+    ]
+  },
+  {
+    "id": "artist-45",
+    "name": "Galaxy Far",
+    "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "followers": 36804906,
+    "verified": true,
+    "bio": "Award-winning artist specializing in R&B, Funk",
+    "genre": [
+      "R&B",
+      "Funk"
+    ]
+  },
+  {
+    "id": "artist-46",
+    "name": "Nebula Near",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "followers": 8248085,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Folk, Techno",
+    "genre": [
+      "Folk",
+      "Techno"
+    ]
+  },
+  {
+    "id": "artist-47",
+    "name": "Black Hole",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 44019781,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Reggae, Folk",
+    "genre": [
+      "Reggae",
+      "Folk",
+      "House"
+    ]
+  },
+  {
+    "id": "artist-48",
+    "name": "White Dwarf",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 31051497,
+    "verified": false,
+    "bio": "Award-winning artist specializing in Hip-Hop, R&B",
+    "genre": [
+      "Hip-Hop",
+      "R&B"
+    ]
+  },
+  {
+    "id": "artist-49",
+    "name": "Red Giant",
+    "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "followers": 28815485,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Latin, K-Pop",
+    "genre": [
+      "Latin",
+      "K-Pop",
+      "Classical"
+    ]
+  },
+  {
+    "id": "artist-50",
+    "name": "Blue Supergiant",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "followers": 3097178,
+    "verified": true,
+    "bio": "Award-winning artist specializing in Soul, Blues",
+    "genre": [
+      "Soul",
+      "Blues",
+      "World"
+    ]
   }
 ]

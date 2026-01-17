@@ -19,10 +19,11 @@ export default function GenreSelector({ selectedGenres, onToggle }: GenreSelecto
             key={genre}
             onClick={() => onToggle(genre)}
             className={cn(
-              "px-4 py-2 rounded-full text-sm font-medium transition-all",
+              "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+              "bg-transparent border-2",
               selectedGenres.includes(genre)
-                ? "bg-spotify-green text-black"
-                : "bg-spotify-light-gray text-white hover:bg-spotify-light-gray/80"
+                ? "border-spotify-green text-spotify-green shadow-[0_0_15px_rgba(29,185,84,0.5)]"
+                : "border-spotify-light-gray/50 text-white hover:border-spotify-green hover:shadow-[0_0_20px_rgba(29,185,84,0.6)]"
             )}
           >
             {genre}

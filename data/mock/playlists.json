@@ -1,55 +1,6291 @@
 [
   {
     "id": "playlist-1",
-    "name": "Trending Songs",
-    "description": "The hottest tracks right now",
-    "coverArt": "https://i.scdn.co/image/ab67706f000000021234567890abcdef",
+    "name": "Melancholic Reflections",
+    "description": "A curated collection of content tracks for proud, excited, relaxed moments",
+    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "owner": "Luna Shadows",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Proud",
+        "Excited",
+        "Relaxed"
+      ],
+      "vibe": 60,
+      "genres": [
+        "Jazz",
+        "Punk"
+      ]
+    },
+    "totalDuration": 4446777,
+    "createdAt": "2024-09-02T00:00:00Z",
+    "updatedAt": "2024-03-10T18:00:00Z"
+  },
+  {
+    "id": "playlist-2",
+    "name": "Nostalgic Memories",
+    "description": "A curated collection of euphoric tracks for proud moments",
+    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
       {
         "id": "track-1",
-        "name": "I Just Might",
-        "duration": 210000
+        "name": "Smooth R&B",
+        "duration": 210638
       },
       {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-71",
+        "name": "Balanced State",
+        "duration": 183568
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-76",
+        "name": "Seasonal Shift",
+        "duration": 175808
+      },
+      {
+        "id": "track-79",
+        "name": "Classic Style",
+        "duration": 206629
+      },
+      {
+        "id": "track-84",
+        "name": "Starlight",
+        "duration": 214404
+      },
+      {
+        "id": "track-86",
+        "name": "Yellow Sun",
+        "duration": 233366
+      },
+      {
+        "id": "track-87",
+        "name": "Chaotic Zone",
+        "duration": 197923
+      },
+      {
+        "id": "track-100",
+        "name": "Discord Resolved",
+        "duration": 246508
+      },
+      {
+        "id": "track-101",
+        "name": "Flame Burning",
+        "duration": 267221
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud"
+      ],
+      "vibe": 95,
+      "genres": [
+        "Electronic",
+        "Indie",
+        "Punk"
+      ]
+    },
+    "totalDuration": 4407647,
+    "createdAt": "2024-10-22T12:00:00Z",
+    "updatedAt": "2024-05-22T14:00:00Z"
+  },
+  {
+    "id": "playlist-3",
+    "name": "Deep Thoughts",
+    "description": "A curated collection of euphoric tracks for optimistic, great moments",
+    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "owner": "Solar Flare",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-58",
+        "name": "Outer Space",
+        "duration": 289347
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-78",
+        "name": "Full Spectrum",
+        "duration": 287253
+      },
+      {
+        "id": "track-80",
+        "name": "Water Flow",
+        "duration": 270096
+      },
+      {
+        "id": "track-82",
+        "name": "Wind Chimes",
+        "duration": 255374
+      },
+      {
+        "id": "track-84",
+        "name": "Starlight",
+        "duration": 214404
+      },
+      {
+        "id": "track-85",
+        "name": "Analytic Mode",
+        "duration": 184745
+      },
+      {
+        "id": "track-87",
+        "name": "Chaotic Zone",
+        "duration": 197923
+      },
+      {
+        "id": "track-88",
+        "name": "Storm Clouds",
+        "duration": 217391
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic",
+        "Great"
+      ],
+      "vibe": 89,
+      "genres": [
+        "Techno",
+        "World",
+        "Afrobeats",
+        "Blues"
+      ]
+    },
+    "totalDuration": 4655992,
+    "createdAt": "2024-03-08T18:00:00Z",
+    "updatedAt": "2024-06-24T07:00:00Z"
+  },
+  {
+    "id": "playlist-4",
+    "name": "Content Moments",
+    "description": "A curated collection of content tracks for great, excited moments",
+    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "owner": "Neon Nights",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-53",
+        "name": "Smoke Clearing",
+        "duration": 172683
+      },
+      {
+        "id": "track-59",
+        "name": "Rhythm Locked",
+        "duration": 288683
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-71",
+        "name": "Balanced State",
+        "duration": 183568
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Great",
+        "Excited"
+      ],
+      "vibe": 63,
+      "genres": [
+        "Ambient",
+        "Indie"
+      ]
+    },
+    "totalDuration": 4432340,
+    "createdAt": "2024-07-22T16:00:00Z",
+    "updatedAt": "2024-12-25T17:00:00Z"
+  },
+  {
+    "id": "playlist-5",
+    "name": "Joyful Anthems",
+    "description": "A curated collection of joyful tracks for relaxed moments",
+    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
         "id": "track-2",
-        "name": "HELICOPTER",
-        "duration": 195000
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
       }
     ],
     "moodTags": {
       "mood": "Joyful",
-      "feelings": ["Great", "Excited"],
-      "vibe": 80,
-      "genres": ["Pop", "Electronic"]
+      "feelings": [
+        "Relaxed"
+      ],
+      "vibe": 82,
+      "genres": [
+        "Disco",
+        "Country",
+        "Soul",
+        "Folk"
+      ]
     },
-    "totalDuration": 405000,
-    "createdAt": "2024-01-01T00:00:00Z",
-    "updatedAt": "2024-01-15T00:00:00Z"
+    "totalDuration": 4655264,
+    "createdAt": "2024-10-12T20:00:00Z",
+    "updatedAt": "2024-05-21T09:00:00Z"
   },
   {
-    "id": "playlist-2",
-    "name": "Chill Vibes",
-    "description": "Relax and unwind",
-    "coverArt": "https://i.scdn.co/image/ab67706f00000002abcdef1234567890",
+    "id": "playlist-6",
+    "name": "Euphoric Beats",
+    "description": "A curated collection of melancholic tracks for nostalgic, insecure, tired moments",
+    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      }
+    ],
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Nostalgic",
+        "Insecure",
+        "Tired"
+      ],
+      "vibe": 25,
+      "genres": [
+        "Classical",
+        "Blues",
+        "Rock"
+      ]
+    },
+    "totalDuration": 4547707,
+    "createdAt": "2024-01-11T14:00:00Z",
+    "updatedAt": "2024-10-13T05:00:00Z"
+  },
+  {
+    "id": "playlist-7",
+    "name": "Anxious Relief",
+    "description": "A curated collection of nostalgic tracks for nostalgic, content moments",
+    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      }
+    ],
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic",
+        "Content"
+      ],
+      "vibe": 27,
+      "genres": [
+        "Metal",
+        "Rock"
+      ]
+    },
+    "totalDuration": 4604632,
+    "createdAt": "2024-05-08T18:00:00Z",
+    "updatedAt": "2024-01-20T00:00:00Z"
+  },
+  {
+    "id": "playlist-8",
+    "name": "Stress-Free Zone",
+    "description": "A curated collection of content tracks for relaxed, great moments",
+    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed",
+        "Great"
+      ],
+      "vibe": 49,
+      "genres": [
+        "World",
+        "Latin"
+      ]
+    },
+    "totalDuration": 4419633,
+    "createdAt": "2024-09-18T06:00:00Z",
+    "updatedAt": "2024-10-04T07:00:00Z"
+  },
+  {
+    "id": "playlist-9",
+    "name": "Confidence Boost",
+    "description": "A curated collection of melancholic tracks for frustrated moments",
+    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
+    "owner": "Urban Pulse",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      }
+    ],
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Frustrated"
+      ],
+      "vibe": 17,
+      "genres": [
+        "World",
+        "Folk",
+        "Country",
+        "R&B"
+      ]
+    },
+    "totalDuration": 4547707,
+    "createdAt": "2024-12-05T19:00:00Z",
+    "updatedAt": "2024-10-22T12:00:00Z"
+  },
+  {
+    "id": "playlist-10",
+    "name": "Relaxed Vibes",
+    "description": "A curated collection of euphoric tracks for optimistic, proud, great moments",
+    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "owner": "Wild Sky",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-40",
+        "name": "Urban Nights",
+        "duration": 249290
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-48",
+        "name": "Cyclone Spin",
+        "duration": 154098
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-76",
+        "name": "Seasonal Shift",
+        "duration": 175808
+      },
+      {
+        "id": "track-78",
+        "name": "Full Spectrum",
+        "duration": 287253
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic",
+        "Proud",
+        "Great"
+      ],
+      "vibe": 95,
+      "genres": [
+        "Reggae",
+        "R&B"
+      ]
+    },
+    "totalDuration": 4749279,
+    "createdAt": "2024-04-13T03:00:00Z",
+    "updatedAt": "2024-01-27T14:00:00Z"
+  },
+  {
+    "id": "playlist-11",
+    "name": "Excited Energy",
+    "description": "A curated collection of nostalgic tracks for nostalgic, reflective moments",
+    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      }
+    ],
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic",
+        "Reflective"
+      ],
+      "vibe": 29,
+      "genres": [
+        "House",
+        "Metal"
+      ]
+    },
+    "totalDuration": 4473634,
+    "createdAt": "2024-10-18T16:00:00Z",
+    "updatedAt": "2024-10-25T19:00:00Z"
+  },
+  {
+    "id": "playlist-12",
+    "name": "Grateful Heart",
+    "description": "A curated collection of content tracks for confident moments",
+    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-57",
+        "name": "Steam Rising",
+        "duration": 227897
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Confident"
+      ],
+      "vibe": 48,
+      "genres": [
+        "Country",
+        "Folk"
+      ]
+    },
+    "totalDuration": 4758255,
+    "createdAt": "2024-05-17T18:00:00Z",
+    "updatedAt": "2024-04-13T04:00:00Z"
+  },
+  {
+    "id": "playlist-13",
+    "name": "Optimistic Outlook",
+    "description": "A curated collection of euphoric tracks for optimistic moments",
+    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
+    "owner": "Dark Forest",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-58",
+        "name": "Outer Space",
+        "duration": 289347
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-71",
+        "name": "Balanced State",
+        "duration": 183568
+      },
+      {
+        "id": "track-85",
+        "name": "Analytic Mode",
+        "duration": 184745
+      },
+      {
+        "id": "track-94",
+        "name": "Dark Ambient",
+        "duration": 162328
+      },
+      {
+        "id": "track-95",
+        "name": "Circadian Rhythm",
+        "duration": 293861
+      },
+      {
+        "id": "track-97",
+        "name": "Morning Dew",
+        "duration": 169090
+      },
+      {
+        "id": "track-101",
+        "name": "Flame Burning",
+        "duration": 267221
+      },
+      {
+        "id": "track-102",
+        "name": "Treble Sparkled",
+        "duration": 297674
+      },
+      {
+        "id": "track-103",
+        "name": "Gust Striking",
+        "duration": 166618
+      },
+      {
+        "id": "track-104",
+        "name": "Summer Heat",
+        "duration": 176960
+      },
+      {
+        "id": "track-105",
+        "name": "Chaotic Zone",
+        "duration": 233602
+      },
+      {
+        "id": "track-106",
+        "name": "Wind Chimes",
+        "duration": 161085
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic"
+      ],
+      "vibe": 100,
+      "genres": [
+        "Punk",
+        "Classical"
+      ]
+    },
+    "totalDuration": 4542450,
+    "createdAt": "2024-08-13T13:00:00Z",
+    "updatedAt": "2024-09-11T07:00:00Z"
+  },
+  {
+    "id": "playlist-14",
+    "name": "Chill Electronic",
+    "description": "A curated collection of nostalgic tracks for reflective, content moments",
+    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      }
+    ],
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Reflective",
+        "Content"
+      ],
+      "vibe": 29,
+      "genres": [
+        "Indie",
+        "Rock",
+        "K-Pop"
+      ]
+    },
+    "totalDuration": 4448250,
+    "createdAt": "2024-10-14T05:00:00Z",
+    "updatedAt": "2024-12-16T00:00:00Z"
+  },
+  {
+    "id": "playlist-15",
+    "name": "Energetic Rock",
+    "description": "A curated collection of nostalgic tracks for grateful, content moments",
+    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      }
+    ],
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Grateful",
+        "Content"
+      ],
+      "vibe": 38,
+      "genres": [
+        "Reggae",
+        "Soul",
+        "Metal"
+      ]
+    },
+    "totalDuration": 4613357,
+    "createdAt": "2024-01-28T00:00:00Z",
+    "updatedAt": "2024-01-13T21:00:00Z"
+  },
+  {
+    "id": "playlist-16",
+    "name": "Mellow Jazz",
+    "description": "A curated collection of reflective tracks for relaxed moments",
+    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-39",
+        "name": "Future Sound",
+        "duration": 174167
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-42",
+        "name": "Inner Thoughts",
+        "duration": 159909
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-45",
+        "name": "Fog Rolling",
+        "duration": 229626
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-48",
+        "name": "Cyclone Spin",
+        "duration": 154098
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-50",
+        "name": "Smooth R&B",
+        "duration": 211782
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-53",
+        "name": "Smoke Clearing",
+        "duration": 172683
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      }
+    ],
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed"
+      ],
+      "vibe": 37,
+      "genres": [
+        "Hip-Hop",
+        "Disco"
+      ]
+    },
+    "totalDuration": 4369120,
+    "createdAt": "2024-05-07T09:00:00Z",
+    "updatedAt": "2024-12-17T01:00:00Z"
+  },
+  {
+    "id": "playlist-17",
+    "name": "Uplifting Pop",
+    "description": "A curated collection of content tracks for confident, proud, relaxed moments",
+    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
+    "owner": "Soft Breeze",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-45",
+        "name": "Fog Rolling",
+        "duration": 229626
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-48",
+        "name": "Cyclone Spin",
+        "duration": 154098
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-56",
+        "name": "Winter Chill",
+        "duration": 188417
+      },
+      {
+        "id": "track-57",
+        "name": "Steam Rising",
+        "duration": 227897
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Confident",
+        "Proud",
+        "Relaxed"
+      ],
+      "vibe": 61,
+      "genres": [
+        "House",
+        "Country",
+        "Pop",
+        "Electronic"
+      ]
+    },
+    "totalDuration": 4521445,
+    "createdAt": "2024-03-12T13:00:00Z",
+    "updatedAt": "2024-07-09T10:00:00Z"
+  },
+  {
+    "id": "playlist-18",
+    "name": "Calm Ambient",
+    "description": "A curated collection of nostalgic tracks for reflective moments",
+    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "owner": "Hard Rain",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      }
+    ],
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 23,
+      "genres": [
+        "Trap",
+        "Rock",
+        "Jazz"
+      ]
+    },
+    "totalDuration": 4460036,
+    "createdAt": "2024-06-15T13:00:00Z",
+    "updatedAt": "2024-09-18T15:00:00Z"
+  },
+  {
+    "id": "playlist-19",
+    "name": "High Energy Hip-Hop",
+    "description": "A curated collection of reflective tracks for reflective, content, relaxed moments",
+    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      }
+    ],
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Reflective",
+        "Content",
+        "Relaxed"
+      ],
+      "vibe": 29,
+      "genres": [
+        "Electronic",
+        "Blues",
+        "Disco"
+      ]
+    },
+    "totalDuration": 4375394,
+    "createdAt": "2024-01-25T04:00:00Z",
+    "updatedAt": "2024-02-23T05:00:00Z"
+  },
+  {
+    "id": "playlist-20",
+    "name": "Smooth R&B",
+    "description": "A curated collection of reflective tracks for content, thoughtful moments",
+    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      },
+      {
+        "id": "track-39",
+        "name": "Future Sound",
+        "duration": 174167
+      },
+      {
+        "id": "track-40",
+        "name": "Urban Nights",
+        "duration": 249290
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-42",
+        "name": "Inner Thoughts",
+        "duration": 159909
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      }
+    ],
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content",
+        "Thoughtful"
+      ],
+      "vibe": 35,
+      "genres": [
+        "Trap",
+        "Afrobeats",
+        "Latin",
+        "Electronic"
+      ]
+    },
+    "totalDuration": 4545558,
+    "createdAt": "2024-01-01T13:00:00Z",
+    "updatedAt": "2024-10-04T07:00:00Z"
+  },
+  {
+    "id": "playlist-21",
+    "name": "Mental Health Focus",
+    "description": "A curated collection of nostalgic tracks for nostalgic, reflective moments",
+    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      }
+    ],
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic",
+        "Reflective"
+      ],
+      "vibe": 34,
+      "genres": [
+        "Soul",
+        "Afrobeats"
+      ]
+    },
+    "totalDuration": 4429975,
+    "createdAt": "2024-03-12T19:00:00Z",
+    "updatedAt": "2024-08-05T02:00:00Z"
+  },
+  {
+    "id": "playlist-22",
+    "name": "Wellness Soundtrack",
+    "description": "A curated collection of melancholic tracks for insecure, reflective, frustrated moments",
+    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      }
+    ],
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Insecure",
+        "Reflective",
+        "Frustrated"
+      ],
+      "vibe": 32,
+      "genres": [
+        "Funk",
+        "Reggae"
+      ]
+    },
+    "totalDuration": 4547707,
+    "createdAt": "2024-07-05T21:00:00Z",
+    "updatedAt": "2024-05-27T22:00:00Z"
+  },
+  {
+    "id": "playlist-23",
+    "name": "Therapy Playlist",
+    "description": "A curated collection of content tracks for relaxed, proud moments",
+    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "owner": "Pure Gold",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-39",
+        "name": "Future Sound",
+        "duration": 174167
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-57",
+        "name": "Steam Rising",
+        "duration": 227897
+      },
+      {
+        "id": "track-58",
+        "name": "Outer Space",
+        "duration": 289347
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed",
+        "Proud"
+      ],
+      "vibe": 55,
+      "genres": [
+        "Afrobeats",
+        "Hip-Hop",
+        "R&B",
+        "World"
+      ]
+    },
+    "totalDuration": 4599266,
+    "createdAt": "2024-04-16T05:00:00Z",
+    "updatedAt": "2024-06-09T03:00:00Z"
+  },
+  {
+    "id": "playlist-24",
+    "name": "Healing Tunes",
+    "description": "A curated collection of joyful tracks for great moments",
+    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
+    "owner": "Silver Lining",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      }
+    ],
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Great"
+      ],
+      "vibe": 69,
+      "genres": [
+        "K-Pop",
+        "Folk"
+      ]
+    },
+    "totalDuration": 4711652,
+    "createdAt": "2024-06-12T08:00:00Z",
+    "updatedAt": "2024-11-15T04:00:00Z"
+  },
+  {
+    "id": "playlist-25",
+    "name": "Morning Motivation",
+    "description": "A curated collection of joyful tracks for relaxed, proud moments",
+    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-36",
+        "name": "Green Fields",
+        "duration": 181921
+      },
+      {
+        "id": "track-40",
+        "name": "Urban Nights",
+        "duration": 249290
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-48",
+        "name": "Cyclone Spin",
+        "duration": 154098
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-50",
+        "name": "Smooth R&B",
+        "duration": 211782
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      }
+    ],
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed",
+        "Proud"
+      ],
+      "vibe": 66,
+      "genres": [
+        "Reggae",
+        "K-Pop",
+        "Metal",
+        "Ambient"
+      ]
+    },
+    "totalDuration": 4371964,
+    "createdAt": "2024-11-09T01:00:00Z",
+    "updatedAt": "2024-10-02T04:00:00Z"
+  },
+  {
+    "id": "playlist-26",
+    "name": "Evening Wind Down",
+    "description": "A curated collection of content tracks for confident moments",
+    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-53",
+        "name": "Smoke Clearing",
+        "duration": 172683
+      },
+      {
+        "id": "track-59",
+        "name": "Rhythm Locked",
+        "duration": 288683
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-71",
+        "name": "Balanced State",
+        "duration": 183568
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Confident"
+      ],
+      "vibe": 52,
+      "genres": [
+        "Jazz",
+        "Ambient"
+      ]
+    },
+    "totalDuration": 4500407,
+    "createdAt": "2024-10-08T00:00:00Z",
+    "updatedAt": "2024-09-17T16:00:00Z"
+  },
+  {
+    "id": "playlist-27",
+    "name": "Workout Mix",
+    "description": "A curated collection of reflective tracks for reflective, relaxed moments",
+    "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-39",
+        "name": "Future Sound",
+        "duration": 174167
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-42",
+        "name": "Inner Thoughts",
+        "duration": 159909
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      }
+    ],
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Reflective",
+        "Relaxed"
+      ],
+      "vibe": 30,
+      "genres": [
+        "Afrobeats",
+        "World",
+        "Punk"
+      ]
+    },
+    "totalDuration": 4178656,
+    "createdAt": "2024-11-26T21:00:00Z",
+    "updatedAt": "2024-12-18T12:00:00Z"
+  },
+  {
+    "id": "playlist-28",
+    "name": "Study Focus",
+    "description": "A curated collection of euphoric tracks for optimistic, proud, great moments",
+    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "owner": "Copper Wire",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-45",
+        "name": "Fog Rolling",
+        "duration": 229626
+      },
+      {
+        "id": "track-48",
+        "name": "Cyclone Spin",
+        "duration": 154098
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      },
+      {
+        "id": "track-56",
+        "name": "Winter Chill",
+        "duration": 188417
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic",
+        "Proud",
+        "Great"
+      ],
+      "vibe": 89,
+      "genres": [
+        "Disco",
+        "Latin",
+        "House"
+      ]
+    },
+    "totalDuration": 4427352,
+    "createdAt": "2024-02-11T02:00:00Z",
+    "updatedAt": "2024-04-27T22:00:00Z"
+  },
+  {
+    "id": "playlist-29",
+    "name": "Sleep Sounds",
+    "description": "A curated collection of melancholic tracks for insecure moments",
+    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      }
+    ],
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Insecure"
+      ],
+      "vibe": 17,
+      "genres": [
+        "Metal",
+        "Blues",
+        "R&B"
+      ]
+    },
+    "totalDuration": 4547707,
+    "createdAt": "2024-09-25T16:00:00Z",
+    "updatedAt": "2024-03-05T23:00:00Z"
+  },
+  {
+    "id": "playlist-30",
+    "name": "Wake Up Call",
+    "description": "A curated collection of euphoric tracks for proud moments",
+    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-53",
+        "name": "Smoke Clearing",
+        "duration": 172683
+      },
+      {
+        "id": "track-59",
+        "name": "Rhythm Locked",
+        "duration": 288683
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud"
+      ],
+      "vibe": 99,
+      "genres": [
+        "R&B",
+        "Ambient",
+        "Rock"
+      ]
+    },
+    "totalDuration": 4538377,
+    "createdAt": "2024-11-20T04:00:00Z",
+    "updatedAt": "2024-09-22T22:00:00Z"
+  },
+  {
+    "id": "playlist-31",
+    "name": "Road Trip Tunes",
+    "description": "A curated collection of content tracks for proud moments",
+    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
       {
         "id": "track-3",
-        "name": "Die On This Hill",
-        "duration": 220000
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-36",
+        "name": "Green Fields",
+        "duration": 181921
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-50",
+        "name": "Smooth R&B",
+        "duration": 211782
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Proud"
+      ],
+      "vibe": 46,
+      "genres": [
+        "Rock",
+        "Metal",
+        "World"
+      ]
+    },
+    "totalDuration": 4455214,
+    "createdAt": "2024-03-12T21:00:00Z",
+    "updatedAt": "2024-12-06T00:00:00Z"
+  },
+  {
+    "id": "playlist-32",
+    "name": "Party Starters",
+    "description": "A curated collection of content tracks for great moments",
+    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-36",
+        "name": "Green Fields",
+        "duration": 181921
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-50",
+        "name": "Smooth R&B",
+        "duration": 211782
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Great"
+      ],
+      "vibe": 58,
+      "genres": [
+        "Metal",
+        "Trap"
+      ]
+    },
+    "totalDuration": 4520243,
+    "createdAt": "2024-04-05T21:00:00Z",
+    "updatedAt": "2024-02-28T23:00:00Z"
+  },
+  {
+    "id": "playlist-33",
+    "name": "Rainy Day Vibes",
+    "description": "A curated collection of joyful tracks for optimistic, grateful moments",
+    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
+    "owner": "Mars Walk",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      },
+      {
+        "id": "track-53",
+        "name": "Smoke Clearing",
+        "duration": 172683
+      },
+      {
+        "id": "track-59",
+        "name": "Rhythm Locked",
+        "duration": 288683
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-81",
+        "name": "Yellow Sun",
+        "duration": 279948
+      },
+      {
+        "id": "track-82",
+        "name": "Wind Chimes",
+        "duration": 255374
+      },
+      {
+        "id": "track-83",
+        "name": "Storm During",
+        "duration": 157600
+      },
+      {
+        "id": "track-84",
+        "name": "Starlight",
+        "duration": 214404
+      },
+      {
+        "id": "track-85",
+        "name": "Analytic Mode",
+        "duration": 184745
+      }
+    ],
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Optimistic",
+        "Grateful"
+      ],
+      "vibe": 82,
+      "genres": [
+        "Techno",
+        "Indie",
+        "Ambient",
+        "Soul"
+      ]
+    },
+    "totalDuration": 4421735,
+    "createdAt": "2024-09-07T23:00:00Z",
+    "updatedAt": "2024-11-11T16:00:00Z"
+  },
+  {
+    "id": "playlist-34",
+    "name": "Sunny Day Energy",
+    "description": "A curated collection of reflective tracks for reflective, thoughtful, content moments",
+    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      }
+    ],
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Reflective",
+        "Thoughtful",
+        "Content"
+      ],
+      "vibe": 41,
+      "genres": [
+        "Trap",
+        "R&B",
+        "Classical"
+      ]
+    },
+    "totalDuration": 4504344,
+    "createdAt": "2024-10-03T13:00:00Z",
+    "updatedAt": "2024-10-19T19:00:00Z"
+  },
+  {
+    "id": "playlist-35",
+    "name": "Winter Warmth",
+    "description": "A curated collection of melancholic tracks for anxious, nostalgic, overwhelmed moments",
+    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
       }
     ],
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": ["Relaxed", "Reflective"],
-      "vibe": 25,
-      "genres": ["Folk", "Indie"]
+      "feelings": [
+        "Anxious",
+        "Nostalgic",
+        "Overwhelmed"
+      ],
+      "vibe": 34,
+      "genres": [
+        "Country",
+        "Ambient"
+      ]
     },
-    "totalDuration": 220000,
-    "createdAt": "2024-01-01T00:00:00Z",
-    "updatedAt": "2024-01-15T00:00:00Z"
+    "totalDuration": 4547707,
+    "createdAt": "2024-05-27T12:00:00Z",
+    "updatedAt": "2024-04-11T15:00:00Z"
+  },
+  {
+    "id": "playlist-36",
+    "name": "Summer Cool",
+    "description": "A curated collection of euphoric tracks for excited moments",
+    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-42",
+        "name": "Inner Thoughts",
+        "duration": 159909
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-79",
+        "name": "Classic Style",
+        "duration": 206629
+      },
+      {
+        "id": "track-80",
+        "name": "Water Flow",
+        "duration": 270096
+      },
+      {
+        "id": "track-81",
+        "name": "Yellow Sun",
+        "duration": 279948
+      },
+      {
+        "id": "track-86",
+        "name": "Yellow Sun",
+        "duration": 233366
+      },
+      {
+        "id": "track-88",
+        "name": "Storm Clouds",
+        "duration": 217391
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 85,
+      "genres": [
+        "K-Pop",
+        "Funk"
+      ]
+    },
+    "totalDuration": 4551885,
+    "createdAt": "2024-04-20T20:00:00Z",
+    "updatedAt": "2024-02-15T17:00:00Z"
+  },
+  {
+    "id": "playlist-37",
+    "name": "Spring Fresh",
+    "description": "A curated collection of content tracks for great, relaxed, excited moments",
+    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "owner": "Neptune Dive",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-43",
+        "name": "Gust Striking",
+        "duration": 216758
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-52",
+        "name": "Logical Step",
+        "duration": 166348
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Great",
+        "Relaxed",
+        "Excited"
+      ],
+      "vibe": 62,
+      "genres": [
+        "Pop",
+        "Indie"
+      ]
+    },
+    "totalDuration": 4435650,
+    "createdAt": "2024-06-15T06:00:00Z",
+    "updatedAt": "2024-11-14T11:00:00Z"
+  },
+  {
+    "id": "playlist-38",
+    "name": "Autumn Cozy",
+    "description": "A curated collection of euphoric tracks for proud moments",
+    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-76",
+        "name": "Seasonal Shift",
+        "duration": 175808
+      },
+      {
+        "id": "track-78",
+        "name": "Full Spectrum",
+        "duration": 287253
+      },
+      {
+        "id": "track-79",
+        "name": "Classic Style",
+        "duration": 206629
+      },
+      {
+        "id": "track-84",
+        "name": "Starlight",
+        "duration": 214404
+      },
+      {
+        "id": "track-86",
+        "name": "Yellow Sun",
+        "duration": 233366
+      },
+      {
+        "id": "track-87",
+        "name": "Chaotic Zone",
+        "duration": 197923
+      },
+      {
+        "id": "track-91",
+        "name": "Steam Rising",
+        "duration": 277329
+      },
+      {
+        "id": "track-100",
+        "name": "Discord Resolved",
+        "duration": 246508
+      },
+      {
+        "id": "track-101",
+        "name": "Flame Burning",
+        "duration": 267221
+      },
+      {
+        "id": "track-102",
+        "name": "Treble Sparkled",
+        "duration": 297674
+      },
+      {
+        "id": "track-103",
+        "name": "Gust Striking",
+        "duration": 166618
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud"
+      ],
+      "vibe": 88,
+      "genres": [
+        "Blues",
+        "Indie"
+      ]
+    },
+    "totalDuration": 4479679,
+    "createdAt": "2024-02-02T05:00:00Z",
+    "updatedAt": "2024-03-25T21:00:00Z"
+  },
+  {
+    "id": "playlist-39",
+    "name": "Dark Mood",
+    "description": "A curated collection of reflective tracks for relaxed, thoughtful, reflective moments",
+    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      },
+      {
+        "id": "track-39",
+        "name": "Future Sound",
+        "duration": 174167
+      },
+      {
+        "id": "track-40",
+        "name": "Urban Nights",
+        "duration": 249290
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-42",
+        "name": "Inner Thoughts",
+        "duration": 159909
+      }
+    ],
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed",
+        "Thoughtful",
+        "Reflective"
+      ],
+      "vibe": 44,
+      "genres": [
+        "Indie",
+        "Classical",
+        "Reggae",
+        "R&B"
+      ]
+    },
+    "totalDuration": 4303926,
+    "createdAt": "2024-03-15T03:00:00Z",
+    "updatedAt": "2024-05-09T20:00:00Z"
+  },
+  {
+    "id": "playlist-40",
+    "name": "Light Heart",
+    "description": "A curated collection of content tracks for confident moments",
+    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-71",
+        "name": "Balanced State",
+        "duration": 183568
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-76",
+        "name": "Seasonal Shift",
+        "duration": 175808
+      },
+      {
+        "id": "track-77",
+        "name": "Unstable Ground",
+        "duration": 213229
+      },
+      {
+        "id": "track-78",
+        "name": "Full Spectrum",
+        "duration": 287253
+      }
+    ],
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Confident"
+      ],
+      "vibe": 50,
+      "genres": [
+        "Indie",
+        "Techno"
+      ]
+    },
+    "totalDuration": 4577588,
+    "createdAt": "2024-09-25T11:00:00Z",
+    "updatedAt": "2024-09-14T15:00:00Z"
+  },
+  {
+    "id": "playlist-41",
+    "name": "Mixed Emotions",
+    "description": "A curated collection of nostalgic tracks for nostalgic moments",
+    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-26",
+        "name": "Peaceful Place",
+        "duration": 293726
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      }
+    ],
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic"
+      ],
+      "vibe": 32,
+      "genres": [
+        "Reggae",
+        "R&B",
+        "Pop",
+        "Trap"
+      ]
+    },
+    "totalDuration": 4527990,
+    "createdAt": "2024-02-11T03:00:00Z",
+    "updatedAt": "2024-12-27T02:00:00Z"
+  },
+  {
+    "id": "playlist-42",
+    "name": "Pure Joy",
+    "description": "A curated collection of joyful tracks for great, optimistic, grateful moments",
+    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
+    "owner": "Comet Tail",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-32",
+        "name": "Ocean Breeze",
+        "duration": 260246
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-71",
+        "name": "Balanced State",
+        "duration": 183568
+      }
+    ],
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Great",
+        "Optimistic",
+        "Grateful"
+      ],
+      "vibe": 68,
+      "genres": [
+        "Indie",
+        "Latin",
+        "Jazz",
+        "Punk"
+      ]
+    },
+    "totalDuration": 4462670,
+    "createdAt": "2024-09-06T20:00:00Z",
+    "updatedAt": "2024-07-25T16:00:00Z"
+  },
+  {
+    "id": "playlist-43",
+    "name": "Deep Sadness",
+    "description": "A curated collection of reflective tracks for relaxed, reflective moments",
+    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-37",
+        "name": "Outer Space",
+        "duration": 230087
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-39",
+        "name": "Future Sound",
+        "duration": 174167
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-42",
+        "name": "Inner Thoughts",
+        "duration": 159909
+      }
+    ],
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed",
+        "Reflective"
+      ],
+      "vibe": 32,
+      "genres": [
+        "House",
+        "Pop",
+        "Ambient",
+        "Punk"
+      ]
+    },
+    "totalDuration": 4247889,
+    "createdAt": "2024-09-27T15:00:00Z",
+    "updatedAt": "2024-12-20T13:00:00Z"
+  },
+  {
+    "id": "playlist-44",
+    "name": "Neutral State",
+    "description": "A curated collection of euphoric tracks for great, excited, optimistic moments",
+    "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-36",
+        "name": "Green Fields",
+        "duration": 181921
+      },
+      {
+        "id": "track-40",
+        "name": "Urban Nights",
+        "duration": 249290
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-48",
+        "name": "Cyclone Spin",
+        "duration": 154098
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-50",
+        "name": "Smooth R&B",
+        "duration": 211782
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Great",
+        "Excited",
+        "Optimistic"
+      ],
+      "vibe": 89,
+      "genres": [
+        "R&B",
+        "Metal",
+        "Reggae"
+      ]
+    },
+    "totalDuration": 4486395,
+    "createdAt": "2024-04-03T14:00:00Z",
+    "updatedAt": "2024-03-20T05:00:00Z"
+  },
+  {
+    "id": "playlist-45",
+    "name": "Genre Mix 2024",
+    "description": "A curated collection of joyful tracks for excited moments",
+    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-38",
+        "name": "Deep Dive",
+        "duration": 183428
+      },
+      {
+        "id": "track-46",
+        "name": "Yellow Sun",
+        "duration": 287323
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-57",
+        "name": "Steam Rising",
+        "duration": 227897
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-65",
+        "name": "Distant Echoes",
+        "duration": 290852
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-78",
+        "name": "Full Spectrum",
+        "duration": 287253
+      },
+      {
+        "id": "track-79",
+        "name": "Classic Style",
+        "duration": 206629
+      },
+      {
+        "id": "track-80",
+        "name": "Water Flow",
+        "duration": 270096
+      },
+      {
+        "id": "track-81",
+        "name": "Yellow Sun",
+        "duration": 279948
+      },
+      {
+        "id": "track-82",
+        "name": "Wind Chimes",
+        "duration": 255374
+      }
+    ],
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 77,
+      "genres": [
+        "Country",
+        "Pop",
+        "Soul"
+      ]
+    },
+    "totalDuration": 4805160,
+    "createdAt": "2024-04-10T22:00:00Z",
+    "updatedAt": "2024-01-20T10:00:00Z"
+  },
+  {
+    "id": "playlist-46",
+    "name": "New Releases",
+    "description": "A curated collection of melancholic tracks for lonely moments",
+    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "owner": "NextEleven",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-1",
+        "name": "Smooth R&B",
+        "duration": 210638
+      },
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-8",
+        "name": "Feeling Free",
+        "duration": 299734
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-11",
+        "name": "Inner Thoughts",
+        "duration": 229596
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-14",
+        "name": "Breeze Blowing",
+        "duration": 242154
+      },
+      {
+        "id": "track-15",
+        "name": "Mind Bender",
+        "duration": 257857
+      },
+      {
+        "id": "track-16",
+        "name": "Morning Dew",
+        "duration": 251297
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      }
+    ],
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Lonely"
+      ],
+      "vibe": 20,
+      "genres": [
+        "Reggae",
+        "Techno",
+        "Rock"
+      ]
+    },
+    "totalDuration": 4547707,
+    "createdAt": "2024-05-15T21:00:00Z",
+    "updatedAt": "2024-05-11T16:00:00Z"
+  },
+  {
+    "id": "playlist-47",
+    "name": "Throwback Hits",
+    "description": "A curated collection of reflective tracks for relaxed, content, reflective moments",
+    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-2",
+        "name": "Modern Beat",
+        "duration": 257468
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-12",
+        "name": "Peaceful Place",
+        "duration": 176245
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-22",
+        "name": "Flame Burning",
+        "duration": 299173
+      },
+      {
+        "id": "track-23",
+        "name": "Classic Style",
+        "duration": 211955
+      },
+      {
+        "id": "track-24",
+        "name": "Silent Streets",
+        "duration": 160111
+      },
+      {
+        "id": "track-25",
+        "name": "Red Dawn",
+        "duration": 270559
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-28",
+        "name": "Haze Settling",
+        "duration": 295690
+      },
+      {
+        "id": "track-29",
+        "name": "Calm Before",
+        "duration": 169038
+      },
+      {
+        "id": "track-30",
+        "name": "City Lights",
+        "duration": 298375
+      },
+      {
+        "id": "track-31",
+        "name": "Winter Chill",
+        "duration": 155720
+      },
+      {
+        "id": "track-33",
+        "name": "Deep Blue",
+        "duration": 245207
+      },
+      {
+        "id": "track-34",
+        "name": "Thought Clear",
+        "duration": 185056
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      }
+    ],
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed",
+        "Content",
+        "Reflective"
+      ],
+      "vibe": 44,
+      "genres": [
+        "Funk",
+        "K-Pop",
+        "Ambient"
+      ]
+    },
+    "totalDuration": 4307825,
+    "createdAt": "2024-04-05T07:00:00Z",
+    "updatedAt": "2024-11-23T03:00:00Z"
+  },
+  {
+    "id": "playlist-48",
+    "name": "Underground Gems",
+    "description": "A curated collection of euphoric tracks for optimistic, proud moments",
+    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
+    "owner": "System",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-3",
+        "name": "Calm Before",
+        "duration": 295621
+      },
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-5",
+        "name": "Full Spectrum",
+        "duration": 207570
+      },
+      {
+        "id": "track-6",
+        "name": "Rough Punk",
+        "duration": 172556
+      },
+      {
+        "id": "track-10",
+        "name": "Tornado Twist",
+        "duration": 184572
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-19",
+        "name": "Chaos Within",
+        "duration": 153372
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-21",
+        "name": "Purple Haze",
+        "duration": 248917
+      },
+      {
+        "id": "track-36",
+        "name": "Green Fields",
+        "duration": 181921
+      },
+      {
+        "id": "track-47",
+        "name": "Classic Style",
+        "duration": 249310
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-50",
+        "name": "Smooth R&B",
+        "duration": 211782
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-53",
+        "name": "Smoke Clearing",
+        "duration": 172683
+      },
+      {
+        "id": "track-59",
+        "name": "Rhythm Locked",
+        "duration": 288683
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic",
+        "Proud"
+      ],
+      "vibe": 97,
+      "genres": [
+        "Metal",
+        "Ambient",
+        "Rock"
+      ]
+    },
+    "totalDuration": 4379481,
+    "createdAt": "2024-04-07T01:00:00Z",
+    "updatedAt": "2024-06-19T05:00:00Z"
+  },
+  {
+    "id": "playlist-49",
+    "name": "Indie Discoveries",
+    "description": "A curated collection of euphoric tracks for proud, optimistic, great moments",
+    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-4",
+        "name": "Cyclone Spin",
+        "duration": 252094
+      },
+      {
+        "id": "track-7",
+        "name": "Spirit Rise",
+        "duration": 158211
+      },
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-13",
+        "name": "Afternoon Rain",
+        "duration": 230495
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-20",
+        "name": "Wind Chimes",
+        "duration": 296672
+      },
+      {
+        "id": "track-36",
+        "name": "Green Fields",
+        "duration": 181921
+      },
+      {
+        "id": "track-41",
+        "name": "Lunar Cycle",
+        "duration": 240396
+      },
+      {
+        "id": "track-44",
+        "name": "Seasonal Shift",
+        "duration": 279290
+      },
+      {
+        "id": "track-49",
+        "name": "Ocean Breeze",
+        "duration": 217798
+      },
+      {
+        "id": "track-50",
+        "name": "Smooth R&B",
+        "duration": 211782
+      },
+      {
+        "id": "track-51",
+        "name": "Green Fields",
+        "duration": 160343
+      },
+      {
+        "id": "track-54",
+        "name": "Pink Clouds",
+        "duration": 292453
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-62",
+        "name": "Modern Beat",
+        "duration": 293481
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-68",
+        "name": "Retro Vibe",
+        "duration": 179373
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-72",
+        "name": "Rough Punk",
+        "duration": 276796
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud",
+        "Optimistic",
+        "Great"
+      ],
+      "vibe": 97,
+      "genres": [
+        "K-Pop",
+        "Metal"
+      ]
+    },
+    "totalDuration": 4667888,
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-05-09T20:00:00Z"
+  },
+  {
+    "id": "playlist-50",
+    "name": "World Music Journey",
+    "description": "A curated collection of euphoric tracks for optimistic, great, excited moments",
+    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "owner": "EmPulse Music",
+    "ownerId": "system",
+    "tracks": [
+      {
+        "id": "track-9",
+        "name": "Thunderstorm",
+        "duration": 173270
+      },
+      {
+        "id": "track-17",
+        "name": "Afternoon Rain",
+        "duration": 226052
+      },
+      {
+        "id": "track-18",
+        "name": "Plasma Energy",
+        "duration": 272233
+      },
+      {
+        "id": "track-27",
+        "name": "Dark Ambient",
+        "duration": 202688
+      },
+      {
+        "id": "track-35",
+        "name": "Deep Blue",
+        "duration": 289642
+      },
+      {
+        "id": "track-55",
+        "name": "Air Lift",
+        "duration": 259924
+      },
+      {
+        "id": "track-58",
+        "name": "Outer Space",
+        "duration": 289347
+      },
+      {
+        "id": "track-60",
+        "name": "Winter Chill",
+        "duration": 157050
+      },
+      {
+        "id": "track-61",
+        "name": "Emotional Wave",
+        "duration": 156186
+      },
+      {
+        "id": "track-63",
+        "name": "Spirit Rise",
+        "duration": 180471
+      },
+      {
+        "id": "track-64",
+        "name": "Morning Dew",
+        "duration": 202052
+      },
+      {
+        "id": "track-66",
+        "name": "Spring Bloom",
+        "duration": 195233
+      },
+      {
+        "id": "track-67",
+        "name": "Orange Sunset",
+        "duration": 291401
+      },
+      {
+        "id": "track-69",
+        "name": "Mid Range",
+        "duration": 271235
+      },
+      {
+        "id": "track-70",
+        "name": "Order Indie",
+        "duration": 289950
+      },
+      {
+        "id": "track-73",
+        "name": "Distant Echoes",
+        "duration": 224936
+      },
+      {
+        "id": "track-74",
+        "name": "Smooth R&B",
+        "duration": 176023
+      },
+      {
+        "id": "track-75",
+        "name": "Balanced State",
+        "duration": 227543
+      },
+      {
+        "id": "track-78",
+        "name": "Full Spectrum",
+        "duration": 287253
+      },
+      {
+        "id": "track-79",
+        "name": "Classic Style",
+        "duration": 206629
+      }
+    ],
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic",
+        "Great",
+        "Excited"
+      ],
+      "vibe": 86,
+      "genres": [
+        "Latin",
+        "Techno",
+        "Afrobeats"
+      ]
+    },
+    "totalDuration": 4579118,
+    "createdAt": "2024-09-03T15:00:00Z",
+    "updatedAt": "2024-03-19T21:00:00Z"
   }
 ]

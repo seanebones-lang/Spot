@@ -27,8 +27,14 @@ export default function MoodSelector({ selectedMood, onSelect }: MoodSelectorPro
             key={mood.value}
             onClick={() => onSelect(mood.value)}
             className={cn(
-              "p-6 rounded-lg text-white font-semibold transition-transform hover:scale-105",
-              `bg-gradient-to-br ${mood.color}`,
+              "p-6 rounded-lg text-white font-semibold transition-all duration-300",
+              "bg-transparent border-2",
+              mood.value === 'Melancholic' && "border-blue-600 hover:shadow-[0_0_20px_rgba(37,99,235,0.6)]",
+              mood.value === 'Nostalgic' && "border-purple-600 hover:shadow-[0_0_20px_rgba(147,51,234,0.6)]",
+              mood.value === 'Reflective' && "border-indigo-600 hover:shadow-[0_0_20px_rgba(79,70,229,0.6)]",
+              mood.value === 'Content' && "border-green-600 hover:shadow-[0_0_20px_rgba(22,163,74,0.6)]",
+              mood.value === 'Joyful' && "border-yellow-500 hover:shadow-[0_0_20px_rgba(234,179,8,0.6)]",
+              mood.value === 'Euphoric' && "border-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.6)]",
               selectedMood === mood.value && "ring-4 ring-spotify-green ring-offset-2 ring-offset-spotify-dark"
             )}
           >

@@ -51,23 +51,38 @@ const helpCategories = [
 const suggestedArticles = [
   {
     title: 'How can I perform a clean reinstall of the app?',
-    category: 'App Help'
+    category: 'App Help',
+    href: '/help'
   },
   {
     title: 'I created a new account. Can I transfer my playlists, saved music and followers?',
-    category: 'Account Help'
+    category: 'Account Help',
+    href: '/help'
   },
   {
     title: 'How do I close (delete) my EmPulse Music Account?',
-    category: 'Account Help'
+    category: 'Account Help',
+    href: '/help'
   },
   {
     title: 'Why does EmPulse Music keep pausing / why does the music stop?',
-    category: 'App Help'
+    category: 'App Help',
+    href: '/help'
   },
   {
     title: 'How do I change my country settings?',
-    category: 'Account Help'
+    category: 'Account Help',
+    href: '/help'
+  },
+  {
+    title: 'Upload Guidelines - What information is required for uploads?',
+    category: 'Artist Help',
+    href: '/help/upload-guidelines'
+  },
+  {
+    title: 'How do I register with a PRO (ASCAP, BMI, SESAC) to collect royalties?',
+    category: 'Artist Help',
+    href: '/legal/pro-guide'
   }
 ];
 
@@ -109,13 +124,14 @@ export default function HelpPage() {
           <p className="text-spotify-text-gray mb-6">View top articles for help with common questions.</p>
           <div className="space-y-3">
             {suggestedArticles.map((article, index) => (
-              <div
+              <Link
                 key={index}
+                href={article.href || '/help'}
                 className="flex items-center gap-3 p-4 bg-spotify-light-gray hover:bg-[#3e3e3e] rounded-lg transition-colors cursor-pointer group"
               >
                 <span className="text-spotify-green group-hover:translate-x-1 transition-transform">→</span>
                 <span className="text-white group-hover:underline">{article.title}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -216,9 +232,12 @@ export default function HelpPage() {
 
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex flex-wrap gap-6 text-spotify-text-gray text-xs">
-              <Link href="#" className="hover:text-white">Legal</Link>
-              <Link href="#" className="hover:text-white">Safety & Privacy Center</Link>
-              <Link href="#" className="hover:text-white">Privacy Policy</Link>
+              <Link href="/legal/terms" className="hover:text-white">Terms of Service</Link>
+              <Link href="/legal/privacy" className="hover:text-white">Privacy Policy</Link>
+              <Link href="/legal/dmca" className="hover:text-white">DMCA Policy</Link>
+              <Link href="/legal/royalty-policy" className="hover:text-white">Royalty Policy</Link>
+              <Link href="/legal/pro-guide" className="hover:text-white">PRO Guide</Link>
+              <Link href="/help/upload-guidelines" className="hover:text-white">Upload Guidelines</Link>
               <Link href="#" className="hover:text-white">Cookies</Link>
               <Link href="#" className="hover:text-white">About Ads</Link>
               <Link href="#" className="hover:text-white">Accessibility</Link>

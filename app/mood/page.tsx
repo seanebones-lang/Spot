@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import { useMoodStore } from '@/stores/moodStore';
+import { usePlayerStore } from '@/stores/playerStore';
 import { mockData } from '@/lib/data';
 import MoodSelector from '@/components/mood/MoodSelector';
 import FeelingChips from '@/components/mood/FeelingChips';
 import VibeSlider from '@/components/mood/VibeSlider';
 import GenreSelector from '@/components/mood/GenreSelector';
+import PlayButton from '@/components/PlayButton';
 import { MoodState } from '@/types/mood';
 
 export default function MoodPage() {
@@ -21,6 +23,8 @@ export default function MoodPage() {
     setGenres,
   } = useMoodStore();
 
+  const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying, addToQueue } = usePlayerStore();
+  const tracks = mockData.getTracks();
   const playlists = mockData.getPlaylists();
 
   // Simple matching algorithm (client-side)
@@ -77,6 +81,23 @@ export default function MoodPage() {
     }
   };
 
+  const handlePlayPlaylist = (playlist: typeof playlists[0]) => {
+    // Find first track in playlist and play it
+    const firstTrackId = playlist.tracks[0]?.id;
+    if (firstTrackId) {
+      const track = tracks.find(t => t.id === firstTrackId);
+      if (track) {
+        // Add all playlist tracks to queue
+        playlist.tracks.forEach(t => {
+          const trackToAdd = tracks.find(tr => tr.id === t.id);
+          if (trackToAdd) addToQueue(trackToAdd);
+        });
+        setCurrentTrack(track);
+        setIsPlaying(true);
+      }
+    }
+  };
+
   return (
     <div className="p-8">
       <h1 className="text-4xl font-bold mb-8">Discover Music by Mood</h1>
@@ -110,27 +131,44 @@ export default function MoodPage() {
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {filteredPlaylists.map((playlist) => (
-            <div
-              key={playlist.id}
-              className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors cursor-pointer group"
-            >
-              <img
-                src={playlist.coverArt}
-                alt={playlist.name}
-                className="w-full aspect-square object-cover rounded mb-3"
-              />
-              <h3 className="font-semibold text-sm truncate mb-1">{playlist.name}</h3>
-              <p className="text-xs text-spotify-text-gray line-clamp-2">{playlist.description}</p>
-              {playlist.moodTags && (
-                <div className="mt-2 flex flex-wrap gap-1">
-                  <span className="text-xs px-2 py-0.5 bg-empulse-purple/20 text-empulse-purple rounded">
-                    {playlist.moodTags.mood}
-                  </span>
+          {filteredPlaylists.map((playlist) => {
+            const firstTrackId = playlist.tracks[0]?.id;
+            const isPlaylistPlaying = currentTrack?.id === firstTrackId && isPlaying;
+            return (
+              <div
+                key={playlist.id}
+                className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors cursor-pointer group relative"
+                onClick={() => handlePlayPlaylist(playlist)}
+              >
+                <div className="relative mb-3">
+                  <img
+                    src={playlist.coverArt}
+                    alt={playlist.name}
+                    className="w-full aspect-square object-cover rounded"
+                  />
+                  <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <PlayButton
+                      isPlaying={isPlaylistPlaying}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handlePlayPlaylist(playlist);
+                      }}
+                      size="sm"
+                    />
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+                <h3 className="font-semibold text-sm truncate mb-1">{playlist.name}</h3>
+                <p className="text-xs text-spotify-text-gray line-clamp-2">{playlist.description}</p>
+                {playlist.moodTags && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    <span className="text-xs px-2 py-0.5 bg-empulse-purple/20 text-empulse-purple rounded">
+                      {playlist.moodTags.mood}
+                    </span>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
         {filteredPlaylists.length === 0 && (
           <div className="text-center py-16">
