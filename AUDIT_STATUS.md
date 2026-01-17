@@ -9,11 +9,12 @@
 ## 📊 **OVERALL PROGRESS**
 
 ```
-[████████░░░░░░░░░░░░] 20% Complete
+[██████████░░░░░░░░░░] 30% Complete
 ```
 
 - ✅ **Preparation**: 100% Complete
-- 🟡 **Extraction**: 10% Complete (Framework ready, live extraction in progress)
+- ✅ **Framework**: 100% Complete (All tools and documentation ready)
+- 🟡 **Extraction**: 10% Complete (Framework ready, awaiting live spotify.com access)
 - ⏳ **Validation**: 0% Complete (Waiting for extraction)
 - ⏳ **Implementation**: 0% Complete (Blocked until validation)
 
@@ -34,6 +35,15 @@
    - ✅ Design token gaps identified
    - ✅ Discrepancies documented (border radius, colors, etc.)
    - ✅ Missing features identified (resizable sidebar)
+
+3. **Extraction Tools & Framework**
+   - ✅ Helper scripts created (`extraction-helpers.md`)
+   - ✅ Workflow documented (`EXTRACTION_WORKFLOW.md`)
+   - ✅ Daily checklist created (`EXTRACTION_CHECKLIST.md`)
+   - ✅ Design tokens JSON structure created (`design-tokens.json`)
+   - ✅ Findings template ready (`REVERSE_ENGINEERING_FINDINGS.md`)
+   - ✅ Progress tracking (`EXTRACTION_PROGRESS.md`)
+   - ✅ Summary report (`EXTRACTION_SUMMARY.md`)
 
 ### **🟡 IN PROGRESS**
 
