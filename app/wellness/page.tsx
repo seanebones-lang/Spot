@@ -90,12 +90,26 @@ export default function WellnessPage() {
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Partner Resources</h2>
         <div className="grid md:grid-cols-3 gap-4">
-          {['BetterMe', 'Calm', 'Breeze Wellbeing'].map((partner) => (
-            <div key={partner} className="bg-spotify-light-gray rounded-lg p-6 text-center">
-              <h3 className="font-bold mb-2">{partner}</h3>
-              <button className="text-spotify-green hover:underline text-sm">Visit Partner →</button>
-            </div>
-          ))}
+          <div className="bg-spotify-light-gray rounded-lg p-6 text-center">
+            <h3 className="font-bold mb-2">BetterMe</h3>
+            <button className="text-spotify-green hover:underline text-sm">Visit Partner →</button>
+          </div>
+          <div className="bg-spotify-light-gray rounded-lg p-6 text-center">
+            <h3 className="font-bold mb-2">Calm</h3>
+            <button className="text-spotify-green hover:underline text-sm">Visit Partner →</button>
+          </div>
+          <div className="bg-spotify-light-gray rounded-lg p-6 text-center">
+            <h3 className="font-bold mb-2">If/Then/Reset</h3>
+            <p className="text-xs text-spotify-text-gray mb-2">by NextEleven</p>
+            <a 
+              href="https://apps.apple.com/us/app/if-then-reset-mental-wellness/id6755074789" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-spotify-green hover:underline text-sm flex items-center justify-center gap-1"
+            >
+              Download on App Store <ExternalLink size={14} />
+            </a>
+          </div>
         </div>
       </section>
 
