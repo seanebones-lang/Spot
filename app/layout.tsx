@@ -3,7 +3,9 @@ import './globals.css';
 import Sidebar from '@/components/Sidebar';
 import TopBar from '@/components/TopBar';
 import Player from '@/components/Player';
+import RightSidebar from '@/components/RightSidebar';
 import KeyboardShortcutsProvider from '@/components/KeyboardShortcutsProvider';
+import LayoutContent from '@/components/LayoutContent';
 
 export const metadata: Metadata = {
   title: 'EmPulse Music - Revolutionary Mood-Based Music Discovery',
@@ -24,16 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <KeyboardShortcutsProvider>
-          <div className="flex h-screen bg-spotify-dark overflow-hidden">
-            <Sidebar />
-            <div className="flex-1 flex flex-col ml-64">
-              <TopBar />
-              <main className="flex-1 overflow-y-auto pt-16 pb-player-height">
-                {children}
-              </main>
-            </div>
-            <Player />
-          </div>
+          <LayoutContent>
+            {children}
+          </LayoutContent>
         </KeyboardShortcutsProvider>
       </body>
     </html>

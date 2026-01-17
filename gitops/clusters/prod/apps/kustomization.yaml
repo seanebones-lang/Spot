@@ -1,0 +1,10 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: empulse-music-apps
+resources:
+  - ../namespaces.yaml
+  - empulse-music-deployment.yaml
+  - empulse-music-service.yaml
+  - empulse-music-ingress.yaml
