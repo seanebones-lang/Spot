@@ -1179,6 +1179,66 @@
 
 ---
 
-**Last Updated**: January 15, 2026  
+---
+
+## 🎯 **ORCHESTRATOR ASSIGNMENT SECTION**
+
+### **After Reverse Engineering Audit Completion:**
+
+**The Orchestrator must:**
+
+1. **Review Complete Audit Report** (`REVERSE_ENGINEERING_AUDIT.md`)
+   - Verify all design tokens extracted
+   - Confirm all components documented
+   - Validate pixel-perfect specifications
+   - Note any new findings (e.g., resizable sidebar divider)
+
+2. **Assign Best Agents for Implementation Tasks:**
+
+   **A. Resizable Sidebar with Horizontal Divider** (NEW - User Observation)
+   - **Primary Agent**: Front-End Specialist
+   - **Supporting Agent**: UX Specialist (for interaction design)
+   - **Task**: Implement resizable sidebar with horizontal divider line that moves left/right
+   - **Specification**:
+     - Divider line between sidebar and main content
+     - Click and drag to resize sidebar width
+     - Smooth animation during resize
+     - Store width in localStorage
+     - Cursor: `col-resize` on hover
+     - Min/max width constraints
+   - **Priority**: 🔴 CRITICAL (user-requested feature)
+   - **Deliverable**: Updated `components/Sidebar.tsx` with resize functionality
+
+   **B. Design Token Implementation**
+   - **Agent**: Front-End Specialist
+   - **Task**: Update `tailwind.config.js` with all verified tokens from audit
+   - **Priority**: 🔴 CRITICAL (blocks all UI work)
+   - **Deliverable**: Complete `tailwind.config.js` + `design-tokens.json`
+
+   **C. Component Updates to Match Specifications**
+   - **Agent**: Front-End Specialist
+   - **Task**: Update all components to match extracted pixel-perfect specifications
+   - **Components**: Buttons, Inputs, Cards, Player Bar, Sidebar, Modals, etc.
+   - **Priority**: 🔴 CRITICAL
+   - **Deliverable**: All components match Spotify.com exactly
+
+   **D. Pixel-Perfect Validation**
+   - **Agent**: Reverse Engineering Specialist (final validation)
+   - **Task**: Run screenshot comparisons, verify <1% difference
+   - **Priority**: 🔴 CRITICAL (before launch)
+   - **Deliverable**: Validation report with pass/fail per component
+
+3. **Update Master Todo List** with specific agent assignments for each task
+
+4. **Unblock All Paused Agents** once audit deliverables are complete:
+   - Front-End Specialist (unblocked after design tokens)
+   - UI Specialist (unblocked after component specs)
+   - All other agents (unblocked after validation)
+
+5. **Track Progress** with weekly reviews until all pixel-perfect matching is complete
+
+---
+
+**Last Updated**: January 16, 2026  
 **Next Review**: Weekly progress reviews with Master Inspector  
 **Status**: 🟡 **IN PROGRESS** - Frontend complete, Backend/Infrastructure pending
