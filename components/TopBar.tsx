@@ -14,15 +14,15 @@ export default function TopBar() {
   const { getStreak } = useCheckInStore();
   const streak = getStreak();
 
-  const { leftSidebarCollapsed, rightSidebarOpen, toggleRightSidebar } = useUIStore();
+  const { leftSidebarWidth, rightSidebarOpen, rightSidebarWidth, toggleRightSidebar } = useUIStore();
 
   return (
     <div 
-      className={cn(
-        "fixed top-0 h-16 bg-spotify-dark/80 backdrop-blur-md z-40 flex items-center justify-between px-8 transition-all duration-300 ease-in-out",
-        leftSidebarCollapsed ? "left-16" : "left-64",
-        rightSidebarOpen ? "right-80" : "right-0"
-      )}
+      className="fixed top-0 h-16 bg-spotify-dark/80 backdrop-blur-md z-40 flex items-center justify-between px-8 transition-all duration-300 ease-in-out"
+      style={{ 
+        left: `${leftSidebarWidth}px`, 
+        right: rightSidebarOpen ? `${rightSidebarWidth}px` : '0' 
+      }}
     >
       {/* Search Bar */}
       <div className="flex-1 max-w-md relative">

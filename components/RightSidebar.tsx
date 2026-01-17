@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { X, Check } from 'lucide-react';
 import { useUIStore } from '@/stores/uiStore';
 import { usePlayerStore } from '@/stores/playerStore';
@@ -7,8 +8,35 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 export default function RightSidebar() {
-  const { rightSidebarOpen, setRightSidebarOpen } = useUIStore();
+  const { rightSidebarOpen, rightSidebarWidth, setRightSidebarOpen, setRightSidebarWidth } = useUIStore();
   const { currentTrack } = usePlayerStore();
+  const [isResizing, setIsResizing] = useState(false);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing) return;
+      const newWidth = window.innerWidth - e.clientX;
+      setRightSidebarWidth(newWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    if (isResizing) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isResizing, setRightSidebarWidth]);
 
   // Mock data - replace with actual track/album data
   const playlistName = 'Coding';
@@ -16,12 +44,15 @@ export default function RightSidebar() {
   const artistName = currentTrack?.artist || 'NextEleven Label Showcase';
 
   return (
-    <div
-      className={cn(
-        "fixed right-0 top-16 bottom-player-height bg-spotify-dark-gray border-l border-white/10 transition-transform duration-300 ease-in-out z-30 overflow-y-auto sidebar-scrollbar",
-        rightSidebarOpen ? "translate-x-0 w-80" : "translate-x-full w-80"
-      )}
-    >
+    <>
+      <div
+        className={cn(
+          "fixed right-0 top-16 bottom-player-height bg-spotify-dark-gray border-l border-white/10 z-30 overflow-y-auto sidebar-scrollbar",
+          rightSidebarOpen ? "translate-x-0" : "translate-x-full",
+          isResizing ? "" : "transition-transform duration-300 ease-in-out"
+        )}
+        style={{ width: `${rightSidebarWidth}px` }}
+      >
       {rightSidebarOpen && (
         <>
           {/* Close Button */}
@@ -116,6 +147,19 @@ export default function RightSidebar() {
           </div>
         </>
       )}
-    </div>
+      </div>
+      
+      {/* Resize Handle */}
+      {rightSidebarOpen && (
+        <div
+          onMouseDown={handleMouseDown}
+          className={cn(
+            "fixed top-16 bottom-player-height w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-40 transition-all",
+            isResizing && "bg-spotify-green/60 w-1"
+          )}
+          style={{ right: `${rightSidebarWidth}px` }}
+        />
+      )}
+    </>
   );
 }

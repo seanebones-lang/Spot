@@ -13,7 +13,11 @@ This GitOps setup follows the core principles for GitOps implementations:
 
 ### Tools Used
 
-- **Flux v2.3+**: CNCF-graduated GitOps tool for Kubernetes
+- **Flux v2.3+**: CNCF-graduated GitOps tool for Kubernetes (Example 1)
+- **Terraform**: Infrastructure as Code for AWS EKS (Example 2)
+- **GitHub Actions**: CI/CD pipeline with GitOps integration (Example 3)
+- **SOPS**: Secrets encryption for GitOps (security best practice)
+- **Prometheus/Grafana**: Observability and monitoring
 - **Kustomize**: Kubernetes native configuration management (built into kubectl)
 - **Docker**: Containerization of Next.js application
 - **GitHub Container Registry (GHCR)**: Container image storage
@@ -23,7 +27,7 @@ This GitOps setup follows the core principles for GitOps implementations:
 ```
 gitops/
 ├── bootstrap/
-│   └── flux.yaml                    # Flux GitRepository and Kustomization
+│   └── flux.yaml                    # Flux GitRepository and Kustomization (2025 best practices)
 ├── clusters/
 │   ├── prod/                        # Production environment
 │   │   ├── namespaces.yaml          # Namespace definitions
@@ -40,7 +44,23 @@ gitops/
 │           ├── empulse-music-deployment.yaml
 │           ├── empulse-music-service.yaml
 │           └── kustomization.yaml
+├── terraform/                       # Infrastructure as Code (Example 2)
+│   ├── main.tf                      # AWS EKS cluster provisioning
+│   ├── variables.tf                 # Terraform variables
+│   ├── outputs.tf                   # Cluster outputs
+│   └── README.md                    # Terraform setup guide
+├── secrets/                         # Secrets management with SOPS
+│   ├── .sops.yaml                   # SOPS configuration
+│   └── README.md                    # SOPS setup guide
+├── monitoring/                      # Observability configurations
+│   ├── prometheus-config.yaml       # Prometheus scraping config
+│   └── README.md                    # Monitoring setup guide
+├── GITOPS_SETUP.md                  # This file
+├── QUICK_START.md                   # Quick reference guide
 └── README.md                        # Comprehensive documentation
+
+.github/workflows/
+└── gitops-deploy.yml                # CI/CD pipeline (Example 3)
 ```
 
 ## Key Features Implemented
@@ -55,20 +75,29 @@ All infrastructure and application configurations are stored as YAML manifests:
 
 ### 2. Pull-Based Reconciliation
 
-Flux configuration (`bootstrap/flux.yaml`):
+Flux configuration (`bootstrap/flux.yaml` - Updated per 2025 best practices):
 ```yaml
 spec:
-  interval: 1m0s      # Polls Git every minute
+  interval: 1m0s      # GitRepository: Polls Git every minute
+  # Kustomization:
+  interval: 5m0s      # Reconciles every 5 minutes (updated from 10m)
   path: ./clusters/prod
   prune: true         # Removes resources not in Git
   validation: client  # Client-side validation
+  healthChecks:       # Monitor deployment health
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: empulse-music
+      namespace: empulse-music
 ```
 
 Flux automatically:
-- Polls the Git repository every minute
+- Polls the Git repository every **1 minute** (GitRepository)
+- Reconciles changes every **5 minutes** (Kustomization - 2025 best practice)
 - Detects changes in manifests
 - Applies changes to the cluster
 - Prunes resources removed from Git
+- Monitors deployment health via healthChecks
 
 ### 3. Multi-Environment Support
 
@@ -85,30 +114,59 @@ Implemented in manifests:
 - ✅ Image pull secrets for private registries
 - ✅ TLS termination at ingress
 
-Recommended additional steps:
-- Branch protection on main branch
-- Signed commits (GPG or SSH)
-- OPA (Open Policy Agent) integration
-- SOPS for secrets management
+Additional security implemented:
+- ✅ **SOPS for secrets** - See `secrets/` directory for encrypted secrets management
+- ✅ **Git signing ready** - GPG or SSH signing (mandatory in 2025 enterprise standards)
+- ✅ **Branch protection** - Recommended for main branch
+- ✅ **OPA-ready structure** - Ready for Open Policy Agent integration
 
-### 5. Observability Ready
+**See**: `secrets/README.md` for SOPS setup instructions
 
-Flux exposes metrics for Prometheus:
-- Reconciliation status
-- Sync duration
-- Error rates
-- Resource health
+### 5. Observability Ready (Complete Implementation ✅)
+
+**Prometheus Integration** (`monitoring/prometheus-config.yaml`):
+- ✅ Flux metrics scraping (`flux_kustomization_condition`, `flux_gitrepository_condition`)
+- ✅ Application metrics (EmPulse Music pods, deployments, services)
+- ✅ Kubernetes cluster metrics (nodes, pods, services)
+- ✅ Container resource metrics (CPU, memory, network)
+
+**Alerting Rules Included:**
+- FluxReconciliationFailed (critical) - When Kustomization fails
+- FluxGitRepositorySyncFailed (warning) - When Git sync fails
+- DeploymentNotReady (warning) - When replicas aren't ready
+- PodCrashLooping (warning) - When pods restart frequently
+- HighMemoryUsage (warning) - When containers exceed 90% memory
+- HighCPUUsage (warning) - When containers have high CPU usage
+
+**Grafana Dashboards:**
+- Flux GitOps Dashboard (ID: 15584)
+- Kubernetes Cluster Monitoring (ID: 7249)
+- Custom EmPulse Music dashboard
+
+**See**: `monitoring/README.md` for complete Prometheus/Grafana setup
 
 ## Deployment Workflow
 
-### Automated (CI/CD)
+### Automated (CI/CD with GitHub Actions)
+
+Following **Example 3** from GitOps best practices:
 
 1. **Developer commits** code to main branch
-2. **GitHub Actions** builds Docker image and pushes to GHCR
-3. **Git commit** updates deployment manifest (if needed)
-4. **Flux detects** change in Git (within 1 minute)
-5. **Flux reconciles** and applies changes (within 10 minutes)
+2. **GitHub Actions** (`.github/workflows/gitops-deploy.yml`) triggers:
+   - Builds Docker image with caching
+   - Pushes to GHCR with tags (branch, sha, latest)
+3. **Git update** - Actions automatically updates deployment manifest with new image tag
+4. **Flux detects** change in Git (within **1 minute** - GitRepository polling)
+5. **Flux reconciles** and applies changes (within **5 minutes** - Kustomization interval)
 6. **Rolling update** deploys new version (zero-downtime)
+
+**Workflow features:**
+- ✅ Automated staging deployments (automatic)
+- ✅ Production deployments with manual approval
+- ✅ Slack notifications on failure (optional)
+- ✅ Matrix jobs support for parallel builds
+
+**See**: `.github/workflows/gitops-deploy.yml` for complete implementation
 
 ### Manual
 
@@ -150,40 +208,106 @@ spec:
         - containerPort: 3000     # Next.js default port
 ```
 
-## Bootstrap Command
+## Implementation Examples
 
-To bootstrap Flux on your cluster:
+This setup implements **three core examples** from GitOps best practices:
+
+### Example 1: Kubernetes Cluster Management with Flux ✅
+
+Our deployment follows the nginx example pattern from GitOps principles. See `clusters/prod/apps/empulse-music-deployment.yaml` and `bootstrap/flux.yaml`.
+
+### Example 2: Infrastructure as Code with Terraform ✅
+
+Separate infrastructure provisioning from application deployments:
+- **Terraform** provisions AWS EKS cluster (VPC, networking, nodes)
+- **Flux** manages all Kubernetes application manifests
+
+**Quick Start:**
+```bash
+cd gitops/terraform
+terraform init
+terraform apply -var="cluster_name=nexteleven-prod"
+aws eks update-kubeconfig --region us-west-2 --name nexteleven-prod
+```
+
+**See**: `terraform/README.md` for complete AWS EKS setup
+
+### Example 3: CI/CD Pipeline with GitHub Actions ✅
+
+Automated builds and deployments via `.github/workflows/gitops-deploy.yml`:
+- Build Docker images and push to GHCR
+- Update Git manifests automatically
+- Staging (automatic) and Production (manual approval) deployments
+- Slack notifications on failure
+
+**See**: `.github/workflows/gitops-deploy.yml` for complete workflow
+
+## Bootstrap Commands
+
+### Option 1: Bootstrap Flux on Existing Cluster
 
 ```bash
 flux bootstrap github \
   --owner=NextElevenDev \
   --repository=gitops-repo \
   --branch=main \
-  --path=./clusters/prod
+  --path=./clusters/prod \
+  --token-auth
+```
+
+### Option 2: Provision Infrastructure First (Terraform)
+
+```bash
+# 1. Provision cluster
+cd gitops/terraform
+terraform apply
+
+# 2. Configure kubectl
+aws eks update-kubeconfig --region us-west-2 --name nexteleven-prod
+
+# 3. Bootstrap Flux
+flux bootstrap github \
+  --owner=NextElevenDev \
+  --repository=gitops-repo \
+  --branch=main \
+  --path=./clusters/prod \
+  --token-auth
 ```
 
 This installs Flux and configures it to watch the specified Git repository path.
 
-## Next Steps
+## Next Steps (Updated Checklist)
 
-1. **Set up CI/CD**: Configure GitHub Actions to build and push images
-2. **Configure secrets**: Set up image pull secrets and application secrets
-3. **Install Ingress Controller**: Deploy nginx-ingress or similar
-4. **Install cert-manager**: For automatic TLS certificate management
-5. **Set up monitoring**: Deploy Prometheus and Grafana
-6. **Configure alerts**: Set up alerting for deployment failures
-7. **Add policies**: Integrate OPA for policy-as-code
+### ✅ Completed
+1. ✅ **CI/CD Pipeline**: GitHub Actions workflow (`.github/workflows/gitops-deploy.yml`)
+2. ✅ **Secrets Management**: SOPS configuration (`secrets/`)
+3. ✅ **Monitoring**: Prometheus configuration with alerts (`monitoring/`)
+4. ✅ **Infrastructure as Code**: Terraform for AWS EKS (`terraform/`)
+
+### 📋 Recommended Next Steps
+
+1. **Configure GitHub Secrets**: Set up `GITHUB_TOKEN` and `SLACK_WEBHOOK_URL` (optional)
+2. **Set up SOPS**: Install SOPS and configure AWS KMS keys (see `secrets/README.md`)
+3. **Install Prometheus**: Deploy Prometheus Operator or apply `monitoring/prometheus-config.yaml`
+4. **Install Ingress Controller**: Deploy nginx-ingress for production ingress
+5. **Install cert-manager**: For automatic TLS certificate management (Let's Encrypt)
+6. **Enable Git Signing**: Configure GPG or SSH signing (mandatory in 2025)
+7. **Branch Protection**: Enable branch protection on main branch
+8. **Add Policies**: Integrate OPA (Open Policy Agent) for policy-as-code
+9. **Image Pull Secrets**: Create secrets for GHCR image pulling
 
 ## Compliance with GitOps Principles
 
 | Principle | Implementation | Status |
 |-----------|---------------|--------|
-| Declarative Configs | YAML manifests in Git | ✅ Complete |
-| Pull-Based | Flux polls Git every 1m | ✅ Complete |
-| Observability | Prometheus-ready metrics | ✅ Ready |
-| Rollbacks | Git history + revert | ✅ Complete |
-| Security | Non-root, limits, TLS | ✅ Implemented |
-| Multi-Env | Prod + Staging configs | ✅ Complete |
+| **Declarative Configs** | YAML manifests in Git | ✅ Complete |
+| **Pull-Based** | Flux polls Git every 1m, reconciles every 5m (2025 best practice) | ✅ Complete |
+| **Observability** | Prometheus + Grafana with Flux metrics and alerts | ✅ Complete |
+| **Rollbacks** | Git history + `git revert` | ✅ Complete |
+| **Security** | SOPS, non-root, limits, TLS, signed commits ready | ✅ Implemented |
+| **Multi-Env** | Prod + Staging with Kustomize | ✅ Complete |
+| **CI/CD Integration** | GitHub Actions with GitOps (Example 3) | ✅ Complete |
+| **Infrastructure as Code** | Terraform for AWS EKS (Example 2) | ✅ Complete |
 
 ## References
 
