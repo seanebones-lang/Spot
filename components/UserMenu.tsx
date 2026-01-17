@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Check
 } from 'lucide-react';
+import PremiumBadge from '@/components/PremiumBadge';
 import { cn } from '@/lib/utils';
 
 interface UserMenuProps {

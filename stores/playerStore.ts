@@ -10,14 +10,28 @@ interface PlayerState {
   queue: Track[];
   shuffle: boolean;
   repeat: 'off' | 'all' | 'one';
+  autoplay: boolean;
+  smartShuffle: boolean;
+  crossfade: boolean;
+  crossfadeDuration: number; // 0-12 seconds
+  gaplessPlayback: boolean;
+  normalizeVolume: boolean;
   setCurrentTrack: (track: Track | null) => void;
   setIsPlaying: (isPlaying: boolean) => void;
   setProgress: (progress: number) => void;
   setVolume: (volume: number) => void;
   addToQueue: (track: Track) => void;
   removeFromQueue: (trackId: string) => void;
+  clearQueue: () => void;
+  reorderQueue: (fromIndex: number, toIndex: number) => void;
   setShuffle: (shuffle: boolean) => void;
   setRepeat: (repeat: 'off' | 'all' | 'one') => void;
+  setAutoplay: (autoplay: boolean) => void;
+  setSmartShuffle: (smartShuffle: boolean) => void;
+  setCrossfade: (crossfade: boolean) => void;
+  setCrossfadeDuration: (duration: number) => void;
+  setGaplessPlayback: (gapless: boolean) => void;
+  setNormalizeVolume: (normalize: boolean) => void;
   playNext: () => void;
   playPrevious: () => void;
 }
@@ -32,6 +46,12 @@ export const usePlayerStore = create<PlayerState>()(
       queue: [],
       shuffle: false,
       repeat: 'off',
+      autoplay: false,
+      smartShuffle: false,
+      crossfade: false,
+      crossfadeDuration: 0,
+      gaplessPlayback: false,
+      normalizeVolume: false,
       
       setCurrentTrack: (track) => set({ currentTrack: track }),
       setIsPlaying: (isPlaying) => set({ isPlaying }),
@@ -42,9 +62,22 @@ export const usePlayerStore = create<PlayerState>()(
       removeFromQueue: (trackId) => set((state) => ({
         queue: state.queue.filter(t => t.id !== trackId)
       })),
+      clearQueue: () => set({ queue: [] }),
+      reorderQueue: (fromIndex, toIndex) => set((state) => {
+        const newQueue = [...state.queue];
+        const [removed] = newQueue.splice(fromIndex, 1);
+        newQueue.splice(toIndex, 0, removed);
+        return { queue: newQueue };
+      }),
       
       setShuffle: (shuffle) => set({ shuffle }),
       setRepeat: (repeat) => set({ repeat }),
+      setAutoplay: (autoplay) => set({ autoplay }),
+      setSmartShuffle: (smartShuffle) => set({ smartShuffle }),
+      setCrossfade: (crossfade) => set({ crossfade }),
+      setCrossfadeDuration: (duration) => set({ crossfadeDuration: Math.max(0, Math.min(12, duration)) }),
+      setGaplessPlayback: (gapless) => set({ gaplessPlayback: gapless }),
+      setNormalizeVolume: (normalize) => set({ normalizeVolume: normalize }),
       
       playNext: () => {
         const { queue, shuffle, currentTrack } = get();

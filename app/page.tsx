@@ -5,6 +5,7 @@ import { usePlayerStore } from '@/stores/playerStore';
 import { mockData } from '@/lib/data';
 import { Track } from '@/types/track';
 import PlayButton from '@/components/PlayButton';
+import AdBanner from '@/components/AdBanner';
 import { Heart, Music, Radio } from 'lucide-react';
 
 export default function HomePage() {
@@ -29,6 +30,9 @@ export default function HomePage() {
 
   return (
     <div className="p-8 bg-gradient-to-b from-spotify-dark via-spotify-dark-gray to-spotify-dark min-h-full">
+      {/* Ad Banner (for free tier) */}
+      <AdBanner type="banner" className="mb-8" />
+
       {/* Daily Check-in Card */}
       <div className="mb-8 bg-gradient-to-r from-empulse-purple to-empulse-blue rounded-lg p-6 text-white">
         <div className="flex items-center justify-between">

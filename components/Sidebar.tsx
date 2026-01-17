@@ -3,11 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Search, Library, Heart, Radio, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Home, Search, Library, Heart, Radio, ChevronLeft, ChevronRight, Pin, MoreHorizontal } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCheckInStore } from '@/stores/checkInStore';
 import { usePointsStore } from '@/stores/pointsStore';
 import { useUIStore } from '@/stores/uiStore';
+import { useLibraryStore } from '@/stores/libraryStore';
+import { mockData } from '@/lib/data';
+import FriendsActivity from './FriendsActivity';
 
 const navItems = [
   { icon: Home, label: 'Home', href: '/' },
@@ -22,6 +25,19 @@ export default function Sidebar() {
   const { streak, lastCheckIn } = useCheckInStore();
   const { totalPoints } = usePointsStore();
   const { leftSidebarCollapsed, leftSidebarWidth, toggleLeftSidebar, setLeftSidebarWidth } = useUIStore();
+  const { savedPlaylists, pinnedPlaylists, pinPlaylist, unpinPlaylist } = useLibraryStore();
+  
+  // Get all playlists (saved + default)
+  const allPlaylists = [...mockData.getPlaylists(), ...savedPlaylists];
+  
+  // Sort: pinned first, then by name
+  const sortedPlaylists = [...allPlaylists].sort((a, b) => {
+    const aPinned = pinnedPlaylists.includes(a.id);
+    const bPinned = pinnedPlaylists.includes(b.id);
+    if (aPinned && !bPinned) return -1;
+    if (!aPinned && bPinned) return 1;
+    return a.name.localeCompare(b.name);
+  });
   
   const [isResizing, setIsResizing] = useState(false);
 
@@ -129,6 +145,72 @@ export default function Sidebar() {
           </Link>
         </div>
       )}
+
+      {/* Playlists Section */}
+      {leftSidebarWidth > 100 && sortedPlaylists.length > 0 && (
+        <div className="flex-1 overflow-y-auto px-3 mb-4 custom-scrollbar">
+          <div className="flex items-center justify-between mb-2 px-2">
+            <h3 className="text-xs font-bold text-spotify-text-gray uppercase tracking-wider">
+              Playlists
+            </h3>
+            <Link
+              href="/collection"
+              className="text-spotify-text-gray hover:text-white transition-colors text-xs"
+            >
+              Show all
+            </Link>
+          </div>
+          <div className="space-y-1">
+            {sortedPlaylists.slice(0, 10).map((playlist) => {
+              const isPinned = pinnedPlaylists.includes(playlist.id);
+              const isActive = pathname === `/playlist/${playlist.id}`;
+              return (
+                <div
+                  key={playlist.id}
+                  className="group flex items-center gap-2"
+                >
+                  <Link
+                    href={`/playlist/${playlist.id}`}
+                    className={cn(
+                      "flex-1 flex items-center gap-2 px-2 py-1.5 rounded transition-colors min-w-0",
+                      isActive
+                        ? "bg-spotify-light-gray text-white"
+                        : "text-spotify-text-gray hover:text-white hover:bg-spotify-light-gray/50"
+                    )}
+                  >
+                    <div className="w-4 h-4 bg-spotify-light-gray rounded flex-shrink-0">
+                      {playlist.coverArt && (
+                        <img src={playlist.coverArt} alt="" className="w-full h-full object-cover rounded" />
+                      )}
+                    </div>
+                    <span className="text-sm truncate">{playlist.name}</span>
+                  </Link>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (isPinned) {
+                        unpinPlaylist(playlist.id);
+                      } else {
+                        pinPlaylist(playlist.id);
+                      }
+                    }}
+                    className={cn(
+                      "opacity-0 group-hover:opacity-100 p-1 text-spotify-text-gray hover:text-white transition-all",
+                      isPinned && "opacity-100 text-spotify-green"
+                    )}
+                    title={isPinned ? "Unpin playlist" : "Pin playlist"}
+                  >
+                    <Pin size={14} className={cn(isPinned && "fill-current")} />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Friends Activity */}
+      {leftSidebarWidth > 200 && <FriendsActivity />}
 
       {/* Daily Check-in Widget */}
       {leftSidebarWidth > 100 && (

@@ -1,20 +1,51 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Award, Flame, PanelRight, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { usePointsStore } from '@/stores/pointsStore';
 import { useCheckInStore } from '@/stores/checkInStore';
 import { useUIStore } from '@/stores/uiStore';
+import { useSearchStore } from '@/stores/searchStore';
 import UserMenu from '@/components/UserMenu';
+import KeyboardShortcutsPanel from '@/components/KeyboardShortcutsPanel';
+import SearchDropdown from '@/components/SearchDropdown';
+import BackForwardButtons from '@/components/BackForwardButtons';
 import { cn } from '@/lib/utils';
 
 export default function TopBar() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const { totalPoints } = usePointsStore();
   const { getStreak } = useCheckInStore();
+  const { addSearch } = useSearchStore();
   const streak = getStreak();
 
   const { leftSidebarWidth, rightSidebarOpen, rightSidebarWidth, toggleRightSidebar } = useUIStore();
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl+K or Cmd+K to focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement;
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }
+      // Ctrl+/ or Cmd+/ to open shortcuts panel
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault();
+        setShortcutsOpen(true);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <div 
@@ -24,15 +55,40 @@ export default function TopBar() {
         right: rightSidebarOpen ? `${rightSidebarWidth}px` : '0' 
       }}
     >
+      {/* Back/Forward Buttons */}
+      <BackForwardButtons />
+      
       {/* Search Bar */}
-      <div className="flex-1 max-w-md relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-spotify-text-gray" size={20} />
+      <div className="flex-1 max-w-md relative mx-6">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 z-10 pointer-events-none" size={20} />
         <input
           type="text"
           placeholder="What do you want to play?"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-white rounded-full px-10 py-2 text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white"
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setShowSearchDropdown(true);
+          }}
+          onFocus={() => setShowSearchDropdown(true)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && searchQuery.trim()) {
+              addSearch(searchQuery);
+              router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+              setShowSearchDropdown(false);
+            }
+          }}
+          className="w-full bg-white rounded-full px-10 py-2.5 text-black placeholder:text-gray-500 focus:outline-none focus:ring-0 hover:bg-white transition-colors shadow-sm hover:shadow-md relative z-10 text-sm"
+        />
+        <SearchDropdown
+          query={searchQuery}
+          isOpen={showSearchDropdown && !searchQuery}
+          onClose={() => setShowSearchDropdown(false)}
+          onSelect={(query) => {
+            setSearchQuery(query);
+            addSearch(query);
+            router.push(`/search?q=${encodeURIComponent(query)}`);
+            setShowSearchDropdown(false);
+          }}
         />
       </div>
 
@@ -73,6 +129,9 @@ export default function TopBar() {
         {/* User Menu */}
         <UserMenu userName="Bones" userEmail="bones@nextEleven.com" subscriptionTier="Premium" />
       </div>
+
+      {/* Keyboard Shortcuts Panel */}
+      <KeyboardShortcutsPanel isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
     </div>
   );
 }

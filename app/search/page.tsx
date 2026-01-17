@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 interface BrowseCategory {
   id: string;
   title: string;
-  href: string;
+  href?: string;
   color: string;
   image?: string;
   category: 'music' | 'podcasts' | 'features' | 'mental-health' | 'artist' | 'store' | 'account' | 'lifestyle' | 'genres';
@@ -234,7 +234,7 @@ const browseCategories: BrowseCategory[] = [
 export default function SearchPage() {
   const [query, setQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState<'all' | 'music' | 'podcasts' | 'audiobooks'>('all');
-  const { addRecentSearch } = useSearchStore();
+  const { addSearch } = useSearchStore();
   const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying } = usePlayerStore();
   
   const tracks = mockData.getTracks();
@@ -263,7 +263,7 @@ export default function SearchPage() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      addRecentSearch(query);
+      addSearch(query);
     }
   };
 
@@ -373,8 +373,7 @@ export default function SearchPage() {
         </div>
         
         <div className="p-8">
-        
-        <div className="space-y-12">
+          <div className="space-y-12">
           {Object.entries(categorySections).map(([sectionKey, categories]) => {
             if (categories.length === 0) return null;
             return (
@@ -423,6 +422,7 @@ export default function SearchPage() {
               </section>
             );
           })}
+          </div>
         </div>
       </div>
     );
@@ -609,6 +609,7 @@ export default function SearchPage() {
           )}
         </>
       )}
+      </div>
     </div>
   );
 }
