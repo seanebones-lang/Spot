@@ -7,6 +7,8 @@
 
 **⚠️ CRITICAL**: All development PAUSED until Reverse Engineering Specialist completes full Spotify.com audit (January 16, 2026).
 
+**🎯 POST-AUDIT DIRECTIVE**: After audit completion, Orchestrator must assign best agents for each implementation task based on audit findings.
+
 ---
 
 ## 🎯 **EXECUTIVE SUMMARY**
@@ -116,6 +118,10 @@
    
    **Dependencies**: None (can start immediately)
    - **Blocks**: ALL other agent work until complete
+   
+   **🔄 POST-AUDIT: ORCHESTRATOR ASSIGNMENT REQUIRED**
+   - After audit completion, Orchestrator must review findings and assign best agents for each implementation task
+   - See "ORCHESTRATOR ASSIGNMENT SECTION" below
 
 ---
 

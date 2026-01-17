@@ -360,8 +360,20 @@ borderRadius: {
 #### Spotify.com Extraction (January 16, 2026) - TODO:
 - [ ] **Sidebar Dimensions**:
   - [ ] Width: `240px` / `___px` (verify)
+  - [ ] Min width: `___px` (verify)
+  - [ ] Max width: `___px` (verify)
   - [ ] Background: `#000000` / `#121212` (verify)
   - [ ] Padding: `___px` (verify)
+  
+- [ ] **Resizable Sidebar Feature** (CRITICAL - User Observation):
+  - [ ] **Horizontal divider line** between sidebar and main content: Moves left/right
+  - [ ] Divider line styling: Width `___px`, color `#2a2a2a` / `___`, height `100%` (verify)
+  - [ ] Drag handle on divider: Visible on hover / always visible (verify)
+  - [ ] Cursor on hover: `col-resize` / `ew-resize` (verify)
+  - [ ] Resize interaction: Click and drag to resize sidebar width (verify)
+  - [ ] Width persistence: Stores width in localStorage / cookie (verify)
+  - [ ] Animation: Smooth transition when resizing (verify duration/easing)
+  - [ ] Min/max constraints: Sidebar collapses at `___px`, expands to `___px` (verify)
   
 - [ ] **Logo Section**:
   - [ ] Height: `___px` (verify)
@@ -567,7 +579,44 @@ borderRadius: {
 5. **Create design-tokens.json**
 6. **Run visual comparisons**
 7. **Generate validation report**
-8. **Handoff to Front-End Specialist** (unblock development)
+8. **Handoff to Orchestrator** → Assign best agents for each implementation task
+
+---
+
+## 🎯 **POST-AUDIT: ORCHESTRATOR ASSIGNMENTS**
+
+### **After Audit Completion, Orchestrator Must:**
+
+1. **Review Complete Audit Report**
+   - Verify all design tokens extracted
+   - Confirm all components documented
+   - Validate pixel-perfect specifications
+
+2. **Assign Best Agents for Each Implementation Task:**
+
+   **Sidebar Resizable Feature (NEW)**:
+   - **Agent**: Front-End Specialist + UX Specialist
+   - **Task**: Implement resizable sidebar with horizontal divider line
+   - **Specification**: Divider moves left/right, stores width, smooth animation
+   - **Priority**: 🔴 CRITICAL (user-requested feature)
+
+   **Design Token Implementation**:
+   - **Agent**: Front-End Specialist
+   - **Task**: Update `tailwind.config.js` with all verified tokens
+   - **Priority**: 🔴 CRITICAL (blocks all UI work)
+
+   **Component Implementation**:
+   - **Agent**: Front-End Specialist
+   - **Task**: Update all components to match extracted specifications
+   - **Priority**: 🔴 CRITICAL
+
+   **Pixel-Perfect Validation**:
+   - **Agent**: Reverse Engineering Specialist (final validation)
+   - **Task**: Run screenshot comparisons, verify <1% difference
+   - **Priority**: 🔴 CRITICAL (before launch)
+
+3. **Update Master Todo List** with agent assignments
+4. **Unblock all paused agents** once audit deliverables complete
 
 ---
 
