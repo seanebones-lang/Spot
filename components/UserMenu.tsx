@@ -81,6 +81,12 @@ export default function UserMenu({
       separator: true,
     },
     {
+      label: 'Chat Support',
+      icon: HelpCircle,
+      href: '/support',
+      separator: false,
+    },
+    {
       label: 'Log out',
       icon: LogOut,
       href: '/logout',

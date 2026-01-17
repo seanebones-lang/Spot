@@ -1,0 +1,90 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { ChevronRight, User, Lock, Smartphone, Music2, Bell, Globe, Shield } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const settingsCategories = [
+  {
+    id: 'account',
+    title: 'Account',
+    icon: User,
+    href: '/settings/account',
+    description: 'Profile, email, password, and account management'
+  },
+  {
+    id: 'privacy',
+    title: 'Privacy',
+    icon: Lock,
+    href: '/settings/privacy',
+    description: 'Privacy settings, data controls, and sharing preferences'
+  },
+  {
+    id: 'devices',
+    title: 'Devices',
+    icon: Smartphone,
+    href: '/settings/devices',
+    description: 'Connected devices and playback settings'
+  },
+  {
+    id: 'playback',
+    title: 'Playback',
+    icon: Music2,
+    href: '/settings/playback',
+    description: 'Audio quality, crossfade, and playback preferences'
+  },
+  {
+    id: 'notifications',
+    title: 'Notifications',
+    icon: Bell,
+    href: '/settings/notifications',
+    description: 'Email and push notification preferences'
+  },
+  {
+    id: 'language',
+    title: 'Language & Region',
+    icon: Globe,
+    href: '/settings/language',
+    description: 'Language, region, and content preferences'
+  },
+  {
+    id: 'security',
+    title: 'Security',
+    icon: Shield,
+    href: '/settings/security',
+    description: 'Two-factor authentication and security settings'
+  }
+];
+
+export default function SettingsPage() {
+  return (
+    <div className="min-h-screen bg-spotify-dark text-white p-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8">Settings</h1>
+
+        <div className="space-y-2">
+          {settingsCategories.map((category) => {
+            const Icon = category.icon;
+            return (
+              <Link
+                key={category.id}
+                href={category.href}
+                className="flex items-center gap-4 p-4 bg-spotify-light-gray hover:bg-[#3e3e3e] rounded-lg transition-colors group"
+              >
+                <div className="w-12 h-12 bg-spotify-dark-gray rounded-full flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-white font-medium mb-1">{category.title}</h3>
+                  <p className="text-sm text-spotify-text-gray truncate">{category.description}</p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-spotify-text-gray group-hover:text-white transition-colors flex-shrink-0" />
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}

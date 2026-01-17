@@ -75,8 +75,11 @@ flux reconcile source git flux-system
 
 1. Edit the deployment manifest in Git
 2. Commit and push changes
-3. Flux will automatically reconcile (within 10 minutes)
+3. Flux will automatically reconcile (within **5 minutes** per 2025 best practices)
 4. Or force immediate reconciliation: `flux reconcile kustomization flux-system --with-source`
+
+**Note**: With GitHub Actions CI/CD (`.github/workflows/gitops-deploy.yml`), deployments are automated:
+- Push to `main` → CI builds image → Updates Git manifest → Flux reconciles automatically
 
 ### Rollback
 
@@ -126,10 +129,85 @@ kubectl get secret ghcr-secret -n empulse-music
 kubectl run test --image=ghcr.io/nexteleven/empulse-music:latest --rm -it --restart=Never -- /bin/sh
 ```
 
-## Next Steps
+## Additional Setup Steps
 
-1. Set up image pull secret: `kubectl create secret docker-registry ghcr-secret --docker-server=ghcr.io --docker-username=YOUR_USERNAME --docker-password=YOUR_TOKEN -n empulse-music`
-2. Configure ingress controller (nginx-ingress)
-3. Set up cert-manager for TLS certificates
-4. Configure monitoring with Prometheus/Grafana
-5. Set up CI/CD pipeline to build and push Docker images
+### 1. Infrastructure Provisioning (Terraform)
+
+If you need to provision a new cluster:
+
+```bash
+cd gitops/terraform
+terraform init
+terraform plan -var="cluster_name=nexteleven-prod"
+terraform apply
+aws eks update-kubeconfig --region us-west-2 --name nexteleven-prod
+```
+
+**See**: `terraform/README.md` for detailed instructions
+
+### 2. Image Pull Secret
+
+```bash
+kubectl create secret docker-registry ghcr-secret \
+  --docker-server=ghcr.io \
+  --docker-username=YOUR_USERNAME \
+  --docker-password=YOUR_TOKEN \
+  -n empulse-music
+```
+
+### 3. Secrets Management (SOPS)
+
+For encrypted secrets in Git:
+
+```bash
+# Install SOPS
+brew install sops
+
+# Encrypt a secret
+sops -e -i secrets/prod/empulse-music-secrets.yaml
+```
+
+**See**: `secrets/README.md` for SOPS setup
+
+### 4. Monitoring (Prometheus/Grafana)
+
+```bash
+# Apply Prometheus configuration
+kubectl apply -f monitoring/prometheus-config.yaml
+
+# Access Prometheus UI
+kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
+```
+
+**See**: `monitoring/README.md` for complete setup
+
+### 5. CI/CD Pipeline
+
+GitHub Actions workflow (`.github/workflows/gitops-deploy.yml`) is ready:
+- ✅ Automated Docker builds
+- ✅ Staging deployment (automatic)
+- ✅ Production deployment (manual approval)
+- ✅ Slack notifications on failure
+
+**Configure GitHub Secrets**:
+- `GITHUB_TOKEN` (automatically provided)
+- `SLACK_WEBHOOK_URL` (optional, for notifications)
+
+### 6. Ingress & TLS
+
+Install ingress controller and cert-manager:
+
+```bash
+# Install nginx-ingress
+helm install ingress-nginx ingress-nginx/ingress-nginx
+
+# Install cert-manager
+helm install cert-manager jetstack/cert-manager --set installCRDs=true
+```
+
+## Quick Reference
+
+- **Terraform**: `gitops/terraform/` - Infrastructure provisioning
+- **SOPS Secrets**: `gitops/secrets/` - Encrypted secrets management
+- **Monitoring**: `gitops/monitoring/` - Prometheus/Grafana configs
+- **CI/CD**: `.github/workflows/gitops-deploy.yml` - GitHub Actions pipeline

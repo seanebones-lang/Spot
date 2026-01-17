@@ -1,7 +1,7 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Home, Search, Library, Heart, Radio, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -21,15 +21,45 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { streak, lastCheckIn } = useCheckInStore();
   const { totalPoints } = usePointsStore();
-  const { leftSidebarCollapsed, toggleLeftSidebar } = useUIStore();
+  const { leftSidebarCollapsed, leftSidebarWidth, toggleLeftSidebar, setLeftSidebarWidth } = useUIStore();
+  
+  const [isResizing, setIsResizing] = useState(false);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing) return;
+      const newWidth = e.clientX;
+      setLeftSidebarWidth(newWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    if (isResizing) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isResizing, setLeftSidebarWidth]);
 
   return (
-    <div 
-      className={cn(
-        "fixed left-0 top-0 bottom-player-height bg-spotify-dark-gray text-white flex flex-col transition-all duration-300 ease-in-out z-30",
-        leftSidebarCollapsed ? "w-16" : "w-64"
-      )}
-    >
+    <>
+      <div 
+        className={cn(
+          "fixed left-0 top-0 bottom-player-height bg-spotify-dark-gray text-white flex flex-col z-30",
+          isResizing ? "" : "transition-all duration-300 ease-in-out"
+        )}
+        style={{ width: `${leftSidebarWidth}px` }}
+      >
       {/* Toggle Button */}
       <button
         onClick={toggleLeftSidebar}
@@ -44,16 +74,9 @@ export default function Sidebar() {
       </button>
 
       {/* Logo */}
-      <div className={cn("p-6", leftSidebarCollapsed && "p-4")}>
-        <Link href="/" className="flex items-center gap-2">
-          <Image 
-            src="/empulseheart.png" 
-            alt="EmPulse Music" 
-            width={leftSidebarCollapsed ? 40 : 64} 
-            height={leftSidebarCollapsed ? 40 : 64} 
-            className="object-contain transition-all duration-300"
-          />
-          {!leftSidebarCollapsed && (
+      <div className={cn("p-6", leftSidebarWidth <= 80 && "p-4")}>
+        <Link href="/" className="flex items-center">
+          {leftSidebarWidth > 100 && (
             <span className="text-xl font-bold whitespace-nowrap">EmPulse Music</span>
           )}
         </Link>
@@ -77,10 +100,10 @@ export default function Sidebar() {
               title={leftSidebarCollapsed ? item.label : undefined}
             >
               <Icon size={24} className="flex-shrink-0" />
-              {!leftSidebarCollapsed && (
+              {leftSidebarWidth > 100 && (
                 <span className="font-medium whitespace-nowrap">{item.label}</span>
               )}
-              {leftSidebarCollapsed && (
+              {leftSidebarWidth <= 100 && (
                 <span className="absolute left-full ml-2 px-2 py-1 bg-spotify-dark-gray text-white text-sm rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-opacity z-50">
                   {item.label}
                 </span>
@@ -91,7 +114,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Mental Health Hub */}
-      {!leftSidebarCollapsed && (
+      {leftSidebarWidth > 100 && (
         <div className="px-3 mb-4">
           <Link
             href="/wellness"
@@ -108,7 +131,7 @@ export default function Sidebar() {
       )}
 
       {/* Daily Check-in Widget */}
-      {!leftSidebarCollapsed && (
+      {leftSidebarWidth > 100 && (
         <div className="px-3 mb-4 mt-auto">
           <Link
             href="/check-in"
@@ -128,7 +151,7 @@ export default function Sidebar() {
       )}
 
       {/* User Profile */}
-      {!leftSidebarCollapsed && (
+      {leftSidebarWidth > 100 && (
         <div className="px-3 pb-4">
           <div className="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-spotify-light-gray/50 transition-colors cursor-pointer">
             <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full"></div>
@@ -136,6 +159,19 @@ export default function Sidebar() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+      
+      {/* Resize Handle */}
+      {leftSidebarWidth > 64 && (
+        <div
+          onMouseDown={handleMouseDown}
+          className={cn(
+            "fixed top-0 bottom-player-height w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-40 transition-all",
+            isResizing && "bg-spotify-green/60 w-1"
+          )}
+          style={{ left: `${leftSidebarWidth}px` }}
+        />
+      )}
+    </>
   );
 }

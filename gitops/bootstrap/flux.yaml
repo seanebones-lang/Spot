@@ -5,12 +5,13 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 1m0s  # Poll Git every 1 minute (as of Flux v2.3+)
   ref:
     branch: main
   secretRef:
     name: flux-system
   url: https://github.com/NextElevenDev/gitops-repo
+  timeout: 60s
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -18,10 +19,15 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 5m0s  # Reconcile every 5 minutes (updated per 2025 best practices)
   path: ./clusters/prod
-  prune: true
+  prune: true      # Automatically remove resources not in Git
   sourceRef:
     kind: GitRepository
     name: flux-system
-  validation: client
+  validation: client  # Client-side validation before applying
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: empulse-music
+      namespace: empulse-music
