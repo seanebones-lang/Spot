@@ -119,14 +119,46 @@
 
 ## ⚠️ **CRITICAL ITEMS REQUIRING LIVE EXTRACTION**
 
-### **Must Extract from Live spotify.com**:
-1. 🔴 **Resizable Sidebar Divider** - Full implementation details
-2. 🔴 **All Hover State Colors** - Blocks UI work
-3. 🔴 **All Active State Colors** - Blocks UI work
-4. 🔴 **Complete Typography System** - Font sizes, weights, line heights
-5. 🔴 **Border Radius Values** - Fix current discrepancy
-6. 🔴 **Spacing Scale** - Complete list of values
-7. 🔴 **Component Measurements** - All exact dimensions
+### **Must Extract from Live spotify.com** (Priority Order):
+
+#### **🔴 CRITICAL - Do First:**
+1. **Resizable Sidebar Divider** ⭐ USER REQUESTED
+   - Find the divider element in DOM
+   - Extract styling (width, color, height)
+   - Document cursor behavior
+   - Test drag/resize functionality
+   - Find JavaScript handlers
+   - Check localStorage key for width persistence
+   - Document min/max constraints
+
+2. **All Hover State Colors** - Blocks UI work
+   - Background hover colors
+   - Text hover colors
+   - Border hover colors
+   - Button hover states
+
+3. **All Active State Colors** - Blocks UI work
+   - Active background colors
+   - Active text colors
+   - Active border colors
+
+4. **Complete Typography System**
+   - All font sizes (px/rem values)
+   - Font weights (300, 400, 500, 700, 900)
+   - Line heights
+   - Letter spacing
+
+#### **🟡 HIGH PRIORITY:**
+5. **Border Radius Values** - Fix current discrepancy (6px vs 4px)
+6. **Spacing Scale** - Complete list of values
+7. **Component Measurements** - All exact dimensions
+8. **Transitions/Animations** - Durations, easing functions
+
+#### **🟢 MEDIUM PRIORITY:**
+9. Shadows (if any)
+10. Modals/Dialogs styling
+11. Loading/Empty states
+12. Responsive breakpoints
 
 ---
 
