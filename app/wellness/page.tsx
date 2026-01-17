@@ -91,8 +91,16 @@ export default function WellnessPage() {
         <h2 className="text-2xl font-bold mb-4">Partner Resources</h2>
         <div className="grid md:grid-cols-3 gap-4">
           <div className="bg-spotify-light-gray rounded-lg p-6 text-center">
-            <h3 className="font-bold mb-2">BetterMe</h3>
-            <button className="text-spotify-green hover:underline text-sm">Visit Partner →</button>
+            <h3 className="font-bold mb-2">Habits</h3>
+            <p className="text-xs text-spotify-text-gray mb-2">by NextEleven</p>
+            <a 
+              href="https://testflight.apple.com/join/aHJvusVF" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-spotify-green hover:underline text-sm flex items-center justify-center gap-1"
+            >
+              Join Beta <ExternalLink size={14} />
+            </a>
           </div>
           <div className="bg-spotify-light-gray rounded-lg p-6 text-center">
             <h3 className="font-bold mb-2">Calm</h3>
