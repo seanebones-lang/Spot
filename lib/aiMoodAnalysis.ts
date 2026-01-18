@@ -923,9 +923,10 @@ class PineconeVectorDB implements VectorDatabase {
       }
       
       // Initialize Pinecone client
+      // Note: New Pinecone SDK (v1+) only requires apiKey, environment is deprecated
       this.client = new Pinecone({
         apiKey: this.apiKey,
-      });
+      } as any);
 
       // Get index reference
       this.index = this.client.index(this.indexName);
