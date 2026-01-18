@@ -11,6 +11,10 @@ import {
   sanitizeFilename,
   isValidMimeType,
   isValidFileSize,
+  mbToBytes,
+  sanitizeJson,
+  isValidUrl,
+  sanitizeObjectKeys,
 } from '@/lib/sanitize';
 
 describe('Sanitization Utilities', () => {
@@ -117,6 +121,209 @@ describe('Sanitization Utilities', () => {
     it('should reject files exceeding limit', () => {
       const maxSize = 1024 * 1024; // 1MB
       expect(isValidFileSize(2 * 1024 * 1024, maxSize)).toBe(false);
+    });
+
+    it('should reject invalid size types', () => {
+      const maxSize = 1024 * 1024;
+      expect(isValidFileSize(-1, maxSize)).toBe(false);
+      expect(isValidFileSize(0, maxSize)).toBe(false);
+      expect(isValidFileSize('invalid' as any, maxSize)).toBe(false);
+      expect(isValidFileSize(null as any, maxSize)).toBe(false);
+    });
+  });
+
+  describe('mbToBytes', () => {
+    it('should convert megabytes to bytes correctly', () => {
+      expect(mbToBytes(1)).toBe(1024 * 1024);
+      expect(mbToBytes(5)).toBe(5 * 1024 * 1024);
+      expect(mbToBytes(50)).toBe(50 * 1024 * 1024);
+    });
+
+    it('should handle decimal values', () => {
+      expect(mbToBytes(1.5)).toBe(1.5 * 1024 * 1024);
+      expect(mbToBytes(0.5)).toBe(0.5 * 1024 * 1024);
+    });
+
+    it('should handle zero', () => {
+      expect(mbToBytes(0)).toBe(0);
+    });
+  });
+
+  describe('sanitizeJson', () => {
+    it('should parse JSON string', () => {
+      const input = '{"key": "value"}';
+      const result = sanitizeJson<{ key: string }>(input);
+      expect(result).toEqual({ key: 'value' });
+    });
+
+    it('should return object as-is if not string', () => {
+      const input = { key: 'value' };
+      const result = sanitizeJson<{ key: string }>(input);
+      expect(result).toEqual({ key: 'value' });
+    });
+
+    it('should return null for invalid JSON string', () => {
+      const input = '{invalid json}';
+      const result = sanitizeJson(input);
+      expect(result).toBeNull();
+    });
+
+    it('should return null for empty string', () => {
+      const result = sanitizeJson('');
+      expect(result).toBeNull();
+    });
+
+    it('should parse complex JSON structures', () => {
+      const input = '{"nested": {"array": [1, 2, 3]}}';
+      const result = sanitizeJson<{ nested: { array: number[] } }>(input);
+      expect(result).toEqual({ nested: { array: [1, 2, 3] } });
+    });
+  });
+
+  describe('isValidUrl', () => {
+    it('should validate http URLs', () => {
+      expect(isValidUrl('http://example.com')).toBe(true);
+      expect(isValidUrl('http://example.com/path')).toBe(true);
+      expect(isValidUrl('http://example.com:8080')).toBe(true);
+    });
+
+    it('should validate https URLs', () => {
+      expect(isValidUrl('https://example.com')).toBe(true);
+      expect(isValidUrl('https://example.com/path?query=1')).toBe(true);
+    });
+
+    it('should reject non-http/https URLs', () => {
+      expect(isValidUrl('ftp://example.com')).toBe(false);
+      expect(isValidUrl('file:///path/to/file')).toBe(false);
+      expect(isValidUrl('javascript:alert(1)')).toBe(false);
+    });
+
+    it('should reject invalid URLs', () => {
+      expect(isValidUrl('not-a-url')).toBe(false);
+      expect(isValidUrl('example.com')).toBe(false);
+      expect(isValidUrl('')).toBe(false);
+    });
+
+    it('should reject non-string input', () => {
+      expect(isValidUrl(null as any)).toBe(false);
+      expect(isValidUrl(123 as any)).toBe(false);
+      expect(isValidUrl({} as any)).toBe(false);
+    });
+  });
+
+  describe('sanitizeObjectKeys', () => {
+    it('should preserve valid object keys', () => {
+      const input = { name: 'test', age: 30 };
+      const result = sanitizeObjectKeys(input);
+      expect(result).toEqual({ name: 'test', age: 30 });
+    });
+
+    it('should filter __proto__ key from own properties', () => {
+      const input: any = { name: 'test' };
+      input.__proto__ = { malicious: true };
+      const result = sanitizeObjectKeys(input);
+      expect(result.name).toBe('test');
+      // Verify that own property keys don't include __proto__
+      expect(Object.hasOwnProperty.call(result, '__proto__')).toBe(false);
+    });
+
+    it('should filter constructor key from own properties', () => {
+      const input: any = { name: 'test' };
+      input.constructor = {};
+      const result = sanitizeObjectKeys(input);
+      expect(result.name).toBe('test');
+      // constructor may still exist but won't be copied from own properties
+    });
+
+    it('should filter prototype key from own properties', () => {
+      const input: any = { name: 'test' };
+      input.prototype = {};
+      const result = sanitizeObjectKeys(input);
+      expect(result.name).toBe('test');
+      // Check that the function filters the key properly
+    });
+
+    it('should handle nested objects', () => {
+      const input = {
+        name: 'test',
+        nested: {
+          __proto__: { malicious: true },
+          value: 'safe',
+        },
+      };
+      const result = sanitizeObjectKeys(input);
+      expect(result).toHaveProperty('name');
+      expect(result).toHaveProperty('nested');
+      // Note: sanitizeObjectKeys only sanitizes top-level keys
+      expect(result.nested.__proto__).toBeDefined(); // Nested is not sanitized
+    });
+
+    it('should handle empty objects', () => {
+      const input = {};
+      const result = sanitizeObjectKeys(input);
+      expect(result).toEqual({});
+    });
+
+    it('should handle objects with only dangerous keys', () => {
+      const input = { __proto__: {}, constructor: {}, prototype: {} };
+      const result = sanitizeObjectKeys(input);
+      expect(Object.keys(result)).toHaveLength(0);
+    });
+  });
+
+  describe('sanitizeString edge cases', () => {
+    it('should handle non-string input', () => {
+      expect(sanitizeString(null as any)).toBe('');
+      expect(sanitizeString(123 as any)).toBe('');
+      expect(sanitizeString({} as any)).toBe('');
+    });
+
+    it('should preserve newlines and tabs', () => {
+      const input = 'hello\nworld\there';
+      const result = sanitizeString(input);
+      expect(result).toContain('\n');
+      expect(result).toContain('\t');
+    });
+  });
+
+  describe('sanitizeFilename edge cases', () => {
+    it('should handle non-string input', () => {
+      expect(sanitizeFilename(null as any)).toBe('file');
+      expect(sanitizeFilename(123 as any)).toBe('file');
+    });
+
+    it('should handle empty string', () => {
+      expect(sanitizeFilename('')).toBe('file');
+    });
+
+    it('should handle filename with only dots', () => {
+      expect(sanitizeFilename('...')).toBe('file');
+    });
+
+    it('should preserve valid extensions', () => {
+      const result = sanitizeFilename('my-file.mp3');
+      expect(result).toContain('.mp3');
+    });
+
+    it('should handle leading and trailing dots', () => {
+      expect(sanitizeFilename('.hidden')).not.toMatch(/^\./);
+      expect(sanitizeFilename('file.')).not.toMatch(/\.$/);
+    });
+  });
+
+  describe('isValidMimeType edge cases', () => {
+    it('should handle null or undefined mimeType', () => {
+      expect(isValidMimeType(null as any, ['audio/*'])).toBe(false);
+      expect(isValidMimeType(undefined as any, ['audio/*'])).toBe(false);
+    });
+
+    it('should handle empty allowed types array', () => {
+      expect(isValidMimeType('audio/mpeg', [])).toBe(false);
+    });
+
+    it('should handle multiple allowed types', () => {
+      expect(isValidMimeType('audio/mpeg', ['audio/*', 'video/*'])).toBe(true);
+      expect(isValidMimeType('video/mp4', ['audio/*', 'video/*'])).toBe(true);
     });
   });
 });

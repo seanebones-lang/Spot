@@ -16,12 +16,16 @@ const nextConfig = {
   compress: true,
   // Production optimizations
   poweredByHeader: false, // Remove X-Powered-By header
-  webpack: (config) => {
-    // Make Pinecone optional - use a mock if not installed
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@pinecone-database/pinecone': require.resolve('./lib/pinecone-stub.js'),
-    };
+  webpack: (config, { dev }) => {
+    // Only stub Pinecone in development when not configured
+    // In production, require PINECONE_API_KEY (validated in lib/env.ts)
+    if (dev && !process.env.PINECONE_API_KEY) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@pinecone-database/pinecone': require.resolve('./lib/pinecone-stub.js'),
+      };
+    }
+    // In production, if PINECONE_API_KEY is missing, env validation will fail startup
     
     return config;
   },

@@ -1,0 +1,61 @@
+name: Daily Database Backup
+
+on:
+  schedule:
+    # Run daily at 2:00 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+env:
+  BACKUP_DIR: ./backups
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Create backup
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          BACKUP_DIR: ${{ env.BACKUP_DIR }}
+          RETENTION_DAYS: 30
+        run: |
+          chmod +x scripts/backup-database.sh
+          ./scripts/backup-database.sh "$BACKUP_DIR"
+
+      - name: Upload backup to artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: database-backup-${{ github.run_number }}
+          path: ${{ env.BACKUP_DIR }}/backup-*.sql.gz
+          retention-days: 7
+
+      # Optional: Upload to cloud storage (S3, GCS, etc.)
+      # Uncomment and configure if you want cloud backups
+      # - name: Upload to S3
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_REGION: ${{ secrets.AWS_REGION }}
+      #     S3_BUCKET: ${{ secrets.S3_BACKUP_BUCKET }}
+      #   run: |
+      #     aws s3 cp ${{ env.BACKUP_DIR }}/backup-*.sql.gz s3://$S3_BUCKET/daily-backups/
+
+      - name: Report backup status
+        if: always()
+        run: |
+          if [ ${{ job.status }} == 'success' ]; then
+            echo "✅ Database backup completed successfully"
+          else
+            echo "❌ Database backup failed"
+            exit 1
+          fi
