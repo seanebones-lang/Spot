@@ -75,11 +75,12 @@ export default function HomePage() {
 
   return (
     <div 
-      className="p-8 min-h-full"
+      className="w-full"
       style={{ 
         padding: '32px',
+        paddingBottom: '24px',
         backgroundColor: '#121212',
-        minHeight: '100vh'
+        minHeight: '100%'
       }}
     >
       {/* Onboarding Tour */}
@@ -97,49 +98,7 @@ export default function HomePage() {
       {/* Ad Banner (for free tier) - Temporarily disabled for testing */}
       {/* <AdBanner type="banner" className="mb-8" /> */}
 
-      {/* Daily Check-in Card */}
-      <div data-tour="check-in" className="mb-8 bg-gradient-to-r from-empulse-purple to-empulse-blue rounded-lg p-6 text-white">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold mb-2">Daily Mood Check-in</h2>
-            <p className="text-white/80 mb-4">Track your mood and earn points</p>
-            <Link href="/check-in" className="px-6 py-3 bg-transparent border-2 border-spotify-green text-spotify-green hover:shadow-[0_0_20px_rgba(29,185,84,0.6)] rounded-full font-semibold transition-all duration-300 inline-block">
-              Check In Now
-            </Link>
-          </div>
-          <Heart size={64} className="opacity-50" />
-        </div>
-      </div>
-
-      {/* Mood Matcher Card */}
-      <div data-tour="mood-matcher" className="mb-8 bg-gradient-to-r from-empulse-purple/20 to-empulse-blue/20 rounded-lg p-6 border border-empulse-purple/30">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold mb-2">Mood Matcher</h2>
-            <p className="text-spotify-text-gray mb-4">
-              Not sure what to listen to? Find music that matches your current mood.
-            </p>
-            <Link 
-              href="/mood" 
-              className="px-6 py-3 bg-empulse-purple hover:bg-empulse-purple/80 text-white rounded-full font-semibold transition-all duration-300 inline-block"
-            >
-              Find My Mood →
-            </Link>
-          </div>
-          <Heart size={64} className="opacity-30" />
-        </div>
-      </div>
-
-      {/* Today's Affirmation */}
-      <div className="mb-8 bg-spotify-light-gray rounded-lg p-6">
-        <h3 className="text-lg font-bold mb-2">Today&apos;s Affirmation</h3>
-            <p className="text-spotify-text-gray">&quot;You are capable of amazing things. Let today be proof of that.&quot;</p>
-        <Link href="/affirmations" className="text-spotify-green text-sm mt-2 inline-block hover:underline">
-          View All Affirmations →
-        </Link>
-      </div>
-
-      {/* Recently Played Section - Exact Spotify Style */}
+      {/* Recently Played Section - Exact Spotify Style (MOVED TO TOP - Music First!) */}
       {recentlyPlayed.length > 0 && (
         <section className="mb-8" style={{ marginBottom: '32px' }}>
           <div 
@@ -147,12 +106,18 @@ export default function HomePage() {
             style={{ marginBottom: '16px' }}
           >
             <h2 
-              className="text-2xl font-bold"
+              className="transition-colors gpu-accelerated"
               style={{ 
-                fontSize: '24px',
-                lineHeight: '28px',
+                fontSize: '20px',
+                lineHeight: '24px',
+                height: '24px',
                 fontWeight: 700,
-                color: '#FFFFFF'
+                color: '#FFFFFF',
+                display: 'inline-flex',
+                textDecoration: 'underline',
+                transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+                position: 'static',
+                cursor: 'pointer'
               }}
             >
               Recently Played
@@ -277,12 +242,18 @@ export default function HomePage() {
           style={{ marginBottom: '16px' }}
         >
           <h2 
-            className="text-2xl font-bold"
+            className="transition-colors gpu-accelerated"
             style={{ 
-              fontSize: '24px',
-              lineHeight: '28px',
+              fontSize: '20px',
+              lineHeight: '24px',
+              height: '24px',
               fontWeight: 700,
-              color: '#FFFFFF'
+              color: '#FFFFFF',
+              display: 'inline-flex',
+              textDecoration: 'underline',
+              transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+              position: 'static',
+              cursor: 'pointer'
             }}
           >
             Made for You
@@ -310,90 +281,112 @@ export default function HomePage() {
           </Link>
         </div>
         <div 
-          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
-          style={{ gap: '16px' }}
+          className="relative"
+          style={{ position: 'relative', overflow: 'visible' }}
         >
-          {playlists.map((playlist) => (
-            <div
-              key={playlist.id}
-              className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-dark-gray transition-all duration-200 group cursor-pointer"
-              style={{
-                backgroundColor: '#181818',
-                borderRadius: '8px',
-                padding: '16px',
-                transition: 'background-color 200ms ease-out'
-              }}
-              onClick={() => handlePlayPlaylist(playlist)}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#282828';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#181818';
-              }}
-            >
-              <div className="relative mb-4" style={{ marginBottom: '16px' }}>
-                <img
-                  src={playlist.coverArt}
-                  alt={playlist.name}
-                  className="w-full aspect-square object-cover rounded"
-                  style={{ borderRadius: '4px', aspectRatio: '1' }}
-                />
-                <div 
-                  className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+          <div 
+            className="flex gap-4 overflow-x-auto"
+            style={{ 
+              gap: '16px',
+              overflowX: 'auto',
+              paddingBottom: '8px'
+            }}
+          >
+            {playlists.map((playlist, index) => (
+              <div
+                key={playlist.id}
+                className="flex flex-col transition-all gpu-accelerated group cursor-pointer"
+                style={{
+                  width: '168px',
+                  height: '220px',
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  position: 'relative',
+                  display: 'block',
+                  transition: 'all 0.2s ease',
+                  zIndex: 0,
+                  flexShrink: 0
+                }}
+                onClick={() => handlePlayPlaylist(playlist)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.zIndex = '1';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.zIndex = '0';
+                }}
+              >
+                <div className="relative mb-3" style={{ marginBottom: '12px', width: '168px', height: '168px' }}>
+                  <img
+                    src={playlist.coverArt}
+                    alt={playlist.name}
+                    className="w-full h-full object-cover rounded"
+                    style={{ borderRadius: '4px' }}
+                  />
+                  <div 
+                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{
+                      bottom: '8px',
+                      right: '8px',
+                      transition: 'opacity 200ms ease-out'
+                    }}
+                  >
+                    <PlayButton
+                      isPlaying={currentTrack?.id === playlist.tracks[0]?.id && isPlaying}
+                      onClick={() => handlePlayPlaylist(playlist)}
+                      size="sm"
+                    />
+                  </div>
+                </div>
+                <h3 
+                  className="font-semibold text-sm mb-1 truncate"
                   style={{
-                    bottom: '8px',
-                    right: '8px',
-                    transition: 'opacity 200ms ease-out'
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 600,
+                    color: '#FFFFFF',
+                    marginBottom: '4px'
                   }}
                 >
-                  <PlayButton
-                    isPlaying={currentTrack?.id === playlist.tracks[0]?.id && isPlaying}
-                    onClick={() => handlePlayPlaylist(playlist)}
-                    size="sm"
-                  />
-                </div>
+                  {playlist.name}
+                </h3>
+                <p 
+                  className="text-xs text-spotify-text-gray line-clamp-2"
+                  style={{
+                    fontSize: '13px',
+                    lineHeight: '16px',
+                    color: '#B3B3B3',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    height: '32px'
+                  }}
+                >
+                  {playlist.description}
+                </p>
               </div>
-              <h3 
-                className="font-semibold text-sm mb-1 truncate"
-                style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  fontWeight: 600,
-                  color: '#FFFFFF',
-                  marginBottom: '4px'
-                }}
-              >
-                {playlist.name}
-              </h3>
-              <p 
-                className="text-xs text-spotify-text-gray line-clamp-2"
-                style={{
-                  fontSize: '13px',
-                  lineHeight: '16px',
-                  color: '#B3B3B3',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden'
-                }}
-              >
-                {playlist.description}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Trending Songs - Exact Spotify Style */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
-          className="text-2xl font-bold mb-4"
+          className="transition-colors gpu-accelerated mb-4"
           style={{
-            fontSize: '24px',
-            lineHeight: '28px',
+            fontSize: '20px',
+            lineHeight: '24px',
+            height: '24px',
             fontWeight: 700,
             color: '#FFFFFF',
-            marginBottom: '16px'
+            marginBottom: '16px',
+            display: 'inline-flex',
+            textDecoration: 'underline',
+            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+            position: 'static',
+            cursor: 'pointer'
           }}
         >
           Trending Songs
@@ -522,82 +515,114 @@ export default function HomePage() {
       {/* Popular Artists - Exact Spotify Style */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
-          className="text-2xl font-bold mb-4"
+          className="transition-colors gpu-accelerated mb-4"
           style={{
-            fontSize: '24px',
-            lineHeight: '28px',
+            fontSize: '20px',
+            lineHeight: '24px',
+            height: '24px',
             fontWeight: 700,
             color: '#FFFFFF',
-            marginBottom: '16px'
+            marginBottom: '16px',
+            display: 'inline-flex',
+            textDecoration: 'underline',
+            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+            position: 'static',
+            cursor: 'pointer'
           }}
         >
           Popular Artists
         </h2>
         <div 
-          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
-          style={{ gap: '16px' }}
+          className="relative"
+          style={{ 
+            position: 'relative',
+            overflow: 'visible'
+          }}
         >
-          {artists.map((artist) => (
-            <Link
-              key={artist.id}
-              href={`/artist/${artist.id}`}
-              className="bg-spotify-light-gray rounded-full p-4 hover:bg-spotify-dark-gray transition-all duration-200 text-center group"
-              style={{
-                backgroundColor: '#181818',
-                borderRadius: '500px',
-                padding: '16px',
-                transition: 'background-color 200ms ease-out, transform 200ms ease-out',
-                textDecoration: 'none'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#282828';
-                e.currentTarget.style.transform = 'scale(1.02)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#181818';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-            >
-              <div 
-                className="w-full aspect-square rounded-full overflow-hidden mb-3"
+          <div 
+            className="flex gap-4 overflow-x-auto"
+            style={{ 
+              gap: '16px',
+              overflowX: 'auto',
+              paddingBottom: '8px'
+            }}
+          >
+            {artists.map((artist, index) => (
+              <Link
+                key={artist.id}
+                href={`/artist/${artist.id}`}
+                className="flex flex-col transition-all gpu-accelerated text-center group"
                 style={{
-                  marginBottom: '12px',
-                  aspectRatio: '1'
+                  width: '168px',
+                  height: '198px',
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  position: 'relative',
+                  display: 'block',
+                  transition: 'all 0.2s ease',
+                  zIndex: 0,
+                  textDecoration: 'none',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.zIndex = '1';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.zIndex = '0';
                 }}
               >
-                <img
-                  src={artist.image}
-                  alt={artist.name}
-                  className="w-full h-full object-cover"
-                  style={{ borderRadius: '50%' }}
-                />
-              </div>
-              <h3 
-                className="font-semibold text-sm truncate"
-                style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  fontWeight: 600,
-                  color: '#FFFFFF'
-                }}
-              >
-                {artist.name}
-              </h3>
-            </Link>
-          ))}
+                <div 
+                  className="w-full rounded-full overflow-hidden mb-3"
+                  style={{
+                    width: '168px',
+                    height: '168px',
+                    marginBottom: '12px',
+                    borderRadius: '50%'
+                  }}
+                >
+                  <img
+                    src={artist.image}
+                    alt={artist.name}
+                    className="w-full h-full object-cover"
+                    style={{ borderRadius: '50%' }}
+                  />
+                </div>
+                <h3 
+                  className="font-semibold text-sm truncate"
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 600,
+                    color: '#FFFFFF',
+                    textAlign: 'center',
+                    padding: '0 4px'
+                  }}
+                >
+                  {artist.name}
+                </h3>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Specialized Categories - Exact Spotify Style */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
-          className="text-2xl font-bold mb-4"
+          className="transition-colors gpu-accelerated mb-4"
           style={{
-            fontSize: '24px',
-            lineHeight: '28px',
+            fontSize: '20px',
+            lineHeight: '24px',
+            height: '24px',
             fontWeight: 700,
             color: '#FFFFFF',
-            marginBottom: '16px'
+            marginBottom: '16px',
+            display: 'inline-flex',
+            textDecoration: 'underline',
+            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+            position: 'static',
+            cursor: 'pointer'
           }}
         >
           Specialized Categories
@@ -647,7 +672,24 @@ export default function HomePage() {
 
       {/* Radio Stations */}
       <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">Radio Stations</h2>
+        <h2 
+          className="transition-colors gpu-accelerated mb-4"
+          style={{
+            fontSize: '20px',
+            lineHeight: '24px',
+            height: '24px',
+            fontWeight: 700,
+            color: '#FFFFFF',
+            marginBottom: '16px',
+            display: 'inline-flex',
+            textDecoration: 'underline',
+            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+            position: 'static',
+            cursor: 'pointer'
+          }}
+        >
+          Radio Stations
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {['Pop Radio', 'Rock Radio', 'Electronic Radio', 'Hip-Hop Radio', 'Jazz Radio', 'Classical Radio'].map((station) => (
             <div

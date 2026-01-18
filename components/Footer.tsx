@@ -7,87 +7,213 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black border-t border-white/10 px-8 py-12 mt-auto">
-      <div className="max-w-7xl mx-auto">
-        {/* Main Footer Links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-          {/* Company */}
+    <footer className="bg-[#121212] border-t border-white/10 px-4 py-12 w-full" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
+      <nav className="w-full">
+        {/* Main Footer Links - Spotify Structure */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8" style={{ gap: '32px', marginBottom: '32px' }}>
+          {/* Company - TypeList Structure */}
           <div>
-            <h5 className="font-bold mb-4 text-white">Company</h5>
-            <ul className="space-y-2 text-spotify-text-gray text-sm">
-              <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
-              <li><Link href="/jobs" className="hover:text-white transition-colors">Jobs</Link></li>
-              <li><Link href="/for-the-record" className="hover:text-white transition-colors">For the Record</Link></li>
+            <ul role="list" className="space-y-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li>
+                <Link href="/about" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/jobs" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Jobs
+                </Link>
+              </li>
+              <li>
+                <Link href="/for-the-record" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  For the Record
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Communities */}
+          {/* Communities - TypeList Structure */}
           <div>
-            <h5 className="font-bold mb-4 text-white">Communities</h5>
-            <ul className="space-y-2 text-spotify-text-gray text-sm">
-              <li><Link href="/artist/signup" className="hover:text-white transition-colors">For Artists</Link></li>
-              <li><Link href="/developers" className="hover:text-white transition-colors">Developers</Link></li>
-              <li><Link href="/advertising" className="hover:text-white transition-colors">Advertising</Link></li>
-              <li><Link href="/investors" className="hover:text-white transition-colors">Investors</Link></li>
-              <li><Link href="/vendors" className="hover:text-white transition-colors">Vendors</Link></li>
+            <ul role="list" className="space-y-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li>
+                <Link href="/artist/signup" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  For Artists
+                </Link>
+              </li>
+              <li>
+                <Link href="/developers" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Developers
+                </Link>
+              </li>
+              <li>
+                <Link href="/advertising" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Advertising
+                </Link>
+              </li>
+              <li>
+                <Link href="/investors" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Investors
+                </Link>
+              </li>
+              <li>
+                <Link href="/vendors" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Vendors
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Useful Links */}
+          {/* Useful Links - TypeList Structure */}
           <div>
-            <h5 className="font-bold mb-4 text-white">Useful links</h5>
-            <ul className="space-y-2 text-spotify-text-gray text-sm">
-              <li><Link href="/support" className="hover:text-white transition-colors">Support</Link></li>
-              <li><Link href="/mobile-app" className="hover:text-white transition-colors">Free Mobile App</Link></li>
-              <li><Link href="/popular-by-country" className="hover:text-white transition-colors">Popular by Country</Link></li>
-              <li><Link href="/import-music" className="hover:text-white transition-colors">Import your music</Link></li>
+            <p className="text-white text-sm mb-4" style={{ fontSize: '14px', lineHeight: '20px', fontWeight: 400, color: '#FFFFFF', marginBottom: '16px' }}>
+              Useful links
+            </p>
+            <ul role="list" className="space-y-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li>
+                <Link href="/support" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Support
+                </Link>
+              </li>
+              <li>
+                <Link href="/mobile-app" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Free Mobile App
+                </Link>
+              </li>
+              <li>
+                <Link href="/popular-by-country" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Popular by Country
+                </Link>
+              </li>
+              <li>
+                <Link href="/import-music" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Import your music
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* EmPulse Plans */}
+          {/* EmPulse Plans - TypeList Structure */}
           <div>
-            <h5 className="font-bold mb-4 text-white">EmPulse Plans</h5>
-            <ul className="space-y-2 text-spotify-text-gray text-sm">
-              <li><Link href="/subscription" className="hover:text-white transition-colors">Premium Individual</Link></li>
-              <li><Link href="/subscription" className="hover:text-white transition-colors">Premium Duo</Link></li>
-              <li><Link href="/subscription" className="hover:text-white transition-colors">Premium Family</Link></li>
-              <li><Link href="/subscription" className="hover:text-white transition-colors">Premium Student</Link></li>
-              <li><Link href="/subscription" className="hover:text-white transition-colors">EmPulse Free</Link></li>
-              <li><Link href="/audiobooks" className="hover:text-white transition-colors">Audiobooks Access</Link></li>
+            <ul role="list" className="space-y-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li>
+                <Link href="/subscription" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Premium Individual
+                </Link>
+              </li>
+              <li>
+                <Link href="/subscription" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Premium Duo
+                </Link>
+              </li>
+              <li>
+                <Link href="/subscription" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Premium Family
+                </Link>
+              </li>
+              <li>
+                <Link href="/subscription" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Premium Student
+                </Link>
+              </li>
+              <li>
+                <Link href="/subscription" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  EmPulse Free
+                </Link>
+              </li>
+              <li>
+                <Link href="/audiobooks" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Audiobooks Access
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
 
-        {/* Legal & Privacy Links */}
-        <div className="border-t border-white/10 pt-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              <Link href="/legal" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Legal Hub</Link>
-              <Link href="/legal/terms" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Terms of Service</Link>
-              <Link href="/legal/privacy" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Privacy Policy</Link>
-              <Link href="/legal/dmca" className="text-spotify-text-gray hover:text-white text-xs transition-colors">DMCA Policy</Link>
-              <Link href="/legal/royalty-policy" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Royalty Policy</Link>
-              <Link href="/legal/pro-guide" className="text-spotify-text-gray hover:text-white text-xs transition-colors">PRO Guide</Link>
-              <Link href="/safety-privacy" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Safety & Privacy Center</Link>
-              <Link href="/cookies" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Cookies</Link>
-              <Link href="/about-ads" className="text-spotify-text-gray hover:text-white text-xs transition-colors">About Ads</Link>
-              <Link href="/accessibility" className="text-spotify-text-gray hover:text-white text-xs transition-colors">Accessibility</Link>
-              <Link href="/privacy-choices" className="text-spotify-text-gray hover:text-white text-xs transition-colors flex items-center gap-1">
-                Your Privacy Choices
-                <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                  <rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                  <path d="M5 7l2 2 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+        {/* Social Media Icons */}
+        <div className="mb-8" style={{ marginBottom: '32px' }}>
+          <div className="flex items-center gap-2" style={{ gap: '16px' }}>
+            <a
+              href="https://instagram.com/spotify"
+              aria-label="Instagram"
+              title="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center rounded-full transition-colors hover:bg-white/10"
+              style={{ width: '40px', height: '40px', color: '#B3B3B3' }}
+            >
+              <Globe size={16} />
+            </a>
+            <a
+              href="https://twitter.com/spotify"
+              aria-label="Twitter"
+              title="Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center rounded-full transition-colors hover:bg-white/10"
+              style={{ width: '40px', height: '40px', color: '#B3B3B3' }}
+            >
+              <Globe size={16} />
+            </a>
+            <a
+              href="https://www.facebook.com/Spotify"
+              aria-label="Facebook"
+              title="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center rounded-full transition-colors hover:bg-white/10"
+              style={{ width: '40px', height: '40px', color: '#B3B3B3' }}
+            >
+              <Globe size={16} />
+            </a>
+          </div>
+        </div>
+
+        {/* Legal & Privacy Links - Spotify Structure */}
+        <div className="border-t border-white/10 pt-8" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '32px' }}>
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4" style={{ gap: '16px', marginBottom: '16px' }}>
+            <div className="flex flex-wrap gap-x-4 gap-y-2" style={{ gap: '16px' }}>
+              <Link href="/legal" className="text-spotify-text-gray hover:text-white text-xs transition-colors" style={{ fontSize: '12px', lineHeight: '16px', color: '#B3B3B3' }}>
+                Legal
+              </Link>
+              <Link href="/safety-privacy" className="text-spotify-text-gray hover:text-white text-xs transition-colors" style={{ fontSize: '12px', lineHeight: '16px', color: '#B3B3B3' }}>
+                Safety & Privacy Center
+              </Link>
+              <Link href="/legal/privacy" className="text-spotify-text-gray hover:text-white text-xs transition-colors" style={{ fontSize: '12px', lineHeight: '16px', color: '#B3B3B3' }}>
+                Privacy Policy
+              </Link>
+              <Link href="/cookies" className="text-spotify-text-gray hover:text-white text-xs transition-colors" style={{ fontSize: '12px', lineHeight: '16px', color: '#B3B3B3' }}>
+                Cookies
+              </Link>
+              <Link href="/about-ads" className="text-spotify-text-gray hover:text-white text-xs transition-colors" style={{ fontSize: '12px', lineHeight: '16px', color: '#B3B3B3' }}>
+                About Ads
+              </Link>
+              <Link href="/accessibility" className="text-spotify-text-gray hover:text-white text-xs transition-colors" style={{ fontSize: '12px', lineHeight: '16px', color: '#B3B3B3' }}>
+                Accessibility
               </Link>
             </div>
-            <div className="flex items-center gap-2 text-spotify-text-gray text-xs">
-              <Globe size={14} />
-              <span>USA</span>
-              <span className="ml-4">© {currentYear} EmPulse Music</span>
-            </div>
+          </div>
+          
+          {/* Copyright & Language Selector */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <p className="text-spotify-text-gray text-xs" style={{ fontSize: '12px', lineHeight: '16px', color: '#B3B3B3' }}>
+              © {currentYear} EmPulse Music AB
+            </p>
+            <button
+              className="px-3 py-1.5 rounded-md text-spotify-text-gray hover:text-white hover:bg-white/10 transition-colors text-xs font-bold"
+              style={{
+                fontSize: '12px',
+                lineHeight: '16px',
+                fontWeight: 700,
+                color: '#B3B3B3',
+                padding: '8px 12px',
+                height: '32px'
+              }}
+            >
+              English
+            </button>
           </div>
         </div>
-      </div>
+      </nav>
     </footer>
   );
 }

@@ -131,50 +131,94 @@ export default function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center rounded-md transition-colors group relative",
+                "rounded-md transition-all group relative gpu-accelerated",
                 isActive 
-                  ? "bg-spotify-light-gray text-white" 
-                  : "text-spotify-text-gray hover:text-white hover:bg-white/10"
+                  ? "bg-spotify-light-gray" 
+                  : "hover:bg-white/10",
+                leftSidebarWidth <= 100 ? "flex flex-col items-center justify-center" : "flex items-center"
               )}
               style={{
-                padding: '12px 16px',
+                padding: leftSidebarWidth <= 100 ? '8px 4px' : '12px 16px',
                 borderRadius: '4px',
-                gap: '16px',
+                gap: leftSidebarWidth <= 100 ? '4px' : '16px',
                 fontSize: '14px',
                 fontWeight: isActive ? 700 : 400,
                 lineHeight: '20px',
                 marginBottom: '4px',
-                textDecoration: 'none'
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
               }}
-              title={leftSidebarCollapsed ? item.label : undefined}
+              title={leftSidebarCollapsed && leftSidebarWidth > 100 ? item.label : undefined}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  const icon = e.currentTarget.querySelector('svg');
+                  const text = e.currentTarget.querySelector('span');
+                  if (icon) icon.style.color = '#FFFFFF';
+                  if (text) {
+                    const spanEl = text as HTMLElement;
+                    spanEl.style.color = '#FFFFFF';
+                    if (leftSidebarWidth <= 100) {
+                      spanEl.style.transform = 'scale(1)';
+                    }
+                  }
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  const icon = e.currentTarget.querySelector('svg');
+                  const text = e.currentTarget.querySelector('span');
+                  if (icon) icon.style.color = '#535353';
+                  if (text) {
+                    const spanEl = text as HTMLElement;
+                    spanEl.style.color = leftSidebarWidth <= 100 ? '#535353' : '#B3B3B3';
+                    if (leftSidebarWidth <= 100) {
+                      spanEl.style.transform = 'scale(0.97)';
+                    }
+                  }
+                }
+              }}
             >
               <Icon 
                 size={24} 
-                className="flex-shrink-0" 
-                style={{ width: '24px', height: '24px', flexShrink: 0 }}
+                className="flex-shrink-0 transition-all" 
+                style={{ 
+                  width: '24px', 
+                  height: '24px', 
+                  flexShrink: 0,
+                  color: isActive ? '#FFFFFF' : '#535353',
+                  transition: 'all 0.2s ease',
+                  position: 'static',
+                  display: 'inline-block'
+                }}
               />
-              {leftSidebarWidth > 100 && (
+              {leftSidebarWidth > 100 ? (
                 <span 
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap transition-all"
                   style={{ 
                     fontSize: '14px',
                     lineHeight: '20px',
                     fontWeight: isActive ? 700 : 400,
-                    color: isActive ? '#FFFFFF' : 'inherit'
+                    color: isActive ? '#FFFFFF' : '#B3B3B3',
+                    transition: 'all 0.2s ease'
                   }}
                 >
                   {item.label}
                 </span>
-              )}
-              {leftSidebarWidth <= 100 && (
+              ) : (
                 <span 
-                  className="absolute left-full ml-2 px-2 py-1 bg-spotify-dark-gray text-white text-sm rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-opacity z-50 shadow-lg"
+                  className="transition-all"
                   style={{
-                    fontSize: '14px',
-                    padding: '6px 12px',
-                    borderRadius: '4px',
-                    backgroundColor: '#181818',
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)'
+                    fontSize: '11px',
+                    lineHeight: '15px',
+                    height: '15px',
+                    fontWeight: 400,
+                    color: isActive ? '#FFFFFF' : '#535353',
+                    display: 'block',
+                    textAlign: 'center',
+                    transform: 'scale(0.97)',
+                    transition: 'transform 0.1s ease-in-out, color 0.1s ease-in-out',
+                    position: 'static',
+                    width: 'auto'
                   }}
                 >
                   {item.label}
