@@ -248,6 +248,8 @@ export default function Player() {
             <button
               onClick={() => setShuffle(!shuffle)}
               disabled={!currentTrack}
+              aria-label={shuffle ? 'Shuffle on' : 'Shuffle off'}
+              aria-pressed={shuffle}
               className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                 shuffle ? 'text-spotify-green' : ''
               }`}
@@ -279,6 +281,7 @@ export default function Player() {
             <button
               onClick={playPrevious}
               disabled={!currentTrack}
+              aria-label="Previous track"
               className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 backgroundColor: 'transparent',
@@ -312,6 +315,7 @@ export default function Player() {
             <button
               onClick={playNext}
               disabled={!currentTrack}
+              aria-label="Next track"
               className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 backgroundColor: 'transparent',
@@ -343,6 +347,8 @@ export default function Player() {
                 setRepeat(modes[(currentIndex + 1) % modes.length]);
               }}
               disabled={!currentTrack}
+              aria-label={`Repeat ${repeat === 'off' ? 'off' : repeat === 'all' ? 'all' : 'one'}`}
+              aria-pressed={repeat !== 'off'}
               className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                 repeat !== 'off' ? 'text-spotify-green' : ''
               }`}
