@@ -14,6 +14,7 @@ import { Track } from '@/types/track';
 import { MoodTags, MoodState } from '@/types/mood';
 import { AudioFeatures } from './aiMoodAnalysis';
 import { Neo4jKnowledgeGraph } from './knowledgeGraph';
+import { DEFAULT_LIMITS, SIMILARITY_THRESHOLDS } from './pipelineConfig';
 
 /**
  * Similarity Match Result
@@ -62,8 +63,8 @@ export class SimilarityMatchingEngine {
     options: SimilarityMatchOptions = {}
   ): Promise<SimilarityMatch[]> {
     const {
-      limit = 20,
-      minSimilarity = 0.6,
+      limit = DEFAULT_LIMITS.MAX_SIMILAR_TRACKS,
+      minSimilarity = SIMILARITY_THRESHOLDS.MIN_SIMILARITY,
       includeVectorSimilarity = true,
       includeGraphSimilarity = true,
       includeFeatureSimilarity = true,
@@ -197,7 +198,7 @@ export class SimilarityMatchingEngine {
 
       return recommendations.map(track => ({
         track,
-        similarity: 0.7, // Default collaborative similarity
+        similarity: SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD, // Default collaborative similarity
       }));
     } catch (error) {
       console.error('Error in collaborative similarity search:', error);
@@ -403,7 +404,7 @@ export class SimilarityMatchingEngine {
       return [];
     }
 
-    const limit = options.limit || 20;
+    const limit = options.limit || DEFAULT_LIMITS.MAX_RECOMMENDATIONS;
 
     try {
       const tracks = await this.knowledgeGraph.findTracksByMood(
