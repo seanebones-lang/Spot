@@ -4,15 +4,72 @@ import { Phone, MessageCircle, BookOpen, ExternalLink, AlertCircle } from 'lucid
 
 export default function WellnessPage() {
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8">Mental Health Resource Hub</h1>
+    <div 
+      className="p-8 max-w-4xl mx-auto"
+      style={{
+        padding: '32px',
+        maxWidth: '896px',
+        backgroundColor: '#121212',
+        minHeight: '100vh',
+        color: '#FFFFFF'
+      }}
+    >
+      <h1 
+        className="text-4xl font-bold mb-8"
+        style={{
+          fontSize: '32px',
+          lineHeight: '36px',
+          fontWeight: 700,
+          color: '#FFFFFF',
+          marginBottom: '32px'
+        }}
+      >
+        Mental Health Resource Hub
+      </h1>
 
-      {/* Disclaimer */}
-      <div className="bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-4 mb-8 flex items-start gap-3">
-        <AlertCircle className="text-yellow-500 flex-shrink-0 mt-0.5" size={24} />
+      {/* Disclaimer - Exact Spotify Style */}
+      <div 
+        className="bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-4 mb-8 flex items-start gap-3"
+        style={{
+          backgroundColor: 'rgba(217, 119, 6, 0.2)',
+          border: '1px solid rgba(217, 119, 6, 0.5)',
+          borderRadius: '8px',
+          padding: '16px',
+          marginBottom: '32px',
+          gap: '12px'
+        }}
+      >
+        <AlertCircle 
+          className="text-yellow-500 flex-shrink-0 mt-0.5"
+          size={24}
+          style={{
+            width: '24px',
+            height: '24px',
+            color: '#F59E0B',
+            flexShrink: 0
+          }}
+        />
         <div>
-          <h3 className="font-bold text-yellow-500 mb-1">Important Disclaimer</h3>
-          <p className="text-sm text-white/80">
+          <h3 
+            className="font-bold text-yellow-500 mb-1"
+            style={{
+              fontSize: '16px',
+              lineHeight: '24px',
+              fontWeight: 700,
+              color: '#F59E0B',
+              marginBottom: '4px'
+            }}
+          >
+            Important Disclaimer
+          </h3>
+          <p 
+            className="text-sm text-white/80"
+            style={{
+              fontSize: '14px',
+              lineHeight: '20px',
+              color: 'rgba(255, 255, 255, 0.8)'
+            }}
+          >
             EmPulse Music is not a substitute for professional mental health care. If you&apos;re experiencing a mental health crisis, please contact a qualified professional or emergency services immediately.
           </p>
         </div>

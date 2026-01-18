@@ -82,30 +82,79 @@ export default function AdBanner({
     );
   }
 
+  // Banner style - matches Spotify ad banner styling
   return (
-    <div className={cn(
-      "bg-gradient-to-r from-empulse-purple/20 to-empulse-blue/20 border border-empulse-purple/30 rounded-lg p-4 relative",
-      className
-    )}>
+    <div 
+      className={cn(
+        "bg-spotify-light-gray rounded-lg p-4 relative transition-all duration-200 hover:bg-spotify-dark-gray",
+        className
+      )}
+      style={{
+        borderRadius: '8px',
+        backgroundColor: type === 'psa' ? '#282828' : '#181818'
+      }}
+    >
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-spotify-text-gray hover:text-white transition-colors"
+          className="absolute top-2 right-2 text-spotify-text-gray hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+          aria-label="Close ad"
         >
-          <X size={16} />
+          <X size={16} style={{ width: '16px', height: '16px' }} />
         </button>
       )}
       <div className="flex items-center gap-4">
         {adContent.image && (
-          <img src={adContent.image} alt="" className="w-16 h-16 rounded-lg object-cover" />
+          <img 
+            src={adContent.image} 
+            alt="" 
+            className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+            style={{ borderRadius: '4px' }}
+          />
         )}
-        <div className="flex-1">
-          <h4 className="font-semibold text-white text-sm">{adContent.title}</h4>
-          <p className="text-xs text-spotify-text-gray mt-1">{adContent.description}</p>
+        <div className="flex-1 min-w-0">
+          {type === 'psa' && (
+            <div 
+              className="text-xs font-bold text-spotify-green mb-1 uppercase tracking-wider"
+              style={{ 
+                fontSize: '11px',
+                letterSpacing: '0.1em',
+                color: '#1DB954'
+              }}
+            >
+              Public Service Announcement
+            </div>
+          )}
+          <h4 
+            className="font-semibold text-white text-sm truncate"
+            style={{ 
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 600
+            }}
+          >
+            {adContent.title}
+          </h4>
+          <p 
+            className="text-xs text-spotify-text-gray mt-1 line-clamp-2"
+            style={{ 
+              fontSize: '12px',
+              lineHeight: '16px',
+              color: '#B3B3B3'
+            }}
+          >
+            {adContent.description}
+          </p>
         </div>
         <button
           onClick={onAdClick}
-          className="px-4 py-2 bg-spotify-green text-black rounded-full text-sm font-semibold hover:scale-105 transition-transform whitespace-nowrap"
+          className="px-4 py-2 bg-spotify-green hover:bg-[#1ED760] text-black rounded-full text-sm font-semibold transition-colors whitespace-nowrap flex-shrink-0"
+          style={{
+            borderRadius: '500px',
+            fontSize: '12px',
+            fontWeight: 700,
+            letterSpacing: '0.05em'
+          }}
         >
           {adContent.cta}
         </button>

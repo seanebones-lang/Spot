@@ -116,59 +116,192 @@ export default function Player() {
     : 0;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-player-height bg-spotify-dark-gray border-t border-spotify-light-gray px-4 z-50">
-      <div className="flex items-center justify-between h-full max-w-screen-2xl mx-auto">
-        {/* Left - Now Playing */}
-        <div className="flex items-center gap-4 flex-1 min-w-0">
-          <div className="w-14 h-14 bg-spotify-light-gray rounded flex-shrink-0">
+    <div 
+      className="fixed bottom-0 left-0 right-0 h-player-height bg-spotify-dark-gray border-t border-spotify-light-gray px-4 z-50"
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '90px',
+        backgroundColor: '#181818',
+        borderTop: '1px solid #282828',
+        padding: '0 16px',
+        zIndex: 50
+      }}
+    >
+      <div 
+        className="flex items-center justify-between h-full max-w-screen-2xl mx-auto"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '100%',
+          maxWidth: '1536px',
+          margin: '0 auto',
+          gap: '16px'
+        }}
+      >
+        {/* Left - Now Playing - Exact Spotify Style */}
+        <div 
+          className="flex items-center gap-4 flex-1 min-w-0"
+          style={{
+            gap: '16px',
+            minWidth: 0,
+            flex: '1 1 30%'
+          }}
+        >
+          <div 
+            className="w-14 h-14 bg-spotify-light-gray rounded flex-shrink-0"
+            style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '4px',
+              backgroundColor: '#282828',
+              flexShrink: 0
+            }}
+          >
             {currentTrack?.coverArt ? (
               <img
                 src={currentTrack.coverArt}
                 alt={currentTrack.name}
                 className="w-full h-full object-cover rounded"
+                style={{ borderRadius: '4px' }}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <span className="text-2xl">🎵</span>
+              <div 
+                className="w-full h-full flex items-center justify-center"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <span className="text-2xl" style={{ fontSize: '24px' }}>🎵</span>
               </div>
             )}
           </div>
           {currentTrack ? (
             <>
-              <div className="min-w-0">
-                <div className="text-sm font-medium text-white truncate">{currentTrack.name}</div>
-                <div className="flex items-center gap-2">
-                  <div className="text-xs text-spotify-text-gray truncate">{currentTrack.artist}</div>
+              <div className="min-w-0" style={{ minWidth: 0 }}>
+                <div 
+                  className="text-sm font-medium text-white truncate"
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 400,
+                    color: '#FFFFFF'
+                  }}
+                >
+                  {currentTrack.name}
+                </div>
+                <div 
+                  className="flex items-center gap-2"
+                  style={{ gap: '8px' }}
+                >
+                  <div 
+                    className="text-xs text-spotify-text-gray truncate"
+                    style={{
+                      fontSize: '13px',
+                      lineHeight: '16px',
+                      color: '#B3B3B3'
+                    }}
+                  >
+                    {currentTrack.artist}
+                  </div>
                   <AudioQualityBadge track={currentTrack} className="flex-shrink-0" />
                 </div>
               </div>
               <MoodWidget track={currentTrack} />
             </>
           ) : (
-            <div className="text-sm text-spotify-text-gray">
+            <div 
+              className="text-sm text-spotify-text-gray"
+              style={{
+                fontSize: '14px',
+                lineHeight: '20px',
+                color: '#B3B3B3'
+              }}
+            >
               No track selected
             </div>
           )}
         </div>
 
-        {/* Center - Controls */}
-        <div className="flex flex-col items-center gap-2 flex-1">
-          <div className="flex items-center gap-2">
+        {/* Center - Controls - Exact Spotify Style */}
+        <div 
+          className="flex flex-col items-center gap-2 flex-1"
+          style={{
+            flex: '1 1 40%',
+            gap: '8px',
+            maxWidth: '722px'
+          }}
+        >
+          <div 
+            className="flex items-center gap-2"
+            style={{
+              gap: '16px',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
             <button
               onClick={() => setShuffle(!shuffle)}
               disabled={!currentTrack}
               className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                 shuffle ? 'text-spotify-green' : ''
               }`}
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: currentTrack ? 'pointer' : 'not-allowed',
+                color: shuffle ? '#1DB954' : '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                opacity: currentTrack ? 1 : 0.5,
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                if (currentTrack && !shuffle) {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!shuffle) {
+                  e.currentTarget.style.color = '#B3B3B3';
+                }
+              }}
             >
-              <Shuffle size={16} />
+              <Shuffle size={16} style={{ width: '16px', height: '16px' }} />
             </button>
             <button
               onClick={playPrevious}
               disabled={!currentTrack}
               className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: currentTrack ? 'pointer' : 'not-allowed',
+                color: '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                opacity: currentTrack ? 1 : 0.5,
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                if (currentTrack) {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#B3B3B3';
+              }}
             >
-              <SkipBack size={20} />
+              <SkipBack size={20} style={{ width: '20px', height: '20px' }} />
             </button>
             <PlayButton 
               isPlaying={isPlaying} 
@@ -180,8 +313,28 @@ export default function Player() {
               onClick={playNext}
               disabled={!currentTrack}
               className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: currentTrack ? 'pointer' : 'not-allowed',
+                color: '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                opacity: currentTrack ? 1 : 0.5,
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                if (currentTrack) {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#B3B3B3';
+              }}
             >
-              <SkipForward size={20} />
+              <SkipForward size={20} style={{ width: '20px', height: '20px' }} />
             </button>
             <button
               onClick={() => {
@@ -193,8 +346,30 @@ export default function Player() {
               className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                 repeat !== 'off' ? 'text-spotify-green' : ''
               }`}
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: currentTrack ? 'pointer' : 'not-allowed',
+                color: repeat !== 'off' ? '#1DB954' : '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                opacity: currentTrack ? 1 : 0.5,
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                if (currentTrack && repeat === 'off') {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (repeat === 'off') {
+                  e.currentTarget.style.color = '#B3B3B3';
+                }
+              }}
             >
-              <Repeat size={16} />
+              <Repeat size={16} style={{ width: '16px', height: '16px' }} />
             </button>
           </div>
           {currentTrack && (
@@ -207,8 +382,16 @@ export default function Player() {
           )}
         </div>
 
-        {/* Right - Volume & Extras */}
-        <div className="flex items-center gap-4 flex-1 justify-end">
+        {/* Right - Volume & Extras - Exact Spotify Style */}
+        <div 
+          className="flex items-center gap-4 flex-1 justify-end"
+          style={{
+            flex: '1 1 30%',
+            gap: '16px',
+            justifyContent: 'flex-end',
+            alignItems: 'center'
+          }}
+        >
           {currentTrack && (
             <QualitySelector
               currentQuality={quality}
@@ -220,17 +403,54 @@ export default function Player() {
             onClick={() => setIsQueueOpen(true)}
             disabled={!currentTrack}
             className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: currentTrack ? 'pointer' : 'not-allowed',
+              color: '#B3B3B3',
+              transition: 'color 200ms ease-out',
+              opacity: currentTrack ? 1 : 0.5,
+              padding: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
             title="Queue"
+            onMouseEnter={(e) => {
+              if (currentTrack) {
+                e.currentTarget.style.color = '#FFFFFF';
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#B3B3B3';
+            }}
           >
-            <List size={20} />
+            <List size={20} style={{ width: '20px', height: '20px' }} />
           </button>
           {currentTrack && (
             <button
               onClick={() => setIsFullScreen(true)}
               className="text-spotify-text-gray hover:text-white transition-colors"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
               title="Full screen"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#FFFFFF';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#B3B3B3';
+              }}
             >
-              <Maximize2 size={20} />
+              <Maximize2 size={20} style={{ width: '20px', height: '20px' }} />
             </button>
           )}
           {currentTrack && <PictureInPicturePlayer />}

@@ -99,9 +99,36 @@ export default function MoodPage() {
   };
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-8">Discover Music by Mood</h1>
-      <p className="text-spotify-text-gray mb-8">
+    <div 
+      className="p-8"
+      style={{
+        padding: '32px',
+        backgroundColor: '#121212',
+        minHeight: '100vh',
+        color: '#FFFFFF'
+      }}
+    >
+      <h1 
+        className="text-4xl font-bold mb-8"
+        style={{
+          fontSize: '32px',
+          lineHeight: '36px',
+          fontWeight: 700,
+          color: '#FFFFFF',
+          marginBottom: '32px'
+        }}
+      >
+        Discover Music by Mood
+      </h1>
+      <p 
+        className="text-spotify-text-gray mb-8"
+        style={{
+          fontSize: '14px',
+          lineHeight: '20px',
+          color: '#B3B3B3',
+          marginBottom: '32px'
+        }}
+      >
         Select your mood, feelings, vibe, and genres to find the perfect playlists
       </p>
 
@@ -123,30 +150,83 @@ export default function MoodPage() {
         onToggle={handleToggleGenre}
       />
 
-      {/* Results */}
-      <div className="mt-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold">
+      {/* Results - Exact Spotify Style */}
+      <div 
+        className="mt-8"
+        style={{ marginTop: '32px' }}
+      >
+        <div 
+          className="flex items-center justify-between mb-4"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '16px'
+          }}
+        >
+          <h2 
+            className="text-2xl font-bold"
+            style={{
+              fontSize: '24px',
+              lineHeight: '28px',
+              fontWeight: 700,
+              color: '#FFFFFF'
+            }}
+          >
             {filteredPlaylists.length} Playlist{filteredPlaylists.length !== 1 ? 's' : ''} Match Your Mood
           </h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div 
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+          style={{ gap: '16px' }}
+        >
           {filteredPlaylists.map((playlist) => {
             const firstTrackId = playlist.tracks[0]?.id;
             const isPlaylistPlaying = currentTrack?.id === firstTrackId && isPlaying;
             return (
               <div
                 key={playlist.id}
-                className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors cursor-pointer group relative"
+                className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-dark-gray transition-all duration-200 cursor-pointer group relative"
+                style={{
+                  backgroundColor: '#181818',
+                  borderRadius: '8px',
+                  padding: '16px',
+                  transition: 'background-color 200ms ease-out',
+                  cursor: 'pointer'
+                }}
                 onClick={() => handlePlayPlaylist(playlist)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#282828';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#181818';
+                }}
               >
-                <div className="relative mb-3">
+                <div 
+                  className="relative mb-3"
+                  style={{
+                    marginBottom: '12px',
+                    position: 'relative'
+                  }}
+                >
                   <img
                     src={playlist.coverArt}
                     alt={playlist.name}
                     className="w-full aspect-square object-cover rounded"
+                    style={{
+                      borderRadius: '4px',
+                      aspectRatio: '1',
+                      width: '100%'
+                    }}
                   />
-                  <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div 
+                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{
+                      bottom: '8px',
+                      right: '8px',
+                      transition: 'opacity 200ms ease-out'
+                    }}
+                  >
                     <PlayButton
                       isPlaying={isPlaylistPlaying}
                       onClick={(e) => {
@@ -157,11 +237,51 @@ export default function MoodPage() {
                     />
                   </div>
                 </div>
-                <h3 className="font-semibold text-sm truncate mb-1">{playlist.name}</h3>
-                <p className="text-xs text-spotify-text-gray line-clamp-2">{playlist.description}</p>
+                <h3 
+                  className="font-semibold text-sm truncate mb-1"
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 600,
+                    color: '#FFFFFF',
+                    marginBottom: '4px'
+                  }}
+                >
+                  {playlist.name}
+                </h3>
+                <p 
+                  className="text-xs text-spotify-text-gray line-clamp-2"
+                  style={{
+                    fontSize: '13px',
+                    lineHeight: '16px',
+                    color: '#B3B3B3',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden'
+                  }}
+                >
+                  {playlist.description}
+                </p>
                 {playlist.moodTags && (
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    <span className="text-xs px-2 py-0.5 bg-empulse-purple/20 text-empulse-purple rounded">
+                  <div 
+                    className="mt-2 flex flex-wrap gap-1"
+                    style={{
+                      marginTop: '8px',
+                      gap: '4px'
+                    }}
+                  >
+                    <span 
+                      className="text-xs px-2 py-0.5 bg-empulse-purple/20 text-empulse-purple rounded"
+                      style={{
+                        fontSize: '11px',
+                        lineHeight: '16px',
+                        padding: '4px 8px',
+                        backgroundColor: 'rgba(114, 9, 183, 0.2)',
+                        color: '#7209B7',
+                        borderRadius: '4px'
+                      }}
+                    >
                       {playlist.moodTags.mood}
                     </span>
                   </div>
@@ -171,11 +291,33 @@ export default function MoodPage() {
           })}
         </div>
         {filteredPlaylists.length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-spotify-text-gray text-lg">
+          <div 
+            className="text-center py-16"
+            style={{
+              textAlign: 'center',
+              padding: '64px 16px'
+            }}
+          >
+            <p 
+              className="text-spotify-text-gray text-lg"
+              style={{
+                fontSize: '18px',
+                lineHeight: '24px',
+                color: '#B3B3B3',
+                marginBottom: '8px'
+              }}
+            >
               No playlists match your current mood selection
             </p>
-            <p className="text-spotify-text-gray text-sm mt-2">
+            <p 
+              className="text-spotify-text-gray text-sm mt-2"
+              style={{
+                fontSize: '14px',
+                lineHeight: '20px',
+                color: '#B3B3B3',
+                marginTop: '8px'
+              }}
+            >
               Try adjusting your mood, feelings, vibe, or genres
             </p>
           </div>

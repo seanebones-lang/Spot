@@ -47,29 +47,127 @@ export default function SupportPage() {
   };
 
   return (
-    <div className="fixed inset-0 bg-spotify-dark flex flex-col z-50">
-      {/* Header */}
-      <div className="h-16 bg-spotify-dark-gray border-b border-white/10 flex items-center justify-between px-6 flex-shrink-0">
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-10 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center">
-            <Bot className="w-6 h-6 text-white" />
+    <div 
+      className="fixed inset-0 bg-spotify-dark flex flex-col z-50"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: '#121212',
+        display: 'flex',
+        flexDirection: 'column',
+        zIndex: 50
+      }}
+    >
+      {/* Header - Exact Spotify Style */}
+      <div 
+        className="h-16 bg-spotify-dark-gray border-b border-white/10 flex items-center justify-between px-6 flex-shrink-0"
+        style={{
+          height: '64px',
+          backgroundColor: '#181818',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 24px',
+          flexShrink: 0
+        }}
+      >
+        <div 
+          className="flex items-center gap-4"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px'
+          }}
+        >
+          <div 
+            className="w-10 h-10 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center"
+            style={{
+              width: '40px',
+              height: '40px',
+              background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}
+          >
+            <Bot 
+              className="w-6 h-6 text-white"
+              style={{
+                width: '24px',
+                height: '24px',
+                color: '#FFFFFF'
+              }}
+            />
           </div>
           <div>
-            <h1 className="text-white font-bold text-lg">EmPulse Music Support</h1>
-            <p className="text-sm text-spotify-text-gray">Powered by xAI Grok</p>
+            <h1 
+              className="text-white font-bold text-lg"
+              style={{
+                fontSize: '18px',
+                lineHeight: '24px',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                marginBottom: '2px'
+              }}
+            >
+              EmPulse Music Support
+            </h1>
+            <p 
+              className="text-sm text-spotify-text-gray"
+              style={{
+                fontSize: '13px',
+                lineHeight: '16px',
+                color: '#B3B3B3'
+              }}
+            >
+              Powered by xAI Grok
+            </p>
           </div>
         </div>
         <button
           onClick={() => window.history.back()}
           className="p-2 hover:bg-spotify-light-gray rounded-full transition-colors"
+          style={{
+            padding: '8px',
+            backgroundColor: 'transparent',
+            borderRadius: '50%',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'background-color 200ms ease-out'
+          }}
           aria-label="Close chat"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#282828';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
         >
-          <Minimize2 className="w-5 h-5 text-spotify-text-gray" />
+          <Minimize2 
+            className="w-5 h-5 text-spotify-text-gray"
+            style={{
+              width: '20px',
+              height: '20px',
+              color: '#B3B3B3'
+            }}
+          />
         </button>
       </div>
 
-      {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+      {/* Messages Area - Exact Spotify Style */}
+      <div 
+        className="flex-1 overflow-y-auto px-6 py-6 space-y-6"
+        style={{
+          flex: '1 1 0%',
+          overflowY: 'auto',
+          padding: '24px',
+          gap: '24px',
+          backgroundColor: '#121212'
+        }}
+      >
         {messages.map((message, index) => (
           <div
             key={index}
@@ -77,10 +175,35 @@ export default function SupportPage() {
               "flex gap-4",
               message.role === 'user' ? "justify-end" : "justify-start"
             )}
+            style={{
+              display: 'flex',
+              gap: '16px',
+              justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start'
+            }}
           >
             {message.role === 'assistant' && (
-              <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                <Bot className="w-5 h-5 text-white" />
+              <div 
+                className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0 mt-1"
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  marginTop: '4px'
+                }}
+              >
+                <Bot 
+                  className="w-5 h-5 text-white"
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    color: '#FFFFFF'
+                  }}
+                />
               </div>
             )}
             <div
@@ -90,18 +213,63 @@ export default function SupportPage() {
                   ? "bg-spotify-green text-black"
                   : "bg-spotify-light-gray text-white"
               )}
+              style={{
+                maxWidth: '70%',
+                borderRadius: '8px',
+                padding: '12px 16px',
+                backgroundColor: message.role === 'user' ? '#1DB954' : '#181818',
+                color: message.role === 'user' ? '#000000' : '#FFFFFF'
+              }}
             >
-              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-              <p className={cn(
-                "text-xs mt-2",
-                message.role === 'user' ? "text-black/60" : "text-spotify-text-gray"
-              )}>
+              <p 
+                className="text-sm whitespace-pre-wrap"
+                style={{
+                  fontSize: '14px',
+                  lineHeight: '20px',
+                  fontWeight: 400,
+                  whiteSpace: 'pre-wrap'
+                }}
+              >
+                {message.content}
+              </p>
+              <p 
+                className={cn(
+                  "text-xs mt-2",
+                  message.role === 'user' ? "text-black/60" : "text-spotify-text-gray"
+                )}
+                style={{
+                  fontSize: '11px',
+                  lineHeight: '16px',
+                  marginTop: '8px',
+                  color: message.role === 'user' ? 'rgba(0, 0, 0, 0.6)' : '#B3B3B3'
+                }}
+              >
                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </p>
             </div>
             {message.role === 'user' && (
-              <div className="w-8 h-8 bg-spotify-light-gray rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                <User className="w-5 h-5 text-white" />
+              <div 
+                className="w-8 h-8 bg-spotify-light-gray rounded-full flex items-center justify-center flex-shrink-0 mt-1"
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  backgroundColor: '#282828',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  marginTop: '4px'
+                }}
+              >
+                <User 
+                  className="w-5 h-5 text-white"
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    color: '#FFFFFF'
+                  }}
+                />
               </div>
             )}
           </div>
@@ -124,9 +292,24 @@ export default function SupportPage() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area */}
-      <div className="border-t border-white/10 p-4 flex-shrink-0">
-        <form onSubmit={handleSend} className="flex gap-3">
+      {/* Input Area - Exact Spotify Style */}
+      <div 
+        className="border-t border-white/10 p-4 flex-shrink-0"
+        style={{
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          padding: '16px',
+          flexShrink: 0,
+          backgroundColor: '#181818'
+        }}
+      >
+        <form 
+          onSubmit={handleSend} 
+          className="flex gap-3"
+          style={{
+            display: 'flex',
+            gap: '12px'
+          }}
+        >
           <input
             ref={inputRef}
             type="text"
@@ -134,18 +317,71 @@ export default function SupportPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
             className="flex-1 bg-spotify-light-gray text-white rounded-full px-6 py-3 focus:outline-none focus:ring-2 focus:ring-spotify-green placeholder:text-spotify-text-gray"
+            style={{
+              flex: '1 1 0%',
+              backgroundColor: '#282828',
+              color: '#FFFFFF',
+              borderRadius: '500px',
+              padding: '12px 24px',
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 400,
+              border: 'none',
+              outline: 'none',
+              fontFamily: 'inherit',
+              transition: 'all 200ms ease-out'
+            }}
             disabled={isLoading}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = '#1DB954';
+              e.currentTarget.style.borderWidth = '2px';
+              e.currentTarget.style.borderStyle = 'solid';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.borderWidth = '1px';
+            }}
           />
           <button
             type="submit"
             disabled={!input.trim() || isLoading}
             className={cn(
-              "w-12 h-12 bg-spotify-green hover:bg-spotify-green/80 rounded-full flex items-center justify-center transition-colors",
+              "w-12 h-12 bg-spotify-green hover:bg-[#1ed760] rounded-full flex items-center justify-center transition-colors",
               (!input.trim() || isLoading) && "opacity-50 cursor-not-allowed"
             )}
+            style={{
+              width: '48px',
+              height: '48px',
+              backgroundColor: '#1DB954',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: 'none',
+              cursor: (!input.trim() || isLoading) ? 'not-allowed' : 'pointer',
+              transition: 'all 200ms ease-out',
+              opacity: (!input.trim() || isLoading) ? 0.5 : 1
+            }}
             aria-label="Send message"
+            onMouseEnter={(e) => {
+              if (input.trim() && !isLoading) {
+                e.currentTarget.style.backgroundColor = '#1ed760';
+                e.currentTarget.style.transform = 'scale(1.05)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
           >
-            <Send className="w-5 h-5 text-black" />
+            <Send 
+              className="w-5 h-5 text-black"
+              style={{
+                width: '20px',
+                height: '20px',
+                color: '#000000'
+              }}
+            />
           </button>
         </form>
       </div>

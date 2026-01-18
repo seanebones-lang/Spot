@@ -69,7 +69,7 @@ export default function TopBar() {
   const headerNavLinks = [
     { label: 'Home', href: '/' },
     { label: 'Search', href: '/search' },
-    { label: 'Your Library', href: '/library' },
+    { label: 'Your Library', href: '/collection' },
   ];
 
   return (
@@ -101,7 +101,7 @@ export default function TopBar() {
               const isActive = pathname === link.href || 
                 (link.href === '/' && pathname === '/') ||
                 (link.href === '/search' && pathname?.startsWith('/search')) ||
-                (link.href === '/library' && pathname?.startsWith('/library'));
+                (link.href === '/collection' && pathname?.startsWith('/collection'));
               return (
                 <Link
                   key={link.href}
@@ -132,53 +132,72 @@ export default function TopBar() {
         </div>
         
         {/* Center Section: Search Bar - Exact Spotify Measurements */}
-        <div className="flex-1 flex justify-center min-w-0" style={{ marginLeft: '32px', marginRight: '32px' }}>
-          <div className="relative w-full" style={{ maxWidth: '364px' }}>
-          <Search 
-            className="absolute pointer-events-none" 
-            size={20} 
-            style={{ 
-              left: '12px', 
-              top: '50%', 
-              transform: 'translateY(-50%)',
-              color: '#121212',
-              width: '20px',
-              height: '20px',
-              opacity: 1
-            }} 
-          />
-          <input
-            type="text"
-            placeholder="What do you want to play?"
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setShowSearchDropdown(true);
-            }}
-            onFocus={() => setShowSearchDropdown(true)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && searchQuery.trim()) {
-                addSearch(searchQuery);
-                router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
-                setShowSearchDropdown(false);
-              }
-            }}
+        <div 
+          className="flex-1 flex justify-center min-w-0"
+          style={{
+            flex: '1 1 40%',
+            justifyContent: 'center',
+            minWidth: 0,
+            marginLeft: '32px',
+            marginRight: '32px'
+          }}
+        >
+          <div 
+            className="relative w-full"
             style={{
+              maxWidth: '364px',
               width: '100%',
-              height: '40px',
-              backgroundColor: '#FFFFFF',
-              borderRadius: '500px',
-              paddingLeft: '40px',
-              paddingRight: '16px',
-              color: '#000000',
-              fontSize: '14px',
-              lineHeight: '20px',
-              fontWeight: 400,
-              border: 'none',
-              outline: 'none'
+              position: 'relative'
             }}
-            className="placeholder:text-[#121212] placeholder:opacity-[0.6]"
-          />
+          >
+            <Search 
+              className="absolute pointer-events-none"
+              size={20}
+              style={{
+                position: 'absolute',
+                left: '12px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#121212',
+                width: '20px',
+                height: '20px',
+                opacity: 1,
+                pointerEvents: 'none'
+              }}
+            />
+            <input
+              type="text"
+              placeholder="What do you want to play?"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setShowSearchDropdown(true);
+              }}
+              onFocus={() => setShowSearchDropdown(true)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && searchQuery.trim()) {
+                  addSearch(searchQuery);
+                  router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+                  setShowSearchDropdown(false);
+                }
+              }}
+              style={{
+                width: '100%',
+                height: '40px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '500px',
+                paddingLeft: '40px',
+                paddingRight: '16px',
+                color: '#000000',
+                fontSize: '14px',
+                lineHeight: '20px',
+                fontWeight: 400,
+                border: 'none',
+                outline: 'none',
+                fontFamily: 'inherit'
+              }}
+              className="placeholder:text-[#121212] placeholder:opacity-[0.6]"
+            />
           <SearchDropdown
             query={searchQuery}
             isOpen={showSearchDropdown}

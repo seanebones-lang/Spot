@@ -53,38 +53,173 @@ const helpPages = [
 
 export default function LegalHubPage() {
   return (
-    <div className="min-h-screen bg-spotify-dark text-white p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-12">
-          <h1 className="text-5xl font-bold mb-4">Legal & Policies</h1>
-          <p className="text-xl text-spotify-text-gray max-w-3xl">
+    <div 
+      className="min-h-screen bg-spotify-dark text-white p-8"
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#121212',
+        padding: '32px',
+        color: '#FFFFFF'
+      }}
+    >
+      <div 
+        className="max-w-6xl mx-auto"
+        style={{
+          maxWidth: '1152px',
+          margin: '0 auto'
+        }}
+      >
+        <div 
+          className="mb-12"
+          style={{ marginBottom: '48px' }}
+        >
+          <h1 
+            className="text-5xl font-bold mb-4"
+            style={{
+              fontSize: '48px',
+              lineHeight: '56px',
+              fontWeight: 900,
+              color: '#FFFFFF',
+              marginBottom: '16px'
+            }}
+          >
+            Legal & Policies
+          </h1>
+          <p 
+            className="text-xl text-spotify-text-gray max-w-3xl"
+            style={{
+              fontSize: '20px',
+              lineHeight: '28px',
+              color: '#B3B3B3',
+              maxWidth: '672px'
+            }}
+          >
             All legal documents, policies, and guidelines for using our platform. 
             These documents ensure legal compliance and protect both artists and listeners.
           </p>
         </div>
 
-        {/* Legal Documents */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Legal Documents</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+        {/* Legal Documents - Exact Spotify Style */}
+        <div 
+          className="mb-12"
+          style={{ marginBottom: '48px' }}
+        >
+          <h2 
+            className="text-3xl font-bold mb-6"
+            style={{
+              fontSize: '32px',
+              lineHeight: '36px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              marginBottom: '24px'
+            }}
+          >
+            Legal Documents
+          </h2>
+          <div 
+            className="grid md:grid-cols-2 gap-6"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+              gap: '24px'
+            }}
+          >
             {legalPages.map((page) => {
               const Icon = page.icon;
               return (
                 <Link
                   key={page.href}
                   href={page.href}
-                  className="bg-spotify-light-gray hover:bg-[#3e3e3e] rounded-lg p-6 transition-colors group"
+                  className="bg-spotify-light-gray hover:bg-spotify-dark-gray rounded-lg p-6 transition-all duration-200 group"
+                  style={{
+                    backgroundColor: '#181818',
+                    borderRadius: '8px',
+                    padding: '24px',
+                    transition: 'background-color 200ms ease-out',
+                    textDecoration: 'none'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#282828';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#181818';
+                  }}
                 >
-                  <div className={`w-16 h-16 bg-gradient-to-br ${page.color} rounded-lg flex items-center justify-center mb-4`}>
-                    <Icon className="w-8 h-8 text-white" />
+                  <div 
+                    className={`w-16 h-16 bg-gradient-to-br ${page.color} rounded-lg flex items-center justify-center mb-4`}
+                    style={{
+                      width: '64px',
+                      height: '64px',
+                      background: `linear-gradient(135deg, ${page.color.split(' ')[1]} 0%, ${page.color.split(' ')[3]} 100%)`,
+                      borderRadius: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '16px',
+                      flexShrink: 0
+                    }}
+                  >
+                    <Icon 
+                      className="w-8 h-8 text-white"
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        color: '#FFFFFF'
+                      }}
+                    />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-spotify-green transition-colors">
+                  <h3 
+                    className="text-xl font-bold mb-2 group-hover:text-spotify-green transition-colors"
+                    style={{
+                      fontSize: '20px',
+                      lineHeight: '28px',
+                      fontWeight: 700,
+                      color: '#FFFFFF',
+                      marginBottom: '8px',
+                      transition: 'color 200ms ease-out'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#1DB954';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#FFFFFF';
+                    }}
+                  >
                     {page.title}
                   </h3>
-                  <p className="text-spotify-text-gray text-sm mb-4">{page.description}</p>
-                  <div className="flex items-center gap-2 text-spotify-green text-sm font-medium">
+                  <p 
+                    className="text-spotify-text-gray text-sm mb-4"
+                    style={{
+                      fontSize: '14px',
+                      lineHeight: '20px',
+                      color: '#B3B3B3',
+                      marginBottom: '16px'
+                    }}
+                  >
+                    {page.description}
+                  </p>
+                  <div 
+                    className="flex items-center gap-2 text-spotify-green text-sm font-medium"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      color: '#1DB954',
+                      fontSize: '14px',
+                      lineHeight: '20px',
+                      fontWeight: 600
+                    }}
+                  >
                     Read More
-                    <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
+                    <ExternalLink 
+                      size={16} 
+                      className="group-hover:translate-x-1 transition-transform"
+                      style={{
+                        width: '16px',
+                        height: '16px',
+                        transition: 'transform 200ms ease-out'
+                      }}
+                    />
                   </div>
                 </Link>
               );

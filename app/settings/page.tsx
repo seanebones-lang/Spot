@@ -59,27 +59,108 @@ const settingsCategories = [
 
 export default function SettingsPage() {
   return (
-    <div className="min-h-screen bg-spotify-dark text-white p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Settings</h1>
+    <div 
+      className="min-h-screen bg-spotify-dark text-white p-8"
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#121212',
+        padding: '32px'
+      }}
+    >
+      <div 
+        className="max-w-4xl mx-auto"
+        style={{ maxWidth: '896px' }}
+      >
+        <h1 
+          className="text-4xl font-bold mb-8"
+          style={{
+            fontSize: '32px',
+            lineHeight: '36px',
+            fontWeight: 700,
+            color: '#FFFFFF',
+            marginBottom: '32px'
+          }}
+        >
+          Settings
+        </h1>
 
-        <div className="space-y-2">
+        <div 
+          className="space-y-2"
+          style={{ gap: '8px' }}
+        >
           {settingsCategories.map((category) => {
             const Icon = category.icon;
             return (
               <Link
                 key={category.id}
                 href={category.href}
-                className="flex items-center gap-4 p-4 bg-spotify-light-gray hover:bg-[#3e3e3e] rounded-lg transition-colors group"
+                className="flex items-center gap-4 p-4 bg-spotify-light-gray hover:bg-spotify-dark-gray rounded-lg transition-colors group"
+                style={{
+                  gap: '16px',
+                  padding: '16px',
+                  backgroundColor: '#181818',
+                  borderRadius: '8px',
+                  transition: 'background-color 200ms ease-out',
+                  textDecoration: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#282828';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#181818';
+                }}
               >
-                <div className="w-12 h-12 bg-spotify-dark-gray rounded-full flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-6 h-6 text-white" />
+                <div 
+                  className="w-12 h-12 bg-spotify-dark-gray rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '50%',
+                    backgroundColor: '#282828'
+                  }}
+                >
+                  <Icon 
+                    className="w-6 h-6 text-white"
+                    style={{
+                      width: '24px',
+                      height: '24px',
+                      color: '#FFFFFF'
+                    }}
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-white font-medium mb-1">{category.title}</h3>
-                  <p className="text-sm text-spotify-text-gray truncate">{category.description}</p>
+                  <h3 
+                    className="text-white font-medium mb-1"
+                    style={{
+                      fontSize: '16px',
+                      lineHeight: '24px',
+                      fontWeight: 600,
+                      color: '#FFFFFF',
+                      marginBottom: '4px'
+                    }}
+                  >
+                    {category.title}
+                  </h3>
+                  <p 
+                    className="text-sm text-spotify-text-gray truncate"
+                    style={{
+                      fontSize: '13px',
+                      lineHeight: '16px',
+                      color: '#B3B3B3'
+                    }}
+                  >
+                    {category.description}
+                  </p>
                 </div>
-                <ChevronRight className="w-5 h-5 text-spotify-text-gray group-hover:text-white transition-colors flex-shrink-0" />
+                <ChevronRight 
+                  className="w-5 h-5 text-spotify-text-gray group-hover:text-white transition-colors flex-shrink-0"
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    color: '#B3B3B3',
+                    transition: 'color 200ms ease-out'
+                  }}
+                />
               </Link>
             );
           })}

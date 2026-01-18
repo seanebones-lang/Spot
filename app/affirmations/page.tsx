@@ -20,46 +20,171 @@ export default function AffirmationsPage() {
     : affirmations;
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-8">Affirmations</h1>
+    <div 
+      className="p-8"
+      style={{
+        padding: '32px',
+        backgroundColor: '#121212',
+        minHeight: '100vh',
+        color: '#FFFFFF'
+      }}
+    >
+      <h1 
+        className="text-4xl font-bold mb-8"
+        style={{
+          fontSize: '32px',
+          lineHeight: '36px',
+          fontWeight: 700,
+          color: '#FFFFFF',
+          marginBottom: '32px'
+        }}
+      >
+        Affirmations
+      </h1>
 
-      {/* Daily Reminder Setting */}
-      <div className="bg-spotify-light-gray rounded-lg p-6 mb-8">
-        <div className="flex items-center justify-between">
+      {/* Daily Reminder Setting - Exact Spotify Style */}
+      <div 
+        className="bg-spotify-light-gray rounded-lg p-6 mb-8"
+        style={{
+          backgroundColor: '#181818',
+          borderRadius: '8px',
+          padding: '24px',
+          marginBottom: '32px'
+        }}
+      >
+        <div 
+          className="flex items-center justify-between"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '16px'
+          }}
+        >
           <div>
-            <h3 className="text-lg font-bold mb-1 flex items-center gap-2">
-              <Clock size={20} />
+            <h3 
+              className="text-lg font-bold mb-1 flex items-center gap-2"
+              style={{
+                fontSize: '18px',
+                lineHeight: '24px',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                marginBottom: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              <Clock 
+                size={20}
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  color: '#FFFFFF',
+                  flexShrink: 0
+                }}
+              />
               Daily Reminder
             </h3>
-            <p className="text-sm text-spotify-text-gray">
+            <p 
+              className="text-sm text-spotify-text-gray"
+              style={{
+                fontSize: '14px',
+                lineHeight: '20px',
+                color: '#B3B3B3'
+              }}
+            >
               Get a daily affirmation notification
             </p>
           </div>
-          <label className="flex items-center gap-3">
+          <label 
+            className="flex items-center gap-3"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              cursor: 'pointer'
+            }}
+          >
             <input
               type="checkbox"
               checked={dailyReminder}
               onChange={(e) => setDailyReminder(e.target.checked)}
               className="w-12 h-6 rounded-full appearance-none bg-spotify-dark-gray checked:bg-spotify-green transition-colors relative cursor-pointer"
               style={{
-                background: dailyReminder ? '#1DB954' : '#282828',
+                width: '48px',
+                height: '24px',
+                borderRadius: '12px',
+                appearance: 'none',
+                backgroundColor: dailyReminder ? '#1DB954' : '#282828',
+                cursor: 'pointer',
+                transition: 'background-color 200ms ease-out',
+                position: 'relative'
               }}
             />
           </label>
         </div>
       </div>
 
-      {/* Categories */}
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-4">Categories</h2>
-        <div className="flex gap-4 flex-wrap">
+      {/* Categories - Exact Spotify Style */}
+      <div 
+        className="mb-8"
+        style={{ marginBottom: '32px' }}
+      >
+        <h2 
+          className="text-xl font-bold mb-4"
+          style={{
+            fontSize: '20px',
+            lineHeight: '28px',
+            fontWeight: 700,
+            color: '#FFFFFF',
+            marginBottom: '16px'
+          }}
+        >
+          Categories
+        </h2>
+        <div 
+          className="flex gap-4 flex-wrap"
+          style={{
+            display: 'flex',
+            gap: '16px',
+            flexWrap: 'wrap'
+          }}
+        >
           <button
             onClick={() => setSelectedCategory(null)}
-            className={`px-6 py-3 rounded-full font-medium transition-all ${
+            className={`rounded-full font-medium transition-all ${
               selectedCategory === null
-                ? 'bg-spotify-green text-black'
-                : 'bg-spotify-light-gray text-white hover:bg-spotify-light-gray/80'
+                ? 'bg-spotify-green text-black hover:bg-[#1ed760]'
+                : 'bg-spotify-light-gray text-white hover:bg-spotify-dark-gray'
             }`}
+            style={{
+              padding: '6px 24px',
+              borderRadius: '500px',
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              transition: 'all 200ms ease-out',
+              backgroundColor: selectedCategory === null ? '#1DB954' : '#282828',
+              color: selectedCategory === null ? '#000000' : '#FFFFFF',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              if (selectedCategory === null) {
+                e.currentTarget.style.backgroundColor = '#1ed760';
+              } else {
+                e.currentTarget.style.backgroundColor = '#3e3e3e';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedCategory === null) {
+                e.currentTarget.style.backgroundColor = '#1DB954';
+              } else {
+                e.currentTarget.style.backgroundColor = '#282828';
+              }
+            }}
           >
             All
           </button>
@@ -67,11 +192,35 @@ export default function AffirmationsPage() {
             <button
               key={cat.value}
               onClick={() => setSelectedCategory(cat.value)}
-              className={`px-6 py-3 rounded-full font-medium transition-all ${
+              className={`rounded-full font-medium transition-all ${
                 selectedCategory === cat.value
                   ? `bg-gradient-to-r ${cat.color} text-white`
-                  : 'bg-spotify-light-gray text-white hover:bg-spotify-light-gray/80'
+                  : 'bg-spotify-light-gray text-white hover:bg-spotify-dark-gray'
               }`}
+              style={{
+                padding: '6px 24px',
+                borderRadius: '500px',
+                fontSize: '14px',
+                lineHeight: '20px',
+                fontWeight: 700,
+                letterSpacing: '0.05em',
+                transition: 'all 200ms ease-out',
+                backgroundColor: selectedCategory === cat.value ? undefined : '#282828',
+                background: selectedCategory === cat.value ? `linear-gradient(90deg, ${cat.color.split(' ')[1]} 0%, ${cat.color.split(' ')[3]} 100%)` : undefined,
+                color: '#FFFFFF',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                if (selectedCategory !== cat.value) {
+                  e.currentTarget.style.backgroundColor = '#3e3e3e';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (selectedCategory !== cat.value) {
+                  e.currentTarget.style.backgroundColor = '#282828';
+                }
+              }}
             >
               {cat.label}
             </button>
@@ -79,36 +228,154 @@ export default function AffirmationsPage() {
         </div>
       </div>
 
-      {/* Affirmations List */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Affirmations List - Exact Spotify Style */}
+      <div 
+        className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '16px'
+        }}
+      >
         {filteredAffirmations.map((affirmation) => {
           const isFavorite = favorites.includes(affirmation.id);
           return (
             <div
               key={affirmation.id}
-              className="bg-spotify-light-gray rounded-lg p-6 hover:bg-spotify-light-gray/80 transition-colors"
+              className="bg-spotify-light-gray rounded-lg p-6 hover:bg-spotify-dark-gray transition-all duration-200"
+              style={{
+                backgroundColor: '#181818',
+                borderRadius: '8px',
+                padding: '24px',
+                transition: 'background-color 200ms ease-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#282828';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#181818';
+              }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <span className="px-3 py-1 bg-empulse-purple/20 text-empulse-purple rounded-full text-xs font-medium">
+              <div 
+                className="flex items-start justify-between mb-4"
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'space-between',
+                  marginBottom: '16px',
+                  gap: '16px'
+                }}
+              >
+                <span 
+                  className="px-3 py-1 bg-empulse-purple/20 text-empulse-purple rounded-full text-xs font-medium"
+                  style={{
+                    padding: '4px 12px',
+                    backgroundColor: 'rgba(114, 9, 183, 0.2)',
+                    color: '#7209B7',
+                    borderRadius: '500px',
+                    fontSize: '11px',
+                    lineHeight: '16px',
+                    fontWeight: 600,
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase'
+                  }}
+                >
                   {categories.find(c => c.value === affirmation.category)?.label}
                 </span>
                 <button
                   onClick={() => isFavorite ? removeFavorite(affirmation.id) : addFavorite(affirmation.id)}
                   className="text-spotify-text-gray hover:text-red-500 transition-colors"
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: isFavorite ? '#EF4444' : '#B3B3B3',
+                    transition: 'color 200ms ease-out',
+                    padding: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#EF4444';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isFavorite) {
+                      e.currentTarget.style.color = '#B3B3B3';
+                    }
+                  }}
                 >
-                  <Heart size={20} className={isFavorite ? 'fill-red-500 text-red-500' : ''} />
+                  <Heart 
+                    size={20} 
+                    className={isFavorite ? 'fill-red-500 text-red-500' : ''}
+                    style={{
+                      width: '20px',
+                      height: '20px',
+                      color: isFavorite ? '#EF4444' : '#B3B3B3'
+                    }}
+                  />
                 </button>
               </div>
-              <p className="text-white mb-4 text-lg leading-relaxed">{affirmation.text}</p>
-              <div className="flex items-center gap-2">
+              <p 
+                className="text-white mb-4 text-lg leading-relaxed"
+                style={{
+                  fontSize: '18px',
+                  lineHeight: '28px',
+                  fontWeight: 400,
+                  color: '#FFFFFF',
+                  marginBottom: '16px'
+                }}
+              >
+                {affirmation.text}
+              </p>
+              <div 
+                className="flex items-center gap-2"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
                 {affirmation.audioUrl && (
-                  <button className="flex items-center gap-2 text-spotify-green hover:underline text-sm">
-                    <Play size={16} />
+                  <button 
+                    className="flex items-center gap-2 text-spotify-green hover:underline text-sm"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      color: '#1DB954',
+                      fontSize: '14px',
+                      lineHeight: '20px',
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      transition: 'text-decoration 200ms ease-out'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+                    onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
+                  >
+                    <Play 
+                      size={16}
+                      style={{
+                        width: '16px',
+                        height: '16px',
+                        flexShrink: 0
+                      }}
+                    />
                     Play Audio
                   </button>
                 )}
                 {affirmation.voice === 'artist' && affirmation.artistId && (
-                  <span className="text-xs text-spotify-text-gray">Artist voice</span>
+                  <span 
+                    className="text-xs text-spotify-text-gray"
+                    style={{
+                      fontSize: '13px',
+                      lineHeight: '16px',
+                      color: '#B3B3B3'
+                    }}
+                  >
+                    Artist voice
+                  </span>
                 )}
               </div>
             </div>

@@ -46,27 +46,159 @@ export default function ArtistDashboardPage() {
   }
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold">Artist Dashboard</h1>
-        <button className="btn-primary flex items-center gap-2">
-          <Upload size={20} />
+    <div 
+      className="p-8"
+      style={{
+        padding: '32px',
+        backgroundColor: '#121212',
+        minHeight: '100vh',
+        color: '#FFFFFF'
+      }}
+    >
+      <div 
+        className="flex items-center justify-between mb-8"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '32px',
+          gap: '16px'
+        }}
+      >
+        <h1 
+          className="text-4xl font-bold"
+          style={{
+            fontSize: '32px',
+            lineHeight: '36px',
+            fontWeight: 700,
+            color: '#FFFFFF'
+          }}
+        >
+          Artist Dashboard
+        </h1>
+        <button 
+          className="btn-primary flex items-center gap-2"
+          style={{
+            backgroundColor: '#1DB954',
+            color: '#000000',
+            fontWeight: 700,
+            padding: '12px 24px',
+            borderRadius: '500px',
+            fontSize: '14px',
+            lineHeight: '20px',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'all 200ms ease-out',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#1ed760';
+            e.currentTarget.style.transform = 'scale(1.05)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#1DB954';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        >
+          <Upload 
+            size={20}
+            style={{
+              width: '20px',
+              height: '20px',
+              flexShrink: 0
+            }}
+          />
           Upload Track
         </button>
       </div>
 
-      {/* Live Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg p-6 text-white">
-          <div className="flex items-center justify-between mb-2">
-            <TrendingUp size={24} className="opacity-80" />
+      {/* Live Statistics - Exact Spotify Style */}
+      <div 
+        className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '16px',
+          marginBottom: '32px'
+        }}
+      >
+        <div 
+          className="bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg p-6 text-white"
+          style={{
+            background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
+            borderRadius: '8px',
+            padding: '24px',
+            color: '#FFFFFF'
+          }}
+        >
+          <div 
+            className="flex items-center justify-between mb-2"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '8px'
+            }}
+          >
+            <TrendingUp 
+              size={24} 
+              className="opacity-80"
+              style={{
+                width: '24px',
+                height: '24px',
+                color: 'rgba(255, 255, 255, 0.8)',
+                flexShrink: 0
+              }}
+            />
             {autoRefresh && (
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              <div 
+                className="w-2 h-2 bg-green-400 rounded-full animate-pulse"
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  backgroundColor: '#22C55E',
+                  borderRadius: '50%',
+                  animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                  flexShrink: 0
+                }}
+              />
             )}
           </div>
-          <div className="text-sm opacity-80 mb-1">Total Streams</div>
-          <div className="text-3xl font-bold">{totalStreams.toLocaleString()}</div>
-          <div className="text-xs opacity-60 mt-1">+{Math.floor(Math.random() * 10)} today</div>
+          <div 
+            className="text-sm opacity-80 mb-1"
+            style={{
+              fontSize: '13px',
+              lineHeight: '16px',
+              color: 'rgba(255, 255, 255, 0.8)',
+              marginBottom: '4px'
+            }}
+          >
+            Total Streams
+          </div>
+          <div 
+            className="text-3xl font-bold"
+            style={{
+              fontSize: '32px',
+              lineHeight: '36px',
+              fontWeight: 700,
+              color: '#FFFFFF'
+            }}
+          >
+            {totalStreams.toLocaleString()}
+          </div>
+          <div 
+            className="text-xs opacity-60 mt-1"
+            style={{
+              fontSize: '11px',
+              lineHeight: '16px',
+              color: 'rgba(255, 255, 255, 0.6)',
+              marginTop: '4px'
+            }}
+          >
+            +{Math.floor(Math.random() * 10)} today
+          </div>
         </div>
 
         <div className="bg-gradient-to-br from-green-500 to-teal-500 rounded-lg p-6 text-white">
