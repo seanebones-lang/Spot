@@ -143,7 +143,11 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-full left-0 right-0 mt-2 bg-spotify-dark-gray rounded-lg shadow-2xl border border-white/10 z-50 max-h-96 overflow-y-auto"
+      className="absolute top-full left-0 right-0 mt-2 bg-spotify-dark-gray rounded-lg shadow-2xl border border-white/10 z-50 max-h-96 overflow-y-auto custom-scrollbar"
+      style={{
+        animation: 'fadeIn 200ms ease-out',
+        transformOrigin: 'top center'
+      }}
     >
       {/* Search Results (while typing) */}
       {hasResults && !showRecent && (

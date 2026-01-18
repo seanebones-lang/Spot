@@ -75,13 +75,19 @@ export default function TopBar() {
 
   return (
     <div 
-      className="fixed top-0 left-0 right-0 z-50"
       style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
         height: '56px',
         backgroundColor: '#000000',
         width: '100vw',
         overflow: 'visible',
-        zIndex: 2
+        zIndex: 100,
+        opacity: 1,
+        flexShrink: 0,
+        flexGrow: 0
       }}
     >
       <div 
@@ -92,113 +98,93 @@ export default function TopBar() {
           paddingTop: '16px',
           paddingBottom: '16px',
           gap: '16px',
-          width: '100%'
+          width: '100%',
+          backgroundColor: '#000000'
         }}
       >
-        {/* Logo - Independent element (Spotify: top=16px, left=16px, width=88px, height=24px) */}
-        <Link 
-          href="/"
-          className={cn(
-            "flex items-center justify-center transition-opacity duration-200 gpu-accelerated",
-            pathname === '/' && "active"
-          )}
-          style={{
-            height: '24px',
-            width: '113px',
-            position: 'static',
-            opacity: 1,
-            flexShrink: 0,
-            flexGrow: 0,
-            flexBasis: '113px'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.7';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '1';
-          }}
-        >
-          <Image
-            src="/seanfy.png"
-            alt="EmPulse Music"
-            width={113}
-            height={34}
-            priority
+        {/* Logo Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, flexBasis: '113px', minWidth: '113px' }}>
+          <Link 
+            href="/"
+            className={cn(
+              "flex items-center justify-center transition-opacity duration-200 gpu-accelerated",
+              pathname === '/' && "active"
+            )}
             style={{
-              width: '113px',
               height: '24px',
-              objectFit: 'contain',
-              display: 'inline-block'
+              width: '113px',
+              opacity: 1
             }}
-          />
-        </Link>
-        
-        {/* Left Section: Back/Forward + Navigation Links - Elements flow with gap */}
-        <div 
-          className="flex items-center h-full" 
-          style={{ 
-            flexShrink: 0, 
-            flexGrow: 0,
-            gap: '32px'
-          }}
-        >
-          {/* Back/Forward Buttons - Independent element */}
-          <div style={{ flexShrink: 0 }}>
-            <BackForwardButtons />
-          </div>
-          
-          {/* Navigation Links - Independent elements with gap spacing */}
-          <nav 
-            className="flex items-center" 
-            style={{ 
-              gap: '32px', 
-              flexShrink: 0,
-              flexGrow: 0
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = '0.7';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = '1';
             }}
           >
-            {headerNavLinks.map((link) => {
-              const isActive = pathname === link.href || 
-                (link.href === '/' && pathname === '/') ||
-                (link.href === '/search' && pathname?.startsWith('/search')) ||
-                (link.href === '/collection' && pathname?.startsWith('/collection'));
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="transition-colors duration-200"
-                  style={{ 
-                    fontSize: '14px',
-                    fontWeight: 700,
-                    lineHeight: '16px',
-                    color: isActive ? '#FFFFFF' : '#B3B3B3',
-                    flexShrink: 0,
-                    whiteSpace: 'nowrap'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = '#FFFFFF';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = '#B3B3B3';
-                    }
-                  }}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
+            <Image
+              src="/seanfy.png"
+              alt="EmPulse Music"
+              width={113}
+              height={34}
+              priority
+              style={{
+                width: '113px',
+                height: '24px',
+                objectFit: 'contain',
+                display: 'inline-block'
+              }}
+            />
+          </Link>
         </div>
         
-        {/* Center Section: Search Bar - Flex-1 with natural spacing */}
+        {/* Back/Forward Buttons Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
+          <BackForwardButtons />
+        </div>
+        
+        {/* Navigation Links - Each link in its own container */}
+        {headerNavLinks.map((link) => {
+          const isActive = pathname === link.href || 
+            (link.href === '/' && pathname === '/') ||
+            (link.href === '/search' && pathname?.startsWith('/search')) ||
+            (link.href === '/collection' && pathname?.startsWith('/collection'));
+          return (
+            <div key={link.href} style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
+              <Link
+                href={link.href}
+                className="transition-colors duration-200"
+                style={{ 
+                  fontSize: '14px',
+                  fontWeight: 700,
+                  lineHeight: '16px',
+                  color: isActive ? '#FFFFFF' : '#B3B3B3',
+                  whiteSpace: 'nowrap'
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = '#FFFFFF';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = '#B3B3B3';
+                  }
+                }}
+              >
+                {link.label}
+              </Link>
+            </div>
+          );
+        })}
+        
+        {/* Search Container - Flex-1 with min-width protection */}
         <div 
           className="flex justify-center min-w-0"
           style={{
             flex: '1 1 auto',
             justifyContent: 'center',
-            minWidth: 0,
+            minWidth: '200px',
             flexShrink: 1,
             flexGrow: 1
           }}
@@ -259,310 +245,323 @@ export default function TopBar() {
               }}
               className="placeholder:text-[#121212] placeholder:opacity-[0.6]"
             />
-          <SearchDropdown
-            query={searchQuery}
-            isOpen={showSearchDropdown}
-            onClose={() => setShowSearchDropdown(false)}
-            onSelect={(query) => {
-              setSearchQuery(query);
-              addSearch(query);
-              router.push(`/search?q=${encodeURIComponent(query)}`);
-              setShowSearchDropdown(false);
-            }}
-          />
+            <SearchDropdown
+              query={searchQuery}
+              isOpen={showSearchDropdown}
+              onClose={() => setShowSearchDropdown(false)}
+              onSelect={(query) => {
+                setSearchQuery(query);
+                addSearch(query);
+                router.push(`/search?q=${encodeURIComponent(query)}`);
+                setShowSearchDropdown(false);
+              }}
+            />
           </div>
         </div>
 
-        {/* Right Section: Premium/Upgrade + Downloads + Notifications + Settings + User Menu - Independent elements with gap */}
-        <div 
-          className="flex items-center h-full ml-auto" 
-          style={{ 
-            gap: '8px',
-            flexShrink: 0,
-            flexGrow: 0
-          }}
-        >
-        {/* Premium/Upgrade Link - Conditional based on tier */}
-        {subscriptionTier === 'Free' ? (
+        {/* Premium/Upgrade Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
+          {subscriptionTier === 'Free' ? (
+            <Link
+              href="/subscription"
+              className="flex items-center rounded-full transition-all duration-200 hover:scale-105 active:scale-95"
+              style={{
+                paddingLeft: '16px',
+                paddingRight: '16px',
+                height: '32px',
+                backgroundColor: '#FFFFFF',
+                color: '#000000',
+                fontSize: '14px',
+                fontWeight: 700,
+                lineHeight: '16px',
+                gap: '8px'
+              }}
+              title="Upgrade to Premium"
+            >
+              <Crown size={16} style={{ width: '16px', height: '16px', color: '#FFD700', opacity: 1 }} />
+              <span>Upgrade</span>
+            </Link>
+          ) : (
+            <Link
+              href="/subscription"
+              className="transition-colors duration-200"
+              style={{
+                fontSize: '14px',
+                fontWeight: 700,
+                lineHeight: '16px',
+                color: '#FFFFFF',
+                textDecoration: pathname === '/subscription' ? 'underline' : 'none',
+                textUnderlineOffset: '2px'
+              }}
+              title="Premium"
+              onMouseEnter={(e) => {
+                if (pathname !== '/subscription') {
+                  e.currentTarget.style.textDecoration = 'underline';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (pathname !== '/subscription') {
+                  e.currentTarget.style.textDecoration = 'none';
+                }
+              }}
+            >
+              Premium
+            </Link>
+          )}
+        </div>
+
+        {/* Downloads Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
           <Link
-            href="/subscription"
-            className="flex items-center rounded-full transition-all duration-200 hover:scale-105 active:scale-95"
+            href="/downloads"
+            className="flex items-center justify-center rounded-full transition-colors duration-200"
             style={{
-              paddingLeft: '16px',
-              paddingRight: '16px',
+              width: '32px',
               height: '32px',
-              backgroundColor: '#FFFFFF',
-              color: '#000000',
-              fontSize: '14px',
-              fontWeight: 700,
-              lineHeight: '16px',
-              gap: '8px'
+              color: pathname === '/downloads' ? '#FFFFFF' : '#B3B3B3',
+              backgroundColor: pathname === '/downloads' ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
             }}
-            title="Upgrade to Premium"
-          >
-            <Crown size={16} style={{ width: '16px', height: '16px', color: '#FFD700', opacity: 1 }} />
-            <span>Upgrade</span>
-          </Link>
-        ) : (
-          <Link
-            href="/subscription"
-            className="transition-colors duration-200"
-            style={{
-              fontSize: '14px',
-              fontWeight: 700,
-              lineHeight: '16px',
-              color: '#FFFFFF',
-              textDecoration: pathname === '/subscription' ? 'underline' : 'none',
-              textUnderlineOffset: '2px'
-            }}
-            title="Premium"
+            title="Your Downloads"
+            aria-label="Downloads"
             onMouseEnter={(e) => {
-              if (pathname !== '/subscription') {
-                e.currentTarget.style.textDecoration = 'underline';
+              if (pathname !== '/downloads') {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
               }
             }}
             onMouseLeave={(e) => {
-              if (pathname !== '/subscription') {
-                e.currentTarget.style.textDecoration = 'none';
+              if (pathname !== '/downloads') {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.backgroundColor = 'transparent';
               }
             }}
           >
-            Premium
+            <Download size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
           </Link>
-        )}
-
-        {/* Downloads Link */}
-        <Link
-          href="/downloads"
-          className="flex items-center justify-center rounded-full transition-colors duration-200"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: pathname === '/downloads' ? '#FFFFFF' : '#B3B3B3',
-            backgroundColor: pathname === '/downloads' ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-          }}
-          title="Your Downloads"
-          aria-label="Downloads"
-          onMouseEnter={(e) => {
-            if (pathname !== '/downloads') {
-              e.currentTarget.style.color = '#FFFFFF';
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (pathname !== '/downloads') {
-              e.currentTarget.style.color = '#B3B3B3';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
-        >
-          <Download size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
-        </Link>
-
-        {/* Notifications */}
-        <button
-          className="flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: '#B3B3B3',
-            backgroundColor: 'transparent'
-          }}
-          title="Notifications"
-          aria-label="Notifications"
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = '#FFFFFF';
-            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = '#B3B3B3';
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }}
-        >
-          <Bell size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
-        </button>
-
-        {/* Settings Quick Access */}
-        <Link
-          href="/settings"
-          className="flex items-center justify-center rounded-full transition-colors duration-200"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: pathname?.startsWith('/settings') ? '#FFFFFF' : '#B3B3B3',
-            backgroundColor: pathname?.startsWith('/settings') ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-          }}
-          title="Settings"
-          aria-label="Settings"
-          onMouseEnter={(e) => {
-            if (!pathname?.startsWith('/settings')) {
-              e.currentTarget.style.color = '#FFFFFF';
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!pathname?.startsWith('/settings')) {
-              e.currentTarget.style.color = '#B3B3B3';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
-        >
-          <Settings size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
-        </Link>
-
-        {/* Keyboard Shortcuts Button */}
-        <button
-          data-tour="keyboard-shortcuts"
-          onClick={() => setShortcutsOpen(true)}
-          className="flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: shortcutsOpen ? '#FFFFFF' : '#B3B3B3',
-            backgroundColor: shortcutsOpen ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-          }}
-          title="Keyboard Shortcuts (Ctrl+/)"
-          aria-label="Keyboard Shortcuts"
-          onMouseEnter={(e) => {
-            if (!shortcutsOpen) {
-              e.currentTarget.style.color = '#FFFFFF';
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!shortcutsOpen) {
-              e.currentTarget.style.color = '#B3B3B3';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
-        >
-          <svg 
-            width="20" 
-            height="20" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-            <line x1="9" y1="9" x2="15" y2="9" />
-            <line x1="9" y1="15" x2="15" y2="15" />
-          </svg>
-        </button>
-
-        {/* EmPulse-Specific Features: Points Counter */}
-        <div 
-          className="flex items-center rounded-full transition-colors duration-200 cursor-default" 
-          title={`${totalPoints} points`}
-          style={{
-            paddingLeft: '12px',
-            paddingRight: '12px',
-            height: '32px',
-            gap: '8px'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }}
-        >
-          <Award size={18} style={{ width: '18px', height: '18px', color: '#457B9D', opacity: 1 }} />
-          <span style={{ fontSize: '14px', fontWeight: 500, color: '#FFFFFF', opacity: 1 }}>{totalPoints}</span>
         </div>
 
-        {/* EmPulse-Specific: Streak Badge */}
-        {streak > 0 && (
-          <div 
-            className="flex items-center rounded-full"
+        {/* Notifications Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+          <button
+            className="flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none"
+            style={{
+              width: '32px',
+              height: '32px',
+              color: '#B3B3B3',
+              backgroundColor: 'transparent'
+            }}
+            title="Notifications"
+            aria-label="Notifications"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#FFFFFF';
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#B3B3B3';
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+          >
+            <Bell size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
+          </button>
+        </div>
+
+        {/* Settings Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+          <Link
+            href="/settings"
+            className="flex items-center justify-center rounded-full transition-colors duration-200"
+            style={{
+              width: '32px',
+              height: '32px',
+              color: pathname?.startsWith('/settings') ? '#FFFFFF' : '#B3B3B3',
+              backgroundColor: pathname?.startsWith('/settings') ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
+            }}
+            title="Settings"
+            aria-label="Settings"
+            onMouseEnter={(e) => {
+              if (!pathname?.startsWith('/settings')) {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!pathname?.startsWith('/settings')) {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }
+            }}
+          >
+            <Settings size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
+          </Link>
+        </div>
+
+        {/* Keyboard Shortcuts Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+          <button
+            data-tour="keyboard-shortcuts"
+            onClick={() => setShortcutsOpen(true)}
+            className="flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none"
+            style={{
+              width: '32px',
+              height: '32px',
+              color: shortcutsOpen ? '#FFFFFF' : '#B3B3B3',
+              backgroundColor: shortcutsOpen ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
+            }}
+            title="Keyboard Shortcuts (Ctrl+/)"
+            aria-label="Keyboard Shortcuts"
+            onMouseEnter={(e) => {
+              if (!shortcutsOpen) {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!shortcutsOpen) {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }
+            }}
+          >
+            <svg 
+              width="20" 
+              height="20" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <line x1="9" y1="9" x2="15" y2="9" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Points Counter Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
+          <Link
+            href="/rewards"
+            className="flex items-center rounded-full transition-colors duration-200"
+            title={`${totalPoints} points - View Rewards`}
             style={{
               paddingLeft: '12px',
               paddingRight: '12px',
               height: '32px',
-              gap: '6px',
-              backgroundColor: 'rgba(249, 115, 22, 0.2)',
-              border: '1px solid rgba(249, 115, 22, 0.3)'
+              gap: '8px',
+              textDecoration: 'none',
+              backgroundColor: pathname === '/rewards' ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            }}
+            onMouseLeave={(e) => {
+              if (pathname !== '/rewards') {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }
             }}
           >
-            <Flame size={14} style={{ width: '14px', height: '14px', color: '#F97316', opacity: 1 }} />
-            <span style={{ fontSize: '12px', fontWeight: 500, color: '#F97316', opacity: 1 }}>{streak}</span>
+            <Award size={18} style={{ width: '18px', height: '18px', color: '#457B9D', opacity: 1 }} />
+            <span style={{ fontSize: '14px', fontWeight: 500, color: '#FFFFFF', opacity: 1 }}>{totalPoints}</span>
+          </Link>
+        </div>
+
+        {/* Streak Badge Container - Independent element (conditional) */}
+        {streak > 0 && (
+          <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
+            <div 
+              className="flex items-center rounded-full"
+              style={{
+                paddingLeft: '12px',
+                paddingRight: '12px',
+                height: '32px',
+                gap: '6px',
+                backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                border: '1px solid rgba(249, 115, 22, 0.3)'
+              }}
+            >
+              <Flame size={14} style={{ width: '14px', height: '14px', color: '#F97316', opacity: 1 }} />
+              <span style={{ fontSize: '12px', fontWeight: 500, color: '#F97316', opacity: 1 }}>{streak}</span>
+            </div>
           </div>
         )}
 
-        {/* EmPulse-Specific: Affirmations Button */}
-        <Link
-          href="/affirmations"
-          className="flex items-center rounded-full transition-all duration-200"
-          style={{
-            paddingLeft: '12px',
-            paddingRight: '12px',
-            height: '32px',
-            gap: '8px',
-            fontSize: '14px',
-            fontWeight: 500,
-            backgroundColor: pathname === '/affirmations' ? 'rgba(114, 9, 183, 0.2)' : 'transparent',
-            border: `1px solid ${pathname === '/affirmations' ? '#7209B7' : 'rgba(114, 9, 183, 0.5)'}`,
-            color: '#7209B7'
-          }}
-          title="Daily Affirmations"
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = '#7209B7';
-            e.currentTarget.style.backgroundColor = 'rgba(114, 9, 183, 0.1)';
-          }}
-          onMouseLeave={(e) => {
-            if (pathname !== '/affirmations') {
-              e.currentTarget.style.borderColor = 'rgba(114, 9, 183, 0.5)';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
-        >
-          <Sparkles size={14} style={{ width: '14px', height: '14px', opacity: 1 }} />
-          <span className="hidden sm:inline" style={{ opacity: 1 }}>Affirmations</span>
-        </Link>
+        {/* Affirmations Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
+          <Link
+            href="/affirmations"
+            className="flex items-center rounded-full transition-all duration-200"
+            style={{
+              paddingLeft: '12px',
+              paddingRight: '12px',
+              height: '32px',
+              gap: '8px',
+              fontSize: '14px',
+              fontWeight: 500,
+              backgroundColor: pathname === '/affirmations' ? 'rgba(114, 9, 183, 0.2)' : 'transparent',
+              border: `1px solid ${pathname === '/affirmations' ? '#7209B7' : 'rgba(114, 9, 183, 0.5)'}`,
+              color: '#7209B7'
+            }}
+            title="Daily Affirmations"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#7209B7';
+              e.currentTarget.style.backgroundColor = 'rgba(114, 9, 183, 0.1)';
+            }}
+            onMouseLeave={(e) => {
+              if (pathname !== '/affirmations') {
+                e.currentTarget.style.borderColor = 'rgba(114, 9, 183, 0.5)';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }
+            }}
+          >
+            <Sparkles size={14} style={{ width: '14px', height: '14px', opacity: 1 }} />
+            <span className="hidden sm:inline" style={{ opacity: 1 }}>Affirmations</span>
+          </Link>
+        </div>
 
-        {/* Right Sidebar Toggle */}
-        <button
-          onClick={toggleRightSidebar}
-          className="flex items-center justify-center rounded-full transition-colors duration-200"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: rightSidebarOpen ? '#FFFFFF' : '#B3B3B3',
-            backgroundColor: rightSidebarOpen ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-          }}
-          aria-label={rightSidebarOpen ? "Close right sidebar" : "Open right sidebar"}
-          title={rightSidebarOpen ? "Close sidebar" : "Open sidebar"}
-          onMouseEnter={(e) => {
-            if (!rightSidebarOpen) {
-              e.currentTarget.style.color = '#FFFFFF';
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!rightSidebarOpen) {
-              e.currentTarget.style.color = '#B3B3B3';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
-        >
-          {rightSidebarOpen ? (
-            <X size={20} style={{ width: '20px', height: '20px', opacity: 1 }} />
-          ) : (
-            <PanelRight size={20} style={{ width: '20px', height: '20px', opacity: 1 }} />
-          )}
-        </button>
+        {/* Right Sidebar Toggle Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+          <button
+            onClick={toggleRightSidebar}
+            className="flex items-center justify-center rounded-full transition-colors duration-200"
+            style={{
+              width: '32px',
+              height: '32px',
+              color: rightSidebarOpen ? '#FFFFFF' : '#B3B3B3',
+              backgroundColor: rightSidebarOpen ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
+            }}
+            aria-label={rightSidebarOpen ? "Close right sidebar" : "Open right sidebar"}
+            title={rightSidebarOpen ? "Close sidebar" : "Open sidebar"}
+            onMouseEnter={(e) => {
+              if (!rightSidebarOpen) {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!rightSidebarOpen) {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }
+            }}
+          >
+            {rightSidebarOpen ? (
+              <X size={20} style={{ width: '20px', height: '20px', opacity: 1 }} />
+            ) : (
+              <PanelRight size={20} style={{ width: '20px', height: '20px', opacity: 1 }} />
+            )}
+          </button>
+        </div>
 
-        {/* User Menu - Part of Right Section Group */}
-        <div style={{ marginLeft: '8px' }}>
+        {/* User Menu Container - Independent element */}
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
           <UserMenu 
             userName="Bones" 
             userEmail="bones@nextEleven.com" 
             subscriptionTier={subscriptionTier} 
           />
-        </div>
         </div>
       </div>
 

@@ -91,20 +91,29 @@ export default function Sidebar() {
 
   return (
     <>
+      {/* Sidebar Container - Independent element, cannot go above TopBar */}
       <div 
-        className={cn(
-          "fixed left-0 top-0 bottom-[90px] bg-spotify-dark-gray text-white flex flex-col z-40",
-          isResizing ? "" : "transition-all duration-300 ease-in-out"
-        )}
-        style={{ 
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: '56px',
+          bottom: '90px',
           width: `${leftSidebarWidth}px`,
-          borderRight: '1px solid #000000'
+          backgroundColor: '#181818',
+          zIndex: 40,
+          flexShrink: 0,
+          flexGrow: 0,
+          borderRight: '1px solid #000000',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: isResizing ? 'none' : 'all 300ms ease-in-out'
         }}
       >
       {/* Toggle Button */}
       <button
         onClick={toggleLeftSidebar}
-        className="absolute -right-3 top-4 w-6 h-6 bg-spotify-light-gray hover:bg-spotify-light-gray/80 rounded-full flex items-center justify-center text-white shadow-lg z-10 transition-colors"
+        className="absolute -right-3 w-6 h-6 bg-spotify-light-gray hover:bg-spotify-light-gray/80 rounded-full flex items-center justify-center text-white shadow-lg z-10 transition-colors"
+        style={{ top: '20px' }}
         aria-label={leftSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
       >
         {leftSidebarCollapsed ? (
@@ -421,7 +430,12 @@ export default function Sidebar() {
         <div className="px-3 mb-4 mt-auto">
           <Link
             href="/check-in"
-            className="bg-gradient-to-r from-empulse-purple to-empulse-blue p-4 rounded-lg text-white"
+            className="p-4 rounded-lg text-white no-underline hover:bg-white/10 transition-colors"
+            style={{ 
+              textDecoration: 'none',
+              backgroundColor: 'transparent',
+              transition: 'background-color 200ms ease-out'
+            }}
           >
             <div className="flex items-center justify-between mb-2">
               <span className="font-semibold text-sm">Daily Check-in</span>
@@ -453,10 +467,14 @@ export default function Sidebar() {
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
           className={cn(
-            "fixed top-0 bottom-[90px] w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all touch-none",
+            "fixed bottom-[90px] w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all touch-none",
             isResizing && "bg-spotify-green/60 w-1"
           )}
-          style={{ left: `${leftSidebarWidth}px`, touchAction: 'none' }}
+          style={{ 
+            left: `${leftSidebarWidth}px`, 
+            top: '56px',
+            touchAction: 'none' 
+          }}
         />
       )}
     </>

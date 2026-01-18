@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useArtistSignupStore } from '@/stores/artistSignupStore';
-import { Check, FileText, Download, AlertCircle } from 'lucide-react';
+import { Check, FileText, Download, AlertCircle, Music, Mic, BookOpen, Radio } from 'lucide-react';
 
 const legalDocuments = [
   { id: 'artist-agreement', name: 'Artist Agreement', required: true },
@@ -12,14 +12,23 @@ const legalDocuments = [
   { id: 'terms-of-service', name: 'Platform Terms of Service (Artist)', required: true },
 ];
 
+const mediumOptions = [
+  { id: 'artist' as const, label: 'Musician/Artist', icon: Music, description: 'Upload tracks, albums, EPs, and LPs' },
+  { id: 'podcaster' as const, label: 'Podcaster', icon: Mic, description: 'Upload and manage podcast episodes' },
+  { id: 'audiobook' as const, label: 'Audiobook Creator', icon: BookOpen, description: 'Upload and distribute audiobooks' },
+  { id: 'radio' as const, label: 'Radio Station Host', icon: Radio, description: 'Manage radio station content' },
+];
+
 export default function ArtistSignupPage() {
   const {
     currentStep,
+    selectedMediums,
     documentsSigned,
     w9Completed,
     proRegistration,
     approvalStatus,
     setCurrentStep,
+    toggleMedium,
     markDocumentSigned,
     setW9Completed,
     setPRORegistration,
@@ -39,7 +48,7 @@ export default function ArtistSignupPage() {
   const handleSubmit = () => {
     if (allDocumentsSigned && w9Completed) {
       setApprovalStatus('pending');
-      setCurrentStep(6);
+      setCurrentStep(7);
     }
   };
 
@@ -61,7 +70,7 @@ export default function ArtistSignupPage() {
               >
                 {step < currentStep ? <Check size={20} /> : step}
               </div>
-              {step < 6 && (
+              {step < 7 && (
                 <div
                   className={`w-16 h-1 mx-1 ${
                     step < currentStep ? 'bg-spotify-green' : 'bg-spotify-light-gray'
@@ -72,6 +81,7 @@ export default function ArtistSignupPage() {
           ))}
         </div>
         <div className="flex justify-between text-xs text-spotify-text-gray">
+          <span>Mediums</span>
           <span>Account</span>
           <span>Documents</span>
           <span>Tax Forms</span>
@@ -81,10 +91,78 @@ export default function ArtistSignupPage() {
         </div>
       </div>
 
-      {/* Step 1: Account Creation */}
+      {/* Step 1: Medium Selection */}
       {currentStep === 1 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Step 1: Account Creation</h2>
+          <h2 className="text-2xl font-bold mb-4">Step 1: Select Your Creator Mediums</h2>
+          <p className="text-sm text-white/80 mb-6">
+            Select all the mediums you want to create content for. You can select multiple options.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            {mediumOptions.map((medium) => {
+              const Icon = medium.icon;
+              const isSelected = selectedMediums.includes(medium.id);
+              return (
+                <button
+                  key={medium.id}
+                  onClick={() => toggleMedium(medium.id)}
+                  className={`p-6 rounded-lg border-2 transition-all text-left ${
+                    isSelected
+                      ? 'border-spotify-green bg-spotify-green/10'
+                      : 'border-spotify-light-gray bg-spotify-dark-gray hover:border-white/30'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`p-3 rounded-lg ${
+                      isSelected ? 'bg-spotify-green/20' : 'bg-spotify-light-gray'
+                    }`}>
+                      <Icon 
+                        size={32} 
+                        className={isSelected ? 'text-spotify-green' : 'text-spotify-text-gray'} 
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-bold text-lg">{medium.label}</h3>
+                        <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                          isSelected 
+                            ? 'border-spotify-green bg-spotify-green' 
+                            : 'border-spotify-text-gray bg-transparent'
+                        }`}>
+                          {isSelected && <Check size={14} className="text-black" />}
+                        </div>
+                      </div>
+                      <p className="text-sm text-spotify-text-gray">{medium.description}</p>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {selectedMediums.length === 0 && (
+            <div className="mb-6 p-4 bg-yellow-600/20 border border-yellow-600/50 rounded-lg">
+              <p className="text-sm text-white/80">
+                <strong className="text-yellow-500">Please select at least one medium</strong> to continue.
+              </p>
+            </div>
+          )}
+
+          <button
+            onClick={() => setCurrentStep(2)}
+            disabled={selectedMediums.length === 0}
+            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Continue to Account Creation
+          </button>
+        </div>
+      )}
+
+      {/* Step 2: Account Creation */}
+      {currentStep === 2 && (
+        <div className="bg-spotify-light-gray rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-4">Step 2: Account Creation</h2>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-2">Artist/Management Name</label>
@@ -121,8 +199,8 @@ export default function ArtistSignupPage() {
         </div>
       )}
 
-      {/* Step 2: Legal Document Review */}
-      {currentStep === 2 && (
+      {/* Step 3: Legal Document Review */}
+      {currentStep === 3 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 2: Legal Document Review</h2>
           <div className="mb-6">
@@ -191,11 +269,11 @@ export default function ArtistSignupPage() {
           </div>
 
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(1)} className="btn-secondary">
+            <button onClick={() => setCurrentStep(2)} className="btn-secondary">
               Back
             </button>
             <button
-              onClick={() => setCurrentStep(3)}
+              onClick={() => setCurrentStep(4)}
               disabled={!allDocumentsSigned}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -205,8 +283,8 @@ export default function ArtistSignupPage() {
         </div>
       )}
 
-      {/* Step 3: Tax Documentation (W-9) */}
-      {currentStep === 3 && (
+      {/* Step 4: Tax Documentation (W-9) */}
+      {currentStep === 4 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 3: Tax Documentation</h2>
           <p className="text-sm text-white/80 mb-6">
@@ -281,11 +359,11 @@ export default function ArtistSignupPage() {
           </label>
 
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(2)} className="btn-secondary">
+            <button onClick={() => setCurrentStep(3)} className="btn-secondary">
               Back
             </button>
             <button
-              onClick={() => setCurrentStep(4)}
+              onClick={() => setCurrentStep(5)}
               disabled={!w9Completed || !w9Data.address || !w9Data.taxClassification}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -295,8 +373,8 @@ export default function ArtistSignupPage() {
         </div>
       )}
 
-      {/* Step 4: PRO Registration */}
-      {currentStep === 4 && (
+      {/* Step 5: PRO Registration */}
+      {currentStep === 5 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 4: PRO Registration</h2>
           <p className="text-sm text-white/80 mb-6">
@@ -354,11 +432,11 @@ export default function ArtistSignupPage() {
           </div>
 
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(3)} className="btn-secondary">
+            <button onClick={() => setCurrentStep(4)} className="btn-secondary">
               Back
             </button>
             <button
-              onClick={() => setCurrentStep(5)}
+              onClick={() => setCurrentStep(6)}
               className="btn-primary flex-1"
             >
               Continue to Document Signing
@@ -367,10 +445,10 @@ export default function ArtistSignupPage() {
         </div>
       )}
 
-      {/* Step 5: Document Signing */}
-      {currentStep === 5 && (
+      {/* Step 6: Document Signing */}
+      {currentStep === 6 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Step 5: Document Signing</h2>
+          <h2 className="text-2xl font-bold mb-4">Step 6: Document Signing</h2>
           <p className="text-sm text-white/80 mb-6">
             Provide your digital signature to finalize the legally binding agreement.
           </p>
@@ -422,8 +500,8 @@ export default function ArtistSignupPage() {
         </div>
       )}
 
-      {/* Step 6: Approval Pending */}
-      {currentStep === 6 && (
+      {/* Step 7: Approval Pending */}
+      {currentStep === 7 && (
         <div className="bg-spotify-light-gray rounded-lg p-8 text-center">
           <div className="mb-6">
             <div className="w-20 h-20 bg-yellow-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -435,11 +513,32 @@ export default function ArtistSignupPage() {
               {approvalStatus === 'approved' && 'Approved!'}
               {approvalStatus === 'rejected' && 'Rejected'}
             </h2>
-            <p className="text-spotify-text-gray">
+            <p className="text-spotify-text-gray mb-4">
               {approvalStatus === 'pending' && 'Your application has been submitted and is awaiting admin review.'}
-              {approvalStatus === 'approved' && 'Congratulations! You can now upload tracks.'}
+              {approvalStatus === 'approved' && 'Congratulations! You can now upload content.'}
               {approvalStatus === 'rejected' && 'Your application was rejected. Please review the requirements and resubmit.'}
             </p>
+            {selectedMediums.length > 0 && (
+              <div className="mb-4">
+                <p className="text-sm text-spotify-text-gray mb-2">Selected mediums:</p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {selectedMediums.map((medium) => {
+                    const option = mediumOptions.find(m => m.id === medium);
+                    if (!option) return null;
+                    const Icon = option.icon;
+                    return (
+                      <div
+                        key={medium}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-spotify-green/20 rounded-full text-sm"
+                      >
+                        <Icon size={16} className="text-spotify-green" />
+                        <span className="text-white">{option.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
             {approvalStatus === 'pending' && (
               <p className="text-sm text-spotify-text-gray mt-2">
                 Estimated approval time: 24-48 hours

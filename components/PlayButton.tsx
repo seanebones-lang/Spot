@@ -23,11 +23,15 @@ export default function PlayButton({ isPlaying, onClick, size = 'md', className,
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "bg-spotify-green hover:scale-105 rounded-full flex items-center justify-center transition-transform shadow-lg",
+        "bg-spotify-green hover:scale-105 rounded-full flex items-center justify-center transition-transform shadow-lg gpu-accelerated",
         sizes[size],
         disabled && "opacity-50 cursor-not-allowed hover:scale-100",
         className
       )}
+      style={{
+        transition: 'transform 150ms cubic-bezier(0.3, 0, 0.1, 1)',
+        willChange: 'transform'
+      }}
     >
       {isPlaying ? (
         <Pause size={size === 'sm' ? 16 : size === 'md' ? 24 : 32} className="text-black ml-0.5" />
