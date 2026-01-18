@@ -104,17 +104,35 @@ export default function RadioPage() {
       useRadioStore.getState().setIsLoading(true);
       
       // Set up load callback with error handling
+      let loadTimeout: NodeJS.Timeout | null = null;
+      
       audioPlayer.setOnLoadCallback(() => {
         console.log('✅ Radio station loaded');
+        if (loadTimeout) clearTimeout(loadTimeout);
         useRadioStore.getState().setIsLoading(false);
         // Check current playing state from store (not closure) to handle async state updates
         const currentIsPlaying = useRadioStore.getState().isPlaying;
         if (currentIsPlaying) {
           console.log('▶️ Auto-playing radio station');
-          audioPlayer.play();
-          setPlayerIsPlaying(true);
+          // Small delay to ensure audio is fully ready
+          setTimeout(() => {
+            audioPlayer.play();
+            setPlayerIsPlaying(true);
+          }, 100);
         }
       });
+      
+      // Log stream URL for debugging
+      console.log('📡 Radio stream URL:', radioTrack.audioUrl);
+      
+      // Set a timeout to detect if loading is taking too long or failing silently
+      loadTimeout = setTimeout(() => {
+        if (!audioPlayer.isTrackLoaded()) {
+          console.warn('⚠️ Radio station taking too long to load, checking for errors...');
+          useRadioStore.getState().setError('Radio stream is taking too long to load. Please check if yt-dlp is installed on the server.');
+          useRadioStore.getState().setIsLoading(false);
+        }
+      }, 15000); // 15 second timeout
 
       // Helper function to restart stream with new random start
       const restartStream = (station: RadioStation, trackId: string) => {
@@ -162,6 +180,14 @@ export default function RadioPage() {
 
       // Set as current track in player store
       setCurrentTrack(radioTrack);
+    } else {
+      // Track is already loaded - if playing state changed, ensure playback state matches
+      // This handles the case where user clicks play on an already-loaded station
+      if (isPlaying && !audioPlayer.isPlaying()) {
+        console.log('▶️ Track already loaded, starting playback');
+        audioPlayer.play();
+        setPlayerIsPlaying(true);
+      }
     }
   }, [currentStation?.id, currentTrack?.id, isPlaying, setCurrentTrack, setPlayerIsPlaying, setProgress]);
 
