@@ -78,7 +78,7 @@ export async function GET(
   try {
     const params = await context.params;
     const stationId = params.station as StationId;
-    const station = STATIONS[stationId];
+    const stationConfig = STATIONS[stationId];
 
     if (!station) {
       return NextResponse.json(
@@ -107,10 +107,10 @@ export async function GET(
     
     // Calculate actual start time
     const actualStart = randomStart 
-      ? Math.floor(Math.random() * station.duration)
-      : Math.max(0, Math.min(startTime, station.duration - 60)); // Ensure we don't start too close to end
+      ? Math.floor(Math.random() * stationConfig.duration)
+      : Math.max(0, Math.min(startTime, stationConfig.duration - 60)); // Ensure we don't start too close to end
 
-    const youtubeUrl = `https://www.youtube.com/watch?v=${station.videoId}`;
+    const youtubeUrl = `https://www.youtube.com/watch?v=${stationConfig.videoId}`;
 
     // Use yt-dlp to extract best audio format and stream it
     // Format: bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio
