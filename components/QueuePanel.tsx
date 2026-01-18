@@ -36,6 +36,7 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
 
   const handleDragOver = (e: React.DragEvent, index: number) => {
     e.preventDefault();
+    e.stopPropagation();
     setDragOverIndex(index);
   };
 
@@ -47,11 +48,37 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
     setDragOverIndex(null);
   };
 
-  if (!isOpen) return null;
+  const handleDrop = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (draggedIndex !== null && draggedIndex !== index) {
+      reorderQueue(draggedIndex, index);
+    }
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
-      <div className="bg-spotify-dark-gray w-full max-w-md h-[70vh] rounded-t-2xl flex flex-col">
+    <div 
+      className={cn(
+        "fixed inset-0 z-50 flex items-end justify-center transition-opacity duration-200",
+        isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+      )}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div 
+        className={cn(
+          "bg-spotify-dark-gray w-full max-w-md h-[70vh] rounded-t-2xl flex flex-col transform transition-transform duration-300 ease-out",
+          isOpen ? "translate-y-0" : "translate-y-full"
+        )}
+        style={{
+          transition: "transform 300ms cubic-bezier(0.3, 0, 0.1, 1), opacity 200ms ease-out"
+        }}
+      >
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <h2 className="text-xl font-bold">Queue</h2>
           <div className="flex items-center gap-2">
@@ -107,7 +134,7 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
             </button>
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+        <div className="flex-1 overflow-y-auto p-4 space-y-2 custom-scrollbar">
           {currentTrack && (
             <div className="p-3 bg-spotify-light-gray rounded-lg mb-4">
               <div className="text-xs text-spotify-text-gray mb-2">Now Playing</div>
@@ -139,15 +166,21 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
               onDragStart={() => handleDragStart(index)}
               onDragOver={(e) => handleDragOver(e, index)}
               onDragEnd={handleDragEnd}
+              onDrop={(e) => handleDrop(e, index)}
               onClick={() => {
                 setCurrentTrack(track);
                 setIsPlaying(true);
               }}
               className={cn(
                 "flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg cursor-pointer group transition-all",
-                draggedIndex === index && "opacity-50",
-                dragOverIndex === index && "bg-white/20 border-l-2 border-spotify-green"
+                draggedIndex === index && "opacity-50 scale-95",
+                dragOverIndex === index && dragOverIndex !== draggedIndex && "bg-white/20 border-l-4 border-spotify-green transform translate-x-1"
               )}
+              style={{
+                transition: draggedIndex === index || dragOverIndex === index 
+                  ? 'all 150ms ease-out' 
+                  : 'all 200ms ease-out'
+              }}
             >
               <GripVertical 
                 size={16} 

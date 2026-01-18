@@ -206,9 +206,12 @@ const ModalRoot: React.FC<ModalProps> = ({
       className={cn(
         'fixed inset-0 z-[100] flex items-center justify-center p-4',
         'bg-black/50 backdrop-blur-sm',
-        'transition-opacity duration-200',
+        'transition-opacity duration-200 ease-out',
         overlayClassName
       )}
+      style={{
+        transition: 'opacity 200ms cubic-bezier(0.3, 0, 0.1, 1)'
+      }}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -221,10 +224,15 @@ const ModalRoot: React.FC<ModalProps> = ({
           'w-full max-h-[90vh]',
           'flex flex-col',
           'shadow-2xl',
-          'transition-all duration-200',
+          'transition-all duration-200 ease-out',
           sizeConfig[size],
           className
         )}
+        style={{
+          transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1), opacity 200ms cubic-bezier(0.3, 0, 0.1, 1)',
+          transform: 'scale(1)',
+          opacity: 1
+        }}
         onClick={(e) => e.stopPropagation()}
         tabIndex={-1}
       >

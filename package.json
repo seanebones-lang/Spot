@@ -11,6 +11,11 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:infrastructure": "jest scripts/test-rag-system.test.ts",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
     "setup:infrastructure": "bash scripts/setup-infrastructure.sh",
     "train:mood-model": "ts-node scripts/train-mood-model.ts",
     "benchmark": "ts-node scripts/benchmark-performance.ts"
@@ -43,6 +48,7 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.0",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^15.5.9"
+    "eslint-config-next": "^15.5.9",
+    "@playwright/test": "^1.40.0"
   }
 }
