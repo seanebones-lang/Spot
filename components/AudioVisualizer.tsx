@@ -106,7 +106,7 @@ function drawSpectrum(
   
   // Create gradient
   const gradient = ctx.createLinearGradient(0, 0, 0, height);
-  gradient.addColorStop(0, '#1DB954'); // Spotify green
+  gradient.addColorStop(0, '#7209B7'); // Spotify green
   gradient.addColorStop(0.5, '#1ED760');
   gradient.addColorStop(1, '#19E68C');
   
@@ -123,7 +123,7 @@ function drawSpectrum(
     
     // Add glow effect
     ctx.shadowBlur = 10;
-    ctx.shadowColor = '#1DB954';
+    ctx.shadowColor = '#7209B7';
     ctx.fillRect(x, y, actualBarWidth, barHeight);
     ctx.shadowBlur = 0;
   }
@@ -141,7 +141,7 @@ function drawWaveform(
   const data = pipeline.getTimeDomainData();
   const sliceWidth = width / data.length;
   
-  ctx.strokeStyle = '#1DB954';
+  ctx.strokeStyle = '#7209B7';
   ctx.lineWidth = 2;
   ctx.beginPath();
   

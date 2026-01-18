@@ -93,7 +93,7 @@ export default function DevicesSettingsPage() {
                 justifyContent: 'space-between',
                 gap: '16px',
                 transition: 'all 200ms ease-out',
-                border: device.isActive ? '2px solid #1DB954' : 'none'
+                border: device.isActive ? '2px solid #7209B7' : 'none'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#282828';
@@ -123,7 +123,7 @@ export default function DevicesSettingsPage() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: device.isActive ? '#1DB954' : '#282828',
+                    backgroundColor: device.isActive ? '#7209B7' : '#282828',
                     flexShrink: 0
                   }}
                 >
@@ -169,7 +169,7 @@ export default function DevicesSettingsPage() {
                         style={{
                           width: '20px',
                           height: '20px',
-                          color: '#1DB954',
+                          color: '#7209B7',
                           flexShrink: 0
                         }}
                       />
@@ -288,7 +288,7 @@ export default function DevicesSettingsPage() {
                 width: '48px',
                 height: '24px',
                 borderRadius: '12px',
-                backgroundColor: '#1DB954',
+                backgroundColor: '#7209B7',
                 position: 'relative',
                 border: 'none',
                 cursor: 'pointer',

@@ -75,7 +75,7 @@ export default function TrialsPage() {
                   style={{
                     width: '20px',
                     height: '20px',
-                    color: '#1DB954',
+                    color: '#7209B7',
                     flexShrink: 0
                   }}
                 />
@@ -93,10 +93,10 @@ export default function TrialsPage() {
           </ul>
           <Link 
             href="/subscription" 
-            className="inline-block bg-spotify-green hover:bg-[#1ed760] text-black px-8 py-3 rounded-full font-medium transition-colors"
+            className="inline-block bg-spotify-green hover:bg-[#8a1dd0] text-black px-8 py-3 rounded-full font-medium transition-colors"
             style={{
               display: 'inline-block',
-              backgroundColor: '#1DB954',
+              backgroundColor: '#7209B7',
               color: '#000000',
               padding: '12px 32px',
               borderRadius: '500px',
@@ -108,11 +108,11 @@ export default function TrialsPage() {
               textDecoration: 'none'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#1ed760';
+              e.currentTarget.style.backgroundColor = '#8a1dd0';
               e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.backgroundColor = '#7209B7';
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >

@@ -73,35 +73,35 @@
       },
       "accent": {
         "primary": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Spotify Green - Primary accent",
+          "description": "Empulse Purple - Primary accent",
           "status": "verified"
         },
         "hover": {
-          "value": "#1ed760",
+          "value": "#8a1dd0",
           "type": "color",
-          "description": "Accent hover state",
+          "description": "Accent hover state (lighter purple)",
           "status": "needs-verification"
         },
         "active": {
-          "value": "#1aa34a",
+          "value": "#5a0789",
           "type": "color",
-          "description": "Accent active state",
+          "description": "Accent active state (darker purple)",
           "status": "needs-verification"
         }
       },
       "link": {
         "default": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Link color",
+          "description": "Link color (Empulse Purple)",
           "status": "verified"
         },
         "hover": {
-          "value": "#1ed760",
+          "value": "#8a1dd0",
           "type": "color",
-          "description": "Link hover color",
+          "description": "Link hover color (lighter purple)",
           "status": "needs-verification"
         }
       },
@@ -422,21 +422,21 @@
     "variants": {
       "primary": {
         "backgroundColor": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Primary button background (Spotify Green)",
+          "description": "Primary button background (Empulse Purple)",
           "status": "verified"
         },
         "backgroundColorHover": {
-          "value": "#1ed760",
+          "value": "#8a1dd0",
           "type": "color",
-          "description": "Primary button hover state",
+          "description": "Primary button hover state (lighter purple)",
           "status": "verified"
         },
         "backgroundColorActive": {
-          "value": "#1aa34a",
+          "value": "#5a0789",
           "type": "color",
-          "description": "Primary button active state",
+          "description": "Primary button active state (darker purple)",
           "status": "verified"
         },
         "textColor": {
@@ -448,19 +448,19 @@
       },
       "secondary": {
         "borderColor": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Secondary button border (Spotify Green)",
+          "description": "Secondary button border (Empulse Purple)",
           "status": "verified"
         },
         "textColor": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Secondary button text color",
+          "description": "Secondary button text color (Empulse Purple)",
           "status": "verified"
         },
         "backgroundColorHover": {
-          "value": "rgba(29, 185, 84, 0.1)",
+          "value": "rgba(114, 9, 183, 0.1)",
           "type": "color",
           "description": "Secondary button hover background",
           "status": "verified"
@@ -592,9 +592,9 @@
           "status": "verified"
         },
         "borderColorFocus": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Input border focus state (Spotify Green)",
+          "description": "Input border focus state (Empulse Purple)",
           "status": "verified"
         },
         "textColor": {
@@ -726,9 +726,9 @@
         "status": "verified"
       },
       "color": {
-        "value": "#1DB954",
+        "value": "#7209B7",
         "type": "color",
-        "description": "Focus ring color (Spotify Green)",
+        "description": "Focus ring color (Empulse Purple)",
         "status": "verified"
       },
       "opacity": {

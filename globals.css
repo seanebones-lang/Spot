@@ -16,14 +16,14 @@
   --color-text-disabled: #535353;
   
   /* Colors - Accent */
-  --color-accent-primary: #1DB954;
-  --color-accent-hover: #1ed760;
-  --color-accent-active: #1aa34a;
+  --color-accent-primary: #7209B7; /* Empulse Purple */
+  --color-accent-hover: #8a1dd0; /* Lighter purple for hover */
+  --color-accent-active: #5a0789; /* Darker purple for active */
   
   /* Colors - Border */
   --color-border-default: #2a2a2a;
   --color-border-hover: #3a3a3a;
-  --color-border-focus: #1DB954;
+  --color-border-focus: #7209B7; /* Empulse Purple */
   
   /* Legacy Color Names (for backwards compatibility) */
   --spotify-green: var(--color-accent-primary);

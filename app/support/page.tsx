@@ -247,7 +247,7 @@ export default function SupportPage() {
                 maxWidth: '70%',
                 borderRadius: '8px',
                 padding: '12px 16px',
-                backgroundColor: message.role === 'user' ? '#1DB954' : '#181818',
+                backgroundColor: message.role === 'user' ? '#7209B7' : '#181818',
                 color: message.role === 'user' ? '#000000' : '#FFFFFF'
               }}
             >
@@ -373,7 +373,7 @@ export default function SupportPage() {
             }}
             disabled={isLoading}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#1DB954';
+              e.currentTarget.style.borderColor = '#7209B7';
               e.currentTarget.style.borderWidth = '2px';
               e.currentTarget.style.borderStyle = 'solid';
             }}
@@ -386,13 +386,13 @@ export default function SupportPage() {
             type="submit"
             disabled={!input.trim() || isLoading}
             className={cn(
-              "w-12 h-12 bg-spotify-green hover:bg-[#1ed760] rounded-full flex items-center justify-center transition-colors",
+              "w-12 h-12 bg-spotify-green hover:bg-[#8a1dd0] rounded-full flex items-center justify-center transition-colors",
               (!input.trim() || isLoading) && "opacity-50 cursor-not-allowed"
             )}
             style={{
               width: '48px',
               height: '48px',
-              backgroundColor: '#1DB954',
+              backgroundColor: '#7209B7',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
@@ -405,12 +405,12 @@ export default function SupportPage() {
             aria-label="Send message"
             onMouseEnter={(e) => {
               if (input.trim() && !isLoading) {
-                e.currentTarget.style.backgroundColor = '#1ed760';
+                e.currentTarget.style.backgroundColor = '#8a1dd0';
                 e.currentTarget.style.transform = 'scale(1.05)';
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.backgroundColor = '#7209B7';
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >

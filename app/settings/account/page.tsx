@@ -85,7 +85,7 @@ export default function AccountSettingsPage() {
                   fontFamily: 'inherit'
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#1DB954';
+                  e.currentTarget.style.borderColor = '#7209B7';
                   e.currentTarget.style.borderWidth = '2px';
                 }}
                 onBlur={(e) => {
@@ -125,7 +125,7 @@ export default function AccountSettingsPage() {
                   fontFamily: 'inherit'
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#1DB954';
+                  e.currentTarget.style.borderColor = '#7209B7';
                   e.currentTarget.style.borderWidth = '2px';
                 }}
                 onBlur={(e) => {

@@ -211,7 +211,7 @@ export default function NewReleasesPage() {
                   <div 
                     className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
                     style={{
-                      background: 'linear-gradient(135deg, #1DB954 0%, #181818 100%)',
+                      background: 'linear-gradient(135deg, #7209B7 0%, #181818 100%)',
                       borderRadius: '4px'
                     }}
                   >
@@ -309,7 +309,7 @@ export default function NewReleasesPage() {
                   <div 
                     className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
                     style={{
-                      background: 'linear-gradient(135deg, #1DB954 0%, #181818 100%)',
+                      background: 'linear-gradient(135deg, #7209B7 0%, #181818 100%)',
                       borderRadius: '4px'
                     }}
                   >

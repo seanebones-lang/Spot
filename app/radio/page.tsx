@@ -335,7 +335,7 @@ export default function RadioPage() {
                     borderRadius: '8px',
                     padding: '16px',
                     transition: 'background-color 200ms ease-out',
-                    border: isCurrentStation ? '1px solid #1DB954' : 'none',
+                    border: isCurrentStation ? '1px solid #7209B7' : 'none',
                   }}
                   onMouseEnter={(e) => {
                     if (!isCurrentStation) {
@@ -356,7 +356,7 @@ export default function RadioPage() {
                       aspectRatio: '1',
                       marginBottom: '12px',
                       background: isCurrentStation 
-                        ? 'linear-gradient(135deg, #1DB954 0%, #1ed760 100%)'
+                        ? 'linear-gradient(135deg, #7209B7 0%, #8a1dd0 100%)'
                         : 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)'
                     }}
                   >
@@ -439,7 +439,7 @@ export default function RadioPage() {
               className="w-20 h-20 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg flex items-center justify-center"
               style={{
                 borderRadius: '8px',
-                background: 'linear-gradient(135deg, #1DB954 0%, #1ed760 100%)'
+                background: 'linear-gradient(135deg, #7209B7 0%, #8a1dd0 100%)'
               }}
             >
               <Radio 

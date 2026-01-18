@@ -263,9 +263,9 @@ export default function HelpPage() {
             Have questions? Find answers from our worldwide Community of expert fans!
           </p>
           <button 
-            className="bg-spotify-green hover:bg-[#1ed760] text-black px-8 py-4 rounded-full font-bold text-lg transition-colors"
+            className="bg-spotify-green hover:bg-[#8a1dd0] text-black px-8 py-4 rounded-full font-bold text-lg transition-colors"
             style={{
-              backgroundColor: '#1DB954',
+              backgroundColor: '#7209B7',
               color: '#000000',
               padding: '16px 32px',
               borderRadius: '500px',
@@ -278,11 +278,11 @@ export default function HelpPage() {
               cursor: 'pointer'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#1ed760';
+              e.currentTarget.style.backgroundColor = '#8a1dd0';
               e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.backgroundColor = '#7209B7';
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
@@ -348,7 +348,7 @@ export default function HelpPage() {
                 <span 
                   className="text-spotify-green group-hover:translate-x-1 transition-transform"
                   style={{
-                    color: '#1DB954',
+                    color: '#7209B7',
                     fontSize: '16px',
                     lineHeight: '24px',
                     transition: 'transform 200ms ease-out',

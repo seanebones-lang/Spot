@@ -121,9 +121,9 @@ const SkipLinks: React.FC<SkipLinksProps> = ({
             'rounded-lg font-semibold text-sm',
             'shadow-lg border-2 border-spotify-green',
             'transition-all duration-200',
-            'hover:bg-[#1ed760] hover:scale-105',
+            'hover:bg-[#8a1dd0] hover:scale-105',
             'focus:outline-none focus:ring-2 focus:ring-spotify-green focus:ring-offset-2 focus:ring-offset-spotify-dark',
-            'active:bg-[#1aa34a] active:scale-100',
+            'active:bg-[#5a0789] active:scale-100',
             'whitespace-nowrap'
           )}
           aria-label={link.description || link.label}

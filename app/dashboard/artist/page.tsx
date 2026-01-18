@@ -259,11 +259,11 @@ export default function ArtistDashboardPage() {
           {/* Dev/Test Button - Remove in production */}
           <button
             onClick={() => setApprovalStatus('approved')}
-            className="mt-4 px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#1ed760] transition-colors"
+            className="mt-4 px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#8a1dd0] transition-colors"
             style={{
               marginTop: '16px',
               padding: '8px 16px',
-              backgroundColor: '#1DB954',
+              backgroundColor: '#7209B7',
               color: '#000000',
               borderRadius: '500px',
               fontSize: '14px',
@@ -314,7 +314,7 @@ export default function ArtistDashboardPage() {
           onClick={() => router.push('/upload')}
           className="btn-primary flex items-center gap-2"
           style={{
-            backgroundColor: '#1DB954',
+            backgroundColor: '#7209B7',
             color: '#000000',
             fontWeight: 700,
             padding: '12px 24px',
@@ -330,13 +330,13 @@ export default function ArtistDashboardPage() {
           }}
           onMouseEnter={(e) => {
             if (moodSettings && moodSettings.feelings.length > 0 && moodSettings.genres.length > 0) {
-              e.currentTarget.style.backgroundColor = '#1ed760';
+              e.currentTarget.style.backgroundColor = '#8a1dd0';
               e.currentTarget.style.transform = 'scale(1.05)';
             }
           }}
           onMouseLeave={(e) => {
             if (moodSettings && moodSettings.feelings.length > 0 && moodSettings.genres.length > 0) {
-              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.backgroundColor = '#7209B7';
               e.currentTarget.style.transform = 'scale(1)';
             }
           }}
@@ -432,7 +432,7 @@ export default function ArtistDashboardPage() {
               padding: '16px',
               borderRadius: '8px',
               marginBottom: '24px',
-              border: `2px solid ${moodValidation.approved ? '#1DB954' : '#FFA500'}`
+              border: `2px solid ${moodValidation.approved ? '#7209B7' : '#FFA500'}`
             }}
           >
             <div className="flex items-start gap-3">
@@ -447,7 +447,7 @@ export default function ArtistDashboardPage() {
                   style={{
                     fontSize: '14px',
                     fontWeight: 700,
-                    color: moodValidation.approved ? '#1DB954' : '#FFA500',
+                    color: moodValidation.approved ? '#7209B7' : '#FFA500',
                     marginBottom: '8px'
                   }}
                 >
@@ -520,10 +520,10 @@ export default function ArtistDashboardPage() {
                 setMoodSettings(defaultSettings);
                 saveMoodSettings(defaultSettings);
               }}
-              className="px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#1ed760] transition-colors"
+              className="px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#8a1dd0] transition-colors"
               style={{
                 padding: '8px 16px',
-                backgroundColor: '#1DB954',
+                backgroundColor: '#7209B7',
                 color: '#000000',
                 borderRadius: '500px',
                 fontSize: '14px',
@@ -746,7 +746,7 @@ export default function ArtistDashboardPage() {
               width: '44px',
               height: '24px',
               borderRadius: '12px',
-              backgroundColor: autoRefresh ? '#1DB954' : '#727272',
+              backgroundColor: autoRefresh ? '#7209B7' : '#727272',
               transition: 'background-color 200ms ease-out',
               cursor: 'pointer',
               flexShrink: 0
@@ -921,7 +921,7 @@ export default function ArtistDashboardPage() {
             onClick={() => router.push('/upload')}
             className="btn-primary"
             style={{
-              backgroundColor: '#1DB954',
+              backgroundColor: '#7209B7',
               color: '#000000',
               fontWeight: 700,
               padding: '12px 24px',
@@ -933,11 +933,11 @@ export default function ArtistDashboardPage() {
               transition: 'all 200ms ease-out'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#1ed760';
+              e.currentTarget.style.backgroundColor = '#8a1dd0';
               e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.backgroundColor = '#7209B7';
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >

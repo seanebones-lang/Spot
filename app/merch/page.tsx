@@ -259,7 +259,7 @@ export default function MerchPage() {
                 position: 'absolute',
                 top: '-8px',
                 right: '-8px',
-                backgroundColor: '#1DB954',
+                backgroundColor: '#7209B7',
                 color: '#000000',
                 fontSize: '11px',
                 lineHeight: '16px',
@@ -393,7 +393,7 @@ export default function MerchPage() {
                   fontSize: '14px',
                   lineHeight: '20px',
                   fontWeight: 600,
-                  color: '#1DB954',
+                  color: '#7209B7',
                   marginBottom: '12px'
                 }}
               >
@@ -405,8 +405,8 @@ export default function MerchPage() {
                 style={{
                   width: '100%',
                   backgroundColor: 'transparent',
-                  border: '2px solid #1DB954',
-                  color: '#1DB954',
+                  border: '2px solid #7209B7',
+                  color: '#7209B7',
                   padding: '8px 16px',
                   borderRadius: '500px',
                   fontSize: '14px',
