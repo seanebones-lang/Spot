@@ -206,10 +206,13 @@ export async function GET(
     headers.set('Pragma', 'no-cache');
     headers.set('Expires', '0');
     headers.set('Accept-Ranges', 'bytes');
-    // Allow CORS for local development
-    headers.set('Access-Control-Allow-Origin', '*');
+    // Allow CORS for cross-origin requests (Vercel frontend to Railway backend)
+    const origin = request.headers.get('origin');
+    headers.set('Access-Control-Allow-Origin', origin || '*');
     headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
-    headers.set('Access-Control-Allow-Headers', 'Content-Type');
+    headers.set('Access-Control-Allow-Headers', 'Content-Type, Range');
+    headers.set('Access-Control-Expose-Headers', 'Content-Length, Content-Range');
+    headers.set('Access-Control-Allow-Credentials', 'true');
 
     return new NextResponse(stream, {
       status: 200,
@@ -228,13 +231,16 @@ export async function GET(
 /**
  * Handle OPTIONS for CORS preflight
  */
-export async function OPTIONS() {
+export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get('origin');
   return new NextResponse(null, {
     status: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': origin || '*',
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Headers': 'Content-Type, Range',
+      'Access-Control-Expose-Headers': 'Content-Length, Content-Range',
+      'Access-Control-Allow-Credentials': 'true',
     },
   });
 }
