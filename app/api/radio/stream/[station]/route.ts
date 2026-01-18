@@ -73,10 +73,11 @@ async function checkYtDlpAvailable(): Promise<boolean> {
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { station: string } }
+  { params }: { params: Promise<{ station: string }> }
 ) {
   try {
-    const stationId = params.station as StationId;
+    const { station } = await params;
+    const stationId = station as StationId;
     const station = STATIONS[stationId];
 
     if (!station) {
