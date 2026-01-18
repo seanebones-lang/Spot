@@ -316,4 +316,5 @@ if (require.main === module) {
   main().catch(console.error);
 }
 
-export { PerformanceBenchmarker, BenchmarkResult, BenchmarkConfig };
+export { PerformanceBenchmarker };
+export type { BenchmarkResult, BenchmarkConfig };
