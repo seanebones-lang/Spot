@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { ComponentType } from 'react';
 
 interface EmptyStateProps {
-  icon?: ComponentType<{ size?: number; className?: string }>;
+  icon?: ComponentType<any>;
   title: string;
   description?: string;
   action?: {
