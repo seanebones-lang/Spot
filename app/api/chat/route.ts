@@ -28,13 +28,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get the last user message
-    const userMessages = messages.filter((msg: any) => msg.role === 'user');
-    const lastUserMessage = userMessages[userMessages.length - 1];
+    // Validate that messages have the correct format
+    const validMessages = messages.filter((msg: any) => 
+      msg && 
+      (msg.role === 'user' || msg.role === 'assistant' || msg.role === 'system') &&
+      msg.content
+    );
 
-    if (!lastUserMessage || !lastUserMessage.content) {
+    if (validMessages.length === 0) {
       return NextResponse.json(
-        { error: 'No user message found' },
+        { error: 'No valid messages found' },
         { status: 400 }
       );
     }
@@ -53,7 +56,8 @@ Be friendly, concise, and helpful. If you don't know something, admit it and sug
 Keep responses under 300 words unless the user asks for detailed information.`;
 
     // Call xAI Grok API
-    // Using the Grok API endpoint for chat completions
+    // Using the latest Grok-3 model (flagship, released Dec 2025)
+    // Supports 128k token context window, text/vision/tools capabilities
     const grokResponse = await fetch('https://api.x.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -61,16 +65,19 @@ Keep responses under 300 words unless the user asks for detailed information.`;
         'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'grok-beta', // Using the beta model
+        model: 'grok-3', // Latest flagship model (Dec 2025)
         messages: [
           { role: 'system', content: systemPrompt },
-          ...messages.map((msg: any) => ({
-            role: msg.role,
-            content: msg.content
-          }))
+          // Filter and map messages, ensuring proper format
+          ...validMessages
+            .filter((msg: any) => msg.role !== 'system') // Don't duplicate system message
+            .map((msg: any) => ({
+              role: msg.role,
+              content: typeof msg.content === 'string' ? msg.content : String(msg.content)
+            }))
         ],
         temperature: 0.7,
-        max_tokens: 500,
+        max_tokens: 2000, // 128k context window supports extended conversations
         stream: false,
       }),
     });

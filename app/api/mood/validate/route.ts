@@ -57,6 +57,7 @@ Respond in JSON format:
 Be specific and actionable. If approved=true, suggestions can still be provided as optional improvements.`;
 
     // Call xAI Grok API
+    // Using the latest Grok-3 model (flagship, released Dec 2025)
     const grokResponse = await fetch('https://api.x.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -64,7 +65,7 @@ Be specific and actionable. If approved=true, suggestions can still be provided 
         'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'grok-beta',
+        model: 'grok-3', // Latest flagship model (Dec 2025)
         messages: [
           {
             role: 'system',
@@ -76,7 +77,7 @@ Be specific and actionable. If approved=true, suggestions can still be provided 
           }
         ],
         temperature: 0.3, // Lower temperature for more consistent validation
-        max_tokens: 500,
+        max_tokens: 1000, // Increased for better JSON responses
         stream: false,
       }),
     });
