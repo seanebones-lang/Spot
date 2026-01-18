@@ -78,8 +78,10 @@ export default function RadioPage() {
         audioUrl: streamUrl,
         coverArt: '', // Radio stations don't have cover art
         moodTags: {
-          primary: [],
-          secondary: [],
+          mood: 'neutral' as MoodState,
+          feelings: [],
+          vibe: 5,
+          genres: [],
         },
         format: 'MP3',
         quality: 'high',
