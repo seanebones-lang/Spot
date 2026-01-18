@@ -546,6 +546,529 @@
     }
   },
   
+  "inputs": {
+    "variants": {
+      "default": {
+        "backgroundColor": {
+          "value": "#181818",
+          "type": "color",
+          "description": "Default input background (Spotify Dark Gray)",
+          "status": "verified"
+        },
+        "borderColor": {
+          "value": "rgba(255, 255, 255, 0.1)",
+          "type": "color",
+          "description": "Default input border color",
+          "status": "verified"
+        },
+        "borderColorHover": {
+          "value": "rgba(255, 255, 255, 0.2)",
+          "type": "color",
+          "description": "Input border hover state",
+          "status": "verified"
+        },
+        "borderColorFocus": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Input border focus state (Spotify Green)",
+          "status": "verified"
+        },
+        "textColor": {
+          "value": "#FFFFFF",
+          "type": "color",
+          "description": "Input text color (white)",
+          "status": "verified"
+        },
+        "placeholderColor": {
+          "value": "#B3B3B3",
+          "type": "color",
+          "description": "Input placeholder color (Spotify Text Gray, 60% opacity)",
+          "status": "verified"
+        }
+      },
+      "ghost": {
+        "backgroundColor": {
+          "value": "transparent",
+          "type": "color",
+          "description": "Ghost input background (transparent)",
+          "status": "verified"
+        }
+      }
+    },
+    "sizes": {
+      "small": {
+        "height": {
+          "value": "36px",
+          "type": "dimension",
+          "description": "Small input height",
+          "status": "verified"
+        },
+        "paddingX": {
+          "value": "12px",
+          "type": "dimension",
+          "description": "Small input horizontal padding",
+          "status": "verified"
+        },
+        "fontSize": {
+          "value": "14px",
+          "type": "dimension",
+          "description": "Small input font size",
+          "status": "verified"
+        }
+      },
+      "medium": {
+        "height": {
+          "value": "40px",
+          "type": "dimension",
+          "description": "Medium input height (default)",
+          "status": "verified"
+        },
+        "paddingX": {
+          "value": "16px",
+          "type": "dimension",
+          "description": "Medium input horizontal padding",
+          "status": "verified"
+        },
+        "fontSize": {
+          "value": "14px",
+          "type": "dimension",
+          "description": "Medium input font size",
+          "status": "verified"
+        }
+      },
+      "large": {
+        "height": {
+          "value": "48px",
+          "type": "dimension",
+          "description": "Large input height",
+          "status": "verified"
+        },
+        "paddingX": {
+          "value": "16px",
+          "type": "dimension",
+          "description": "Large input horizontal padding",
+          "status": "verified"
+        },
+        "fontSize": {
+          "value": "16px",
+          "type": "dimension",
+          "description": "Large input font size",
+          "status": "verified"
+        }
+      }
+    },
+    "validation": {
+      "error": {
+        "borderColor": {
+          "value": "#E63946",
+          "type": "color",
+          "description": "Error state border color (EmPulse Red)",
+          "status": "verified"
+        },
+        "textColor": {
+          "value": "#E63946",
+          "type": "color",
+          "description": "Error message text color",
+          "status": "verified"
+        }
+      },
+      "success": {
+        "borderColor": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Success state border color (Spotify Green)",
+          "status": "verified"
+        },
+        "textColor": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Success message text color",
+          "status": "verified"
+        }
+      }
+    },
+    "borderRadius": {
+      "value": "4px",
+      "type": "dimension",
+      "description": "Input border radius (rounded-lg)",
+      "status": "verified",
+      "note": "Used in all Input variants - matches Spotify input style"
+    },
+    "focusRing": {
+      "width": {
+        "value": "2px",
+        "type": "dimension",
+        "description": "Focus ring width",
+        "status": "verified"
+      },
+      "color": {
+        "value": "#1DB954",
+        "type": "color",
+        "description": "Focus ring color (Spotify Green)",
+        "status": "verified"
+      },
+      "opacity": {
+        "value": "0.2",
+        "type": "opacity",
+        "description": "Focus ring opacity",
+        "status": "verified"
+      }
+    },
+    "labels": {
+      "fontSize": {
+        "value": "14px",
+        "type": "dimension",
+        "description": "Label font size",
+        "status": "verified"
+      },
+      "fontWeight": {
+        "value": "500",
+        "type": "fontWeight",
+        "description": "Label font weight (medium)",
+        "status": "verified"
+      },
+      "color": {
+        "value": "#FFFFFF",
+        "type": "color",
+        "description": "Label text color (white)",
+        "status": "verified"
+      },
+      "spacing": {
+        "marginBottom": {
+          "value": "8px",
+          "type": "dimension",
+          "description": "Margin between label and input",
+          "status": "verified"
+        }
+      }
+    },
+    "helperText": {
+      "fontSize": {
+        "value": "12px",
+        "type": "dimension",
+        "description": "Helper text font size",
+        "status": "verified"
+      },
+      "color": {
+        "value": "#B3B3B3",
+        "type": "color",
+        "description": "Helper text color (Spotify Text Gray)",
+        "status": "verified"
+      },
+      "spacing": {
+        "marginTop": {
+          "value": "6px",
+          "type": "dimension",
+          "description": "Margin between input and helper text",
+          "status": "verified"
+        }
+      }
+    },
+    "transition": {
+      "duration": {
+        "value": "200ms",
+        "type": "duration",
+        "description": "Input transition duration",
+        "status": "verified"
+      },
+      "easing": {
+        "value": "ease-in-out",
+        "type": "cubicBezier",
+        "description": "Input transition easing",
+        "status": "verified"
+      }
+    }
+  },
+  
+  "cards": {
+    "variants": {
+      "default": {
+        "backgroundColor": {
+          "value": "#282828",
+          "type": "color",
+          "description": "Default card background (Spotify Light Gray)",
+          "status": "verified"
+        },
+        "backgroundColorHover": {
+          "value": "rgba(40, 40, 40, 0.8)",
+          "type": "color",
+          "description": "Default card hover background",
+          "status": "verified"
+        }
+      },
+      "elevated": {
+        "backgroundColor": {
+          "value": "#181818",
+          "type": "color",
+          "description": "Elevated card background (Spotify Dark Gray)",
+          "status": "verified"
+        },
+        "backgroundColorHover": {
+          "value": "rgba(24, 24, 24, 0.8)",
+          "type": "color",
+          "description": "Elevated card hover background",
+          "status": "verified"
+        }
+      },
+      "outline": {
+        "borderColor": {
+          "value": "rgba(255, 255, 255, 0.1)",
+          "type": "color",
+          "description": "Outline card border color",
+          "status": "verified"
+        },
+        "borderColorHover": {
+          "value": "rgba(255, 255, 255, 0.2)",
+          "type": "color",
+          "description": "Outline card hover border",
+          "status": "verified"
+        }
+      },
+      "gradient": {
+        "gradient": {
+          "value": "linear-gradient(to right, rgba(114, 9, 183, 0.2), rgba(69, 123, 157, 0.2))",
+          "type": "gradient",
+          "description": "Gradient card background (EmPulse Purple to Blue)",
+          "status": "verified"
+        },
+        "borderColor": {
+          "value": "rgba(114, 9, 183, 0.3)",
+          "type": "color",
+          "description": "Gradient card border (EmPulse Purple)",
+          "status": "verified"
+        }
+      }
+    },
+    "sizes": {
+      "small": {
+        "padding": {
+          "value": "12px",
+          "type": "dimension",
+          "description": "Small card padding",
+          "status": "verified"
+        }
+      },
+      "medium": {
+        "padding": {
+          "value": "16px",
+          "type": "dimension",
+          "description": "Medium card padding (default)",
+          "status": "verified"
+        }
+      },
+      "large": {
+        "padding": {
+          "value": "24px",
+          "type": "dimension",
+          "description": "Large card padding",
+          "status": "verified"
+        }
+      }
+    },
+    "borderRadius": {
+      "value": "8px",
+      "type": "dimension",
+      "description": "Card border radius (rounded-lg)",
+      "status": "verified",
+      "note": "Used in all Card variants - matches Spotify card style"
+    },
+    "images": {
+      "small": {
+        "width": {
+          "value": "64px",
+          "type": "dimension",
+          "description": "Small card image size",
+          "status": "verified"
+        },
+        "aspectRatio": {
+          "value": "1:1",
+          "type": "ratio",
+          "description": "Square aspect ratio",
+          "status": "verified"
+        }
+      },
+      "medium": {
+        "width": {
+          "value": "128px",
+          "type": "dimension",
+          "description": "Medium card image size",
+          "status": "verified"
+        },
+        "aspectRatio": {
+          "value": "1:1",
+          "type": "ratio",
+          "description": "Square aspect ratio",
+          "status": "verified"
+        }
+      },
+      "large": {
+        "width": {
+          "value": "192px",
+          "type": "dimension",
+          "description": "Large card image size",
+          "status": "verified"
+        },
+        "aspectRatio": {
+          "value": "1:1",
+          "type": "ratio",
+          "description": "Square aspect ratio",
+          "status": "verified"
+        }
+      }
+    },
+    "transition": {
+      "duration": {
+        "value": "200ms",
+        "type": "duration",
+        "description": "Card transition duration",
+        "status": "verified"
+      },
+      "easing": {
+        "value": "ease-in-out",
+        "type": "cubicBezier",
+        "description": "Card transition easing",
+        "status": "verified"
+      }
+    }
+  },
+  
+  "modals": {
+    "sizes": {
+      "small": {
+        "maxWidth": {
+          "value": "448px",
+          "type": "dimension",
+          "description": "Small modal max width (max-w-md)",
+          "status": "verified"
+        }
+      },
+      "medium": {
+        "maxWidth": {
+          "value": "672px",
+          "type": "dimension",
+          "description": "Medium modal max width (max-w-2xl) - default",
+          "status": "verified"
+        }
+      },
+      "large": {
+        "maxWidth": {
+          "value": "896px",
+          "type": "dimension",
+          "description": "Large modal max width (max-w-4xl)",
+          "status": "verified"
+        }
+      },
+      "extraLarge": {
+        "maxWidth": {
+          "value": "1152px",
+          "type": "dimension",
+          "description": "Extra large modal max width (max-w-6xl)",
+          "status": "verified"
+        }
+      },
+      "fullscreen": {
+        "maxWidth": {
+          "value": "100%",
+          "type": "dimension",
+          "description": "Fullscreen modal (with 16px margin)",
+          "status": "verified"
+        }
+      }
+    },
+    "overlay": {
+      "backgroundColor": {
+        "value": "rgba(0, 0, 0, 0.5)",
+        "type": "color",
+        "description": "Modal overlay/backdrop color",
+        "status": "verified"
+      },
+      "backdropBlur": {
+        "value": "4px",
+        "type": "dimension",
+        "description": "Backdrop blur amount",
+        "status": "verified"
+      }
+    },
+    "container": {
+      "backgroundColor": {
+        "value": "#181818",
+        "type": "color",
+        "description": "Modal container background (Spotify Dark Gray)",
+        "status": "verified"
+      },
+      "borderRadius": {
+        "value": "12px",
+        "type": "dimension",
+        "description": "Modal border radius (rounded-xl)",
+        "status": "verified"
+      },
+      "maxHeight": {
+        "value": "90vh",
+        "type": "dimension",
+        "description": "Maximum modal height (90% of viewport)",
+        "status": "verified"
+      },
+      "padding": {
+        "header": {
+          "value": "24px",
+          "type": "dimension",
+          "description": "Header padding",
+          "status": "verified"
+        },
+        "body": {
+          "value": "24px",
+          "type": "dimension",
+          "description": "Body padding",
+          "status": "verified"
+        },
+        "footer": {
+          "value": "24px",
+          "type": "dimension",
+          "description": "Footer padding",
+          "status": "verified"
+        }
+      }
+    },
+    "border": {
+      "header": {
+        "color": {
+          "value": "rgba(255, 255, 255, 0.1)",
+          "type": "color",
+          "description": "Header border color",
+          "status": "verified"
+        }
+      },
+      "footer": {
+        "color": {
+          "value": "rgba(255, 255, 255, 0.1)",
+          "type": "color",
+          "description": "Footer border color",
+          "status": "verified"
+        }
+      }
+    },
+    "transition": {
+      "duration": {
+        "value": "200ms",
+        "type": "duration",
+        "description": "Modal transition duration",
+        "status": "verified"
+      },
+      "easing": {
+        "value": "ease-in-out",
+        "type": "cubicBezier",
+        "description": "Modal transition easing",
+        "status": "verified"
+      }
+    },
+    "zIndex": {
+      "value": "100",
+      "type": "zIndex",
+      "description": "Modal z-index (z-[100])",
+      "status": "verified"
+    }
+  },
+  
   "sidebar": {
     "resizable": {
       "divider": {
