@@ -3,19 +3,60 @@ import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { requireAuth } from '@/lib/auth';
+import { 
+  sanitizeFilename, 
+  sanitizeString, 
+  isValidMimeType, 
+  isValidFileSize,
+  ALLOWED_AUDIO_TYPES,
+  ALLOWED_IMAGE_TYPES,
+  mbToBytes,
+  sanitizeObjectKeys
+} from '@/lib/sanitize';
+import { checkRateLimit, getClientIdentifier } from '@/lib/rateLimit';
+import { logger, generateCorrelationId } from '@/lib/logger';
+import { getEnv } from '@/lib/env';
+
+// File size limits (in MB, converted to bytes)
+const MAX_AUDIO_SIZE = mbToBytes(50); // 50MB
+const MAX_IMAGE_SIZE = mbToBytes(5); // 5MB
 
 /**
  * API Route for Submitting Track Upload for Review
  * Handles track submission with file uploads (audio + cover art) and all metadata
  * Requires authentication
+ * Rate limited: 10 requests per day
  */
 export async function POST(request: NextRequest) {
+  const correlationId = generateCorrelationId();
+  const startTime = Date.now();
+  
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(request);
+    const rateLimit = checkRateLimit(clientId, '/api/tracks/submit');
+    if (!rateLimit.allowed) {
+      logger.warn('Rate limit exceeded for track submission', { correlationId, clientId });
+      return NextResponse.json(
+        { error: 'Too many submissions. Please try again later.' },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': '10',
+            'X-RateLimit-Remaining': String(rateLimit.remaining),
+            'X-RateLimit-Reset': String(rateLimit.resetTime),
+            'Retry-After': String(Math.ceil((rateLimit.resetTime - Date.now()) / 1000)),
+          },
+        }
+      );
+    }
+
     // Require authentication
     let user;
     try {
       user = requireAuth(request);
     } catch (error) {
+      logger.warn('Unauthorized track submission attempt', { correlationId });
       return NextResponse.json(
         { error: 'Authentication required. Please log in to submit tracks.' },
         { status: 401 }
@@ -25,6 +66,7 @@ export async function POST(request: NextRequest) {
     // Check if user is an approved artist
     // In production, check user.role === 'artist' && user.artistApproved === true
     // For now, allow any authenticated user
+    
     // Parse FormData
     const formDataObj = await request.formData();
     
@@ -37,8 +79,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const formData = JSON.parse(payloadStr);
+    let formData: any;
+    try {
+      formData = JSON.parse(payloadStr);
+      // Sanitize object keys to prevent prototype pollution
+      formData = sanitizeObjectKeys(formData);
+    } catch (error) {
+      logger.warn('Invalid JSON payload', { correlationId, error });
+      return NextResponse.json(
+        { error: 'Invalid metadata payload format' },
+        { status: 400 }
+      );
+    }
+
     const releaseType = formData.releaseType || 'single';
+    
+    // Validate release type
+    if (!['single', 'ep', 'lp'].includes(releaseType)) {
+      return NextResponse.json(
+        { error: 'Invalid release type. Must be single, ep, or lp' },
+        { status: 400 }
+      );
+    }
     
     // Get files based on release type
     const audioFile = releaseType === 'single' ? (formDataObj.get('audioFile') as File | null) : null;
@@ -56,7 +118,7 @@ export async function POST(request: NextRequest) {
       }
     }
     
-    // Validate required fields
+    // Validate and sanitize required fields
     if (releaseType === 'single') {
       if (!formData.metadata || !formData.metadata.trackName) {
         return NextResponse.json(
@@ -64,9 +126,28 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
       }
+      // Sanitize track name
+      formData.metadata.trackName = sanitizeString(formData.metadata.trackName);
+      
       if (!audioFile) {
         return NextResponse.json(
           { error: 'Audio file is required' },
+          { status: 400 }
+        );
+      }
+
+      // Validate audio file
+      if (!isValidMimeType(audioFile.type, ALLOWED_AUDIO_TYPES)) {
+        logger.warn('Invalid audio file type', { correlationId, mimeType: audioFile.type });
+        return NextResponse.json(
+          { error: `Invalid audio file type. Allowed types: ${ALLOWED_AUDIO_TYPES.join(', ')}` },
+          { status: 400 }
+        );
+      }
+
+      if (!isValidFileSize(audioFile.size, MAX_AUDIO_SIZE)) {
+        return NextResponse.json(
+          { error: `Audio file too large. Maximum size is ${MAX_AUDIO_SIZE / mbToBytes(1)}MB` },
           { status: 400 }
         );
       }
@@ -77,6 +158,9 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
       }
+      // Sanitize album name
+      formData.metadata.albumName = sanitizeString(formData.metadata.albumName);
+      
       if (!formData.tracks || formData.tracks.length === 0) {
         return NextResponse.json(
           { error: 'At least one track is required' },
@@ -93,6 +177,41 @@ export async function POST(request: NextRequest) {
       if (formData.tracks.length < minTracks) {
         return NextResponse.json(
           { error: `${releaseType === 'ep' ? 'EP' : 'Album'} must have at least ${minTracks} tracks` },
+          { status: 400 }
+        );
+      }
+
+      // Validate all track files
+      for (let i = 0; i < trackFiles.length; i++) {
+        const trackFile = trackFiles[i];
+        if (!isValidMimeType(trackFile.type, ALLOWED_AUDIO_TYPES)) {
+          logger.warn('Invalid audio file type in track', { correlationId, index: i, mimeType: trackFile.type });
+          return NextResponse.json(
+            { error: `Track ${i + 1}: Invalid audio file type` },
+            { status: 400 }
+          );
+        }
+        if (!isValidFileSize(trackFile.size, MAX_AUDIO_SIZE)) {
+          return NextResponse.json(
+            { error: `Track ${i + 1}: File too large. Maximum size is ${MAX_AUDIO_SIZE / mbToBytes(1)}MB` },
+            { status: 400 }
+          );
+        }
+      }
+    }
+
+    // Validate cover art if provided
+    if (coverArtFile) {
+      if (!isValidMimeType(coverArtFile.type, ALLOWED_IMAGE_TYPES)) {
+        logger.warn('Invalid cover art file type', { correlationId, mimeType: coverArtFile.type });
+        return NextResponse.json(
+          { error: `Invalid cover art file type. Allowed types: ${ALLOWED_IMAGE_TYPES.join(', ')}` },
+          { status: 400 }
+        );
+      }
+      if (!isValidFileSize(coverArtFile.size, MAX_IMAGE_SIZE)) {
+        return NextResponse.json(
+          { error: `Cover art file too large. Maximum size is ${MAX_IMAGE_SIZE / mbToBytes(1)}MB` },
           { status: 400 }
         );
       }
@@ -135,7 +254,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate submission ID
+    // Generate submission ID (UUID-like format)
     const submissionId = releaseType === 'single' 
       ? `TRK-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
       : `${releaseType.toUpperCase()}-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
@@ -153,43 +272,59 @@ export async function POST(request: NextRequest) {
       await mkdir(coverArtDir, { recursive: true });
     }
 
-    // Save audio file(s)
+    // Save audio file(s) with sanitized filenames
     let audioFileUrl: string | null = null;
     let audioFileUrls: string[] = [];
 
     if (releaseType === 'single' && audioFile) {
       // Single track
-      const audioExtension = audioFile.name.split('.').pop() || 'mp3';
+      const sanitizedOriginalName = sanitizeFilename(audioFile.name);
+      const audioExtension = sanitizedOriginalName.split('.').pop() || 'mp3';
       const audioFileName = `audio.${audioExtension}`;
       const audioFilePath = join(audioDir, audioFileName);
       const audioBuffer = Buffer.from(await audioFile.arrayBuffer());
       await writeFile(audioFilePath, audioBuffer);
       audioFileUrl = `/uploads/audio/${submissionId}/${audioFileName}`;
+      
+      logger.info('Audio file saved', { correlationId, submissionId, fileName: audioFileName, size: audioFile.size });
     } else if (releaseType !== 'single' && trackFiles.length > 0) {
       // Multiple tracks for EP/LP
       for (let i = 0; i < trackFiles.length; i++) {
         const trackFile = trackFiles[i];
         const trackInfo = formData.tracks[i];
-        const audioExtension = trackFile.name.split('.').pop() || 'mp3';
+        const sanitizedOriginalName = sanitizeFilename(trackFile.name);
+        const audioExtension = sanitizedOriginalName.split('.').pop() || 'mp3';
         const trackNumber = trackInfo?.trackNumber || i + 1;
         const audioFileName = `track_${trackNumber}.${audioExtension}`;
         const audioFilePath = join(audioDir, audioFileName);
         const audioBuffer = Buffer.from(await trackFile.arrayBuffer());
         await writeFile(audioFilePath, audioBuffer);
         audioFileUrls.push(`/uploads/audio/${submissionId}/${audioFileName}`);
+        
+        logger.info('Track file saved', { correlationId, submissionId, trackNumber, fileName: audioFileName, size: trackFile.size });
       }
     }
 
-    // Save cover art file (if provided)
+    // Save cover art file (if provided) with sanitized filename
     let coverArtUrl = null;
     if (coverArtFile) {
-      const coverArtExtension = coverArtFile.name.split('.').pop() || 'jpg';
+      const sanitizedOriginalName = sanitizeFilename(coverArtFile.name);
+      const coverArtExtension = sanitizedOriginalName.split('.').pop() || 'jpg';
       const coverArtFileName = `cover.${coverArtExtension}`;
       const coverArtFilePath = join(coverArtDir, coverArtFileName);
       const coverArtBuffer = Buffer.from(await coverArtFile.arrayBuffer());
       await writeFile(coverArtFilePath, coverArtBuffer);
       
       coverArtUrl = `/uploads/cover-art/${submissionId}/${coverArtFileName}`;
+      logger.info('Cover art saved', { correlationId, submissionId, fileName: coverArtFileName, size: coverArtFile.size });
+    }
+
+    // Sanitize metadata fields
+    if (formData.metadata) {
+      if (formData.metadata.artistFullLegalName) {
+        formData.metadata.artistFullLegalName = sanitizeString(formData.metadata.artistFullLegalName);
+      }
+      // Sanitize other string fields as needed
     }
 
     // Create submission record
@@ -230,14 +365,19 @@ export async function POST(request: NextRequest) {
     };
 
     // Log publication (in production, save to database)
-    console.log('Track published:', {
+    const totalFileSize = releaseType === 'single' 
+      ? (audioFile?.size || 0) + (coverArtFile?.size || 0)
+      : trackFiles.reduce((sum, f) => sum + f.size, 0) + (coverArtFile?.size || 0);
+    
+    const duration = Date.now() - startTime;
+    logger.info('Track published', {
+      correlationId,
       submissionId,
+      userId: user.userId,
       releaseType,
       trackName: releaseType === 'single' ? formData.metadata?.trackName : formData.metadata?.albumName,
-      audioFileSize: releaseType === 'single' ? (audioFile?.size || 0) : trackFiles.reduce((sum, f) => sum + f.size, 0),
-      coverArtFileSize: coverArtFile?.size || 0,
-      status: 'published',
-      timestamp: new Date().toISOString()
+      totalFileSize,
+      duration,
     });
 
     return NextResponse.json({
@@ -248,10 +388,9 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Error submitting track:', error);
+    const duration = Date.now() - startTime;
+    logger.error('Error submitting track', error, { correlationId, duration });
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    const errorStack = error instanceof Error ? error.stack : undefined;
-    console.error('Error details:', { errorMessage, errorStack });
     return NextResponse.json(
       { 
         error: 'An unexpected error occurred while submitting your track. Please try again.',

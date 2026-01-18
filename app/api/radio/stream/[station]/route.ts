@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { spawn } from 'child_process';
 import { promisify } from 'util';
 import { exec } from 'child_process';
+import { logger, generateCorrelationId } from '@/lib/logger';
+import { withTimeout } from '@/lib/timeout';
 
 const execAsync = promisify(exec);
 
@@ -75,27 +77,55 @@ export async function GET(
   request: NextRequest,
   context: { params: Promise<{ station: string }> }
 ) {
+  const correlationId = generateCorrelationId();
+  const startTime = Date.now();
+  
   try {
     const params = await context.params;
     const stationId = params.station as StationId;
+    
+    // Validate station ID against whitelist (prevent command injection)
+    if (!stationId || typeof stationId !== 'string') {
+      logger.warn('Invalid station ID format', { correlationId, stationId });
+      return NextResponse.json(
+        { error: 'Invalid station ID' },
+        { status: 400 }
+      );
+    }
+    
     const stationConfig = STATIONS[stationId];
 
     if (!stationConfig) {
+      logger.warn('Station not found', { correlationId, stationId });
       return NextResponse.json(
         { error: 'Station not found' },
         { status: 404 }
       );
     }
 
-    // Check if yt-dlp is available
-    const ytDlpAvailable = await checkYtDlpAvailable();
+    // Check if yt-dlp is available (with timeout)
+    let ytDlpAvailable = false;
+    try {
+      ytDlpAvailable = await withTimeout(
+        checkYtDlpAvailable(),
+        5000, // 5 second timeout
+        'yt-dlp check timeout'
+      );
+    } catch (error) {
+      logger.warn('yt-dlp availability check failed', { correlationId, error });
+    }
+    
     if (!ytDlpAvailable) {
-      console.error('yt-dlp or youtube-dl not found in system PATH');
       // Try to use python3 -m yt_dlp as fallback (common in Docker/container environments)
       try {
-        await execAsync('python3 -m yt_dlp --version');
+        await withTimeout(
+          execAsync('python3 -m yt_dlp --version'),
+          5000,
+          'Python yt-dlp check timeout'
+        );
         // If this works, we'll use python3 -m yt_dlp in the spawn command
       } catch {
+        logger.error('yt-dlp not available', { correlationId });
         return NextResponse.json(
           { 
             error: 'Streaming service unavailable. Please ensure yt-dlp is installed.',
@@ -108,8 +138,11 @@ export async function GET(
 
     // Get start time from query params (for random mid-stream start)
     const searchParams = request.nextUrl.searchParams;
-    const startTime = parseInt(searchParams.get('start') || '0', 10);
+    const startTimeParam = parseInt(searchParams.get('start') || '0', 10);
     const randomStart = searchParams.get('random') === 'true';
+    
+    // Validate and sanitize start time
+    const startTime = isNaN(startTimeParam) ? 0 : Math.max(0, startTimeParam);
     
     // Calculate actual start time
     const actualStart = randomStart 
@@ -136,6 +169,10 @@ export async function GET(
     }
     
     // Build yt-dlp command for audio-only streaming
+    // Sanitize videoId to prevent command injection
+    const sanitizedVideoId = stationConfig.videoId.replace(/[^a-zA-Z0-9_-]/g, '');
+    const sanitizedYoutubeUrl = `https://www.youtube.com/watch?v=${sanitizedVideoId}`;
+    
     args = [
       ...args,
       '-f', 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio/best',
@@ -143,26 +180,43 @@ export async function GET(
       '--no-warnings',
       '--quiet',
       '--no-check-certificate',
+      '--socket-timeout', '30', // 30 second socket timeout
       '-o', '-', // Output to stdout
-      youtubeUrl,
+      sanitizedYoutubeUrl,
     ];
 
     // Create a readable stream from yt-dlp
+    // Set process timeout (kill after 5 minutes of inactivity)
+    const PROCESS_TIMEOUT = 5 * 60 * 1000; // 5 minutes
+    let processTimeout: NodeJS.Timeout;
+    
     const ytDlpProcess = spawn(ytDlpCommand, args, {
       stdio: ['ignore', 'pipe', 'pipe'],
     });
 
+    // Reset timeout on data
+    const resetTimeout = () => {
+      if (processTimeout) clearTimeout(processTimeout);
+      processTimeout = setTimeout(() => {
+        logger.warn('yt-dlp process timeout', { correlationId, stationId });
+        ytDlpProcess.kill('SIGTERM');
+      }, PROCESS_TIMEOUT);
+    };
+    resetTimeout();
+
     // Handle errors
     ytDlpProcess.stderr?.on('data', (data) => {
+      resetTimeout();
       const error = data.toString();
       // Filter out non-critical warnings
       if (!error.includes('WARNING') && !error.includes('DeprecationWarning')) {
-        console.error('yt-dlp error:', error);
+        logger.warn('yt-dlp stderr', { correlationId, error });
       }
     });
 
     ytDlpProcess.on('error', (error) => {
-      console.error('Failed to spawn yt-dlp:', error);
+      clearTimeout(processTimeout);
+      logger.error('Failed to spawn yt-dlp', error, { correlationId, stationId });
     });
 
     // Create a response stream
@@ -173,21 +227,25 @@ export async function GET(
         // In a production setup, you'd pipe through ffmpeg: ffmpeg -ss ${start} -i pipe:0 -f mp3 pipe:1
         
         ytDlpProcess.stdout?.on('data', (chunk) => {
+          resetTimeout();
           try {
             controller.enqueue(new Uint8Array(chunk));
           } catch (error) {
-            console.error('Stream error:', error);
+            clearTimeout(processTimeout);
+            logger.error('Stream error', error, { correlationId });
             controller.error(error);
           }
         });
 
         ytDlpProcess.stdout?.on('end', () => {
+          clearTimeout(processTimeout);
           controller.close();
         });
 
         ytDlpProcess.on('close', (code) => {
+          clearTimeout(processTimeout);
           if (code !== 0 && code !== null) {
-            console.error(`yt-dlp process exited with code ${code}`);
+            logger.warn('yt-dlp process exited', { correlationId, code });
             controller.error(new Error(`Stream process exited with code ${code}`));
           } else {
             controller.close();
@@ -195,7 +253,9 @@ export async function GET(
         });
       },
       cancel() {
-        ytDlpProcess.kill();
+        clearTimeout(processTimeout);
+        ytDlpProcess.kill('SIGTERM');
+        logger.info('Stream cancelled', { correlationId, stationId });
       },
     });
 
@@ -206,23 +266,21 @@ export async function GET(
     headers.set('Pragma', 'no-cache');
     headers.set('Expires', '0');
     headers.set('Accept-Ranges', 'bytes');
-    // Allow CORS for cross-origin requests (Vercel frontend to Railway backend)
-    const origin = request.headers.get('origin');
-    headers.set('Access-Control-Allow-Origin', origin || '*');
-    headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
-    headers.set('Access-Control-Allow-Headers', 'Content-Type, Range');
-    headers.set('Access-Control-Expose-Headers', 'Content-Length, Content-Range');
-    headers.set('Access-Control-Allow-Credentials', 'true');
+    // CORS is handled by middleware, but set headers for streaming
+    // Note: CORS validation happens in middleware.ts
 
+    logger.info('Radio stream started', { correlationId, stationId, duration: Date.now() - startTime });
+    
     return new NextResponse(stream, {
       status: 200,
       headers,
     });
 
   } catch (error) {
-    console.error('Radio stream error:', error);
+    const duration = Date.now() - startTime;
+    logger.error('Radio stream error', error, { correlationId, duration });
     return NextResponse.json(
-      { error: 'Failed to start stream', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: 'Failed to start stream', details: process.env.NODE_ENV === 'development' && error instanceof Error ? error.message : undefined },
       { status: 500 }
     );
   }
