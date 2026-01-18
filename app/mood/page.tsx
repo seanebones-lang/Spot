@@ -150,7 +150,7 @@ export default function MoodPage() {
                     <PlayButton
                       isPlaying={isPlaylistPlaying}
                       onClick={(e) => {
-                        e.stopPropagation();
+                        e?.stopPropagation();
                         handlePlayPlaylist(playlist);
                       }}
                       size="sm"

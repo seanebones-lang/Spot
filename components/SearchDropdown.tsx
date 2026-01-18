@@ -18,6 +18,70 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Auto-complete search while typing
+  useEffect(() => {
+    if (query.trim().length > 2) {
+      const results: SearchResult[] = [];
+      const queryLower = query.toLowerCase();
+
+      // Search tracks
+      mockData.getTracks().forEach((track) => {
+        if (track.name.toLowerCase().includes(queryLower) || track.artist.toLowerCase().includes(queryLower)) {
+          results.push({
+            id: track.id,
+            type: 'track',
+            name: track.name,
+            subtitle: track.artist,
+            image: track.coverArt,
+          });
+        }
+      });
+
+      // Search artists
+      mockData.getArtists().forEach((artist) => {
+        if (artist.name.toLowerCase().includes(queryLower)) {
+          results.push({
+            id: artist.id,
+            type: 'artist',
+            name: artist.name,
+            subtitle: `${artist.followers} followers`,
+            image: artist.image,
+          });
+        }
+      });
+
+      // Search playlists
+      mockData.getPlaylists().forEach((playlist) => {
+        if (playlist.name.toLowerCase().includes(queryLower)) {
+          results.push({
+            id: playlist.id,
+            type: 'playlist',
+            name: playlist.name,
+            subtitle: playlist.description,
+            image: playlist.coverArt,
+          });
+        }
+      });
+
+      // Search albums
+      mockData.getAlbums().forEach((album) => {
+        if (album.name.toLowerCase().includes(queryLower)) {
+          results.push({
+            id: album.id,
+            type: 'album',
+            name: album.name,
+            subtitle: album.artist,
+            image: album.coverArt,
+          });
+        }
+      });
+
+      setSearchResults(results.slice(0, 5)); // Top 5 results
+    } else {
+      setSearchResults([]);
+    }
+  }, [query]);
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -33,12 +97,96 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
 
   if (!isOpen) return null;
 
+  const hasResults = searchResults.length > 0;
+  const showRecent = !query || query.trim().length <= 2;
+
+  const getResultIcon = (type: string) => {
+    switch (type) {
+      case 'track':
+        return <Music size={16} className="text-spotify-green" />;
+      case 'artist':
+        return <User size={16} className="text-spotify-blue" />;
+      case 'playlist':
+        return <List size={16} className="text-empulse-purple" />;
+      case 'album':
+        return <Disc size={16} className="text-orange-500" />;
+      default:
+        return <Search size={16} />;
+    }
+  };
+
+  const getResultLink = (result: SearchResult) => {
+    switch (result.type) {
+      case 'track':
+        return '/track';
+      case 'artist':
+        return `/artist/${result.id}`;
+      case 'playlist':
+        return `/playlist/${result.id}`;
+      case 'album':
+        return `/album/${result.id}`;
+      default:
+        return '/search';
+    }
+  };
+
   return (
     <div
       ref={dropdownRef}
       className="absolute top-full left-0 right-0 mt-2 bg-spotify-dark-gray rounded-lg shadow-2xl border border-white/10 z-50 max-h-96 overflow-y-auto"
     >
-      {recentSearches.length > 0 ? (
+      {/* Search Results (while typing) */}
+      {hasResults && !showRecent && (
+        <div className="p-2">
+          <div className="px-3 py-2 mb-2">
+            <h3 className="text-xs font-bold text-spotify-text-gray uppercase">Results</h3>
+          </div>
+          {searchResults.map((result) => (
+            <button
+              key={`${result.type}-${result.id}`}
+              onClick={() => {
+                onSelect(result.name);
+                router.push(getResultLink(result));
+                onClose();
+              }}
+              className="w-full flex items-center gap-3 px-3 py-2 rounded hover:bg-white/10 transition-colors group"
+            >
+              {result.image ? (
+                <img
+                  src={result.image}
+                  alt={result.name}
+                  className="w-10 h-10 rounded object-cover flex-shrink-0"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded bg-spotify-light-gray flex items-center justify-center flex-shrink-0">
+                  {getResultIcon(result.type)}
+                </div>
+              )}
+              <div className="flex-1 min-w-0 text-left">
+                <div className="text-white truncate font-medium">{result.name}</div>
+                {result.subtitle && (
+                  <div className="text-xs text-spotify-text-gray truncate">{result.subtitle}</div>
+                )}
+              </div>
+              <div className="flex-shrink-0 text-spotify-text-gray">
+                {getResultIcon(result.type)}
+              </div>
+            </button>
+          ))}
+          <button
+            onClick={() => {
+              router.push(`/search?q=${encodeURIComponent(query)}`);
+              onClose();
+            }}
+            className="w-full mt-2 px-3 py-2 text-sm text-spotify-green hover:bg-white/10 rounded transition-colors font-medium"
+          >
+            View all results for &quot;{query}&quot;
+          </button>
+        </div>
+      )}
+
+      {/* Recent Searches (when empty or query <= 2 chars) */}
+      {showRecent && recentSearches.length > 0 && (
         <div className="p-2">
           <div className="flex items-center justify-between px-3 py-2 mb-2">
             <h3 className="text-xs font-bold text-spotify-text-gray uppercase">Recent Searches</h3>
@@ -74,10 +222,14 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
             </button>
           ))}
         </div>
-      ) : (
+      )}
+
+      {/* Empty State */}
+      {showRecent && recentSearches.length === 0 && !hasResults && (
         <div className="p-8 text-center">
           <Search size={32} className="text-spotify-text-gray mx-auto mb-2" />
           <p className="text-spotify-text-gray text-sm">No recent searches</p>
+          <p className="text-spotify-text-gray text-xs mt-1">Type to search for tracks, artists, playlists, and albums</p>
         </div>
       )}
     </div>

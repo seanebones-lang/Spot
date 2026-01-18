@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Track } from '@/types/track';
 import { Heart } from 'lucide-react';
+import Tooltip from '@/components/Tooltip';
 
 interface MoodWidgetProps {
   track: Track;
@@ -14,14 +15,20 @@ export default function MoodWidget({ track }: MoodWidgetProps) {
   if (!track.moodTags) return null;
 
   return (
-    <div className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 bg-spotify-light-gray/50 hover:bg-spotify-light-gray rounded-full text-xs transition-colors"
-      >
-        <Heart size={14} className="text-empulse-purple" />
-        <span className="text-white/80">Mood: {track.moodTags.mood}</span>
-      </button>
+    <Tooltip
+      text="Click to see mood details and find similar tracks"
+      position="top"
+      showOnHover={true}
+    >
+      <div className="relative">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-2 px-3 py-1.5 bg-spotify-light-gray/50 hover:bg-spotify-light-gray rounded-full text-xs transition-colors"
+          aria-label="View mood details and find similar tracks"
+        >
+          <Heart size={14} className="text-empulse-purple" />
+          <span className="text-white/80">Mood: {track.moodTags.mood}</span>
+        </button>
 
       {isOpen && (
         <>
@@ -79,6 +86,7 @@ export default function MoodWidget({ track }: MoodWidgetProps) {
           </div>
         </>
       )}
-    </div>
+      </div>
+    </Tooltip>
   );
 }

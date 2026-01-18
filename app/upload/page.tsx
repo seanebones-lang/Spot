@@ -10,6 +10,7 @@ import MoodSelector from '@/components/mood/MoodSelector';
 import FeelingChips from '@/components/mood/FeelingChips';
 import VibeSlider from '@/components/mood/VibeSlider';
 import GenreSelector from '@/components/mood/GenreSelector';
+import { getRAGPipeline } from '@/lib/aiMoodAnalysis';
 
 interface AIMoodSuggestion {
   mood: MoodState;
@@ -73,26 +74,42 @@ export default function UploadPage() {
     accept: {
       'audio/*': ['.mp3', '.wav', '.flac', '.m4a', '.mp4'],
     },
-    onDrop: (acceptedFiles) => {
+    onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length > 0) {
-        setUploadedFile(acceptedFiles[0]);
-        // Simulate AI mood analysis
-        setTimeout(() => {
+        const file = acceptedFiles[0];
+        setUploadedFile(file);
+        
+        // Run RAG mood analysis pipeline
+        try {
+          const ragPipeline = getRAGPipeline();
+          const moodSuggestion = await ragPipeline.analyzeMood(file);
+          
+          setAiSuggestions(moodSuggestion);
+          setArtistMoodTags({
+            mood: moodSuggestion.mood,
+            feelings: moodSuggestion.feelings,
+            vibe: moodSuggestion.vibe,
+            genres: moodSuggestion.genres,
+            confidence: moodSuggestion.confidence,
+          });
+        } catch (error) {
+          console.error('Error in RAG mood analysis:', error);
+          // Fallback to default values
           setAiSuggestions({
-            mood: 'Joyful',
-            feelings: ['Great', 'Excited'],
-            vibe: 75,
-            genres: ['Pop', 'Electronic'],
-            confidence: 0.85,
+            mood: 'Content',
+            feelings: [],
+            vibe: 50,
+            genres: [],
+            confidence: 0.5,
           });
           setArtistMoodTags({
-            mood: 'Joyful',
-            feelings: ['Great', 'Excited'],
-            vibe: 75,
-            genres: ['Pop', 'Electronic'],
-            confidence: 0.85,
+            mood: 'Content',
+            feelings: [],
+            vibe: 50,
+            genres: [],
+            confidence: 0.5,
           });
-        }, 1000);
+        }
       }
     },
   });

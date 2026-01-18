@@ -71,10 +71,13 @@ export default function Sidebar() {
     <>
       <div 
         className={cn(
-          "fixed left-0 top-0 bottom-player-height bg-spotify-dark-gray text-white flex flex-col z-30",
+          "fixed left-0 top-0 bottom-player-height bg-spotify-dark-gray text-white flex flex-col z-40",
           isResizing ? "" : "transition-all duration-300 ease-in-out"
         )}
-        style={{ width: `${leftSidebarWidth}px` }}
+        style={{ 
+          width: `${leftSidebarWidth}px`,
+          borderRight: '1px solid #000000'
+        }}
       >
       {/* Toggle Button */}
       <button
@@ -248,7 +251,7 @@ export default function Sidebar() {
         <div
           onMouseDown={handleMouseDown}
           className={cn(
-            "fixed top-0 bottom-player-height w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-40 transition-all",
+            "fixed top-0 bottom-player-height w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all",
             isResizing && "bg-spotify-green/60 w-1"
           )}
           style={{ left: `${leftSidebarWidth}px` }}
