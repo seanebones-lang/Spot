@@ -21,6 +21,11 @@ export default function RightSidebar() {
     setIsResizing(true);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+  };
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing) return;
@@ -28,16 +33,33 @@ export default function RightSidebar() {
       setRightSidebarWidth(newWidth);
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      if (!isResizing || e.touches.length === 0) return;
+      const newWidth = window.innerWidth - e.touches[0].clientX;
+      setRightSidebarWidth(newWidth);
+    };
+
     const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    const handleTouchEnd = () => {
       setIsResizing(false);
     };
 
     if (isResizing) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd);
+      document.addEventListener('touchcancel', handleTouchEnd);
       return () => {
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleTouchEnd);
+        document.removeEventListener('touchcancel', handleTouchEnd);
       };
     }
   }, [isResizing, setRightSidebarWidth]);
@@ -188,13 +210,15 @@ export default function RightSidebar() {
       {rightSidebarOpen && (
         <div
           onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
           className={cn(
-            "fixed bottom-[90px] w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all",
+            "fixed bottom-[90px] w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all touch-none",
             isResizing && "bg-spotify-green/60 w-1"
           )}
           style={{ 
             top: '56px',
-            right: `${rightSidebarWidth}px` 
+            right: `${rightSidebarWidth}px`,
+            touchAction: 'none'
           }}
         />
       )}

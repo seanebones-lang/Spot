@@ -21,11 +21,28 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
     }
   };
 
+  const handleSeekTouch = (touch: Touch) => {
+    if (barRef.current) {
+      const rect = barRef.current.getBoundingClientRect();
+      const x = touch.clientX - rect.left;
+      const volumePercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      onVolumeChange(volumePercent);
+    }
+  };
+
   const handleMute = () => {
     onVolumeChange(volume > 0 ? 0 : 50);
   };
 
-  // Handle document-level mouse events for smooth dragging
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+    if (e.touches.length > 0) {
+      handleSeekTouch(e.touches[0]);
+    }
+  };
+
+  // Handle document-level mouse and touch events for smooth dragging
   useEffect(() => {
     if (!isDragging) return;
 
@@ -38,16 +55,36 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
       }
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      if (barRef.current && e.touches.length > 0) {
+        const rect = barRef.current.getBoundingClientRect();
+        const x = e.touches[0].clientX - rect.left;
+        const volumePercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        onVolumeChange(volumePercent);
+      }
+    };
+
     const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    const handleTouchEnd = () => {
       setIsDragging(false);
     };
 
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchcancel', handleTouchEnd);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchcancel', handleTouchEnd);
     };
   }, [isDragging, onVolumeChange]);
 
@@ -61,11 +98,13 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
       </button>
       <div
         ref={barRef}
-        className="flex-1 h-1 bg-spotify-text-gray/30 rounded-full cursor-pointer relative group"
+        className="flex-1 h-1 bg-spotify-text-gray/30 rounded-full cursor-pointer relative group touch-none"
         onMouseDown={(e) => {
           setIsDragging(true);
           handleSeek(e);
         }}
+        onTouchStart={handleTouchStart}
+        style={{ touchAction: 'none' }}
       >
         <div
           className="h-full bg-white rounded-full transition-all group-hover:bg-spotify-green"
