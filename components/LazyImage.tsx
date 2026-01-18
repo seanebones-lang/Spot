@@ -231,7 +231,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
       )}
     </div>
   );
-});
+};
 
 LazyImage.displayName = 'LazyImage';
 

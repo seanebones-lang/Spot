@@ -33,11 +33,12 @@ export function lazyLoad<T extends React.ComponentType<any>>(
     return importFn();
   });
 
-  return (props: React.ComponentPropsWithoutRef<T>) => (
-    <React.Suspense fallback={fallback}>
-      <LazyComponent {...props} />
-    </React.Suspense>
-  );
+  return (props: React.ComponentPropsWithoutRef<T>) =>
+    React.createElement(
+      React.Suspense,
+      { fallback },
+      React.createElement(LazyComponent, props)
+    );
 }
 
 /**
