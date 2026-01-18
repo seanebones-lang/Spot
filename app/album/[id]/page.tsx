@@ -139,7 +139,7 @@ export default function AlbumPage() {
               borderRadius: '4px',
               boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
               flexShrink: 0,
-              background: 'linear-gradient(135deg, #1DB954 0%, #181818 100%)'
+              background: 'linear-gradient(135deg, #7209B7 0%, #181818 100%)'
             }}
           >
             <span className="text-6xl" style={{ fontSize: '64px' }}>💿</span>
@@ -292,7 +292,7 @@ export default function AlbumPage() {
                       style={{
                         width: '4px',
                         height: '4px',
-                        backgroundColor: '#1DB954',
+                        backgroundColor: '#7209B7',
                         borderRadius: '50%'
                       }}
                     ></div>
@@ -308,7 +308,7 @@ export default function AlbumPage() {
                     fontSize: '14px',
                     lineHeight: '20px',
                     fontWeight: 400,
-                    color: currentTrack?.id === track.id ? '#1DB954' : '#FFFFFF'
+                    color: currentTrack?.id === track.id ? '#7209B7' : '#FFFFFF'
                   }}
                 >
                   {track.name}

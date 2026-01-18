@@ -83,7 +83,7 @@ export default function PlaybackSettingsPage() {
               transition: 'border-color 200ms ease-out'
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#1DB954';
+              e.currentTarget.style.borderColor = '#7209B7';
               e.currentTarget.style.borderWidth = '2px';
             }}
             onBlur={(e) => {
@@ -162,7 +162,7 @@ export default function PlaybackSettingsPage() {
                 width: '48px',
                 height: '24px',
                 borderRadius: '12px',
-                backgroundColor: crossfade ? '#1DB954' : '#B3B3B3',
+                backgroundColor: crossfade ? '#7209B7' : '#B3B3B3',
                 position: 'relative',
                 border: 'none',
                 cursor: 'pointer',
@@ -207,7 +207,7 @@ export default function PlaybackSettingsPage() {
                   cursor: 'pointer',
                   WebkitAppearance: 'none',
                   appearance: 'none',
-                  background: `linear-gradient(to right, #1DB954 0%, #1DB954 ${(crossfadeDuration / 12) * 100}%, #282828 ${(crossfadeDuration / 12) * 100}%, #282828 100%)`
+                  background: `linear-gradient(to right, #7209B7 0%, #7209B7 ${(crossfadeDuration / 12) * 100}%, #282828 ${(crossfadeDuration / 12) * 100}%, #282828 100%)`
                 }}
               />
               <div 
@@ -282,7 +282,7 @@ export default function PlaybackSettingsPage() {
                 width: '48px',
                 height: '24px',
                 borderRadius: '12px',
-                backgroundColor: gaplessPlayback ? '#1DB954' : '#B3B3B3',
+                backgroundColor: gaplessPlayback ? '#7209B7' : '#B3B3B3',
                 position: 'relative',
                 border: 'none',
                 cursor: 'pointer',
@@ -362,7 +362,7 @@ export default function PlaybackSettingsPage() {
                 width: '48px',
                 height: '24px',
                 borderRadius: '12px',
-                backgroundColor: normalizeVolume ? '#1DB954' : '#B3B3B3',
+                backgroundColor: normalizeVolume ? '#7209B7' : '#B3B3B3',
                 position: 'relative',
                 border: 'none',
                 cursor: 'pointer',
@@ -440,7 +440,7 @@ export default function PlaybackSettingsPage() {
                 width: '48px',
                 height: '24px',
                 borderRadius: '12px',
-                backgroundColor: '#1DB954',
+                backgroundColor: '#7209B7',
                 position: 'relative',
                 border: 'none',
                 cursor: 'pointer',

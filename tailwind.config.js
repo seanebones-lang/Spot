@@ -7,7 +7,7 @@ module.exports = {
   "theme": {
     "extend": {
       "colors": {
-        "spotify-green": "#1DB954",
+        "spotify-green": "#7209B7", // Changed to Empulse Purple
         "spotify-black": "#000000",
         "spotify-dark": "#121212",
         "spotify-dark-gray": "#181818",

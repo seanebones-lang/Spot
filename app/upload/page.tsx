@@ -1895,7 +1895,7 @@ export default function UploadPage() {
       <div className="mt-8 pt-6 border-t border-white/10 text-center">
         <Link 
           href="/dashboard/artist"
-          className="text-spotify-green hover:text-[#1ed760] text-sm font-medium transition-colors inline-flex items-center gap-1"
+          className="text-spotify-green hover:text-[#8a1dd0] text-sm font-medium transition-colors inline-flex items-center gap-1"
         >
           ← Back to Artist Dashboard
         </Link>

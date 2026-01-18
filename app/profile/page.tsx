@@ -166,7 +166,7 @@ export default function ProfilePage() {
                 width: '48px',
                 height: '48px',
                 margin: '0 auto 16px',
-                color: '#1DB954'
+                color: '#7209B7'
               }}
             />
             <div 
@@ -217,7 +217,7 @@ export default function ProfilePage() {
                 width: '48px',
                 height: '48px',
                 margin: '0 auto 16px',
-                color: '#1DB954'
+                color: '#7209B7'
               }}
             />
             <div 
@@ -268,7 +268,7 @@ export default function ProfilePage() {
                 width: '48px',
                 height: '48px',
                 margin: '0 auto 16px',
-                color: '#1DB954'
+                color: '#7209B7'
               }}
             />
             <div 
@@ -391,7 +391,7 @@ export default function ProfilePage() {
                       width: '32px',
                       height: '32px',
                       marginLeft: '16px',
-                      color: '#1DB954'
+                      color: '#7209B7'
                     }}
                   />
                 </h2>

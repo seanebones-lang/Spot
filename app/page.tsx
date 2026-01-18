@@ -184,7 +184,7 @@ export default function HomePage() {
                       style={{
                         top: '8px',
                         right: '8px',
-                        backgroundColor: '#1DB954',
+                        backgroundColor: '#7209B7',
                         borderRadius: '50%',
                         padding: '4px',
                         zIndex: 1
@@ -464,7 +464,7 @@ export default function HomePage() {
                       style={{
                         top: '8px',
                         right: '8px',
-                        backgroundColor: '#1DB954',
+                        backgroundColor: '#7209B7',
                         borderRadius: '50%',
                         padding: '4px',
                         zIndex: 1
@@ -495,7 +495,7 @@ export default function HomePage() {
                     fontSize: '14px',
                     lineHeight: '20px',
                     fontWeight: 600,
-                    color: currentTrack?.id === track.id ? '#1DB954' : '#FFFFFF',
+                    color: currentTrack?.id === track.id ? '#7209B7' : '#FFFFFF',
                     marginBottom: '4px'
                   }}
                 >

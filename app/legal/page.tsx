@@ -179,7 +179,7 @@ export default function LegalHubPage() {
                       transition: 'color 200ms ease-out'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#1DB954';
+                      e.currentTarget.style.color = '#7209B7';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.color = '#FFFFFF';
@@ -204,7 +204,7 @@ export default function LegalHubPage() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '8px',
-                      color: '#1DB954',
+                      color: '#7209B7',
                       fontSize: '14px',
                       lineHeight: '20px',
                       fontWeight: 600

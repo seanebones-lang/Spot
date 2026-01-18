@@ -116,7 +116,7 @@ export default function AffirmationsPage() {
                 height: '24px',
                 borderRadius: '12px',
                 appearance: 'none',
-                backgroundColor: dailyReminder ? '#1DB954' : '#282828',
+                backgroundColor: dailyReminder ? '#7209B7' : '#282828',
                 cursor: 'pointer',
                 transition: 'background-color 200ms ease-out',
                 position: 'relative'
@@ -155,7 +155,7 @@ export default function AffirmationsPage() {
             onClick={() => setSelectedCategory(null)}
             className={`rounded-full font-medium transition-all ${
               selectedCategory === null
-                ? 'bg-spotify-green text-black hover:bg-[#1ed760]'
+                ? 'bg-spotify-green text-black hover:bg-[#8a1dd0]'
                 : 'bg-spotify-light-gray text-white hover:bg-spotify-dark-gray'
             }`}
             style={{
@@ -166,21 +166,21 @@ export default function AffirmationsPage() {
               fontWeight: 700,
               letterSpacing: '0.05em',
               transition: 'all 200ms ease-out',
-              backgroundColor: selectedCategory === null ? '#1DB954' : '#282828',
+              backgroundColor: selectedCategory === null ? '#7209B7' : '#282828',
               color: selectedCategory === null ? '#000000' : '#FFFFFF',
               border: 'none',
               cursor: 'pointer'
             }}
             onMouseEnter={(e) => {
               if (selectedCategory === null) {
-                e.currentTarget.style.backgroundColor = '#1ed760';
+                e.currentTarget.style.backgroundColor = '#8a1dd0';
               } else {
                 e.currentTarget.style.backgroundColor = '#3e3e3e';
               }
             }}
             onMouseLeave={(e) => {
               if (selectedCategory === null) {
-                e.currentTarget.style.backgroundColor = '#1DB954';
+                e.currentTarget.style.backgroundColor = '#7209B7';
               } else {
                 e.currentTarget.style.backgroundColor = '#282828';
               }
@@ -343,7 +343,7 @@ export default function AffirmationsPage() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '8px',
-                      color: '#1DB954',
+                      color: '#7209B7',
                       fontSize: '14px',
                       lineHeight: '20px',
                       backgroundColor: 'transparent',

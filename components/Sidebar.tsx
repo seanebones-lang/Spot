@@ -418,7 +418,7 @@ export default function Sidebar() {
                       style={{ 
                         width: '14px',
                         height: '14px',
-                        color: isPinned ? '#1DB954' : 'inherit'
+                        color: isPinned ? '#7209B7' : 'inherit'
                       }}
                     />
                   </button>

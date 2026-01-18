@@ -148,7 +148,7 @@ export default function UserMenu({
           onClick={() => setLoginModalOpen(true)}
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200",
-            "bg-spotify-green hover:bg-[#1ed760] text-black font-bold text-sm"
+            "bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold text-sm"
           )}
         >
           <LogIn size={16} />
