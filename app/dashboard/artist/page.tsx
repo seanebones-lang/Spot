@@ -736,7 +736,7 @@ export default function ArtistDashboardPage() {
           </span>
           <div
             role="switch"
-            aria-checked={autoRefresh.toString()}
+            aria-checked={autoRefresh}
             aria-label="Auto-refresh statistics"
             onClick={() => setAutoRefresh(!autoRefresh)}
             style={{
