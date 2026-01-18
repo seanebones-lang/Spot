@@ -92,12 +92,20 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
     <div className="flex items-center gap-2 w-32">
       <button
         onClick={handleMute}
+        aria-label={volume === 0 ? 'Unmute' : 'Mute'}
+        aria-pressed={volume === 0}
         className="text-spotify-text-gray hover:text-white transition-colors"
       >
         {volume === 0 ? <VolumeX size={20} /> : <Volume2 size={20} />}
       </button>
       <div
         ref={barRef}
+        role="slider"
+        aria-label="Volume"
+        aria-valuenow={volume}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-orientation="horizontal"
         className="flex-1 h-1 bg-spotify-text-gray/30 rounded-full cursor-pointer relative group touch-none"
         onMouseDown={(e) => {
           setIsDragging(true);

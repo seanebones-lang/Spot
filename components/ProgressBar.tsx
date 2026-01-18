@@ -127,6 +127,11 @@ export default function ProgressBar({ progress, duration, currentTime, onSeek }:
       </span>
       <div
         ref={barRef}
+        role="progressbar"
+        aria-valuenow={progress}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={`Progress: ${formatDuration(currentTime)} of ${formatDuration(duration)}`}
         className="flex-1 h-1 bg-spotify-text-gray/30 rounded-full cursor-pointer relative group touch-none"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}

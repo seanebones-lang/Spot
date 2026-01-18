@@ -161,7 +161,7 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
           )}
           {queue.map((track, index) => (
             <div
-              key={track.id}
+              key={`${track.id}-${index}`}
               draggable
               onDragStart={() => handleDragStart(index)}
               onDragOver={(e) => handleDragOver(e, index)}

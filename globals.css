@@ -1,0 +1,14 @@
+@import url('https://assets.website-files.com/62d5ec0b9e7676278af9e793/64d81d2c4a4e7305d5c2b7a1_spotify-circular.css');
+:root {
+  --spotify-green: #1DB954;
+  --spotify-black: #000;
+  --spotify-dark: #181818;
+  --spotify-light: #b3b3b3;
+  --spacing-1: 4px;
+  --radius-md: 12px;
+}
+* { font-family: 'Circular Std Book', sans-serif; letter-spacing: -0.01em; }
+.card-hover { transition: transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94); }
+.card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.progress-shine { /* shine anim */ }
+@keyframes shine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
