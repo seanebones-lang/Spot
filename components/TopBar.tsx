@@ -557,11 +557,7 @@ export default function TopBar() {
 
         {/* User Menu Container - Independent element */}
         <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
-          <UserMenu 
-            userName="Bones" 
-            userEmail="bones@nextEleven.com" 
-            subscriptionTier={subscriptionTier} 
-          />
+          <UserMenu subscriptionTier={subscriptionTier} />
         </div>
       </div>
 

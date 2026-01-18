@@ -13,26 +13,30 @@ import {
   Music,
   Mic,
   BookOpen,
-  Radio
+  Radio,
+  LogIn
 } from 'lucide-react';
 import PremiumBadge from '@/components/PremiumBadge';
 import { cn } from '@/lib/utils';
+import { useAuthStore } from '@/stores/authStore';
+import LoginModal from './LoginModal';
 
 interface UserMenuProps {
-  userName?: string;
-  userEmail?: string;
   subscriptionTier?: 'Free' | 'Premium' | 'Artist';
 }
 
 export default function UserMenu({ 
-  userName = 'User', 
-  userEmail = 'user@example.com',
   subscriptionTier = 'Premium'
 }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const { user, isAuthenticated, logout } = useAuthStore();
+
+  const userName = user?.name || 'User';
+  const userEmail = user?.email || 'user@example.com';
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -119,7 +123,7 @@ export default function UserMenu({
       label: 'Log out',
       icon: LogOut,
       href: '/logout',
-      separator: false,
+      separator: true,
       danger: true,
     },
   ];
@@ -127,12 +131,36 @@ export default function UserMenu({
   const handleItemClick = (href: string) => {
     setIsOpen(false);
     if (href === '/logout') {
-      // Handle logout logic here
-      console.log('Logging out...');
+      logout();
+      router.push('/');
+    } else if (href === '/login') {
+      setLoginModalOpen(true);
     } else {
       router.push(href);
     }
   };
+
+  // Show login button if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <>
+        <button
+          onClick={() => setLoginModalOpen(true)}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200",
+            "bg-spotify-green hover:bg-[#1ed760] text-black font-bold text-sm"
+          )}
+        >
+          <LogIn size={16} />
+          Sign In
+        </button>
+        <LoginModal 
+          isOpen={loginModalOpen} 
+          onClose={() => setLoginModalOpen(false)} 
+        />
+      </>
+    );
+  }
 
   return (
     <div className="relative">
@@ -252,6 +280,10 @@ export default function UserMenu({
           </div>
         </div>
       )}
+      <LoginModal 
+        isOpen={loginModalOpen} 
+        onClose={() => setLoginModalOpen(false)} 
+      />
     </div>
   );
 }

@@ -2,13 +2,29 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
+import { requireAuth } from '@/lib/auth';
 
 /**
  * API Route for Submitting Track Upload for Review
  * Handles track submission with file uploads (audio + cover art) and all metadata
+ * Requires authentication
  */
 export async function POST(request: NextRequest) {
   try {
+    // Require authentication
+    let user;
+    try {
+      user = requireAuth(request);
+    } catch (error) {
+      return NextResponse.json(
+        { error: 'Authentication required. Please log in to submit tracks.' },
+        { status: 401 }
+      );
+    }
+
+    // Check if user is an approved artist
+    // In production, check user.role === 'artist' && user.artistApproved === true
+    // For now, allow any authenticated user
     // Parse FormData
     const formDataObj = await request.formData();
     
@@ -180,6 +196,8 @@ export async function POST(request: NextRequest) {
     // In production, you would save this to a database
     const submissionRecord = {
       id: submissionId,
+      userId: user.userId, // Link to authenticated user
+      userEmail: user.email,
       releaseType,
       trackName: releaseType === 'single' ? formData.metadata.trackName : formData.metadata.albumName,
       albumName: releaseType !== 'single' ? formData.metadata.albumName : null,
