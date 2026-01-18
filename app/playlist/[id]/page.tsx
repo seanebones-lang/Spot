@@ -137,20 +137,23 @@ export default function PlaylistPage() {
 
   return (
     <div 
-      className="bg-gradient-to-b from-purple-600/20 to-spotify-dark min-h-full"
+      className="min-h-full relative"
       style={{
-        background: 'linear-gradient(180deg, rgba(114, 9, 183, 0.2) 0%, #121212 100%)',
         minHeight: '100vh',
-        backgroundColor: '#121212'
+        backgroundColor: '#121212',
+        position: 'relative'
       }}
     >
-      {/* Header - Exact Spotify Style */}
+      {/* Header - Exact Spotify Style with Gradient Background */}
       <div 
-        className="p-8 pb-4 flex items-end gap-6"
+        className="p-8 pb-4 flex items-end gap-6 relative"
         style={{
           padding: '32px',
           paddingBottom: '16px',
-          gap: '24px'
+          gap: '24px',
+          position: 'relative',
+          background: 'linear-gradient(rgb(83, 83, 83) 0%, transparent 100%)',
+          minHeight: '547px'
         }}
       >
         <img
@@ -206,12 +209,19 @@ export default function PlaylistPage() {
             </p>
           )}
           <div 
-            className="flex items-center gap-2 text-sm text-spotify-text-gray"
+            className="flex items-center"
             style={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
+              fontSize: '13px',
+              fontWeight: 400,
+              lineHeight: '18px',
+              height: '18px',
+              color: '#FFFFFF',
               gap: '8px',
-              fontSize: '14px',
-              lineHeight: '20px',
-              color: '#B3B3B3'
+              width: '687px',
+              transition: 'all'
             }}
           >
             <span 

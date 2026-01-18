@@ -28,6 +28,7 @@ import KeyboardShortcutsPanel from '@/components/KeyboardShortcutsPanel';
 import SearchDropdown from '@/components/SearchDropdown';
 import BackForwardButtons from '@/components/BackForwardButtons';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export default function TopBar() {
   const router = useRouter();
@@ -78,25 +79,83 @@ export default function TopBar() {
       style={{ 
         height: '56px',
         backgroundColor: '#000000',
-        width: '100vw'
+        width: '100vw',
+        overflow: 'visible',
+        zIndex: 2
       }}
     >
       <div 
-        className="flex items-center h-full"
+        className="flex items-center h-full relative"
         style={{
-          paddingLeft: `${leftSidebarWidth + 24}px`,
-          paddingRight: `${rightSidebarOpen ? rightSidebarWidth + 24 : 24}px`
+          paddingLeft: `${leftSidebarWidth + 16}px`,
+          paddingRight: `${rightSidebarOpen ? rightSidebarWidth + 16 : 16}px`,
+          paddingTop: '16px',
+          paddingBottom: '16px',
+          gap: '16px',
+          width: '100%'
         }}
       >
-        {/* Left Section: Back/Forward + Navigation Links */}
-        <div className="flex items-center h-full flex-shrink-0">
-          {/* Back/Forward Buttons */}
-          <div className="flex items-center mr-4">
+        {/* Logo - Independent element (Spotify: top=16px, left=16px, width=88px, height=24px) */}
+        <Link 
+          href="/"
+          className={cn(
+            "flex items-center justify-center transition-opacity duration-200 gpu-accelerated",
+            pathname === '/' && "active"
+          )}
+          style={{
+            height: '24px',
+            width: '113px',
+            position: 'static',
+            opacity: 1,
+            flexShrink: 0,
+            flexGrow: 0,
+            flexBasis: '113px'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = '0.7';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = '1';
+          }}
+        >
+          <Image
+            src="/seanfy.png"
+            alt="EmPulse Music"
+            width={113}
+            height={34}
+            priority
+            style={{
+              width: '113px',
+              height: '24px',
+              objectFit: 'contain',
+              display: 'inline-block'
+            }}
+          />
+        </Link>
+        
+        {/* Left Section: Back/Forward + Navigation Links - Elements flow with gap */}
+        <div 
+          className="flex items-center h-full" 
+          style={{ 
+            flexShrink: 0, 
+            flexGrow: 0,
+            gap: '32px'
+          }}
+        >
+          {/* Back/Forward Buttons - Independent element */}
+          <div style={{ flexShrink: 0 }}>
             <BackForwardButtons />
           </div>
           
-          {/* Navigation Links - Exact Spotify: No icons, just text */}
-          <nav className="flex items-center" style={{ gap: '32px', marginRight: '32px' }}>
+          {/* Navigation Links - Independent elements with gap spacing */}
+          <nav 
+            className="flex items-center" 
+            style={{ 
+              gap: '32px', 
+              flexShrink: 0,
+              flexGrow: 0
+            }}
+          >
             {headerNavLinks.map((link) => {
               const isActive = pathname === link.href || 
                 (link.href === '/' && pathname === '/') ||
@@ -111,7 +170,9 @@ export default function TopBar() {
                     fontSize: '14px',
                     fontWeight: 700,
                     lineHeight: '16px',
-                    color: isActive ? '#FFFFFF' : '#B3B3B3'
+                    color: isActive ? '#FFFFFF' : '#B3B3B3',
+                    flexShrink: 0,
+                    whiteSpace: 'nowrap'
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
@@ -131,15 +192,15 @@ export default function TopBar() {
           </nav>
         </div>
         
-        {/* Center Section: Search Bar - Exact Spotify Measurements */}
+        {/* Center Section: Search Bar - Flex-1 with natural spacing */}
         <div 
-          className="flex-1 flex justify-center min-w-0"
+          className="flex justify-center min-w-0"
           style={{
-            flex: '1 1 40%',
+            flex: '1 1 auto',
             justifyContent: 'center',
             minWidth: 0,
-            marginLeft: '32px',
-            marginRight: '32px'
+            flexShrink: 1,
+            flexGrow: 1
           }}
         >
           <div 
@@ -212,11 +273,13 @@ export default function TopBar() {
           </div>
         </div>
 
-        {/* Right Section: Premium/Upgrade + Downloads + Notifications + Settings + User Menu */}
+        {/* Right Section: Premium/Upgrade + Downloads + Notifications + Settings + User Menu - Independent elements with gap */}
         <div 
-          className="flex items-center h-full flex-shrink-0" 
+          className="flex items-center h-full ml-auto" 
           style={{ 
-            gap: '8px'
+            gap: '8px',
+            flexShrink: 0,
+            flexGrow: 0
           }}
         >
         {/* Premium/Upgrade Link - Conditional based on tier */}
@@ -492,7 +555,7 @@ export default function TopBar() {
           )}
         </button>
 
-        {/* User Menu */}
+        {/* User Menu - Part of Right Section Group */}
         <div style={{ marginLeft: '8px' }}>
           <UserMenu 
             userName="Bones" 
