@@ -19,6 +19,8 @@ export default function HomePage() {
   const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying, addToQueue, addToRecentlyPlayed, recentlyPlayed } = usePlayerStore();
   const [error, setError] = useState<string | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  // Issue-4: Track image load errors
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const completed = localStorage.getItem('onboarding_completed');
@@ -170,12 +172,19 @@ export default function HomePage() {
                 }}
               >
                 <div className="relative mb-3" style={{ marginBottom: '12px' }}>
-                  <img
-                    src={track.coverArt}
-                    alt={track.name}
-                    className="w-full aspect-square object-cover rounded"
-                    style={{ borderRadius: '4px', aspectRatio: '1' }}
-                  />
+                  {imageErrors.has(track.id) ? (
+                    <div className="w-full aspect-square bg-spotify-light-gray rounded flex items-center justify-center" style={{ borderRadius: '4px', aspectRatio: '1' }}>
+                      <Music size={32} className="text-spotify-text-gray" />
+                    </div>
+                  ) : (
+                    <img
+                      src={track.coverArt}
+                      alt={track.name}
+                      className="w-full aspect-square object-cover rounded"
+                      style={{ borderRadius: '4px', aspectRatio: '1' }}
+                      onError={() => setImageErrors(prev => new Set(prev).add(track.id))}
+                    />
+                  )}
                   <div 
                     className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{
@@ -317,12 +326,19 @@ export default function HomePage() {
                 }}
               >
                 <div className="relative mb-3" style={{ marginBottom: '12px', width: '168px', height: '168px' }}>
-                  <img
-                    src={playlist.coverArt}
-                    alt={playlist.name}
-                    className="w-full h-full object-cover rounded"
-                    style={{ borderRadius: '4px' }}
-                  />
+                  {imageErrors.has(playlist.id) ? (
+                    <div className="w-full h-full bg-spotify-light-gray rounded flex items-center justify-center" style={{ borderRadius: '4px' }}>
+                      <Music size={32} className="text-spotify-text-gray" />
+                    </div>
+                  ) : (
+                    <img
+                      src={playlist.coverArt}
+                      alt={playlist.name}
+                      className="w-full h-full object-cover rounded"
+                      style={{ borderRadius: '4px' }}
+                      onError={() => setImageErrors(prev => new Set(prev).add(playlist.id))}
+                    />
+                  )}
                   <div 
                     className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{
@@ -445,12 +461,19 @@ export default function HomePage() {
                   backgroundColor: '#282828'
                 }}
               >
-                <img
-                  src={track.coverArt}
-                  alt={track.name}
-                  className="w-full h-full object-cover rounded"
-                  style={{ borderRadius: '4px' }}
-                />
+                {imageErrors.has(`trending-${track.id}`) ? (
+                  <div className="w-full h-full bg-spotify-dark-gray rounded flex items-center justify-center" style={{ borderRadius: '4px' }}>
+                    <Music size={20} className="text-spotify-text-gray" />
+                  </div>
+                ) : (
+                  <img
+                    src={track.coverArt}
+                    alt={track.name}
+                    className="w-full h-full object-cover rounded"
+                    style={{ borderRadius: '4px' }}
+                    onError={() => setImageErrors(prev => new Set(prev).add(`trending-${track.id}`))}
+                  />
+                )}
                 <div 
                   className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/cover:opacity-100 transition-opacity bg-black/30 rounded"
                   style={{
@@ -581,12 +604,19 @@ export default function HomePage() {
                     borderRadius: '50%'
                   }}
                 >
-                  <img
-                    src={artist.image}
-                    alt={artist.name}
-                    className="w-full h-full object-cover"
-                    style={{ borderRadius: '50%' }}
-                  />
+                  {imageErrors.has(`artist-${artist.id}`) ? (
+                    <div className="w-full h-full bg-spotify-light-gray rounded-full flex items-center justify-center">
+                      <Music size={48} className="text-spotify-text-gray" />
+                    </div>
+                  ) : (
+                    <img
+                      src={artist.image}
+                      alt={artist.name}
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '50%' }}
+                      onError={() => setImageErrors(prev => new Set(prev).add(`artist-${artist.id}`))}
+                    />
+                  )}
                 </div>
                 <h3 
                   className="font-semibold text-sm truncate"
