@@ -107,7 +107,10 @@ export default function RadioPage() {
       audioPlayer.setOnLoadCallback(() => {
         console.log('✅ Radio station loaded');
         useRadioStore.getState().setIsLoading(false);
-        if (isPlaying) {
+        // Check current playing state from store (not closure) to handle async state updates
+        const currentIsPlaying = useRadioStore.getState().isPlaying;
+        if (currentIsPlaying) {
+          console.log('▶️ Auto-playing radio station');
           audioPlayer.play();
           setPlayerIsPlaying(true);
         }
@@ -133,8 +136,9 @@ export default function RadioPage() {
           }
         );
         
-        // Auto-play the new stream if currently playing
-        if (isPlaying) {
+        // Auto-play the new stream if currently playing (check store value)
+        const currentIsPlaying = useRadioStore.getState().isPlaying;
+        if (currentIsPlaying) {
           audioPlayer.play();
         }
       };
