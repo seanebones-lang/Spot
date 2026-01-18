@@ -6,6 +6,7 @@ import { checkRateLimit, getClientIdentifier } from '@/lib/rateLimit';
 import { logger, generateCorrelationId } from '@/lib/logger';
 import { generateTokenPair } from '@/lib/auth';
 import { sendVerificationEmail } from '@/lib/email';
+import { getEnv } from '@/lib/env';
 import prisma from '@/lib/db';
 
 /**

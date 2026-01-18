@@ -382,54 +382,6 @@ export async function POST(request: NextRequest) {
         });
       }
 
-    // Sanitize metadata fields
-    if (formData.metadata) {
-      if (formData.metadata.artistFullLegalName) {
-        formData.metadata.artistFullLegalName = sanitizeString(formData.metadata.artistFullLegalName);
-      }
-      // Sanitize other string fields as needed
-    }
-
-      // Store checksums in metadata for integrity verification
-      const metadataWithChecksums = {
-        ...(formData.metadata || {}),
-        fileChecksums: {
-          audio: releaseType === 'single' ? audioFileChecksum : audioFileChecksums,
-          coverArt: coverArtChecksum,
-        },
-      };
-
-      // Save submission to database
-      const submissionRecord = await prisma.trackSubmission.create({
-        data: {
-          submissionId,
-          userId: user.userId,
-          releaseType: releaseType.toUpperCase() as 'SINGLE' | 'EP' | 'LP',
-          trackName: releaseType === 'single' ? formData.metadata.trackName : null,
-          albumName: releaseType !== 'single' ? formData.metadata.albumName : null,
-          artistName: formData.metadata.artistFullLegalName,
-          audioFileUrl: releaseType === 'single' ? audioFileUrl : null,
-          audioFileUrls: releaseType !== 'single' ? audioFileUrls : [],
-          audioFileName: releaseType === 'single' ? (audioFile?.name || null) : null,
-          audioFileSize: releaseType === 'single' ? (audioFile?.size || null) : null,
-          audioFileType: releaseType === 'single' ? (audioFile?.type || null) : null,
-          coverArtUrl: coverArtUrl || null,
-          coverArtFileName: coverArtFile?.name || null,
-          coverArtFileSize: coverArtFile?.size || null,
-          status: 'PUBLISHED',
-          publishedAt: new Date(),
-          // Store complex objects as JSON (including checksums)
-          metadata: metadataWithChecksums,
-          moodTags: formData.artistMoodTags || null,
-          tracks: releaseType !== 'single' ? (formData.tracks || null) : null,
-          composers: formData.composers || null,
-          lyricists: formData.lyricists || null,
-          publishers: formData.publishers || null,
-          rightsMetadata: formData.rightsMetadata || null,
-          legalWarranties: formData.legalWarranties || null,
-        },
-      });
-
     } catch (uploadError) {
       // If cloud storage is not configured, return helpful error
       if (uploadError instanceof Error && uploadError.message.includes('Cloud storage not configured')) {
@@ -446,6 +398,54 @@ export async function POST(request: NextRequest) {
       // Re-throw other errors to be caught by outer catch
       throw uploadError;
     }
+
+    // Sanitize metadata fields
+    if (formData.metadata) {
+      if (formData.metadata.artistFullLegalName) {
+        formData.metadata.artistFullLegalName = sanitizeString(formData.metadata.artistFullLegalName);
+      }
+      // Sanitize other string fields as needed
+    }
+
+    // Store checksums in metadata for integrity verification
+    const metadataWithChecksums = {
+      ...(formData.metadata || {}),
+      fileChecksums: {
+        audio: releaseType === 'single' ? audioFileChecksum : audioFileChecksums,
+        coverArt: coverArtChecksum,
+      },
+    };
+
+    // Save submission to database
+    const submissionRecord = await prisma.trackSubmission.create({
+      data: {
+        submissionId,
+        userId: user.userId,
+        releaseType: releaseType.toUpperCase() as 'SINGLE' | 'EP' | 'LP',
+        trackName: releaseType === 'single' ? formData.metadata.trackName : null,
+        albumName: releaseType !== 'single' ? formData.metadata.albumName : null,
+        artistName: formData.metadata.artistFullLegalName,
+        audioFileUrl: releaseType === 'single' ? audioFileUrl : null,
+        audioFileUrls: releaseType !== 'single' ? audioFileUrls : [],
+        audioFileName: releaseType === 'single' ? (audioFile?.name || null) : null,
+        audioFileSize: releaseType === 'single' ? (audioFile?.size || null) : null,
+        audioFileType: releaseType === 'single' ? (audioFile?.type || null) : null,
+        coverArtUrl: coverArtUrl || null,
+        coverArtFileName: coverArtFile?.name || null,
+        coverArtFileSize: coverArtFile?.size || null,
+        status: 'PUBLISHED',
+        publishedAt: new Date(),
+        // Store complex objects as JSON (including checksums)
+        metadata: metadataWithChecksums,
+        moodTags: formData.artistMoodTags || null,
+        tracks: releaseType !== 'single' ? (formData.tracks || null) : null,
+        composers: formData.composers || null,
+        lyricists: formData.lyricists || null,
+        publishers: formData.publishers || null,
+        rightsMetadata: formData.rightsMetadata || null,
+        legalWarranties: formData.legalWarranties || null,
+      },
+    });
 
     // Log publication
     const totalFileSize = releaseType === 'single' 
