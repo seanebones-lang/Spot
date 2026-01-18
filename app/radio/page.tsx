@@ -68,7 +68,10 @@ export default function RadioPage() {
     // Convert radio station to Track format for system player
     const createTrackFromStation = (station: RadioStation): Track => {
       const randomStart = Math.floor(Math.random() * station.duration);
-      const streamUrl = `/api/radio/stream/${station.id}?start=${randomStart}&random=false`;
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const streamUrl = apiUrl
+        ? `${apiUrl}/api/radio/stream/${station.id}?start=${randomStart}&random=false`
+        : `/api/radio/stream/${station.id}?start=${randomStart}&random=false`;
       
       return {
         id: `radio-${station.id}`,

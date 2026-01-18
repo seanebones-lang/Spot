@@ -65,10 +65,16 @@ export class AudiophileAudioPipeline {
         if (existingSource && typeof existingSource.disconnect === 'function') {
           existingSource.disconnect();
         }
+        // Also close the audio context if it exists
+        if (this.audioContext && this.audioContext.state !== 'closed') {
+          await this.audioContext.close();
+        }
       } catch (e) {
-        // Ignore errors
+        console.warn('Error during cleanup:', e);
       }
       delete (audioElement as any)._mediaElementSourceNode;
+      // Reset audio context
+      this.audioContext = null;
     }
     
     this.audioElement = audioElement;
@@ -295,6 +301,32 @@ export class AudiophileAudioPipeline {
    * Cleanup and disconnect all nodes
    */
   async cleanup(): Promise<void> {
+    // Disconnect source if it exists
+    if (this.source) {
+      try {
+        this.source.disconnect();
+      } catch (e) {
+        // Ignore disconnect errors
+      }
+      this.source = null;
+    }
+    
+    // Remove reference from audio element
+    if (this.audioElement) {
+      delete (this.audioElement as any)._mediaElementSourceNode;
+    }
+    
+    // Close audio context
+    if (this.audioContext && this.audioContext.state !== 'closed') {
+      try {
+        await this.audioContext.close();
+      } catch (e) {
+        console.warn('Error closing audio context:', e);
+      }
+    }
+    
+    this.audioContext = null;
+    this.audioElement = null;
     if (this.source) {
       try {
         this.source.disconnect();
