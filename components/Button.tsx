@@ -58,12 +58,12 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   /**
    * Icon to display before text (from lucide-react)
    */
-  icon?: React.ComponentType<{ size?: number; className?: string }>;
+  icon?: React.ComponentType<any>;
   
   /**
    * Icon to display after text (from lucide-react)
    */
-  iconRight?: React.ComponentType<{ size?: number; className?: string }>;
+  iconRight?: React.ComponentType<any>;
   
   /**
    * Button content (children)
