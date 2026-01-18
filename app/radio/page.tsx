@@ -15,26 +15,114 @@ const radioStations = [
 
 export default function RadioPage() {
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-8">Radio Stations</h1>
+    <div 
+      className="p-8"
+      style={{
+        padding: '32px',
+        backgroundColor: '#121212',
+        minHeight: '100vh',
+        color: '#FFFFFF'
+      }}
+    >
+      <h1 
+        className="text-4xl font-bold mb-8"
+        style={{
+          fontSize: '32px',
+          lineHeight: '36px',
+          fontWeight: 700,
+          color: '#FFFFFF',
+          marginBottom: '32px'
+        }}
+      >
+        Radio Stations
+      </h1>
 
-      {/* Featured Stations */}
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">Featured Stations</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      {/* Featured Stations - Exact Spotify Style */}
+      <section className="mb-8" style={{ marginBottom: '32px' }}>
+        <h2 
+          className="text-2xl font-bold mb-4"
+          style={{
+            fontSize: '24px',
+            lineHeight: '28px',
+            fontWeight: 700,
+            color: '#FFFFFF',
+            marginBottom: '16px'
+          }}
+        >
+          Featured Stations
+        </h2>
+        <div 
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+          style={{ gap: '16px' }}
+        >
           {radioStations.map((station) => {
             const Icon = station.icon || RadioIcon;
             return (
               <div
                 key={station.id}
-                className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors group cursor-pointer"
+                className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-dark-gray transition-all duration-200 group cursor-pointer"
+                style={{
+                  backgroundColor: '#181818',
+                  borderRadius: '8px',
+                  padding: '16px',
+                  transition: 'background-color 200ms ease-out'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#282828';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#181818';
+                }}
               >
-                <div className="w-full aspect-square bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg mb-3 flex items-center justify-center">
-                  <Icon size={32} className="text-white opacity-50" />
+                <div 
+                  className="w-full aspect-square bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg mb-3 flex items-center justify-center"
+                  style={{
+                    borderRadius: '4px',
+                    aspectRatio: '1',
+                    marginBottom: '12px',
+                    background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)'
+                  }}
+                >
+                  <Icon 
+                    size={32} 
+                    className="text-white opacity-50"
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      color: '#FFFFFF',
+                      opacity: 0.5
+                    }}
+                  />
                 </div>
-                <h3 className="font-semibold text-sm truncate mb-1">{station.name}</h3>
-                <p className="text-xs text-spotify-text-gray">{station.genre}</p>
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity mt-2">
+                <h3 
+                  className="font-semibold text-sm truncate mb-1"
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 600,
+                    color: '#FFFFFF',
+                    marginBottom: '4px'
+                  }}
+                >
+                  {station.name}
+                </h3>
+                <p 
+                  className="text-xs text-spotify-text-gray"
+                  style={{
+                    fontSize: '13px',
+                    lineHeight: '16px',
+                    color: '#B3B3B3'
+                  }}
+                >
+                  {station.genre}
+                </p>
+                <div 
+                  className="opacity-0 group-hover:opacity-100 transition-opacity mt-2"
+                  style={{
+                    marginTop: '8px',
+                    transition: 'opacity 200ms ease-out'
+                  }}
+                >
                   <PlayButton isPlaying={false} onClick={() => {}} size="sm" />
                 </div>
               </div>

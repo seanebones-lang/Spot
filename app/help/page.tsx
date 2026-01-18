@@ -88,49 +88,289 @@ const suggestedArticles = [
 
 export default function HelpPage() {
   return (
-    <div className="min-h-screen bg-spotify-dark text-white">
-      {/* Header */}
-      <div className="bg-spotify-dark-gray border-b border-white/10 px-8 py-4">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-6">
-            <h1 className="text-2xl font-bold">EmPulse Music</h1>
-            <div className="flex items-center gap-4 text-sm">
-              <Link href="/help" className="text-white font-medium">Help</Link>
-              <Link href="/support" className="text-spotify-text-gray hover:text-white">Chat</Link>
-              <Link href="#" className="text-spotify-text-gray hover:text-white">Ideas</Link>
+    <div 
+      className="min-h-screen bg-spotify-dark text-white"
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#121212',
+        color: '#FFFFFF'
+      }}
+    >
+      {/* Header - Exact Spotify Style */}
+      <div 
+        className="bg-spotify-dark-gray border-b border-white/10 px-8 py-4"
+        style={{
+          backgroundColor: '#181818',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          padding: '16px 32px'
+        }}
+      >
+        <div 
+          className="flex items-center justify-between max-w-7xl mx-auto"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            gap: '16px'
+          }}
+        >
+          <div 
+            className="flex items-center gap-6"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '24px'
+            }}
+          >
+            <h1 
+              className="text-2xl font-bold"
+              style={{
+                fontSize: '24px',
+                lineHeight: '28px',
+                fontWeight: 700,
+                color: '#FFFFFF'
+              }}
+            >
+              EmPulse Music
+            </h1>
+            <div 
+              className="flex items-center gap-4 text-sm"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                fontSize: '14px',
+                lineHeight: '20px'
+              }}
+            >
+              <Link 
+                href="/help" 
+                className="text-white font-medium"
+                style={{
+                  color: '#FFFFFF',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  transition: 'color 200ms ease-out'
+                }}
+              >
+                Help
+              </Link>
+              <Link 
+                href="/support" 
+                className="text-spotify-text-gray hover:text-white"
+                style={{
+                  color: '#B3B3B3',
+                  textDecoration: 'none',
+                  transition: 'color 200ms ease-out'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#B3B3B3';
+                }}
+              >
+                Chat
+              </Link>
+              <Link 
+                href="#" 
+                className="text-spotify-text-gray hover:text-white"
+                style={{
+                  color: '#B3B3B3',
+                  textDecoration: 'none',
+                  transition: 'color 200ms ease-out'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#B3B3B3';
+                }}
+              >
+                Ideas
+              </Link>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <button className="text-spotify-text-gray hover:text-white">Log In</button>
+          <div 
+            className="flex items-center gap-4"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '16px'
+            }}
+          >
+            <button 
+              className="text-spotify-text-gray hover:text-white"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#B3B3B3',
+                fontSize: '14px',
+                lineHeight: '20px',
+                fontWeight: 400,
+                transition: 'color 200ms ease-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#FFFFFF';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#B3B3B3';
+              }}
+            >
+              Log In
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-8 py-12">
-        {/* Main Heading */}
-        <div className="mb-12">
-          <h2 className="text-5xl font-bold mb-4">VISIT Our Community</h2>
-          <p className="text-xl text-spotify-text-gray mb-6">
+      <div 
+        className="max-w-7xl mx-auto px-8 py-12"
+        style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '48px 32px'
+        }}
+      >
+        {/* Main Heading - Exact Spotify Style */}
+        <div 
+          className="mb-12"
+          style={{ marginBottom: '48px' }}
+        >
+          <h2 
+            className="text-5xl font-bold mb-4"
+            style={{
+              fontSize: '48px',
+              lineHeight: '56px',
+              fontWeight: 900,
+              color: '#FFFFFF',
+              marginBottom: '16px'
+            }}
+          >
+            VISIT Our Community
+          </h2>
+          <p 
+            className="text-xl text-spotify-text-gray mb-6"
+            style={{
+              fontSize: '20px',
+              lineHeight: '28px',
+              color: '#B3B3B3',
+              marginBottom: '24px'
+            }}
+          >
             Have questions? Find answers from our worldwide Community of expert fans!
           </p>
-          <button className="bg-spotify-green hover:bg-spotify-green/80 text-black px-8 py-4 rounded-full font-bold text-lg transition-colors">
+          <button 
+            className="bg-spotify-green hover:bg-[#1ed760] text-black px-8 py-4 rounded-full font-bold text-lg transition-colors"
+            style={{
+              backgroundColor: '#1DB954',
+              color: '#000000',
+              padding: '16px 32px',
+              borderRadius: '500px',
+              fontSize: '16px',
+              lineHeight: '24px',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              transition: 'all 200ms ease-out',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#1ed760';
+              e.currentTarget.style.transform = 'scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
             Go to Community
           </button>
         </div>
 
-        {/* Suggested Articles */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold mb-4">Suggested Articles</h3>
-          <p className="text-spotify-text-gray mb-6">View top articles for help with common questions.</p>
-          <div className="space-y-3">
+        {/* Suggested Articles - Exact Spotify Style */}
+        <div 
+          className="mb-16"
+          style={{ marginBottom: '64px' }}
+        >
+          <h3 
+            className="text-3xl font-bold mb-4"
+            style={{
+              fontSize: '32px',
+              lineHeight: '36px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              marginBottom: '16px'
+            }}
+          >
+            Suggested Articles
+          </h3>
+          <p 
+            className="text-spotify-text-gray mb-6"
+            style={{
+              fontSize: '14px',
+              lineHeight: '20px',
+              color: '#B3B3B3',
+              marginBottom: '24px'
+            }}
+          >
+            View top articles for help with common questions.
+          </p>
+          <div 
+            className="space-y-3"
+            style={{ gap: '12px' }}
+          >
             {suggestedArticles.map((article, index) => (
               <Link
                 key={index}
                 href={article.href || '/help'}
-                className="flex items-center gap-3 p-4 bg-spotify-light-gray hover:bg-[#3e3e3e] rounded-lg transition-colors cursor-pointer group"
+                className="flex items-center gap-3 p-4 bg-spotify-light-gray hover:bg-spotify-dark-gray rounded-lg transition-colors cursor-pointer group"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  padding: '16px',
+                  backgroundColor: '#181818',
+                  borderRadius: '8px',
+                  transition: 'background-color 200ms ease-out',
+                  cursor: 'pointer',
+                  textDecoration: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#282828';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#181818';
+                }}
               >
-                <span className="text-spotify-green group-hover:translate-x-1 transition-transform">→</span>
-                <span className="text-white group-hover:underline">{article.title}</span>
+                <span 
+                  className="text-spotify-green group-hover:translate-x-1 transition-transform"
+                  style={{
+                    color: '#1DB954',
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                    transition: 'transform 200ms ease-out',
+                    flexShrink: 0
+                  }}
+                >
+                  →
+                </span>
+                <span 
+                  className="text-white group-hover:underline"
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 400,
+                    color: '#FFFFFF',
+                    transition: 'text-decoration 200ms ease-out'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+                  onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
+                >
+                  {article.title}
+                </span>
               </Link>
             ))}
           </div>

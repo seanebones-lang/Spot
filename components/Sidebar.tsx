@@ -93,37 +93,90 @@ export default function Sidebar() {
       </button>
 
       {/* Logo */}
-      <div className={cn("p-6", leftSidebarWidth <= 80 && "p-4")}>
-        <Link href="/" className="flex items-center">
+      <div 
+        className={cn("px-6 py-5", leftSidebarWidth <= 80 && "px-4 py-4")}
+        style={{ padding: leftSidebarWidth <= 80 ? '16px' : '20px 24px' }}
+      >
+        <Link 
+          href="/" 
+          className="flex items-center"
+          style={{ textDecoration: 'none' }}
+        >
           {leftSidebarWidth > 100 && (
-            <span className="text-xl font-bold whitespace-nowrap">EmPulse Music</span>
+            <span 
+              className="text-xl font-bold whitespace-nowrap"
+              style={{ 
+                fontSize: '24px',
+                lineHeight: '28px',
+                fontWeight: 700,
+                color: '#FFFFFF'
+              }}
+            >
+              EmPulse Music
+            </span>
           )}
         </Link>
       </div>
 
-      {/* Navigation */}
-      <nav className="px-3 mb-4">
+      {/* Navigation - Exact Spotify Styling */}
+      <nav className="px-2 mb-2" style={{ padding: '0 8px', marginBottom: '8px' }}>
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+          const isActive = pathname === item.href || 
+            (item.href === '/' && pathname === '/') ||
+            (item.href === '/search' && pathname?.startsWith('/search')) ||
+            (item.href === '/collection' && pathname?.startsWith('/collection'));
           return (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-4 px-4 py-3 rounded-md transition-colors mb-1 group relative",
+                "flex items-center rounded-md transition-colors group relative",
                 isActive 
                   ? "bg-spotify-light-gray text-white" 
-                  : "text-spotify-text-gray hover:text-white hover:bg-spotify-light-gray/50"
+                  : "text-spotify-text-gray hover:text-white hover:bg-white/10"
               )}
+              style={{
+                padding: '12px 16px',
+                borderRadius: '4px',
+                gap: '16px',
+                fontSize: '14px',
+                fontWeight: isActive ? 700 : 400,
+                lineHeight: '20px',
+                marginBottom: '4px',
+                textDecoration: 'none'
+              }}
               title={leftSidebarCollapsed ? item.label : undefined}
             >
-              <Icon size={24} className="flex-shrink-0" />
+              <Icon 
+                size={24} 
+                className="flex-shrink-0" 
+                style={{ width: '24px', height: '24px', flexShrink: 0 }}
+              />
               {leftSidebarWidth > 100 && (
-                <span className="font-medium whitespace-nowrap">{item.label}</span>
+                <span 
+                  className="whitespace-nowrap"
+                  style={{ 
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: isActive ? 700 : 400,
+                    color: isActive ? '#FFFFFF' : 'inherit'
+                  }}
+                >
+                  {item.label}
+                </span>
               )}
               {leftSidebarWidth <= 100 && (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-spotify-dark-gray text-white text-sm rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-opacity z-50">
+                <span 
+                  className="absolute left-full ml-2 px-2 py-1 bg-spotify-dark-gray text-white text-sm rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-opacity z-50 shadow-lg"
+                  style={{
+                    fontSize: '14px',
+                    padding: '6px 12px',
+                    borderRadius: '4px',
+                    backgroundColor: '#181818',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)'
+                  }}
+                >
                   {item.label}
                 </span>
               )}
@@ -149,16 +202,47 @@ export default function Sidebar() {
         </div>
       )}
 
-      {/* Playlists Section */}
+      {/* Playlists Section - Exact Spotify Styling */}
       {leftSidebarWidth > 100 && sortedPlaylists.length > 0 && (
-        <div className="flex-1 overflow-y-auto px-3 mb-4 custom-scrollbar">
-          <div className="flex items-center justify-between mb-2 px-2">
-            <h3 className="text-xs font-bold text-spotify-text-gray uppercase tracking-wider">
+        <div 
+          className="flex-1 overflow-y-auto px-2 mb-2 custom-scrollbar"
+          style={{ 
+            padding: '0 8px',
+            marginBottom: '8px',
+            minHeight: 0
+          }}
+        >
+          <div 
+            className="flex items-center justify-between mb-2 px-2"
+            style={{ 
+              padding: '0 8px',
+              marginBottom: '8px'
+            }}
+          >
+            <h3 
+              className="text-xs font-bold text-spotify-text-gray uppercase tracking-wider"
+              style={{
+                fontSize: '11px',
+                lineHeight: '16px',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+                color: '#B3B3B3',
+                textTransform: 'uppercase'
+              }}
+            >
               Playlists
             </h3>
             <Link
               href="/collection"
               className="text-spotify-text-gray hover:text-white transition-colors text-xs"
+              style={{
+                fontSize: '11px',
+                lineHeight: '16px',
+                color: '#B3B3B3',
+                textDecoration: 'none'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#B3B3B3'}
             >
               Show all
             </Link>
@@ -171,22 +255,57 @@ export default function Sidebar() {
                 <div
                   key={playlist.id}
                   className="group flex items-center gap-2"
+                  style={{ gap: '8px' }}
                 >
                   <Link
                     href={`/playlist/${playlist.id}`}
                     className={cn(
-                      "flex-1 flex items-center gap-2 px-2 py-1.5 rounded transition-colors min-w-0",
+                      "flex-1 flex items-center gap-2 rounded transition-colors min-w-0",
                       isActive
                         ? "bg-spotify-light-gray text-white"
-                        : "text-spotify-text-gray hover:text-white hover:bg-spotify-light-gray/50"
+                        : "text-spotify-text-gray hover:text-white hover:bg-white/10"
                     )}
+                    style={{
+                      padding: '6px 8px',
+                      borderRadius: '4px',
+                      gap: '8px',
+                      fontSize: '14px',
+                      lineHeight: '20px',
+                      fontWeight: isActive ? 700 : 400,
+                      textDecoration: 'none',
+                      backgroundColor: isActive ? '#282828' : 'transparent'
+                    }}
                   >
-                    <div className="w-4 h-4 bg-spotify-light-gray rounded flex-shrink-0">
+                    <div 
+                      className="w-4 h-4 bg-spotify-light-gray rounded flex-shrink-0"
+                      style={{ 
+                        width: '16px',
+                        height: '16px',
+                        borderRadius: '2px',
+                        backgroundColor: playlist.coverArt ? 'transparent' : '#282828',
+                        overflow: 'hidden'
+                      }}
+                    >
                       {playlist.coverArt && (
-                        <img src={playlist.coverArt} alt="" className="w-full h-full object-cover rounded" />
+                        <img 
+                          src={playlist.coverArt} 
+                          alt="" 
+                          className="w-full h-full object-cover"
+                          style={{ borderRadius: '2px' }}
+                        />
                       )}
                     </div>
-                    <span className="text-sm truncate">{playlist.name}</span>
+                    <span 
+                      className="truncate"
+                      style={{
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        fontWeight: isActive ? 700 : 400,
+                        color: isActive ? '#FFFFFF' : 'inherit'
+                      }}
+                    >
+                      {playlist.name}
+                    </span>
                   </Link>
                   <button
                     onClick={(e) => {
@@ -198,12 +317,28 @@ export default function Sidebar() {
                       }
                     }}
                     className={cn(
-                      "opacity-0 group-hover:opacity-100 p-1 text-spotify-text-gray hover:text-white transition-all",
+                      "opacity-0 group-hover:opacity-100 p-1 text-spotify-text-gray hover:text-white transition-all rounded",
                       isPinned && "opacity-100 text-spotify-green"
                     )}
+                    style={{
+                      padding: '4px',
+                      borderRadius: '2px',
+                      transition: 'opacity 200ms ease-out',
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer'
+                    }}
                     title={isPinned ? "Unpin playlist" : "Pin playlist"}
                   >
-                    <Pin size={14} className={cn(isPinned && "fill-current")} />
+                    <Pin 
+                      size={14} 
+                      className={cn(isPinned && "fill-current")}
+                      style={{ 
+                        width: '14px',
+                        height: '14px',
+                        color: isPinned ? '#1DB954' : 'inherit'
+                      }}
+                    />
                   </button>
                 </div>
               );

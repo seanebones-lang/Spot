@@ -54,20 +54,70 @@ export default function CollectionPage() {
   }, [savedTracks, searchQuery]);
 
   return (
-    <div className="p-8">
-      {/* Header with Search and View Controls */}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-4xl font-bold">Your Library</h1>
+    <div 
+      className="p-8"
+      style={{
+        padding: '32px',
+        backgroundColor: '#121212',
+        minHeight: '100vh',
+        color: '#FFFFFF'
+      }}
+    >
+      {/* Header with Search and View Controls - Exact Spotify Style */}
+      <div 
+        className="flex items-center justify-between mb-6"
+        style={{
+          marginBottom: '24px'
+        }}
+      >
+        <h1 
+          className="text-4xl font-bold"
+          style={{
+            fontSize: '32px',
+            lineHeight: '36px',
+            fontWeight: 700,
+            color: '#FFFFFF'
+          }}
+        >
+          Your Library
+        </h1>
         <div className="flex items-center gap-4">
-          {/* Search Input */}
-          <div className="relative w-64">
-            <Search size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-spotify-text-gray" />
+          {/* Search Input - Exact Spotify Style */}
+          <div 
+            className="relative w-64"
+            style={{ width: '256px' }}
+          >
+            <Search 
+              size={20} 
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-spotify-text-gray"
+              style={{
+                left: '12px',
+                color: '#B3B3B3',
+                width: '20px',
+                height: '20px'
+              }}
+            />
             <input
               type="text"
               placeholder="Search in Your Library"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-spotify-light-gray rounded-full pl-10 pr-4 py-2 text-white placeholder:text-spotify-text-gray focus:outline-none focus:ring-2 focus:ring-white"
+              className="w-full bg-spotify-light-gray rounded-full pl-10 pr-4 py-2 text-white placeholder:text-spotify-text-gray focus:outline-none"
+              style={{
+                width: '100%',
+                backgroundColor: '#282828',
+                borderRadius: '500px',
+                paddingLeft: '40px',
+                paddingRight: '16px',
+                paddingTop: '8px',
+                paddingBottom: '8px',
+                color: '#FFFFFF',
+                fontSize: '14px',
+                lineHeight: '20px',
+                fontWeight: 400,
+                border: 'none',
+                outline: 'none'
+              }}
             />
           </div>
           
@@ -107,41 +157,91 @@ export default function CollectionPage() {
         </div>
       </div>
 
-      {/* Filter Buttons */}
-      <div className="flex gap-2 mb-8">
+      {/* Filter Buttons - Exact Spotify Style */}
+      <div 
+        className="flex gap-2 mb-8"
+        style={{
+          gap: '8px',
+          marginBottom: '32px'
+        }}
+      >
         <button
           onClick={() => setFilter('all')}
           className={cn(
-            "px-4 py-2 rounded-full text-sm font-medium transition-colors",
-            filter === 'all' ? 'bg-white text-black' : 'bg-spotify-light-gray text-white hover:bg-spotify-light-gray/80'
+            "rounded-full font-medium transition-colors",
+            filter === 'all' ? 'bg-white text-black hover:bg-[#f5f5f5]' : 'bg-spotify-light-gray text-white hover:bg-spotify-dark-gray'
           )}
+          style={{
+            padding: '6px 16px',
+            borderRadius: '500px',
+            fontSize: '14px',
+            lineHeight: '20px',
+            fontWeight: 700,
+            letterSpacing: '0.05em',
+            transition: 'all 200ms ease-out',
+            backgroundColor: filter === 'all' ? '#FFFFFF' : '#282828',
+            color: filter === 'all' ? '#000000' : '#FFFFFF'
+          }}
         >
           All
         </button>
         <button
           onClick={() => setFilter('playlists')}
           className={cn(
-            "px-4 py-2 rounded-full text-sm font-medium transition-colors",
-            filter === 'playlists' ? 'bg-white text-black' : 'bg-spotify-light-gray text-white hover:bg-spotify-light-gray/80'
+            "rounded-full font-medium transition-colors",
+            filter === 'playlists' ? 'bg-white text-black hover:bg-[#f5f5f5]' : 'bg-spotify-light-gray text-white hover:bg-spotify-dark-gray'
           )}
+          style={{
+            padding: '6px 16px',
+            borderRadius: '500px',
+            fontSize: '14px',
+            lineHeight: '20px',
+            fontWeight: 700,
+            letterSpacing: '0.05em',
+            transition: 'all 200ms ease-out',
+            backgroundColor: filter === 'playlists' ? '#FFFFFF' : '#282828',
+            color: filter === 'playlists' ? '#000000' : '#FFFFFF'
+          }}
         >
           Playlists
         </button>
         <button
           onClick={() => setFilter('artists')}
           className={cn(
-            "px-4 py-2 rounded-full text-sm font-medium transition-colors",
-            filter === 'artists' ? 'bg-white text-black' : 'bg-spotify-light-gray text-white hover:bg-spotify-light-gray/80'
+            "rounded-full font-medium transition-colors",
+            filter === 'artists' ? 'bg-white text-black hover:bg-[#f5f5f5]' : 'bg-spotify-light-gray text-white hover:bg-spotify-dark-gray'
           )}
+          style={{
+            padding: '6px 16px',
+            borderRadius: '500px',
+            fontSize: '14px',
+            lineHeight: '20px',
+            fontWeight: 700,
+            letterSpacing: '0.05em',
+            transition: 'all 200ms ease-out',
+            backgroundColor: filter === 'artists' ? '#FFFFFF' : '#282828',
+            color: filter === 'artists' ? '#000000' : '#FFFFFF'
+          }}
         >
           Artists
         </button>
         <button
           onClick={() => setFilter('albums')}
           className={cn(
-            "px-4 py-2 rounded-full text-sm font-medium transition-colors",
-            filter === 'albums' ? 'bg-white text-black' : 'bg-spotify-light-gray text-white hover:bg-spotify-light-gray/80'
+            "rounded-full font-medium transition-colors",
+            filter === 'albums' ? 'bg-white text-black hover:bg-[#f5f5f5]' : 'bg-spotify-light-gray text-white hover:bg-spotify-dark-gray'
           )}
+          style={{
+            padding: '6px 16px',
+            borderRadius: '500px',
+            fontSize: '14px',
+            lineHeight: '20px',
+            fontWeight: 700,
+            letterSpacing: '0.05em',
+            transition: 'all 200ms ease-out',
+            backgroundColor: filter === 'albums' ? '#FFFFFF' : '#282828',
+            color: filter === 'albums' ? '#000000' : '#FFFFFF'
+          }}
         >
           Albums
         </button>

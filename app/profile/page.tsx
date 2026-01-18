@@ -30,30 +30,164 @@ export default function ProfilePage() {
   );
 
   return (
-    <div className="min-h-screen bg-spotify-dark text-white">
-      {/* Profile Header */}
-      <div className="relative bg-gradient-to-b from-[#2a2a2a] to-spotify-dark pt-16 pb-8 px-8">
-        <div className="flex items-end gap-6">
-          {/* Avatar */}
-          <div className="w-[232px] h-[232px] bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0 shadow-2xl">
-            <span className="text-white text-7xl font-bold">
+    <div 
+      className="min-h-screen bg-spotify-dark text-white"
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#121212',
+        color: '#FFFFFF'
+      }}
+    >
+      {/* Profile Header - Exact Spotify Style */}
+      <div 
+        className="relative bg-gradient-to-b from-[#2a2a2a] to-spotify-dark pt-16 pb-8 px-8"
+        style={{
+          position: 'relative',
+          background: 'linear-gradient(180deg, #2a2a2a 0%, #121212 100%)',
+          paddingTop: '64px',
+          paddingBottom: '32px',
+          paddingLeft: '32px',
+          paddingRight: '32px'
+        }}
+      >
+        <div 
+          className="flex items-end gap-6"
+          style={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            gap: '24px'
+          }}
+        >
+          {/* Avatar - Exact Spotify Style */}
+          <div 
+            className="w-[232px] h-[232px] bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0 shadow-2xl"
+            style={{
+              width: '232px',
+              height: '232px',
+              background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)'
+            }}
+          >
+            <span 
+              className="text-white text-7xl font-bold"
+              style={{
+                color: '#FFFFFF',
+                fontSize: '72px',
+                lineHeight: '80px',
+                fontWeight: 900
+              }}
+            >
               {userName.charAt(0).toUpperCase()}
             </span>
           </div>
 
-          {/* User Info */}
-          <div className="flex-1 min-w-0 pb-2">
-            <div className="mb-4">
-              <h1 className="text-6xl font-bold mb-4 tracking-tight">{userName}</h1>
-              <div className="flex items-center gap-6 text-sm text-spotify-text-gray">
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  <span className="font-medium text-white">{followers.toLocaleString()}</span> followers
+          {/* User Info - Exact Spotify Style */}
+          <div 
+            className="flex-1 min-w-0 pb-2"
+            style={{
+              flex: '1 1 0%',
+              minWidth: 0,
+              paddingBottom: '8px'
+            }}
+          >
+            <div className="mb-4" style={{ marginBottom: '16px' }}>
+              <h1 
+                className="text-6xl font-bold mb-4 tracking-tight"
+                style={{
+                  fontSize: '72px',
+                  lineHeight: '80px',
+                  fontWeight: 900,
+                  color: '#FFFFFF',
+                  marginBottom: '16px',
+                  letterSpacing: '-0.02em'
+                }}
+              >
+                {userName}
+              </h1>
+              <div 
+                className="flex items-center gap-6 text-sm text-spotify-text-gray"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '24px',
+                  fontSize: '14px',
+                  lineHeight: '20px',
+                  color: '#B3B3B3'
+                }}
+              >
+                <span 
+                  className="hover:text-white transition-colors cursor-pointer"
+                  style={{
+                    transition: 'color 200ms ease-out',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#FFFFFF';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#B3B3B3';
+                  }}
+                >
+                  <span 
+                    className="font-medium text-white"
+                    style={{
+                      fontWeight: 600,
+                      color: '#FFFFFF'
+                    }}
+                  >
+                    {followers.toLocaleString()}
+                  </span> followers
                 </span>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  <span className="font-medium text-white">{following.toLocaleString()}</span> following
+                <span 
+                  className="hover:text-white transition-colors cursor-pointer"
+                  style={{
+                    transition: 'color 200ms ease-out',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#FFFFFF';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#B3B3B3';
+                  }}
+                >
+                  <span 
+                    className="font-medium text-white"
+                    style={{
+                      fontWeight: 600,
+                      color: '#FFFFFF'
+                    }}
+                  >
+                    {following.toLocaleString()}
+                  </span> following
                 </span>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  <span className="font-medium text-white">{publicPlaylists}</span> public playlists
+                <span 
+                  className="hover:text-white transition-colors cursor-pointer"
+                  style={{
+                    transition: 'color 200ms ease-out',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#FFFFFF';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#B3B3B3';
+                  }}
+                >
+                  <span 
+                    className="font-medium text-white"
+                    style={{
+                      fontWeight: 600,
+                      color: '#FFFFFF'
+                    }}
+                  >
+                    {publicPlaylists}
+                  </span> public playlists
                 </span>
               </div>
             </div>
@@ -61,50 +195,187 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Filter Buttons */}
-      <div className="sticky top-16 z-30 bg-spotify-dark border-b border-white/10 px-8 py-4">
-        <div className="flex items-center gap-2">
+      {/* Filter Buttons - Exact Spotify Style */}
+      <div 
+        className="sticky top-16 z-30 bg-spotify-dark border-b border-white/10 px-8 py-4"
+        style={{
+          position: 'sticky',
+          top: '64px',
+          zIndex: 30,
+          backgroundColor: '#121212',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          padding: '16px 32px'
+        }}
+      >
+        <div 
+          className="flex items-center gap-2"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+        >
           <button
             onClick={() => setFilter('all')}
             className={cn(
-              "px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap",
+              "rounded-full font-medium transition-colors whitespace-nowrap",
               filter === 'all' 
                 ? 'bg-white text-black hover:bg-[#f5f5f5]' 
                 : 'bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10'
             )}
+            style={{
+              padding: '6px 16px',
+              borderRadius: '500px',
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              transition: 'all 200ms ease-out',
+              backgroundColor: filter === 'all' ? '#FFFFFF' : 'transparent',
+              color: filter === 'all' ? '#000000' : '#B3B3B3',
+              border: 'none',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap'
+            }}
+            onMouseEnter={(e) => {
+              if (filter !== 'all') {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              } else {
+                e.currentTarget.style.backgroundColor = '#f5f5f5';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter !== 'all') {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              } else {
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
+              }
+            }}
           >
             All
           </button>
           <button
             onClick={() => setFilter('playlists')}
             className={cn(
-              "px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap",
+              "rounded-full font-medium transition-colors whitespace-nowrap",
               filter === 'playlists' 
                 ? 'bg-white text-black hover:bg-[#f5f5f5]' 
                 : 'bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10'
             )}
+            style={{
+              padding: '6px 16px',
+              borderRadius: '500px',
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              transition: 'all 200ms ease-out',
+              backgroundColor: filter === 'playlists' ? '#FFFFFF' : 'transparent',
+              color: filter === 'playlists' ? '#000000' : '#B3B3B3',
+              border: 'none',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap'
+            }}
+            onMouseEnter={(e) => {
+              if (filter !== 'playlists') {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              } else {
+                e.currentTarget.style.backgroundColor = '#f5f5f5';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter !== 'playlists') {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              } else {
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
+              }
+            }}
           >
             Playlists
           </button>
           <button
             onClick={() => setFilter('artists')}
             className={cn(
-              "px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap",
+              "rounded-full font-medium transition-colors whitespace-nowrap",
               filter === 'artists' 
                 ? 'bg-white text-black hover:bg-[#f5f5f5]' 
                 : 'bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10'
             )}
+            style={{
+              padding: '6px 16px',
+              borderRadius: '500px',
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              transition: 'all 200ms ease-out',
+              backgroundColor: filter === 'artists' ? '#FFFFFF' : 'transparent',
+              color: filter === 'artists' ? '#000000' : '#B3B3B3',
+              border: 'none',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap'
+            }}
+            onMouseEnter={(e) => {
+              if (filter !== 'artists') {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              } else {
+                e.currentTarget.style.backgroundColor = '#f5f5f5';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter !== 'artists') {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              } else {
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
+              }
+            }}
           >
             Artists
           </button>
           <button
             onClick={() => setFilter('albums')}
             className={cn(
-              "px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap",
+              "rounded-full font-medium transition-colors whitespace-nowrap",
               filter === 'albums' 
                 ? 'bg-white text-black hover:bg-[#f5f5f5]' 
                 : 'bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10'
             )}
+            style={{
+              padding: '6px 16px',
+              borderRadius: '500px',
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              transition: 'all 200ms ease-out',
+              backgroundColor: filter === 'albums' ? '#FFFFFF' : 'transparent',
+              color: filter === 'albums' ? '#000000' : '#B3B3B3',
+              border: 'none',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap'
+            }}
+            onMouseEnter={(e) => {
+              if (filter !== 'albums') {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              } else {
+                e.currentTarget.style.backgroundColor = '#f5f5f5';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter !== 'albums') {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              } else {
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
+              }
+            }}
           >
             Albums
           </button>

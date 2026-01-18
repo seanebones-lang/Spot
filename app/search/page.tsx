@@ -329,18 +329,44 @@ export default function SearchPage() {
   // Browse All View (No Search Query)
   if (!query) {
     return (
-      <div className="min-h-screen bg-spotify-dark">
-        {/* Filter Buttons - Sticky below TopBar */}
-        <div className="sticky top-16 z-30 bg-spotify-dark/95 backdrop-blur-md px-8 py-4 border-b border-white/10">
-          <div className="flex items-center gap-2">
+      <div 
+        className="min-h-screen"
+        style={{ 
+          backgroundColor: '#121212',
+          minHeight: '100vh'
+        }}
+      >
+        {/* Filter Buttons - Sticky below TopBar - Exact Spotify Style */}
+        <div 
+          className="sticky top-16 z-30 backdrop-blur-md px-8 py-4 border-b"
+          style={{
+            top: '56px',
+            backgroundColor: 'rgba(18, 18, 18, 0.95)',
+            padding: '16px 32px',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+          }}
+        >
+          <div 
+            className="flex items-center gap-2"
+            style={{ gap: '8px' }}
+          >
             <button
               onClick={() => setActiveFilter('all')}
               className={cn(
-                "px-4 py-1.5 rounded-full text-sm font-medium transition-colors",
+                "rounded-full font-medium transition-colors",
                 activeFilter === 'all'
                   ? 'bg-white text-black hover:bg-[#f5f5f5]'
                   : 'bg-transparent text-spotify-text-gray hover:text-white hover:bg-white/10'
               )}
+              style={{
+                padding: '6px 16px',
+                borderRadius: '500px',
+                fontSize: '14px',
+                lineHeight: '20px',
+                fontWeight: 700,
+                letterSpacing: '0.05em',
+                transition: 'all 200ms ease-out'
+              }}
             >
               All
             </button>
@@ -489,27 +515,96 @@ export default function SearchPage() {
         </div>
       </div>
 
-      <div className="p-8">
-        {/* Songs */}
+      <div 
+        className="p-8"
+        style={{
+          padding: '32px',
+          backgroundColor: '#121212'
+        }}
+      >
+        {/* Songs - Exact Spotify Style */}
         {filteredTracks.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold mb-4 text-white">Songs</h2>
-              <div className="space-y-2">
+            <section className="mb-8" style={{ marginBottom: '32px' }}>
+              <h2 
+                className="text-2xl font-bold mb-4 text-white"
+                style={{
+                  fontSize: '24px',
+                  lineHeight: '28px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  marginBottom: '16px'
+                }}
+              >
+                Songs
+              </h2>
+              <div 
+                className="space-y-2"
+                style={{ gap: '8px' }}
+              >
                 {filteredTracks.map((track) => (
                   <div
                     key={track.id}
                     className="flex items-center gap-4 p-3 hover:bg-white/10 rounded-lg group cursor-pointer"
+                    style={{
+                      gap: '16px',
+                      padding: '12px 16px',
+                      borderRadius: '4px',
+                      transition: 'background-color 200ms ease-out'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <div className="w-12 h-12 bg-spotify-dark-gray rounded flex-shrink-0">
+                    <div 
+                      className="w-12 h-12 bg-spotify-dark-gray rounded flex-shrink-0"
+                      style={{
+                        width: '48px',
+                        height: '48px',
+                        borderRadius: '4px',
+                        backgroundColor: '#282828'
+                      }}
+                    >
                       {track.coverArt && (
-                        <img src={track.coverArt} alt={track.name} className="w-full h-full object-cover rounded" />
+                        <img 
+                          src={track.coverArt} 
+                          alt={track.name} 
+                          className="w-full h-full object-cover rounded"
+                          style={{ borderRadius: '4px' }}
+                        />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-medium text-white truncate">{track.name}</div>
-                      <div className="text-sm text-spotify-text-gray truncate">{track.artist}</div>
+                      <div 
+                        className="font-medium text-white truncate"
+                        style={{
+                          fontSize: '14px',
+                          lineHeight: '20px',
+                          fontWeight: 400,
+                          color: '#FFFFFF'
+                        }}
+                      >
+                        {track.name}
+                      </div>
+                      <div 
+                        className="text-sm text-spotify-text-gray truncate"
+                        style={{
+                          fontSize: '13px',
+                          lineHeight: '16px',
+                          color: '#B3B3B3'
+                        }}
+                      >
+                        {track.artist}
+                      </div>
                     </div>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div 
+                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                      style={{
+                        transition: 'opacity 200ms ease-out'
+                      }}
+                    >
                       <PlayButton
                         isPlaying={currentTrack?.id === track.id && isPlaying}
                         onClick={() => {
@@ -525,82 +620,269 @@ export default function SearchPage() {
             </section>
         )}
 
-        {/* Artists */}
+        {/* Artists - Exact Spotify Style */}
         {filteredArtists.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold mb-4 text-white">Artists</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <section className="mb-8" style={{ marginBottom: '32px' }}>
+              <h2 
+                className="text-2xl font-bold mb-4 text-white"
+                style={{
+                  fontSize: '24px',
+                  lineHeight: '28px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  marginBottom: '16px'
+                }}
+              >
+                Artists
+              </h2>
+              <div 
+                className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+                style={{ gap: '16px' }}
+              >
                 {filteredArtists.map((artist) => (
                   <Link
                     key={artist.id}
                     href={`/artist/${artist.id}`}
                     className="text-center group"
+                    style={{ textDecoration: 'none' }}
                   >
-                    <div className="w-full aspect-square rounded-full overflow-hidden mb-3 group-hover:scale-105 transition-transform">
+                    <div 
+                      className="w-full aspect-square rounded-full overflow-hidden mb-3 group-hover:scale-105 transition-transform"
+                      style={{
+                        marginBottom: '12px',
+                        aspectRatio: '1',
+                        transition: 'transform 200ms ease-out'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    >
                       {artist.image ? (
-                        <img src={artist.image} alt={artist.name} className="w-full h-full object-cover" />
+                        <img 
+                          src={artist.image} 
+                          alt={artist.name} 
+                          className="w-full h-full object-cover"
+                          style={{ borderRadius: '50%' }}
+                        />
                       ) : (
-                        <div className="w-full h-full bg-spotify-light-gray flex items-center justify-center">
-                          <span className="text-2xl">{artist.name.charAt(0)}</span>
+                        <div 
+                          className="w-full h-full bg-spotify-light-gray flex items-center justify-center"
+                          style={{
+                            backgroundColor: '#282828',
+                            borderRadius: '50%'
+                          }}
+                        >
+                          <span 
+                            className="text-2xl"
+                            style={{
+                              fontSize: '24px',
+                              lineHeight: '28px',
+                              fontWeight: 700,
+                              color: '#FFFFFF'
+                            }}
+                          >
+                            {artist.name.charAt(0)}
+                          </span>
                         </div>
                       )}
                     </div>
-                    <h3 className="font-semibold text-white hover:underline truncate">{artist.name}</h3>
+                    <h3 
+                      className="font-semibold text-white hover:underline truncate"
+                      style={{
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        fontWeight: 600,
+                        color: '#FFFFFF'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+                      onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
+                    >
+                      {artist.name}
+                    </h3>
                   </Link>
                 ))}
               </div>
             </section>
         )}
 
-        {/* Playlists */}
+        {/* Playlists - Exact Spotify Style */}
         {filteredPlaylists.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold mb-4 text-white">Playlists</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <section className="mb-8" style={{ marginBottom: '32px' }}>
+              <h2 
+                className="text-2xl font-bold mb-4 text-white"
+                style={{
+                  fontSize: '24px',
+                  lineHeight: '28px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  marginBottom: '16px'
+                }}
+              >
+                Playlists
+              </h2>
+              <div 
+                className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+                style={{ gap: '16px' }}
+              >
                 {filteredPlaylists.map((playlist) => (
                   <Link
                     key={playlist.id}
                     href={`/playlist/${playlist.id}`}
-                    className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors group"
+                    className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-dark-gray transition-all duration-200 group"
+                    style={{
+                      backgroundColor: '#181818',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      transition: 'background-color 200ms ease-out',
+                      textDecoration: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#282828';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#181818';
+                    }}
                   >
-                    <div className="w-full aspect-square rounded mb-3 overflow-hidden">
+                    <div 
+                      className="w-full aspect-square rounded mb-3 overflow-hidden"
+                      style={{
+                        borderRadius: '4px',
+                        aspectRatio: '1',
+                        marginBottom: '12px'
+                      }}
+                    >
                       {playlist.coverArt ? (
-                        <img src={playlist.coverArt} alt={playlist.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        <img 
+                          src={playlist.coverArt} 
+                          alt={playlist.name} 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                          style={{
+                            borderRadius: '4px',
+                            transition: 'transform 200ms ease-out'
+                          }}
+                        />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center">
-                          <span className="text-4xl">🎵</span>
+                        <div 
+                          className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
+                          style={{
+                            background: 'linear-gradient(135deg, #1DB954 0%, #181818 100%)',
+                            borderRadius: '4px'
+                          }}
+                        >
+                          <span className="text-4xl" style={{ fontSize: '32px' }}>🎵</span>
                         </div>
                       )}
                     </div>
-                    <h3 className="font-semibold text-sm text-white truncate">{playlist.name}</h3>
+                    <h3 
+                      className="font-semibold text-sm text-white truncate"
+                      style={{
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        fontWeight: 600,
+                        color: '#FFFFFF'
+                      }}
+                    >
+                      {playlist.name}
+                    </h3>
                   </Link>
                 ))}
               </div>
             </section>
         )}
 
-        {/* Albums */}
+        {/* Albums - Exact Spotify Style */}
         {filteredAlbums.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold mb-4 text-white">Albums</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <section className="mb-8" style={{ marginBottom: '32px' }}>
+              <h2 
+                className="text-2xl font-bold mb-4 text-white"
+                style={{
+                  fontSize: '24px',
+                  lineHeight: '28px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  marginBottom: '16px'
+                }}
+              >
+                Albums
+              </h2>
+              <div 
+                className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+                style={{ gap: '16px' }}
+              >
                 {filteredAlbums.map((album) => (
                   <Link
                     key={album.id}
                     href={`/album/${album.id}`}
-                    className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors group"
+                    className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-dark-gray transition-all duration-200 group"
+                    style={{
+                      backgroundColor: '#181818',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      transition: 'background-color 200ms ease-out',
+                      textDecoration: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#282828';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#181818';
+                    }}
                   >
-                    <div className="w-full aspect-square rounded mb-3 overflow-hidden">
+                    <div 
+                      className="w-full aspect-square rounded mb-3 overflow-hidden"
+                      style={{
+                        borderRadius: '4px',
+                        aspectRatio: '1',
+                        marginBottom: '12px'
+                      }}
+                    >
                       {album.coverArt ? (
-                        <img src={album.coverArt} alt={album.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        <img 
+                          src={album.coverArt} 
+                          alt={album.name} 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                          style={{
+                            borderRadius: '4px',
+                            transition: 'transform 200ms ease-out'
+                          }}
+                        />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center">
-                          <span className="text-4xl">💿</span>
+                        <div 
+                          className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
+                          style={{
+                            background: 'linear-gradient(135deg, #1DB954 0%, #181818 100%)',
+                            borderRadius: '4px'
+                          }}
+                        >
+                          <span className="text-4xl" style={{ fontSize: '32px' }}>💿</span>
                         </div>
                       )}
                     </div>
-                    <h3 className="font-semibold text-sm text-white truncate">{album.name}</h3>
-                    <p className="text-xs text-spotify-text-gray truncate">{album.artist.name}</p>
+                    <h3 
+                      className="font-semibold text-sm text-white truncate"
+                      style={{
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        fontWeight: 600,
+                        color: '#FFFFFF',
+                        marginBottom: '4px'
+                      }}
+                    >
+                      {album.name}
+                    </h3>
+                    <p 
+                      className="text-xs text-spotify-text-gray truncate"
+                      style={{
+                        fontSize: '13px',
+                        lineHeight: '16px',
+                        color: '#B3B3B3'
+                      }}
+                    >
+                      {album.artist.name}
+                    </p>
                   </Link>
                 ))}
               </div>

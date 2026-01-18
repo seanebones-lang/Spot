@@ -1,10 +1,19 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Clock, X, Search } from 'lucide-react';
+import { Clock, X, Search, Music, User, List, Disc } from 'lucide-react';
 import { useSearchStore } from '@/stores/searchStore';
 import { useRouter } from 'next/navigation';
+import { mockData } from '@/lib/data';
 import { cn } from '@/lib/utils';
+
+interface SearchResult {
+  id: string;
+  type: 'track' | 'artist' | 'playlist' | 'album';
+  name: string;
+  subtitle?: string;
+  image?: string;
+}
 
 interface SearchDropdownProps {
   query: string;
@@ -17,6 +26,7 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
   const { recentSearches, removeSearch } = useSearchStore();
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
 
   // Auto-complete search while typing
   useEffect(() => {
@@ -65,12 +75,12 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
 
       // Search albums
       mockData.getAlbums().forEach((album) => {
-        if (album.name.toLowerCase().includes(queryLower)) {
+        if (album.name.toLowerCase().includes(queryLower) || album.artist?.name?.toLowerCase().includes(queryLower)) {
           results.push({
             id: album.id,
             type: 'album',
             name: album.name,
-            subtitle: album.artist,
+            subtitle: typeof album.artist === 'string' ? album.artist : album.artist?.name || '',
             image: album.coverArt,
           });
         }

@@ -166,6 +166,13 @@ export default function ContextMenu({
       ref={menuRef}
       className="fixed bg-[#282828] rounded-md shadow-2xl py-1 z-[9999] min-w-[200px]"
       style={{
+        position: 'fixed',
+        backgroundColor: '#282828',
+        borderRadius: '4px',
+        paddingTop: '4px',
+        paddingBottom: '4px',
+        zIndex: 9999,
+        minWidth: '200px',
         left: `${position.x}px`,
         top: `${position.y}px`,
         boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
@@ -194,6 +201,28 @@ export default function ContextMenu({
                 onClose();
               }}
               className="w-full flex items-center gap-3 px-4 py-2 text-left text-white hover:bg-white/10 transition-colors"
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                padding: '12px 16px',
+                textAlign: 'left',
+                color: '#FFFFFF',
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 200ms ease-out',
+                textDecoration: 'none',
+                fontSize: '14px',
+                lineHeight: '20px'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               {content}
             </Link>
@@ -213,6 +242,29 @@ export default function ContextMenu({
                 ? "text-red-400 hover:bg-red-500/20"
                 : "text-white hover:bg-white/10"
             )}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              padding: '12px 16px',
+              textAlign: 'left',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'background-color 200ms ease-out, color 200ms ease-out',
+              fontSize: '14px',
+              lineHeight: '20px',
+              color: item.danger ? '#EF4444' : '#FFFFFF'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = item.danger 
+                ? 'rgba(239, 68, 68, 0.2)' 
+                : 'rgba(255, 255, 255, 0.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
           >
             {content}
           </button>
