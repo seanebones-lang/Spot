@@ -54,14 +54,20 @@ export default function Sidebar() {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing) return;
-      const newWidth = e.clientX;
+      // Issue-10: Add min/max width constraints (min: 200px, max: 50% of viewport)
+      const minWidth = 200;
+      const maxWidth = window.innerWidth * 0.5;
+      const newWidth = Math.max(minWidth, Math.min(maxWidth, e.clientX));
       setLeftSidebarWidth(newWidth);
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       e.preventDefault();
       if (!isResizing || e.touches.length === 0) return;
-      const newWidth = e.touches[0].clientX;
+      // Issue-10: Add min/max width constraints
+      const minWidth = 200;
+      const maxWidth = window.innerWidth * 0.5;
+      const newWidth = Math.max(minWidth, Math.min(maxWidth, e.touches[0].clientX));
       setLeftSidebarWidth(newWidth);
     };
 
