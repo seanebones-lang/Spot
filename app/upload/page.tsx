@@ -405,9 +405,27 @@ export default function UploadPage() {
       };
       formDataToSend.append('payload', JSON.stringify(metadataPayload));
 
+      // Get auth token for authenticated request
+      const token = localStorage.getItem('auth-storage');
+      let authToken = null;
+      if (token) {
+        try {
+          const authData = JSON.parse(token);
+          authToken = authData?.state?.token;
+        } catch (e) {
+          // Token not found
+        }
+      }
+
       // Submit to API with FormData
+      const headers: HeadersInit = {};
+      if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
+      }
+
       const response = await fetch('/api/tracks/submit', {
         method: 'POST',
+        headers,
         // Don't set Content-Type header - browser will set it with boundary for FormData
         body: formDataToSend,
       });

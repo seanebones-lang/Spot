@@ -41,14 +41,81 @@ export default function ArtistSignupPage() {
     businessName: '',
     address: '',
     taxClassification: '',
+    completed: false,
   });
+  const [digitalSignature, setDigitalSignature] = useState('');
+  const [accountInfo, setAccountInfo] = useState({
+    artistName: '',
+    email: '',
+    password: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const allDocumentsSigned = legalDocuments.every(doc => documentsSigned.includes(doc.id));
 
-  const handleSubmit = () => {
-    if (allDocumentsSigned && w9Completed) {
+  const handleSubmit = async () => {
+    if (!allDocumentsSigned || !w9Completed || !digitalSignature.trim()) {
+      setSubmitError('Please complete all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Get auth token from store (user should be logged in)
+      const token = localStorage.getItem('auth-storage');
+      let authToken = null;
+      if (token) {
+        try {
+          const authData = JSON.parse(token);
+          authToken = authData?.state?.token;
+        } catch (e) {
+          // Token not found
+        }
+      }
+
+      if (!authToken) {
+        setSubmitError('Please log in to submit your application');
+        setIsSubmitting(false);
+        return;
+      }
+
+      const response = await fetch('/api/artist/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({
+          selectedMediums,
+          accountInfo,
+          documentsSigned,
+          w9Data: {
+            ...w9Data,
+            taxId: w9Data.ssn || w9Data.ein,
+            completed: w9Completed,
+          },
+          proRegistration,
+          digitalSignature,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit application');
+      }
+
+      // Success - update approval status
       setApprovalStatus('pending');
       setCurrentStep(7);
+    } catch (error) {
+      console.error('Signup submission error:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to submit application');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -168,16 +235,22 @@ export default function ArtistSignupPage() {
               <label className="block text-sm font-medium mb-2">Artist/Management Name</label>
               <input
                 type="text"
+                value={accountInfo.artistName}
+                onChange={(e) => setAccountInfo({ ...accountInfo, artistName: e.target.value })}
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                 placeholder="Enter artist or management name"
+                required
               />
             </div>
             <div>
               <label className="block text-sm font-medium mb-2">Email</label>
               <input
                 type="email"
+                value={accountInfo.email}
+                onChange={(e) => setAccountInfo({ ...accountInfo, email: e.target.value })}
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                 placeholder="your@email.com"
+                required
               />
               <p className="text-xs text-spotify-text-gray mt-1">Verification required</p>
             </div>
@@ -185,13 +258,19 @@ export default function ArtistSignupPage() {
               <label className="block text-sm font-medium mb-2">Password</label>
               <input
                 type="password"
+                value={accountInfo.password}
+                onChange={(e) => setAccountInfo({ ...accountInfo, password: e.target.value })}
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                 placeholder="Create a strong password"
+                minLength={8}
+                required
               />
+              <p className="text-xs text-spotify-text-gray mt-1">Must be at least 8 characters</p>
             </div>
             <button
-              onClick={() => setCurrentStep(2)}
-              className="btn-primary w-full mt-4"
+              onClick={() => setCurrentStep(3)}
+              disabled={!accountInfo.artistName || !accountInfo.email || !accountInfo.password || accountInfo.password.length < 8}
+              className="btn-primary w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Continue to Legal Documents
             </button>
@@ -468,8 +547,11 @@ export default function ArtistSignupPage() {
               <label className="block text-sm font-medium mb-2">Digital Signature</label>
               <input
                 type="text"
+                value={digitalSignature}
+                onChange={(e) => setDigitalSignature(e.target.value)}
                 className="w-full bg-spotify-light-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green border-b-2 border-white"
                 placeholder="Type your full legal name"
+                required
               />
               <p className="text-xs text-spotify-text-gray mt-1">By typing your name, you are providing a legally binding signature</p>
             </div>
@@ -485,16 +567,22 @@ export default function ArtistSignupPage() {
             </div>
           </div>
 
+          {submitError && (
+            <div className="mb-4 p-3 bg-red-900/20 border border-red-500/50 rounded-lg">
+              <p className="text-red-400 text-sm">{submitError}</p>
+            </div>
+          )}
+
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(4)} className="btn-secondary">
+            <button onClick={() => setCurrentStep(5)} className="btn-secondary" disabled={isSubmitting}>
               Back
             </button>
             <button
               onClick={handleSubmit}
-              disabled={!allDocumentsSigned || !w9Completed}
+              disabled={!allDocumentsSigned || !w9Completed || !digitalSignature.trim() || isSubmitting}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit for Approval
+              {isSubmitting ? 'Submitting...' : 'Submit for Approval'}
             </button>
           </div>
         </div>
