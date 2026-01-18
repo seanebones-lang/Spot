@@ -33,12 +33,17 @@ export function lazyLoad<T extends React.ComponentType<any>>(
     return importFn();
   });
 
-  return (props: React.ComponentPropsWithoutRef<T>) =>
-    React.createElement(
+  function LazyWrapper(props: React.ComponentPropsWithoutRef<T>) {
+    return React.createElement(
       React.Suspense,
       { fallback },
       React.createElement(LazyComponent, props)
     );
+  }
+
+  LazyWrapper.displayName = 'LazyWrapper';
+  
+  return LazyWrapper;
 }
 
 /**
