@@ -366,7 +366,7 @@ export default function RadioPage() {
                     <PlayButton 
                       isPlaying={isStationPlaying} 
                       onClick={(e) => {
-                        e.stopPropagation();
+                        e?.stopPropagation();
                         togglePlayPause();
                       }} 
                       size="sm" 
