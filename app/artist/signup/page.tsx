@@ -82,7 +82,9 @@ export default function ArtistSignupPage() {
         return;
       }
 
-      const response = await fetch('/api/artist/signup', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const endpoint = apiUrl ? `${apiUrl}/api/artist/signup` : '/api/artist/signup';
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
