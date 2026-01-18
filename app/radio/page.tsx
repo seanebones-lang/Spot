@@ -37,7 +37,9 @@ export default function RadioPage() {
   useEffect(() => {
     const fetchStations = async () => {
       try {
-        const response = await fetch('/api/radio/stations');
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+        const endpoint = apiUrl ? `${apiUrl}/api/radio/stations` : '/api/radio/stations';
+        const response = await fetch(endpoint);
         if (response.ok) {
           const data = await response.json();
           setStations(data.stations);

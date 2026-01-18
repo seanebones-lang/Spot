@@ -164,7 +164,9 @@ export default function ArtistDashboardPage() {
     
     setIsValidatingMood(true);
     try {
-      const response = await fetch('/api/mood/validate', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const endpoint = apiUrl ? `${apiUrl}/api/mood/validate` : '/api/mood/validate';
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

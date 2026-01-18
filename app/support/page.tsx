@@ -37,7 +37,9 @@ export default function SupportPage() {
 
     try {
       // Call our API route which handles xAI Grok API communication
-      const response = await fetch('/api/chat', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const endpoint = apiUrl ? `${apiUrl}/api/chat` : '/api/chat';
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

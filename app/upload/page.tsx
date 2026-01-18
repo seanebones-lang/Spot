@@ -423,7 +423,9 @@ export default function UploadPage() {
         headers['Authorization'] = `Bearer ${authToken}`;
       }
 
-      const response = await fetch('/api/tracks/submit', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const endpoint = apiUrl ? `${apiUrl}/api/tracks/submit` : '/api/tracks/submit';
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers,
         // Don't set Content-Type header - browser will set it with boundary for FormData
