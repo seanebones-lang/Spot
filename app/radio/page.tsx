@@ -7,6 +7,7 @@ import { useRadioStore, RadioStation } from '@/stores/radioStore';
 import { usePlayerStore } from '@/stores/playerStore';
 import { audioPlayer } from '@/lib/player';
 import { Track } from '@/types/track';
+import { MoodState } from '@/types/mood';
 
 export default function RadioPage() {
   const {
