@@ -141,19 +141,23 @@ export default function ProgressBar({ progress, duration, currentTime, onSeek }:
         />
         {((hoverProgress !== null && !isDragging) || (dragProgress !== null && isDragging)) && (
           <div
-            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full transition-opacity"
+            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg transition-all"
             style={{ 
               left: `clamp(0px, calc(${(dragProgress !== null ? dragProgress : hoverProgress || 0)}% - 6px), calc(100% - 12px))`,
-              opacity: isDragging ? 1 : 0,
+              opacity: isDragging ? 1 : 0.8,
+              transform: isDragging ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%) scale(1)',
+              transition: isDragging ? 'opacity 0ms, transform 150ms ease-out' : 'opacity 200ms ease-out, transform 200ms ease-out'
             }}
             onMouseEnter={(e) => {
               if (!isDragging) {
                 e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.1)';
               }
             }}
             onMouseLeave={(e) => {
               if (!isDragging) {
-                e.currentTarget.style.opacity = '0';
+                e.currentTarget.style.opacity = '0.8';
+                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)';
               }
             }}
           />

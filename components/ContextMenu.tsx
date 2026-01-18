@@ -187,7 +187,7 @@ export default function ContextMenu({
   return (
     <div
       ref={menuRef}
-      className="fixed bg-[#282828] rounded-md shadow-2xl py-1 z-[9999] min-w-[200px]"
+      className="fixed bg-[#282828] rounded-md shadow-2xl py-1 z-[9999] min-w-[200px] transition-opacity duration-150 ease-out"
       style={{
         position: 'fixed',
         backgroundColor: '#282828',
@@ -199,6 +199,10 @@ export default function ContextMenu({
         left: `${position.x}px`,
         top: `${position.y}px`,
         boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+        transition: 'opacity 150ms cubic-bezier(0.3, 0, 0.1, 1), transform 150ms cubic-bezier(0.3, 0, 0.1, 1)',
+        opacity: 1,
+        transform: 'scale(1)',
+        animation: 'contextMenuFadeIn 150ms cubic-bezier(0.3, 0, 0.1, 1)'
       }}
     >
       {menuItems.map((item, index) => {

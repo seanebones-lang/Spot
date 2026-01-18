@@ -14,6 +14,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
 }
 
 body {
@@ -37,10 +38,17 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #535353;
   border-radius: 6px;
+  transition: background-color 200ms ease-out;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #727272;
+}
+
+/* Smooth scrolling for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #535353 #121212;
 }
 
 /* Screen reader only utility (for accessibility) */
@@ -79,10 +87,18 @@ body {
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
   background: #2a2a2a;
   border-radius: 4px;
+  transition: background-color 200ms ease-out;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #3a3a3a;
+}
+
+/* Smooth momentum scrolling for scrollable containers */
+.custom-scrollbar {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain; /* Prevent scroll chaining */
 }
 
 /* Base component styles */
@@ -110,4 +126,42 @@ body {
     backface-visibility: hidden;
     perspective: 1000px;
   }
+}
+
+/* Context menu fade-in animation */
+@keyframes contextMenuFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Horizontal scroll styling */
+.horizontal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #535353 #121212;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #535353;
+  border-radius: 4px;
+  transition: background-color 200ms ease-out;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #727272;
 }

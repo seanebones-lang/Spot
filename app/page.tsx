@@ -285,7 +285,7 @@ export default function HomePage() {
           style={{ position: 'relative', overflow: 'visible' }}
         >
           <div 
-            className="flex gap-4 overflow-x-auto"
+            className="flex gap-4 overflow-x-auto horizontal-scroll"
             style={{ 
               gap: '16px',
               overflowX: 'auto',
@@ -540,7 +540,7 @@ export default function HomePage() {
           }}
         >
           <div 
-            className="flex gap-4 overflow-x-auto"
+            className="flex gap-4 overflow-x-auto horizontal-scroll"
             style={{ 
               gap: '16px',
               overflowX: 'auto',

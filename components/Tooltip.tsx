@@ -22,27 +22,54 @@ export default function Tooltip({
   className,
 }: TooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (!showOnHover) {
       setIsVisible(true);
+      setIsMounted(true);
       return;
     }
   }, [showOnHover]);
 
   const handleMouseEnter = () => {
     if (showOnHover) {
-      setIsVisible(true);
+      // Spotify-style delay before showing tooltip
+      timeoutRef.current = setTimeout(() => {
+        setIsMounted(true);
+        // Trigger animation on next frame
+        requestAnimationFrame(() => {
+          setIsVisible(true);
+        });
+      }, 300);
     }
   };
 
   const handleMouseLeave = () => {
     if (showOnHover) {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
       setIsVisible(false);
+      // Delay unmounting for smooth fade-out
+      setTimeout(() => {
+        setIsMounted(false);
+      }, 200);
     }
   };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const getPositionClasses = () => {
     switch (position) {
@@ -94,14 +121,18 @@ export default function Tooltip({
         children
       )}
 
-      {isVisible && (
+      {isMounted && (
         <div
           ref={tooltipRef}
           className={cn(
             'absolute z-50 px-3 py-2 bg-spotify-dark-gray text-white text-xs rounded-lg shadow-2xl whitespace-nowrap pointer-events-none',
-            'border border-white/20',
-            getPositionClasses()
+            'border border-white/20 transition-opacity duration-200 ease-out',
+            getPositionClasses(),
+            isVisible ? 'opacity-100' : 'opacity-0'
           )}
+          style={{
+            transition: 'opacity 200ms cubic-bezier(0.3, 0, 0.1, 1)'
+          }}
           role="tooltip"
         >
           {text}
