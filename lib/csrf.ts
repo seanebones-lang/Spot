@@ -2,9 +2,10 @@
  * CSRF Protection
  * Implements double-submit cookie pattern for CSRF protection
  * Generates and validates CSRF tokens
+ * 
+ * Uses Web Crypto API for Edge Runtime compatibility
  */
 
-import { randomBytes } from 'crypto';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 import { logger } from './logger';
@@ -14,10 +15,31 @@ const CSRF_TOKEN_HEADER = 'X-CSRF-Token';
 const CSRF_TOKEN_LENGTH = 32; // 32 bytes = 64 hex characters
 
 /**
+ * Generate secure random bytes using Web Crypto API (Edge Runtime compatible)
+ */
+function getRandomBytes(length: number): Uint8Array {
+  const arr = new Uint8Array(length);
+  // Use Web Crypto API which works in both Node.js and Edge Runtime
+  crypto.getRandomValues(arr);
+  return arr;
+}
+
+/**
+ * Convert Uint8Array to hex string
+ */
+function toHex(arr: Uint8Array): string {
+  return Array.from(arr)
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+/**
  * Generate CSRF token
+ * Uses Web Crypto API for Edge Runtime compatibility
  */
 export function generateCsrfToken(): string {
-  return randomBytes(CSRF_TOKEN_LENGTH).toString('hex');
+  const randomBytes = getRandomBytes(CSRF_TOKEN_LENGTH);
+  return toHex(randomBytes);
 }
 
 /**
