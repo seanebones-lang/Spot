@@ -327,17 +327,6 @@ export class AudiophileAudioPipeline {
     
     this.audioContext = null;
     this.audioElement = null;
-    if (this.source) {
-      try {
-        this.source.disconnect();
-      } catch (e) {
-        // Already disconnected
-      }
-      // Clear the reference from the audio element
-      if (this.audioElement) {
-        delete (this.audioElement as any)._mediaElementSourceNode;
-      }
-    }
     
     // Disconnect EQ nodes
     this.eqNodes.forEach(node => {
