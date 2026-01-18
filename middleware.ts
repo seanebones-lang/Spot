@@ -78,7 +78,8 @@ export async function middleware(request: NextRequest) {
     // CSRF validation for state-changing methods (except auth endpoints that handle it manually)
     const path = request.nextUrl.pathname;
     const isStateChangingMethod = ['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method);
-    const skipCsrfPaths = ['/api/auth/login', '/api/auth/register']; // These handle CSRF manually if needed
+    // Removed /api/admin/delete-all-album-art from exclusions - admin endpoints must have CSRF + role auth
+    const skipCsrfPaths = ['/api/auth/login', '/api/auth/register'];
     
     if (isStateChangingMethod && !skipCsrfPaths.some(p => path.startsWith(p))) {
       if (!validateCsrfToken(request)) {
@@ -107,9 +108,11 @@ export async function middleware(request: NextRequest) {
   }
   
   // Content Security Policy
+  // Removed 'unsafe-eval' for security - Next.js 15 does not require it
+  // 'unsafe-inline' kept for styles (Tailwind) but should be replaced with nonces in future
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Note: 'unsafe-eval' may be needed for Next.js
+    "script-src 'self' 'unsafe-inline'", // Removed unsafe-eval - XSS protection
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https:",
     "font-src 'self' data:",

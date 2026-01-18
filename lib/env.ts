@@ -17,6 +17,15 @@ interface EnvSchema {
   // Database (when implemented)
   DATABASE_URL?: string;
   
+  // Knowledge Graph (required in production)
+  NEO4J_URI?: string;
+  NEO4J_USER?: string;
+  NEO4J_PASSWORD?: string;
+  
+  // Vector Database (required in production)
+  PINECONE_API_KEY?: string;
+  PINECONE_INDEX_NAME?: string;
+  
   // CORS
   ALLOWED_ORIGINS?: string;
   
@@ -56,6 +65,28 @@ export function validateEnv(): EnvSchema {
   if (!process.env.XAI_API_KEY) {
     warnings.push('XAI_API_KEY is not set. AI features will not work.');
   }
+
+  // Production-specific validations for critical dependencies
+  if (process.env.NODE_ENV === 'production') {
+    // Validate Neo4j configuration (required for knowledge graph)
+    if (!process.env.NEO4J_URI || !process.env.NEO4J_URI.startsWith('neo4j://')) {
+      errors.push('NEO4J_URI is required in production. Format: neo4j://host:port (e.g., neo4j://localhost:7687)');
+    }
+    if (!process.env.NEO4J_USER) {
+      errors.push('NEO4J_USER is required in production for knowledge graph access');
+    }
+    if (!process.env.NEO4J_PASSWORD) {
+      errors.push('NEO4J_PASSWORD is required in production for knowledge graph access');
+    }
+
+    // Validate Pinecone configuration (required for vector search)
+    if (!process.env.PINECONE_API_KEY || !process.env.PINECONE_API_KEY.startsWith('pcsk')) {
+      errors.push('PINECONE_API_KEY is required in production. Format: pcsk_... (from Pinecone dashboard)');
+    }
+    if (!process.env.PINECONE_INDEX_NAME) {
+      errors.push('PINECONE_INDEX_NAME is required in production for vector search');
+    }
+  }
   
   if (errors.length > 0) {
     throw new Error(
@@ -75,6 +106,11 @@ export function validateEnv(): EnvSchema {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     API_URL: process.env.API_URL,
     DATABASE_URL: process.env.DATABASE_URL,
+    NEO4J_URI: process.env.NEO4J_URI,
+    NEO4J_USER: process.env.NEO4J_USER,
+    NEO4J_PASSWORD: process.env.NEO4J_PASSWORD,
+    PINECONE_API_KEY: process.env.PINECONE_API_KEY,
+    PINECONE_INDEX_NAME: process.env.PINECONE_INDEX_NAME,
     ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS,
     MAX_FILE_SIZE_MB: process.env.MAX_FILE_SIZE_MB || '50',
     MAX_AUDIO_SIZE_MB: process.env.MAX_AUDIO_SIZE_MB || '50',
