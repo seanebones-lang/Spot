@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getEnv } from '@/lib/env';
 import { logger, generateCorrelationId } from '@/lib/logger';
 import prisma from '@/lib/db';
+import { getSystemHealthReport } from '@/lib/pipelineHealth';
+import { getMetricsCollector } from '@/lib/pipelineMetrics';
+import { getEmbeddingCache } from '@/lib/embeddingCache';
 
 /**
  * Health Check Endpoint
@@ -95,6 +98,50 @@ export async function GET(request: NextRequest) {
       message: `Memory usage: ${memoryPercent.toFixed(2)}%`,
     };
   }
+
+    // Check RAG pipeline components (optional - only if configured)
+    try {
+      const cache = getEmbeddingCache();
+      const cacheStats = cache.getStats();
+      
+      health.checks.embedding_cache = {
+        status: cacheStats.size < cacheStats.maxSize * 0.9 ? 'ok' : 'degraded',
+        message: `Cache: ${cacheStats.size}/${cacheStats.maxSize} entries`,
+      };
+    } catch (error) {
+      health.checks.embedding_cache = {
+        status: 'degraded',
+        message: error instanceof Error ? error.message : 'Cache check failed',
+      };
+    }
+
+    // Check pipeline metrics
+    try {
+      const metricsCollector = getMetricsCollector();
+      const aggregates = metricsCollector.getAggregateMetrics();
+      
+      if (aggregates.length > 0) {
+        const avgLatency = aggregates.reduce((sum, m) => sum + m.avgDuration, 0) / aggregates.length;
+        health.checks.pipeline_metrics = {
+          status: avgLatency < 200 ? 'ok' : 'degraded',
+          message: `Avg latency: ${avgLatency.toFixed(2)}ms, Stages: ${aggregates.length}`,
+        };
+      } else {
+        health.checks.pipeline_metrics = {
+          status: 'ok',
+          message: 'No metrics collected yet',
+        };
+      }
+    } catch (error) {
+      health.checks.pipeline_metrics = {
+        status: 'degraded',
+        message: error instanceof Error ? error.message : 'Metrics check failed',
+      };
+    }
+
+    // Note: Vector DB and Neo4j health checks require active connections
+    // These are checked separately in pipeline orchestration, not in general health endpoint
+    // For production, add specific endpoint: /api/health/pipeline
 
     const responseTime = Date.now() - startTime;
     health.checks.responseTime = {

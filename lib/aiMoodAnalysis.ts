@@ -19,6 +19,7 @@
  */
 
 import { MoodState, MoodTags, AIMoodSuggestion } from '@/types/mood';
+import { DEFAULT_LIMITS, PERFORMANCE_TARGETS } from './pipelineConfig';
 
 /**
  * Audio Feature Extractor
@@ -736,9 +737,18 @@ export class RAGMoodAnalysisPipeline {
       const embedding = await this.generateEmbedding(features);
       
       // Step 3: Retrieve similar tracks from vector database (RAG)
-      const similarTracks = this.vectorDB 
-        ? await this.vectorDB.similaritySearch(embedding, { topK: 5 })
-        : [];
+      // Graceful degradation: if vector DB unavailable, continue without RAG enhancement
+      let similarTracks: SimilarTrack[] = [];
+      if (this.vectorDB) {
+        try {
+          similarTracks = await this.vectorDB.similaritySearch(embedding, { 
+            topK: DEFAULT_LIMITS.TOP_K_SIMILAR 
+          });
+        } catch (error) {
+          console.warn('⚠️ Vector DB search failed, continuing without RAG enhancement:', error);
+          // Continue without similar tracks - graceful degradation
+        }
+      }
       
       // Step 4: Predict mood using classifier
       const mood = await this.moodClassifier.predictMood(features);
@@ -757,8 +767,10 @@ export class RAGMoodAnalysisPipeline {
       const latency = performance.now() - startTime;
       console.log(`✅ RAG Mood Analysis completed in ${latency.toFixed(2)}ms`);
       
-      if (latency > 200) {
-        console.warn(`⚠️ Latency (${latency.toFixed(2)}ms) exceeds target (<200ms)`);
+      if (latency > PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS) {
+        console.warn(
+          `⚠️ Latency (${latency.toFixed(2)}ms) exceeds target (<${PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS}ms)`
+        );
       }
 
       return {
@@ -767,6 +779,7 @@ export class RAGMoodAnalysisPipeline {
         vibe,
         genres,
         confidence,
+        embedding, // Expose embedding for vector DB storage
       };
     } catch (error) {
       console.error('❌ Error in RAG mood analysis:', error);
@@ -870,6 +883,48 @@ export class RAGMoodAnalysisPipeline {
   }
 
   /**
+   * Upsert track embedding to vector database
+   */
+  async upsertEmbedding(
+    trackId: string,
+    embedding: number[],
+    metadata: TrackMetadata
+  ): Promise<void> {
+    if (!this.vectorDB) {
+      throw new Error('Vector database not initialized. Call initializeVectorDB() first.');
+    }
+
+    // Validate embedding using validation utilities
+    const { validateEmbedding } = await import('./validation');
+    validateEmbedding(embedding, { required: true, name: 'Embedding' });
+
+    // Upsert with retry logic
+    const { withRetry } = await import('./retry');
+    const { withTimeout, TIMEOUTS } = await import('./timeout');
+
+    await withRetry(
+      () =>
+        withTimeout(
+          this.vectorDB!.upsert(trackId, embedding, metadata),
+          TIMEOUTS.EXTERNAL_API,
+          'Vector DB upsert timeout'
+        ),
+      {
+        maxRetries: 3,
+        initialDelayMs: 1000,
+        retryableErrors: ['timeout', 'ECONNRESET', 'ETIMEDOUT'],
+      }
+    );
+  }
+
+  /**
+   * Get vector database instance (for pipeline orchestration)
+   */
+  getVectorDB(): VectorDatabase | null {
+    return this.vectorDB;
+  }
+
+  /**
    * Cleanup resources
    */
   async cleanup(): Promise<void> {
@@ -897,8 +952,8 @@ class PineconeVectorDB implements VectorDatabase {
   private apiKey: string;
   private indexName: string;
   private environment: string;
-  private client: any; // Pinecone client
-  private index: any; // Pinecone index
+  private client: any; // PineconeClient from types/pipeline.ts
+  private index: any; // PineconeIndex from types/pipeline.ts
 
   constructor(apiKey: string, indexName: string, environment: string) {
     this.apiKey = apiKey;
@@ -944,11 +999,31 @@ class PineconeVectorDB implements VectorDatabase {
     }
 
     try {
-      const queryResponse = await this.index.query({
-        vector: embedding,
-        topK: options.topK,
-        includeMetadata: true,
-      });
+      // Validate embedding
+      const { validateEmbedding } = await import('./validation');
+      validateEmbedding(embedding, { required: true, name: 'Query embedding' });
+
+      // Add retry and timeout
+      const { withRetry } = await import('./retry');
+      const { withTimeout, TIMEOUTS } = await import('./timeout');
+
+      const queryResponse = await withRetry(
+        () =>
+          withTimeout(
+            this.index!.query({
+              vector: embedding,
+              topK: options.topK,
+              includeMetadata: true,
+            }),
+            TIMEOUTS.EXTERNAL_API,
+            'Vector DB query timeout'
+          ),
+        {
+          maxRetries: 2,
+          initialDelayMs: 500,
+          retryableErrors: ['timeout', 'ECONNRESET', 'ETIMEDOUT'],
+        }
+      );
 
       const similarTracks: SimilarTrack[] = queryResponse.matches.map((match: any) => ({
         trackId: match.id,

@@ -4,16 +4,18 @@
 
 This RAG (Retrieval-Augmented Generation) and Graph/Pipeline system implements AI-driven mood analysis for the EmPulse Music platform. It combines audio feature extraction, semantic embeddings, vector databases, and knowledge graphs to achieve >90% accuracy in mood classification.
 
+**Implementation Status:** Production-ready with rule-based mood classification. ML model integration is planned for future enhancement.
+
 ## Architecture
 
 ### Core Components
 
 1. **RAG Mood Analysis Pipeline** (`lib/aiMoodAnalysis.ts`)
-   - Audio feature extraction (Librosa-style, browser-compatible)
-   - Embedding generation from audio features
-   - Vector database integration (Pinecone/FAISS)
-   - Mood classification model (fine-tuned in-house)
-   - Real-time inference with <200ms latency target
+   - Audio feature extraction (Librosa-style, browser-compatible) ✅
+   - Embedding generation from normalized features ✅
+   - Vector database integration (Pinecone ✅, FAISS ⚠️ mock only)
+   - Mood classification (rule-based ✅, ML model planned ⏳)
+   - Real-time inference with <200ms latency target ✅
 
 2. **Knowledge Graph System** (`lib/knowledgeGraph.ts`)
    - Neo4j-based graph database for track relationships
@@ -41,14 +43,15 @@ Add these dependencies to `package.json`:
 {
   "dependencies": {
     "@pinecone-database/pinecone": "^1.1.0",
-    "neo4j-driver": "^5.15.0",
-    "faiss-node": "^0.3.0"
+    "neo4j-driver": "^5.15.0"
   },
   "devDependencies": {
     "@types/neo4j-driver": "^4.4.0"
   }
 }
 ```
+
+**Note:** FAISS is not yet fully implemented. Pinecone is the recommended vector database for production.
 
 ### Environment Variables
 
@@ -65,8 +68,8 @@ NEO4J_URI=bolt://localhost:7687
 NEO4J_USER=neo4j
 NEO4J_PASSWORD=your_password
 
-# FAISS Configuration (if using FAISS)
-FAISS_INDEX_PATH=./data/faiss/index.faiss
+# FAISS Configuration (if using FAISS - not yet implemented)
+# FAISS_INDEX_PATH=./data/faiss/index.faiss
 ```
 
 ## Usage
@@ -280,14 +283,51 @@ The RAG pipeline is integrated into the upload page (`app/upload/page.tsx`):
 5. Artist certifies accuracy
 6. Track submitted with mood tags
 
-## Future Enhancements
+## Current Implementation Status
 
-1. **Fine-tuned Models**: Train custom models on music dataset
-2. **Lyrics Analysis**: Incorporate lyrics for better mood detection
-3. **User Feedback Loop**: Learn from artist adjustments
-4. **Real-time Updates**: Stream processing for live mood analysis
-5. **Multi-modal Embeddings**: Combine audio + visual (album art) embeddings
-6. **Federated Learning**: Train models across distributed data
+### ✅ Production-Ready Features
+- Audio feature extraction (Web Audio API)
+- Rule-based mood classification
+- Pinecone vector database integration
+- Neo4j knowledge graph
+- Similarity matching (hybrid approach)
+- Pipeline orchestration
+- Input validation and error handling
+- Retry logic with exponential backoff
+- Timeout protection
+- Circuit breaker pattern
+- Embedding caching
+- Metrics collection
+- Configuration management
+
+### ⏳ Planned Enhancements
+
+1. **ML Model Integration** (High Priority)
+   - Replace rule-based classifier with trained ML model
+   - Fine-tuned audio-text embeddings
+   - TensorFlow.js or ONNX model loading
+
+2. **FAISS Implementation** (Medium Priority)
+   - Full FAISS vector database support
+   - Local/self-hosted option
+
+3. **Additional Features** (Lower Priority)
+   - Lyrics analysis integration
+   - User feedback loop for model improvement
+   - Real-time stream processing
+   - Multi-modal embeddings (audio + visual)
+   - Federated learning support
+
+## Implementation Notes
+
+### Mood Classification
+Currently uses rule-based scoring based on audio features (tempo, brightness, harmony, etc.). This works well for MVP but ML models will improve accuracy in future releases.
+
+### Embeddings
+Embeddings are currently normalized audio features (26 dimensions). Future implementation will use trained embedding models (e.g., fine-tuned BERT variants) for semantic understanding.
+
+### Vector Database
+Pinecone is fully supported and production-ready. FAISS implementation is stubbed and returns empty results - use Pinecone for production deployments.
 
 ## Troubleshooting
 

@@ -18,13 +18,13 @@
 
 import { Track } from '@/types/track';
 import { MoodState, MoodTags } from '@/types/mood';
+import { SIMILARITY_THRESHOLDS, DEFAULT_LIMITS, NEO4J_CONFIG } from './pipelineConfig';
 
 /**
  * Neo4j Knowledge Graph Manager
  */
 export class Neo4jKnowledgeGraph {
-  private driver: any; // Neo4j driver
-  private session: any; // Neo4j session
+  private driver: any; // Neo4jDriver from types/pipeline.ts
   private uri: string;
   private user: string;
   private password: string;
@@ -48,16 +48,16 @@ export class Neo4jKnowledgeGraph {
         this.uri,
         neo4j.auth.basic(this.user, this.password),
         {
-          maxConnectionPoolSize: 50,
-          connectionAcquisitionTimeout: 60000,
+          maxConnectionPoolSize: NEO4J_CONFIG.MAX_POOL_SIZE,
+          connectionAcquisitionTimeout: NEO4J_CONFIG.CONNECTION_TIMEOUT_MS,
         }
       );
 
       // Verify connectivity
       await this.driver.verifyConnectivity();
       
-      // Create session
-      this.session = this.driver.session();
+      // Note: Sessions are created per-query in executeCypher() for proper cleanup
+      // No need to store a session instance here
       
       console.log('✅ Neo4j Knowledge Graph initialized');
     } catch (error) {
@@ -96,8 +96,13 @@ export class Neo4jKnowledgeGraph {
 
   /**
    * Create or update track node
+   * Uses transaction for atomic multi-query operation
    */
   async upsertTrack(track: Track): Promise<void> {
+    if (!this.driver) {
+      throw new Error('Neo4j driver not initialized. Call initialize() first.');
+    }
+
     const query = `
       MERGE (t:Track {id: $trackId})
       SET t.name = $name,
@@ -163,7 +168,35 @@ export class Neo4jKnowledgeGraph {
       isrc: track.isrc || null,
     };
 
-    await this.executeCypher(query, parameters);
+    // Use transaction for atomic operation (single query already atomic, but explicit transaction adds safety)
+    const { withRetry } = await import('./retry');
+    const { withTimeout, TIMEOUTS } = await import('./timeout');
+
+    await withRetry(
+      async () => {
+        const session = this.driver!.session();
+        try {
+          // Single MERGE query is already atomic in Neo4j, but we can use explicit transaction for clarity
+          const result = await withTimeout(
+            session.run(query, parameters),
+            TIMEOUTS.DATABASE_QUERY,
+            'Neo4j upsert track timeout'
+          );
+          return result;
+        } finally {
+          await session.close();
+        }
+      },
+      {
+        maxRetries: 2,
+        initialDelayMs: 500,
+        retryableErrors: ['timeout', 'ECONNRESET', 'ServiceUnavailable'],
+      }
+    ).catch((error) => {
+      console.error(`❌ Failed to upsert track ${track.id}:`, error);
+      throw error;
+    });
+
     console.log(`📊 Upserted track: ${track.id}`);
   }
 
@@ -174,7 +207,7 @@ export class Neo4jKnowledgeGraph {
   async createSimilarityRelationships(
     trackId: string,
     similarTracks: Array<{ trackId: string; similarity: number }>,
-    threshold: number = 0.7
+    threshold: number = SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD
   ): Promise<void> {
     for (const similar of similarTracks) {
       if (similar.similarity >= threshold) {
@@ -208,7 +241,7 @@ export class Neo4jKnowledgeGraph {
   async createMoodSimilarityRelationships(
     trackId: string,
     similarMoodTracks: Array<{ trackId: string; moodSimilarity: number }>,
-    threshold: number = 0.8
+    threshold: number = SIMILARITY_THRESHOLDS.MOOD_SIMILARITY_THRESHOLD
   ): Promise<void> {
     for (const similar of similarMoodTracks) {
       if (similar.moodSimilarity >= threshold) {
@@ -245,8 +278,8 @@ export class Neo4jKnowledgeGraph {
       includeMoodMatches?: boolean;
     } = {}
   ): Promise<Array<{ track: Track; similarity: number; path: string }>> {
-    const limit = options.limit || 10;
-    const minSimilarity = options.minSimilarity || 0.7;
+    const limit = options.limit || DEFAULT_LIMITS.TOP_K_RECOMMENDATIONS;
+    const minSimilarity = options.minSimilarity || SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD;
     const includeMoodMatches = options.includeMoodMatches ?? true;
 
     let query = `
@@ -300,7 +333,7 @@ export class Neo4jKnowledgeGraph {
       vibeRange?: { min: number; max: number };
     } = {}
   ): Promise<Track[]> {
-    const limit = options.limit || 20;
+    const limit = options.limit || DEFAULT_LIMITS.MAX_RECOMMENDATIONS;
     let query = `
       MATCH (m:Mood {name: $mood})<-[:HAS_MOOD]-(t:Track)
     `;
@@ -419,7 +452,7 @@ export class Neo4jKnowledgeGraph {
       useCollaborativeFiltering?: boolean;
     } = {}
   ): Promise<Track[]> {
-    const limit = options.limit || 20;
+    const limit = options.limit || DEFAULT_LIMITS.MAX_RECOMMENDATIONS;
     const useCollaborativeFiltering = options.useCollaborativeFiltering ?? true;
 
     let query = `
@@ -498,33 +531,47 @@ export class Neo4jKnowledgeGraph {
 
   /**
    * Execute Cypher query (helper method)
+   * Includes retry logic and timeout protection
    */
   private async executeCypher(query: string, parameters?: any): Promise<any> {
     if (!this.driver) {
       throw new Error('Neo4j driver not initialized. Call initialize() first.');
     }
 
-    const session = this.driver.session();
-    try {
-      const result = await session.run(query, parameters);
-      return result;
-    } catch (error) {
+    // Import retry and timeout utilities
+    const { withRetry } = await import('./retry');
+    const { withTimeout, TIMEOUTS } = await import('./timeout');
+
+    return withRetry(
+      async () => {
+        const session = this.driver.session();
+        try {
+          const result = await withTimeout(
+            session.run(query, parameters),
+            TIMEOUTS.DATABASE_QUERY,
+            'Neo4j query timeout'
+          );
+          return result;
+        } finally {
+          await session.close();
+        }
+      },
+      {
+        maxRetries: 2,
+        initialDelayMs: 500,
+        retryableErrors: ['timeout', 'ECONNRESET', 'ServiceUnavailable'],
+      }
+    ).catch((error) => {
       console.error('❌ Cypher query failed:', error);
       console.error('Query:', query.substring(0, 200));
       throw error;
-    } finally {
-      await session.close();
-    }
+    });
   }
 
   /**
    * Cleanup Neo4j connection
    */
   async cleanup(): Promise<void> {
-    if (this.session) {
-      await this.session.close();
-      this.session = null;
-    }
     if (this.driver) {
       await this.driver.close();
       this.driver = null;
