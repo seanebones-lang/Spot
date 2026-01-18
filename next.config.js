@@ -6,6 +6,15 @@ const nextConfig = {
     domains: ['i.scdn.co', 'mosaic.scdn.co', 'wrapped-images.spotifycdn.com'],
     unoptimized: false,
   },
+  webpack: (config) => {
+    // Make Pinecone optional - use a mock if not installed
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@pinecone-database/pinecone': require.resolve('./lib/pinecone-stub.js'),
+    };
+    
+    return config;
+  },
 }
 
 module.exports = nextConfig

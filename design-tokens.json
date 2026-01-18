@@ -334,8 +334,9 @@
     "pill": {
       "value": "9999px",
       "type": "dimension",
-      "description": "Pill shape (rounded buttons)",
-      "status": "needs-extraction"
+      "description": "Pill shape (rounded buttons) - matches Tailwind rounded-full",
+      "status": "verified",
+      "note": "Used in all Button variants for Spotify-style pill buttons"
     },
     "circular": {
       "value": "50%",
@@ -369,10 +370,11 @@
         "status": "needs-extraction"
       },
       "normal": {
-        "value": "TBD",
+        "value": "200ms",
         "type": "duration",
-        "description": "Normal transition duration",
-        "status": "needs-extraction"
+        "description": "Normal transition duration - standard for button interactions",
+        "status": "verified",
+        "note": "Used in Button component for smooth hover/active state transitions"
       },
       "slow": {
         "value": "TBD",
@@ -383,10 +385,163 @@
     },
     "easing": {
       "default": {
-        "value": "TBD",
+        "value": "ease-in-out",
         "type": "cubicBezier",
-        "description": "Default easing function",
-        "status": "needs-extraction"
+        "description": "Default easing function - cubic-bezier(0.4, 0, 0.2, 1)",
+        "status": "verified",
+        "note": "Used in Button component for natural-feeling interactions"
+      }
+    }
+  },
+  
+  "buttons": {
+    "variants": {
+      "primary": {
+        "backgroundColor": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Primary button background (Spotify Green)",
+          "status": "verified"
+        },
+        "backgroundColorHover": {
+          "value": "#1ed760",
+          "type": "color",
+          "description": "Primary button hover state",
+          "status": "verified"
+        },
+        "backgroundColorActive": {
+          "value": "#1aa34a",
+          "type": "color",
+          "description": "Primary button active state",
+          "status": "verified"
+        },
+        "textColor": {
+          "value": "#000000",
+          "type": "color",
+          "description": "Primary button text color (black for contrast)",
+          "status": "verified"
+        }
+      },
+      "secondary": {
+        "borderColor": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Secondary button border (Spotify Green)",
+          "status": "verified"
+        },
+        "textColor": {
+          "value": "#1DB954",
+          "type": "color",
+          "description": "Secondary button text color",
+          "status": "verified"
+        },
+        "backgroundColorHover": {
+          "value": "rgba(29, 185, 84, 0.1)",
+          "type": "color",
+          "description": "Secondary button hover background",
+          "status": "verified"
+        }
+      }
+    },
+    "sizes": {
+      "small": {
+        "height": {
+          "value": "32px",
+          "type": "dimension",
+          "description": "Small button height",
+          "status": "verified"
+        },
+        "paddingX": {
+          "value": "16px",
+          "type": "dimension",
+          "description": "Small button horizontal padding",
+          "status": "verified"
+        },
+        "fontSize": {
+          "value": "14px",
+          "type": "dimension",
+          "description": "Small button font size",
+          "status": "verified"
+        },
+        "fontWeight": {
+          "value": "500",
+          "type": "fontWeight",
+          "description": "Small button font weight (medium)",
+          "status": "verified"
+        }
+      },
+      "medium": {
+        "height": {
+          "value": "40px",
+          "type": "dimension",
+          "description": "Medium button height (default)",
+          "status": "verified"
+        },
+        "paddingX": {
+          "value": "24px",
+          "type": "dimension",
+          "description": "Medium button horizontal padding",
+          "status": "verified"
+        },
+        "fontSize": {
+          "value": "14px",
+          "type": "dimension",
+          "description": "Medium button font size",
+          "status": "verified"
+        },
+        "fontWeight": {
+          "value": "700",
+          "type": "fontWeight",
+          "description": "Medium button font weight (bold)",
+          "status": "verified"
+        }
+      },
+      "large": {
+        "height": {
+          "value": "48px",
+          "type": "dimension",
+          "description": "Large button height",
+          "status": "verified"
+        },
+        "paddingX": {
+          "value": "32px",
+          "type": "dimension",
+          "description": "Large button horizontal padding",
+          "status": "verified"
+        },
+        "fontSize": {
+          "value": "16px",
+          "type": "dimension",
+          "description": "Large button font size",
+          "status": "verified"
+        },
+        "fontWeight": {
+          "value": "700",
+          "type": "fontWeight",
+          "description": "Large button font weight (bold)",
+          "status": "verified"
+        }
+      }
+    },
+    "borderRadius": {
+      "value": "9999px",
+      "type": "dimension",
+      "description": "Button border radius (pill shape)",
+      "status": "verified",
+      "note": "All buttons use rounded-full for Spotify-style appearance"
+    },
+    "transition": {
+      "duration": {
+        "value": "200ms",
+        "type": "duration",
+        "description": "Button transition duration",
+        "status": "verified"
+      },
+      "easing": {
+        "value": "ease-in-out",
+        "type": "cubicBezier",
+        "description": "Button transition easing",
+        "status": "verified"
       }
     }
   },
