@@ -27,6 +27,9 @@ module.exports = {
       spacing: {
         'player-height': '90px',
       },
+      inset: {
+        'player-height': '90px', // For bottom positioning above player
+      },
       borderRadius: {
         'spotify': '4px',
       },

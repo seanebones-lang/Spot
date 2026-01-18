@@ -71,7 +71,7 @@ export default function Sidebar() {
     <>
       <div 
         className={cn(
-          "fixed left-0 top-0 bottom-player-height bg-spotify-dark-gray text-white flex flex-col z-40",
+          "fixed left-0 top-0 bottom-[90px] bg-spotify-dark-gray text-white flex flex-col z-40",
           isResizing ? "" : "transition-all duration-300 ease-in-out"
         )}
         style={{ 
@@ -386,7 +386,7 @@ export default function Sidebar() {
         <div
           onMouseDown={handleMouseDown}
           className={cn(
-            "fixed top-0 bottom-player-height w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all",
+            "fixed top-0 bottom-[90px] w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all",
             isResizing && "bg-spotify-green/60 w-1"
           )}
           style={{ left: `${leftSidebarWidth}px` }}

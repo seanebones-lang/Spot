@@ -85,13 +85,25 @@ body {
 @layer components {
   .btn-primary {
     @apply bg-spotify-green text-white rounded-full px-6 py-2 font-bold hover:scale-105 transition-transform;
+    will-change: transform;
   }
   
   .btn-secondary {
     @apply bg-transparent border border-white/30 text-white rounded-full px-6 py-2 font-bold hover:border-white transition-colors;
+    will-change: border-color;
   }
   
   .card-hover {
     @apply transition-transform hover:scale-105 cursor-pointer;
+    will-change: transform;
+  }
+}
+
+/* GPU acceleration for smooth animations */
+@layer utilities {
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { formatDuration } from '@/lib/utils';
 
 interface ProgressBarProps {
@@ -16,14 +16,13 @@ export default function ProgressBar({ progress, duration, currentTime, onSeek }:
   const barRef = useRef<HTMLDivElement>(null);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
     setIsDragging(true);
     handleSeek(e);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isDragging) {
-      handleSeek(e);
-    } else if (barRef.current) {
+    if (!isDragging && barRef.current) {
       const rect = barRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const progressPercent = (x / rect.width) * 100;
@@ -32,11 +31,12 @@ export default function ProgressBar({ progress, duration, currentTime, onSeek }:
   };
 
   const handleMouseLeave = () => {
-    setIsDragging(false);
-    setHoverProgress(null);
+    if (!isDragging) {
+      setHoverProgress(null);
+    }
   };
 
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement> | MouseEvent) => {
     if (barRef.current) {
       const rect = barRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -45,6 +45,33 @@ export default function ProgressBar({ progress, duration, currentTime, onSeek }:
       onSeek(newPosition);
     }
   };
+
+  // Handle document-level mouse events for smooth dragging
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (barRef.current) {
+        const rect = barRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const progressPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        const newPosition = (progressPercent / 100) * duration;
+        onSeek(newPosition);
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, duration, onSeek]);
 
   return (
     <div className="flex items-center gap-2 w-full group">

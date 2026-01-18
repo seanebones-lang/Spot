@@ -51,7 +51,7 @@ export default function RightSidebar() {
     <>
       <div
         className={cn(
-          "fixed right-0 bottom-player-height bg-spotify-dark-gray z-40 overflow-y-auto sidebar-scrollbar",
+          "fixed right-0 bottom-[90px] bg-spotify-dark-gray z-40 overflow-y-auto sidebar-scrollbar",
           rightSidebarOpen ? "translate-x-0" : "translate-x-full",
           isResizing ? "" : "transition-transform duration-300 ease-in-out"
         )}
@@ -189,7 +189,7 @@ export default function RightSidebar() {
         <div
           onMouseDown={handleMouseDown}
           className={cn(
-            "fixed bottom-player-height w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all",
+            "fixed bottom-[90px] w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all",
             isResizing && "bg-spotify-green/60 w-1"
           )}
           style={{ 
