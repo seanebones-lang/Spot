@@ -910,7 +910,17 @@ class PineconeVectorDB implements VectorDatabase {
     try {
       // Import Pinecone client (dynamic import for browser compatibility)
       // @ts-ignore - Pinecone types may not be available at compile time
-      const { Pinecone } = await import('@pinecone-database/pinecone');
+      // Optional Pinecone import - only if package is installed
+      // Using dynamic import with error handling
+      // @ts-ignore - Pinecone types may not be available at compile time
+      let Pinecone;
+      try {
+        const pineconeModule = await import('@pinecone-database/pinecone');
+        Pinecone = pineconeModule.Pinecone;
+      } catch (error) {
+        // Pinecone not installed - provide helpful error message
+        throw new Error('Pinecone database package not installed. Install with: npm install @pinecone-database/pinecone');
+      }
       
       // Initialize Pinecone client
       this.client = new Pinecone({
