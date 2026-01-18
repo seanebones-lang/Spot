@@ -11,6 +11,7 @@ import { useUIStore } from '@/stores/uiStore';
 import { useLibraryStore } from '@/stores/libraryStore';
 import { mockData } from '@/lib/data';
 import FriendsActivity from './FriendsActivity';
+import ImageWithFallback from './ImageWithFallback';
 
 const navItems = [
   { icon: Home, label: 'Home', href: '/' },
