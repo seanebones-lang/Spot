@@ -69,6 +69,8 @@ export default function UploadPage() {
   const [artistMoodTags, setArtistMoodTags] = useState<AIMoodSuggestion | null>(null);
   const [hasAdjusted, setHasAdjusted] = useState(false);
   const [accuracyCertified, setAccuracyCertified] = useState(false);
+  // Issue-8: Loading state for async mood analysis
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
@@ -79,7 +81,8 @@ export default function UploadPage() {
         const file = acceptedFiles[0];
         setUploadedFile(file);
         
-        // Run RAG mood analysis pipeline
+        // Run RAG mood analysis pipeline (Issue-8: Add loading state)
+        setIsAnalyzing(true);
         try {
           const ragPipeline = getRAGPipeline();
           const moodSuggestion = await ragPipeline.analyzeMood(file);
@@ -109,6 +112,8 @@ export default function UploadPage() {
             genres: [],
             confidence: 0.5,
           });
+        } finally {
+          setIsAnalyzing(false);
         }
       }
     },
@@ -293,7 +298,13 @@ export default function UploadPage() {
           >
             <input {...getInputProps()} />
             <Upload size={48} className="mx-auto mb-4 text-spotify-text-gray" />
-            {uploadedFile ? (
+            {isAnalyzing ? (
+              <div className="flex flex-col items-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-spotify-green mb-4"></div>
+                <p className="font-medium text-white mb-1">Analyzing track mood...</p>
+                <p className="text-sm text-spotify-text-gray">This may take a few seconds</p>
+              </div>
+            ) : uploadedFile ? (
               <div>
                 <FileAudio size={32} className="mx-auto mb-2 text-spotify-green" />
                 <p className="font-medium text-white">{uploadedFile.name}</p>

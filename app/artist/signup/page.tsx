@@ -26,6 +26,14 @@ export default function ArtistSignupPage() {
     setApprovalStatus,
   } = useArtistSignupStore();
 
+  // Step 1 form state (Issue-3: Add validation)
+  const [step1Data, setStep1Data] = useState({
+    artistName: '',
+    email: '',
+    password: '',
+  });
+  const [step1Errors, setStep1Errors] = useState<Record<string, string>>({});
+
   const [w9Data, setW9Data] = useState({
     ssn: '',
     ein: '',
@@ -35,6 +43,34 @@ export default function ArtistSignupPage() {
   });
 
   const allDocumentsSigned = legalDocuments.every(doc => documentsSigned.includes(doc.id));
+
+  // Validation for Step 1 (Issue-3)
+  const validateStep1 = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!step1Data.artistName.trim()) {
+      newErrors.artistName = 'Artist/Management name is required';
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!step1Data.email || !emailRegex.test(step1Data.email)) {
+      newErrors.email = 'Valid email address is required';
+    }
+    
+    if (!step1Data.password || step1Data.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
+    }
+    
+    setStep1Errors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleStep1Continue = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateStep1()) {
+      setCurrentStep(2);
+    }
+  };
 
   const handleSubmit = () => {
     if (allDocumentsSigned && w9Completed) {
@@ -85,39 +121,88 @@ export default function ArtistSignupPage() {
       {currentStep === 1 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 1: Account Creation</h2>
-          <div className="space-y-4">
+          <form onSubmit={handleStep1Continue} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Artist/Management Name</label>
+              <label className="block text-sm font-medium mb-2">Artist/Management Name *</label>
               <input
                 type="text"
-                className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                value={step1Data.artistName}
+                onChange={(e) => {
+                  setStep1Data({ ...step1Data, artistName: e.target.value });
+                  if (step1Errors.artistName) {
+                    setStep1Errors({ ...step1Errors, artistName: '' });
+                  }
+                }}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green ${
+                  step1Errors.artistName ? 'border-2 border-red-500' : ''
+                }`}
                 placeholder="Enter artist or management name"
+                aria-invalid={!!step1Errors.artistName}
+                aria-describedby={step1Errors.artistName ? 'artistName-error' : undefined}
               />
+              {step1Errors.artistName && (
+                <p id="artistName-error" className="text-xs text-red-400 mt-1" role="alert">
+                  {step1Errors.artistName}
+                </p>
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label className="block text-sm font-medium mb-2">Email *</label>
               <input
                 type="email"
-                className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                value={step1Data.email}
+                onChange={(e) => {
+                  setStep1Data({ ...step1Data, email: e.target.value });
+                  if (step1Errors.email) {
+                    setStep1Errors({ ...step1Errors, email: '' });
+                  }
+                }}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green ${
+                  step1Errors.email ? 'border-2 border-red-500' : ''
+                }`}
                 placeholder="your@email.com"
+                aria-invalid={!!step1Errors.email}
+                aria-describedby={step1Errors.email ? 'email-error' : undefined}
               />
-              <p className="text-xs text-spotify-text-gray mt-1">Verification required</p>
+              {step1Errors.email ? (
+                <p id="email-error" className="text-xs text-red-400 mt-1" role="alert">
+                  {step1Errors.email}
+                </p>
+              ) : (
+                <p className="text-xs text-spotify-text-gray mt-1">Verification required</p>
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Password</label>
+              <label className="block text-sm font-medium mb-2">Password *</label>
               <input
                 type="password"
-                className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
-                placeholder="Create a strong password"
+                value={step1Data.password}
+                onChange={(e) => {
+                  setStep1Data({ ...step1Data, password: e.target.value });
+                  if (step1Errors.password) {
+                    setStep1Errors({ ...step1Errors, password: '' });
+                  }
+                }}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green ${
+                  step1Errors.password ? 'border-2 border-red-500' : ''
+                }`}
+                placeholder="Create a strong password (min 8 characters)"
+                aria-invalid={!!step1Errors.password}
+                aria-describedby={step1Errors.password ? 'password-error' : undefined}
               />
+              {step1Errors.password && (
+                <p id="password-error" className="text-xs text-red-400 mt-1" role="alert">
+                  {step1Errors.password}
+                </p>
+              )}
             </div>
             <button
-              onClick={() => setCurrentStep(2)}
+              type="submit"
               className="btn-primary w-full mt-4"
             >
               Continue to Legal Documents
             </button>
-          </div>
+          </form>
         </div>
       )}
 
