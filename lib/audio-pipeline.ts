@@ -353,11 +353,6 @@ export class AudiophileAudioPipeline {
       }
     }
     
-    if (this.audioContext && this.audioContext.state !== 'closed') {
-      await this.audioContext.close();
-    }
-    
-    this.audioContext = null;
     this.source = null;
     this.analyser = null;
     this.eqNodes = [];
