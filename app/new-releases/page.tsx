@@ -29,6 +29,9 @@ export default function NewReleasesPage() {
                 artist: {
                   id: `artist-${track.id}`,
                   name: track.artistName || 'Unknown Artist',
+                  image: '',
+                  followers: 0,
+                  verified: false,
                 },
                 coverArt: track.coverArtUrl || '', // Use cover art if available from upload
                 tracks: [],
