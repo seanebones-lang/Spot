@@ -1,6 +1,7 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { Track } from '@/types/track';
+import { createSafeStorage } from '@/lib/safeStorage';
 
 interface PlayerState {
   currentTrack: Track | null;
@@ -117,6 +118,14 @@ export const usePlayerStore = create<PlayerState>()(
     }),
     {
       name: 'player-storage',
+      storage: createJSONStorage(() => {
+        try {
+          return createSafeStorage();
+        } catch (error) {
+          console.error('Failed to create storage:', error);
+          return sessionStorage; // Fallback to sessionStorage
+        }
+      }),
       partialize: (state) => ({
         currentTrack: state.currentTrack,
         progress: state.progress,

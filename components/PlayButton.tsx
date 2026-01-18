@@ -22,6 +22,8 @@ export default function PlayButton({ isPlaying, onClick, size = 'md', className,
     <button
       onClick={onClick}
       disabled={disabled}
+      aria-label={isPlaying ? 'Pause' : 'Play'}
+      aria-pressed={isPlaying}
       className={cn(
         "bg-spotify-green hover:scale-105 rounded-full flex items-center justify-center transition-transform shadow-lg gpu-accelerated",
         sizes[size],
