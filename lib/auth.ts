@@ -1,5 +1,7 @@
 import { NextRequest } from 'next/server';
 import { verify } from 'jsonwebtoken';
+import { getEnv } from '@/lib/env';
+import { logger } from '@/lib/logger';
 
 /**
  * Authentication utilities
@@ -10,6 +12,17 @@ export interface AuthUser {
   userId: string;
   email: string;
   role: string;
+}
+
+/**
+ * Get JWT secret - throws error if not configured
+ */
+function getJwtSecret(): string {
+  const env = getEnv();
+  if (!env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is not configured. This is required for authentication.');
+  }
+  return env.JWT_SECRET;
 }
 
 /**
@@ -24,11 +37,12 @@ export function verifyToken(request: NextRequest): AuthUser | null {
     }
 
     const token = authHeader.substring(7);
-    const secret = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+    const secret = getJwtSecret();
 
     const decoded = verify(token, secret) as AuthUser;
     return decoded;
   } catch (error) {
+    logger.debug('Token verification failed', { error });
     return null;
   }
 }

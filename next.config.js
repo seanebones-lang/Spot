@@ -6,6 +6,16 @@ const nextConfig = {
     domains: ['i.scdn.co', 'mosaic.scdn.co', 'wrapped-images.spotifycdn.com', 'images.unsplash.com'],
     unoptimized: false,
   },
+  // Request body size limit (50MB for file uploads)
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '50mb',
+    },
+  },
+  // Compress responses
+  compress: true,
+  // Production optimizations
+  poweredByHeader: false, // Remove X-Powered-By header
   webpack: (config) => {
     // Make Pinecone optional - use a mock if not installed
     config.resolve.alias = {
@@ -15,6 +25,7 @@ const nextConfig = {
     
     return config;
   },
+  // Headers are handled in middleware.ts for dynamic control
 }
 
 module.exports = nextConfig

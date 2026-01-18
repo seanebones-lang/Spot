@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger, generateCorrelationId } from '@/lib/logger';
 
 /**
  * GTA V Radio Station Metadata
@@ -60,33 +61,35 @@ const STATIONS = [
  * Returns list of all available radio stations
  */
 export async function GET(request: NextRequest) {
-  const response = NextResponse.json({
-    stations: STATIONS,
-    count: STATIONS.length,
-  });
+  const correlationId = generateCorrelationId();
+  const startTime = Date.now();
   
-  // Allow CORS for cross-origin requests (Vercel frontend to Railway backend)
-  const origin = request.headers.get('origin');
-  response.headers.set('Access-Control-Allow-Origin', origin || '*');
-  response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
-  response.headers.set('Access-Control-Allow-Credentials', 'true');
-  
-  return response;
+  try {
+    const response = NextResponse.json({
+      stations: STATIONS,
+      count: STATIONS.length,
+    });
+    
+    // CORS is handled by middleware.ts
+    const duration = Date.now() - startTime;
+    logger.info('Radio stations list requested', { correlationId, duration });
+    
+    return response;
+  } catch (error) {
+    const duration = Date.now() - startTime;
+    logger.error('Error getting radio stations', error, { correlationId, duration });
+    return NextResponse.json(
+      { error: 'Failed to retrieve stations' },
+      { status: 500 }
+    );
+  }
 }
 
 /**
  * Handle OPTIONS for CORS preflight
+ * Note: CORS is now handled by middleware.ts, but keeping this for compatibility
  */
 export async function OPTIONS(request: NextRequest) {
-  const origin = request.headers.get('origin');
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': origin || '*',
-      'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Credentials': 'true',
-    },
-  });
+  // CORS preflight is handled by middleware.ts
+  return new NextResponse(null, { status: 200 });
 }

@@ -1,24 +1,52 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth';
+import { checkRateLimit, getClientIdentifier } from '@/lib/rateLimit';
+import { logger, generateCorrelationId } from '@/lib/logger';
+import { sanitizeString, sanitizeEmail, sanitizeObjectKeys } from '@/lib/sanitize';
 
 /**
  * Artist Signup Submission API
  * Submits artist signup application for approval
  * Requires authentication
+ * Rate limited: 5 requests per day
  */
 export async function POST(request: NextRequest) {
+  const correlationId = generateCorrelationId();
+  const startTime = Date.now();
+  
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(request);
+    const rateLimit = checkRateLimit(clientId, '/api/artist/signup');
+    if (!rateLimit.allowed) {
+      logger.warn('Rate limit exceeded for artist signup', { correlationId, clientId });
+      return NextResponse.json(
+        { error: 'Too many applications. Please try again later.' },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': '5',
+            'X-RateLimit-Remaining': String(rateLimit.remaining),
+            'X-RateLimit-Reset': String(rateLimit.resetTime),
+            'Retry-After': String(Math.ceil((rateLimit.resetTime - Date.now()) / 1000)),
+          },
+        }
+      );
+    }
+
     // Require authentication
     let user;
     try {
       user = requireAuth(request);
     } catch (error) {
+      logger.warn('Unauthorized artist signup attempt', { correlationId });
       return NextResponse.json(
         { error: 'Authentication required. Please log in first.' },
         { status: 401 }
       );
     }
 
+    const body = await request.json();
     const {
       selectedMediums,
       accountInfo,
@@ -26,7 +54,7 @@ export async function POST(request: NextRequest) {
       w9Data,
       proRegistration,
       digitalSignature,
-    } = await request.json();
+    } = sanitizeObjectKeys(body);
 
     // Validation
     if (!selectedMediums || selectedMediums.length === 0) {
@@ -39,6 +67,22 @@ export async function POST(request: NextRequest) {
     if (!accountInfo || !accountInfo.email || !accountInfo.artistName) {
       return NextResponse.json(
         { error: 'Account information is required' },
+        { status: 400 }
+      );
+    }
+
+    // Sanitize account info
+    const sanitizedEmail = sanitizeEmail(accountInfo.email);
+    if (!sanitizedEmail) {
+      return NextResponse.json(
+        { error: 'Invalid email format' },
+        { status: 400 }
+      );
+    }
+    const sanitizedArtistName = sanitizeString(accountInfo.artistName);
+    if (!sanitizedArtistName || sanitizedArtistName.length < 2) {
+      return NextResponse.json(
+        { error: 'Artist name must be at least 2 characters long' },
         { status: 400 }
       );
     }
@@ -72,8 +116,8 @@ export async function POST(request: NextRequest) {
     const application = {
       id: applicationId,
       userId: user.userId,
-      email: accountInfo.email,
-      artistName: accountInfo.artistName,
+      email: sanitizedEmail,
+      artistName: sanitizedArtistName,
       selectedMediums,
       documentsSigned,
       w9Data: {
@@ -97,11 +141,14 @@ export async function POST(request: NextRequest) {
     // 3. Send confirmation email to artist
     // 4. Update user role to 'artist' (pending approval)
 
-    console.log('Artist signup application submitted:', {
+    const duration = Date.now() - startTime;
+    logger.info('Artist signup application submitted', {
+      correlationId,
       applicationId,
       userId: user.userId,
-      artistName: accountInfo.artistName,
+      artistName: sanitizedArtistName,
       mediums: selectedMediums,
+      duration,
     });
 
     return NextResponse.json({
@@ -115,7 +162,8 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Artist signup error:', error);
+    const duration = Date.now() - startTime;
+    logger.error('Artist signup error', error, { correlationId, duration });
     return NextResponse.json(
       { error: 'Failed to submit application. Please try again.' },
       { status: 500 }
