@@ -150,7 +150,7 @@ export default function SupportPage() {
                 color: '#B3B3B3'
               }}
             >
-              Powered by xAI Grok
+              Powered by xAI Grok-3
             </p>
           </div>
         </div>
