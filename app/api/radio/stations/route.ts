@@ -59,9 +59,34 @@ const STATIONS = [
  * GET /api/radio/stations
  * Returns list of all available radio stations
  */
-export async function GET() {
-  return NextResponse.json({
+export async function GET(request: NextRequest) {
+  const response = NextResponse.json({
     stations: STATIONS,
     count: STATIONS.length,
+  });
+  
+  // Allow CORS for cross-origin requests (Vercel frontend to Railway backend)
+  const origin = request.headers.get('origin');
+  response.headers.set('Access-Control-Allow-Origin', origin || '*');
+  response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+  response.headers.set('Access-Control-Allow-Credentials', 'true');
+  
+  return response;
+}
+
+/**
+ * Handle OPTIONS for CORS preflight
+ */
+export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get('origin');
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': origin || '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Credentials': 'true',
+    },
   });
 }
