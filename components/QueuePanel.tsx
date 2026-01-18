@@ -1,9 +1,10 @@
 'use client';
 
-import { X, Trash2, GripVertical, Power } from 'lucide-react';
+import { X, Trash2, GripVertical, Power, Music } from 'lucide-react';
 import { useState } from 'react';
 import { usePlayerStore } from '@/stores/playerStore';
 import PlayButton from './PlayButton';
+import EmptyState from './EmptyState';
 import { formatDuration, cn } from '@/lib/utils';
 
 interface QueuePanelProps {
@@ -56,9 +57,14 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
           <div className="flex items-center gap-2">
             {queue.length > 0 && (
               <button
-                onClick={clearQueue}
+                onClick={() => {
+                  if (window.confirm('Are you sure you want to clear the queue? This will remove all tracks.')) {
+                    clearQueue();
+                  }
+                }}
                 className="text-xs text-spotify-text-gray hover:text-white transition-colors px-2 py-1"
                 title="Clear queue"
+                aria-label="Clear queue"
               >
                 Clear
               </button>
@@ -120,9 +126,11 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
             </div>
           )}
           {queue.length === 0 && (
-            <div className="text-center py-16 text-spotify-text-gray">
-              <p>Your queue is empty</p>
-            </div>
+            <EmptyState
+              icon={Music}
+              title="Your queue is empty"
+              description="Add tracks to your queue to see them here. Play a track, album, or playlist to get started."
+            />
           )}
           {queue.map((track, index) => (
             <div

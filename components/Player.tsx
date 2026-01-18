@@ -12,6 +12,7 @@ import PictureInPicturePlayer from './PictureInPicturePlayer';
 import QualitySelector from './QualitySelector';
 import QueuePanel from './QueuePanel';
 import FullScreenPlayer from './FullScreenPlayer';
+import AudioQualityBadge from './AudioQualityBadge';
 import { formatDuration } from '@/lib/utils';
 import { Maximize2 } from 'lucide-react';
 import type { Quality } from './QualitySelector';
@@ -45,6 +46,17 @@ export default function Player() {
   useEffect(() => {
     if (currentTrack) {
       console.log('🎧 Player: Loading track:', currentTrack.name, currentTrack.audioUrl);
+      const wasPlaying = isPlaying;
+      
+      // Set up load callback to auto-play if was playing
+      audioPlayer.setOnLoadCallback(() => {
+        if (wasPlaying) {
+          console.log('✅ Track loaded, resuming playback');
+          audioPlayer.play();
+          setIsPlaying(true);
+        }
+      });
+      
       audioPlayer.loadTrack(
         currentTrack.audioUrl,
         currentTrack.id,
@@ -59,12 +71,19 @@ export default function Player() {
           }
         }
       );
+      
+      // Reset progress when loading new track
+      setProgress(0);
     } else {
       console.log('⚠️ Player: No currentTrack set');
     }
-  }, [currentTrack, repeat, playNext, setProgress]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTrack?.id, repeat]); // Only depend on track ID to avoid re-loading
 
   useEffect(() => {
+    // Skip if no track loaded
+    if (!currentTrack) return;
+    
     console.log('🎮 Player: isPlaying changed to:', isPlaying);
     if (isPlaying) {
       console.log('▶️ Player: Starting playback');
@@ -73,7 +92,7 @@ export default function Player() {
       console.log('⏸️ Player: Pausing playback');
       audioPlayer.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, currentTrack]);
 
   useEffect(() => {
     audioPlayer.setVolume(volume);
@@ -118,7 +137,10 @@ export default function Player() {
             <>
               <div className="min-w-0">
                 <div className="text-sm font-medium text-white truncate">{currentTrack.name}</div>
-                <div className="text-xs text-spotify-text-gray truncate">{currentTrack.artist}</div>
+                <div className="flex items-center gap-2">
+                  <div className="text-xs text-spotify-text-gray truncate">{currentTrack.artist}</div>
+                  <AudioQualityBadge track={currentTrack} className="flex-shrink-0" />
+                </div>
               </div>
               <MoodWidget track={currentTrack} />
             </>

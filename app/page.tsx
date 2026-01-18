@@ -1,18 +1,31 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePlayerStore } from '@/stores/playerStore';
 import { mockData } from '@/lib/data';
 import { Track } from '@/types/track';
 import PlayButton from '@/components/PlayButton';
 import AdBanner from '@/components/AdBanner';
+import ErrorToast from '@/components/ErrorToast';
+import OnboardingTour from '@/components/OnboardingTour';
+import Tooltip from '@/components/Tooltip';
 import { Heart, Music, Radio } from 'lucide-react';
 
 export default function HomePage() {
   const tracks = mockData.getTracks();
   const playlists = mockData.getPlaylists();
   const artists = mockData.getArtists();
-  const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying, addToQueue } = usePlayerStore();
+  const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying, addToQueue, addToRecentlyPlayed, recentlyPlayed } = usePlayerStore();
+  const [error, setError] = useState<string | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  useEffect(() => {
+    const completed = localStorage.getItem('onboarding_completed');
+    if (!completed) {
+      setShowOnboarding(true);
+    }
+  }, []);
 
   const handlePlayTrack = (track: Track, e?: React.MouseEvent) => {
     if (e) {
@@ -23,6 +36,9 @@ export default function HomePage() {
     console.log('🎵 Track data:', { id: track.id, name: track.name, audioUrl: track.audioUrl });
     
     try {
+      // Clear any previous errors
+      setError(null);
+      
       // Add track to queue first if not already there
       addToQueue(track);
       
@@ -30,11 +46,21 @@ export default function HomePage() {
       setCurrentTrack(track);
       console.log('✅ Track set in store:', track.name);
       
+      // Add to recently played
+      addToRecentlyPlayed(track);
+      
       // Then set playing - Player component will handle loading
       setIsPlaying(true);
       console.log('✅ Playing set to true');
     } catch (error) {
       console.error('❌ Error in handlePlayTrack:', error);
+      setError('Failed to play track. Please try again.');
+    }
+  };
+
+  const handleRetry = () => {
+    if (currentTrack) {
+      handlePlayTrack(currentTrack);
     }
   };
 
@@ -49,11 +75,23 @@ export default function HomePage() {
 
   return (
     <div className="p-8 bg-gradient-to-b from-spotify-dark via-spotify-dark-gray to-spotify-dark min-h-full">
+      {/* Onboarding Tour */}
+      {showOnboarding && <OnboardingTour onComplete={() => setShowOnboarding(false)} />}
+
+      {/* Error Toast */}
+      {error && (
+        <ErrorToast 
+          message={error} 
+          onRetry={handleRetry}
+          onDismiss={() => setError(null)}
+        />
+      )}
+
       {/* Ad Banner (for free tier) - Temporarily disabled for testing */}
       {/* <AdBanner type="banner" className="mb-8" /> */}
 
       {/* Daily Check-in Card */}
-      <div className="mb-8 bg-gradient-to-r from-empulse-purple to-empulse-blue rounded-lg p-6 text-white">
+      <div data-tour="check-in" className="mb-8 bg-gradient-to-r from-empulse-purple to-empulse-blue rounded-lg p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold mb-2">Daily Mood Check-in</h2>
@@ -66,6 +104,25 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Mood Matcher Card */}
+      <div data-tour="mood-matcher" className="mb-8 bg-gradient-to-r from-empulse-purple/20 to-empulse-blue/20 rounded-lg p-6 border border-empulse-purple/30">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold mb-2">Mood Matcher</h2>
+            <p className="text-spotify-text-gray mb-4">
+              Not sure what to listen to? Find music that matches your current mood.
+            </p>
+            <Link 
+              href="/mood" 
+              className="px-6 py-3 bg-empulse-purple hover:bg-empulse-purple/80 text-white rounded-full font-semibold transition-all duration-300 inline-block"
+            >
+              Find My Mood →
+            </Link>
+          </div>
+          <Heart size={64} className="opacity-30" />
+        </div>
+      </div>
+
       {/* Today's Affirmation */}
       <div className="mb-8 bg-spotify-light-gray rounded-lg p-6">
         <h3 className="text-lg font-bold mb-2">Today&apos;s Affirmation</h3>
@@ -75,13 +132,54 @@ export default function HomePage() {
         </Link>
       </div>
 
+      {/* Recently Played Section */}
+      {recentlyPlayed.length > 0 && (
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold">Recently Played</h2>
+            <Link href="/history" className="text-sm text-spotify-text-gray hover:underline">
+              See all
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {recentlyPlayed.slice(0, 6).map((track) => (
+              <div
+                key={track.id}
+                className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors group cursor-pointer"
+                onClick={(e) => {
+                  if ((e.target as HTMLElement).closest('button')) return;
+                  handlePlayTrack(track);
+                }}
+              >
+                <div className="relative mb-3">
+                  <img
+                    src={track.coverArt}
+                    alt={track.name}
+                    className="w-full aspect-square object-cover rounded"
+                  />
+                  <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <PlayButton
+                      isPlaying={currentTrack?.id === track.id && isPlaying}
+                      onClick={() => handlePlayTrack(track)}
+                      size="sm"
+                    />
+                  </div>
+                </div>
+                <h3 className="font-semibold text-sm mb-1 truncate">{track.name}</h3>
+                <p className="text-xs text-spotify-text-gray truncate">{track.artist}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Wellness Dashboard */}
       <div className="mb-8 grid grid-cols-3 gap-4">
         <div className="bg-spotify-light-gray rounded-lg p-4">
           <div className="text-sm text-spotify-text-gray mb-1">Streak</div>
           <div className="text-2xl font-bold">🔥 5 days</div>
         </div>
-        <div className="bg-spotify-light-gray rounded-lg p-4">
+        <div data-tour="points" className="bg-spotify-light-gray rounded-lg p-4">
           <div className="text-sm text-spotify-text-gray mb-1">Points</div>
           <div className="text-2xl font-bold">150</div>
         </div>
@@ -212,22 +310,34 @@ export default function HomePage() {
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Specialized Categories</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg p-6 text-white">
-            <Music size={32} className="mb-3" />
-            <h3 className="text-lg font-bold mb-2">MHz Sounds</h3>
-            <p className="text-sm text-white/80 mb-4">Healing frequencies for wellness</p>
-            <Link href="/categories/mhz-sounds" className="text-sm underline">
-              Explore →
-            </Link>
-          </div>
-          <div className="bg-gradient-to-br from-orange-600 to-red-600 rounded-lg p-6 text-white">
-            <Radio size={32} className="mb-3" />
-            <h3 className="text-lg font-bold mb-2">Withdrawal Sounds</h3>
-            <p className="text-sm text-white/80 mb-4">Support for recovery journeys</p>
-            <Link href="/categories/withdrawal-sounds" className="text-sm underline">
-              Explore →
-            </Link>
-          </div>
+          <Tooltip
+            text="Healing frequencies designed to promote relaxation and wellness. Based on sound therapy principles."
+            position="top"
+            showInfoIcon={true}
+          >
+            <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg p-6 text-white">
+              <Music size={32} className="mb-3" />
+              <h3 className="text-lg font-bold mb-2">MHz Sounds</h3>
+              <p className="text-sm text-white/80 mb-4">Healing frequencies for wellness</p>
+              <Link href="/categories/mhz-sounds" className="text-sm underline">
+                Explore →
+              </Link>
+            </div>
+          </Tooltip>
+          <Tooltip
+            text="Specially curated audio content to support individuals on recovery journeys. Comforting sounds and music."
+            position="top"
+            showInfoIcon={true}
+          >
+            <div className="bg-gradient-to-br from-orange-600 to-red-600 rounded-lg p-6 text-white">
+              <Radio size={32} className="mb-3" />
+              <h3 className="text-lg font-bold mb-2">Withdrawal Sounds</h3>
+              <p className="text-sm text-white/80 mb-4">Support for recovery journeys</p>
+              <Link href="/categories/withdrawal-sounds" className="text-sm underline">
+                Explore →
+              </Link>
+            </div>
+          </Tooltip>
           <div className="bg-gradient-to-br from-green-600 to-teal-600 rounded-lg p-6 text-white">
             <Heart size={32} className="mb-3" />
             <h3 className="text-lg font-bold mb-2">Mental Health Podcasts</h3>

@@ -8,6 +8,7 @@ interface PlayerState {
   progress: number; // 0-100
   volume: number; // 0-100
   queue: Track[];
+  recentlyPlayed: Track[];
   shuffle: boolean;
   repeat: 'off' | 'all' | 'one';
   autoplay: boolean;
@@ -24,6 +25,7 @@ interface PlayerState {
   removeFromQueue: (trackId: string) => void;
   clearQueue: () => void;
   reorderQueue: (fromIndex: number, toIndex: number) => void;
+  addToRecentlyPlayed: (track: Track) => void;
   setShuffle: (shuffle: boolean) => void;
   setRepeat: (repeat: 'off' | 'all' | 'one') => void;
   setAutoplay: (autoplay: boolean) => void;
@@ -44,6 +46,7 @@ export const usePlayerStore = create<PlayerState>()(
       progress: 0,
       volume: 50,
       queue: [],
+      recentlyPlayed: [],
       shuffle: false,
       repeat: 'off',
       autoplay: false,
@@ -68,6 +71,12 @@ export const usePlayerStore = create<PlayerState>()(
         const [removed] = newQueue.splice(fromIndex, 1);
         newQueue.splice(toIndex, 0, removed);
         return { queue: newQueue };
+      }),
+      
+      addToRecentlyPlayed: (track) => set((state) => {
+        // Remove track if already exists, then add to front
+        const filtered = state.recentlyPlayed.filter(t => t.id !== track.id);
+        return { recentlyPlayed: [track, ...filtered].slice(0, 10) }; // Keep last 10
       }),
       
       setShuffle: (shuffle) => set({ shuffle }),
@@ -113,6 +122,7 @@ export const usePlayerStore = create<PlayerState>()(
         progress: state.progress,
         volume: state.volume,
         queue: state.queue,
+        recentlyPlayed: state.recentlyPlayed,
       }),
     }
   )

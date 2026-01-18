@@ -42,7 +42,7 @@ export default function VibeSlider({ value, onChange }: VibeSliderProps) {
     return angle;
   };
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(true);
     handleMove(e);

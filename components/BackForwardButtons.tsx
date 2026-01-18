@@ -16,20 +16,48 @@ export default function BackForwardButtons() {
   };
 
   return (
-    <div className="flex items-center gap-2 mr-4">
+    <div className="flex items-center gap-2">
       <button
         onClick={handleBack}
-        className="w-8 h-8 flex items-center justify-center bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-8 h-8 flex items-center justify-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed"
+        style={{
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          color: '#FFFFFF'
+        }}
+        onMouseEnter={(e) => {
+          if (!e.currentTarget.disabled) {
+            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!e.currentTarget.disabled) {
+            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+          }
+        }}
         aria-label="Go back"
       >
-        <ArrowLeft size={18} />
+        <ArrowLeft size={18} style={{ width: '18px', height: '18px', opacity: 1 }} />
       </button>
       <button
         onClick={handleForward}
-        className="w-8 h-8 flex items-center justify-center bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-8 h-8 flex items-center justify-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed"
+        style={{
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          color: '#FFFFFF'
+        }}
+        onMouseEnter={(e) => {
+          if (!e.currentTarget.disabled) {
+            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!e.currentTarget.disabled) {
+            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+          }
+        }}
         aria-label="Go forward"
       >
-        <ArrowRight size={18} />
+        <ArrowRight size={18} style={{ width: '18px', height: '18px', opacity: 1 }} />
       </button>
     </div>
   );

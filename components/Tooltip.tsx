@@ -1,0 +1,119 @@
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import { Info } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+interface TooltipProps {
+  text: string;
+  children: React.ReactNode;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  showOnHover?: boolean;
+  showInfoIcon?: boolean;
+  className?: string;
+}
+
+export default function Tooltip({
+  text,
+  children,
+  position = 'top',
+  showOnHover = true,
+  showInfoIcon = false,
+  className,
+}: TooltipProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showOnHover) {
+      setIsVisible(true);
+      return;
+    }
+  }, [showOnHover]);
+
+  const handleMouseEnter = () => {
+    if (showOnHover) {
+      setIsVisible(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (showOnHover) {
+      setIsVisible(false);
+    }
+  };
+
+  const getPositionClasses = () => {
+    switch (position) {
+      case 'top':
+        return 'bottom-full left-1/2 transform -translate-x-1/2 mb-2';
+      case 'bottom':
+        return 'top-full left-1/2 transform -translate-x-1/2 mt-2';
+      case 'left':
+        return 'right-full top-1/2 transform -translate-y-1/2 mr-2';
+      case 'right':
+        return 'left-full top-1/2 transform -translate-y-1/2 ml-2';
+      default:
+        return 'bottom-full left-1/2 transform -translate-x-1/2 mb-2';
+    }
+  };
+
+  const getArrowClasses = () => {
+    switch (position) {
+      case 'top':
+        return 'top-full left-1/2 transform -translate-x-1/2 border-t-spotify-dark-gray border-l-transparent border-r-transparent border-b-transparent';
+      case 'bottom':
+        return 'bottom-full left-1/2 transform -translate-x-1/2 border-b-spotify-dark-gray border-l-transparent border-r-transparent border-t-transparent';
+      case 'left':
+        return 'left-full top-1/2 transform -translate-y-1/2 border-l-spotify-dark-gray border-t-transparent border-b-transparent border-r-transparent';
+      case 'right':
+        return 'right-full top-1/2 transform -translate-y-1/2 border-r-spotify-dark-gray border-t-transparent border-b-transparent border-l-transparent';
+      default:
+        return 'top-full left-1/2 transform -translate-x-1/2 border-t-spotify-dark-gray border-l-transparent border-r-transparent border-b-transparent';
+    }
+  };
+
+  return (
+    <div
+      ref={triggerRef}
+      className={cn('relative inline-block', className)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {showInfoIcon ? (
+        <div className="flex items-center gap-2">
+          {children}
+          <Info
+            size={14}
+            className="text-spotify-text-gray hover:text-white transition-colors cursor-help"
+            aria-label={`Tooltip: ${text}`}
+          />
+        </div>
+      ) : (
+        children
+      )}
+
+      {isVisible && (
+        <div
+          ref={tooltipRef}
+          className={cn(
+            'absolute z-50 px-3 py-2 bg-spotify-dark-gray text-white text-xs rounded-lg shadow-2xl whitespace-nowrap pointer-events-none',
+            'border border-white/20',
+            getPositionClasses()
+          )}
+          role="tooltip"
+        >
+          {text}
+          {/* Arrow */}
+          <div
+            className={cn(
+              'absolute w-0 h-0 border-4',
+              getArrowClasses()
+            )}
+          />
+        </div>
+      )}
+    </div>
+  );
+}

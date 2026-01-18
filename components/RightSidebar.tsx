@@ -51,11 +51,15 @@ export default function RightSidebar() {
     <>
       <div
         className={cn(
-          "fixed right-0 top-16 bottom-player-height bg-spotify-dark-gray border-l border-white/10 z-30 overflow-y-auto sidebar-scrollbar",
+          "fixed right-0 bottom-player-height bg-spotify-dark-gray z-40 overflow-y-auto sidebar-scrollbar",
           rightSidebarOpen ? "translate-x-0" : "translate-x-full",
           isResizing ? "" : "transition-transform duration-300 ease-in-out"
         )}
-        style={{ width: `${rightSidebarWidth}px` }}
+        style={{ 
+          width: `${rightSidebarWidth}px`,
+          top: '56px',
+          borderLeft: '1px solid #000000'
+        }}
       >
       {rightSidebarOpen && (
         <>
@@ -185,10 +189,13 @@ export default function RightSidebar() {
         <div
           onMouseDown={handleMouseDown}
           className={cn(
-            "fixed top-16 bottom-player-height w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-40 transition-all",
+            "fixed bottom-player-height w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all",
             isResizing && "bg-spotify-green/60 w-1"
           )}
-          style={{ right: `${rightSidebarWidth}px` }}
+          style={{ 
+            top: '56px',
+            right: `${rightSidebarWidth}px` 
+          }}
         />
       )}
     </>

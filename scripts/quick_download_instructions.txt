@@ -1,0 +1,16 @@
+🎵 QUICK FIX: Download Real Music
+
+1. Go to: https://pixabay.com/music/
+2. Search "sad instrumental" → Download 20 tracks → Rename to track-1.mp3 through track-20.mp3
+3. Search "happy upbeat" → Download 20 tracks → Rename to track-81.mp3 through track-100.mp3
+4. Place ALL files in: public/audio/
+5. Refresh browser
+
+That's it! Now you have real mood-matched music instead of tones.
+
+Alternative quick option:
+- Download ANY 6 royalty-free tracks (one per mood)
+- Name them: track-1.mp3, track-21.mp3, track-41.mp3, track-61.mp3, track-81.mp3, track-101.mp3
+- Copy each to fill the ranges (track-1→track-20, track-21→track-40, etc.)
+
+For full automation, see: scripts/INSTRUCTIONS_ROYALTY_FREE_MUSIC.md

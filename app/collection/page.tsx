@@ -2,9 +2,10 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, Grid3x3, List, LayoutGrid } from 'lucide-react';
+import { Search, Grid3x3, List, LayoutGrid, Music, Disc, User } from 'lucide-react';
 import { useLibraryStore } from '@/stores/libraryStore';
 import { mockData } from '@/lib/data';
+import EmptyState from '@/components/EmptyState';
 import { cn } from '@/lib/utils';
 
 type FilterType = 'all' | 'playlists' | 'artists' | 'albums';
@@ -276,11 +277,61 @@ export default function CollectionPage() {
         </section>
       )}
 
-      {(filter === 'all' || filter === 'playlists') && savedPlaylists.length === 0 && (
-        <div className="text-center py-16">
-          <p className="text-spotify-text-gray text-lg">No saved playlists yet</p>
-          <p className="text-spotify-text-gray text-sm mt-2">Start exploring and save your favorites!</p>
-        </div>
+      {/* Empty States */}
+      {filter === 'all' && savedPlaylists.length === 0 && filteredAlbums.length === 0 && filteredTracks.length === 0 && (
+        <EmptyState
+          icon={Music}
+          title="Your Library is empty"
+          description="Start exploring music and save your favorites. They'll appear here for easy access."
+          action={{
+            label: 'Explore Music',
+            onClick: () => window.location.href = '/'
+          }}
+        />
+      )}
+      
+      {(filter === 'playlists') && savedPlaylists.length === 0 && (
+        <EmptyState
+          icon={Music}
+          title="No playlists yet"
+          description="Create playlists to organize your favorite music. They'll appear here once you've created or saved some."
+          action={{
+            label: 'Explore Playlists',
+            onClick: () => window.location.href = '/'
+          }}
+        />
+      )}
+
+      {(filter === 'albums') && filteredAlbums.length === 0 && (
+        <EmptyState
+          icon={Disc}
+          title="No albums saved"
+          description="Save albums you love to access them quickly. Click the heart icon on any album to save it."
+          action={{
+            label: 'Browse Albums',
+            onClick: () => window.location.href = '/'
+          }}
+        />
+      )}
+
+      {(filter === 'artists') && (
+        <EmptyState
+          icon={User}
+          title="No artists followed"
+          description="Follow your favorite artists to get updates and see their latest releases here."
+          action={{
+            label: 'Discover Artists',
+            onClick: () => window.location.href = '/'
+          }}
+        />
+      )}
+
+      {(filter === 'all' && savedPlaylists.length === 0 && filteredAlbums.length === 0 && filteredTracks.length > 0) && (
+        <EmptyState
+          icon={Music}
+          title="Start building your library"
+          description="Save playlists, albums, and follow artists to organize your music collection."
+        />
       )}
     </div>
   );
