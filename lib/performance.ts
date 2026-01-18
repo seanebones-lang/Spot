@@ -24,7 +24,7 @@ export function lazyLoad<T extends React.ComponentType<any>>(
 
   const LazyComponent = React.lazy(() => {
     if (delay > 0) {
-      return new Promise((resolve) => {
+      return new Promise<{ default: T }>((resolve) => {
         setTimeout(() => {
           resolve(importFn());
         }, delay);
