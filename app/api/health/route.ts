@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getEnv } from '@/lib/env';
 import { logger, generateCorrelationId } from '@/lib/logger';
+import prisma from '@/lib/db';
 
 /**
  * Health Check Endpoint
@@ -33,6 +34,19 @@ export async function GET(request: NextRequest) {
       message: error instanceof Error ? error.message : 'Environment validation failed',
     };
     logger.error('Health check: environment validation failed', error, { correlationId });
+  }
+
+  // Check database connectivity
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    health.checks.database = { status: 'ok' };
+  } catch (error) {
+    health.status = 'unhealthy';
+    health.checks.database = {
+      status: 'error',
+      message: error instanceof Error ? error.message : 'Database connection failed',
+    };
+    logger.error('Health check: database connection failed', error, { correlationId });
   }
 
   // Check external API (xAI) - optional

@@ -5,6 +5,11 @@ import { fetchWithTimeout } from '@/lib/timeout';
 import { logger, generateCorrelationId } from '@/lib/logger';
 import { sanitizeString } from '@/lib/sanitize';
 
+// Propagate correlation ID to external API calls
+function getCorrelationId(request: NextRequest): string {
+  return request.headers.get('X-Correlation-ID') || generateCorrelationId();
+}
+
 /**
  * API Route for xAI Grok Chat Integration
  * Handles chat messages from the support page and forwards them to xAI Grok API
@@ -18,7 +23,7 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);
-    const rateLimit = checkRateLimit(clientId, '/api/chat');
+    const rateLimit = await checkRateLimit(clientId, '/api/chat');
     if (!rateLimit.allowed) {
       logger.warn('Rate limit exceeded for chat', { correlationId, clientId });
       return NextResponse.json(
@@ -104,6 +109,7 @@ Keep responses under 300 words unless the user asks for detailed information.`;
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`,
+          'X-Correlation-ID': correlationId, // Propagate correlation ID
         },
         body: JSON.stringify({
           model: 'grok-3', // Latest flagship model (Dec 2025)

@@ -1,8 +1,10 @@
 /**
  * Rate Limiting Utility
- * Simple in-memory rate limiter for API routes
- * For production, consider using Redis-based solution like @upstash/ratelimit
+ * Hybrid rate limiting: Uses Redis (Upstash) if configured, falls back to in-memory
+ * For production, Redis is recommended for distributed systems
  */
+
+import { checkRateLimitRedis, RateLimitResult } from './rateLimitRedis';
 
 interface RateLimitConfig {
   windowMs: number; // Time window in milliseconds
@@ -16,7 +18,7 @@ interface RateLimitStore {
   };
 }
 
-// In-memory store (use Redis in production for distributed systems)
+// In-memory store (fallback when Redis is not configured)
 const store: RateLimitStore = {};
 
 // Cleanup old entries every 5 minutes
@@ -35,6 +37,8 @@ setInterval(() => {
 export const RATE_LIMITS: Record<string, RateLimitConfig> = {
   '/api/auth/login': { windowMs: 60 * 1000, maxRequests: 5 }, // 5 per minute
   '/api/auth/register': { windowMs: 60 * 60 * 1000, maxRequests: 3 }, // 3 per hour
+  '/api/auth/forgot-password': { windowMs: 60 * 60 * 1000, maxRequests: 5 }, // 5 per hour
+  '/api/auth/reset-password': { windowMs: 60 * 60 * 1000, maxRequests: 5 }, // 5 per hour
   '/api/chat': { windowMs: 60 * 60 * 1000, maxRequests: 20 }, // 20 per hour
   '/api/tracks/submit': { windowMs: 24 * 60 * 60 * 1000, maxRequests: 10 }, // 10 per day
   '/api/artist/signup': { windowMs: 24 * 60 * 60 * 1000, maxRequests: 5 }, // 5 per day
@@ -44,14 +48,24 @@ export const RATE_LIMITS: Record<string, RateLimitConfig> = {
 
 /**
  * Check if request should be rate limited
+ * Hybrid: Tries Redis first, falls back to in-memory
  * @param identifier - Unique identifier (IP address, user ID, etc.)
  * @param endpoint - API endpoint path
  * @returns Object with allowed status and remaining requests
  */
-export function checkRateLimit(
+export async function checkRateLimit(
   identifier: string,
   endpoint: string
-): { allowed: boolean; remaining: number; resetTime: number } {
+): Promise<RateLimitResult> {
+  // Try Redis first (will return fallback indication if not configured)
+  const redisResult = await checkRateLimitRedis(identifier, endpoint);
+  
+  // If Redis is configured and returned a result, use it
+  if (redisResult.allowed || process.env.UPSTASH_REDIS_REST_URL) {
+    return redisResult;
+  }
+
+  // Fallback to in-memory rate limiting
   const config = RATE_LIMITS[endpoint] || RATE_LIMITS.default;
   const key = `${identifier}:${endpoint}`;
   const now = Date.now();

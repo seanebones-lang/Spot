@@ -1,12 +1,65 @@
 /**
  * Structured Logging Utility
  * Provides consistent logging across the application
+ * Sanitizes sensitive data to prevent leakage
  */
 
 type LogLevel = 'error' | 'warn' | 'info' | 'debug';
 
 interface LogContext {
   [key: string]: any;
+}
+
+/**
+ * Sensitive field names that should be redacted from logs
+ */
+const SENSITIVE_FIELDS = [
+  'password',
+  'token',
+  'secret',
+  'key',
+  'auth',
+  'authorization',
+  'ssn',
+  'socialSecurity',
+  'creditCard',
+  'cardNumber',
+  'cvv',
+  'apiKey',
+  'apikey',
+  'accessToken',
+  'refreshToken',
+  'email', // Sometimes we want to redact emails in logs
+  'emailVerificationToken',
+  'resetToken',
+];
+
+/**
+ * Sanitize log data to remove sensitive information
+ */
+function sanitizeLogData(data: any): any {
+  if (!data || typeof data !== 'object') {
+    return data;
+  }
+
+  const sanitized = Array.isArray(data) ? [...data] : { ...data };
+
+  for (const key of Object.keys(sanitized)) {
+    const keyLower = key.toLowerCase();
+    
+    // Check if key contains any sensitive field name
+    if (SENSITIVE_FIELDS.some(field => keyLower.includes(field))) {
+      sanitized[key] = '[REDACTED]';
+      continue;
+    }
+
+    // Recursively sanitize nested objects
+    if (typeof sanitized[key] === 'object' && sanitized[key] !== null) {
+      sanitized[key] = sanitizeLogData(sanitized[key]);
+    }
+  }
+
+  return sanitized;
 }
 
 class Logger {
@@ -20,7 +73,7 @@ class Logger {
   
   error(message: string, error?: Error | unknown, context?: LogContext): void {
     const errorContext = {
-      ...context,
+      ...sanitizeLogData(context),
       ...(error instanceof Error
         ? {
             errorMessage: error.message,
@@ -30,22 +83,22 @@ class Logger {
         : { error: String(error) }),
     };
     
-    console.error(this.formatMessage('error', message, errorContext));
+    console.error(this.formatMessage('error', message, sanitizeLogData(errorContext)));
   }
   
   warn(message: string, context?: LogContext): void {
-    console.warn(this.formatMessage('warn', message, context));
+    console.warn(this.formatMessage('warn', message, sanitizeLogData(context)));
   }
   
   info(message: string, context?: LogContext): void {
     if (this.isDevelopment) {
-      console.info(this.formatMessage('info', message, context));
+      console.info(this.formatMessage('info', message, sanitizeLogData(context)));
     }
   }
   
   debug(message: string, context?: LogContext): void {
     if (this.isDevelopment) {
-      console.debug(this.formatMessage('debug', message, context));
+      console.debug(this.formatMessage('debug', message, sanitizeLogData(context)));
     }
   }
   

@@ -3,6 +3,10 @@ import { requireAuth } from '@/lib/auth';
 import { checkRateLimit, getClientIdentifier } from '@/lib/rateLimit';
 import { logger, generateCorrelationId } from '@/lib/logger';
 import { sanitizeString, sanitizeEmail, sanitizeObjectKeys } from '@/lib/sanitize';
+import { checkBodySize } from '@/lib/bodyLimit';
+import { requireCsrfToken } from '@/lib/csrf';
+import { encryptJson } from '@/lib/encryption';
+import prisma from '@/lib/db';
 
 /**
  * Artist Signup Submission API
@@ -15,9 +19,12 @@ export async function POST(request: NextRequest) {
   const startTime = Date.now();
   
   try {
+    // CSRF protection
+    requireCsrfToken(request);
+
     // Rate limiting
     const clientId = getClientIdentifier(request);
-    const rateLimit = checkRateLimit(clientId, '/api/artist/signup');
+    const rateLimit = await checkRateLimit(clientId, '/api/artist/signup');
     if (!rateLimit.allowed) {
       logger.warn('Rate limit exceeded for artist signup', { correlationId, clientId });
       return NextResponse.json(
@@ -43,6 +50,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Authentication required. Please log in first.' },
         { status: 401 }
+      );
+    }
+
+    // Check body size
+    const bodySizeCheck = checkBodySize(request);
+    if (!bodySizeCheck.valid) {
+      return NextResponse.json(
+        { error: bodySizeCheck.error },
+        { status: 413 } // 413 Payload Too Large
       );
     }
 
@@ -111,35 +127,48 @@ export async function POST(request: NextRequest) {
     // Generate application ID
     const applicationId = `APP-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 
-    // Create application record
-    // In production, save to database
-    const application = {
-      id: applicationId,
-      userId: user.userId,
-      email: sanitizedEmail,
-      artistName: sanitizedArtistName,
-      selectedMediums,
-      documentsSigned,
-      w9Data: {
-        // Don't store sensitive data like SSN/EIN in plain text in production
-        // Use encryption or secure storage
-        taxId: w9Data.taxId ? '***' + w9Data.taxId.slice(-4) : null, // Masked
-        businessName: w9Data.businessName,
-        address: w9Data.address,
-        taxClassification: w9Data.taxClassification,
+    // Encrypt W-9 sensitive data before storage
+    let w9DataEncrypted: string | null = null;
+    try {
+      // Store full W-9 data encrypted (including SSN/EIN)
+      const w9DataForEncryption = {
+        taxId: w9Data.taxId || null,
+        businessName: w9Data.businessName || null,
+        address: w9Data.address || null,
+        taxClassification: w9Data.taxClassification || null,
         completed: true,
-      },
-      proRegistration,
-      digitalSignature,
-      status: 'pending',
-      submittedAt: new Date().toISOString(),
-    };
+        timestamp: new Date().toISOString(),
+      };
+      
+      w9DataEncrypted = encryptJson(w9DataForEncryption);
+      logger.info('W-9 data encrypted successfully', { correlationId });
+    } catch (encryptionError) {
+      logger.error('Failed to encrypt W-9 data', encryptionError, { correlationId });
+      return NextResponse.json(
+        { error: 'Failed to process sensitive data. Please contact support.' },
+        { status: 500 }
+      );
+    }
 
-    // In production:
-    // 1. Save application to database
-    // 2. Send notification email to admin
-    // 3. Send confirmation email to artist
-    // 4. Update user role to 'artist' (pending approval)
+    // Save application to database with encrypted W-9 data
+    const application = await prisma.artistApplication.create({
+      data: {
+        applicationId,
+        userId: user.userId,
+        email: sanitizedEmail,
+        artistName: sanitizedArtistName,
+        selectedMediums: selectedMediums || null,
+        documentsSigned: documentsSigned || null,
+        w9DataEncrypted: w9DataEncrypted, // Encrypted sensitive data
+        proRegistration: proRegistration || null,
+        digitalSignature: digitalSignature || null,
+        status: 'PENDING',
+      },
+    });
+
+    // TODO: Send notification email to admin
+    // TODO: Send confirmation email to artist
+    // TODO: Update user role to 'artist' (pending approval) - or handle on approval
 
     const duration = Date.now() - startTime;
     logger.info('Artist signup application submitted', {
@@ -153,10 +182,11 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      applicationId,
+      applicationId: application.applicationId,
       message: 'Application submitted successfully. Awaiting admin approval.',
       application: {
         id: application.id,
+        applicationId: application.applicationId,
         status: application.status,
         submittedAt: application.submittedAt,
       },

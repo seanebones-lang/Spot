@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isOriginAllowed } from '@/lib/env';
 import { generateCorrelationId } from '@/lib/logger';
+import { getCsrfToken, validateCsrfToken } from '@/lib/csrf';
 
 /**
  * Next.js Middleware
@@ -10,7 +11,7 @@ import { generateCorrelationId } from '@/lib/logger';
  * - Security headers
  */
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
   
   // Generate correlation ID for request tracking
@@ -41,8 +42,30 @@ export function middleware(request: NextRequest) {
     }
     
     response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Correlation-ID');
-    response.headers.set('Access-Control-Expose-Headers', 'X-Correlation-ID, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset');
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Correlation-ID, X-CSRF-Token');
+    response.headers.set('Access-Control-Expose-Headers', 'X-Correlation-ID, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-CSRF-Token');
+    
+    // Ensure CSRF token cookie is set for API routes (non-GET requests)
+    if (!request.cookies.get('csrf-token') && request.method !== 'GET') {
+      try {
+        const csrfToken = await getCsrfToken();
+        response.cookies.set('csrf-token', csrfToken, {
+          httpOnly: false,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax',
+          path: '/',
+          maxAge: 60 * 60 * 24, // 24 hours
+        });
+        // Also set in response header for easy access
+        response.headers.set('X-CSRF-Token', csrfToken);
+      } catch (error) {
+        // If token generation fails, continue (won't affect GET requests)
+        console.error('Failed to generate CSRF token in middleware:', error);
+      }
+    } else if (request.cookies.get('csrf-token')) {
+      // Include existing token in response header
+      response.headers.set('X-CSRF-Token', request.cookies.get('csrf-token')!.value);
+    }
     
     // Handle preflight requests
     if (request.method === 'OPTIONS') {
@@ -50,6 +73,25 @@ export function middleware(request: NextRequest) {
         status: 200,
         headers: response.headers,
       });
+    }
+
+    // CSRF validation for state-changing methods (except auth endpoints that handle it manually)
+    const path = request.nextUrl.pathname;
+    const isStateChangingMethod = ['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method);
+    const skipCsrfPaths = ['/api/auth/login', '/api/auth/register']; // These handle CSRF manually if needed
+    
+    if (isStateChangingMethod && !skipCsrfPaths.some(p => path.startsWith(p))) {
+      if (!validateCsrfToken(request)) {
+        return new NextResponse(
+          JSON.stringify({ error: 'CSRF token validation failed' }),
+          {
+            status: 403,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+      }
     }
   }
   
