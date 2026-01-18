@@ -5,6 +5,13 @@ FROM node:18-alpine AS base
 FROM base AS deps
 WORKDIR /app
 
+# Install yt-dlp for radio streaming
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    ffmpeg \
+    && pip3 install --no-cache-dir yt-dlp
+
 # Copy package files
 COPY package.json package-lock.json* ./
 RUN npm ci

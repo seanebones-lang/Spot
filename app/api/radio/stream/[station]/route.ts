@@ -91,13 +91,19 @@ export async function GET(
     const ytDlpAvailable = await checkYtDlpAvailable();
     if (!ytDlpAvailable) {
       console.error('yt-dlp or youtube-dl not found in system PATH');
-      return NextResponse.json(
-        { 
-          error: 'Streaming service unavailable. Please ensure yt-dlp is installed.',
-          hint: 'Install with: brew install yt-dlp (macOS) or pip install yt-dlp'
-        },
-        { status: 503 }
-      );
+      // Try to use python3 -m yt_dlp as fallback (common in Docker/container environments)
+      try {
+        await execAsync('python3 -m yt_dlp --version');
+        // If this works, we'll use python3 -m yt_dlp in the spawn command
+      } catch {
+        return NextResponse.json(
+          { 
+            error: 'Streaming service unavailable. Please ensure yt-dlp is installed.',
+            hint: 'Install with: brew install yt-dlp (macOS) or pip install yt-dlp'
+          },
+          { status: 503 }
+        );
+      }
     }
 
     // Get start time from query params (for random mid-stream start)
@@ -115,10 +121,23 @@ export async function GET(
     // Use yt-dlp to extract best audio format and stream it
     // Format: bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio
     // We'll pipe directly to response for streaming
-    const ytDlpCommand = process.platform === 'win32' ? 'yt-dlp.exe' : 'yt-dlp';
+    // Try multiple methods to find yt-dlp
+    let ytDlpCommand = 'yt-dlp';
+    let args: string[] = [];
+    
+    // Check if we can use python3 -m yt_dlp (common in Docker)
+    try {
+      await execAsync('python3 -m yt_dlp --version');
+      ytDlpCommand = 'python3';
+      args = ['-m', 'yt_dlp'];
+    } catch {
+      // Fall back to direct yt-dlp command
+      ytDlpCommand = process.platform === 'win32' ? 'yt-dlp.exe' : 'yt-dlp';
+    }
     
     // Build yt-dlp command for audio-only streaming
-    const args = [
+    args = [
+      ...args,
       '-f', 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio/best',
       '--no-playlist',
       '--no-warnings',
