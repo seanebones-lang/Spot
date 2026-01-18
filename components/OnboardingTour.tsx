@@ -84,7 +84,10 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
     if (currentStep < tourSteps.length - 1) {
       const nextStep = currentStep + 1;
       setCurrentStep(nextStep);
-      scrollToTarget(tourSteps[nextStep]?.target);
+      // Small delay to ensure DOM is ready and element exists
+      setTimeout(() => {
+        scrollToTarget(tourSteps[nextStep]?.target);
+      }, 100);
     } else {
       handleComplete();
     }
@@ -108,10 +111,19 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
 
   const scrollToTarget = (selector?: string) => {
     if (!selector) return;
-    const element = document.querySelector(selector);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    // Try multiple times in case element isn't rendered yet
+    let attempts = 0;
+    const maxAttempts = 10;
+    const tryScroll = () => {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else if (attempts < maxAttempts) {
+        attempts++;
+        setTimeout(tryScroll, 100);
+      }
+    };
+    tryScroll();
   };
 
   const currentTourStep = tourSteps[currentStep];
@@ -192,15 +204,19 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
       />
 
       {/* Tour Tooltip */}
-      {currentTourStep && (
-        <div
-          className={cn(
-            'fixed z-[201] bg-spotify-dark-gray rounded-lg shadow-2xl p-6 max-w-sm',
-            'border border-white/20',
-            getTooltipPosition(currentTourStep.position)
-          )}
-          style={getTooltipStyle(currentTourStep.target, currentTourStep.position)}
-        >
+      {currentTourStep && (() => {
+        const targetElement = currentTourStep.target ? document.querySelector(currentTourStep.target) : null;
+        // Only show tooltip if target element exists or if no target specified
+        if (!currentTourStep.target || targetElement) {
+          return (
+            <div
+              className={cn(
+                'fixed z-[201] bg-spotify-dark-gray rounded-lg shadow-2xl p-6 max-w-sm',
+                'border border-white/20',
+                getTooltipPosition(currentTourStep.position)
+              )}
+              style={getTooltipStyle(currentTourStep.target, currentTourStep.position)}
+            >
           <div className="flex items-start gap-4 mb-4">
             {currentTourStep.icon}
             <div className="flex-1">
@@ -248,7 +264,10 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
             </div>
           </div>
         </div>
-      )}
+          );
+        }
+        return null;
+      })()}
     </>
   );
 }
