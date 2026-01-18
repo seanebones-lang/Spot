@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useArtistSignupStore } from '@/stores/artistSignupStore';
+import { getUserFriendlyError, formatErrorWithRecovery, getErrorRecovery } from '@/lib/errorMessages';
 import { Check, FileText, Download, AlertCircle, Music, Mic, BookOpen, Radio } from 'lucide-react';
 
 const legalDocuments = [
@@ -49,10 +50,52 @@ export default function ArtistSignupPage() {
     email: '',
     password: '',
   });
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const allDocumentsSigned = legalDocuments.every(doc => documentsSigned.includes(doc.id));
+
+  // Validation function for Step 2 (Account Creation)
+  const validateStep2 = (): boolean => {
+    const errors: Record<string, string> = {};
+
+    if (!accountInfo.artistName.trim()) {
+      errors.artistName = 'Artist/Management name is required';
+    } else if (accountInfo.artistName.trim().length < 2) {
+      errors.artistName = 'Name must be at least 2 characters';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!accountInfo.email) {
+      errors.email = 'Email address is required';
+    } else if (!emailRegex.test(accountInfo.email)) {
+      errors.email = 'Please enter a valid email address (e.g., name@example.com)';
+    }
+
+    if (!accountInfo.password) {
+      errors.password = 'Password is required';
+    } else if (accountInfo.password.length < 8) {
+      errors.password = 'Password must be at least 8 characters';
+    } else if (!/(?=.*[a-z])/.test(accountInfo.password)) {
+      errors.password = 'Password must contain at least one lowercase letter';
+    } else if (!/(?=.*[A-Z])/.test(accountInfo.password)) {
+      errors.password = 'Password must contain at least one uppercase letter';
+    } else if (!/(?=.*\d)/.test(accountInfo.password)) {
+      errors.password = 'Password must contain at least one number';
+    }
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleBlur = (field: string) => {
+    setTouched({ ...touched, [field]: true });
+    if (currentStep === 2) {
+      validateStep2();
+    }
+  };
 
   const handleSubmit = async () => {
     if (!allDocumentsSigned || !w9Completed || !digitalSignature.trim()) {
@@ -77,7 +120,7 @@ export default function ArtistSignupPage() {
       }
 
       if (!authToken) {
-        setSubmitError('Please log in to submit your application');
+        setSubmitError(getUserFriendlyError('AUTH_REQUIRED'));
         setIsSubmitting(false);
         return;
       }
@@ -107,7 +150,9 @@ export default function ArtistSignupPage() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit application');
+        // Use server error message if available, otherwise map error code
+        const errorMessage = result.error || result.errorCode || 'Failed to submit application';
+        throw new Error(errorMessage);
       }
 
       // Success - update approval status
@@ -115,7 +160,9 @@ export default function ArtistSignupPage() {
       setCurrentStep(7);
     } catch (error) {
       console.error('Signup submission error:', error);
-      setSubmitError(error instanceof Error ? error.message : 'Failed to submit application');
+      // Use user-friendly error message
+      const { message } = formatErrorWithRecovery(error);
+      setSubmitError(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -234,44 +281,118 @@ export default function ArtistSignupPage() {
           <h2 className="text-2xl font-bold mb-4">Step 2: Account Creation</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Artist/Management Name</label>
+              <label htmlFor="artistName" className="block text-sm font-medium mb-2">
+                Artist/Management Name
+              </label>
               <input
+                id="artistName"
                 type="text"
                 value={accountInfo.artistName}
-                onChange={(e) => setAccountInfo({ ...accountInfo, artistName: e.target.value })}
-                className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                onChange={(e) => {
+                  setAccountInfo({ ...accountInfo, artistName: e.target.value });
+                  // Clear error when user starts typing
+                  if (validationErrors.artistName) {
+                    setValidationErrors({ ...validationErrors, artistName: '' });
+                  }
+                }}
+                onBlur={() => handleBlur('artistName')}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
+                  touched.artistName && validationErrors.artistName
+                    ? 'border-2 border-red-500 focus:ring-red-500'
+                    : 'focus:ring-spotify-green'
+                }`}
                 placeholder="Enter artist or management name"
+                aria-invalid={validationErrors.artistName ? 'true' : 'false'}
+                aria-describedby={validationErrors.artistName ? 'artistName-error' : undefined}
                 required
               />
+              {touched.artistName && validationErrors.artistName && (
+                <p id="artistName-error" className="text-red-500 text-sm mt-1" role="alert">
+                  {validationErrors.artistName}
+                </p>
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email
+              </label>
               <input
+                id="email"
                 type="email"
                 value={accountInfo.email}
-                onChange={(e) => setAccountInfo({ ...accountInfo, email: e.target.value })}
-                className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                onChange={(e) => {
+                  setAccountInfo({ ...accountInfo, email: e.target.value });
+                  if (validationErrors.email) {
+                    setValidationErrors({ ...validationErrors, email: '' });
+                  }
+                }}
+                onBlur={() => handleBlur('email')}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
+                  touched.email && validationErrors.email
+                    ? 'border-2 border-red-500 focus:ring-red-500'
+                    : 'focus:ring-spotify-green'
+                }`}
                 placeholder="your@email.com"
+                aria-invalid={validationErrors.email ? 'true' : 'false'}
+                aria-describedby={validationErrors.email ? 'email-error' : undefined}
                 required
               />
-              <p className="text-xs text-spotify-text-gray mt-1">Verification required</p>
+              {touched.email && validationErrors.email ? (
+                <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
+                  {validationErrors.email}
+                </p>
+              ) : (
+                <p className="text-xs text-spotify-text-gray mt-1">Verification required</p>
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Password</label>
+              <label htmlFor="password" className="block text-sm font-medium mb-2">
+                Password
+              </label>
               <input
+                id="password"
                 type="password"
                 value={accountInfo.password}
-                onChange={(e) => setAccountInfo({ ...accountInfo, password: e.target.value })}
-                className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                onChange={(e) => {
+                  setAccountInfo({ ...accountInfo, password: e.target.value });
+                  if (validationErrors.password) {
+                    setValidationErrors({ ...validationErrors, password: '' });
+                  }
+                }}
+                onBlur={() => handleBlur('password')}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
+                  touched.password && validationErrors.password
+                    ? 'border-2 border-red-500 focus:ring-red-500'
+                    : 'focus:ring-spotify-green'
+                }`}
                 placeholder="Create a strong password"
+                aria-invalid={validationErrors.password ? 'true' : 'false'}
+                aria-describedby={validationErrors.password ? 'password-error' : undefined}
                 minLength={8}
                 required
               />
-              <p className="text-xs text-spotify-text-gray mt-1">Must be at least 8 characters</p>
+              {touched.password && validationErrors.password ? (
+                <p id="password-error" className="text-red-500 text-sm mt-1" role="alert">
+                  {validationErrors.password}
+                </p>
+              ) : (
+                <p className="text-xs text-spotify-text-gray mt-1">
+                  Must be at least 8 characters with uppercase, lowercase, and numbers
+                </p>
+              )}
             </div>
             <button
-              onClick={() => setCurrentStep(3)}
-              disabled={!accountInfo.artistName || !accountInfo.email || !accountInfo.password || accountInfo.password.length < 8}
+              onClick={() => {
+                if (validateStep2()) {
+                  setCurrentStep(3);
+                }
+              }}
+              disabled={
+                !accountInfo.artistName ||
+                !accountInfo.email ||
+                !accountInfo.password ||
+                Object.keys(validationErrors).length > 0
+              }
               className="btn-primary w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Continue to Legal Documents
@@ -569,11 +690,24 @@ export default function ArtistSignupPage() {
             </div>
           </div>
 
-          {submitError && (
-            <div className="mb-4 p-3 bg-red-900/20 border border-red-500/50 rounded-lg">
-              <p className="text-red-400 text-sm">{submitError}</p>
-            </div>
-          )}
+          {submitError && (() => {
+            const { recovery } = formatErrorWithRecovery(submitError);
+            return (
+              <div className="mb-4 p-4 bg-red-900/20 border border-red-500/50 rounded-lg">
+                <div className="flex items-start gap-2 mb-2">
+                  <AlertCircle size={20} className="text-red-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-red-400 text-sm font-medium">{submitError}</p>
+                </div>
+                {recovery && recovery.steps.length > 0 && (
+                  <ul className="text-red-300 text-xs mt-2 ml-7 list-disc list-inside space-y-1">
+                    {recovery.steps.map((step, index) => (
+                      <li key={index}>{step}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          })()}
 
           <div className="flex gap-4">
             <button onClick={() => setCurrentStep(5)} className="btn-secondary" disabled={isSubmitting}>

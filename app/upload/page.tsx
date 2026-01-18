@@ -93,6 +93,7 @@ export default function UploadPage() {
   const [artistMoodTags, setArtistMoodTags] = useState<AIMoodSuggestion | null>(null);
   const [hasAdjusted, setHasAdjusted] = useState(false);
   const [accuracyCertified, setAccuracyCertified] = useState(false);
+  const [isAnalyzingMood, setIsAnalyzingMood] = useState(false);
   
   // Submission state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -111,7 +112,8 @@ export default function UploadPage() {
         const file = acceptedFiles[0];
         setUploadedFile(file);
         
-        // Run RAG mood analysis pipeline
+        // Run RAG mood analysis pipeline with loading state
+        setIsAnalyzingMood(true);
         try {
           const ragPipeline = getRAGPipeline();
           const moodSuggestion = await ragPipeline.analyzeMood(file);
@@ -141,6 +143,8 @@ export default function UploadPage() {
             genres: [],
             confidence: 0.5,
           });
+        } finally {
+          setIsAnalyzingMood(false);
         }
       }
     },
@@ -723,7 +727,15 @@ export default function UploadPage() {
             </ul>
           </div>
 
-          {uploadedFile && (
+          {/* Loading state for AI mood analysis */}
+          {isAnalyzingMood && (
+            <div className="mt-6 flex items-center gap-3 p-4 bg-blue-600/20 border border-blue-600/50 rounded-lg">
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-spotify-green" />
+              <span className="text-white text-sm">Analyzing track mood with AI... This may take a few seconds.</span>
+            </div>
+          )}
+
+          {uploadedFile && !isAnalyzingMood && (
             <button
               onClick={() => setStep(2)}
               className="btn-primary w-full mt-6"

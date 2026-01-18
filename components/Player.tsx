@@ -13,6 +13,7 @@ import QualitySelector from './QualitySelector';
 import QueuePanel from './QueuePanel';
 import FullScreenPlayer from './FullScreenPlayer';
 import AudioQualityBadge from './AudioQualityBadge';
+import ImageWithFallback from './ImageWithFallback';
 import { formatDuration } from '@/lib/utils';
 import { Maximize2 } from 'lucide-react';
 import type { Quality } from './QualitySelector';
@@ -162,7 +163,7 @@ export default function Player() {
             }}
           >
             {currentTrack?.coverArt ? (
-              <img
+              <ImageWithFallback
                 src={currentTrack.coverArt}
                 alt={currentTrack.name}
                 className="w-full h-full object-cover rounded"

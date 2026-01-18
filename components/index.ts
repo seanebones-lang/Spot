@@ -48,6 +48,8 @@ export type { SkipLinksProps, SkipLink } from './SkipLinks';
 export { default as LazyImage } from './LazyImage';
 export type { LazyImageProps } from './LazyImage';
 
+export { default as ImageWithFallback } from './ImageWithFallback';
+
 // Re-export subcomponents
 export { Modal as ModalComponent } from './Modal';
 export type { 
