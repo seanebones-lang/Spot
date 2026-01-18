@@ -258,4 +258,5 @@ if (require.main === module) {
   main().catch(console.error);
 }
 
-export { MoodModelTrainer, TrainingConfig, TrainingSample };
+export { MoodModelTrainer };
+export type { TrainingConfig, TrainingSample };
