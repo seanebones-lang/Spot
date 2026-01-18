@@ -46,6 +46,9 @@ export default function AlbumPage() {
               artist: {
                 id: `artist-${uploadedRelease.id}`,
                 name: uploadedRelease.artistName || 'Unknown Artist',
+                image: '',
+                followers: 0,
+                verified: false,
               },
               coverArt: uploadedRelease.coverArtUrl || '',
               tracks: uploadedRelease.trackData || [],
