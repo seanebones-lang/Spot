@@ -80,7 +80,7 @@ export async function GET(
     const stationId = params.station as StationId;
     const stationConfig = STATIONS[stationId];
 
-    if (!station) {
+    if (!stationConfig) {
       return NextResponse.json(
         { error: 'Station not found' },
         { status: 404 }
