@@ -5,13 +5,6 @@ FROM node:18-alpine AS base
 FROM base AS deps
 WORKDIR /app
 
-# Install yt-dlp for radio streaming
-RUN apk add --no-cache \
-    python3 \
-    py3-pip \
-    ffmpeg \
-    && pip3 install --no-cache-dir yt-dlp
-
 # Copy package files
 COPY package.json package-lock.json* ./
 RUN npm ci
@@ -36,11 +29,12 @@ ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # Install yt-dlp for radio streaming (required in production)
+# Use --break-system-packages flag for Alpine's PEP 668 protection
 RUN apk add --no-cache \
     python3 \
     py3-pip \
     ffmpeg \
-    && pip3 install --no-cache-dir yt-dlp
+    && pip3 install --no-cache-dir --break-system-packages yt-dlp
 
 # Create non-root user
 RUN addgroup --system --gid 1001 nodejs
