@@ -368,9 +368,9 @@ export default function Sidebar() {
                       }}
                     >
                       {playlist.coverArt && (
-                        <img 
+                        <ImageWithFallback 
                           src={playlist.coverArt} 
-                          alt="" 
+                          alt={`${playlist.name} cover`} 
                           className="w-full h-full object-cover"
                           style={{ borderRadius: '2px' }}
                         />

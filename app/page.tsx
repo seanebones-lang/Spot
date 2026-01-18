@@ -10,7 +10,8 @@ import AdBanner from '@/components/AdBanner';
 import ErrorToast from '@/components/ErrorToast';
 import OnboardingTour from '@/components/OnboardingTour';
 import Tooltip from '@/components/Tooltip';
-import { Heart, Music, Radio } from 'lucide-react';
+import ImageWithFallback from '@/components/ImageWithFallback';
+import { Heart, Music, Radio, Check } from 'lucide-react';
 
 export default function HomePage() {
   const tracks = mockData.getTracks();
@@ -170,12 +171,29 @@ export default function HomePage() {
                 }}
               >
                 <div className="relative mb-3" style={{ marginBottom: '12px' }}>
-                  <img
+                  <ImageWithFallback
                     src={track.coverArt}
                     alt={track.name}
                     className="w-full aspect-square object-cover rounded"
                     style={{ borderRadius: '4px', aspectRatio: '1' }}
                   />
+                  {/* Visual indicator for previously played tracks */}
+                  {recentlyPlayed.some(t => t.id === track.id) && (
+                    <div 
+                      className="absolute top-2 right-2 bg-spotify-green rounded-full p-1"
+                      style={{
+                        top: '8px',
+                        right: '8px',
+                        backgroundColor: '#1DB954',
+                        borderRadius: '50%',
+                        padding: '4px',
+                        zIndex: 1
+                      }}
+                      aria-label="Previously played"
+                    >
+                      <Check size={12} className="text-black" style={{ width: '12px', height: '12px' }} />
+                    </div>
+                  )}
                   <div 
                     className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{
@@ -318,7 +336,7 @@ export default function HomePage() {
                 }}
               >
                 <div className="relative mb-3" style={{ marginBottom: '12px', width: '168px', height: '168px' }}>
-                  <img
+                  <ImageWithFallback
                     src={playlist.coverArt}
                     alt={playlist.name}
                     className="w-full h-full object-cover rounded"
@@ -433,12 +451,29 @@ export default function HomePage() {
                 }}
               >
                 <div className="relative mb-3" style={{ marginBottom: '12px', width: '168px', height: '168px' }}>
-                  <img
+                  <ImageWithFallback
                     src={track.coverArt}
                     alt={track.name}
                     className="w-full h-full object-cover rounded"
                     style={{ borderRadius: '4px' }}
                   />
+                  {/* Visual indicator for previously played tracks */}
+                  {recentlyPlayed.some(t => t.id === track.id) && (
+                    <div 
+                      className="absolute top-2 right-2 bg-spotify-green rounded-full p-1"
+                      style={{
+                        top: '8px',
+                        right: '8px',
+                        backgroundColor: '#1DB954',
+                        borderRadius: '50%',
+                        padding: '4px',
+                        zIndex: 1
+                      }}
+                      aria-label="Previously played"
+                    >
+                      <Check size={12} className="text-black" style={{ width: '12px', height: '12px' }} />
+                    </div>
+                  )}
                   <div 
                     className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{
@@ -552,7 +587,7 @@ export default function HomePage() {
                     borderRadius: '50%'
                   }}
                 >
-                  <img
+                  <ImageWithFallback
                     src={artist.image}
                     alt={artist.name}
                     className="w-full h-full object-cover"
