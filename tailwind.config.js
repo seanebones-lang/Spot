@@ -37,7 +37,13 @@ module.exports = {
         "spotify": "4px"
       },
       "screens": {
-        "spotify-sm": "320px"
+        "xs": "375px",        // Small mobile devices
+        "sm": "640px",        // Mobile (standard)
+        "md": "768px",        // Tablets (Spotify 2-column layout starts)
+        "lg": "1024px",       // Desktop (main layout)
+        "xl": "1280px",       // Large desktop
+        "2xl": "1536px",      // Extra large desktop
+        "spotify-sm": "320px" // Legacy: keep for compatibility
       },
       "boxShadow": {
         "spotify": "0 4px 12px rgba(0,0,0,0.25)"
