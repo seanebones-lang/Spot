@@ -55,51 +55,7 @@ export default function ContextMenu({
   onHide, onSnooze, onShare, isLiked
 }: ContextMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        onClose();
-      }
-    };
-
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleEscape);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [onClose]);
-
-  // Keep menu within viewport
-  const [position, setPosition] = useState({ x, y });
-
-  useEffect(() => {
-    if (!menuRef.current) return;
-    const menu = menuRef.current;
-    const rect = menu.getBoundingClientRect();
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    let newX = x;
-    let newY = y;
-
-    if (x + rect.width > viewportWidth) {
-      newX = viewportWidth - rect.width - 10;
-    }
-    if (y + rect.height > viewportHeight) {
-      newY = viewportHeight - rect.height - 10;
-    }
-
-    setPosition({ x: newX, y: newY });
-  }, [x, y]);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const trackMenuItems: MenuItem[] = [
     { icon: Play, label: 'Play', onClick: onPlay },
@@ -161,6 +117,73 @@ export default function ContextMenu({
                    type === 'album' ? albumMenuItems :
                    artistMenuItems;
 
+  // Calculate valid items (non-separator) for keyboard navigation
+  const validItems = menuItems.filter((i) => !i.separator);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+
+    const handleKeyboard = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedIndex((prev) => {
+          const next = prev + 1;
+          return next >= validItems.length ? 0 : next;
+        });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedIndex((prev) => {
+          const next = prev - 1;
+          return next < 0 ? validItems.length - 1 : next;
+        });
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const selectedItem = validItems[selectedIndex];
+        if (selectedItem) {
+          selectedItem.onClick?.();
+          onClose();
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyboard);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyboard);
+    };
+  }, [onClose, selectedIndex, validItems]);
+
+  // Keep menu within viewport
+  const [position, setPosition] = useState({ x, y });
+
+  useEffect(() => {
+    if (!menuRef.current) return;
+    const menu = menuRef.current;
+    const rect = menu.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    let newX = x;
+    let newY = y;
+
+    if (x + rect.width > viewportWidth) {
+      newX = viewportWidth - rect.width - 10;
+    }
+    if (y + rect.height > viewportHeight) {
+      newY = viewportHeight - rect.height - 10;
+    }
+
+    setPosition({ x: newX, y: newY });
+  }, [x, y]);
+
   return (
     <div
       ref={menuRef}
@@ -182,6 +205,20 @@ export default function ContextMenu({
         if (item.separator && index > 0) {
           return <div key={`sep-${index}`} className="h-px bg-white/10 my-1 mx-2" />;
         }
+
+        // Calculate the index of this item in the valid items array
+        let itemIndex = -1;
+        let validCount = 0;
+        for (let i = 0; i < menuItems.length; i++) {
+          if (!menuItems[i].separator) {
+            if (i === index) {
+              itemIndex = validCount;
+              break;
+            }
+            validCount++;
+          }
+        }
+        const isSelected = itemIndex === selectedIndex;
 
         const Icon = item.icon;
         const content = (
@@ -209,7 +246,7 @@ export default function ContextMenu({
                 padding: '12px 16px',
                 textAlign: 'left',
                 color: '#FFFFFF',
-                backgroundColor: 'transparent',
+                backgroundColor: isSelected ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'background-color 200ms ease-out',
@@ -219,9 +256,12 @@ export default function ContextMenu({
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                if (itemIndex !== -1) setSelectedIndex(itemIndex);
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
+                if (!isSelected) {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }
               }}
             >
               {content}
@@ -249,7 +289,9 @@ export default function ContextMenu({
               gap: '12px',
               padding: '12px 16px',
               textAlign: 'left',
-              backgroundColor: 'transparent',
+              backgroundColor: isSelected 
+                ? (item.danger ? 'rgba(239, 68, 68, 0.2)' : 'rgba(255, 255, 255, 0.1)')
+                : 'transparent',
               border: 'none',
               cursor: 'pointer',
               transition: 'background-color 200ms ease-out, color 200ms ease-out',
@@ -261,9 +303,12 @@ export default function ContextMenu({
               e.currentTarget.style.backgroundColor = item.danger 
                 ? 'rgba(239, 68, 68, 0.2)' 
                 : 'rgba(255, 255, 255, 0.1)';
+              if (itemIndex !== -1) setSelectedIndex(itemIndex);
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
+              if (!isSelected) {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }
             }}
           >
             {content}
