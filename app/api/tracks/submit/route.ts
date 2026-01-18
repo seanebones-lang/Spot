@@ -285,6 +285,8 @@ export async function POST(request: NextRequest) {
     let audioFileUrls: string[] = [];
     let audioFileChecksum: string | null = null;
     let audioFileChecksums: string[] = [];
+    let coverArtUrl: string | null = null;
+    let coverArtChecksum: string | null = null;
 
     try {
       if (releaseType === 'single' && audioFile) {
@@ -351,9 +353,6 @@ export async function POST(request: NextRequest) {
       }
 
       // Upload cover art file (if provided) to cloud storage
-      let coverArtUrl = null;
-      let coverArtChecksum: string | null = null;
-      
       if (coverArtFile) {
         const sanitizedOriginalName = sanitizeFilename(coverArtFile.name);
         const coverArtExtension = sanitizedOriginalName.split('.').pop() || 'jpg';
