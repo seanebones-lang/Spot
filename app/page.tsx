@@ -302,9 +302,10 @@ export default function HomePage() {
                   backgroundColor: 'rgba(0, 0, 0, 0)',
                   position: 'relative',
                   display: 'block',
-                  transition: 'all 0.2s ease',
+                  transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1), z-index 0ms',
                   zIndex: 0,
-                  flexShrink: 0
+                  flexShrink: 0,
+                  willChange: 'transform'
                 }}
                 onClick={() => handlePlayPlaylist(playlist)}
                 onMouseEnter={(e) => {
@@ -371,7 +372,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trending Songs - Exact Spotify Style */}
+      {/* Trending Songs - Horizontal Card Layout */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
           className="transition-colors gpu-accelerated mb-4"
@@ -392,97 +393,81 @@ export default function HomePage() {
           Trending Songs
         </h2>
         <div 
-          className="bg-spotify-light-gray rounded-lg overflow-hidden"
-          style={{
-            backgroundColor: '#181818',
-            borderRadius: '8px'
-          }}
+          className="relative"
+          style={{ position: 'relative', overflow: 'visible' }}
         >
-          {tracks.map((track, index) => (
-            <div
-              key={track.id}
-              className="flex items-center gap-4 p-3 hover:bg-white/10 transition-colors group cursor-pointer"
-              style={{
-                padding: '12px 16px',
-                gap: '16px',
-                transition: 'background-color 200ms ease-out'
-              }}
-              onClick={(e) => {
-                if ((e.target as HTMLElement).closest('button')) return;
-                handlePlayTrack(track);
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              <div 
-                className="w-8 text-center text-spotify-text-gray group-hover:text-white flex-shrink-0"
+          <div 
+            className="flex gap-4 overflow-x-auto horizontal-scroll"
+            style={{ 
+              gap: '16px',
+              overflowX: 'auto',
+              paddingBottom: '8px'
+            }}
+          >
+            {tracks.map((track) => (
+              <div
+                key={track.id}
+                className="flex flex-col transition-all gpu-accelerated group cursor-pointer"
                 style={{
-                  width: '32px',
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  color: '#B3B3B3',
-                  transition: 'color 200ms ease-out'
+                  width: '168px',
+                  height: '220px',
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  position: 'relative',
+                  display: 'block',
+                  transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1), z-index 0ms',
+                  zIndex: 0,
+                  flexShrink: 0,
+                  willChange: 'transform'
+                }}
+                onClick={(e) => {
+                  if ((e.target as HTMLElement).closest('button')) return;
+                  handlePlayTrack(track);
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.zIndex = '1';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.zIndex = '0';
                 }}
               >
-                {currentTrack?.id === track.id && isPlaying ? (
-                  <Music size={16} className="mx-auto text-spotify-green" style={{ color: '#1DB954' }} />
-                ) : (
-                  <span className="opacity-0 group-hover:opacity-100" style={{ transition: 'opacity 200ms ease-out' }}>
-                    {index + 1}
-                  </span>
-                )}
-              </div>
-              <div 
-                className="w-12 h-12 bg-spotify-dark-gray rounded flex-shrink-0 relative group/cover"
-                style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '4px',
-                  backgroundColor: '#282828'
-                }}
-              >
-                <img
-                  src={track.coverArt}
-                  alt={track.name}
-                  className="w-full h-full object-cover rounded"
-                  style={{ borderRadius: '4px' }}
-                />
-                <div 
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/cover:opacity-100 transition-opacity bg-black/30 rounded"
-                  style={{
-                    borderRadius: '4px',
-                    transition: 'opacity 200ms ease-out',
-                    backgroundColor: 'rgba(0, 0, 0, 0.3)'
-                  }}
-                >
-                  <PlayButton
-                    isPlaying={currentTrack?.id === track.id && isPlaying}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handlePlayTrack(track, e);
-                    }}
-                    size="sm"
+                <div className="relative mb-3" style={{ marginBottom: '12px', width: '168px', height: '168px' }}>
+                  <img
+                    src={track.coverArt}
+                    alt={track.name}
+                    className="w-full h-full object-cover rounded"
+                    style={{ borderRadius: '4px' }}
                   />
+                  <div 
+                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{
+                      bottom: '8px',
+                      right: '8px',
+                      transition: 'opacity 200ms ease-out'
+                    }}
+                  >
+                    <PlayButton
+                      isPlaying={currentTrack?.id === track.id && isPlaying}
+                      onClick={() => handlePlayTrack(track)}
+                      size="sm"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="flex-1 min-w-0">
-                <div 
-                  className={`font-medium truncate ${currentTrack?.id === track.id ? 'text-spotify-green' : ''}`}
+                <h3 
+                  className="font-semibold text-sm mb-1 truncate"
                   style={{
                     fontSize: '14px',
                     lineHeight: '20px',
-                    fontWeight: 400,
-                    color: currentTrack?.id === track.id ? '#1DB954' : '#FFFFFF'
+                    fontWeight: 600,
+                    color: currentTrack?.id === track.id ? '#1DB954' : '#FFFFFF',
+                    marginBottom: '4px'
                   }}
                 >
                   {track.name}
-                </div>
-                <div 
-                  className="text-sm text-spotify-text-gray truncate"
+                </h3>
+                <p 
+                  className="text-xs text-spotify-text-gray truncate"
                   style={{
                     fontSize: '13px',
                     lineHeight: '16px',
@@ -490,25 +475,10 @@ export default function HomePage() {
                   }}
                 >
                   {track.artist}
-                </div>
+                </p>
               </div>
-              <div 
-                className={`flex-shrink-0 transition-opacity ${currentTrack?.id === track.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                style={{
-                  transition: 'opacity 200ms ease-out'
-                }}
-              >
-                <PlayButton
-                  isPlaying={currentTrack?.id === track.id && isPlaying}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePlayTrack(track, e);
-                  }}
-                  size="sm"
-                />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -558,10 +528,11 @@ export default function HomePage() {
                   backgroundColor: 'rgba(0, 0, 0, 0)',
                   position: 'relative',
                   display: 'block',
-                  transition: 'all 0.2s ease',
+                  transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1), z-index 0ms',
                   zIndex: 0,
                   textDecoration: 'none',
-                  flexShrink: 0
+                  flexShrink: 0,
+                  willChange: 'transform'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'scale(1.05)';
@@ -670,8 +641,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Radio Stations */}
-      <section className="mb-8">
+      {/* Radio Stations - Horizontal Scrollable Cards */}
+      <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
           className="transition-colors gpu-accelerated mb-4"
           style={{
@@ -690,18 +661,74 @@ export default function HomePage() {
         >
           Radio Stations
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {['Pop Radio', 'Rock Radio', 'Electronic Radio', 'Hip-Hop Radio', 'Jazz Radio', 'Classical Radio'].map((station) => (
-            <div
-              key={station}
-              className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors group cursor-pointer"
-            >
-              <div className="w-full aspect-square bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg mb-3 flex items-center justify-center">
-                <Radio size={32} className="text-white opacity-50" />
+        <div 
+          className="relative"
+          style={{ position: 'relative', overflow: 'visible' }}
+        >
+          <div 
+            className="flex gap-4 overflow-x-auto horizontal-scroll"
+            style={{ 
+              gap: '16px',
+              overflowX: 'auto',
+              paddingBottom: '8px'
+            }}
+          >
+            {['Pop Radio', 'Rock Radio', 'Electronic Radio', 'Hip-Hop Radio', 'Jazz Radio', 'Classical Radio'].map((station) => (
+              <div
+                key={station}
+                className="flex flex-col transition-all gpu-accelerated group cursor-pointer"
+                style={{
+                  width: '168px',
+                  height: '220px',
+                  backgroundColor: '#181818',
+                  borderRadius: '8px',
+                  padding: '16px',
+                  position: 'relative',
+                  transition: 'background-color 200ms ease-out, transform 200ms cubic-bezier(0.3, 0, 0.1, 1)',
+                  flexShrink: 0,
+                  willChange: 'transform, background-color'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#282828';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#181818';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
+                <div 
+                  style={{
+                    width: '100%',
+                    aspectRatio: '1',
+                    borderRadius: '4px',
+                    marginBottom: '12px',
+                    background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}
+                >
+                  <Radio size={32} style={{ opacity: 0.5, color: '#FFFFFF' }} />
+                </div>
+                <h3 
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 600,
+                    color: '#FFFFFF',
+                    margin: 0,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {station}
+                </h3>
               </div>
-              <h3 className="font-semibold text-sm">{station}</h3>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
     </div>

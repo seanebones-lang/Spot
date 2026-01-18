@@ -58,7 +58,7 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
         >
           Skip to main content
         </a>
-        <main id="main-content" className="flex-1 flex flex-col overflow-y-auto bg-[#121212]" style={{ paddingTop: '56px', paddingBottom: '0px' }}>
+        <main id="main-content" className="flex-1 flex flex-col overflow-y-auto bg-[#121212]" style={{ paddingTop: '56px', paddingBottom: '90px' }}>
           <div className="flex-1 w-full">
             <Breadcrumbs />
             {children}

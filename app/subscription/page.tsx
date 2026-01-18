@@ -272,19 +272,6 @@ export default function SubscriptionPage() {
             </div>
           </div>
         </div>
-
-        {/* Footer Links */}
-        <div className="mt-8 flex gap-6 text-sm text-spotify-text-gray">
-          <Link href="/settings" className="hover:text-white transition-colors">
-            Account Settings
-          </Link>
-          <Link href="/legal/terms" className="hover:text-white transition-colors">
-            Terms of Service
-          </Link>
-          <Link href="/legal/privacy" className="hover:text-white transition-colors">
-            Privacy Policy
-          </Link>
-        </div>
       </div>
     </div>
   );

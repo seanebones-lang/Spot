@@ -9,7 +9,11 @@ import {
   CreditCard, 
   HelpCircle, 
   ChevronRight,
-  Check
+  Check,
+  Music,
+  Mic,
+  BookOpen,
+  Radio
 } from 'lucide-react';
 import PremiumBadge from '@/components/PremiumBadge';
 import { cn } from '@/lib/utils';
@@ -60,6 +64,30 @@ export default function UserMenu({
       label: 'Account',
       icon: Settings,
       href: '/settings/account',
+      separator: false,
+    },
+    {
+      label: 'Artist Dashboard',
+      icon: Music,
+      href: '/dashboard/artist',
+      separator: true,
+    },
+    {
+      label: 'Podcaster Dashboard',
+      icon: Mic,
+      href: '/dashboard/podcaster',
+      separator: false,
+    },
+    {
+      label: 'Audiobook Dashboard',
+      icon: BookOpen,
+      href: '/dashboard/audiobook',
+      separator: false,
+    },
+    {
+      label: 'Radio Station Dashboard',
+      icon: Radio,
+      href: '/dashboard/radio',
       separator: false,
     },
     {
