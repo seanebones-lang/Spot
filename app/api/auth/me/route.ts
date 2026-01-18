@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth';
 import { logger, generateCorrelationId } from '@/lib/logger';
+import prisma from '@/lib/db';
 
 /**
  * Get Current User API
@@ -14,32 +15,27 @@ export async function GET(request: NextRequest) {
     // Require authentication (this will throw if not authenticated)
     const authUser = requireAuth(request);
 
-    // In production, fetch user from database using authUser.userId
-    // const user = await db.users.findById(authUser.userId);
-    // if (!user) {
-    //   logger.warn('User not found in database', { correlationId, userId: authUser.userId });
-    //   return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    // }
-    //
-    // return NextResponse.json({
-    //   success: true,
-    //   user: {
-    //     id: user.id,
-    //     email: user.email,
-    //     name: user.name,
-    //     role: user.role,
-    //     createdAt: user.createdAt,
-    //   },
-    // });
+    // Fetch user from database
+    const user = await prisma.user.findUnique({
+      where: { id: authUser.userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        isActive: true,
+        createdAt: true,
+        emailVerifiedAt: true,
+      },
+    });
 
-    // Mock user (replace with database lookup)
-    const user = {
-      id: authUser.userId,
-      email: authUser.email,
-      name: authUser.email?.split('@')[0] || 'User',
-      role: authUser.role || 'user',
-      createdAt: new Date().toISOString(),
-    };
+    if (!user) {
+      logger.warn('User not found in database', { correlationId, userId: authUser.userId });
+      return NextResponse.json(
+        { error: 'User not found' },
+        { status: 404 }
+      );
+    }
 
     const duration = Date.now() - startTime;
     logger.info('User info retrieved', { correlationId, userId: user.id, duration });

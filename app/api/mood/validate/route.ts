@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);
-    const rateLimit = checkRateLimit(clientId, '/api/mood/validate');
+    const rateLimit = await checkRateLimit(clientId, '/api/mood/validate');
     if (!rateLimit.allowed) {
       logger.warn('Rate limit exceeded for mood validation', { correlationId, clientId });
       return NextResponse.json(

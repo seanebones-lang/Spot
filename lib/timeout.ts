@@ -31,6 +31,17 @@ export async function fetchWithTimeout(
 }
 
 /**
+ * Default timeout values for different operations
+ */
+export const TIMEOUTS = {
+  DATABASE_QUERY: 5000,      // 5 seconds for DB queries
+  EXTERNAL_API: 30000,       // 30 seconds for external APIs
+  FILE_UPLOAD: 120000,       // 2 minutes for file uploads
+  EMAIL_SEND: 10000,         // 10 seconds for email sending
+  DEFAULT: 30000,            // 30 seconds default
+};
+
+/**
  * Wrap a promise with timeout
  */
 export function withTimeout<T>(

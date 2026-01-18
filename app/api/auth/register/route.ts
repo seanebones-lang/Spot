@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sign } from 'jsonwebtoken';
-import { getEnv } from '@/lib/env';
+import { randomBytes } from 'crypto';
 import { sanitizeEmail, sanitizeString } from '@/lib/sanitize';
 import { hashPassword, validatePasswordStrength } from '@/lib/password';
 import { checkRateLimit, getClientIdentifier } from '@/lib/rateLimit';
 import { logger, generateCorrelationId } from '@/lib/logger';
+import { generateTokenPair } from '@/lib/auth';
+import { sendVerificationEmail } from '@/lib/email';
+import prisma from '@/lib/db';
 
 /**
  * User Registration API
@@ -18,7 +20,7 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);
-    const rateLimit = checkRateLimit(clientId, '/api/auth/register');
+    const rateLimit = await checkRateLimit(clientId, '/api/auth/register');
     if (!rateLimit.allowed) {
       logger.warn('Rate limit exceeded for registration', { correlationId, clientId });
       return NextResponse.json(
@@ -85,37 +87,48 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // In production, you would:
-    // 1. Check if user already exists in database
-    // 2. Create user in database with hashed password
-    // 3. Send verification email
-    //
-    // Example implementation:
-    // const existingUser = await db.users.findByEmail(sanitizedEmail);
-    // if (existingUser) {
-    //   return NextResponse.json({ error: 'Email already registered' }, { status: 409 });
-    // }
-    //
-    // const user = await db.users.create({
-    //   email: sanitizedEmail,
-    //   name: sanitizedName,
-    //   passwordHash,
-    //   role: 'user',
-    //   isActive: false, // Require email verification
-    //   createdAt: new Date(),
-    // });
-    //
-    // await sendVerificationEmail(user.email, user.id);
+    // Check if user already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email: sanitizedEmail },
+      select: { id: true },
+    });
 
-    // For now, create a mock user (replace with database)
-    const userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    const user = {
-      id: userId,
-      email: sanitizedEmail,
-      name: sanitizedName,
-      role: 'user' as const,
-      createdAt: new Date().toISOString(),
-    };
+    if (existingUser) {
+      // Don't reveal if email exists (security best practice)
+      // Return success message to prevent email enumeration
+      logger.warn('Registration attempt with existing email', { correlationId, email: sanitizedEmail });
+      return NextResponse.json(
+        { error: 'An account with this email already exists' },
+        { status: 409 }
+      );
+    }
+
+    // Generate email verification token
+    const emailVerificationToken = randomBytes(32).toString('hex');
+    const emailVerificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+    // Create user in database
+    const user = await prisma.user.create({
+      data: {
+        email: sanitizedEmail,
+        name: sanitizedName,
+        passwordHash,
+        role: 'USER',
+        isActive: false, // Require email verification
+        emailVerificationToken,
+        emailVerificationExpires,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        createdAt: true,
+      },
+    });
+
+    // Send verification email
+    await sendVerificationEmail(user.email, emailVerificationToken);
 
     // Generate JWT token
     const env = getEnv();
@@ -127,23 +140,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const token = sign(
+    // Generate token pair (access token + refresh token)
+    const tokens = await generateTokenPair(
       { userId: user.id, email: user.email, role: user.role },
-      env.JWT_SECRET,
-      { expiresIn: '7d' }
+      request
     );
 
-    // In production, save user to database here
-    logger.info('User registered', { correlationId, userId: user.id, email: user.email });
+    logger.info('User registered', { correlationId, userId: user.id });
 
     const duration = Date.now() - startTime;
     logger.info('Registration successful', { correlationId, userId: user.id, duration });
 
     return NextResponse.json({
       success: true,
-      user,
-      token,
-      message: 'Account created successfully',
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
+      message: 'Account created successfully. Please check your email to verify your account.',
+      requiresVerification: true,
     });
   } catch (error) {
     const duration = Date.now() - startTime;

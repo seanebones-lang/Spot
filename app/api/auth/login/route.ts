@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sign } from 'jsonwebtoken';
 import { getEnv } from '@/lib/env';
 import { sanitizeEmail } from '@/lib/sanitize';
 import { verifyPassword } from '@/lib/password';
 import { checkRateLimit, getClientIdentifier } from '@/lib/rateLimit';
 import { logger, generateCorrelationId } from '@/lib/logger';
+import { generateTokenPair } from '@/lib/auth';
+import prisma, { dbQueryWithTimeout } from '@/lib/db';
 
 /**
  * User Login API
@@ -18,7 +19,7 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);
-    const rateLimit = checkRateLimit(clientId, '/api/auth/login');
+    const rateLimit = await checkRateLimit(clientId, '/api/auth/login');
     if (!rateLimit.allowed) {
       logger.warn('Rate limit exceeded for login', { correlationId, clientId });
       return NextResponse.json(
@@ -54,37 +55,102 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // In production, you would:
-    // 1. Find user by email in database
-    // 2. Verify password hash (bcrypt.compare)
-    // 3. Check if account is active/verified
-    // 
-    // Example implementation:
-    // const user = await db.users.findByEmail(sanitizedEmail);
-    // if (!user) {
-    //   logger.warn('Login attempt with non-existent email', { correlationId, email: sanitizedEmail });
-    //   return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    // }
-    // 
-    // const passwordValid = await verifyPassword(password, user.passwordHash);
-    // if (!passwordValid) {
-    //   logger.warn('Login attempt with invalid password', { correlationId, userId: user.id });
-    //   return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    // }
-    //
-    // if (!user.isActive) {
-    //   return NextResponse.json({ error: 'Account is not active' }, { status: 403 });
-    // }
+    // Find user by email in database (with timeout)
+    const user = await dbQueryWithTimeout(
+      prisma.user.findUnique({
+        where: { email: sanitizedEmail },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          passwordHash: true,
+          isActive: true,
+          role: true,
+          lockedUntil: true,
+          failedLoginAttempts: true,
+        },
+      })
+    );
 
-    // Mock user for demo (replace with actual database query)
-    // NOTE: In production, this mock authentication should be removed
-    const user = {
-      id: `user_${Date.now()}`,
-      email: sanitizedEmail,
-      name: sanitizedEmail.split('@')[0], // Extract name from email
-      role: 'user' as const,
-      createdAt: new Date().toISOString(),
-    };
+    // Use generic error message to prevent email enumeration
+    if (!user) {
+      logger.warn('Login attempt with non-existent email', { correlationId, email: sanitizedEmail });
+      return NextResponse.json(
+        { error: 'Invalid credentials' },
+        { status: 401 }
+      );
+    }
+
+    // Check if account is locked
+    if (user.lockedUntil && user.lockedUntil > new Date()) {
+      const minutesRemaining = Math.ceil((user.lockedUntil.getTime() - Date.now()) / 1000 / 60);
+      logger.warn('Login attempt on locked account', { correlationId, userId: user.id });
+      return NextResponse.json(
+        { 
+          error: 'Account is temporarily locked due to too many failed login attempts',
+          lockedUntil: user.lockedUntil.toISOString(),
+          minutesRemaining,
+        },
+        { status: 423 } // 423 Locked
+      );
+    }
+
+    // Verify password
+    const passwordValid = await verifyPassword(password, user.passwordHash);
+    
+    if (!passwordValid) {
+      // Increment failed login attempts
+      const newFailedAttempts = user.failedLoginAttempts + 1;
+      const lockUntil = newFailedAttempts >= 5 
+        ? new Date(Date.now() + 15 * 60 * 1000) // Lock for 15 minutes
+        : null;
+      
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          failedLoginAttempts: newFailedAttempts,
+          lockedUntil: lockUntil,
+        },
+      });
+
+      logger.warn('Login attempt with invalid password', { 
+        correlationId, 
+        userId: user.id,
+        failedAttempts: newFailedAttempts,
+      });
+
+      if (lockUntil) {
+        return NextResponse.json(
+          { 
+            error: 'Account locked due to too many failed login attempts. Please try again in 15 minutes.',
+          },
+          { status: 423 }
+        );
+      }
+
+      return NextResponse.json(
+        { error: 'Invalid credentials' },
+        { status: 401 }
+      );
+    }
+
+    // Check if account is active/verified
+    if (!user.isActive) {
+      return NextResponse.json(
+        { error: 'Account is not active. Please verify your email address.' },
+        { status: 403 }
+      );
+    }
+
+    // Reset failed login attempts on successful login
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        failedLoginAttempts: 0,
+        lockedUntil: null,
+        lastLoginAt: new Date(),
+      },
+    });
 
     // Generate JWT token
     const env = getEnv();
@@ -96,10 +162,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const token = sign(
+    // Generate token pair (access token + refresh token)
+    const tokens = await generateTokenPair(
       { userId: user.id, email: user.email, role: user.role },
-      env.JWT_SECRET,
-      { expiresIn: '7d' }
+      request
     );
 
     const duration = Date.now() - startTime;
@@ -107,8 +173,14 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      user,
-      token,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
       message: 'Login successful',
     });
   } catch (error) {
