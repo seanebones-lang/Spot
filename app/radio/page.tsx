@@ -113,7 +113,10 @@ export default function RadioPage() {
       // Helper function to restart stream with new random start
       const restartStream = (station: RadioStation, trackId: string) => {
         const newRandomStart = Math.floor(Math.random() * station.duration);
-        const newStreamUrl = `/api/radio/stream/${station.id}?start=${newRandomStart}&random=false`;
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+        const newStreamUrl = apiUrl
+          ? `${apiUrl}/api/radio/stream/${station.id}?start=${newRandomStart}&random=false`
+          : `/api/radio/stream/${station.id}?start=${newRandomStart}&random=false`;
         
         audioPlayer.loadTrack(
           newStreamUrl,
