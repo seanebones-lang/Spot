@@ -1,0 +1,25 @@
+# Copy this file to terraform.tfvars and update with your values
+# terraform.tfvars is gitignored and contains sensitive values
+
+aws_region   = "us-east-1"
+environment  = "dev"
+app_name     = "spot"
+vpc_cidr     = "10.0.0.0/16"
+
+# Database configuration
+db_password        = "CHANGE_ME_SECURE_PASSWORD"
+db_username        = "spotadmin"
+db_instance_class  = "db.t3.micro"
+db_allocated_storage = 20
+
+# ECS configuration
+container_cpu    = 512
+container_memory = 1024
+desired_count    = 2
+min_capacity     = 2
+max_capacity     = 10
+
+# CloudFront CDN
+enable_cloudfront = true
+# domain_name = "yourdomain.com"
+# certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"

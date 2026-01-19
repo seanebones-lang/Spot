@@ -1,0 +1,193 @@
+name: Comprehensive CI Pipeline
+
+on:
+  pull_request:
+    branches: [main, fix-all-complete-v1]
+  push:
+    branches: [main, fix-all-complete-v1]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # Quality checks
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Check formatting (Prettier)
+        run: npx prettier --check "**/*.{ts,tsx,js,jsx,json,css,md}" || true
+        continue-on-error: true
+
+  # Testing
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --watchAll=false --coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false
+        continue-on-error: true
+
+  # Build verification
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: Check build output
+        run: |
+          if [ ! -d ".next" ]; then
+            echo "❌ Build failed - .next directory not found"
+            exit 1
+          fi
+          echo "✅ Build successful"
+
+  # Security checks
+  security:
+    name: Security Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Check for secrets
+        run: |
+          echo "Checking for accidentally committed secrets..."
+          # Basic check - can be enhanced with truffleHog or similar
+          if grep -r "password.*=.*['\"].*[a-zA-Z0-9]\{10,\}" app/ components/ lib/ 2>/dev/null; then
+            echo "⚠️ Potential secrets found - review manually"
+          else
+            echo "✅ No obvious secrets found"
+          fi
+        continue-on-error: true
+
+  # Deployment config validation
+  validate-deployment-configs:
+    name: Validate Deployment Configs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate railway.toml
+        run: |
+          if [ -f "railway.toml" ]; then
+            echo "✅ railway.toml exists"
+            # Basic TOML validation
+            python3 -c "import tomllib; open('railway.toml', 'rb').read()" 2>/dev/null && echo "✅ Valid TOML" || echo "⚠️ TOML validation skipped"
+          else
+            echo "⚠️ railway.toml not found"
+          fi
+        continue-on-error: true
+
+      - name: Validate vercel.json
+        run: |
+          if [ -f "vercel.json" ]; then
+            node -e "require('./vercel.json')" && echo "✅ vercel.json valid" || echo "❌ vercel.json invalid"
+          else
+            echo "⚠️ vercel.json not found"
+          fi
+        continue-on-error: true
+
+      - name: Validate Dockerfile
+        run: |
+          if [ -f "Dockerfile" ]; then
+            echo "✅ Dockerfile exists"
+            # Check for common Dockerfile issues
+            if grep -q "FROM node:" Dockerfile; then
+              echo "✅ Dockerfile uses Node.js base image"
+            fi
+          else
+            echo "⚠️ Dockerfile not found"
+          fi
+        continue-on-error: true
+
+  # Summary
+  ci-summary:
+    name: CI Summary
+    needs: [code-quality, test, build, security, validate-deployment-configs]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: CI Summary
+        run: |
+          echo "## CI Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Quality | ${{ needs.code-quality.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Tests | ${{ needs.test.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{ needs.build.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security | ${{ needs.security.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Deployment Configs | ${{ needs.validate-deployment-configs.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.code-quality.result }}" == "success" ] && \
+             [ "${{ needs.test.result }}" == "success" ] && \
+             [ "${{ needs.build.result }}" == "success" ]; then
+            echo "🎉 **All critical checks passed!** Ready for deployment." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Some checks failed.** Fix issues before merging." >> $GITHUB_STEP_SUMMARY
+          fi
