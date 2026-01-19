@@ -147,12 +147,36 @@ if (require.main === module) {
 
   const [platform, project, tokenArg, branch = 'main'] = args;
   
+  // Load .env.local if it exists
+  try {
+    const { readFileSync } = require('fs');
+    const { join } = require('path');
+    const envLocal = join(process.cwd(), '.env.local');
+    try {
+      const envContent = readFileSync(envLocal, 'utf8');
+      envContent.split('\n').forEach(line => {
+        const [key, ...valueParts] = line.split('=');
+        if (key && valueParts.length > 0) {
+          const value = valueParts.join('=').trim();
+          if (value && !process.env[key]) {
+            process.env[key] = value;
+          }
+        }
+      });
+    } catch (e) {
+      // .env.local doesn't exist or can't be read, that's okay
+    }
+  } catch (e) {
+    // Module not available, continue
+  }
+  
   // Use token from arg or env var
   const token = tokenArg || 
     (platform === 'vercel' ? process.env.VERCEL_TOKEN : process.env.RAILWAY_TOKEN);
 
   if (!token) {
     console.error(`❌ Token required. Set ${platform === 'vercel' ? 'VERCEL_TOKEN' : 'RAILWAY_TOKEN'} env var or pass as argument`);
+    console.error(`   Token can be in .env.local file or environment variable`);
     process.exit(1);
   }
 
