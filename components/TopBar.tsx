@@ -249,7 +249,7 @@ export default function TopBar() {
         </div>
 
         {/* Premium/Upgrade Container - Independent element */}
-        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content', display: window.innerWidth < 640 ? 'none' : 'flex' }}>
           {subscriptionTier === 'Free' ? (
             <Link
               href="/subscription"
@@ -300,7 +300,7 @@ export default function TopBar() {
         </div>
 
         {/* Downloads Container - Independent element */}
-        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px', display: window.innerWidth < 640 ? 'none' : 'flex' }}>
           <Link
             href="/downloads"
             className="flex items-center justify-center rounded-full transition-colors duration-200"
@@ -330,7 +330,7 @@ export default function TopBar() {
         </div>
 
         {/* Notifications Container - Independent element */}
-        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px', display: window.innerWidth < 640 ? 'none' : 'flex' }}>
           <button
             className="flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none"
             style={{
@@ -355,7 +355,7 @@ export default function TopBar() {
         </div>
 
         {/* Settings Container - Independent element */}
-        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px', display: window.innerWidth < 640 ? 'none' : 'flex' }}>
           <Link
             href="/settings"
             className="flex items-center justify-center rounded-full transition-colors duration-200"
@@ -385,7 +385,7 @@ export default function TopBar() {
         </div>
 
         {/* Keyboard Shortcuts Container - Independent element */}
-        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px', display: window.innerWidth < 640 ? 'none' : 'flex' }}>
           <button
             data-tour="keyboard-shortcuts"
             onClick={() => setShortcutsOpen(true)}
@@ -430,7 +430,7 @@ export default function TopBar() {
         </div>
 
 {/* Right Sidebar Toggle Container - Independent element */}
-        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
+        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px', display: window.innerWidth < 640 ? 'none' : 'flex' }}>
           <button
             onClick={toggleRightSidebar}
             className="flex items-center justify-center rounded-full transition-colors duration-200"
