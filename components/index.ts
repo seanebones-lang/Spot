@@ -61,4 +61,4 @@ export type {
 export { default as Equalizer } from './Equalizer';
 export { default as AudioVisualizer } from './AudioVisualizer';
 export { default as AudiophileVisualizer } from './AudiophileVisualizer';
-export type { VisualizerType, VisualizerColorScheme } from './AudioVisualizer';
+export type { VisualizerType, VisualizerColorScheme } from './AudiophileVisualizer';
