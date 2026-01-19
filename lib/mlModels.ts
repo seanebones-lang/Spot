@@ -187,8 +187,9 @@ export class ONNXMoodModel implements MoodClassificationModel {
     }
 
     // Placeholder - would use actual ONNX inference
+    // Use TensorFlow model as fallback (calls predict which uses fallback internally)
     const tfModel = new TensorFlowJSMoodModel(this.metadata);
-    return tfModel.fallbackRuleBasedPrediction(features);
+    return await tfModel.predict(features);
   }
 
   getMetadata(): ModelMetadata {

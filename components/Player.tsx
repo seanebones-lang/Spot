@@ -7,16 +7,12 @@ import { audioPlayer } from '@/lib/player';
 import PlayButton from './PlayButton';
 import ProgressBar from './ProgressBar';
 import VolumeControl from './VolumeControl';
-import MoodWidget from './mood/MoodWidget';
 import PictureInPicturePlayer from './PictureInPicturePlayer';
-import QualitySelector from './QualitySelector';
 import QueuePanel from './QueuePanel';
 import FullScreenPlayer from './FullScreenPlayer';
-import AudioQualityBadge from './AudioQualityBadge';
 import ImageWithFallback from './ImageWithFallback';
 import { formatDuration } from '@/lib/utils';
 import { Maximize2 } from 'lucide-react';
-import type { Quality } from './QualitySelector';
 
 export default function Player() {
   const {
@@ -35,14 +31,8 @@ export default function Player() {
     playPrevious,
   } = usePlayerStore();
 
-  const [quality, setQuality] = useState<Quality>('high');
   const [isQueueOpen, setIsQueueOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  
-  // Detect available formats from track
-  const availableFormats = currentTrack?.format 
-    ? [currentTrack.format.toLowerCase()]
-    : ['mp3'];
 
   useEffect(() => {
     if (currentTrack) {
@@ -210,10 +200,8 @@ export default function Player() {
                   >
                     {currentTrack.artist}
                   </div>
-                  <AudioQualityBadge track={currentTrack} className="flex-shrink-0" />
                 </div>
               </div>
-              <MoodWidget track={currentTrack} />
             </>
           ) : (
             <div 
@@ -399,13 +387,6 @@ export default function Player() {
             alignItems: 'center'
           }}
         >
-          {currentTrack && (
-            <QualitySelector
-              currentQuality={quality}
-              availableFormats={availableFormats}
-              onQualityChange={setQuality}
-            />
-          )}
           <button
             onClick={() => setIsQueueOpen(true)}
             disabled={!currentTrack}

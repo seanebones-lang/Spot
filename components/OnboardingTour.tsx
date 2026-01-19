@@ -57,15 +57,42 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
   const [showWelcome, setShowWelcome] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const overlayRef = useRef<HTMLDivElement>(null);
 
+  // Fix hydration: only check localStorage after mount
   useEffect(() => {
-    const completed = localStorage.getItem('onboarding_completed');
-    if (completed === 'true') {
-      setIsComplete(true);
+    setIsMounted(true);
+    try {
+      const completed = localStorage.getItem('onboarding_completed');
+      if (completed === 'true') {
+        setIsComplete(true);
+        onComplete(); // Call onComplete if already completed
+      }
+    } catch (err) {
+      console.warn('localStorage not available');
     }
-  }, []);
+  }, [onComplete]);
+
+  // Emergency bypass: allow ESC key to close
+  useEffect(() => {
+    if (!isMounted || isComplete) return;
+    
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        handleSkip();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape, true);
+    
+    return () => {
+      document.removeEventListener('keydown', handleEscape, true);
+    };
+  }, [isMounted, isComplete]);
 
   const handleStartTour = () => {
     setShowWelcome(false);
@@ -128,14 +155,22 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
 
   const currentTourStep = tourSteps[currentStep];
 
-  // Don't render if already completed
-  if (isComplete) return null;
+  // Don't render until mounted or if already completed
+  if (!isMounted || isComplete) return null;
 
   // Welcome Modal
   if (showWelcome) {
     return (
-      <div className="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4">
-        <div className="bg-spotify-dark-gray rounded-lg w-full max-w-md shadow-2xl">
+      <div 
+        className="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4"
+        onClick={(e) => {
+          // Allow clicking outside to close
+          if (e.target === e.currentTarget) {
+            handleSkip();
+          }
+        }}
+      >
+        <div className="bg-spotify-dark-gray rounded-lg w-full max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
           <div className="p-8 text-center">
             <div className="mb-6">
               <Sparkles size={48} className="text-empulse-purple mx-auto mb-4" />

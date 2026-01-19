@@ -38,3 +38,6 @@ next-env.d.ts
 /uploads
 
 /lib/generated/prisma
+
+# Husky
+.husky/_

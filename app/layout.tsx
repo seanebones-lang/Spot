@@ -3,6 +3,7 @@ import './globals.css';
 import KeyboardShortcutsProvider from '@/components/KeyboardShortcutsProvider';
 import LayoutContent from '@/components/LayoutContent';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import GlobalErrorHandler from '@/components/GlobalErrorHandler';
 
 export const metadata: Metadata = {
   title: 'EmPulse Music - Revolutionary Mood-Based Music Discovery',
@@ -20,15 +21,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <ErrorBoundary>
-          <KeyboardShortcutsProvider>
-            <LayoutContent>
-              {children}
-            </LayoutContent>
-          </KeyboardShortcutsProvider>
-        </ErrorBoundary>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <GlobalErrorHandler>
+          <ErrorBoundary>
+            <KeyboardShortcutsProvider>
+              <LayoutContent>
+                {children}
+              </LayoutContent>
+            </KeyboardShortcutsProvider>
+          </ErrorBoundary>
+        </GlobalErrorHandler>
       </body>
     </html>
   );

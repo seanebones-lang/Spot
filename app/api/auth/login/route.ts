@@ -56,21 +56,32 @@ export async function POST(request: NextRequest) {
     }
 
     // Find user by email in database (with timeout)
-    const user = await dbQueryWithTimeout(
-      prisma.user.findUnique({
-        where: { email: sanitizedEmail },
-        select: {
-          id: true,
-          email: true,
-          name: true,
-          passwordHash: true,
-          isActive: true,
-          role: true,
-          lockedUntil: true,
-          failedLoginAttempts: true,
-        },
-      })
-    );
+    type UserWithLock = {
+      id: string;
+      email: string;
+      name: string | null;
+      passwordHash: string;
+      isActive: boolean;
+      role: string;
+      lockedUntil: Date | null;
+      failedLoginAttempts: number;
+    };
+    
+    const userQuery = prisma.user.findUnique({
+      where: { email: sanitizedEmail },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        passwordHash: true,
+        isActive: true,
+        role: true,
+        lockedUntil: true,
+        failedLoginAttempts: true,
+      },
+    }) as Promise<UserWithLock | null>;
+    
+    const user = await dbQueryWithTimeout<UserWithLock | null>(userQuery);
 
     // Use generic error message to prevent email enumeration
     if (!user) {

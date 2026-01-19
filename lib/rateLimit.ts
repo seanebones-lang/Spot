@@ -117,7 +117,7 @@ export function withRateLimit(
 ) {
   return async (req: Request): Promise<Response> => {
     const identifier = getClientIdentifier(req);
-    const result = checkRateLimit(identifier, endpoint);
+    const result = await checkRateLimit(identifier, endpoint);
     
     if (!result.allowed) {
       return new Response(

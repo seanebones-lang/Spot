@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Search, Library, Heart, Radio, ChevronLeft, ChevronRight, Pin, MoreHorizontal } from 'lucide-react';
+import { Home, Search, Library, Heart, Radio, ChevronLeft, ChevronRight, Pin, MoreHorizontal, Music } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCheckInStore } from '@/stores/checkInStore';
 import { usePointsStore } from '@/stores/pointsStore';
@@ -130,29 +130,25 @@ export default function Sidebar() {
         )}
       </button>
 
-      {/* Logo */}
+      {/* Logo - Icon Only (Spotify Style) */}
       <div 
-        className={cn("px-6 py-5", leftSidebarWidth <= 80 && "px-4 py-4")}
-        style={{ padding: leftSidebarWidth <= 80 ? '16px' : '20px 24px' }}
+        className="px-6 py-5"
+        style={{ padding: '20px 24px' }}
       >
         <Link 
           href="/" 
-          className="flex items-center"
+          className="flex items-center justify-center"
           style={{ textDecoration: 'none' }}
         >
-          {leftSidebarWidth > 100 && (
-            <span 
-              className="text-xl font-bold whitespace-nowrap"
-              style={{ 
-                fontSize: '24px',
-                lineHeight: '28px',
-                fontWeight: 700,
-                color: '#FFFFFF'
-              }}
-            >
-              EmPulse Music
-            </span>
-          )}
+          <Music 
+            size={32} 
+            className="text-white"
+            style={{ 
+              width: '32px',
+              height: '32px',
+              color: '#FFFFFF'
+            }}
+          />
         </Link>
       </div>
 
@@ -169,16 +165,12 @@ export default function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-md transition-all group relative gpu-accelerated",
-                isActive 
-                  ? "bg-spotify-light-gray" 
-                  : "hover:bg-white/10",
-                leftSidebarWidth <= 100 ? "flex flex-col items-center justify-center" : "flex items-center"
+                "rounded-md transition-all group relative gpu-accelerated flex items-center justify-center"
               )}
               style={{
-                padding: leftSidebarWidth <= 100 ? '8px 4px' : '12px 16px',
+                padding: '12px',
                 borderRadius: '4px',
-                gap: leftSidebarWidth <= 100 ? '4px' : '16px',
+                gap: '0',
                 fontSize: '14px',
                 fontWeight: isActive ? 700 : 400,
                 lineHeight: '20px',
@@ -186,33 +178,18 @@ export default function Sidebar() {
                 textDecoration: 'none',
                 transition: 'all 0.2s ease'
               }}
-              title={leftSidebarCollapsed && leftSidebarWidth > 100 ? item.label : undefined}
+              title={item.label}
+              aria-label={item.label}
               onMouseEnter={(e) => {
                 if (!isActive) {
                   const icon = e.currentTarget.querySelector('svg');
-                  const text = e.currentTarget.querySelector('span');
                   if (icon) icon.style.color = '#FFFFFF';
-                  if (text) {
-                    const spanEl = text as HTMLElement;
-                    spanEl.style.color = '#FFFFFF';
-                    if (leftSidebarWidth <= 100) {
-                      spanEl.style.transform = 'scale(1)';
-                    }
-                  }
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
                   const icon = e.currentTarget.querySelector('svg');
-                  const text = e.currentTarget.querySelector('span');
                   if (icon) icon.style.color = '#535353';
-                  if (text) {
-                    const spanEl = text as HTMLElement;
-                    spanEl.style.color = leftSidebarWidth <= 100 ? '#535353' : '#B3B3B3';
-                    if (leftSidebarWidth <= 100) {
-                      spanEl.style.transform = 'scale(0.97)';
-                    }
-                  }
                 }
               }}
             >
@@ -229,39 +206,7 @@ export default function Sidebar() {
                   display: 'inline-block'
                 }}
               />
-              {leftSidebarWidth > 100 ? (
-                <span 
-                  className="whitespace-nowrap transition-all"
-                  style={{ 
-                    fontSize: '14px',
-                    lineHeight: '20px',
-                    fontWeight: isActive ? 700 : 400,
-                    color: isActive ? '#FFFFFF' : '#B3B3B3',
-                    transition: 'all 0.2s ease'
-                  }}
-                >
-                  {item.label}
-                </span>
-              ) : (
-                <span 
-                  className="transition-all"
-                  style={{
-                    fontSize: '11px',
-                    lineHeight: '15px',
-                    height: '15px',
-                    fontWeight: 400,
-                    color: isActive ? '#FFFFFF' : '#535353',
-                    display: 'block',
-                    textAlign: 'center',
-                    transform: 'scale(0.97)',
-                    transition: 'transform 0.1s ease-in-out, color 0.1s ease-in-out',
-                    position: 'static',
-                    width: 'auto'
-                  }}
-                >
-                  {item.label}
-                </span>
-              )}
+              {/* Icon-only navigation (Spotify style) - no text labels */}
             </Link>
           );
         })}
@@ -284,14 +229,47 @@ export default function Sidebar() {
         </div>
       )}
 
+      {/* Daily Check-in Widget - Moved under Mental Health Hub for better visibility */}
+      {leftSidebarWidth > 100 && (
+        <div className="px-3 mb-4">
+          <Link
+            href="/check-in"
+            className="p-4 rounded-lg text-white no-underline hover:bg-white/10 transition-colors block"
+            style={{ 
+              textDecoration: 'none',
+              backgroundColor: 'transparent',
+              transition: 'background-color 200ms ease-out'
+            }}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-semibold text-sm">Daily Check-in</span>
+              {streak > 0 && (
+                <span className="text-xs bg-white/20 px-2 py-1 rounded">🔥 {streak}</span>
+              )}
+            </div>
+            <div className="text-xs text-white/80">
+              {lastCheckIn ? `${totalPoints} points` : 'Earn points today'}
+            </div>
+          </Link>
+        </div>
+      )}
+
+      {/* Scrollable Bottom Section - Playlists, Friends Activity, User Profile */}
+      <div 
+        className="flex-1 overflow-y-auto custom-scrollbar"
+        style={{ 
+          minHeight: 0,
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
       {/* Playlists Section - Exact Spotify Styling */}
       {leftSidebarWidth > 100 && sortedPlaylists.length > 0 && (
         <div 
-          className="flex-1 overflow-y-auto px-2 mb-2 custom-scrollbar"
+          className="px-2 mb-2"
           style={{ 
             padding: '0 8px',
-            marginBottom: '8px',
-            minHeight: 0
+            marginBottom: '8px'
           }}
         >
           <div 
@@ -432,40 +410,16 @@ export default function Sidebar() {
       {/* Friends Activity */}
       {leftSidebarWidth > 200 && <FriendsActivity />}
 
-      {/* Daily Check-in Widget */}
-      {leftSidebarWidth > 100 && (
-        <div className="px-3 mb-4 mt-auto">
-          <Link
-            href="/check-in"
-            className="p-4 rounded-lg text-white no-underline hover:bg-white/10 transition-colors"
-            style={{ 
-              textDecoration: 'none',
-              backgroundColor: 'transparent',
-              transition: 'background-color 200ms ease-out'
-            }}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-semibold text-sm">Daily Check-in</span>
-              {streak > 0 && (
-                <span className="text-xs bg-white/20 px-2 py-1 rounded">🔥 {streak}</span>
-              )}
-            </div>
-            <div className="text-xs text-white/80">
-              {lastCheckIn ? `${totalPoints} points` : 'Earn points today'}
-            </div>
-          </Link>
-        </div>
-      )}
-
       {/* User Profile */}
       {leftSidebarWidth > 100 && (
-        <div className="px-3 pb-4">
+        <div className="px-3 pb-4 mt-auto">
           <div className="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-spotify-light-gray/50 transition-colors cursor-pointer">
             <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full"></div>
             <span className="text-sm font-medium">User</span>
           </div>
         </div>
       )}
+      </div>
       </div>
       
       {/* Resize Handle */}

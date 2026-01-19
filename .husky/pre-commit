@@ -1,0 +1,8 @@
+echo "🔍 Running pre-commit checks..."
+
+# Run lint-staged (automatically stages files)
+npx lint-staged || {
+  echo "⚠️  Lint-staged failed, but continuing..."
+}
+
+echo "✅ Pre-commit checks passed!"

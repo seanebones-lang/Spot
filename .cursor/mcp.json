@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "grok-agent-mcp": {
+      "command": "node",
+      "args": ["/Users/nexteleven/cursor-mcp-integration/server/local-mcp-server.js"],
+      "cwd": "/Users/nexteleven/cursor-mcp-integration",
+      "env": {
+        "VERCEL_APP_URL": "https://grokcode-30wnt049r-sean-mcdonnells-projects-4fbf31ab.vercel.app",
+        "API_KEY": "${env:API_KEY}",
+        "NODE_PATH": "/Users/nexteleven/cursor-mcp-integration/node_modules"
+      }
+    },
+    "eleven-agent-mcp": {
+      "command": "node",
+      "args": ["/Users/nexteleven/cursor-mcp-integration/server/local-mcp-server.js"],
+      "cwd": "/Users/nexteleven/cursor-mcp-integration",
+      "env": {
+        "VERCEL_APP_URL": "https://grokcode.vercel.app/",
+        "API_KEY": "${env:ELEVEN_API_KEY}",
+        "NODE_PATH": "/Users/nexteleven/cursor-mcp-integration/node_modules"
+      }
+    }
+  },
+  "customTools": {
+    "deploy": {
+      "path": "./tools/deploy-mcp.js",
+      "description": "Deploy to Vercel or Railway",
+      "args": ["platform", "project", "token", "branch"],
+      "platforms": ["vercel", "railway"]
+    },
+    "tester": {
+      "path": "./tools/tester-mcp.js",
+      "description": "Run tests via MCP",
+      "args": ["cmd", "type"],
+      "types": ["unit", "e2e", "integration", "all"]
+    }
+  },
+  "notes": "MCP Tools - Always accessible via repo tools/"
+}
