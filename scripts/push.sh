@@ -15,6 +15,21 @@ if [ ! -d ".git" ]; then
   exit 1
 fi
 
+# Fetch latest from remote
+echo "📥 Fetching latest from remote..."
+git fetch origin main 2>&1 | grep -v "Permission denied" || true
+
+# Check if we need to pull first
+BEHIND=$(git rev-list --count HEAD..origin/main 2>/dev/null || echo "0")
+if [ "$BEHIND" != "0" ]; then
+  echo "⚠️  Local branch is $BEHIND commit(s) behind remote"
+  echo "📥 Pulling latest changes..."
+  git pull origin main --no-edit || {
+    echo "❌ Pull failed due to conflicts. Please resolve manually."
+    exit 1
+  }
+fi
+
 # Check if there are commits to push
 AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0")
 if [ "$AHEAD" = "0" ]; then
