@@ -5,7 +5,7 @@ export interface Playlist {
   id: string;
   name: string;
   description?: string;
-  coverArt: string;
+  coverArt?: string; // Optional - fallback to placeholder
   owner: string;
   ownerId: string;
   tracks: Track[];

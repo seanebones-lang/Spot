@@ -5,11 +5,9 @@
     "artist": {
       "id": "artist-1",
       "name": "Luna Shadows",
-      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
       "followers": 33205681,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-30",
@@ -48,11 +46,9 @@
     "artist": {
       "id": "artist-2",
       "name": "Echo River",
-      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
       "followers": 23891572,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-1",
@@ -91,11 +87,9 @@
     "artist": {
       "id": "artist-3",
       "name": "Solar Flare",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
       "followers": 49258278,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-2",
@@ -134,11 +128,9 @@
     "artist": {
       "id": "artist-4",
       "name": "Neon Nights",
-      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
       "followers": 32385151,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-3",
@@ -177,11 +169,9 @@
     "artist": {
       "id": "artist-5",
       "name": "Crystal Sound",
-      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
       "followers": 46331011,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-4",
@@ -220,11 +210,9 @@
     "artist": {
       "id": "artist-6",
       "name": "Mystic Waves",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
       "followers": 11329321,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-5",
@@ -263,11 +251,9 @@
     "artist": {
       "id": "artist-7",
       "name": "Electric Dreams",
-      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
       "followers": 46544409,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-6",
@@ -306,11 +292,9 @@
     "artist": {
       "id": "artist-8",
       "name": "Cosmic Harmony",
-      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
       "followers": 2129478,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-7",
@@ -349,11 +333,9 @@
     "artist": {
       "id": "artist-9",
       "name": "Urban Pulse",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
       "followers": 32703102,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-8",
@@ -392,11 +374,9 @@
     "artist": {
       "id": "artist-10",
       "name": "Wild Sky",
-      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
       "followers": 15791445,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-9",
@@ -435,11 +415,9 @@
     "artist": {
       "id": "artist-11",
       "name": "Deep Ocean",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
       "followers": 29330088,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-10",
@@ -478,11 +456,9 @@
     "artist": {
       "id": "artist-12",
       "name": "High Mountain",
-      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
       "followers": 40132002,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-11",
@@ -521,11 +497,9 @@
     "artist": {
       "id": "artist-13",
       "name": "Dark Forest",
-      "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
       "followers": 15975205,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-12",
@@ -564,11 +538,9 @@
     "artist": {
       "id": "artist-14",
       "name": "Bright City",
-      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
       "followers": 33370070,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-13",
@@ -607,11 +579,9 @@
     "artist": {
       "id": "artist-15",
       "name": "Quiet Valley",
-      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
       "followers": 11942556,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-14",
@@ -650,11 +620,9 @@
     "artist": {
       "id": "artist-16",
       "name": "Loud Canyon",
-      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
       "followers": 4305458,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-15",
@@ -693,11 +661,9 @@
     "artist": {
       "id": "artist-17",
       "name": "Soft Breeze",
-      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
       "followers": 29239871,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-16",
@@ -736,11 +702,9 @@
     "artist": {
       "id": "artist-18",
       "name": "Hard Rain",
-      "image": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
       "followers": 38120655,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-17",
@@ -779,11 +743,9 @@
     "artist": {
       "id": "artist-19",
       "name": "Gentle Wind",
-      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
       "followers": 20110413,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-18",
@@ -822,11 +784,9 @@
     "artist": {
       "id": "artist-20",
       "name": "Strong Current",
-      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
       "followers": 5058816,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-19",
@@ -865,11 +825,9 @@
     "artist": {
       "id": "artist-21",
       "name": "Smooth Operator",
-      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
       "followers": 5165769,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-20",
@@ -908,11 +866,9 @@
     "artist": {
       "id": "artist-22",
       "name": "Rough Diamond",
-      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
       "followers": 4867640,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-21",
@@ -951,11 +907,9 @@
     "artist": {
       "id": "artist-23",
       "name": "Pure Gold",
-      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
       "followers": 35622803,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-22",
@@ -994,11 +948,9 @@
     "artist": {
       "id": "artist-24",
       "name": "Silver Lining",
-      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
       "followers": 23863730,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-23",
@@ -1037,11 +989,9 @@
     "artist": {
       "id": "artist-25",
       "name": "Bronze Age",
-      "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
       "followers": 4763361,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-24",
@@ -1080,11 +1030,9 @@
     "artist": {
       "id": "artist-26",
       "name": "Iron Will",
-      "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
       "followers": 32606161,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-25",
@@ -1123,11 +1071,9 @@
     "artist": {
       "id": "artist-27",
       "name": "Steel Mind",
-      "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
       "followers": 25970160,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-26",
@@ -1166,11 +1112,9 @@
     "artist": {
       "id": "artist-28",
       "name": "Copper Wire",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
       "followers": 27976273,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-27",
@@ -1209,11 +1153,9 @@
     "artist": {
       "id": "artist-29",
       "name": "Tin Can",
-      "image": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
       "followers": 15750782,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-28",
@@ -1252,11 +1194,9 @@
     "artist": {
       "id": "artist-30",
       "name": "Lead Weight",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
       "followers": 28615920,
       "verified": true
     },
-    "coverArt": "",
     "tracks": [
       {
         "id": "track-29",

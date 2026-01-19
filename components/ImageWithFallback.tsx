@@ -5,7 +5,7 @@ import { Music } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ImageWithFallbackProps {
-  src: string;
+  src?: string; // Optional - shows fallback if undefined
   alt: string;
   className?: string;
   style?: React.CSSProperties;
@@ -46,7 +46,8 @@ export default function ImageWithFallback({
     setHasError(false);
   };
 
-  if (hasError) {
+  // Show fallback immediately if no src provided
+  if (!src || hasError) {
     return (
       <div
         className={cn(
