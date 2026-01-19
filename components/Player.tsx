@@ -108,7 +108,7 @@ export default function Player() {
 
   return (
     <div 
-      className="fixed bottom-0 left-0 right-0 h-player-height bg-spotify-dark-gray border-t border-spotify-light-gray px-4 z-50"
+      className="fixed bottom-0 left-0 right-0 h-player-height bg-spotify-dark-gray border-t border-spotify-light-gray px-2 sm:px-4 z-50"
       style={{
         position: 'fixed',
         bottom: 0,
@@ -117,12 +117,12 @@ export default function Player() {
         height: '90px',
         backgroundColor: '#181818',
         borderTop: '1px solid #282828',
-        padding: '0 16px',
+        padding: '0 8px',
         zIndex: 50
       }}
     >
       <div 
-        className="flex items-center justify-between h-full max-w-screen-2xl mx-auto"
+        className="flex items-center justify-between h-full max-w-screen-2xl mx-auto gap-2 sm:gap-4"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -130,23 +130,23 @@ export default function Player() {
           height: '100%',
           maxWidth: '1536px',
           margin: '0 auto',
-          gap: '16px'
+          gap: '8px'
         }}
       >
-        {/* Left - Now Playing - Exact Spotify Style */}
+        {/* Left - Now Playing - Responsive for mobile */}
         <div 
-          className="flex items-center gap-4 flex-1 min-w-0"
+          className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0"
           style={{
-            gap: '16px',
+            gap: '8px',
             minWidth: 0,
             flex: '1 1 30%'
           }}
         >
           <div 
-            className="w-14 h-14 bg-spotify-light-gray rounded flex-shrink-0"
+            className="w-12 h-12 sm:w-14 sm:h-14 bg-spotify-light-gray rounded flex-shrink-0"
             style={{
-              width: '56px',
-              height: '56px',
+              width: '48px',
+              height: '48px',
               borderRadius: '4px',
               backgroundColor: '#282828',
               flexShrink: 0
@@ -217,19 +217,19 @@ export default function Player() {
           )}
         </div>
 
-        {/* Center - Controls - Exact Spotify Style */}
+        {/* Center - Controls - Responsive for mobile */}
         <div 
-          className="flex flex-col items-center gap-2 flex-1"
+          className="flex flex-col items-center gap-1 sm:gap-2 flex-1 hidden sm:flex"
           style={{
             flex: '1 1 40%',
-            gap: '8px',
+            gap: '4px',
             maxWidth: '722px'
           }}
         >
           <div 
-            className="flex items-center gap-2"
+            className="flex items-center gap-1 sm:gap-2"
             style={{
-              gap: '16px',
+              gap: '8px',
               alignItems: 'center',
               justifyContent: 'center'
             }}
@@ -377,12 +377,12 @@ export default function Player() {
           )}
         </div>
 
-        {/* Right - Volume & Extras - Exact Spotify Style */}
+        {/* Right - Volume & Extras - Responsive for mobile */}
         <div 
-          className="flex items-center gap-4 flex-1 justify-end"
+          className="flex items-center gap-2 sm:gap-4 flex-1 justify-end"
           style={{
             flex: '1 1 30%',
-            gap: '16px',
+            gap: '8px',
             justifyContent: 'flex-end',
             alignItems: 'center'
           }}
