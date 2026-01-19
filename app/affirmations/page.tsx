@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useAffirmationsStore } from '@/stores/affirmationsStore';
 import { Heart, Play, Clock } from 'lucide-react';
+import { getCardBackgroundInline } from '@/lib/cardBackgrounds';
 
 const categories: { value: string; label: string; color: string }[] = [
   { value: 'morning', label: 'Morning', color: 'from-yellow-500 to-orange-500' },
@@ -43,13 +44,14 @@ export default function AffirmationsPage() {
       </h1>
 
       {/* Daily Reminder Setting - Exact Spotify Style */}
-      <div 
+      <div
         className="bg-spotify-light-gray rounded-lg p-6 mb-8"
         style={{
-          backgroundColor: '#181818',
+          ...getCardBackgroundInline('daily-reminder'),
           borderRadius: '8px',
           padding: '24px',
-          marginBottom: '32px'
+          marginBottom: '32px',
+          filter: 'brightness(0.9)'
         }}
       >
         <div 
@@ -242,18 +244,19 @@ export default function AffirmationsPage() {
           return (
             <div
               key={affirmation.id}
-              className="bg-spotify-light-gray rounded-lg p-6 hover:bg-spotify-dark-gray transition-all duration-200"
+              className="bg-spotify-light-gray rounded-lg p-6 hover:brightness-110 transition-all duration-200"
               style={{
-                backgroundColor: '#181818',
+                ...getCardBackgroundInline(affirmation.id + affirmation.category),
                 borderRadius: '8px',
                 padding: '24px',
-                transition: 'background-color 200ms ease-out'
+                transition: 'all 200ms ease-out',
+                filter: 'brightness(0.95)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#282828';
+                e.currentTarget.style.filter = 'brightness(1.1)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#181818';
+                e.currentTarget.style.filter = 'brightness(0.95)';
               }}
             >
               <div 
