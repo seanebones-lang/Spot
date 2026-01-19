@@ -20,11 +20,19 @@ export default function HomePage() {
   const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying, addToQueue, addToRecentlyPlayed, recentlyPlayed } = usePlayerStore();
   const [error, setError] = useState<string | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
+  // Fix hydration issue: only check localStorage after mount
   useEffect(() => {
-    const completed = localStorage.getItem('onboarding_completed');
-    if (!completed) {
-      setShowOnboarding(true);
+    setIsMounted(true);
+    try {
+      const completed = localStorage.getItem('onboarding_completed');
+      if (!completed) {
+        setShowOnboarding(true);
+      }
+    } catch (err) {
+      // localStorage might not be available (e.g., in incognito mode)
+      console.warn('localStorage not available, skipping onboarding check');
     }
   }, []);
 
@@ -84,8 +92,8 @@ export default function HomePage() {
         minHeight: '100%'
       }}
     >
-      {/* Onboarding Tour */}
-      {showOnboarding && <OnboardingTour onComplete={() => setShowOnboarding(false)} />}
+      {/* Onboarding Tour - Only render after mount to prevent hydration issues */}
+      {isMounted && showOnboarding && <OnboardingTour onComplete={() => setShowOnboarding(false)} />}
 
       {/* Error Toast */}
       {error && (
@@ -237,23 +245,7 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* Wellness Dashboard */}
-      <div className="mb-8 grid grid-cols-3 gap-4">
-        <div className="bg-spotify-light-gray rounded-lg p-4">
-          <div className="text-sm text-spotify-text-gray mb-1">Streak</div>
-          <div className="text-2xl font-bold">🔥 5 days</div>
-        </div>
-        <div data-tour="points" className="bg-spotify-light-gray rounded-lg p-4">
-          <div className="text-sm text-spotify-text-gray mb-1">Points</div>
-          <div className="text-2xl font-bold">150</div>
-        </div>
-        <div className="bg-spotify-light-gray rounded-lg p-4">
-          <div className="text-sm text-spotify-text-gray mb-1">Journal Entries</div>
-          <div className="text-2xl font-bold">12</div>
-        </div>
-      </div>
-
-      {/* Made for You - Exact Spotify Style */}
+{/* Made for You - Exact Spotify Style */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
         <div 
           className="flex items-center justify-between mb-4"

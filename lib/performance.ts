@@ -37,7 +37,7 @@ export function lazyLoad<T extends React.ComponentType<any>>(
     return React.createElement(
       React.Suspense,
       { fallback },
-      React.createElement(LazyComponent, props)
+      React.createElement(LazyComponent, props as any)
     );
   }
 

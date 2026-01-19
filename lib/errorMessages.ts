@@ -144,7 +144,7 @@ export function getErrorRecovery(error: string | Error | unknown): ErrorRecovery
   
   // Check for specific error types
   for (const [key, recovery] of Object.entries(errorRecoveryMap)) {
-    if (errorCode.includes(key)) {
+    if (errorCode.includes(key) && recovery) {
       return recovery;
     }
   }

@@ -3,24 +3,15 @@
 import { useState, useEffect } from 'react';
 import { 
   Search, 
-  Award, 
-  Flame, 
   PanelRight, 
   X, 
   Download, 
   Bell, 
   Settings, 
-  Sparkles,
-  Crown,
-  Home,
-  Music,
-  Radio,
-  Library
+  Crown
 } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { usePointsStore } from '@/stores/pointsStore';
-import { useCheckInStore } from '@/stores/checkInStore';
 import { useUIStore } from '@/stores/uiStore';
 import { useSearchStore } from '@/stores/searchStore';
 import UserMenu from '@/components/UserMenu';
@@ -37,10 +28,7 @@ export default function TopBar() {
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [subscriptionTier, setSubscriptionTier] = useState<'Free' | 'Premium' | 'Artist'>('Premium');
-  const { totalPoints } = usePointsStore();
-  const { getStreak } = useCheckInStore();
   const { addSearch } = useSearchStore();
-  const streak = getStreak();
 
   const { leftSidebarWidth, rightSidebarOpen, rightSidebarWidth, toggleRightSidebar } = useUIStore();
 
@@ -66,12 +54,7 @@ export default function TopBar() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Navigation links that should appear in header (Exact Spotify: Home, Search, Your Library)
-  const headerNavLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Search', href: '/search' },
-    { label: 'Your Library', href: '/collection' },
-  ];
+  // Spotify's TopBar does NOT have duplicate nav links - sidebar handles navigation
 
   return (
     <div 
@@ -142,41 +125,6 @@ export default function TopBar() {
         <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
           <BackForwardButtons />
         </div>
-        
-        {/* Navigation Links - Each link in its own container */}
-        {headerNavLinks.map((link) => {
-          const isActive = pathname === link.href || 
-            (link.href === '/' && pathname === '/') ||
-            (link.href === '/search' && pathname?.startsWith('/search')) ||
-            (link.href === '/collection' && pathname?.startsWith('/collection'));
-          return (
-            <div key={link.href} style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
-              <Link
-                href={link.href}
-                className="transition-colors duration-200"
-                style={{ 
-                  fontSize: '14px',
-                  fontWeight: 700,
-                  lineHeight: '16px',
-                  color: isActive ? '#FFFFFF' : '#B3B3B3',
-                  whiteSpace: 'nowrap'
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.color = '#FFFFFF';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.color = '#B3B3B3';
-                  }
-                }}
-              >
-                {link.label}
-              </Link>
-            </div>
-          );
-        })}
         
         {/* Search Container - Flex-1 with min-width protection */}
         <div 
@@ -440,88 +388,7 @@ export default function TopBar() {
           </button>
         </div>
 
-        {/* Points Counter Container - Independent element */}
-        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
-          <Link
-            href="/rewards"
-            className="flex items-center rounded-full transition-colors duration-200"
-            title={`${totalPoints} points - View Rewards`}
-            style={{
-              paddingLeft: '12px',
-              paddingRight: '12px',
-              height: '32px',
-              gap: '8px',
-              textDecoration: 'none',
-              backgroundColor: pathname === '/rewards' ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }}
-            onMouseLeave={(e) => {
-              if (pathname !== '/rewards') {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }
-            }}
-          >
-            <Award size={18} style={{ width: '18px', height: '18px', color: '#457B9D', opacity: 1 }} />
-            <span style={{ fontSize: '14px', fontWeight: 500, color: '#FFFFFF', opacity: 1 }}>{totalPoints}</span>
-          </Link>
-        </div>
-
-        {/* Streak Badge Container - Independent element (conditional) */}
-        {streak > 0 && (
-          <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
-            <div 
-              className="flex items-center rounded-full"
-              style={{
-                paddingLeft: '12px',
-                paddingRight: '12px',
-                height: '32px',
-                gap: '6px',
-                backgroundColor: 'rgba(249, 115, 22, 0.2)',
-                border: '1px solid rgba(249, 115, 22, 0.3)'
-              }}
-            >
-              <Flame size={14} style={{ width: '14px', height: '14px', color: '#F97316', opacity: 1 }} />
-              <span style={{ fontSize: '12px', fontWeight: 500, color: '#F97316', opacity: 1 }}>{streak}</span>
-            </div>
-          </div>
-        )}
-
-        {/* Affirmations Container - Independent element */}
-        <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
-          <Link
-            href="/affirmations"
-            className="flex items-center rounded-full transition-all duration-200"
-            style={{
-              paddingLeft: '12px',
-              paddingRight: '12px',
-              height: '32px',
-              gap: '8px',
-              fontSize: '14px',
-              fontWeight: 500,
-              backgroundColor: pathname === '/affirmations' ? 'rgba(114, 9, 183, 0.2)' : 'transparent',
-              border: `1px solid ${pathname === '/affirmations' ? '#7209B7' : 'rgba(114, 9, 183, 0.5)'}`,
-              color: '#7209B7'
-            }}
-            title="Daily Affirmations"
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#7209B7';
-              e.currentTarget.style.backgroundColor = 'rgba(114, 9, 183, 0.1)';
-            }}
-            onMouseLeave={(e) => {
-              if (pathname !== '/affirmations') {
-                e.currentTarget.style.borderColor = 'rgba(114, 9, 183, 0.5)';
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }
-            }}
-          >
-            <Sparkles size={14} style={{ width: '14px', height: '14px', opacity: 1 }} />
-            <span className="hidden sm:inline" style={{ opacity: 1 }}>Affirmations</span>
-          </Link>
-        </div>
-
-        {/* Right Sidebar Toggle Container - Independent element */}
+{/* Right Sidebar Toggle Container - Independent element */}
         <div style={{ flexShrink: 0, flexGrow: 0, minWidth: '32px' }}>
           <button
             onClick={toggleRightSidebar}

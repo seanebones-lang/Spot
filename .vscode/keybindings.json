@@ -1,0 +1,23 @@
+[
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.chat.open",
+    "when": "true",
+    "args": {
+      "query": "@Eleven MCP"
+    }
+  },
+  {
+    "key": "cmd+shift+e",
+    "command": "workbench.action.chat.open",
+    "when": "true",
+    "args": {
+      "query": "MCP[deploy] vercel spot-music $VERCEL_TOKEN"
+    }
+  },
+  {
+    "key": "cmd+shift+t",
+    "command": "workbench.action.terminal.runSelectedText",
+    "when": "editorTextFocus && terminalProcessSupported"
+  }
+]

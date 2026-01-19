@@ -1007,7 +1007,16 @@ class PineconeVectorDB implements VectorDatabase {
       const { withRetry } = await import('./retry');
       const { withTimeout, TIMEOUTS } = await import('./timeout');
 
-      const queryResponse = await withRetry(
+      // Pinecone query response type
+      interface PineconeQueryResponse {
+        matches: Array<{
+          id: string;
+          score?: number;
+          metadata?: any;
+        }>;
+      }
+
+      const queryResponse = await withRetry<PineconeQueryResponse>(
         () =>
           withTimeout(
             this.index!.query({
@@ -1017,7 +1026,7 @@ class PineconeVectorDB implements VectorDatabase {
             }),
             TIMEOUTS.EXTERNAL_API,
             'Vector DB query timeout'
-          ),
+          ) as Promise<PineconeQueryResponse>,
         {
           maxRetries: 2,
           initialDelayMs: 500,

@@ -33,8 +33,7 @@ export { default as Skeleton, SkeletonCard, SkeletonList } from './Skeleton';
 export type { SkeletonProps, SkeletonVariant, SkeletonSize, SkeletonCardProps, SkeletonListProps } from './Skeleton';
 
 export { ToastProvider, useToast } from './Toast';
-export { default as Toast } from './Toast';
-export type { ToastVariant } from './Toast';
+export type { ToastVariant, Toast as ToastType, ToastContextValue } from './Toast';
 
 export { default as Select } from './Select';
 export type { SelectProps, SelectOption, SelectSize, SelectVariant } from './Select';
