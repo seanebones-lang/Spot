@@ -26,6 +26,7 @@ export default function PlayButton({ isPlaying, onClick, size = 'md', className,
       aria-pressed={isPlaying}
       className={cn(
         "bg-spotify-green hover:scale-105 rounded-full flex items-center justify-center transition-transform shadow-lg",
+        "focus:outline-none focus:ring-2 focus:ring-spotify-green focus:ring-offset-2 focus:ring-offset-black",
         sizes[size],
         disabled && "opacity-50 cursor-not-allowed hover:scale-100",
         className

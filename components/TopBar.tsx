@@ -23,10 +23,12 @@ import { usePointsStore } from '@/stores/pointsStore';
 import { useCheckInStore } from '@/stores/checkInStore';
 import { useUIStore } from '@/stores/uiStore';
 import { useSearchStore } from '@/stores/searchStore';
+import { useUserStore } from '@/stores/userStore';
 import UserMenu from '@/components/UserMenu';
 import KeyboardShortcutsPanel from '@/components/KeyboardShortcutsPanel';
 import SearchDropdown from '@/components/SearchDropdown';
 import BackForwardButtons from '@/components/BackForwardButtons';
+import Button from '@/components/Button';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -36,11 +38,15 @@ export default function TopBar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
-  const [subscriptionTier, setSubscriptionTier] = useState<'Free' | 'Premium' | 'Artist'>('Premium');
+  const { user, isAuthenticated } = useUserStore();
   const { totalPoints } = usePointsStore();
   const { getStreak } = useCheckInStore();
   const { addSearch } = useSearchStore();
   const streak = getStreak();
+  
+  // Get subscription tier from user store
+  const subscriptionTier = user?.subscriptionTier === 'artist' ? 'Artist' : 
+                          user?.subscriptionTier === 'premium' ? 'Premium' : 'Free';
 
   const { leftSidebarWidth, rightSidebarOpen, rightSidebarWidth, toggleRightSidebar } = useUIStore();
 
@@ -465,14 +471,27 @@ export default function TopBar() {
           )}
         </button>
 
-        {/* User Menu - Part of Right Section Group */}
-        <div style={{ marginLeft: '8px' }}>
-          <UserMenu 
-            userName="Bones" 
-            userEmail="bones@nextEleven.com" 
-            subscriptionTier={subscriptionTier} 
-          />
-        </div>
+        {/* User Menu or Sign In/Sign Up - Part of Right Section Group */}
+        {isAuthenticated && user ? (
+          <div style={{ marginLeft: '8px' }}>
+            <UserMenu 
+              subscriptionTier={subscriptionTier} 
+            />
+          </div>
+        ) : (
+          <div style={{ marginLeft: '8px', display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <Link href="/signup">
+              <Button variant="secondary" size="sm">
+                Sign up
+              </Button>
+            </Link>
+            <Link href="/signin">
+              <Button variant="primary" size="sm">
+                Log in
+              </Button>
+            </Link>
+          </div>
+        )}
         </div>
       </div>
 

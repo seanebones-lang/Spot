@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useMemo, memo } from 'react';
+import dynamic from 'next/dynamic';
 import { Shuffle, SkipBack, SkipForward, Repeat, List, Maximize2, Music, Settings } from 'lucide-react';
 import { usePlayerStore } from '@/stores/playerStore';
 import { audioPlayer } from '@/lib/player';
@@ -10,14 +11,16 @@ import VolumeControl from './VolumeControl';
 import MoodWidget from './mood/MoodWidget';
 import PictureInPicturePlayer from './PictureInPicturePlayer';
 import QualitySelector from './QualitySelector';
-import QueuePanel from './QueuePanel';
-import FullScreenPlayer from './FullScreenPlayer';
 import AudioQualityBadge from './AudioQualityBadge';
 import ControlButton from './ControlButton';
-import Equalizer from './Equalizer';
 import { formatDuration } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 import type { Quality } from './QualitySelector';
+
+// Lazy load heavy components for better initial bundle size using Next.js dynamic import
+const QueuePanel = dynamic(() => import('./QueuePanel'), { ssr: false });
+const FullScreenPlayer = dynamic(() => import('./FullScreenPlayer'), { ssr: false });
+const Equalizer = dynamic(() => import('./Equalizer'), { ssr: false });
 
 /**
  * Main audio player component with Spotify-style UI
@@ -138,52 +141,6 @@ function Player() {
     audioPlayer.setVolume(volume);
   }, [volume]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      // Don't trigger if user is typing in an input
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
-        return;
-      }
-
-      switch (e.code) {
-        case 'Space':
-          e.preventDefault();
-          if (currentTrack) {
-            handlePlayPause();
-          }
-          break;
-        case 'ArrowLeft':
-          e.preventDefault();
-          if (currentTrack && e.shiftKey) {
-            playPrevious();
-          } else if (currentTrack) {
-            handleSeek(Math.max(0, currentTime - 10) * 1000);
-          }
-          break;
-        case 'ArrowRight':
-          e.preventDefault();
-          if (currentTrack && e.shiftKey) {
-            playNext();
-          } else if (currentTrack) {
-            handleSeek(Math.min(currentTrack.duration, currentTime + 10) * 1000);
-          }
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          setVolume(Math.min(100, volume + 5));
-          break;
-        case 'ArrowDown':
-          e.preventDefault();
-          setVolume(Math.max(0, volume - 5));
-          break;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentTrack, isPlaying, currentTime, volume, setVolume]);
-
   const handlePlayPause = useCallback(() => {
     if (!currentTrack || isLoading) return;
     setIsPlaying(!isPlaying);
@@ -243,6 +200,52 @@ function Player() {
     }
   }, [repeat]);
 
+  // Keyboard shortcuts (moved after callbacks to fix dependency warning)
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Don't trigger if user is typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      switch (e.code) {
+        case 'Space':
+          e.preventDefault();
+          if (currentTrack) {
+            handlePlayPause();
+          }
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          if (currentTrack && e.shiftKey) {
+            playPrevious();
+          } else if (currentTrack) {
+            handleSeek(Math.max(0, currentTime - 10) * 1000);
+          }
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          if (currentTrack && e.shiftKey) {
+            playNext();
+          } else if (currentTrack) {
+            handleSeek(Math.min(currentTrack.duration, currentTime + 10) * 1000);
+          }
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setVolume(Math.min(100, volume + 5));
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          setVolume(Math.max(0, volume - 5));
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [currentTrack, currentTime, volume, setVolume, handlePlayPause, handleSeek, playNext, playPrevious]);
+
   return (
     <div 
       className="fixed bottom-0 left-0 right-0 h-[90px] bg-[#181818] border-t border-[#282828] px-4 z-50"
@@ -253,10 +256,7 @@ function Player() {
         className="flex items-center justify-between h-full max-w-screen-2xl mx-auto gap-4"
       >
         {/* Left - Now Playing - Exact Spotify: flex-basis 30% */}
-        <div 
-          className="flex items-center gap-4 flex-1 min-w-0"
-          style={{ flex: '1 1 30%' }}
-        >
+        <div className="flex items-center gap-4 flex-[1_1_30%] min-w-0">
           <div 
             className="w-14 h-14 bg-[#282828] rounded flex-shrink-0"
             role="img"
@@ -283,22 +283,11 @@ function Player() {
           {currentTrack ? (
             <>
               <div className="min-w-0 flex-1">
-                <div 
-                  className="text-sm leading-5 font-normal text-white truncate"
-                  style={{
-                    fontSize: '14px',
-                    lineHeight: '20px'
-                  }}
-                >
+                <div className="text-sm leading-5 font-normal text-white truncate">
                   {currentTrack.name}
                 </div>
                 <div className="flex items-center gap-2">
-                  <div 
-                    className="text-[13px] leading-4 text-spotify-text-gray truncate"
-                    style={{
-                      lineHeight: '16px'
-                    }}
-                  >
+                  <div className="text-[13px] leading-4 text-spotify-text-gray truncate">
                     {currentTrack.artist}
                   </div>
                   <AudioQualityBadge track={currentTrack} className="flex-shrink-0" />
@@ -317,27 +306,14 @@ function Player() {
               <MoodWidget track={currentTrack} />
             </>
           ) : (
-            <div 
-              className="text-sm text-spotify-text-gray"
-              style={{
-                fontSize: '14px',
-                lineHeight: '20px',
-              }}
-            >
+            <div className="text-sm leading-5 text-spotify-text-gray">
               No track selected
             </div>
           )}
         </div>
 
         {/* Center - Controls - Exact Spotify: flex-basis 40%, max-width 722px */}
-        <div 
-          className="flex flex-col items-center gap-2 flex-1"
-          style={{
-            flex: '1 1 40%',
-            gap: '8px',
-            maxWidth: '722px'
-          }}
-        >
+        <div className="flex flex-col items-center gap-2 flex-[1_1_40%] max-w-[722px]">
           <div 
             className="flex items-center gap-4"
           >
@@ -396,12 +372,7 @@ function Player() {
         </div>
 
         {/* Right - Volume & Extras - Exact Spotify: flex-basis 30% */}
-        <div 
-          className="flex items-center gap-4 flex-1 justify-end"
-          style={{
-            flex: '1 1 30%'
-          }}
-        >
+        <div className="flex items-center gap-4 flex-[1_1_30%] justify-end">
           {currentTrack && (
             <QualitySelector
               currentQuality={quality}
@@ -459,8 +430,12 @@ function Player() {
         </div>
       )}
       
-      <QueuePanel isOpen={isQueueOpen} onClose={() => setIsQueueOpen(false)} />
-      <FullScreenPlayer isOpen={isFullScreen} onClose={() => setIsFullScreen(false)} />
+      {isQueueOpen && (
+        <QueuePanel isOpen={isQueueOpen} onClose={() => setIsQueueOpen(false)} />
+      )}
+      {isFullScreen && (
+        <FullScreenPlayer isOpen={isFullScreen} onClose={() => setIsFullScreen(false)} />
+      )}
     </div>
   );
 }

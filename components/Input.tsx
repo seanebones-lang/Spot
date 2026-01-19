@@ -82,6 +82,11 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   iconRight?: React.ComponentType<{ size?: number; className?: string }>;
   
   /**
+   * Click handler for right icon
+   */
+  onIconRightClick?: () => void;
+  
+  /**
    * Show success checkmark icon when value is valid
    * @default false
    */
@@ -104,6 +109,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       success,
       iconLeft: IconLeft,
       iconRight: IconRight,
+      onIconRightClick,
       showSuccessIcon = false,
       containerClassName,
       className,
@@ -209,7 +215,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             id={finalId}
             disabled={disabled}
             required={required}
-            aria-invalid={hasError}
+            aria-invalid={hasError ? 'true' : 'false'}
             aria-describedby={
               hasError ? `${finalId}-error` : 
               helperText ? `${finalId}-helper` : 
@@ -252,8 +258,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {/* Right Icon (Error, Success, or Custom) */}
           {showRightIcon && (
             <div className={cn(
-              'absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none',
-              IconRight && 'pointer-events-auto'
+              'absolute right-3 top-1/2 -translate-y-1/2',
+              hasError || hasSuccess ? 'pointer-events-none' : 'pointer-events-auto'
             )}>
               {hasError ? (
                 <AlertCircle 
@@ -268,14 +274,28 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   aria-hidden="true"
                 />
               ) : IconRight ? (
-                <IconRight 
-                  size={currentSize.iconSize} 
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (onIconRightClick && !disabled) {
+                      onIconRightClick();
+                    }
+                  }}
+                  disabled={disabled}
                   className={cn(
-                    'text-spotify-text-gray cursor-pointer',
+                    'text-spotify-text-gray hover:text-white transition-colors',
                     disabled && 'opacity-50 cursor-not-allowed'
-                  )} 
-                  aria-hidden="true"
-                />
+                  )}
+                  aria-label="Toggle visibility"
+                  tabIndex={-1}
+                >
+                  <IconRight 
+                    size={currentSize.iconSize}
+                    aria-hidden="true"
+                  />
+                </button>
               ) : null}
             </div>
           )}

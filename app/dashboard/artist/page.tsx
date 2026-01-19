@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { TrendingUp, DollarSign, Music, Upload, Eye, EyeOff, BarChart3 } from 'lucide-react';
 import { useArtistSignupStore } from '@/stores/artistSignupStore';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 // Mock track data
 const mockTracks = [
@@ -11,7 +12,7 @@ const mockTracks = [
   { id: '3', name: 'New Track (Draft)', album: 'Work in Progress', uploadDate: '2024-01-14', status: 'unpublished', streams: 0, earnings: 0 },
 ];
 
-export default function ArtistDashboardPage() {
+function ArtistDashboardContent() {
   const { approvalStatus } = useArtistSignupStore();
   const [tracks, setTracks] = useState(mockTracks);
   const [autoRefresh, setAutoRefresh] = useState(true);
@@ -346,5 +347,13 @@ export default function ArtistDashboardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ArtistDashboardPage() {
+  return (
+    <ProtectedRoute requireAuth requireArtist>
+      <ArtistDashboardContent />
+    </ProtectedRoute>
   );
 }
