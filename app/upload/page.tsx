@@ -11,6 +11,7 @@ import FeelingChips from '@/components/mood/FeelingChips';
 import VibeSlider from '@/components/mood/VibeSlider';
 import GenreSelector from '@/components/mood/GenreSelector';
 import { getRAGPipeline } from '@/lib/aiMoodAnalysis';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 interface AIMoodSuggestion {
   mood: MoodState;
@@ -20,7 +21,7 @@ interface AIMoodSuggestion {
   confidence: number;
 }
 
-export default function UploadPage() {
+function UploadPageContent() {
   const [step, setStep] = useState(1);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [coverArtFile, setCoverArtFile] = useState<File | null>(null);
@@ -1247,5 +1248,13 @@ export default function UploadPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function UploadPage() {
+  return (
+    <ProtectedRoute requireAuth requireArtist>
+      <UploadPageContent />
+    </ProtectedRoute>
   );
 }

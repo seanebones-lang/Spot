@@ -80,27 +80,61 @@ vec3 renderSpectrum(vec2 uv) {
   return color * barMask;
 }
 
-// Waveform Visualization
+// Waveform Visualization - Enhanced for 4K with smooth interpolation
 vec3 renderWaveform(vec2 uv) {
   float x = uv.x;
-  float sampleIndex = x * 1024.0;
-  float audioValue = texture2D(uAudioData, vec2(sampleIndex / 1024.0, 0.5)).r;
-  audioValue = (audioValue - 0.5) * 2.0; // Center around 0
+  
+  // Use high-resolution sampling for 4K displays (2048 samples for better detail)
+  float sampleCount = 2048.0;
+  float sampleIndex = x * sampleCount;
+  
+  // Bilinear interpolation for smooth waveform at any resolution
+  float samplePos = sampleIndex / sampleCount;
+  float samplePos1 = floor(sampleIndex) / sampleCount;
+  float samplePos2 = (floor(sampleIndex) + 1.0) / sampleCount;
+  
+  // Sample adjacent points for smooth interpolation
+  float audioValue1 = texture2D(uAudioData, vec2(samplePos1, 0.5)).r;
+  float audioValue2 = texture2D(uAudioData, vec2(samplePos2, 0.5)).r;
+  
+  // Smooth interpolation between samples
+  float t = fract(sampleIndex);
+  float audioValue = mix(audioValue1, audioValue2, smoothstep(0.0, 1.0, t));
+  
+  // Center around 0 (-1 to 1 range)
+  audioValue = (audioValue - 0.5) * 2.0;
   audioValue *= uSensitivity;
   
-  // Calculate waveform position
-  float waveY = 0.5 + audioValue * 0.4;
+  // Calculate waveform position with center symmetry
+  float waveY = 0.5 + audioValue * 0.45;
   float dist = abs(uv.y - waveY);
   
-  // Smooth line with glow
-  float line = exp(-dist * 100.0);
-  float glow = exp(-dist * 20.0) * 0.3;
+  // High-resolution line rendering for 4K (sharper falloff)
+  float lineWidth = 0.003; // Thinner line for 4K clarity
+  float line = exp(-dist / lineWidth);
   
-  // Color based on amplitude
-  vec3 color = mix(uColorPrimary, uColorSecondary, abs(audioValue));
-  color += uColorAccent * glow;
+  // Multi-layer glow for depth
+  float innerGlow = exp(-dist * 200.0) * 0.8;
+  float outerGlow = exp(-dist * 50.0) * 0.4;
+  float distantGlow = exp(-dist * 15.0) * 0.2;
   
-  return color * (line + glow);
+  // Color gradient based on amplitude and position
+  float amplitude = abs(audioValue);
+  vec3 color = mix(uColorPrimary, uColorSecondary, amplitude);
+  color = mix(color, uColorAccent, amplitude * 0.5);
+  
+  // Add vibrant glow layers
+  color += uColorAccent * innerGlow;
+  color += uColorSecondary * outerGlow;
+  color += uColorPrimary * distantGlow;
+  
+  // Add mirror effect for stereo visualization
+  float mirrorY = 1.0 - waveY;
+  float mirrorDist = abs(uv.y - mirrorY);
+  float mirrorLine = exp(-mirrorDist / lineWidth) * 0.3;
+  color += uColorSecondary * mirrorLine * (1.0 - amplitude * 0.5);
+  
+  return color * clamp(line + innerGlow + outerGlow, 0.0, 1.5);
 }
 
 // Circular Visualization
@@ -388,32 +422,50 @@ function AudiophileVisualizer({
   const [currentColorScheme, setCurrentColorScheme] = useState<VisualizerColorScheme>(colorScheme);
   const [currentSensitivity, setCurrentSensitivity] = useState(sensitivity);
   const [showSettings, setShowSettings] = useState(false);
-  const [audioData, setAudioData] = useState<Float32Array>(new Float32Array(1024));
+  const [audioData, setAudioData] = useState<Float32Array>(new Float32Array(2048));
   const animationFrameRef = useRef<number | null>(null);
 
   const colors = COLOR_SCHEMES[currentColorScheme];
   const visualizerTypeIndex = ['spectrum', 'waveform', 'circular', 'bars', 'particles'].indexOf(currentType);
 
-  // Get audio data and update texture
+  // Get audio data and update texture - Enhanced for 4K with more samples
   const updateAudioData = useCallback(() => {
     const pipeline = audioPlayer.getAudioPipeline();
     if (!pipeline) {
-      setAudioData(new Float32Array(1024));
+      setAudioData(new Float32Array(2048));
       return;
     }
 
-      const frequencyData = pipeline.getFrequencyData();
-      if (frequencyData.length > 0) {
-        // Convert Uint8Array to Float32Array and normalize
-        // Use first 1024 samples for texture (or all if less)
-        const sampleCount = Math.min(frequencyData.length, 1024);
-        const floatData = new Float32Array(sampleCount);
-        for (let i = 0; i < sampleCount; i++) {
-          floatData[i] = frequencyData[i] / 255.0;
-        }
-        setAudioData(floatData);
+    // Get both frequency and time-domain data for comprehensive visualization
+    const frequencyData = pipeline.getFrequencyData();
+    const timeDomainData = pipeline.getTimeDomainData();
+    
+    if (frequencyData.length > 0 || timeDomainData.length > 0) {
+      // Use up to 2048 samples for 4K resolution
+      // Prefer time-domain data for waveform, frequency data for spectrum
+      const sourceData = currentType === 'waveform' ? timeDomainData : frequencyData;
+      const maxSamples = 2048;
+      const sampleCount = Math.min(sourceData.length, maxSamples);
+      
+      const floatData = new Float32Array(maxSamples);
+      
+      // Convert and normalize to 0-1 range
+      for (let i = 0; i < sampleCount; i++) {
+        floatData[i] = sourceData[i] / 255.0;
       }
-  }, []);
+      
+      // Interpolate/extend data if we have fewer samples than needed
+      if (sampleCount < maxSamples && sampleCount > 0) {
+        const step = sampleCount / maxSamples;
+        for (let i = sampleCount; i < maxSamples; i++) {
+          const sourceIndex = Math.floor(i * step);
+          floatData[i] = floatData[sourceIndex];
+        }
+      }
+      
+      setAudioData(floatData);
+    }
+  }, [currentType]);
 
   // Animation loop
   useEffect(() => {
@@ -469,8 +521,10 @@ function AudiophileVisualizer({
           {showSettings && (
             <div className="absolute top-12 right-2 bg-[#181818] border border-[#282828] rounded-lg p-4 min-w-[200px] z-10">
               <div className="mb-4">
-                <label className="block text-sm text-spotify-text-gray mb-2">Type</label>
+                <label htmlFor="visualizer-type" className="block text-sm text-spotify-text-gray mb-2">Type</label>
                 <select
+                  id="visualizer-type"
+                  aria-label="Visualizer type"
                   value={currentType}
                   onChange={(e) => setCurrentType(e.target.value as VisualizerType)}
                   className="w-full bg-[#282828] text-white rounded px-3 py-2 border border-[#404040] focus:outline-none focus:border-spotify-green"
@@ -484,8 +538,10 @@ function AudiophileVisualizer({
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm text-spotify-text-gray mb-2">Color Scheme</label>
+                <label htmlFor="visualizer-color-scheme" className="block text-sm text-spotify-text-gray mb-2">Color Scheme</label>
                 <select
+                  id="visualizer-color-scheme"
+                  aria-label="Color scheme"
                   value={currentColorScheme}
                   onChange={(e) => setCurrentColorScheme(e.target.value as VisualizerColorScheme)}
                   className="w-full bg-[#282828] text-white rounded px-3 py-2 border border-[#404040] focus:outline-none focus:border-spotify-green"
@@ -499,11 +555,13 @@ function AudiophileVisualizer({
               </div>
 
               <div>
-                <label className="block text-sm text-spotify-text-gray mb-2">
+                <label htmlFor="visualizer-sensitivity" className="block text-sm text-spotify-text-gray mb-2">
                   Sensitivity: {Math.round(currentSensitivity * 100)}%
                 </label>
                 <input
+                  id="visualizer-sensitivity"
                   type="range"
+                  aria-label={`Sensitivity: ${Math.round(currentSensitivity * 100)}%`}
                   min="0"
                   max="1"
                   step="0.01"

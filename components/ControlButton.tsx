@@ -28,18 +28,6 @@ export default function ControlButton({
   className,
   title,
 }: ControlButtonProps) {
-  const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!disabled && !active) {
-      e.currentTarget.style.color = '#FFFFFF';
-    }
-  }, [disabled, active]);
-
-  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!active) {
-      e.currentTarget.style.color = '#B3B3B3';
-    }
-  }, [active]);
-
   return (
     <button
       onClick={onClick}
@@ -52,15 +40,11 @@ export default function ControlButton({
         'flex items-center justify-center',
         'text-spotify-text-gray hover:text-white',
         'disabled:opacity-50 disabled:cursor-not-allowed',
-        active && 'text-spotify-green',
+        'cursor-pointer',
+        'focus:outline-none focus:ring-2 focus:ring-spotify-green focus:ring-offset-2 focus:ring-offset-black',
+        active ? 'text-spotify-green' : 'text-spotify-text-gray',
         className
       )}
-      style={{
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        color: active ? '#1DB954' : '#B3B3B3',
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       {children}
     </button>
