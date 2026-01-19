@@ -44,7 +44,8 @@
     "terraform:plan": "cd terraform/dev && terraform plan",
     "terraform:apply": "cd terraform/dev && terraform apply -auto-approve",
     "argocd:sync": "argocd app sync spot-app",
-    "swarm": "node -e \"console.log('Swarm orchestration via MCP[query_agent]')\""
+    "swarm": "node -e \"console.log('Swarm orchestration via MCP[query_agent]')\"",
+    "push": "bash scripts/push.sh"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.971.0",
