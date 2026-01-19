@@ -11,6 +11,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  // Prisma: Use binary engine for edge runtime compatibility
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '50mb',
+    },
+    // Prisma binary engine (no adapter needed)
+    prismaClientGenerator: {
+      engineType: 'binary',
+    },
+  },
   images: {
     domains: ['i.scdn.co', 'mosaic.scdn.co', 'wrapped-images.spotifycdn.com', 'images.unsplash.com'],
     unoptimized: false,
