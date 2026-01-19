@@ -27,8 +27,14 @@ export default function AudioQualityBadge({
   useEffect(() => {
     const loadQualityInfo = async () => {
       try {
+        // If no audio URL, show default quality
+        if (!track.audioUrl) {
+          setQualityInfo({ label: 'Standard', specs: 'MP3' });
+          return;
+        }
+
         let formatInfo;
-        
+
         // Use track format if available, otherwise detect from URL
         if (track.format) {
           const formatMap: Record<string, any> = {
@@ -41,17 +47,17 @@ export default function AudioQualityBadge({
         } else {
           formatInfo = await detectAudioFormat(track.audioUrl);
         }
-        
+
         const label = getQualityLabel(formatInfo);
         const specs = getTechnicalSpecs(formatInfo);
-        
+
         setQualityInfo({ label, specs });
       } catch (error) {
         console.error('Failed to detect audio format:', error);
         setQualityInfo({ label: 'Standard', specs: 'MP3' });
       }
     };
-    
+
     if (track) {
       loadQualityInfo();
     }

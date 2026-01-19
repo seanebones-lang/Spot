@@ -7,8 +7,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-2",
     "duration": 210638,
-    "audioUrl": "/audio/track-1.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -33,8 +31,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-3",
     "duration": 257468,
-    "audioUrl": "/audio/track-2.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=1000&h=1000&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -58,8 +54,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-4",
     "duration": 295621,
-    "audioUrl": "/audio/track-3.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -82,8 +76,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-5",
     "duration": 252094,
-    "audioUrl": "/audio/track-4.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -109,8 +101,6 @@
     "album": "Evening Glow Album",
     "albumId": "album-6",
     "duration": 207570,
-    "audioUrl": "/audio/track-5.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -135,8 +125,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-7",
     "duration": 172556,
-    "audioUrl": "/audio/track-6.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -162,8 +150,6 @@
     "album": "Neon Signs Album",
     "albumId": "album-8",
     "duration": 158211,
-    "audioUrl": "/audio/track-7.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -189,8 +175,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-9",
     "duration": 299734,
-    "audioUrl": "/audio/track-8.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -214,8 +198,6 @@
     "album": "City Lights Album",
     "albumId": "album-10",
     "duration": 173270,
-    "audioUrl": "/audio/track-9.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -241,8 +223,6 @@
     "album": "Starlight Album",
     "albumId": "album-11",
     "duration": 184572,
-    "audioUrl": "/audio/track-10.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -267,8 +247,6 @@
     "album": "Desert Highway Album",
     "albumId": "album-12",
     "duration": 229596,
-    "audioUrl": "/audio/track-11.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -293,8 +271,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-13",
     "duration": 176245,
-    "audioUrl": "/audio/track-12.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -320,8 +296,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-14",
     "duration": 230495,
-    "audioUrl": "/audio/track-13.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -345,8 +319,6 @@
     "album": "Mountain View Album",
     "albumId": "album-15",
     "duration": 242154,
-    "audioUrl": "/audio/track-14.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -369,8 +341,6 @@
     "album": "Desert Highway Album",
     "albumId": "album-16",
     "duration": 257857,
-    "audioUrl": "/audio/track-15.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -394,8 +364,6 @@
     "album": "City Lights Album",
     "albumId": "album-17",
     "duration": 251297,
-    "audioUrl": "/audio/track-16.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -419,8 +387,6 @@
     "album": "Evening Glow Album",
     "albumId": "album-18",
     "duration": 226052,
-    "audioUrl": "/audio/track-17.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -445,8 +411,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-19",
     "duration": 272233,
-    "audioUrl": "/audio/track-18.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -469,8 +433,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-20",
     "duration": 153372,
-    "audioUrl": "/audio/track-19.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -496,8 +458,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-21",
     "duration": 296672,
-    "audioUrl": "/audio/track-20.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -520,8 +480,6 @@
     "album": "Starlight Album",
     "albumId": "album-22",
     "duration": 248917,
-    "audioUrl": "/audio/track-21.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -545,8 +503,6 @@
     "album": "Morning Dew Album",
     "albumId": "album-23",
     "duration": 299173,
-    "audioUrl": "/audio/track-22.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -571,8 +527,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-24",
     "duration": 211955,
-    "audioUrl": "/audio/track-23.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -597,8 +551,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-25",
     "duration": 160111,
-    "audioUrl": "/audio/track-24.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -623,8 +575,6 @@
     "album": "Forest Path Album",
     "albumId": "album-26",
     "duration": 270559,
-    "audioUrl": "/audio/track-25.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -650,8 +600,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-27",
     "duration": 293726,
-    "audioUrl": "/audio/track-26.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -674,8 +622,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-28",
     "duration": 202688,
-    "audioUrl": "/audio/track-27.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -699,8 +645,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-29",
     "duration": 295690,
-    "audioUrl": "/audio/track-28.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -724,8 +668,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-30",
     "duration": 169038,
-    "audioUrl": "/audio/track-29.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -748,8 +690,6 @@
     "album": "Golden Hour Album",
     "albumId": "album-1",
     "duration": 298375,
-    "audioUrl": "/audio/track-30.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -773,8 +713,6 @@
     "album": "Evening Glow Album",
     "albumId": "album-2",
     "duration": 155720,
-    "audioUrl": "/audio/track-31.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -797,8 +735,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-3",
     "duration": 260246,
-    "audioUrl": "/audio/track-32.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -823,8 +759,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-4",
     "duration": 245207,
-    "audioUrl": "/audio/track-33.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -850,8 +784,6 @@
     "album": "Thunderstorm Album",
     "albumId": "album-5",
     "duration": 185056,
-    "audioUrl": "/audio/track-34.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -876,8 +808,6 @@
     "album": "Neon Signs Album",
     "albumId": "album-6",
     "duration": 289642,
-    "audioUrl": "/audio/track-35.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -900,8 +830,6 @@
     "album": "Neon Signs Album",
     "albumId": "album-7",
     "duration": 181921,
-    "audioUrl": "/audio/track-36.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -924,8 +852,6 @@
     "album": "Golden Hour Album",
     "albumId": "album-8",
     "duration": 230087,
-    "audioUrl": "/audio/track-37.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -949,8 +875,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-9",
     "duration": 183428,
-    "audioUrl": "/audio/track-38.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -974,8 +898,6 @@
     "album": "Mountain View Album",
     "albumId": "album-10",
     "duration": 174167,
-    "audioUrl": "/audio/track-39.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -1000,8 +922,6 @@
     "album": "Forest Path Album",
     "albumId": "album-11",
     "duration": 249290,
-    "audioUrl": "/audio/track-40.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -1025,8 +945,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-12",
     "duration": 240396,
-    "audioUrl": "/audio/track-41.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1051,8 +969,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-13",
     "duration": 159909,
-    "audioUrl": "/audio/track-42.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1076,8 +992,6 @@
     "album": "Golden Hour Album",
     "albumId": "album-14",
     "duration": 216758,
-    "audioUrl": "/audio/track-43.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1102,8 +1016,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-15",
     "duration": 279290,
-    "audioUrl": "/audio/track-44.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1129,8 +1041,6 @@
     "album": "Desert Highway Album",
     "albumId": "album-16",
     "duration": 229626,
-    "audioUrl": "/audio/track-45.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1153,8 +1063,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-17",
     "duration": 287323,
-    "audioUrl": "/audio/track-46.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1178,8 +1086,6 @@
     "album": "Electric Soul Album",
     "albumId": "album-18",
     "duration": 249310,
-    "audioUrl": "/audio/track-47.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1205,8 +1111,6 @@
     "album": "Mountain View Album",
     "albumId": "album-19",
     "duration": 154098,
-    "audioUrl": "/audio/track-48.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1230,8 +1134,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-20",
     "duration": 217798,
-    "audioUrl": "/audio/track-49.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1257,8 +1159,6 @@
     "album": "Mountain View Album",
     "albumId": "album-21",
     "duration": 211782,
-    "audioUrl": "/audio/track-50.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1281,8 +1181,6 @@
     "album": "Morning Dew Album",
     "albumId": "album-22",
     "duration": 160343,
-    "audioUrl": "/audio/track-51.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1308,8 +1206,6 @@
     "album": "Forest Path Album",
     "albumId": "album-23",
     "duration": 166348,
-    "audioUrl": "/audio/track-52.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1334,8 +1230,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-24",
     "duration": 172683,
-    "audioUrl": "/audio/track-53.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1358,8 +1252,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-25",
     "duration": 292453,
-    "audioUrl": "/audio/track-54.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1385,8 +1277,6 @@
     "album": "Golden Hour Album",
     "albumId": "album-26",
     "duration": 259924,
-    "audioUrl": "/audio/track-55.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1410,8 +1300,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-27",
     "duration": 188417,
-    "audioUrl": "/audio/track-56.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1434,8 +1322,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-28",
     "duration": 227897,
-    "audioUrl": "/audio/track-57.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1459,8 +1345,6 @@
     "album": "Desert Highway Album",
     "albumId": "album-29",
     "duration": 289347,
-    "audioUrl": "/audio/track-58.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1484,8 +1368,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-30",
     "duration": 288683,
-    "audioUrl": "/audio/track-59.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1508,8 +1390,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-1",
     "duration": 157050,
-    "audioUrl": "/audio/track-60.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -1535,8 +1415,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-2",
     "duration": 156186,
-    "audioUrl": "/audio/track-61.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1561,8 +1439,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-3",
     "duration": 293481,
-    "audioUrl": "/audio/track-62.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1585,8 +1461,6 @@
     "album": "City Lights Album",
     "albumId": "album-4",
     "duration": 180471,
-    "audioUrl": "/audio/track-63.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1610,8 +1484,6 @@
     "album": "Mountain View Album",
     "albumId": "album-5",
     "duration": 202052,
-    "audioUrl": "/audio/track-64.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1635,8 +1507,6 @@
     "album": "City Lights Album",
     "albumId": "album-6",
     "duration": 290852,
-    "audioUrl": "/audio/track-65.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1661,8 +1531,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-7",
     "duration": 195233,
-    "audioUrl": "/audio/track-66.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1688,8 +1556,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-8",
     "duration": 291401,
-    "audioUrl": "/audio/track-67.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1714,8 +1580,6 @@
     "album": "Desert Highway Album",
     "albumId": "album-9",
     "duration": 179373,
-    "audioUrl": "/audio/track-68.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1740,8 +1604,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-10",
     "duration": 271235,
-    "audioUrl": "/audio/track-69.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1766,8 +1628,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-11",
     "duration": 289950,
-    "audioUrl": "/audio/track-70.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1792,8 +1652,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-12",
     "duration": 183568,
-    "audioUrl": "/audio/track-71.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1816,8 +1674,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-13",
     "duration": 276796,
-    "audioUrl": "/audio/track-72.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1842,8 +1698,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-14",
     "duration": 224936,
-    "audioUrl": "/audio/track-73.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1869,8 +1723,6 @@
     "album": "Mountain View Album",
     "albumId": "album-15",
     "duration": 176023,
-    "audioUrl": "/audio/track-74.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1895,8 +1747,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-16",
     "duration": 227543,
-    "audioUrl": "/audio/track-75.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1921,8 +1771,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-17",
     "duration": 175808,
-    "audioUrl": "/audio/track-76.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1946,8 +1794,6 @@
     "album": "Evening Glow Album",
     "albumId": "album-18",
     "duration": 213229,
-    "audioUrl": "/audio/track-77.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1970,8 +1816,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-19",
     "duration": 287253,
-    "audioUrl": "/audio/track-78.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -1997,8 +1841,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-20",
     "duration": 206629,
-    "audioUrl": "/audio/track-79.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -2023,8 +1865,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-21",
     "duration": 270096,
-    "audioUrl": "/audio/track-80.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -2049,8 +1889,6 @@
     "album": "Thunderstorm Album",
     "albumId": "album-22",
     "duration": 279948,
-    "audioUrl": "/audio/track-81.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2074,8 +1912,6 @@
     "album": "Golden Hour Album",
     "albumId": "album-23",
     "duration": 255374,
-    "audioUrl": "/audio/track-82.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2098,8 +1934,6 @@
     "album": "Spring Bloom Album",
     "albumId": "album-24",
     "duration": 157600,
-    "audioUrl": "/audio/track-83.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2122,8 +1956,6 @@
     "album": "Forest Path Album",
     "albumId": "album-25",
     "duration": 214404,
-    "audioUrl": "/audio/track-84.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2148,8 +1980,6 @@
     "album": "City Lights Album",
     "albumId": "album-26",
     "duration": 184745,
-    "audioUrl": "/audio/track-85.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2173,8 +2003,6 @@
     "album": "Summer Heat Album",
     "albumId": "album-27",
     "duration": 233366,
-    "audioUrl": "/audio/track-86.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2199,8 +2027,6 @@
     "album": "City Lights Album",
     "albumId": "album-28",
     "duration": 197923,
-    "audioUrl": "/audio/track-87.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2225,8 +2051,6 @@
     "album": "Spring Bloom Album",
     "albumId": "album-29",
     "duration": 217391,
-    "audioUrl": "/audio/track-88.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2250,8 +2074,6 @@
     "album": "Morning Dew Album",
     "albumId": "album-30",
     "duration": 269240,
-    "audioUrl": "/audio/track-89.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2274,8 +2096,6 @@
     "album": "Mountain View Album",
     "albumId": "album-1",
     "duration": 264605,
-    "audioUrl": "/audio/track-90.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2298,8 +2118,6 @@
     "album": "Desert Highway Album",
     "albumId": "album-2",
     "duration": 277329,
-    "audioUrl": "/audio/track-91.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2325,8 +2143,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-3",
     "duration": 232081,
-    "audioUrl": "/audio/track-92.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2350,8 +2166,6 @@
     "album": "Mountain View Album",
     "albumId": "album-4",
     "duration": 181468,
-    "audioUrl": "/audio/track-93.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2375,8 +2189,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-5",
     "duration": 162328,
-    "audioUrl": "/audio/track-94.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2402,8 +2214,6 @@
     "album": "Morning Dew Album",
     "albumId": "album-6",
     "duration": 293861,
-    "audioUrl": "/audio/track-95.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2427,8 +2237,6 @@
     "album": "Mountain View Album",
     "albumId": "album-7",
     "duration": 231563,
-    "audioUrl": "/audio/track-96.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2454,8 +2262,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-8",
     "duration": 169090,
-    "audioUrl": "/audio/track-97.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2479,8 +2285,6 @@
     "album": "Forest Path Album",
     "albumId": "album-9",
     "duration": 202848,
-    "audioUrl": "/audio/track-98.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2504,8 +2308,6 @@
     "album": "Morning Dew Album",
     "albumId": "album-10",
     "duration": 293830,
-    "audioUrl": "/audio/track-99.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2529,8 +2331,6 @@
     "album": "Spring Bloom Album",
     "albumId": "album-11",
     "duration": 246508,
-    "audioUrl": "/audio/track-100.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -2556,8 +2356,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-12",
     "duration": 267221,
-    "audioUrl": "/audio/track-101.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2581,8 +2379,6 @@
     "album": "Spring Bloom Album",
     "albumId": "album-13",
     "duration": 297674,
-    "audioUrl": "/audio/track-102.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2605,8 +2401,6 @@
     "album": "Evening Glow Album",
     "albumId": "album-14",
     "duration": 166618,
-    "audioUrl": "/audio/track-103.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2630,8 +2424,6 @@
     "album": "Mountain View Album",
     "albumId": "album-15",
     "duration": 176960,
-    "audioUrl": "/audio/track-104.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2655,8 +2447,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-16",
     "duration": 233602,
-    "audioUrl": "/audio/track-105.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2679,8 +2469,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-17",
     "duration": 161085,
-    "audioUrl": "/audio/track-106.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2704,8 +2492,6 @@
     "album": "Morning Dew Album",
     "albumId": "album-18",
     "duration": 221433,
-    "audioUrl": "/audio/track-107.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2730,8 +2516,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-19",
     "duration": 160208,
-    "audioUrl": "/audio/track-108.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2755,8 +2539,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-20",
     "duration": 249452,
-    "audioUrl": "/audio/track-109.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2782,8 +2564,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-21",
     "duration": 212957,
-    "audioUrl": "/audio/track-110.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2809,8 +2589,6 @@
     "album": "Electric Soul Album",
     "albumId": "album-22",
     "duration": 291275,
-    "audioUrl": "/audio/track-111.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2833,8 +2611,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-23",
     "duration": 262450,
-    "audioUrl": "/audio/track-112.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2859,8 +2635,6 @@
     "album": "Summer Heat Album",
     "albumId": "album-24",
     "duration": 235054,
-    "audioUrl": "/audio/track-113.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2884,8 +2658,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-25",
     "duration": 275152,
-    "audioUrl": "/audio/track-114.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2910,8 +2682,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-26",
     "duration": 263998,
-    "audioUrl": "/audio/track-115.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2935,8 +2705,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-27",
     "duration": 168657,
-    "audioUrl": "/audio/track-116.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2961,8 +2729,6 @@
     "album": "Silent Streets Album",
     "albumId": "album-28",
     "duration": 258424,
-    "audioUrl": "/audio/track-117.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -2988,8 +2754,6 @@
     "album": "Sunset Drive Album",
     "albumId": "album-29",
     "duration": 297314,
-    "audioUrl": "/audio/track-118.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3013,8 +2777,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-30",
     "duration": 204877,
-    "audioUrl": "/audio/track-119.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3039,8 +2801,6 @@
     "album": "Thunderstorm Album",
     "albumId": "album-1",
     "duration": 170957,
-    "audioUrl": "/audio/track-120.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3065,8 +2825,6 @@
     "album": "Golden Hour Album",
     "albumId": "album-2",
     "duration": 243122,
-    "audioUrl": "/audio/track-121.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -3090,8 +2848,6 @@
     "album": "Neon Signs Album",
     "albumId": "album-3",
     "duration": 203303,
-    "audioUrl": "/audio/track-122.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -3115,8 +2871,6 @@
     "album": "Morning Dew Album",
     "albumId": "album-4",
     "duration": 204085,
-    "audioUrl": "/audio/track-123.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -3142,8 +2896,6 @@
     "album": "Mountain View Album",
     "albumId": "album-5",
     "duration": 274011,
-    "audioUrl": "/audio/track-124.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -3166,8 +2918,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-6",
     "duration": 191439,
-    "audioUrl": "/audio/track-125.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -3191,8 +2941,6 @@
     "album": "Thunderstorm Album",
     "albumId": "album-7",
     "duration": 299509,
-    "audioUrl": "/audio/track-126.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -3217,8 +2965,6 @@
     "album": "Thunderstorm Album",
     "albumId": "album-8",
     "duration": 272333,
-    "audioUrl": "/audio/track-127.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -3242,8 +2988,6 @@
     "album": "Golden Hour Album",
     "albumId": "album-9",
     "duration": 257624,
-    "audioUrl": "/audio/track-128.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -3268,8 +3012,6 @@
     "album": "Neon Signs Album",
     "albumId": "album-10",
     "duration": 244881,
-    "audioUrl": "/audio/track-129.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -3294,8 +3036,6 @@
     "album": "Summer Heat Album",
     "albumId": "album-11",
     "duration": 161768,
-    "audioUrl": "/audio/track-130.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -3318,8 +3058,6 @@
     "album": "Electric Soul Album",
     "albumId": "album-12",
     "duration": 252320,
-    "audioUrl": "/audio/track-131.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -3342,8 +3080,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-13",
     "duration": 205887,
-    "audioUrl": "/audio/track-132.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -3369,8 +3105,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-14",
     "duration": 261370,
-    "audioUrl": "/audio/track-133.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -3396,8 +3130,6 @@
     "album": "Starlight Album",
     "albumId": "album-15",
     "duration": 239052,
-    "audioUrl": "/audio/track-134.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3423,8 +3155,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-16",
     "duration": 233473,
-    "audioUrl": "/audio/track-135.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3450,8 +3180,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-17",
     "duration": 293755,
-    "audioUrl": "/audio/track-136.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3476,8 +3204,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-18",
     "duration": 175168,
-    "audioUrl": "/audio/track-137.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -3500,8 +3226,6 @@
     "album": "Morning Dew Album",
     "albumId": "album-19",
     "duration": 279193,
-    "audioUrl": "/audio/track-138.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -3526,8 +3250,6 @@
     "album": "Starlight Album",
     "albumId": "album-20",
     "duration": 197689,
-    "audioUrl": "/audio/track-139.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -3552,8 +3274,6 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-21",
     "duration": 263119,
-    "audioUrl": "/audio/track-140.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
       "feelings": [
@@ -3577,8 +3297,6 @@
     "album": "Spring Bloom Album",
     "albumId": "album-22",
     "duration": 193718,
-    "audioUrl": "/audio/track-141.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
       "feelings": [
@@ -3602,8 +3320,6 @@
     "album": "Electric Soul Album",
     "albumId": "album-23",
     "duration": 187768,
-    "audioUrl": "/audio/track-142.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -3626,8 +3342,6 @@
     "album": "Thunderstorm Album",
     "albumId": "album-24",
     "duration": 232874,
-    "audioUrl": "/audio/track-143.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3651,8 +3365,6 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-25",
     "duration": 189086,
-    "audioUrl": "/audio/track-144.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -3676,8 +3388,6 @@
     "album": "Winter Chill Album",
     "albumId": "album-26",
     "duration": 289169,
-    "audioUrl": "/audio/track-145.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3702,8 +3412,6 @@
     "album": "Starlight Album",
     "albumId": "album-27",
     "duration": 247624,
-    "audioUrl": "/audio/track-146.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
       "feelings": [
@@ -3728,8 +3436,6 @@
     "album": "Spring Bloom Album",
     "albumId": "album-28",
     "duration": 193956,
-    "audioUrl": "/audio/track-147.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
       "feelings": [
@@ -3755,8 +3461,6 @@
     "album": "Starlight Album",
     "albumId": "album-29",
     "duration": 234063,
-    "audioUrl": "/audio/track-148.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [
@@ -3781,8 +3485,6 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-30",
     "duration": 222195,
-    "audioUrl": "/audio/track-149.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
       "feelings": [
@@ -3808,8 +3510,6 @@
     "album": "Urban Nights Album",
     "albumId": "album-1",
     "duration": 279416,
-    "audioUrl": "/audio/track-150.mp3",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
       "feelings": [

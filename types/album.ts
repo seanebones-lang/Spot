@@ -5,7 +5,7 @@ export interface Album {
   id: string;
   name: string;
   artist: Artist;
-  coverArt: string;
+  coverArt?: string; // Optional - fallback to placeholder
   tracks: Track[];
   releaseDate: string;
   label?: string;

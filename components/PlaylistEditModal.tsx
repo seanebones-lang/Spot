@@ -18,14 +18,14 @@ export default function PlaylistEditModal({ playlist, isOpen, onClose, onSave }:
   const [name, setName] = useState(playlist.name);
   const [description, setDescription] = useState(playlist.description || '');
   const [privacy, setPrivacy] = useState<PrivacyOption>('public');
-  const [coverArt, setCoverArt] = useState<string | null>(playlist.coverArt);
+  const [coverArt, setCoverArt] = useState<string | null>(playlist.coverArt || null);
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setName(playlist.name);
       setDescription(playlist.description || '');
-      setCoverArt(playlist.coverArt);
+      setCoverArt(playlist.coverArt || null);
       // In production, get actual privacy setting from playlist
     }
   }, [isOpen, playlist]);

@@ -162,24 +162,30 @@ export default function RadioPage() {
       };
 
       // Load track with special handling for radio streams
-      audioPlayer.loadTrack(
-        radioTrack.audioUrl,
-        radioTrack.id,
-        (prog) => {
-          // Update progress for radio (though it's continuous)
-          setProgress(prog);
-        },
-        () => {
-          // When stream ends, restart with new random start (seamless loop)
-          console.log('🔄 Radio stream ended, restarting with new random start');
-          if (currentStation) {
-            restartStream(currentStation, radioTrack.id);
+      if (radioTrack.audioUrl) {
+        audioPlayer.loadTrack(
+          radioTrack.audioUrl,
+          radioTrack.id,
+          (prog) => {
+            // Update progress for radio (though it's continuous)
+            setProgress(prog);
+          },
+          () => {
+            // When stream ends, restart with new random start (seamless loop)
+            console.log('🔄 Radio stream ended, restarting with new random start');
+            if (currentStation) {
+              restartStream(currentStation, radioTrack.id);
+            }
           }
-        }
-      );
+        );
 
-      // Set as current track in player store
-      setCurrentTrack(radioTrack);
+        // Set as current track in player store
+        setCurrentTrack(radioTrack);
+      } else {
+        console.error('❌ Radio track has no audio URL');
+        useRadioStore.getState().setError('Radio stream URL is not available');
+        useRadioStore.getState().setIsLoading(false);
+      }
     } else {
       // Track is already loaded - if playing state changed, ensure playback state matches
       // This handles the case where user clicks play on an already-loaded station

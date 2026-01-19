@@ -58,8 +58,8 @@ export interface Track {
   album: string;
   albumId: string;
   duration: number; // in milliseconds
-  audioUrl: string;
-  coverArt: string;
+  audioUrl?: string; // Optional - for UI-only mode without media
+  coverArt?: string; // Optional - fallback to music icon
   moodTags: MoodTags;
   format?: 'WAV' | 'FLAC' | 'MP3' | 'M4A' | 'MP4';
   quality?: 'lossless' | 'high' | 'standard' | 'data-saver';

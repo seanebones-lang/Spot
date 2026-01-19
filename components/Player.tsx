@@ -36,9 +36,16 @@ export default function Player() {
 
   useEffect(() => {
     if (currentTrack) {
+      // Check if audioUrl exists (media content not loaded yet)
+      if (!currentTrack.audioUrl) {
+        console.log('ℹ️ Player: Track has no audio URL (UI-only mode):', currentTrack.name);
+        setProgress(0);
+        return;
+      }
+
       console.log('🎧 Player: Loading track:', currentTrack.name, currentTrack.audioUrl);
       const wasPlaying = isPlaying;
-      
+
       // Set up load callback to auto-play if was playing
       audioPlayer.setOnLoadCallback(() => {
         if (wasPlaying) {
@@ -47,7 +54,7 @@ export default function Player() {
           setIsPlaying(true);
         }
       });
-      
+
       audioPlayer.loadTrack(
         currentTrack.audioUrl,
         currentTrack.id,
@@ -62,7 +69,7 @@ export default function Player() {
           }
         }
       );
-      
+
       // Reset progress when loading new track
       setProgress(0);
     } else {
@@ -72,9 +79,9 @@ export default function Player() {
   }, [currentTrack?.id, repeat]); // Only depend on track ID to avoid re-loading
 
   useEffect(() => {
-    // Skip if no track loaded
-    if (!currentTrack) return;
-    
+    // Skip if no track loaded or no audio URL
+    if (!currentTrack || !currentTrack.audioUrl) return;
+
     console.log('🎮 Player: isPlaying changed to:', isPlaying);
     if (isPlaying) {
       console.log('▶️ Player: Starting playback');
