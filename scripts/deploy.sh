@@ -29,17 +29,24 @@ if ! command -v node &> /dev/null; then
   exit 1
 fi
 
+# Load .env.local if it exists
+if [ -f .env.local ]; then
+  export $(grep -v '^#' .env.local | xargs)
+fi
+
 # Get token from environment
 if [ "$PLATFORM" == "vercel" ]; then
   TOKEN=${VERCEL_TOKEN:-""}
   if [ -z "$TOKEN" ]; then
-    echo -e "${RED}❌ VERCEL_TOKEN not set. Export it: export VERCEL_TOKEN=your_token${NC}"
+    echo -e "${RED}❌ VERCEL_TOKEN not set. Add it to .env.local or export it${NC}"
+    echo -e "${BLUE}💡 Add to .env.local: VERCEL_TOKEN=your_token${NC}"
     exit 1
   fi
 elif [ "$PLATFORM" == "railway" ]; then
   TOKEN=${RAILWAY_TOKEN:-""}
   if [ -z "$TOKEN" ]; then
-    echo -e "${RED}❌ RAILWAY_TOKEN not set. Export it: export RAILWAY_TOKEN=your_token${NC}"
+    echo -e "${RED}❌ RAILWAY_TOKEN not set. Add it to .env.local or export it${NC}"
+    echo -e "${BLUE}💡 Add to .env.local: RAILWAY_TOKEN=your_token${NC}"
     exit 1
   fi
 else
