@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import TopBar from '@/components/TopBar';
 import Player from '@/components/Player';
 import RightSidebar from '@/components/RightSidebar';
+import MobileNavDrawer from '@/components/MobileNavDrawer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
@@ -40,6 +41,7 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
   return (
     <div className="flex h-screen bg-[#000000] overflow-hidden">
       <Sidebar />
+      <MobileNavDrawer />
       {/* TopBar - Fixed at top level, independent of scrollable content */}
       <TopBar />
       <div 
