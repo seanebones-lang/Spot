@@ -11,14 +11,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  // Prisma: Use binary engine for edge runtime compatibility
+  // Request body size limit (50MB for file uploads)
   experimental: {
     serverActions: {
       bodySizeLimit: '50mb',
-    },
-    // Prisma binary engine (no adapter needed)
-    prismaClientGenerator: {
-      engineType: 'binary',
     },
   },
   images: {
