@@ -83,10 +83,10 @@ export default function HomePage() {
   };
 
   return (
-    <div 
+    <div
       className="w-full"
-      style={{ 
-        padding: '32px',
+      style={{
+        padding: window.innerWidth < 768 ? '16px' : '32px',
         paddingBottom: '24px',
         backgroundColor: '#121212',
         minHeight: '100%'

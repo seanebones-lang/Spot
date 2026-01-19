@@ -20,10 +20,10 @@ export default function AffirmationsPage() {
     : affirmations;
 
   return (
-    <div 
+    <div
       className="p-8"
       style={{
-        padding: '32px',
+        padding: window.innerWidth < 768 ? '16px' : '32px',
         backgroundColor: '#121212',
         minHeight: '100vh',
         color: '#FFFFFF'
