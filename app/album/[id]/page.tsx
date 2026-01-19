@@ -1,28 +1,93 @@
 'use client';
 
 import { useParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import { mockData } from '@/lib/data';
 import PlayButton from '@/components/PlayButton';
 import { usePlayerStore } from '@/stores/playerStore';
 import { formatDuration } from '@/lib/utils';
 import Link from 'next/link';
+import { Album } from '@/types/album';
+import { Track } from '@/types/track';
 
 export default function AlbumPage() {
   const params = useParams();
   const id = params.id as string;
-  const album = mockData.getAlbums().find(a => a.id === id);
   const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying } = usePlayerStore();
-  const tracks = mockData.getTracks();
+  const [album, setAlbum] = useState<Album | null>(null);
+  const [albumTracks, setAlbumTracks] = useState<Track[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  if (!album) {
+  useEffect(() => {
+    // First check mockData
+    const mockAlbum = mockData.getAlbums().find(a => a.id === id);
+    if (mockAlbum) {
+      const tracks = mockData.getTracks();
+      const mockAlbumTracks = tracks.filter(t => mockAlbum.tracks.some(tr => tr.id === t.id));
+      setAlbum(mockAlbum);
+      setAlbumTracks(mockAlbumTracks);
+      setLoading(false);
+      return;
+    }
+
+    // Then check localStorage for uploaded releases
+    try {
+      if (typeof window !== 'undefined') {
+        const savedTracks = localStorage.getItem('artist-tracks');
+        if (savedTracks) {
+          const uploadedReleases = JSON.parse(savedTracks);
+          const uploadedRelease = uploadedReleases.find((r: any) => r.id === id && r.status === 'published');
+          
+          if (uploadedRelease) {
+            // Convert to Album format
+            const convertedAlbum: Album = {
+              id: uploadedRelease.id,
+              name: uploadedRelease.releaseType === 'single' ? uploadedRelease.name : (uploadedRelease.album || uploadedRelease.name),
+              artist: {
+                id: `artist-${uploadedRelease.id}`,
+                name: uploadedRelease.artistName || 'Unknown Artist',
+                image: '',
+                followers: 0,
+                verified: false,
+              },
+              coverArt: uploadedRelease.coverArtUrl || '',
+              tracks: uploadedRelease.trackData || [],
+              releaseDate: uploadedRelease.uploadDate || new Date().toISOString(),
+              totalDuration: 0,
+            };
+            
+            // Use trackData if available, otherwise create minimal tracks
+            const convertedTracks: Track[] = uploadedRelease.trackData || [];
+            
+            setAlbum(convertedAlbum);
+            setAlbumTracks(convertedTracks);
+            setLoading(false);
+            return;
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Error loading uploaded album:', e);
+    }
+
+    setLoading(false);
+  }, [id]);
+
+  if (loading) {
     return (
       <div className="p-8">
-        <h1 className="text-2xl font-bold">Album not found</h1>
+        <div className="text-white">Loading...</div>
       </div>
     );
   }
 
-  const albumTracks = tracks.filter(t => album.tracks.some(tr => tr.id === t.id));
+  if (!album) {
+    return (
+      <div className="p-8">
+        <h1 className="text-2xl font-bold text-white">Album not found</h1>
+      </div>
+    );
+  }
 
   const handlePlayAlbum = () => {
     const firstTrack = albumTracks[0];
@@ -52,18 +117,34 @@ export default function AlbumPage() {
           minHeight: '547px'
         }}
       >
-        <img
-          src={album.coverArt}
-          alt={album.name}
-          className="w-60 h-60 object-cover rounded shadow-2xl"
-          style={{
-            width: '232px',
-            height: '232px',
-            borderRadius: '4px',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
-            flexShrink: 0
-          }}
-        />
+        {album.coverArt ? (
+          <img
+            src={album.coverArt}
+            alt={album.name}
+            className="w-60 h-60 object-cover rounded shadow-2xl"
+            style={{
+              width: '232px',
+              height: '232px',
+              borderRadius: '4px',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+              flexShrink: 0
+            }}
+          />
+        ) : (
+          <div 
+            className="w-60 h-60 bg-gradient-to-br from-spotify-green to-spotify-dark-gray rounded shadow-2xl flex items-center justify-center"
+            style={{
+              width: '232px',
+              height: '232px',
+              borderRadius: '4px',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+              flexShrink: 0,
+              background: 'linear-gradient(135deg, #7209B7 0%, #181818 100%)'
+            }}
+          >
+            <span className="text-6xl" style={{ fontSize: '64px' }}>💿</span>
+          </div>
+        )}
         <div className="flex-1" style={{ minWidth: 0 }}>
           <div 
             className="text-sm font-medium mb-2"
@@ -211,7 +292,7 @@ export default function AlbumPage() {
                       style={{
                         width: '4px',
                         height: '4px',
-                        backgroundColor: '#1DB954',
+                        backgroundColor: '#7209B7',
                         borderRadius: '50%'
                       }}
                     ></div>
@@ -227,7 +308,7 @@ export default function AlbumPage() {
                     fontSize: '14px',
                     lineHeight: '20px',
                     fontWeight: 400,
-                    color: currentTrack?.id === track.id ? '#1DB954' : '#FFFFFF'
+                    color: currentTrack?.id === track.id ? '#7209B7' : '#FFFFFF'
                   }}
                 >
                   {track.name}

@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useDropzone } from 'react-dropzone';
-import { Upload, FileAudio, AlertCircle, CheckCircle, Plus, X, Info, ExternalLink } from 'lucide-react';
+import { Upload, FileAudio, AlertCircle, CheckCircle, Plus, X, Info, ExternalLink, Music } from 'lucide-react';
 import Link from 'next/link';
 import { MoodState } from '@/types/mood';
 import { Contributor, Publisher } from '@/types/track';
@@ -11,7 +12,6 @@ import FeelingChips from '@/components/mood/FeelingChips';
 import VibeSlider from '@/components/mood/VibeSlider';
 import GenreSelector from '@/components/mood/GenreSelector';
 import { getRAGPipeline } from '@/lib/aiMoodAnalysis';
-import ProtectedRoute from '@/components/ProtectedRoute';
 
 interface AIMoodSuggestion {
   mood: MoodState;
@@ -21,17 +21,40 @@ interface AIMoodSuggestion {
   confidence: number;
 }
 
-function UploadPageContent() {
-  const [step, setStep] = useState(1);
+type ReleaseType = 'single' | 'ep' | 'lp';
+
+interface TrackData {
+  id: string;
+  file: File | null;
+  trackName: string;
+  isrc: string;
+  trackNumber: number;
+  moodTags?: AIMoodSuggestion | null;
+  aiSuggestions?: AIMoodSuggestion | null;
+  hasAdjusted?: boolean;
+  accuracyCertified?: boolean;
+}
+
+export default function UploadPage() {
+  const [step, setStep] = useState(0); // Step 0: Release Type Selection
+  const [releaseType, setReleaseType] = useState<ReleaseType>('single');
+  
+  // Single track upload (legacy support)
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [coverArtFile, setCoverArtFile] = useState<File | null>(null);
+  
+  // Multi-track support for EP/LP
+  const [tracks, setTracks] = useState<TrackData[]>([
+    { id: '1', file: null, trackName: '', isrc: '', trackNumber: 1 }
+  ]);
   
   // Basic metadata
   const [metadata, setMetadata] = useState({
     trackName: '',
+    albumName: '', // For EP/LP, this is the release name
     artistFullLegalName: '',
     featuredArtists: [] as Array<{ fullLegalName: string; role?: string }>,
-    album: '',
+    album: '', // Legacy field
     releaseDate: '',
     genre: '',
     subgenre: '',
@@ -70,20 +93,27 @@ function UploadPageContent() {
   const [artistMoodTags, setArtistMoodTags] = useState<AIMoodSuggestion | null>(null);
   const [hasAdjusted, setHasAdjusted] = useState(false);
   const [accuracyCertified, setAccuracyCertified] = useState(false);
-  // Issue-8: Loading state for async mood analysis
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isAnalyzingMood, setIsAnalyzingMood] = useState(false);
+  
+  // Submission state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const router = useRouter();
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  // Dropzone for single file upload
+  const { getRootProps: getSingleRootProps, getInputProps: getSingleInputProps, isDragActive: isSingleDragActive } = useDropzone({
     accept: {
       'audio/*': ['.mp3', '.wav', '.flac', '.m4a', '.mp4'],
     },
+    multiple: false,
     onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length > 0) {
         const file = acceptedFiles[0];
         setUploadedFile(file);
         
-        // Run RAG mood analysis pipeline (Issue-8: Add loading state)
-        setIsAnalyzing(true);
+        // Run RAG mood analysis pipeline with loading state
+        setIsAnalyzingMood(true);
         try {
           const ragPipeline = getRAGPipeline();
           const moodSuggestion = await ragPipeline.analyzeMood(file);
@@ -114,8 +144,35 @@ function UploadPageContent() {
             confidence: 0.5,
           });
         } finally {
-          setIsAnalyzing(false);
+          setIsAnalyzingMood(false);
         }
+      }
+    },
+  });
+
+  // Dropzone for multiple file upload (EP/LP)
+  const { getRootProps: getMultiRootProps, getInputProps: getMultiInputProps, isDragActive: isMultiDragActive } = useDropzone({
+    accept: {
+      'audio/*': ['.mp3', '.wav', '.flac', '.m4a', '.mp4'],
+    },
+    multiple: true,
+    onDrop: async (acceptedFiles) => {
+      if (acceptedFiles.length > 0) {
+        // Add new tracks with auto-incrementing track numbers
+        const newTracks: TrackData[] = acceptedFiles.map((file, index) => {
+          const trackNumber = tracks.length + index + 1;
+          const baseName = file.name.replace(/\.[^/.]+$/, ''); // Remove extension
+          return {
+            id: `track-${Date.now()}-${index}`,
+            file,
+            trackName: baseName,
+            isrc: '',
+            trackNumber,
+          };
+        });
+        
+        // Update tracks array
+        setTracks([...tracks, ...newTracks]);
       }
     },
   });
@@ -174,6 +231,62 @@ function UploadPageContent() {
     setPublishers(publishers.filter((_, i) => i !== index));
   };
 
+  // Track management functions for EP/LP
+  const updateTrack = (trackId: string, field: keyof TrackData, value: any) => {
+    setTracks(tracks.map(track => 
+      track.id === trackId ? { ...track, [field]: value } : track
+    ));
+  };
+
+  const removeTrack = (trackId: string) => {
+    const filtered = tracks.filter(t => t.id !== trackId);
+    // Re-number tracks after removal
+    const renumbered = filtered.map((track, index) => ({
+      ...track,
+      trackNumber: index + 1
+    }));
+    setTracks(renumbered);
+  };
+
+  const addTrack = () => {
+    const newTrack: TrackData = {
+      id: `track-${Date.now()}`,
+      file: null,
+      trackName: '',
+      isrc: '',
+      trackNumber: tracks.length + 1,
+    };
+    setTracks([...tracks, newTrack]);
+  };
+
+  const moveTrack = (trackId: string, direction: 'up' | 'down') => {
+    const index = tracks.findIndex(t => t.id === trackId);
+    if (index === -1) return;
+    
+    const newIndex = direction === 'up' ? index - 1 : index + 1;
+    if (newIndex < 0 || newIndex >= tracks.length) return;
+
+    const reordered = [...tracks];
+    [reordered[index], reordered[newIndex]] = [reordered[newIndex], reordered[index]];
+    
+    // Re-number tracks
+    const renumbered = reordered.map((track, idx) => ({
+      ...track,
+      trackNumber: idx + 1
+    }));
+    setTracks(renumbered);
+  };
+
+  const handleTrackFileUpload = (trackId: string, file: File) => {
+    updateTrack(trackId, 'file', file);
+    // Auto-populate track name from filename if empty
+    const track = tracks.find(t => t.id === trackId);
+    if (track && !track.trackName) {
+      const baseName = file.name.replace(/\.[^/.]+$/, '');
+      updateTrack(trackId, 'trackName', baseName);
+    }
+  };
+
   // Validation
   const compositionOwnershipTotal = [...composers, ...lyricists].reduce(
     (sum, c) => sum + (c.ownershipPercentage || 0),
@@ -214,9 +327,20 @@ function UploadPageContent() {
   };
 
   const canProceed = () => {
-    if (step === 1) return uploadedFile !== null;
+    if (step === 0) return releaseType !== null;
+    if (step === 1) {
+      if (releaseType === 'single') return uploadedFile !== null;
+      // For EP/LP, need minimum tracks: EP needs 2-6, LP needs 7+
+      const minTracks = releaseType === 'ep' ? 2 : 7;
+      return tracks.length >= minTracks && tracks.every(t => t.file !== null && t.trackName);
+    }
     if (step === 2) {
-      return metadata.trackName && metadata.artistFullLegalName;
+      if (releaseType === 'single') {
+        return metadata.trackName && metadata.artistFullLegalName;
+      } else {
+        // For EP/LP, need album name and artist name
+        return metadata.albumName && metadata.artistFullLegalName;
+      }
     }
     if (step === 3) {
       const hasComposers = composers.length > 0 && composers.every(c => c.firstName && c.lastName);
@@ -232,13 +356,230 @@ function UploadPageContent() {
     return false;
   };
 
-  const totalSteps = 6;
-  const stepLabels = ['Upload', 'Basic Info', 'Rights', 'Legal', 'Mood Tags', 'Review'];
+  const handleSubmit = async () => {
+    // Reset error state
+    setSubmitError(null);
+    setIsSubmitting(true);
+
+    try {
+      // Create FormData to handle file uploads
+      const formDataToSend = new FormData();
+      
+      if (releaseType === 'single') {
+        // Single track upload
+        if (uploadedFile) {
+          formDataToSend.append('audioFile', uploadedFile);
+        }
+        if (coverArtFile) {
+          formDataToSend.append('coverArtFile', coverArtFile);
+        }
+      } else {
+        // EP/LP - multiple tracks
+        tracks.forEach((track, index) => {
+          if (track.file) {
+            formDataToSend.append(`track_${index}_file`, track.file);
+          }
+        });
+        if (coverArtFile) {
+          formDataToSend.append('coverArtFile', coverArtFile);
+        }
+      }
+      
+      // Add all metadata as JSON string
+      const metadataPayload = {
+        releaseType,
+        metadata: releaseType === 'single' 
+          ? metadata 
+          : { ...metadata, trackName: metadata.albumName }, // Use albumName for EP/LP
+        tracks: releaseType === 'single' 
+          ? null 
+          : tracks.map(t => ({
+              id: t.id,
+              trackName: t.trackName,
+              isrc: t.isrc,
+              trackNumber: t.trackNumber,
+            })),
+        composers,
+        lyricists,
+        publishers,
+        rightsMetadata,
+        legalWarranties,
+        artistMoodTags,
+        aiSuggestions,
+      };
+      formDataToSend.append('payload', JSON.stringify(metadataPayload));
+
+      // Get auth token for authenticated request
+      const token = localStorage.getItem('auth-storage');
+      let authToken = null;
+      if (token) {
+        try {
+          const authData = JSON.parse(token);
+          authToken = authData?.state?.token;
+        } catch (e) {
+          // Token not found
+        }
+      }
+
+      // Submit to API with FormData
+      const headers: HeadersInit = {};
+      if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
+      }
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const endpoint = apiUrl ? `${apiUrl}/api/tracks/submit` : '/api/tracks/submit';
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers,
+        // Don't set Content-Type header - browser will set it with boundary for FormData
+        body: formDataToSend,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit track');
+      }
+
+      // Save published release to localStorage for dashboard display
+      const submission = result.submission || {};
+      const releaseName = releaseType === 'single' 
+        ? metadata.trackName 
+        : metadata.albumName;
+      
+      const publishedRelease = {
+        id: result.submissionId,
+        name: releaseName,
+        album: releaseType === 'single' ? (metadata.album || 'Single') : releaseName,
+        artistName: metadata.artistFullLegalName || 'Unknown Artist',
+        uploadDate: new Date().toISOString(),
+        status: 'published',
+        streams: 0,
+        earnings: 0,
+        releaseType,
+        trackCount: releaseType === 'single' ? 1 : tracks.length,
+        // Include URLs for playback and display
+        coverArtUrl: submission.coverArtUrl || null,
+        audioFileUrl: submission.audioFileUrl || null,
+        audioFileUrls: submission.audioFileUrls || null,
+        // Genre, mood, and content flags
+        genre: metadata.genre || '',
+        subgenre: metadata.subgenre || '',
+        moodTags: artistMoodTags || null,
+        explicitContent: rightsMetadata.explicitContent || false,
+        // Track data for playback
+        trackData: releaseType === 'single' 
+          ? [{
+              id: result.submissionId,
+              name: releaseName,
+              artist: metadata.artistFullLegalName || 'Unknown Artist',
+              artistId: `artist-${result.submissionId}`,
+              album: releaseType === 'single' ? (metadata.album || 'Single') : releaseName,
+              albumId: result.submissionId,
+              duration: 0, // Could estimate from file size
+              audioUrl: submission.audioFileUrl || '',
+              coverArt: submission.coverArtUrl || '',
+            }]
+          : (submission.tracks || []).map((trackInfo: any, idx: number) => ({
+              id: `${result.submissionId}-track-${idx + 1}`,
+              name: trackInfo.trackName || `Track ${idx + 1}`,
+              artist: metadata.artistFullLegalName || 'Unknown Artist',
+              artistId: `artist-${result.submissionId}`,
+              album: releaseName,
+              albumId: result.submissionId,
+              duration: 0,
+              audioUrl: submission.audioFileUrls?.[idx] || '',
+              coverArt: submission.coverArtUrl || '',
+            })),
+      };
+
+      // Load existing tracks from localStorage
+      let allTracks = [];
+      try {
+        const existingTracks = localStorage.getItem('artist-tracks');
+        if (existingTracks) {
+          allTracks = JSON.parse(existingTracks);
+        }
+      } catch (e) {
+        console.error('Error loading existing tracks:', e);
+      }
+
+      // Add new release at the beginning
+      allTracks.unshift(publishedRelease);
+      const tracksJson = JSON.stringify(allTracks);
+      
+      // Save to localStorage - multiple times to ensure it sticks
+      localStorage.setItem('artist-tracks', tracksJson);
+      console.log('✅ [Upload] Saved track to localStorage:', publishedRelease.name);
+      console.log('✅ [Upload] Track data:', JSON.stringify(publishedRelease, null, 2));
+      console.log('✅ [Upload] Total tracks now:', allTracks.length);
+      
+      // Immediately verify it was saved
+      let verify = localStorage.getItem('artist-tracks');
+      console.log('✅ [Upload] Verification (1) - localStorage has:', verify ? `${verify.length} chars` : 'nothing');
+      
+      // Re-save to be absolutely sure (sometimes localStorage can be flaky)
+      if (!verify || verify !== tracksJson) {
+        console.warn('⚠️ [Upload] Verification failed, re-saving...');
+        localStorage.setItem('artist-tracks', tracksJson);
+        verify = localStorage.getItem('artist-tracks');
+        console.log('✅ [Upload] Verification (2) - localStorage has:', verify ? `${verify.length} chars` : 'nothing');
+      }
+      
+      // Verify the structure is correct
+      if (verify) {
+        try {
+          const parsedVerify = JSON.parse(verify);
+          const firstTrack = Array.isArray(parsedVerify) ? parsedVerify[0] : null;
+          if (firstTrack && firstTrack.id && firstTrack.name) {
+            console.log('✅ [Upload] Structure verified - first track:', { id: firstTrack.id, name: firstTrack.name });
+          } else {
+            console.error('❌ [Upload] Structure invalid - first track:', firstTrack);
+          }
+        } catch (e) {
+          console.error('❌ [Upload] Failed to parse verification:', e);
+        }
+      }
+      
+      // Dispatch custom event to notify dashboard to reload
+      window.dispatchEvent(new Event('tracks-updated'));
+      console.log('✅ [Upload] Dispatched tracks-updated event');
+
+      // Success!
+      setSubmitSuccess(true);
+      
+      // Small delay then redirect to new releases - ensures localStorage is written and flushed
+      setTimeout(() => {
+        // Double-check localStorage one more time before redirect
+        const finalCheck = localStorage.getItem('artist-tracks');
+        if (finalCheck) {
+          console.log('✅ [Upload] Final check passed - redirecting to new releases with', JSON.parse(finalCheck).length, 'tracks');
+        } else {
+          console.error('❌ [Upload] Final check FAILED - localStorage is empty!');
+        }
+        router.push('/new-releases');
+      }, 500);
+
+    } catch (error: any) {
+      console.error('Error submitting track:', error);
+      setSubmitError(error.message || 'An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const totalSteps = step === 0 ? 1 : 7; // Step 0 is release type, then 1-6 for upload flow
+  const stepLabels = step === 0 
+    ? ['Release Type']
+    : ['Release Type', 'Upload', 'Basic Info', 'Rights', 'Legal', 'Mood Tags', 'Review'];
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold">Upload Track</h1>
+        <h1 className="text-4xl font-bold">
+          {releaseType === 'single' ? 'Upload Track' : releaseType === 'ep' ? 'Upload EP' : 'Upload Album'}
+        </h1>
         <div className="flex gap-3 text-sm">
           <Link href="/help/upload-guidelines" className="text-spotify-green hover:underline flex items-center gap-1">
             <Info size={16} />
@@ -252,60 +593,112 @@ function UploadPageContent() {
       </div>
 
       {/* Progress Steps */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          {Array.from({ length: totalSteps }, (_, i) => i + 1).map((s) => (
-            <div key={s} className="flex items-center flex-1">
-              <div className="flex flex-col items-center flex-1">
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
-                    s <= step ? 'bg-spotify-green text-black' : 'bg-spotify-light-gray text-spotify-text-gray'
-                  }`}
-                >
-                  {s < step ? <CheckCircle size={20} /> : s}
+      {step > 0 && (
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            {Array.from({ length: totalSteps }, (_, i) => i).map((s) => (
+              <div key={s} className="flex items-center flex-1">
+                <div className="flex flex-col items-center flex-1">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
+                      s <= step ? 'bg-spotify-green text-black' : 'bg-spotify-light-gray text-spotify-text-gray'
+                    }`}
+                  >
+                    {s < step ? <CheckCircle size={20} /> : s + 1}
+                  </div>
                 </div>
+                {s < totalSteps - 1 && (
+                  <div
+                    className={`h-1 flex-1 mx-1 ${
+                      s < step ? 'bg-spotify-green' : 'bg-spotify-light-gray'
+                    }`}
+                  />
+                )}
               </div>
-              {s < totalSteps && (
-                <div
-                  className={`h-1 flex-1 mx-1 ${
-                    s < step ? 'bg-spotify-green' : 'bg-spotify-light-gray'
-                  }`}
-                />
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="flex justify-between text-xs text-spotify-text-gray">
+            {stepLabels.map((label, idx) => (
+              <span key={idx} className="flex-1 text-center">
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="flex justify-between text-xs text-spotify-text-gray">
-          {stepLabels.map((label, idx) => (
-            <span key={idx} className="flex-1 text-center">
-              {label}
-            </span>
-          ))}
+      )}
+
+      {/* Step 0: Release Type Selection */}
+      {step === 0 && (
+        <div className="bg-spotify-light-gray rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-6">What are you uploading?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <button
+              onClick={() => {
+                setReleaseType('single');
+                setStep(1);
+              }}
+              className={`p-8 rounded-lg border-2 transition-all ${
+                releaseType === 'single'
+                  ? 'border-spotify-green bg-spotify-green/10'
+                  : 'border-white/10 hover:border-white/30 bg-spotify-dark-gray'
+              }`}
+            >
+              <Music size={48} className="mx-auto mb-4 text-spotify-green" />
+              <h3 className="text-xl font-bold mb-2">Single</h3>
+              <p className="text-sm text-spotify-text-gray">One track release</p>
+            </button>
+
+            <button
+              onClick={() => {
+                setReleaseType('ep');
+                setStep(1);
+              }}
+              className={`p-8 rounded-lg border-2 transition-all ${
+                releaseType === 'ep'
+                  ? 'border-spotify-green bg-spotify-green/10'
+                  : 'border-white/10 hover:border-white/30 bg-spotify-dark-gray'
+              }`}
+            >
+              <Music size={48} className="mx-auto mb-4 text-spotify-green" />
+              <h3 className="text-xl font-bold mb-2">EP</h3>
+              <p className="text-sm text-spotify-text-gray">2-6 tracks (Extended Play)</p>
+            </button>
+
+            <button
+              onClick={() => {
+                setReleaseType('lp');
+                setStep(1);
+              }}
+              className={`p-8 rounded-lg border-2 transition-all ${
+                releaseType === 'lp'
+                  ? 'border-spotify-green bg-spotify-green/10'
+                  : 'border-white/10 hover:border-white/30 bg-spotify-dark-gray'
+              }`}
+            >
+              <Music size={48} className="mx-auto mb-4 text-spotify-green" />
+              <h3 className="text-xl font-bold mb-2">Album/LP</h3>
+              <p className="text-sm text-spotify-text-gray">7+ tracks (Full Album)</p>
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Step 1: File Upload */}
-      {step === 1 && (
+      {step === 1 && releaseType === 'single' && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 1: Upload Audio File</h2>
           
           <div
-            {...getRootProps()}
+            {...getSingleRootProps()}
             className={`border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors ${
-              isDragActive
+              isSingleDragActive
                 ? 'border-spotify-green bg-spotify-green/10'
                 : 'border-spotify-text-gray/30 hover:border-spotify-text-gray/60'
             }`}
           >
-            <input {...getInputProps()} />
+            <input {...getSingleInputProps()} />
             <Upload size={48} className="mx-auto mb-4 text-spotify-text-gray" />
-            {isAnalyzing ? (
-              <div className="flex flex-col items-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-spotify-green mb-4"></div>
-                <p className="font-medium text-white mb-1">Analyzing track mood...</p>
-                <p className="text-sm text-spotify-text-gray">This may take a few seconds</p>
-              </div>
-            ) : uploadedFile ? (
+            {uploadedFile ? (
               <div>
                 <FileAudio size={32} className="mx-auto mb-2 text-spotify-green" />
                 <p className="font-medium text-white">{uploadedFile.name}</p>
@@ -334,12 +727,176 @@ function UploadPageContent() {
             </ul>
           </div>
 
-          {uploadedFile && (
+          {/* Loading state for AI mood analysis */}
+          {isAnalyzingMood && (
+            <div className="mt-6 flex items-center gap-3 p-4 bg-blue-600/20 border border-blue-600/50 rounded-lg">
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-spotify-green" />
+              <span className="text-white text-sm">Analyzing track mood with AI... This may take a few seconds.</span>
+            </div>
+          )}
+
+          {uploadedFile && !isAnalyzingMood && (
             <button
               onClick={() => setStep(2)}
               className="btn-primary w-full mt-6"
             >
               Continue to Basic Info
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Step 1: Multiple Track Upload for EP/LP */}
+      {step === 1 && (releaseType === 'ep' || releaseType === 'lp') && (
+        <div className="bg-spotify-light-gray rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-4">
+            Step 1: Upload {releaseType === 'ep' ? 'EP' : 'Album'} Tracks
+          </h2>
+          
+          <div className="mb-6 bg-blue-600/20 border border-blue-600/50 rounded-lg p-4">
+            <p className="text-sm text-white/80">
+              {releaseType === 'ep' 
+                ? 'Upload 2-6 tracks for your EP. You can upload multiple files at once or add them one by one.'
+                : 'Upload 7+ tracks for your album. You can upload multiple files at once or add them one by one.'}
+            </p>
+          </div>
+
+          {/* Bulk upload dropzone */}
+          <div
+            {...getMultiRootProps()}
+            className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors mb-6 ${
+              isMultiDragActive
+                ? 'border-spotify-green bg-spotify-green/10'
+                : 'border-spotify-text-gray/30 hover:border-spotify-text-gray/60'
+            }`}
+          >
+            <input {...getMultiInputProps()} />
+            <Upload size={32} className="mx-auto mb-2 text-spotify-text-gray" />
+            <p className="text-white font-medium mb-1">Drag & drop multiple audio files here</p>
+            <p className="text-spotify-text-gray text-sm">or click to browse</p>
+            <p className="text-xs text-spotify-text-gray mt-2">
+              Supported formats: WAV, FLAC, MP3 (320kbps+), M4A, MP4
+            </p>
+          </div>
+
+          {/* Track list */}
+          <div className="space-y-4 mb-6">
+            {tracks.map((track) => (
+              <div key={track.id} className="bg-spotify-dark-gray rounded-lg p-4 border border-white/10">
+                <div className="flex items-start gap-4">
+                  {/* Track number */}
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-spotify-green/20 flex items-center justify-center font-bold text-spotify-green">
+                    {track.trackNumber}
+                  </div>
+
+                  {/* Track info */}
+                  <div className="flex-1 space-y-3">
+                    {/* Track name */}
+                    <div>
+                      <label className="block text-xs font-medium mb-1 text-spotify-text-gray">
+                        Track Name *
+                      </label>
+                      <input
+                        type="text"
+                        value={track.trackName}
+                        onChange={(e) => updateTrack(track.id, 'trackName', e.target.value)}
+                        className="w-full bg-black/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                        placeholder="Enter track name"
+                      />
+                    </div>
+
+                    {/* File upload or display */}
+                    {track.file ? (
+                      <div className="flex items-center gap-2 text-sm">
+                        <FileAudio size={16} className="text-spotify-green" />
+                        <span className="text-white">{track.file.name}</span>
+                        <span className="text-spotify-text-gray">
+                          ({(track.file.size / 1024 / 1024).toFixed(2)} MB)
+                        </span>
+                      </div>
+                    ) : (
+                      <label className="block">
+                        <input
+                          type="file"
+                          accept="audio/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleTrackFileUpload(track.id, file);
+                          }}
+                        />
+                        <div className="border border-dashed border-white/20 rounded px-4 py-2 text-sm text-spotify-text-gray hover:border-spotify-green/50 cursor-pointer text-center">
+                          Click to upload track file
+                        </div>
+                      </label>
+                    )}
+
+                    {/* ISRC */}
+                    <div>
+                      <label className="block text-xs font-medium mb-1 text-spotify-text-gray">
+                        ISRC (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={track.isrc}
+                        onChange={(e) => updateTrack(track.id, 'isrc', e.target.value)}
+                        className="w-full bg-black/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                        placeholder="USRC17607839"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex flex-col gap-2">
+                    <button
+                      onClick={() => moveTrack(track.id, 'up')}
+                      disabled={track.trackNumber === 1}
+                      className="p-2 rounded hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed"
+                      title="Move up"
+                    >
+                      ↑
+                    </button>
+                    <button
+                      onClick={() => moveTrack(track.id, 'down')}
+                      disabled={track.trackNumber === tracks.length}
+                      className="p-2 rounded hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed"
+                      title="Move down"
+                    >
+                      ↓
+                    </button>
+                    {tracks.length > 1 && (
+                      <button
+                        onClick={() => removeTrack(track.id)}
+                        className="p-2 rounded hover:bg-red-600/20 text-red-400"
+                        title="Remove track"
+                      >
+                        <X size={16} />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Add track button */}
+          {((releaseType === 'ep' && tracks.length < 6) || (releaseType === 'lp' && tracks.length < 30)) && (
+            <button
+              onClick={addTrack}
+              className="btn-secondary w-full mb-6 flex items-center justify-center gap-2"
+            >
+              <Plus size={16} />
+              Add Another Track
+            </button>
+          )}
+
+          {/* Validation and continue */}
+          {tracks.length >= (releaseType === 'ep' ? 2 : 7) && tracks.every(t => t.file && t.trackName) && (
+            <button
+              onClick={() => setStep(2)}
+              className="btn-primary w-full"
+            >
+              Continue to Basic Info ({tracks.length} {tracks.length === 1 ? 'track' : 'tracks'})
             </button>
           )}
         </div>
@@ -359,20 +916,42 @@ function UploadPageContent() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Step 2: Basic Track Information</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Step 2: Basic {releaseType === 'single' ? 'Track' : releaseType === 'ep' ? 'EP' : 'Album'} Information
+          </h2>
 
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Track Title *</label>
-              <input
-                type="text"
-                value={metadata.trackName}
-                onChange={(e) => setMetadata({ ...metadata, trackName: e.target.value })}
-                className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
-                placeholder="Enter exact track title"
-                required
-              />
-            </div>
+            {/* Album/EP Name for multi-track releases */}
+            {(releaseType === 'ep' || releaseType === 'lp') && (
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {releaseType === 'ep' ? 'EP' : 'Album'} Name *
+                </label>
+                <input
+                  type="text"
+                  value={metadata.albumName}
+                  onChange={(e) => setMetadata({ ...metadata, albumName: e.target.value })}
+                  className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                  placeholder={`Enter ${releaseType === 'ep' ? 'EP' : 'album'} name`}
+                  required
+                />
+              </div>
+            )}
+
+            {/* Track Title - only for singles */}
+            {releaseType === 'single' && (
+              <div>
+                <label className="block text-sm font-medium mb-2">Track Title *</label>
+                <input
+                  type="text"
+                  value={metadata.trackName}
+                  onChange={(e) => setMetadata({ ...metadata, trackName: e.target.value })}
+                  className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                  placeholder="Enter exact track title"
+                  required
+                />
+              </div>
+            )}
 
             <div>
               <label className="block text-sm font-medium mb-2">Artist Full Legal Name (Primary) *</label>
@@ -418,16 +997,19 @@ function UploadPageContent() {
               </button>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">Album/EP Title (Optional)</label>
-              <input
-                type="text"
-                value={metadata.album}
-                onChange={(e) => setMetadata({ ...metadata, album: e.target.value })}
-                className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
-                placeholder="Enter album/EP title"
-              />
-            </div>
+            {/* Album field only for singles (EP/LP uses albumName field above) */}
+            {releaseType === 'single' && (
+              <div>
+                <label className="block text-sm font-medium mb-2">Album/EP Title (Optional)</label>
+                <input
+                  type="text"
+                  value={metadata.album}
+                  onChange={(e) => setMetadata({ ...metadata, album: e.target.value })}
+                  className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
+                  placeholder="Enter album/EP title"
+                />
+              </div>
+            )}
 
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -491,17 +1073,42 @@ function UploadPageContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Cover Art * (JPEG/PNG, min 1400x1400px)</label>
+              <label className="block text-sm font-medium mb-2">Cover Art * (JPEG/PNG, minimum 1000x1000px)</label>
               <input
                 type="file"
                 accept="image/jpeg,image/png"
-                onChange={(e) => e.target.files?.[0] && setCoverArtFile(e.target.files[0])}
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    // Validate dimensions
+                    const img = new Image();
+                    const objectUrl = URL.createObjectURL(file);
+                    img.onload = () => {
+                      URL.revokeObjectURL(objectUrl);
+                      if (img.width < 1000 || img.height < 1000) {
+                        alert(`Cover art must be at least 1000x1000px. Your image is ${img.width}x${img.height}px.`);
+                        e.target.value = ''; // Clear input
+                        setCoverArtFile(null);
+                      } else {
+                        setCoverArtFile(file);
+                      }
+                    };
+                    img.onerror = () => {
+                      URL.revokeObjectURL(objectUrl);
+                      alert('Failed to load image. Please try a different file.');
+                      e.target.value = '';
+                      setCoverArtFile(null);
+                    };
+                    img.src = objectUrl;
+                  }
+                }}
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                 required
               />
               {coverArtFile && (
                 <p className="text-xs text-spotify-text-gray mt-1">Selected: {coverArtFile.name}</p>
               )}
+              <p className="text-xs text-spotify-text-gray mt-1">⚠️ Artwork is required and must be at least 1000x1000 pixels</p>
             </div>
           </div>
 
@@ -1022,16 +1629,20 @@ function UploadPageContent() {
             <h3 className="font-bold mb-2 flex items-center gap-2">
               <Info size={20} /> Legal Notice
             </h3>
-            <p className="text-sm text-white/80">
-              By submitting this upload, you acknowledge that false declarations may result in:
-              <ul className="list-disc list-inside mt-2 space-y-1">
+            <div className="text-sm text-white/80">
+              <p className="mb-2">
+                By submitting this upload, you acknowledge that false declarations may result in:
+              </p>
+              <ul className="list-disc list-inside mt-2 space-y-1 mb-2">
                 <li>Immediate content takedown without notice</li>
                 <li>Account termination and permanent ban</li>
                 <li>Legal liability for copyright infringement</li>
                 <li>Exposure to DMCA takedown notices and lawsuits</li>
               </ul>
-              All declarations are timestamped and stored for legal audits. Your IP address is recorded.
-            </p>
+              <p>
+                All declarations are timestamped and stored for legal audits. Your IP address is recorded.
+              </p>
+            </div>
           </div>
 
           <div className="flex gap-4 mt-6">
@@ -1230,31 +1841,65 @@ function UploadPageContent() {
             )}
           </div>
 
+          {/* Success Message */}
+          {submitSuccess && (
+            <div className="mb-6 bg-green-600/20 border border-green-600/50 rounded-lg p-4">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="text-green-400" size={20} />
+                <p className="text-sm text-white font-medium">
+                  Track published successfully and is now live! Redirecting to dashboard...
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {submitError && (
+            <div className="mb-6 bg-red-600/20 border border-red-600/50 rounded-lg p-4">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="text-red-400" size={20} />
+                <p className="text-sm text-white/80">
+                  <strong>Error:</strong> {submitError}
+                </p>
+              </div>
+            </div>
+          )}
+
           <div className="mt-6 bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-4">
             <p className="text-sm text-white/80">
-              <strong>Final Submission:</strong> By clicking "Submit for Review", you confirm all information is accurate 
-              and all legal warranties are true. Submission will be reviewed for compliance before distribution.
+              <strong>Final Submission:</strong> By clicking "Publish Now", you confirm all information is accurate 
+              and all legal warranties are true. Your track will be published live immediately.
             </p>
           </div>
 
           <div className="flex gap-4 mt-6">
-            <button onClick={() => setStep(5)} className="btn-secondary">
+            <button 
+              onClick={() => setStep(5)} 
+              className="btn-secondary"
+              disabled={isSubmitting || submitSuccess}
+            >
               Back
             </button>
-            <button className="btn-primary flex-1">
-              Submit for Review
+            <button 
+              onClick={handleSubmit}
+              disabled={isSubmitting || submitSuccess}
+              className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Publishing...' : submitSuccess ? 'Published!' : 'Publish Now'}
             </button>
           </div>
         </div>
       )}
-    </div>
-  );
-}
 
-export default function UploadPage() {
-  return (
-    <ProtectedRoute requireAuth requireArtist>
-      <UploadPageContent />
-    </ProtectedRoute>
+      {/* Dashboard Link at Bottom */}
+      <div className="mt-8 pt-6 border-t border-white/10 text-center">
+        <Link 
+          href="/dashboard/artist"
+          className="text-spotify-green hover:text-[#8a1dd0] text-sm font-medium transition-colors inline-flex items-center gap-1"
+        >
+          ← Back to Artist Dashboard
+        </Link>
+      </div>
+    </div>
   );
 }

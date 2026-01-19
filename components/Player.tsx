@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useState, useCallback, useMemo, memo } from 'react';
-import dynamic from 'next/dynamic';
-import { Shuffle, SkipBack, SkipForward, Repeat, List, Maximize2, Music, Settings } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Shuffle, SkipBack, SkipForward, Repeat, List } from 'lucide-react';
 import { usePlayerStore } from '@/stores/playerStore';
 import { audioPlayer } from '@/lib/player';
 import PlayButton from './PlayButton';
@@ -11,33 +10,15 @@ import VolumeControl from './VolumeControl';
 import MoodWidget from './mood/MoodWidget';
 import PictureInPicturePlayer from './PictureInPicturePlayer';
 import QualitySelector from './QualitySelector';
+import QueuePanel from './QueuePanel';
+import FullScreenPlayer from './FullScreenPlayer';
 import AudioQualityBadge from './AudioQualityBadge';
-import ControlButton from './ControlButton';
+import ImageWithFallback from './ImageWithFallback';
 import { formatDuration } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { Maximize2 } from 'lucide-react';
 import type { Quality } from './QualitySelector';
 
-// Lazy load heavy components for better initial bundle size using Next.js dynamic import
-const QueuePanel = dynamic(() => import('./QueuePanel'), { ssr: false });
-const FullScreenPlayer = dynamic(() => import('./FullScreenPlayer'), { ssr: false });
-const Equalizer = dynamic(() => import('./Equalizer'), { ssr: false });
-
-/**
- * Main audio player component with Spotify-style UI
- * 
- * Features:
- * - Playback controls (play, pause, skip, shuffle, repeat)
- * - Progress tracking and seeking
- * - Volume control
- * - Queue management
- * - Full-screen player
- * - Picture-in-picture mode
- * - Quality selection
- * - Mood widget integration
- * 
- * @component
- */
-function Player() {
+export default function Player() {
   const {
     currentTrack,
     isPlaying,
@@ -57,53 +38,31 @@ function Player() {
   const [quality, setQuality] = useState<Quality>('high');
   const [isQueueOpen, setIsQueueOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [showEQ, setShowEQ] = useState(false);
   
   // Detect available formats from track
-  const availableFormats = useMemo(() => {
-    return currentTrack?.format 
-      ? [currentTrack.format.toLowerCase()]
-      : ['mp3'];
-  }, [currentTrack?.format]);
+  const availableFormats = currentTrack?.format 
+    ? [currentTrack.format.toLowerCase()]
+    : ['mp3'];
 
-  // Calculate current time in seconds
-  const currentTime = useMemo(() => {
-    return currentTrack 
-      ? (progress / 100) * currentTrack.duration 
-      : 0;
-  }, [currentTrack, progress]);
-
-  // Handle track loading with error handling
   useEffect(() => {
-    if (!currentTrack) {
-      setIsLoading(false);
-      setError(null);
-      return;
-    }
-
-    setIsLoading(true);
-    setError(null);
-    
-    const wasPlaying = isPlaying;
-    
-    // Set up load callback to auto-play if was playing
-    audioPlayer.setOnLoadCallback(() => {
-      setIsLoading(false);
-      if (wasPlaying) {
-        audioPlayer.play();
-        setIsPlaying(true);
-      }
-    });
-    
-    try {
+    if (currentTrack) {
+      console.log('🎧 Player: Loading track:', currentTrack.name, currentTrack.audioUrl);
+      const wasPlaying = isPlaying;
+      
+      // Set up load callback to auto-play if was playing
+      audioPlayer.setOnLoadCallback(() => {
+        if (wasPlaying) {
+          console.log('✅ Track loaded, resuming playback');
+          audioPlayer.play();
+          setIsPlaying(true);
+        }
+      });
+      
       audioPlayer.loadTrack(
         currentTrack.audioUrl,
         currentTrack.id,
         (prog) => setProgress(prog),
         () => {
-          // Handle track end
           if (repeat === 'one') {
             audioPlayer.play();
           } else if (repeat === 'all') {
@@ -116,251 +75,310 @@ function Player() {
       
       // Reset progress when loading new track
       setProgress(0);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to load track';
-      setError(errorMessage);
-      setIsLoading(false);
-      console.error('Error loading track:', err);
+    } else {
+      console.log('⚠️ Player: No currentTrack set');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTrack?.id, repeat]); // Only depend on track ID to avoid re-loading
 
-  // Handle play/pause state changes
   useEffect(() => {
-    if (!currentTrack || isLoading) return;
+    // Skip if no track loaded
+    if (!currentTrack) return;
     
+    console.log('🎮 Player: isPlaying changed to:', isPlaying);
     if (isPlaying) {
+      console.log('▶️ Player: Starting playback');
       audioPlayer.play();
     } else {
+      console.log('⏸️ Player: Pausing playback');
       audioPlayer.pause();
     }
-  }, [isPlaying, currentTrack, isLoading]);
+  }, [isPlaying, currentTrack]);
 
-  // Handle volume changes
   useEffect(() => {
     audioPlayer.setVolume(volume);
   }, [volume]);
 
-  const handlePlayPause = useCallback(() => {
-    if (!currentTrack || isLoading) return;
+  const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
-  }, [currentTrack, isPlaying, isLoading, setIsPlaying]);
+  };
 
-  const handleSeek = useCallback((position: number) => {
-    if (!currentTrack) return;
+  const handleSeek = (position: number) => {
     const seconds = position / 1000;
     audioPlayer.seek(seconds);
-    const newProgress = position > 0 
+    const newProgress = position > 0 && currentTrack 
       ? (position / currentTrack.duration) * 100 
       : 0;
     setProgress(newProgress);
-  }, [currentTrack, setProgress]);
+  };
 
-  const handleShuffleToggle = useCallback(() => {
-    if (!currentTrack) return;
-    setShuffle(!shuffle);
-  }, [currentTrack, shuffle, setShuffle]);
-
-  const handleRepeatToggle = useCallback(() => {
-    if (!currentTrack) return;
-    const modes: ('off' | 'all' | 'one')[] = ['off', 'all', 'one'];
-    const currentIndex = modes.indexOf(repeat);
-    setRepeat(modes[(currentIndex + 1) % modes.length]);
-  }, [currentTrack, repeat, setRepeat]);
-
-  const handlePrevious = useCallback(() => {
-    if (!currentTrack) return;
-    playPrevious();
-  }, [currentTrack, playPrevious]);
-
-  const handleNext = useCallback(() => {
-    if (!currentTrack) return;
-    playNext();
-  }, [currentTrack, playNext]);
-
-  const handleQueueToggle = useCallback(() => {
-    if (!currentTrack) return;
-    setIsQueueOpen(true);
-  }, [currentTrack]);
-
-  const handleFullScreenToggle = useCallback(() => {
-    if (!currentTrack) return;
-    setIsFullScreen(true);
-  }, [currentTrack]);
-
-  // Repeat button label
-  const repeatLabel = useMemo(() => {
-    switch (repeat) {
-      case 'off':
-        return 'Repeat off';
-      case 'all':
-        return 'Repeat all';
-      case 'one':
-        return 'Repeat one';
-    }
-  }, [repeat]);
-
-  // Keyboard shortcuts (moved after callbacks to fix dependency warning)
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      // Don't trigger if user is typing in an input
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
-        return;
-      }
-
-      switch (e.code) {
-        case 'Space':
-          e.preventDefault();
-          if (currentTrack) {
-            handlePlayPause();
-          }
-          break;
-        case 'ArrowLeft':
-          e.preventDefault();
-          if (currentTrack && e.shiftKey) {
-            playPrevious();
-          } else if (currentTrack) {
-            handleSeek(Math.max(0, currentTime - 10) * 1000);
-          }
-          break;
-        case 'ArrowRight':
-          e.preventDefault();
-          if (currentTrack && e.shiftKey) {
-            playNext();
-          } else if (currentTrack) {
-            handleSeek(Math.min(currentTrack.duration, currentTime + 10) * 1000);
-          }
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          setVolume(Math.min(100, volume + 5));
-          break;
-        case 'ArrowDown':
-          e.preventDefault();
-          setVolume(Math.max(0, volume - 5));
-          break;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentTrack, currentTime, volume, setVolume, handlePlayPause, handleSeek, playNext, playPrevious]);
+  const currentTime = currentTrack 
+    ? (progress / 100) * currentTrack.duration 
+    : 0;
 
   return (
     <div 
-      className="fixed bottom-0 left-0 right-0 h-[90px] bg-[#181818] border-t border-[#282828] px-4 z-50"
-      role="region"
-      aria-label="Audio player"
+      className="fixed bottom-0 left-0 right-0 h-player-height bg-spotify-dark-gray border-t border-spotify-light-gray px-4 z-50"
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '90px',
+        backgroundColor: '#181818',
+        borderTop: '1px solid #282828',
+        padding: '0 16px',
+        zIndex: 50
+      }}
     >
       <div 
-        className="flex items-center justify-between h-full max-w-screen-2xl mx-auto gap-4"
+        className="flex items-center justify-between h-full max-w-screen-2xl mx-auto"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '100%',
+          maxWidth: '1536px',
+          margin: '0 auto',
+          gap: '16px'
+        }}
       >
-        {/* Left - Now Playing - Exact Spotify: flex-basis 30% */}
-        <div className="flex items-center gap-4 flex-[1_1_30%] min-w-0">
+        {/* Left - Now Playing - Exact Spotify Style */}
+        <div 
+          className="flex items-center gap-4 flex-1 min-w-0"
+          style={{
+            gap: '16px',
+            minWidth: 0,
+            flex: '1 1 30%'
+          }}
+        >
           <div 
-            className="w-14 h-14 bg-[#282828] rounded flex-shrink-0"
-            role="img"
-            aria-label={currentTrack ? `${currentTrack.name} cover art` : 'No track'}
+            className="w-14 h-14 bg-spotify-light-gray rounded flex-shrink-0"
+            style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '4px',
+              backgroundColor: '#282828',
+              flexShrink: 0
+            }}
           >
             {currentTrack?.coverArt ? (
-              <img
+              <ImageWithFallback
                 src={currentTrack.coverArt}
-                alt={`${currentTrack.name} by ${currentTrack.artist}`}
+                alt={currentTrack.name}
                 className="w-full h-full object-cover rounded"
-                loading="lazy"
-                onError={(e) => {
-                  // Fallback to placeholder on image load error
-                  e.currentTarget.style.display = 'none';
-                }}
+                style={{ borderRadius: '4px' }}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <Music size={24} className="text-spotify-text-gray" />
+              <div 
+                className="w-full h-full flex items-center justify-center"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <span className="text-2xl" style={{ fontSize: '24px' }}>🎵</span>
               </div>
             )}
           </div>
-          
           {currentTrack ? (
             <>
-              <div className="min-w-0 flex-1">
-                <div className="text-sm leading-5 font-normal text-white truncate">
+              <div className="min-w-0" style={{ minWidth: 0 }}>
+                <div 
+                  className="text-sm font-medium text-white truncate"
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 400,
+                    color: '#FFFFFF'
+                  }}
+                >
                   {currentTrack.name}
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="text-[13px] leading-4 text-spotify-text-gray truncate">
+                <div 
+                  className="flex items-center gap-2"
+                  style={{ gap: '8px' }}
+                >
+                  <div 
+                    className="text-xs text-spotify-text-gray truncate"
+                    style={{
+                      fontSize: '13px',
+                      lineHeight: '16px',
+                      color: '#B3B3B3'
+                    }}
+                  >
                     {currentTrack.artist}
                   </div>
                   <AudioQualityBadge track={currentTrack} className="flex-shrink-0" />
                 </div>
-                {error && (
-                  <div className="text-xs text-red-400 mt-1" role="alert">
-                    {error}
-                  </div>
-                )}
-                {isLoading && (
-                  <div className="text-xs text-spotify-text-gray mt-1" aria-live="polite">
-                    Loading...
-                  </div>
-                )}
               </div>
               <MoodWidget track={currentTrack} />
             </>
           ) : (
-            <div className="text-sm leading-5 text-spotify-text-gray">
+            <div 
+              className="text-sm text-spotify-text-gray"
+              style={{
+                fontSize: '14px',
+                lineHeight: '20px',
+                color: '#B3B3B3'
+              }}
+            >
               No track selected
             </div>
           )}
         </div>
 
-        {/* Center - Controls - Exact Spotify: flex-basis 40%, max-width 722px */}
-        <div className="flex flex-col items-center gap-2 flex-[1_1_40%] max-w-[722px]">
+        {/* Center - Controls - Exact Spotify Style */}
+        <div 
+          className="flex flex-col items-center gap-2 flex-1"
+          style={{
+            flex: '1 1 40%',
+            gap: '8px',
+            maxWidth: '722px'
+          }}
+        >
           <div 
-            className="flex items-center gap-4"
+            className="flex items-center gap-2"
+            style={{
+              gap: '16px',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
-            <ControlButton
-              onClick={handleShuffleToggle}
-              disabled={!currentTrack || isLoading}
-              active={shuffle}
-              ariaLabel={shuffle ? 'Shuffle on' : 'Shuffle off'}
-              ariaPressed={shuffle}
+            <button
+              onClick={() => setShuffle(!shuffle)}
+              disabled={!currentTrack}
+              aria-label={shuffle ? 'Shuffle on' : 'Shuffle off'}
+              aria-pressed={shuffle}
+              className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                shuffle ? 'text-spotify-green' : ''
+              }`}
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: currentTrack ? 'pointer' : 'not-allowed',
+                color: shuffle ? '#7209B7' : '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                opacity: currentTrack ? 1 : 0.5,
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                if (currentTrack && !shuffle) {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!shuffle) {
+                  e.currentTarget.style.color = '#B3B3B3';
+                }
+              }}
             >
-              <Shuffle size={16} />
-            </ControlButton>
-            
-            <ControlButton
-              onClick={handlePrevious}
-              disabled={!currentTrack || isLoading}
-              ariaLabel="Previous track"
+              <Shuffle size={16} style={{ width: '16px', height: '16px' }} />
+            </button>
+            <button
+              onClick={playPrevious}
+              disabled={!currentTrack}
+              aria-label="Previous track"
+              className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: currentTrack ? 'pointer' : 'not-allowed',
+                color: '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                opacity: currentTrack ? 1 : 0.5,
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                if (currentTrack) {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#B3B3B3';
+              }}
             >
-              <SkipBack size={20} />
-            </ControlButton>
-            
+              <SkipBack size={20} style={{ width: '20px', height: '20px' }} />
+            </button>
             <PlayButton 
               isPlaying={isPlaying} 
               onClick={handlePlayPause} 
               size="md"
-              disabled={!currentTrack || isLoading}
+              disabled={!currentTrack}
             />
-            
-            <ControlButton
-              onClick={handleNext}
-              disabled={!currentTrack || isLoading}
-              ariaLabel="Next track"
+            <button
+              onClick={playNext}
+              disabled={!currentTrack}
+              aria-label="Next track"
+              className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: currentTrack ? 'pointer' : 'not-allowed',
+                color: '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                opacity: currentTrack ? 1 : 0.5,
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                if (currentTrack) {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#B3B3B3';
+              }}
             >
-              <SkipForward size={20} />
-            </ControlButton>
-            
-            <ControlButton
-              onClick={handleRepeatToggle}
-              disabled={!currentTrack || isLoading}
-              active={repeat !== 'off'}
-              ariaLabel={repeatLabel}
-              ariaPressed={repeat !== 'off'}
+              <SkipForward size={20} style={{ width: '20px', height: '20px' }} />
+            </button>
+            <button
+              onClick={() => {
+                const modes: ('off' | 'all' | 'one')[] = ['off', 'all', 'one'];
+                const currentIndex = modes.indexOf(repeat);
+                setRepeat(modes[(currentIndex + 1) % modes.length]);
+              }}
+              disabled={!currentTrack}
+              aria-label={`Repeat ${repeat === 'off' ? 'off' : repeat === 'all' ? 'all' : 'one'}`}
+              aria-pressed={repeat !== 'off'}
+              className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                repeat !== 'off' ? 'text-spotify-green' : ''
+              }`}
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: currentTrack ? 'pointer' : 'not-allowed',
+                color: repeat !== 'off' ? '#7209B7' : '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                opacity: currentTrack ? 1 : 0.5,
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onMouseEnter={(e) => {
+                if (currentTrack && repeat === 'off') {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (repeat === 'off') {
+                  e.currentTarget.style.color = '#B3B3B3';
+                }
+              }}
             >
-              <Repeat size={16} />
-            </ControlButton>
+              <Repeat size={16} style={{ width: '16px', height: '16px' }} />
+            </button>
           </div>
-          
           {currentTrack && (
             <ProgressBar
               progress={progress}
@@ -371,8 +389,16 @@ function Player() {
           )}
         </div>
 
-        {/* Right - Volume & Extras - Exact Spotify: flex-basis 30% */}
-        <div className="flex items-center gap-4 flex-[1_1_30%] justify-end">
+        {/* Right - Volume & Extras - Exact Spotify Style */}
+        <div 
+          className="flex items-center gap-4 flex-1 justify-end"
+          style={{
+            flex: '1 1 30%',
+            gap: '16px',
+            justifyContent: 'flex-end',
+            alignItems: 'center'
+          }}
+        >
           {currentTrack && (
             <QualitySelector
               currentQuality={quality}
@@ -380,64 +406,67 @@ function Player() {
               onQualityChange={setQuality}
             />
           )}
-          
+          <button
+            onClick={() => setIsQueueOpen(true)}
+            disabled={!currentTrack}
+            className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: currentTrack ? 'pointer' : 'not-allowed',
+              color: '#B3B3B3',
+              transition: 'color 200ms ease-out',
+              opacity: currentTrack ? 1 : 0.5,
+              padding: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            title="Queue"
+            onMouseEnter={(e) => {
+              if (currentTrack) {
+                e.currentTarget.style.color = '#FFFFFF';
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#B3B3B3';
+            }}
+          >
+            <List size={20} style={{ width: '20px', height: '20px' }} />
+          </button>
           {currentTrack && (
             <button
-              onClick={() => setShowEQ(!showEQ)}
-              className={cn(
-                "p-2 rounded-lg transition-colors",
-                showEQ
-                  ? "bg-spotify-green text-black"
-                  : "hover:bg-white/10 text-spotify-text-gray hover:text-white"
-              )}
-              aria-label="Toggle equalizer"
-              title="Equalizer"
+              onClick={() => setIsFullScreen(true)}
+              className="text-spotify-text-gray hover:text-white transition-colors"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#B3B3B3',
+                transition: 'color 200ms ease-out',
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              title="Full screen"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#FFFFFF';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#B3B3B3';
+              }}
             >
-              <Settings size={20} />
+              <Maximize2 size={20} style={{ width: '20px', height: '20px' }} />
             </button>
           )}
-          
-          <ControlButton
-            onClick={handleQueueToggle}
-            disabled={!currentTrack}
-            ariaLabel="Open queue"
-            title="Queue"
-          >
-            <List size={20} />
-          </ControlButton>
-          
-          {currentTrack && (
-            <>
-              <ControlButton
-                onClick={handleFullScreenToggle}
-                ariaLabel="Open full screen player"
-                title="Full screen"
-              >
-                <Maximize2 size={20} />
-              </ControlButton>
-              <PictureInPicturePlayer />
-            </>
-          )}
-          
+          {currentTrack && <PictureInPicturePlayer />}
           <VolumeControl volume={volume} onVolumeChange={setVolume} />
         </div>
       </div>
       
-      {/* EQ Panel (slides up from bottom) */}
-      {showEQ && currentTrack && (
-        <div className="absolute bottom-[90px] left-0 right-0 bg-[#181818] border-t border-[#282828] p-4 max-h-[400px] overflow-y-auto">
-          <Equalizer compact={false} />
-        </div>
-      )}
-      
-      {isQueueOpen && (
-        <QueuePanel isOpen={isQueueOpen} onClose={() => setIsQueueOpen(false)} />
-      )}
-      {isFullScreen && (
-        <FullScreenPlayer isOpen={isFullScreen} onClose={() => setIsFullScreen(false)} />
-      )}
+      <QueuePanel isOpen={isQueueOpen} onClose={() => setIsQueueOpen(false)} />
+      <FullScreenPlayer isOpen={isFullScreen} onClose={() => setIsFullScreen(false)} />
     </div>
   );
 }
-
-export default memo(Player);

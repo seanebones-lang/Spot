@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useArtistSignupStore } from '@/stores/artistSignupStore';
-import { Check, FileText, Download, AlertCircle } from 'lucide-react';
+import { getUserFriendlyError, formatErrorWithRecovery, getErrorRecovery } from '@/lib/errorMessages';
+import { Check, FileText, Download, AlertCircle, Music, Mic, BookOpen, Radio } from 'lucide-react';
 
 const legalDocuments = [
   { id: 'artist-agreement', name: 'Artist Agreement', required: true },
@@ -12,27 +13,28 @@ const legalDocuments = [
   { id: 'terms-of-service', name: 'Platform Terms of Service (Artist)', required: true },
 ];
 
+const mediumOptions = [
+  { id: 'artist' as const, label: 'Musician/Artist', icon: Music, description: 'Upload tracks, albums, EPs, and LPs' },
+  { id: 'podcaster' as const, label: 'Podcaster', icon: Mic, description: 'Upload and manage podcast episodes' },
+  { id: 'audiobook' as const, label: 'Audiobook Creator', icon: BookOpen, description: 'Upload and distribute audiobooks' },
+  { id: 'radio' as const, label: 'Radio Station Host', icon: Radio, description: 'Manage radio station content' },
+];
+
 export default function ArtistSignupPage() {
   const {
     currentStep,
+    selectedMediums,
     documentsSigned,
     w9Completed,
     proRegistration,
     approvalStatus,
     setCurrentStep,
+    toggleMedium,
     markDocumentSigned,
     setW9Completed,
     setPRORegistration,
     setApprovalStatus,
   } = useArtistSignupStore();
-
-  // Step 1 form state (Issue-3: Add validation)
-  const [step1Data, setStep1Data] = useState({
-    artistName: '',
-    email: '',
-    password: '',
-  });
-  const [step1Errors, setStep1Errors] = useState<Record<string, string>>({});
 
   const [w9Data, setW9Data] = useState({
     ssn: '',
@@ -40,42 +42,129 @@ export default function ArtistSignupPage() {
     businessName: '',
     address: '',
     taxClassification: '',
+    completed: false,
   });
+  const [digitalSignature, setDigitalSignature] = useState('');
+  const [accountInfo, setAccountInfo] = useState({
+    artistName: '',
+    email: '',
+    password: '',
+  });
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const allDocumentsSigned = legalDocuments.every(doc => documentsSigned.includes(doc.id));
 
-  // Validation for Step 1 (Issue-3)
-  const validateStep1 = (): boolean => {
-    const newErrors: Record<string, string> = {};
-    
-    if (!step1Data.artistName.trim()) {
-      newErrors.artistName = 'Artist/Management name is required';
+  // Validation function for Step 2 (Account Creation)
+  const validateStep2 = (): boolean => {
+    const errors: Record<string, string> = {};
+
+    if (!accountInfo.artistName.trim()) {
+      errors.artistName = 'Artist/Management name is required';
+    } else if (accountInfo.artistName.trim().length < 2) {
+      errors.artistName = 'Name must be at least 2 characters';
     }
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!step1Data.email || !emailRegex.test(step1Data.email)) {
-      newErrors.email = 'Valid email address is required';
+    if (!accountInfo.email) {
+      errors.email = 'Email address is required';
+    } else if (!emailRegex.test(accountInfo.email)) {
+      errors.email = 'Please enter a valid email address (e.g., name@example.com)';
     }
-    
-    if (!step1Data.password || step1Data.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+
+    if (!accountInfo.password) {
+      errors.password = 'Password is required';
+    } else if (accountInfo.password.length < 8) {
+      errors.password = 'Password must be at least 8 characters';
+    } else if (!/(?=.*[a-z])/.test(accountInfo.password)) {
+      errors.password = 'Password must contain at least one lowercase letter';
+    } else if (!/(?=.*[A-Z])/.test(accountInfo.password)) {
+      errors.password = 'Password must contain at least one uppercase letter';
+    } else if (!/(?=.*\d)/.test(accountInfo.password)) {
+      errors.password = 'Password must contain at least one number';
     }
-    
-    setStep1Errors(newErrors);
-    return Object.keys(newErrors).length === 0;
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
-  const handleStep1Continue = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateStep1()) {
-      setCurrentStep(2);
+  const handleBlur = (field: string) => {
+    setTouched({ ...touched, [field]: true });
+    if (currentStep === 2) {
+      validateStep2();
     }
   };
 
-  const handleSubmit = () => {
-    if (allDocumentsSigned && w9Completed) {
+  const handleSubmit = async () => {
+    if (!allDocumentsSigned || !w9Completed || !digitalSignature.trim()) {
+      setSubmitError('Please complete all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Get auth token from store (user should be logged in)
+      const token = localStorage.getItem('auth-storage');
+      let authToken = null;
+      if (token) {
+        try {
+          const authData = JSON.parse(token);
+          authToken = authData?.state?.token;
+        } catch (e) {
+          // Token not found
+        }
+      }
+
+      if (!authToken) {
+        setSubmitError(getUserFriendlyError('AUTH_REQUIRED'));
+        setIsSubmitting(false);
+        return;
+      }
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const endpoint = apiUrl ? `${apiUrl}/api/artist/signup` : '/api/artist/signup';
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({
+          selectedMediums,
+          accountInfo,
+          documentsSigned,
+          w9Data: {
+            ...w9Data,
+            taxId: w9Data.ssn || w9Data.ein,
+            completed: w9Completed,
+          },
+          proRegistration,
+          digitalSignature,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        // Use server error message if available, otherwise map error code
+        const errorMessage = result.error || result.errorCode || 'Failed to submit application';
+        throw new Error(errorMessage);
+      }
+
+      // Success - update approval status
       setApprovalStatus('pending');
-      setCurrentStep(6);
+      setCurrentStep(7);
+    } catch (error) {
+      console.error('Signup submission error:', error);
+      // Use user-friendly error message
+      const { message } = formatErrorWithRecovery(error);
+      setSubmitError(message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -97,7 +186,7 @@ export default function ArtistSignupPage() {
               >
                 {step < currentStep ? <Check size={20} /> : step}
               </div>
-              {step < 6 && (
+              {step < 7 && (
                 <div
                   className={`w-16 h-1 mx-1 ${
                     step < currentStep ? 'bg-spotify-green' : 'bg-spotify-light-gray'
@@ -108,6 +197,7 @@ export default function ArtistSignupPage() {
           ))}
         </div>
         <div className="flex justify-between text-xs text-spotify-text-gray">
+          <span>Mediums</span>
           <span>Account</span>
           <span>Documents</span>
           <span>Tax Forms</span>
@@ -117,97 +207,202 @@ export default function ArtistSignupPage() {
         </div>
       </div>
 
-      {/* Step 1: Account Creation */}
+      {/* Step 1: Medium Selection */}
       {currentStep === 1 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Step 1: Account Creation</h2>
-          <form onSubmit={handleStep1Continue} className="space-y-4">
+          <h2 className="text-2xl font-bold mb-4">Step 1: Select Your Creator Mediums</h2>
+          <p className="text-sm text-white/80 mb-6">
+            Select all the mediums you want to create content for. You can select multiple options.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            {mediumOptions.map((medium) => {
+              const Icon = medium.icon;
+              const isSelected = selectedMediums.includes(medium.id);
+              return (
+                <button
+                  key={medium.id}
+                  onClick={() => toggleMedium(medium.id)}
+                  className={`p-6 rounded-lg border-2 transition-all text-left ${
+                    isSelected
+                      ? 'border-spotify-green bg-spotify-green/10'
+                      : 'border-spotify-light-gray bg-spotify-dark-gray hover:border-white/30'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`p-3 rounded-lg ${
+                      isSelected ? 'bg-spotify-green/20' : 'bg-spotify-light-gray'
+                    }`}>
+                      <Icon 
+                        size={32} 
+                        className={isSelected ? 'text-spotify-green' : 'text-spotify-text-gray'} 
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-bold text-lg">{medium.label}</h3>
+                        <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                          isSelected 
+                            ? 'border-spotify-green bg-spotify-green' 
+                            : 'border-spotify-text-gray bg-transparent'
+                        }`}>
+                          {isSelected && <Check size={14} className="text-black" />}
+                        </div>
+                      </div>
+                      <p className="text-sm text-spotify-text-gray">{medium.description}</p>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {selectedMediums.length === 0 && (
+            <div className="mb-6 p-4 bg-yellow-600/20 border border-yellow-600/50 rounded-lg">
+              <p className="text-sm text-white/80">
+                <strong className="text-yellow-500">Please select at least one medium</strong> to continue.
+              </p>
+            </div>
+          )}
+
+          <button
+            onClick={() => setCurrentStep(2)}
+            disabled={selectedMediums.length === 0}
+            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Continue to Account Creation
+          </button>
+        </div>
+      )}
+
+      {/* Step 2: Account Creation */}
+      {currentStep === 2 && (
+        <div className="bg-spotify-light-gray rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-4">Step 2: Account Creation</h2>
+          <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Artist/Management Name *</label>
+              <label htmlFor="artistName" className="block text-sm font-medium mb-2">
+                Artist/Management Name
+              </label>
               <input
+                id="artistName"
                 type="text"
-                value={step1Data.artistName}
+                value={accountInfo.artistName}
                 onChange={(e) => {
-                  setStep1Data({ ...step1Data, artistName: e.target.value });
-                  if (step1Errors.artistName) {
-                    setStep1Errors({ ...step1Errors, artistName: '' });
+                  setAccountInfo({ ...accountInfo, artistName: e.target.value });
+                  // Clear error when user starts typing
+                  if (validationErrors.artistName) {
+                    setValidationErrors({ ...validationErrors, artistName: '' });
                   }
                 }}
-                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green ${
-                  step1Errors.artistName ? 'border-2 border-red-500' : ''
+                onBlur={() => handleBlur('artistName')}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
+                  touched.artistName && validationErrors.artistName
+                    ? 'border-2 border-red-500 focus:ring-red-500'
+                    : 'focus:ring-spotify-green'
                 }`}
                 placeholder="Enter artist or management name"
-                aria-invalid={!!step1Errors.artistName}
-                aria-describedby={step1Errors.artistName ? 'artistName-error' : undefined}
+                aria-invalid={validationErrors.artistName ? 'true' : 'false'}
+                aria-describedby={validationErrors.artistName ? 'artistName-error' : undefined}
+                required
               />
-              {step1Errors.artistName && (
-                <p id="artistName-error" className="text-xs text-red-400 mt-1" role="alert">
-                  {step1Errors.artistName}
+              {touched.artistName && validationErrors.artistName && (
+                <p id="artistName-error" className="text-red-500 text-sm mt-1" role="alert">
+                  {validationErrors.artistName}
                 </p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Email *</label>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email
+              </label>
               <input
+                id="email"
                 type="email"
-                value={step1Data.email}
+                value={accountInfo.email}
                 onChange={(e) => {
-                  setStep1Data({ ...step1Data, email: e.target.value });
-                  if (step1Errors.email) {
-                    setStep1Errors({ ...step1Errors, email: '' });
+                  setAccountInfo({ ...accountInfo, email: e.target.value });
+                  if (validationErrors.email) {
+                    setValidationErrors({ ...validationErrors, email: '' });
                   }
                 }}
-                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green ${
-                  step1Errors.email ? 'border-2 border-red-500' : ''
+                onBlur={() => handleBlur('email')}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
+                  touched.email && validationErrors.email
+                    ? 'border-2 border-red-500 focus:ring-red-500'
+                    : 'focus:ring-spotify-green'
                 }`}
                 placeholder="your@email.com"
-                aria-invalid={!!step1Errors.email}
-                aria-describedby={step1Errors.email ? 'email-error' : undefined}
+                aria-invalid={validationErrors.email ? 'true' : 'false'}
+                aria-describedby={validationErrors.email ? 'email-error' : undefined}
+                required
               />
-              {step1Errors.email ? (
-                <p id="email-error" className="text-xs text-red-400 mt-1" role="alert">
-                  {step1Errors.email}
+              {touched.email && validationErrors.email ? (
+                <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
+                  {validationErrors.email}
                 </p>
               ) : (
                 <p className="text-xs text-spotify-text-gray mt-1">Verification required</p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Password *</label>
+              <label htmlFor="password" className="block text-sm font-medium mb-2">
+                Password
+              </label>
               <input
+                id="password"
                 type="password"
-                value={step1Data.password}
+                value={accountInfo.password}
                 onChange={(e) => {
-                  setStep1Data({ ...step1Data, password: e.target.value });
-                  if (step1Errors.password) {
-                    setStep1Errors({ ...step1Errors, password: '' });
+                  setAccountInfo({ ...accountInfo, password: e.target.value });
+                  if (validationErrors.password) {
+                    setValidationErrors({ ...validationErrors, password: '' });
                   }
                 }}
-                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green ${
-                  step1Errors.password ? 'border-2 border-red-500' : ''
+                onBlur={() => handleBlur('password')}
+                className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
+                  touched.password && validationErrors.password
+                    ? 'border-2 border-red-500 focus:ring-red-500'
+                    : 'focus:ring-spotify-green'
                 }`}
-                placeholder="Create a strong password (min 8 characters)"
-                aria-invalid={!!step1Errors.password}
-                aria-describedby={step1Errors.password ? 'password-error' : undefined}
+                placeholder="Create a strong password"
+                aria-invalid={validationErrors.password ? 'true' : 'false'}
+                aria-describedby={validationErrors.password ? 'password-error' : undefined}
+                minLength={8}
+                required
               />
-              {step1Errors.password && (
-                <p id="password-error" className="text-xs text-red-400 mt-1" role="alert">
-                  {step1Errors.password}
+              {touched.password && validationErrors.password ? (
+                <p id="password-error" className="text-red-500 text-sm mt-1" role="alert">
+                  {validationErrors.password}
+                </p>
+              ) : (
+                <p className="text-xs text-spotify-text-gray mt-1">
+                  Must be at least 8 characters with uppercase, lowercase, and numbers
                 </p>
               )}
             </div>
             <button
-              type="submit"
-              className="btn-primary w-full mt-4"
+              onClick={() => {
+                if (validateStep2()) {
+                  setCurrentStep(3);
+                }
+              }}
+              disabled={
+                !accountInfo.artistName ||
+                !accountInfo.email ||
+                !accountInfo.password ||
+                Object.keys(validationErrors).length > 0
+              }
+              className="btn-primary w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Continue to Legal Documents
             </button>
-          </form>
+          </div>
         </div>
       )}
 
-      {/* Step 2: Legal Document Review */}
-      {currentStep === 2 && (
+      {/* Step 3: Legal Document Review */}
+      {currentStep === 3 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 2: Legal Document Review</h2>
           <div className="mb-6">
@@ -276,11 +471,11 @@ export default function ArtistSignupPage() {
           </div>
 
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(1)} className="btn-secondary">
+            <button onClick={() => setCurrentStep(2)} className="btn-secondary">
               Back
             </button>
             <button
-              onClick={() => setCurrentStep(3)}
+              onClick={() => setCurrentStep(4)}
               disabled={!allDocumentsSigned}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -290,8 +485,8 @@ export default function ArtistSignupPage() {
         </div>
       )}
 
-      {/* Step 3: Tax Documentation (W-9) */}
-      {currentStep === 3 && (
+      {/* Step 4: Tax Documentation (W-9) */}
+      {currentStep === 4 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 3: Tax Documentation</h2>
           <p className="text-sm text-white/80 mb-6">
@@ -366,11 +561,11 @@ export default function ArtistSignupPage() {
           </label>
 
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(2)} className="btn-secondary">
+            <button onClick={() => setCurrentStep(3)} className="btn-secondary">
               Back
             </button>
             <button
-              onClick={() => setCurrentStep(4)}
+              onClick={() => setCurrentStep(5)}
               disabled={!w9Completed || !w9Data.address || !w9Data.taxClassification}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -380,8 +575,8 @@ export default function ArtistSignupPage() {
         </div>
       )}
 
-      {/* Step 4: PRO Registration */}
-      {currentStep === 4 && (
+      {/* Step 5: PRO Registration */}
+      {currentStep === 5 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 4: PRO Registration</h2>
           <p className="text-sm text-white/80 mb-6">
@@ -439,11 +634,11 @@ export default function ArtistSignupPage() {
           </div>
 
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(3)} className="btn-secondary">
+            <button onClick={() => setCurrentStep(4)} className="btn-secondary">
               Back
             </button>
             <button
-              onClick={() => setCurrentStep(5)}
+              onClick={() => setCurrentStep(6)}
               className="btn-primary flex-1"
             >
               Continue to Document Signing
@@ -452,10 +647,10 @@ export default function ArtistSignupPage() {
         </div>
       )}
 
-      {/* Step 5: Document Signing */}
-      {currentStep === 5 && (
+      {/* Step 6: Document Signing */}
+      {currentStep === 6 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Step 5: Document Signing</h2>
+          <h2 className="text-2xl font-bold mb-4">Step 6: Document Signing</h2>
           <p className="text-sm text-white/80 mb-6">
             Provide your digital signature to finalize the legally binding agreement.
           </p>
@@ -475,8 +670,11 @@ export default function ArtistSignupPage() {
               <label className="block text-sm font-medium mb-2">Digital Signature</label>
               <input
                 type="text"
+                value={digitalSignature}
+                onChange={(e) => setDigitalSignature(e.target.value)}
                 className="w-full bg-spotify-light-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green border-b-2 border-white"
                 placeholder="Type your full legal name"
+                required
               />
               <p className="text-xs text-spotify-text-gray mt-1">By typing your name, you are providing a legally binding signature</p>
             </div>
@@ -492,23 +690,42 @@ export default function ArtistSignupPage() {
             </div>
           </div>
 
+          {submitError && (() => {
+            const { recovery } = formatErrorWithRecovery(submitError);
+            return (
+              <div className="mb-4 p-4 bg-red-900/20 border border-red-500/50 rounded-lg">
+                <div className="flex items-start gap-2 mb-2">
+                  <AlertCircle size={20} className="text-red-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-red-400 text-sm font-medium">{submitError}</p>
+                </div>
+                {recovery && recovery.steps.length > 0 && (
+                  <ul className="text-red-300 text-xs mt-2 ml-7 list-disc list-inside space-y-1">
+                    {recovery.steps.map((step, index) => (
+                      <li key={index}>{step}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          })()}
+
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(4)} className="btn-secondary">
+            <button onClick={() => setCurrentStep(5)} className="btn-secondary" disabled={isSubmitting}>
               Back
             </button>
             <button
               onClick={handleSubmit}
-              disabled={!allDocumentsSigned || !w9Completed}
+              disabled={!allDocumentsSigned || !w9Completed || !digitalSignature.trim() || isSubmitting}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit for Approval
+              {isSubmitting ? 'Submitting...' : 'Submit for Approval'}
             </button>
           </div>
         </div>
       )}
 
-      {/* Step 6: Approval Pending */}
-      {currentStep === 6 && (
+      {/* Step 7: Approval Pending */}
+      {currentStep === 7 && (
         <div className="bg-spotify-light-gray rounded-lg p-8 text-center">
           <div className="mb-6">
             <div className="w-20 h-20 bg-yellow-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -520,11 +737,32 @@ export default function ArtistSignupPage() {
               {approvalStatus === 'approved' && 'Approved!'}
               {approvalStatus === 'rejected' && 'Rejected'}
             </h2>
-            <p className="text-spotify-text-gray">
+            <p className="text-spotify-text-gray mb-4">
               {approvalStatus === 'pending' && 'Your application has been submitted and is awaiting admin review.'}
-              {approvalStatus === 'approved' && 'Congratulations! You can now upload tracks.'}
+              {approvalStatus === 'approved' && 'Congratulations! You can now upload content.'}
               {approvalStatus === 'rejected' && 'Your application was rejected. Please review the requirements and resubmit.'}
             </p>
+            {selectedMediums.length > 0 && (
+              <div className="mb-4">
+                <p className="text-sm text-spotify-text-gray mb-2">Selected mediums:</p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {selectedMediums.map((medium) => {
+                    const option = mediumOptions.find(m => m.id === medium);
+                    if (!option) return null;
+                    const Icon = option.icon;
+                    return (
+                      <div
+                        key={medium}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-spotify-green/20 rounded-full text-sm"
+                      >
+                        <Icon size={16} className="text-spotify-green" />
+                        <span className="text-white">{option.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
             {approvalStatus === 'pending' && (
               <p className="text-sm text-spotify-text-gray mt-2">
                 Estimated approval time: 24-48 hours

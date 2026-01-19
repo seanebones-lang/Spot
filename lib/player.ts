@@ -1,5 +1,6 @@
 import { Howl } from 'howler';
 import { getAudioPipeline, AudiophileAudioPipeline } from './audio-pipeline';
+import { getAudioPipelineManager, getStationPipeline, getSharedPipeline } from './audio-pipeline-manager';
 
 class AudioPlayer {
   private sound: Howl | null = null;
@@ -15,7 +16,11 @@ class AudioPlayer {
   private onEnd?: () => void;
   
   loadTrack(audioUrl: string, trackId: string, onProgress?: (progress: number) => void, onEnd?: () => void) {
-    // Clean up previous track
+    // Clean up previous track and pipeline first
+    if (this.audioPipeline) {
+      this.audioPipeline.cleanup().catch(console.error);
+      this.audioPipeline = null;
+    }
     if (this.sound) {
       this.sound.unload();
     }
@@ -28,6 +33,7 @@ class AudioPlayer {
     this.onEnd = onEnd;
     this.isLoaded = false;
     this.pendingPlay = false;
+    this.audioElement = null;
     
     console.log('🎵 Loading track:', audioUrl);
     
@@ -156,14 +162,23 @@ class AudioPlayer {
       }
       
       // Get the HTMLAudioElement from Howler
-      this.audioElement = soundInstance._node as HTMLAudioElement;
+      const newAudioElement = soundInstance._node as HTMLAudioElement;
       
-      if (!this.audioElement) {
+      if (!newAudioElement) {
         console.warn('⚠️ Could not access audio element');
         return;
       }
       
-      // Initialize audio pipeline
+      // If we already have a pipeline with a different element, cleanup first
+      if (this.audioPipeline && this.audioElement && this.audioElement !== newAudioElement) {
+        console.log('🔄 Cleaning up pipeline for new audio element');
+        await this.audioPipeline.cleanup();
+        this.audioPipeline = null;
+      }
+      
+      this.audioElement = newAudioElement;
+      
+      // Initialize audio pipeline (it will check if element is already connected)
       this.audioPipeline = getAudioPipeline();
       await this.audioPipeline.initialize(this.audioElement);
       
@@ -174,6 +189,7 @@ class AudioPlayer {
     } catch (error) {
       console.error('❌ Failed to initialize audio pipeline:', error);
       // Continue without pipeline (fallback to basic playback)
+      this.audioPipeline = null;
     }
   }
   

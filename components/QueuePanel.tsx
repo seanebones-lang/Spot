@@ -172,14 +172,15 @@ export default function QueuePanel({ isOpen, onClose }: QueuePanelProps) {
                 setIsPlaying(true);
               }}
               className={cn(
-                "flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg cursor-pointer group transition-all",
+                "flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg cursor-pointer group",
                 draggedIndex === index && "opacity-50 scale-95",
                 dragOverIndex === index && dragOverIndex !== draggedIndex && "bg-white/20 border-l-4 border-spotify-green transform translate-x-1"
               )}
               style={{
                 transition: draggedIndex === index || dragOverIndex === index 
-                  ? 'all 150ms ease-out' 
-                  : 'all 200ms ease-out'
+                  ? 'all 150ms cubic-bezier(0.3, 0, 0.1, 1)' 
+                  : 'all 200ms cubic-bezier(0.3, 0, 0.1, 1)',
+                willChange: draggedIndex === index || dragOverIndex === index ? 'transform, opacity' : 'auto'
               }}
             >
               <GripVertical 

@@ -113,9 +113,9 @@ export default function ToursPage() {
             </div>
             {date.tickets && (
               <button 
-                className="bg-spotify-green hover:bg-[#1ed760] text-black px-6 py-2 rounded-full font-medium transition-colors"
+                className="bg-spotify-green hover:bg-[#8a1dd0] text-black px-6 py-2 rounded-full font-medium transition-colors"
                 style={{
-                  backgroundColor: '#1DB954',
+                  backgroundColor: '#7209B7',
                   color: '#000000',
                   padding: '12px 24px',
                   borderRadius: '500px',
@@ -128,11 +128,11 @@ export default function ToursPage() {
                   cursor: 'pointer'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#1ed760';
+                  e.currentTarget.style.backgroundColor = '#8a1dd0';
                   e.currentTarget.style.transform = 'scale(1.05)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#1DB954';
+                  e.currentTarget.style.backgroundColor = '#7209B7';
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               >

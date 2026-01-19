@@ -56,17 +56,17 @@ const browseCategories: BrowseCategory[] = [
   { id: 'mental-health-podcasts', title: 'Mental Health Podcasts', href: '/radio?filter=mental-health', color: '#E61E32', category: 'podcasts', image: 'https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80' },
   
   // Features - Spotify Personalized
-  { id: 'made-for-you', title: 'Made For You', href: '/', color: '#0D73EC', category: 'features', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
-  { id: 'discover-weekly', title: 'Discover Weekly', href: '/', color: '#1DB954', category: 'features', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
-  { id: 'release-radar', title: 'Release Radar', href: '/', color: '#509BF5', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
-  { id: 'daily-mix', title: 'Daily Mix', href: '/', color: '#8D67AB', category: 'features', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
-  { id: 'time-capsule', title: 'Time Capsule', href: '/', color: '#BA5D07', category: 'features', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
-  { id: 'on-repeat', title: 'On Repeat', href: '/', color: '#E8115B', category: 'features', image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80' },
-  { id: 'repeat-rewind', title: 'Repeat Rewind', href: '/', color: '#1E3264', category: 'features', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80' },
-  { id: 'top-songs', title: 'Your Top Songs', href: '/', color: '#FF4632', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
-  { id: 'liked-songs', title: 'Liked Songs', href: '/collection?filter=liked', color: '#1DB954', category: 'features', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
+  { id: 'made-for-you', title: 'Made For You', href: '/search?q=made%20for%20you', color: '#0D73EC', category: 'features', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
+  { id: 'discover-weekly', title: 'Discover Weekly', href: '/search?q=discover%20weekly', color: '#7209B7', category: 'features', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
+  { id: 'release-radar', title: 'Release Radar', href: '/search?q=release%20radar', color: '#509BF5', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
+  { id: 'daily-mix', title: 'Daily Mix', href: '/search?q=daily%20mix', color: '#8D67AB', category: 'features', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
+  { id: 'time-capsule', title: 'Time Capsule', href: '/search?q=time%20capsule', color: '#BA5D07', category: 'features', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
+  { id: 'on-repeat', title: 'On Repeat', href: '/search?q=on%20repeat', color: '#E8115B', category: 'features', image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80' },
+  { id: 'repeat-rewind', title: 'Repeat Rewind', href: '/search?q=repeat%20rewind', color: '#1E3264', category: 'features', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80' },
+  { id: 'top-songs', title: 'Your Top Songs', href: '/search?q=top%20songs', color: '#FF4632', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
+  { id: 'liked-songs', title: 'Liked Songs', href: '/collection?filter=liked', color: '#7209B7', category: 'features', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
   { id: 'recently-played', title: 'Recently Played', href: '/collection?filter=recent', color: '#509BF5', category: 'features', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
-  { id: 'new-releases', title: 'New Releases', href: '/', color: '#FF4632', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
+  { id: 'new-releases', title: 'New Releases', href: '/new-releases', color: '#FF4632', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
   { id: 'live-events', title: 'Live Events', href: '/events', color: '#8400E7', category: 'features', image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80' },
   { id: 'radio', title: 'Radio Stations', href: '/radio', color: '#509BF5', category: 'features', image: 'https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=400&h=400&fit=crop&q=80' },
   { id: 'live-broadcasts', title: 'Live Broadcasts', href: '/broadcasts', color: '#FF4632', category: 'features', image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=400&fit=crop&q=80' },
@@ -77,19 +77,19 @@ const browseCategories: BrowseCategory[] = [
   { id: 'check-in', title: 'Daily Check-In', href: '/check-in', color: '#7209B7', category: 'mental-health', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80' },
   { id: 'journal', title: 'Journal', href: '/journal', color: '#457B9D', category: 'mental-health', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop&q=80' },
   { id: 'affirmations', title: 'Affirmations', href: '/affirmations', color: '#E22134', category: 'mental-health', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80' },
-  { id: 'mhz-sounds', title: 'MHz Sounds', href: '/categories/mhz', color: '#1DB954', category: 'mental-health', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
+  { id: 'mhz-sounds', title: 'MHz Sounds', href: '/categories/mhz', color: '#7209B7', category: 'mental-health', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
   { id: 'withdrawal', title: 'Withdrawal Sounds', href: '/categories/withdrawal', color: '#8D67AB', category: 'mental-health', image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=400&fit=crop&q=80' },
   
   // Artist Features
   { id: 'artist-dashboard', title: 'Artist Dashboard', href: '/dashboard/artist', color: '#8400E7', category: 'artist', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
-  { id: 'upload', title: 'Upload Music', href: '/upload', color: '#1DB954', category: 'artist', image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80' },
+  { id: 'upload', title: 'Upload Music', href: '/upload', color: '#7209B7', category: 'artist', image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80' },
   { id: 'artist-signup', title: 'Become an Artist', href: '/artist/signup', color: '#E8115B', category: 'artist', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80' },
   { id: 'artist-interviews', title: 'Artist Interviews', href: '/interviews', color: '#8D67AB', category: 'artist', image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=400&fit=crop&q=80' },
   
   // Store & Account
   { id: 'merch', title: 'Merch Store', href: '/merch', color: '#FF4632', category: 'store', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=400&fit=crop&q=80' },
   { id: 'rewards', title: 'Rewards & Points', href: '/rewards', color: '#FFA500', category: 'store', image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&h=400&fit=crop&q=80' },
-  { id: 'subscription', title: 'Subscription', href: '/subscription', color: '#1DB954', category: 'account', image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=400&fit=crop&q=80' },
+  { id: 'subscription', title: 'Subscription', href: '/subscription', color: '#7209B7', category: 'account', image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=400&fit=crop&q=80' },
   { id: 'settings', title: 'Settings', href: '/settings', color: '#B3B3B3', category: 'account', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
   { id: 'collection', title: 'Your Library', href: '/collection', color: '#1E3264', category: 'account', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop&q=80' },
   { id: 'profile', title: 'Profile', href: '/profile', color: '#BA5D07', category: 'account', image: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80' },
@@ -97,33 +97,33 @@ const browseCategories: BrowseCategory[] = [
   { id: 'newsletter', title: 'Newsletter', href: '/newsletters', color: '#509BF5', category: 'account', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
   
   // Lifestyle & Activity Categories
-  { id: 'workout', title: 'Workout', color: '#E8115B', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
-  { id: 'focus', title: 'Focus', color: '#509BF5', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80' },
-  { id: 'study', title: 'Study', color: '#1E3264', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop&q=80' },
-  { id: 'sleep', title: 'Sleep', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
-  { id: 'chill', title: 'Chill', color: '#1DB954', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80' },
-  { id: 'travel', title: 'Travel', color: '#FF4632', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80' },
-  { id: 'party', title: 'Party', color: '#E8115B', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80' },
-  { id: 'romance', title: 'Romance', color: '#E61E32', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=400&h=400&fit=crop&q=80' },
-  { id: 'commute', title: 'Commute', color: '#509BF5', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80' },
-  { id: 'gaming', title: 'Gaming', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&h=400&fit=crop&q=80' },
-  { id: 'cooking', title: 'Cooking', color: '#BA5D07', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&h=400&fit=crop&q=80' },
-  { id: 'running', title: 'Running', color: '#E8115B', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
-  { id: 'yoga', title: 'Yoga', color: '#1DB954', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80' },
-  { id: 'meditation', title: 'Meditation', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
-  { id: 'energy', title: 'Energy Boost', color: '#FF4632', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80' },
-  { id: 'motivation', title: 'Motivation', color: '#FFA500', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80' },
-  { id: 'driving', title: 'Driving', color: '#509BF5', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80' },
-  { id: 'road-trip', title: 'Road Trip', color: '#148A08', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80' },
-  { id: 'morning', title: 'Morning', color: '#FFA500', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
-  { id: 'evening', title: 'Evening', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
-  { id: 'night', title: 'Night', color: '#1E3264', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
+  { id: 'workout', title: 'Workout', href: '/search?q=workout', color: '#E8115B', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
+  { id: 'focus', title: 'Focus', href: '/search?q=focus', color: '#509BF5', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80' },
+  { id: 'study', title: 'Study', href: '/search?q=study', color: '#1E3264', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop&q=80' },
+  { id: 'sleep', title: 'Sleep', href: '/search?q=sleep', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
+  { id: 'chill', title: 'Chill', href: '/search?q=chill', color: '#7209B7', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80' },
+  { id: 'travel', title: 'Travel', href: '/search?q=travel', color: '#FF4632', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80' },
+  { id: 'party', title: 'Party', href: '/search?q=party', color: '#E8115B', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80' },
+  { id: 'romance', title: 'Romance', href: '/search?q=romance', color: '#E61E32', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=400&h=400&fit=crop&q=80' },
+  { id: 'commute', title: 'Commute', href: '/search?q=commute', color: '#509BF5', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80' },
+  { id: 'gaming', title: 'Gaming', href: '/search?q=gaming', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&h=400&fit=crop&q=80' },
+  { id: 'cooking', title: 'Cooking', href: '/search?q=cooking', color: '#BA5D07', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&h=400&fit=crop&q=80' },
+  { id: 'running', title: 'Running', href: '/search?q=running', color: '#E8115B', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
+  { id: 'yoga', title: 'Yoga', href: '/search?q=yoga', color: '#7209B7', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80' },
+  { id: 'meditation', title: 'Meditation', href: '/search?q=meditation', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
+  { id: 'energy', title: 'Energy Boost', href: '/search?q=energy', color: '#FF4632', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80' },
+  { id: 'motivation', title: 'Motivation', href: '/search?q=motivation', color: '#FFA500', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80' },
+  { id: 'driving', title: 'Driving', href: '/search?q=driving', color: '#509BF5', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80' },
+  { id: 'road-trip', title: 'Road Trip', href: '/search?q=road%20trip', color: '#148A08', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80' },
+  { id: 'morning', title: 'Morning', href: '/search?q=morning', color: '#FFA500', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
+  { id: 'evening', title: 'Evening', href: '/search?q=evening', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
+  { id: 'night', title: 'Night', href: '/search?q=night', color: '#1E3264', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
   
   // Additional Podcast Categories
   { id: 'comedy', title: 'Comedy', href: '/radio?filter=comedy', color: '#FFA500', category: 'podcasts', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=400&fit=crop&q=80' },
   { id: 'true-crime', title: 'True Crime', href: '/radio?filter=true-crime', color: '#1E3264', category: 'podcasts', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80' },
   { id: 'business', title: 'Business', href: '/radio?filter=business', color: '#0D73EC', category: 'podcasts', image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=400&fit=crop&q=80' },
-  { id: 'education', title: 'Education', href: '/radio?filter=education', color: '#1DB954', category: 'podcasts', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=400&fit=crop&q=80' },
+  { id: 'education', title: 'Education', href: '/radio?filter=education', color: '#7209B7', category: 'podcasts', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=400&fit=crop&q=80' },
   { id: 'news', title: 'News', href: '/radio?filter=news', color: '#BA5D07', category: 'podcasts', image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=400&fit=crop&q=80' },
   { id: 'technology', title: 'Technology', href: '/radio?filter=technology', color: '#509BF5', category: 'podcasts', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop&q=80' },
   { id: 'science', title: 'Science', href: '/radio?filter=science', color: '#0D73EC', category: 'podcasts', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=400&fit=crop&q=80' },
@@ -131,7 +131,7 @@ const browseCategories: BrowseCategory[] = [
   { id: 'sports', title: 'Sports', href: '/radio?filter=sports', color: '#E61E32', category: 'podcasts', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
   { id: 'entertainment', title: 'Entertainment', href: '/radio?filter=entertainment', color: '#E8115B', category: 'podcasts', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=400&fit=crop&q=80' },
   { id: 'society-culture', title: 'Society & Culture', href: '/radio?filter=society', color: '#8D67AB', category: 'podcasts', image: 'https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80' },
-  { id: 'health-fitness', title: 'Health & Fitness', href: '/radio?filter=health', color: '#1DB954', category: 'podcasts', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
+  { id: 'health-fitness', title: 'Health & Fitness', href: '/radio?filter=health', color: '#7209B7', category: 'podcasts', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
   { id: 'kids-family', title: 'Kids & Family', href: '/radio?filter=kids', color: '#FFA500', category: 'podcasts', image: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400&h=400&fit=crop&q=80' },
   { id: 'religion', title: 'Religion & Spirituality', href: '/radio?filter=religion', color: '#8D67AB', category: 'podcasts', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80' },
   
@@ -150,11 +150,11 @@ const browseCategories: BrowseCategory[] = [
   
   // Additional Mental Health & Wellness
   { id: 'therapy-directory', title: 'Therapy Directory', href: '/wellness/therapy', color: '#457B9D', category: 'mental-health', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&q=80' },
-  { id: 'donations', title: 'Donate', href: '/wellness/donations', color: '#1DB954', category: 'mental-health', image: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&h=400&fit=crop&q=80' },
+  { id: 'donations', title: 'Donate', href: '/wellness/donations', color: '#7209B7', category: 'mental-health', image: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&h=400&fit=crop&q=80' },
   
   // Additional Artist Features
   { id: 'ai-marketing', title: 'AI Marketing Tools', href: '/dashboard/artist/marketing', color: '#8400E7', category: 'artist', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=400&fit=crop&q=80' },
-  { id: 'payouts', title: 'Payouts & Earnings', href: '/dashboard/artist/payouts', color: '#1DB954', category: 'artist', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=400&fit=crop&q=80' },
+  { id: 'payouts', title: 'Payouts & Earnings', href: '/dashboard/artist/payouts', color: '#7209B7', category: 'artist', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=400&fit=crop&q=80' },
   { id: 'analytics', title: 'Analytics', href: '/dashboard/artist/analytics', color: '#509BF5', category: 'artist', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=400&fit=crop&q=80' },
   
   // Device & Settings
@@ -183,19 +183,19 @@ const browseCategories: BrowseCategory[] = [
   
   // Additional Store Features
   { id: 'tickets', title: 'Concert Tickets', href: '/tickets', color: '#FF4632', category: 'store', image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80' },
-  { id: 'trials', title: 'Free Trials', href: '/trials', color: '#1DB954', category: 'store', image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=400&fit=crop&q=80' },
+  { id: 'trials', title: 'Free Trials', href: '/trials', color: '#7209B7', category: 'store', image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=400&fit=crop&q=80' },
   
   // Innovative EmPulse Categories - Beyond Spotify
   { id: 'anxiety-relief', title: 'Anxiety Relief', href: '/categories/anxiety', color: '#457B9D', category: 'mental-health', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80' },
   { id: 'depression-support', title: 'Depression Support', href: '/categories/depression', color: '#7209B7', category: 'mental-health', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
   { id: 'ptsd-healing', title: 'PTSD Healing', href: '/categories/ptsd', color: '#8D67AB', category: 'mental-health', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80' },
-  { id: 'addiction-recovery', title: 'Addiction Recovery', href: '/categories/recovery', color: '#1DB954', category: 'mental-health', image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=400&fit=crop&q=80' },
+  { id: 'addiction-recovery', title: 'Addiction Recovery', href: '/categories/recovery', color: '#7209B7', category: 'mental-health', image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=400&fit=crop&q=80' },
   { id: 'grief-support', title: 'Grief Support', href: '/categories/grief', color: '#1E3264', category: 'mental-health', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80' },
   { id: 'trauma-healing', title: 'Trauma Healing', href: '/categories/trauma', color: '#457B9D', category: 'mental-health', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
   
   // More Lifestyle Activities
   { id: 'pre-game', title: 'Pre-Game', color: '#E8115B', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80' },
-  { id: 'post-game', title: 'Post-Game', color: '#1DB954', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
+  { id: 'post-game', title: 'Post-Game', color: '#7209B7', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80' },
   { id: 'pre-party', title: 'Pre-Party', color: '#E8115B', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80' },
   { id: 'post-party', title: 'Post-Party', color: '#8D67AB', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80' },
   { id: 'afternoon', title: 'Afternoon', color: '#FFA500', category: 'lifestyle', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
@@ -221,13 +221,13 @@ const browseCategories: BrowseCategory[] = [
   // More Features
   { id: 'trending', title: 'Trending Now', href: '/trending', color: '#FF4632', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
   { id: 'charts', title: 'Charts', href: '/charts', color: '#E8115B', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
-  { id: 'viral', title: 'Viral Hits', href: '/viral', color: '#1DB954', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
+  { id: 'viral', title: 'Viral Hits', href: '/viral', color: '#7209B7', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
   { id: 'fresh-finds', title: 'Fresh Finds', href: '/fresh', color: '#509BF5', category: 'features', image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80' },
   { id: 'underground', title: 'Underground', href: '/underground', color: '#1E3264', category: 'features', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80' },
   
   // More Account Features
   { id: 'playback-history', title: 'Playback History', href: '/history', color: '#509BF5', category: 'account', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
-  { id: 'downloads', title: 'Downloads', href: '/collection?filter=downloaded', color: '#1DB954', category: 'account', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop&q=80' },
+  { id: 'downloads', title: 'Downloads', href: '/collection?filter=downloaded', color: '#7209B7', category: 'account', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop&q=80' },
   { id: 'social', title: 'Social', href: '/social', color: '#509BF5', category: 'account', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80' },
   { id: 'friends-activity', title: 'Friends Activity', href: '/friends', color: '#8D67AB', category: 'account', image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=400&fit=crop&q=80' },
 ];
@@ -250,23 +250,30 @@ export default function SearchPage() {
   const playlists = mockData.getPlaylists();
   const albums = mockData.getAlbums();
 
-  const filteredTracks = tracks.filter(track =>
+  // Base filtering by query
+  const tracksByQuery = tracks.filter(track =>
     track.name.toLowerCase().includes(query.toLowerCase()) ||
     track.artist.toLowerCase().includes(query.toLowerCase())
   );
 
-  const filteredArtists = artists.filter(artist =>
+  const artistsByQuery = artists.filter(artist =>
     artist.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  const filteredPlaylists = playlists.filter(playlist =>
+  const playlistsByQuery = playlists.filter(playlist =>
     playlist.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  const filteredAlbums = albums.filter(album =>
+  const albumsByQuery = albums.filter(album =>
     album.name.toLowerCase().includes(query.toLowerCase()) ||
     album.artist.name.toLowerCase().includes(query.toLowerCase())
   );
+
+  // Apply active filter
+  const filteredTracks = activeFilter === 'all' || activeFilter === 'music' ? tracksByQuery : [];
+  const filteredArtists = activeFilter === 'all' || activeFilter === 'music' ? artistsByQuery : [];
+  const filteredPlaylists = activeFilter === 'all' || activeFilter === 'music' || activeFilter === 'podcasts' ? playlistsByQuery : [];
+  const filteredAlbums = activeFilter === 'all' || activeFilter === 'music' ? albumsByQuery : [];
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -330,17 +337,17 @@ export default function SearchPage() {
   if (!query) {
     return (
       <div 
-        className="min-h-screen"
+        className="w-full"
         style={{ 
-          backgroundColor: '#121212',
-          minHeight: '100vh'
+          backgroundColor: '#121212'
         }}
       >
         {/* Filter Buttons - Sticky below TopBar - Exact Spotify Style */}
         <div 
-          className="sticky top-16 z-30 backdrop-blur-md px-8 py-4 border-b"
+          className="sticky z-30 backdrop-blur-md border-b"
           style={{
-            top: '56px',
+            top: '0',
+            width: '100%',
             backgroundColor: 'rgba(18, 18, 18, 0.95)',
             padding: '16px 32px',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
@@ -406,15 +413,36 @@ export default function SearchPage() {
           </div>
         </div>
         
-        <div className="p-8">
+        <div 
+          className="w-full"
+          style={{
+            padding: '32px',
+            paddingBottom: '24px',
+            backgroundColor: '#121212'
+          }}
+        >
           <div className="space-y-12">
           {Object.entries(categorySections).map(([sectionKey, categories]) => {
             if (categories.length === 0) return null;
+            
+            // Filter categories by activeFilter
+            let filteredCategories = categories;
+            if (activeFilter === 'music') {
+              filteredCategories = categories.filter(c => c.category === 'music' || c.category === 'genres');
+            } else if (activeFilter === 'podcasts') {
+              filteredCategories = categories.filter(c => c.category === 'podcasts');
+            } else if (activeFilter === 'audiobooks') {
+              filteredCategories = categories.filter(c => c.id === 'audiobooks');
+            }
+            // activeFilter === 'all' shows everything, no filtering needed
+            
+            if (filteredCategories.length === 0) return null;
+            
             return (
               <section key={sectionKey} className="mb-12">
                 <h2 className="text-2xl font-bold text-white mb-6">{sectionTitles[sectionKey as keyof typeof sectionTitles]}</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {categories.map((category) => (
+                  {filteredCategories.map((category) => (
                     <Link
                       key={category.id}
                       href={category.href || '#'}
@@ -464,9 +492,18 @@ export default function SearchPage() {
 
   // Search Results View
   return (
-    <div className="min-h-screen bg-spotify-dark">
+    <div className="w-full bg-spotify-dark">
       {/* Filter Buttons - Sticky below TopBar */}
-      <div className="sticky top-16 z-30 bg-spotify-dark/95 backdrop-blur-md px-8 py-4 border-b border-white/10">
+      <div 
+        className="sticky z-30 backdrop-blur-md border-b"
+        style={{
+          top: '0',
+          width: '100%',
+          backgroundColor: 'rgba(18, 18, 18, 0.95)',
+          padding: '16px 32px',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+        }}
+      >
         <div className="flex items-center gap-2">
           <button
             onClick={() => setActiveFilter('all')}
@@ -516,9 +553,10 @@ export default function SearchPage() {
       </div>
 
       <div 
-        className="p-8"
+        className="w-full"
         style={{
           padding: '32px',
+          paddingBottom: '24px',
           backgroundColor: '#121212'
         }}
       >
@@ -651,7 +689,8 @@ export default function SearchPage() {
                       style={{
                         marginBottom: '12px',
                         aspectRatio: '1',
-                        transition: 'transform 200ms ease-out'
+                        transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1)',
+                        willChange: 'transform'
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'scale(1.05)';
@@ -768,7 +807,7 @@ export default function SearchPage() {
                         <div 
                           className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
                           style={{
-                            background: 'linear-gradient(135deg, #1DB954 0%, #181818 100%)',
+                            background: 'linear-gradient(135deg, #7209B7 0%, #181818 100%)',
                             borderRadius: '4px'
                           }}
                         >
@@ -853,7 +892,7 @@ export default function SearchPage() {
                         <div 
                           className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
                           style={{
-                            background: 'linear-gradient(135deg, #1DB954 0%, #181818 100%)',
+                            background: 'linear-gradient(135deg, #7209B7 0%, #181818 100%)',
                             borderRadius: '4px'
                           }}
                         >

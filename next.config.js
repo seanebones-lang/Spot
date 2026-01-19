@@ -2,44 +2,34 @@
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
-  // Use PORT from environment variable (Railway/Vercel set this automatically)
-  // For local dev, defaults to 3000, but dev server uses 3001
   images: {
     domains: ['i.scdn.co', 'mosaic.scdn.co', 'wrapped-images.spotifycdn.com', 'images.unsplash.com'],
     unoptimized: false,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '*.scdn.co',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.spotifycdn.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-    ],
   },
-  // Experimental features for better performance
+  // Request body size limit (50MB for file uploads)
   experimental: {
-    optimizePackageImports: ['lucide-react', '@react-three/fiber', '@react-three/drei'],
+    serverActions: {
+      bodySizeLimit: '50mb',
+    },
   },
-  webpack: (config) => {
-    // Make Pinecone optional - use a mock if not installed
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@pinecone-database/pinecone': require.resolve('./lib/pinecone-stub.js'),
-    };
+  // Compress responses
+  compress: true,
+  // Production optimizations
+  poweredByHeader: false, // Remove X-Powered-By header
+  webpack: (config, { dev }) => {
+    // Only stub Pinecone in development when not configured
+    // In production, require PINECONE_API_KEY (validated in lib/env.ts)
+    if (dev && !process.env.PINECONE_API_KEY) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@pinecone-database/pinecone': require.resolve('./lib/pinecone-stub.js'),
+      };
+    }
+    // In production, if PINECONE_API_KEY is missing, env validation will fail startup
     
     return config;
   },
-  // Ensure proper port handling for Railway/Vercel
-  // Railway sets PORT automatically, Vercel handles it internally
-  serverRuntimeConfig: {
-    port: process.env.PORT || 3000,
-  },
+  // Headers are handled in middleware.ts for dynamic control
 }
 
 module.exports = nextConfig

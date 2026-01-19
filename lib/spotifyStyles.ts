@@ -4,7 +4,7 @@
  */
 
 export const spotifyColors = {
-  green: '#1DB954',
+  green: '#7209B7',
   greenHover: '#1ED760',
   black: '#000000',
   dark: '#121212',

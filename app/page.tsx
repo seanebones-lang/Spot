@@ -10,7 +10,8 @@ import AdBanner from '@/components/AdBanner';
 import ErrorToast from '@/components/ErrorToast';
 import OnboardingTour from '@/components/OnboardingTour';
 import Tooltip from '@/components/Tooltip';
-import { Heart, Music, Radio } from 'lucide-react';
+import ImageWithFallback from '@/components/ImageWithFallback';
+import { Heart, Music, Radio, Check } from 'lucide-react';
 
 export default function HomePage() {
   const tracks = mockData.getTracks();
@@ -19,8 +20,6 @@ export default function HomePage() {
   const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying, addToQueue, addToRecentlyPlayed, recentlyPlayed } = usePlayerStore();
   const [error, setError] = useState<string | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  // Issue-4: Track image load errors
-  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const completed = localStorage.getItem('onboarding_completed');
@@ -77,10 +76,12 @@ export default function HomePage() {
 
   return (
     <div 
-      className="w-full bg-spotify-dark min-h-full"
+      className="w-full"
       style={{ 
         padding: '32px',
-        paddingBottom: '24px'
+        paddingBottom: '24px',
+        backgroundColor: '#121212',
+        minHeight: '100%'
       }}
     >
       {/* Onboarding Tour */}
@@ -106,21 +107,39 @@ export default function HomePage() {
             style={{ marginBottom: '16px' }}
           >
             <h2 
-              className="inline-flex text-xl leading-6 h-6 font-bold text-white underline cursor-pointer transition-colors duration-[50ms] gpu-accelerated"
-              style={{
+              className="transition-colors gpu-accelerated"
+              style={{ 
                 fontSize: '20px',
                 lineHeight: '24px',
-                transition: 'color 0.05s cubic-bezier(0.3, 0, 1)'
+                height: '24px',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                display: 'inline-flex',
+                textDecoration: 'underline',
+                transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+                position: 'static',
+                cursor: 'pointer'
               }}
             >
               Recently Played
             </h2>
             <Link 
               href="/history" 
-              className="text-sm leading-5 font-bold text-spotify-text-gray hover:text-white hover:underline transition-colors duration-200 no-underline"
+              className="text-sm text-spotify-text-gray hover:underline"
               style={{
                 fontSize: '14px',
-                lineHeight: '20px'
+                lineHeight: '20px',
+                fontWeight: 700,
+                color: '#B3B3B3',
+                textDecoration: 'none'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.textDecoration = 'underline';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#B3B3B3';
+                e.currentTarget.style.textDecoration = 'none';
               }}
             >
               See all
@@ -133,45 +152,54 @@ export default function HomePage() {
             {recentlyPlayed.slice(0, 6).map((track) => (
               <div
                 key={track.id}
-                className="bg-spotify-dark-gray rounded-lg p-4 hover:bg-[#282828] transition-all duration-200 group cursor-pointer relative"
+                className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-dark-gray transition-all duration-200 group cursor-pointer"
                 style={{
-                  width: '168px',
-                  height: '220px',
+                  backgroundColor: '#181818',
                   borderRadius: '8px',
-                  transition: 'transform 200ms ease, background-color 200ms ease-out'
+                  padding: '16px',
+                  transition: 'background-color 200ms ease-out'
                 }}
                 onClick={(e) => {
                   if ((e.target as HTMLElement).closest('button')) return;
                   handlePlayTrack(track);
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.zIndex = '1';
+                  e.currentTarget.style.backgroundColor = '#282828';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.zIndex = '0';
+                  e.currentTarget.style.backgroundColor = '#181818';
                 }}
               >
-                <div className="relative mb-3" style={{ marginBottom: '12px', width: '168px', height: '168px' }}>
-                  {imageErrors.has(track.id) ? (
-                    <div className="w-full h-full bg-spotify-light-gray rounded flex items-center justify-center" style={{ borderRadius: '4px' }}>
-                      <Music size={32} className="text-spotify-text-gray" />
+                <div className="relative mb-3" style={{ marginBottom: '12px' }}>
+                  <ImageWithFallback
+                    src={track.coverArt}
+                    alt={track.name}
+                    className="w-full aspect-square object-cover rounded"
+                    style={{ borderRadius: '4px', aspectRatio: '1' }}
+                  />
+                  {/* Visual indicator for previously played tracks */}
+                  {recentlyPlayed.some(t => t.id === track.id) && (
+                    <div 
+                      className="absolute top-2 right-2 bg-spotify-green rounded-full p-1"
+                      style={{
+                        top: '8px',
+                        right: '8px',
+                        backgroundColor: '#7209B7',
+                        borderRadius: '50%',
+                        padding: '4px',
+                        zIndex: 1
+                      }}
+                      aria-label="Previously played"
+                    >
+                      <Check size={12} className="text-black" style={{ width: '12px', height: '12px' }} />
                     </div>
-                  ) : (
-                    <img
-                      src={track.coverArt}
-                      alt={track.name}
-                      className="w-full h-full object-cover rounded"
-                      style={{ borderRadius: '4px', width: '168px', height: '168px' }}
-                      onError={() => setImageErrors(prev => new Set(prev).add(track.id))}
-                    />
                   )}
                   <div 
-                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{
                       bottom: '8px',
-                      right: '8px'
+                      right: '8px',
+                      transition: 'opacity 200ms ease-out'
                     }}
                   >
                     <PlayButton
@@ -182,20 +210,23 @@ export default function HomePage() {
                   </div>
                 </div>
                 <h3 
-                  className="text-sm font-semibold mb-1 truncate text-white"
+                  className="font-semibold text-sm mb-1 truncate"
                   style={{
                     fontSize: '14px',
                     lineHeight: '20px',
                     fontWeight: 600,
+                    color: '#FFFFFF',
                     marginBottom: '4px'
                   }}
                 >
                   {track.name}
                 </h3>
                 <p 
-                  className="text-[13px] leading-4 text-spotify-text-gray truncate"
+                  className="text-xs text-spotify-text-gray truncate"
                   style={{
-                    lineHeight: '16px'
+                    fontSize: '13px',
+                    lineHeight: '16px',
+                    color: '#B3B3B3'
                   }}
                 >
                   {track.artist}
@@ -224,23 +255,44 @@ export default function HomePage() {
 
       {/* Made for You - Exact Spotify Style */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
-        <div className="flex items-center justify-between mb-4">
+        <div 
+          className="flex items-center justify-between mb-4"
+          style={{ marginBottom: '16px' }}
+        >
           <h2 
-            className="inline-flex text-xl leading-6 h-6 font-bold text-white underline cursor-pointer transition-colors duration-[50ms] gpu-accelerated"
-            style={{
+            className="transition-colors gpu-accelerated"
+            style={{ 
               fontSize: '20px',
               lineHeight: '24px',
-              transition: 'color 0.05s cubic-bezier(0.3, 0, 1)'
+              height: '24px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              display: 'inline-flex',
+              textDecoration: 'underline',
+              transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+              position: 'static',
+              cursor: 'pointer'
             }}
           >
             Made for You
           </h2>
           <Link 
             href="/mood" 
-            className="text-sm leading-5 font-bold text-spotify-text-gray hover:text-white hover:underline transition-colors duration-200 no-underline"
+            className="text-sm text-spotify-text-gray hover:underline"
             style={{
               fontSize: '14px',
-              lineHeight: '20px'
+              lineHeight: '20px',
+              fontWeight: 700,
+              color: '#B3B3B3',
+              textDecoration: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#FFFFFF';
+              e.currentTarget.style.textDecoration = 'underline';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#B3B3B3';
+              e.currentTarget.style.textDecoration = 'none';
             }}
           >
             See all
@@ -261,12 +313,17 @@ export default function HomePage() {
             {playlists.map((playlist, index) => (
               <div
                 key={playlist.id}
-                className="flex flex-col transition-all duration-200 gpu-accelerated group cursor-pointer relative flex-shrink-0"
+                className="flex flex-col transition-all gpu-accelerated group cursor-pointer"
                 style={{
                   width: '168px',
                   height: '220px',
-                  transition: 'transform 200ms ease',
-                  zIndex: 0
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  position: 'relative',
+                  display: 'block',
+                  transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1), z-index 0ms',
+                  zIndex: 0,
+                  flexShrink: 0,
+                  willChange: 'transform'
                 }}
                 onClick={() => handlePlayPlaylist(playlist)}
                 onMouseEnter={(e) => {
@@ -279,24 +336,18 @@ export default function HomePage() {
                 }}
               >
                 <div className="relative mb-3" style={{ marginBottom: '12px', width: '168px', height: '168px' }}>
-                  {imageErrors.has(playlist.id) ? (
-                    <div className="w-full h-full bg-spotify-light-gray rounded flex items-center justify-center" style={{ borderRadius: '4px' }}>
-                      <Music size={32} className="text-spotify-text-gray" />
-                    </div>
-                  ) : (
-                    <img
-                      src={playlist.coverArt}
-                      alt={playlist.name}
-                      className="w-full h-full object-cover rounded"
-                      style={{ borderRadius: '4px', width: '168px', height: '168px' }}
-                      onError={() => setImageErrors(prev => new Set(prev).add(playlist.id))}
-                    />
-                  )}
+                  <ImageWithFallback
+                    src={playlist.coverArt}
+                    alt={playlist.name}
+                    className="w-full h-full object-cover rounded"
+                    style={{ borderRadius: '4px' }}
+                  />
                   <div 
-                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{
                       bottom: '8px',
-                      right: '8px'
+                      right: '8px',
+                      transition: 'opacity 200ms ease-out'
                     }}
                   >
                     <PlayButton
@@ -307,25 +358,28 @@ export default function HomePage() {
                   </div>
                 </div>
                 <h3 
-                  className="text-sm font-semibold mb-1 truncate text-white"
+                  className="font-semibold text-sm mb-1 truncate"
                   style={{
                     fontSize: '14px',
                     lineHeight: '20px',
                     fontWeight: 600,
+                    color: '#FFFFFF',
                     marginBottom: '4px'
                   }}
                 >
                   {playlist.name}
                 </h3>
                 <p 
-                  className="text-[13px] leading-4 text-spotify-text-gray line-clamp-2"
+                  className="text-xs text-spotify-text-gray line-clamp-2"
                   style={{
+                    fontSize: '13px',
                     lineHeight: '16px',
-                    height: '32px',
+                    color: '#B3B3B3',
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    height: '32px'
                   }}
                 >
                   {playlist.description}
@@ -336,146 +390,149 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trending Songs - Exact Spotify Style */}
+      {/* Trending Songs - Horizontal Card Layout */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
-          className="inline-flex text-xl leading-6 h-6 font-bold text-white underline cursor-pointer transition-colors duration-[50ms] gpu-accelerated mb-4"
+          className="transition-colors gpu-accelerated mb-4"
           style={{
             fontSize: '20px',
             lineHeight: '24px',
+            height: '24px',
+            fontWeight: 700,
+            color: '#FFFFFF',
             marginBottom: '16px',
-            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)'
+            display: 'inline-flex',
+            textDecoration: 'underline',
+            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+            position: 'static',
+            cursor: 'pointer'
           }}
         >
           Trending Songs
         </h2>
         <div 
-          className="bg-spotify-light-gray rounded-lg overflow-hidden"
-          style={{
-            backgroundColor: '#181818',
-            borderRadius: '8px'
-          }}
+          className="relative"
+          style={{ position: 'relative', overflow: 'visible' }}
         >
-          {tracks.map((track, index) => (
-            <div
-              key={track.id}
-              className="flex items-center gap-4 p-3 hover:bg-white/10 transition-colors duration-200 group cursor-pointer"
-              style={{
-                padding: '12px 16px',
-                gap: '16px'
-              }}
-              onClick={(e) => {
-                if ((e.target as HTMLElement).closest('button')) return;
-                handlePlayTrack(track);
-              }}
-            >
-              <div 
-                className="w-8 text-center text-spotify-text-gray group-hover:text-white flex-shrink-0 transition-colors duration-200"
+          <div 
+            className="flex gap-4 overflow-x-auto horizontal-scroll"
+            style={{ 
+              gap: '16px',
+              overflowX: 'auto',
+              paddingBottom: '8px'
+            }}
+          >
+            {tracks.map((track) => (
+              <div
+                key={track.id}
+                className="flex flex-col transition-all gpu-accelerated group cursor-pointer"
                 style={{
-                  width: '32px',
-                  fontSize: '14px',
-                  lineHeight: '20px'
+                  width: '168px',
+                  height: '220px',
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  position: 'relative',
+                  display: 'block',
+                  transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1), z-index 0ms',
+                  zIndex: 0,
+                  flexShrink: 0,
+                  willChange: 'transform'
+                }}
+                onClick={(e) => {
+                  if ((e.target as HTMLElement).closest('button')) return;
+                  handlePlayTrack(track);
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.zIndex = '1';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.zIndex = '0';
                 }}
               >
-                {currentTrack?.id === track.id && isPlaying ? (
-                  <Music size={16} className="mx-auto text-spotify-green" />
-                ) : (
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    {index + 1}
-                  </span>
-                )}
-              </div>
-              <div 
-                className="w-12 h-12 bg-spotify-dark-gray rounded flex-shrink-0 relative group/cover"
-                style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '4px',
-                  backgroundColor: '#282828'
-                }}
-              >
-                {imageErrors.has(`trending-${track.id}`) ? (
-                  <div className="w-full h-full bg-spotify-dark-gray rounded flex items-center justify-center" style={{ borderRadius: '4px' }}>
-                    <Music size={20} className="text-spotify-text-gray" />
-                  </div>
-                ) : (
-                  <img
+                <div className="relative mb-3" style={{ marginBottom: '12px', width: '168px', height: '168px' }}>
+                  <ImageWithFallback
                     src={track.coverArt}
                     alt={track.name}
                     className="w-full h-full object-cover rounded"
                     style={{ borderRadius: '4px' }}
-                    onError={() => setImageErrors(prev => new Set(prev).add(`trending-${track.id}`))}
                   />
-                )}
-                <div 
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/cover:opacity-100 transition-opacity bg-black/30 rounded"
-                  style={{
-                    borderRadius: '4px',
-                    transition: 'opacity 200ms ease-out',
-                    backgroundColor: 'rgba(0, 0, 0, 0.3)'
-                  }}
-                >
-                  <PlayButton
-                    isPlaying={currentTrack?.id === track.id && isPlaying}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handlePlayTrack(track, e);
-                    }}
-                    size="sm"
-                  />
-                </div>
-              </div>
-              <div className="flex-1 min-w-0">
-                <div 
-                  className={cn(
-                    "text-sm leading-5 font-normal truncate",
-                    currentTrack?.id === track.id ? 'text-spotify-green' : 'text-white'
+                  {/* Visual indicator for previously played tracks */}
+                  {recentlyPlayed.some(t => t.id === track.id) && (
+                    <div 
+                      className="absolute top-2 right-2 bg-spotify-green rounded-full p-1"
+                      style={{
+                        top: '8px',
+                        right: '8px',
+                        backgroundColor: '#7209B7',
+                        borderRadius: '50%',
+                        padding: '4px',
+                        zIndex: 1
+                      }}
+                      aria-label="Previously played"
+                    >
+                      <Check size={12} className="text-black" style={{ width: '12px', height: '12px' }} />
+                    </div>
                   )}
+                  <div 
+                    className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{
+                      bottom: '8px',
+                      right: '8px',
+                      transition: 'opacity 200ms ease-out'
+                    }}
+                  >
+                    <PlayButton
+                      isPlaying={currentTrack?.id === track.id && isPlaying}
+                      onClick={() => handlePlayTrack(track)}
+                      size="sm"
+                    />
+                  </div>
+                </div>
+                <h3 
+                  className="font-semibold text-sm mb-1 truncate"
                   style={{
                     fontSize: '14px',
-                    lineHeight: '20px'
+                    lineHeight: '20px',
+                    fontWeight: 600,
+                    color: currentTrack?.id === track.id ? '#7209B7' : '#FFFFFF',
+                    marginBottom: '4px'
                   }}
                 >
                   {track.name}
-                </div>
-                <div 
-                  className="text-[13px] leading-4 text-spotify-text-gray truncate"
+                </h3>
+                <p 
+                  className="text-xs text-spotify-text-gray truncate"
                   style={{
-                    lineHeight: '16px'
+                    fontSize: '13px',
+                    lineHeight: '16px',
+                    color: '#B3B3B3'
                   }}
                 >
                   {track.artist}
-                </div>
+                </p>
               </div>
-              <div 
-                className={cn(
-                  "flex-shrink-0 transition-opacity duration-200",
-                  currentTrack?.id === track.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                )}
-              >
-                <PlayButton
-                  isPlaying={currentTrack?.id === track.id && isPlaying}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePlayTrack(track, e);
-                  }}
-                  size="sm"
-                />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Popular Artists - Exact Spotify Style */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
-          className="inline-flex text-xl leading-6 h-6 font-bold text-white underline cursor-pointer transition-colors duration-[50ms] gpu-accelerated mb-4"
+          className="transition-colors gpu-accelerated mb-4"
           style={{
             fontSize: '20px',
             lineHeight: '24px',
+            height: '24px',
+            fontWeight: 700,
+            color: '#FFFFFF',
             marginBottom: '16px',
-            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)'
+            display: 'inline-flex',
+            textDecoration: 'underline',
+            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+            position: 'static',
+            cursor: 'pointer'
           }}
         >
           Popular Artists
@@ -506,10 +563,11 @@ export default function HomePage() {
                   backgroundColor: 'rgba(0, 0, 0, 0)',
                   position: 'relative',
                   display: 'block',
-                  transition: 'all 0.2s ease',
+                  transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1), z-index 0ms',
                   zIndex: 0,
                   textDecoration: 'none',
-                  flexShrink: 0
+                  flexShrink: 0,
+                  willChange: 'transform'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'scale(1.05)';
@@ -529,25 +587,22 @@ export default function HomePage() {
                     borderRadius: '50%'
                   }}
                 >
-                  {imageErrors.has(`artist-${artist.id}`) ? (
-                    <div className="w-full h-full bg-spotify-light-gray rounded-full flex items-center justify-center">
-                      <Music size={48} className="text-spotify-text-gray" />
-                    </div>
-                  ) : (
-                    <img
-                      src={artist.image}
-                      alt={artist.name}
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '50%' }}
-                      onError={() => setImageErrors(prev => new Set(prev).add(`artist-${artist.id}`))}
-                    />
-                  )}
+                  <ImageWithFallback
+                    src={artist.image}
+                    alt={artist.name}
+                    className="w-full h-full object-cover"
+                    style={{ borderRadius: '50%' }}
+                  />
                 </div>
                 <h3 
-                  className="text-sm font-semibold truncate text-white text-center px-1"
+                  className="font-semibold text-sm truncate"
                   style={{
                     fontSize: '14px',
-                    lineHeight: '20px'
+                    lineHeight: '20px',
+                    fontWeight: 600,
+                    color: '#FFFFFF',
+                    textAlign: 'center',
+                    padding: '0 4px'
                   }}
                 >
                   {artist.name}
@@ -561,12 +616,19 @@ export default function HomePage() {
       {/* Specialized Categories - Exact Spotify Style */}
       <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
-          className="inline-flex text-xl leading-6 h-6 font-bold text-white underline cursor-pointer transition-colors duration-[50ms] gpu-accelerated mb-4"
+          className="transition-colors gpu-accelerated mb-4"
           style={{
             fontSize: '20px',
             lineHeight: '24px',
+            height: '24px',
+            fontWeight: 700,
+            color: '#FFFFFF',
             marginBottom: '16px',
-            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)'
+            display: 'inline-flex',
+            textDecoration: 'underline',
+            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+            position: 'static',
+            cursor: 'pointer'
           }}
         >
           Specialized Categories
@@ -614,31 +676,94 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Radio Stations */}
-      <section className="mb-8">
+      {/* Radio Stations - Horizontal Scrollable Cards */}
+      <section className="mb-8" style={{ marginBottom: '32px' }}>
         <h2 
-          className="inline-flex text-xl leading-6 h-6 font-bold text-white underline cursor-pointer transition-colors duration-[50ms] gpu-accelerated mb-4"
+          className="transition-colors gpu-accelerated mb-4"
           style={{
             fontSize: '20px',
             lineHeight: '24px',
+            height: '24px',
+            fontWeight: 700,
+            color: '#FFFFFF',
             marginBottom: '16px',
-            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)'
+            display: 'inline-flex',
+            textDecoration: 'underline',
+            transition: 'color 0.05s cubic-bezier(0.3, 0, 1)',
+            position: 'static',
+            cursor: 'pointer'
           }}
         >
           Radio Stations
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {['Pop Radio', 'Rock Radio', 'Electronic Radio', 'Hip-Hop Radio', 'Jazz Radio', 'Classical Radio'].map((station) => (
-            <div
-              key={station}
-              className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80 transition-colors group cursor-pointer"
-            >
-              <div className="w-full aspect-square bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg mb-3 flex items-center justify-center">
-                <Radio size={32} className="text-white opacity-50" />
+        <div 
+          className="relative"
+          style={{ position: 'relative', overflow: 'visible' }}
+        >
+          <div 
+            className="flex gap-4 overflow-x-auto horizontal-scroll"
+            style={{ 
+              gap: '16px',
+              overflowX: 'auto',
+              paddingBottom: '8px'
+            }}
+          >
+            {['Pop Radio', 'Rock Radio', 'Electronic Radio', 'Hip-Hop Radio', 'Jazz Radio', 'Classical Radio'].map((station) => (
+              <div
+                key={station}
+                className="flex flex-col transition-all gpu-accelerated group cursor-pointer"
+                style={{
+                  width: '168px',
+                  height: '220px',
+                  backgroundColor: '#181818',
+                  borderRadius: '8px',
+                  padding: '16px',
+                  position: 'relative',
+                  transition: 'background-color 200ms ease-out, transform 200ms cubic-bezier(0.3, 0, 0.1, 1)',
+                  flexShrink: 0,
+                  willChange: 'transform, background-color'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#282828';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#181818';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
+                <div 
+                  style={{
+                    width: '100%',
+                    aspectRatio: '1',
+                    borderRadius: '4px',
+                    marginBottom: '12px',
+                    background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}
+                >
+                  <Radio size={32} style={{ opacity: 0.5, color: '#FFFFFF' }} />
+                </div>
+                <h3 
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 600,
+                    color: '#FFFFFF',
+                    margin: 0,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {station}
+                </h3>
               </div>
-              <h3 className="font-semibold text-sm">{station}</h3>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
     </div>

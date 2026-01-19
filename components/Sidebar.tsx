@@ -11,6 +11,7 @@ import { useUIStore } from '@/stores/uiStore';
 import { useLibraryStore } from '@/stores/libraryStore';
 import { mockData } from '@/lib/data';
 import FriendsActivity from './FriendsActivity';
+import ImageWithFallback from './ImageWithFallback';
 
 const navItems = [
   { icon: Home, label: 'Home', href: '/' },
@@ -97,20 +98,29 @@ export default function Sidebar() {
 
   return (
     <>
+      {/* Sidebar Container - Independent element, cannot go above TopBar */}
       <div 
-        className={cn(
-          "fixed left-0 top-0 bottom-[90px] bg-spotify-dark-gray text-white flex flex-col z-40",
-          isResizing ? "" : "transition-all duration-300 ease-in-out"
-        )}
-        style={{ 
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: '56px',
+          bottom: '90px',
           width: `${leftSidebarWidth}px`,
-          borderRight: '1px solid #000000'
+          backgroundColor: '#181818',
+          zIndex: 40,
+          flexShrink: 0,
+          flexGrow: 0,
+          borderRight: '1px solid #000000',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: isResizing ? 'none' : 'all 300ms ease-in-out'
         }}
       >
       {/* Toggle Button */}
       <button
         onClick={toggleLeftSidebar}
-        className="absolute -right-3 top-4 w-6 h-6 bg-spotify-light-gray hover:bg-spotify-light-gray/80 rounded-full flex items-center justify-center text-white shadow-lg z-10 transition-colors"
+        className="absolute -right-3 w-6 h-6 bg-spotify-light-gray hover:bg-spotify-light-gray/80 rounded-full flex items-center justify-center text-white shadow-lg z-10 transition-colors"
+        style={{ top: '20px' }}
         aria-label={leftSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
       >
         {leftSidebarCollapsed ? (
@@ -120,22 +130,24 @@ export default function Sidebar() {
         )}
       </button>
 
-      {/* Logo - Exact Spotify: padding 20px 24px (or 16px when collapsed) */}
+      {/* Logo */}
       <div 
-        className={cn(
-          leftSidebarWidth <= 80 ? "p-4" : "px-6 py-5"
-        )}
+        className={cn("px-6 py-5", leftSidebarWidth <= 80 && "px-4 py-4")}
+        style={{ padding: leftSidebarWidth <= 80 ? '16px' : '20px 24px' }}
       >
         <Link 
           href="/" 
-          className="flex items-center no-underline"
+          className="flex items-center"
+          style={{ textDecoration: 'none' }}
         >
           {leftSidebarWidth > 100 && (
             <span 
-              className="text-2xl font-bold whitespace-nowrap text-white"
+              className="text-xl font-bold whitespace-nowrap"
               style={{ 
                 fontSize: '24px',
-                lineHeight: '28px'
+                lineHeight: '28px',
+                fontWeight: 700,
+                color: '#FFFFFF'
               }}
             >
               EmPulse Music
@@ -144,71 +156,107 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      {/* Navigation - Exact Spotify: padding 0 8px, gap 16px, font 14px, line-height 20px */}
-      <nav className="px-2 mb-2">
+      {/* Navigation - Exact Spotify Styling */}
+      <nav className="px-2 mb-2" style={{ padding: '0 8px', marginBottom: '8px' }}>
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href || 
             (item.href === '/' && pathname === '/') ||
             (item.href === '/search' && pathname?.startsWith('/search')) ||
             (item.href === '/collection' && pathname?.startsWith('/collection'));
-          const isCollapsed = leftSidebarWidth <= 100;
-          
           return (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded transition-all duration-200 gpu-accelerated mb-1 no-underline",
+                "rounded-md transition-all group relative gpu-accelerated",
                 isActive 
                   ? "bg-spotify-light-gray" 
                   : "hover:bg-white/10",
-                isCollapsed 
-                  ? "flex flex-col items-center justify-center py-2 px-1 gap-1" 
-                  : "flex items-center py-3 px-4 gap-4"
+                leftSidebarWidth <= 100 ? "flex flex-col items-center justify-center" : "flex items-center"
               )}
               style={{
+                padding: leftSidebarWidth <= 100 ? '8px 4px' : '12px 16px',
                 borderRadius: '4px',
+                gap: leftSidebarWidth <= 100 ? '4px' : '16px',
                 fontSize: '14px',
                 fontWeight: isActive ? 700 : 400,
-                lineHeight: '20px'
+                lineHeight: '20px',
+                marginBottom: '4px',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
               }}
-              title={leftSidebarCollapsed && !isCollapsed ? item.label : undefined}
-              aria-current={isActive ? 'page' : undefined}
+              title={leftSidebarCollapsed && leftSidebarWidth > 100 ? item.label : undefined}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  const icon = e.currentTarget.querySelector('svg');
+                  const text = e.currentTarget.querySelector('span');
+                  if (icon) icon.style.color = '#FFFFFF';
+                  if (text) {
+                    const spanEl = text as HTMLElement;
+                    spanEl.style.color = '#FFFFFF';
+                    if (leftSidebarWidth <= 100) {
+                      spanEl.style.transform = 'scale(1)';
+                    }
+                  }
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  const icon = e.currentTarget.querySelector('svg');
+                  const text = e.currentTarget.querySelector('span');
+                  if (icon) icon.style.color = '#535353';
+                  if (text) {
+                    const spanEl = text as HTMLElement;
+                    spanEl.style.color = leftSidebarWidth <= 100 ? '#535353' : '#B3B3B3';
+                    if (leftSidebarWidth <= 100) {
+                      spanEl.style.transform = 'scale(0.97)';
+                    }
+                  }
+                }
+              }}
             >
               <Icon 
                 size={24} 
-                className={cn(
-                  "flex-shrink-0 transition-colors duration-200 w-6 h-6",
-                  isActive 
-                    ? "text-white" 
-                    : "text-[#535353] group-hover:text-white"
-                )}
+                className="flex-shrink-0 transition-all" 
+                style={{ 
+                  width: '24px', 
+                  height: '24px', 
+                  flexShrink: 0,
+                  color: isActive ? '#FFFFFF' : '#535353',
+                  transition: 'all 0.2s ease',
+                  position: 'static',
+                  display: 'inline-block'
+                }}
               />
-              {!isCollapsed ? (
+              {leftSidebarWidth > 100 ? (
                 <span 
-                  className={cn(
-                    "whitespace-nowrap transition-colors duration-200",
-                    isActive ? "text-white font-bold" : "text-spotify-text-gray group-hover:text-white"
-                  )}
+                  className="whitespace-nowrap transition-all"
                   style={{ 
                     fontSize: '14px',
-                    lineHeight: '20px'
+                    lineHeight: '20px',
+                    fontWeight: isActive ? 700 : 400,
+                    color: isActive ? '#FFFFFF' : '#B3B3B3',
+                    transition: 'all 0.2s ease'
                   }}
                 >
                   {item.label}
                 </span>
               ) : (
                 <span 
-                  className={cn(
-                    "transition-all duration-100 text-center block",
-                    isActive ? "text-white" : "text-[#535353] group-hover:text-white"
-                  )}
+                  className="transition-all"
                   style={{
                     fontSize: '11px',
                     lineHeight: '15px',
                     height: '15px',
-                    transform: 'scale(0.97)'
+                    fontWeight: 400,
+                    color: isActive ? '#FFFFFF' : '#535353',
+                    display: 'block',
+                    textAlign: 'center',
+                    transform: 'scale(0.97)',
+                    transition: 'transform 0.1s ease-in-out, color 0.1s ease-in-out',
+                    position: 'static',
+                    width: 'auto'
                   }}
                 >
                   {item.label}
@@ -254,16 +302,29 @@ export default function Sidebar() {
             }}
           >
             <h3 
-              className="text-[11px] leading-4 font-bold text-spotify-text-gray uppercase tracking-wider"
+              className="text-xs font-bold text-spotify-text-gray uppercase tracking-wider"
               style={{
-                letterSpacing: '0.1em'
+                fontSize: '11px',
+                lineHeight: '16px',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+                color: '#B3B3B3',
+                textTransform: 'uppercase'
               }}
             >
               Playlists
             </h3>
             <Link
               href="/collection"
-              className="text-[11px] leading-4 text-spotify-text-gray hover:text-white transition-colors duration-200 no-underline"
+              className="text-spotify-text-gray hover:text-white transition-colors text-xs"
+              style={{
+                fontSize: '11px',
+                lineHeight: '16px',
+                color: '#B3B3B3',
+                textDecoration: 'none'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#B3B3B3'}
             >
               Show all
             </Link>
@@ -281,44 +342,48 @@ export default function Sidebar() {
                   <Link
                     href={`/playlist/${playlist.id}`}
                     className={cn(
-                      "flex-1 flex items-center gap-2 rounded transition-colors duration-200 min-w-0 py-1.5 px-2 no-underline",
+                      "flex-1 flex items-center gap-2 rounded transition-colors min-w-0",
                       isActive
-                        ? "bg-spotify-light-gray text-white font-bold"
-                        : "text-spotify-text-gray hover:text-white hover:bg-white/10 font-normal"
+                        ? "bg-spotify-light-gray text-white"
+                        : "text-spotify-text-gray hover:text-white hover:bg-white/10"
                     )}
                     style={{
+                      padding: '6px 8px',
                       borderRadius: '4px',
+                      gap: '8px',
                       fontSize: '14px',
-                      lineHeight: '20px'
+                      lineHeight: '20px',
+                      fontWeight: isActive ? 700 : 400,
+                      textDecoration: 'none',
+                      backgroundColor: isActive ? '#282828' : 'transparent'
                     }}
-                    aria-current={isActive ? 'page' : undefined}
                   >
                     <div 
-                      className={cn(
-                        "w-4 h-4 rounded flex-shrink-0 overflow-hidden",
-                        !playlist.coverArt && "bg-spotify-light-gray"
-                      )}
+                      className="w-4 h-4 bg-spotify-light-gray rounded flex-shrink-0"
                       style={{ 
-                        borderRadius: '2px'
+                        width: '16px',
+                        height: '16px',
+                        borderRadius: '2px',
+                        backgroundColor: playlist.coverArt ? 'transparent' : '#282828',
+                        overflow: 'hidden'
                       }}
                     >
                       {playlist.coverArt && (
-                        <img 
+                        <ImageWithFallback 
                           src={playlist.coverArt} 
-                          alt="" 
+                          alt={`${playlist.name} cover`} 
                           className="w-full h-full object-cover"
                           style={{ borderRadius: '2px' }}
                         />
                       )}
                     </div>
                     <span 
-                      className={cn(
-                        "truncate",
-                        isActive ? "text-white font-bold" : "text-inherit"
-                      )}
+                      className="truncate"
                       style={{
                         fontSize: '14px',
-                        lineHeight: '20px'
+                        lineHeight: '20px',
+                        fontWeight: isActive ? 700 : 400,
+                        color: isActive ? '#FFFFFF' : 'inherit'
                       }}
                     >
                       {playlist.name}
@@ -334,21 +399,27 @@ export default function Sidebar() {
                       }
                     }}
                     className={cn(
-                      "opacity-0 group-hover:opacity-100 p-1 rounded transition-opacity duration-200 bg-transparent border-none cursor-pointer",
+                      "opacity-0 group-hover:opacity-100 p-1 text-spotify-text-gray hover:text-white transition-all rounded",
                       isPinned && "opacity-100 text-spotify-green"
                     )}
                     style={{
-                      borderRadius: '2px'
+                      padding: '4px',
+                      borderRadius: '2px',
+                      transition: 'opacity 200ms ease-out',
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer'
                     }}
                     title={isPinned ? "Unpin playlist" : "Pin playlist"}
-                    aria-label={isPinned ? "Unpin playlist" : "Pin playlist"}
                   >
                     <Pin 
                       size={14} 
-                      className={cn(
-                        "w-3.5 h-3.5",
-                        isPinned && "fill-current text-spotify-green"
-                      )}
+                      className={cn(isPinned && "fill-current")}
+                      style={{ 
+                        width: '14px',
+                        height: '14px',
+                        color: isPinned ? '#7209B7' : 'inherit'
+                      }}
                     />
                   </button>
                 </div>
@@ -366,7 +437,12 @@ export default function Sidebar() {
         <div className="px-3 mb-4 mt-auto">
           <Link
             href="/check-in"
-            className="bg-gradient-to-r from-empulse-purple to-empulse-blue p-4 rounded-lg text-white"
+            className="p-4 rounded-lg text-white no-underline hover:bg-white/10 transition-colors"
+            style={{ 
+              textDecoration: 'none',
+              backgroundColor: 'transparent',
+              transition: 'background-color 200ms ease-out'
+            }}
           >
             <div className="flex items-center justify-between mb-2">
               <span className="font-semibold text-sm">Daily Check-in</span>
@@ -398,10 +474,14 @@ export default function Sidebar() {
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
           className={cn(
-            "fixed top-0 bottom-[90px] w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all touch-none",
+            "fixed bottom-[90px] w-1 bg-transparent hover:bg-spotify-green/60 cursor-col-resize z-[60] transition-all touch-none",
             isResizing && "bg-spotify-green/60 w-1"
           )}
-          style={{ left: `${leftSidebarWidth}px`, touchAction: 'none' }}
+          style={{ 
+            left: `${leftSidebarWidth}px`, 
+            top: '56px',
+            touchAction: 'none' 
+          }}
         />
       )}
     </>

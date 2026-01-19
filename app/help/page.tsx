@@ -263,9 +263,9 @@ export default function HelpPage() {
             Have questions? Find answers from our worldwide Community of expert fans!
           </p>
           <button 
-            className="bg-spotify-green hover:bg-[#1ed760] text-black px-8 py-4 rounded-full font-bold text-lg transition-colors"
+            className="bg-spotify-green hover:bg-[#8a1dd0] text-black px-8 py-4 rounded-full font-bold text-lg transition-colors"
             style={{
-              backgroundColor: '#1DB954',
+              backgroundColor: '#7209B7',
               color: '#000000',
               padding: '16px 32px',
               borderRadius: '500px',
@@ -278,11 +278,11 @@ export default function HelpPage() {
               cursor: 'pointer'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#1ed760';
+              e.currentTarget.style.backgroundColor = '#8a1dd0';
               e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.backgroundColor = '#7209B7';
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
@@ -348,7 +348,7 @@ export default function HelpPage() {
                 <span 
                   className="text-spotify-green group-hover:translate-x-1 transition-transform"
                   style={{
-                    color: '#1DB954',
+                    color: '#7209B7',
                     fontSize: '16px',
                     lineHeight: '24px',
                     transition: 'transform 200ms ease-out',
@@ -424,68 +424,6 @@ export default function HelpPage() {
           >
             Chat with AI Assistant
           </Link>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="mt-16 bg-black border-t border-white/10 px-8 py-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h5 className="font-bold mb-4 text-white">Company</h5>
-              <ul className="space-y-2 text-spotify-text-gray text-sm">
-                <li><Link href="#" className="hover:text-white">About</Link></li>
-                <li><Link href="#" className="hover:text-white">Jobs</Link></li>
-                <li><Link href="#" className="hover:text-white">For the Record</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-bold mb-4 text-white">Communities</h5>
-              <ul className="space-y-2 text-spotify-text-gray text-sm">
-                <li><Link href="/artist/signup" className="hover:text-white">For Artists</Link></li>
-                <li><Link href="#" className="hover:text-white">Developers</Link></li>
-                <li><Link href="#" className="hover:text-white">Advertising</Link></li>
-                <li><Link href="#" className="hover:text-white">Investors</Link></li>
-                <li><Link href="#" className="hover:text-white">Vendors</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-bold mb-4 text-white">Useful Links</h5>
-              <ul className="space-y-2 text-spotify-text-gray text-sm">
-                <li><Link href="/help" className="hover:text-white">Support</Link></li>
-                <li><Link href="#" className="hover:text-white">Web Player</Link></li>
-                <li><Link href="#" className="hover:text-white">Free Mobile App</Link></li>
-                <li><Link href="/support" className="hover:text-white">Contact EmPulse Music</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-bold mb-4 text-white">EmPulse Plans</h5>
-              <ul className="space-y-2 text-spotify-text-gray text-sm">
-                <li><Link href="/subscription" className="hover:text-white">Premium Individual</Link></li>
-                <li><Link href="/subscription" className="hover:text-white">Premium Family</Link></li>
-                <li><Link href="/subscription" className="hover:text-white">Premium Student</Link></li>
-                <li><Link href="/subscription" className="hover:text-white">Artist Plan</Link></li>
-                <li><Link href="/subscription" className="hover:text-white">EmPulse Free</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex flex-wrap gap-6 text-spotify-text-gray text-xs">
-              <Link href="/legal/terms" className="hover:text-white">Terms of Service</Link>
-              <Link href="/legal/privacy" className="hover:text-white">Privacy Policy</Link>
-              <Link href="/legal/dmca" className="hover:text-white">DMCA Policy</Link>
-              <Link href="/legal/royalty-policy" className="hover:text-white">Royalty Policy</Link>
-              <Link href="/legal/pro-guide" className="hover:text-white">PRO Guide</Link>
-              <Link href="/help/upload-guidelines" className="hover:text-white">Upload Guidelines</Link>
-              <Link href="#" className="hover:text-white">Cookies</Link>
-              <Link href="#" className="hover:text-white">About Ads</Link>
-              <Link href="#" className="hover:text-white">Accessibility</Link>
-            </div>
-            <div className="text-spotify-text-gray text-xs">
-              © 2026 EmPulse Music AB
-            </div>
-          </div>
         </div>
       </div>
     </div>

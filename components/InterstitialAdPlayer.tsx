@@ -154,7 +154,7 @@ export default function InterstitialAdPlayer({
             className="h-full bg-spotify-green transition-all duration-1000"
             style={{
               width: `${((ad.duration || 15) - timeRemaining) / (ad.duration || 15) * 100}%`,
-              backgroundColor: '#1DB954'
+              backgroundColor: '#7209B7'
             }}
           />
         </div>

@@ -1,35 +1,42 @@
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
-  transform: {
-    '^.+\\.(ts|tsx)$': ['ts-jest', {
-      tsconfig: {
-        jsx: 'react-jsx',
-      },
-    }],
-  },
-  transformIgnorePatterns: [
-    'node_modules/(?!(lucide-react|@playwright|@testing-library)/)',
-  ],
+/**
+ * Jest Configuration
+ * Test runner configuration for unit and integration tests
+ */
+
+const nextJest = require('next/jest');
+
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files
+  dir: './',
+});
+
+// Add any custom config to be passed to Jest
+const customJestConfig = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
-  collectCoverageFrom: [
-    'lib/**/*.{ts,tsx}',
-    'components/**/*.{ts,tsx}',
-    'stores/**/*.{ts,tsx}',
-    '!**/*.d.ts',
-    '!**/*.stories.{ts,tsx}',
-    '!**/__tests__/**',
-    '!**/node_modules/**',
-  ],
-  coverageReporters: ['text', 'lcov', 'html', 'json-summary'],
-  coverageDirectory: 'coverage',
   testMatch: [
-    '**/__tests__/**/*.{ts,tsx}',
-    '**/*.test.{ts,tsx}',
-    '**/*.spec.{ts,tsx}',
+    '**/__tests__/**/*.[jt]s?(x)',
+    '**/?(*.)+(spec|test).[jt]s?(x)',
   ],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  collectCoverageFrom: [
+    'lib/**/*.{js,ts}',
+    'app/api/**/*.{js,ts}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!**/.next/**',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70,
+    },
+  },
 };
+
+// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+module.exports = createJestConfig(customJestConfig);

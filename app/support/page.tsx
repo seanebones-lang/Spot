@@ -31,19 +31,48 @@ export default function SupportPage() {
 
     const userMessage = input.trim();
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: userMessage, timestamp: new Date() }]);
+    const userMessageObj = { role: 'user' as const, content: userMessage, timestamp: new Date() };
+    setMessages(prev => [...prev, userMessageObj]);
     setIsLoading(true);
 
-    // TODO: Connect to xAI Grok API
-    // For now, simulate response
-    setTimeout(() => {
+    try {
+      // Call our API route which handles xAI Grok API communication
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const endpoint = apiUrl ? `${apiUrl}/api/chat` : '/api/chat';
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMessageObj],
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to get response from assistant');
+      }
+
+      const data = await response.json();
+      
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'I understand your question. This is a placeholder response. Once connected to xAI Grok, I\'ll provide intelligent assistance for your EmPulse Music experience.',
+        content: data.message || 'I apologize, but I encountered an issue. Please try again.',
         timestamp: new Date()
       }]);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: error instanceof Error 
+          ? `Sorry, I encountered an error: ${error.message}. Please try again or contact support if the issue persists.`
+          : 'Sorry, I encountered an unexpected error. Please try again.',
+        timestamp: new Date()
+      }]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -123,7 +152,7 @@ export default function SupportPage() {
                 color: '#B3B3B3'
               }}
             >
-              Powered by xAI Grok
+              Powered by xAI Grok-3
             </p>
           </div>
         </div>
@@ -165,7 +194,8 @@ export default function SupportPage() {
           overflowY: 'auto',
           padding: '24px',
           gap: '24px',
-          backgroundColor: '#121212'
+          backgroundColor: '#121212',
+          minHeight: 0
         }}
       >
         {messages.map((message, index) => (
@@ -217,7 +247,7 @@ export default function SupportPage() {
                 maxWidth: '70%',
                 borderRadius: '8px',
                 padding: '12px 16px',
-                backgroundColor: message.role === 'user' ? '#1DB954' : '#181818',
+                backgroundColor: message.role === 'user' ? '#7209B7' : '#181818',
                 color: message.role === 'user' ? '#000000' : '#FFFFFF'
               }}
             >
@@ -294,20 +324,27 @@ export default function SupportPage() {
 
       {/* Input Area - Exact Spotify Style */}
       <div 
-        className="border-t border-white/10 p-4 flex-shrink-0"
+        className="border-t border-white/10 flex-shrink-0"
         style={{
           borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-          padding: '16px',
+          padding: '16px 24px',
+          paddingBottom: 'calc(16px + 90px)', // Account for player bar height (90px)
           flexShrink: 0,
-          backgroundColor: '#181818'
+          backgroundColor: '#181818',
+          position: 'relative',
+          zIndex: 60,
+          minHeight: '80px',
+          display: 'flex',
+          alignItems: 'center'
         }}
       >
         <form 
           onSubmit={handleSend} 
-          className="flex gap-3"
+          className="flex gap-3 w-full"
           style={{
             display: 'flex',
-            gap: '12px'
+            gap: '12px',
+            width: '100%'
           }}
         >
           <input
@@ -326,14 +363,17 @@ export default function SupportPage() {
               fontSize: '14px',
               lineHeight: '20px',
               fontWeight: 400,
-              border: 'none',
+              border: '1px solid transparent',
               outline: 'none',
               fontFamily: 'inherit',
-              transition: 'all 200ms ease-out'
+              transition: 'all 200ms ease-out',
+              minWidth: '0',
+              width: '100%',
+              display: 'block'
             }}
             disabled={isLoading}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#1DB954';
+              e.currentTarget.style.borderColor = '#7209B7';
               e.currentTarget.style.borderWidth = '2px';
               e.currentTarget.style.borderStyle = 'solid';
             }}
@@ -346,13 +386,13 @@ export default function SupportPage() {
             type="submit"
             disabled={!input.trim() || isLoading}
             className={cn(
-              "w-12 h-12 bg-spotify-green hover:bg-[#1ed760] rounded-full flex items-center justify-center transition-colors",
+              "w-12 h-12 bg-spotify-green hover:bg-[#8a1dd0] rounded-full flex items-center justify-center transition-colors",
               (!input.trim() || isLoading) && "opacity-50 cursor-not-allowed"
             )}
             style={{
               width: '48px',
               height: '48px',
-              backgroundColor: '#1DB954',
+              backgroundColor: '#7209B7',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
@@ -365,12 +405,12 @@ export default function SupportPage() {
             aria-label="Send message"
             onMouseEnter={(e) => {
               if (input.trim() && !isLoading) {
-                e.currentTarget.style.backgroundColor = '#1ed760';
+                e.currentTarget.style.backgroundColor = '#8a1dd0';
                 e.currentTarget.style.transform = 'scale(1.05)';
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.backgroundColor = '#7209B7';
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >

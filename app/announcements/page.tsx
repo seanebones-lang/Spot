@@ -64,7 +64,7 @@ export default function AnnouncementsPage() {
                 style={{
                   width: '24px',
                   height: '24px',
-                  color: '#1DB954',
+                  color: '#7209B7',
                   flexShrink: 0,
                   marginTop: '4px'
                 }}

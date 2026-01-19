@@ -1,0 +1,346 @@
+// Prisma Schema for EmPulse Music Platform
+// Generated: January 14, 2026
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// User Accounts
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  passwordHash String
+  role      UserRole @default(USER)
+  
+  // Email verification
+  isActive  Boolean  @default(false)
+  emailVerificationToken String? @unique
+  emailVerificationExpires DateTime?
+  emailVerifiedAt DateTime?
+  
+  // Password reset
+  passwordResetToken String? @unique
+  passwordResetExpires DateTime?
+  
+  // Account lockout for failed login attempts
+  failedLoginAttempts Int @default(0)
+  lockedUntil DateTime?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lastLoginAt DateTime?
+  
+  // Relations
+  tracks     Track[]
+  playlists  Playlist[]
+  submissions TrackSubmission[]
+  artistApplications ArtistApplication[]
+  refreshTokens RefreshToken[]
+  
+  @@index([email])
+  @@index([createdAt])
+  @@index([isActive])
+  @@map("users")
+}
+
+enum UserRole {
+  USER
+  ARTIST
+  ADMIN
+}
+
+// Refresh Tokens for JWT rotation
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  revokedAt DateTime?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt])
+  @@map("refresh_tokens")
+}
+
+// Artists (can be linked to User accounts)
+model Artist {
+  id        String   @id @default(uuid())
+  name      String
+  image     String?
+  bio       String?  @db.Text
+  genre     String[]
+  followers Int      @default(0)
+  verified  Boolean  @default(false)
+  
+  // Optional link to User account
+  userId    String?  @unique
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  tracks    Track[]
+  albums    Album[]
+  
+  @@index([name])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("artists")
+}
+
+// Albums/EPs
+model Album {
+  id          String   @id @default(uuid())
+  name        String
+  artistId    String
+  coverArt    String?
+  releaseDate DateTime?
+  type        ReleaseType @default(SINGLE)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  artist      Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  tracks      Track[]
+  
+  @@index([artistId])
+  @@index([releaseDate])
+  @@index([createdAt])
+  @@map("albums")
+}
+
+enum ReleaseType {
+  SINGLE
+  EP
+  LP
+}
+
+// Tracks (Published tracks)
+model Track {
+  id          String   @id @default(uuid())
+  name        String
+  artistId    String
+  albumId     String?
+  userId      String   // Uploader
+  
+  duration    Int      // milliseconds
+  audioUrl    String
+  coverArt    String?
+  
+  // Mood tags (stored as JSONB for flexibility)
+  moodTags    Json?
+  
+  // Format and quality
+  format      String?
+  quality     String?
+  
+  // Legal metadata (stored as JSONB)
+  rightsMetadata Json?
+  artistFullLegalName String?
+  
+  // Genre
+  genre       String?
+  subgenre    String?
+  
+  // ISRC code
+  isrc        String?  @unique
+  
+  // Status
+  status      TrackStatus @default(PUBLISHED)
+  
+  // Timestamps
+  releaseDate DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  artist      Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  album       Album?   @relation(fields: [albumId], references: [id], onDelete: SetNull)
+  user        User     @relation(fields: [userId], references: [id])
+  playlists   PlaylistTrack[]
+  
+  @@index([artistId])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([releaseDate])
+  @@index([name]) // For search - fulltext search would require PostgreSQL extensions
+  @@map("tracks")
+}
+
+enum TrackStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  REJECTED
+  ARCHIVED
+}
+
+// Track Submissions (before review/approval)
+model TrackSubmission {
+  id          String   @id @default(uuid())
+  submissionId String  @unique // Human-readable ID (e.g., TRK-123456789-ABC)
+  userId      String
+  
+  releaseType ReleaseType @default(SINGLE)
+  
+  // Track/Album metadata
+  trackName   String?
+  albumName   String?
+  artistName  String?
+  
+  // File URLs (stored in S3/cloud storage)
+  audioFileUrl String?
+  audioFileUrls String[] // For EP/LP
+  coverArtUrl String?
+  
+  // File metadata
+  audioFileName String?
+  audioFileSize Int?
+  audioFileType String?
+  coverArtFileName String?
+  coverArtFileSize Int?
+  
+  // Metadata (stored as JSONB)
+  metadata    Json?
+  moodTags    Json?
+  tracks      Json? // For EP/LP track list
+  composers   Json?
+  lyricists   Json?
+  publishers  Json?
+  rightsMetadata Json?
+  legalWarranties Json?
+  
+  // Status
+  status      SubmissionStatus @default(PENDING)
+  
+  // Timestamps
+  submittedAt DateTime @default(now())
+  reviewedAt  DateTime?
+  publishedAt DateTime?
+  
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([status])
+  @@index([submissionId])
+  @@index([submittedAt])
+  @@map("track_submissions")
+}
+
+enum SubmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PUBLISHED
+}
+
+// Artist Applications (signup requests)
+model ArtistApplication {
+  id          String   @id @default(uuid())
+  applicationId String @unique // Human-readable ID (e.g., APP-123456789-ABC)
+  userId      String
+  
+  email       String
+  artistName  String
+  
+  // Application data (stored as JSONB)
+  selectedMediums Json?
+  documentsSigned Json?
+  
+  // W-9 Data (encrypted in application layer)
+  w9DataEncrypted String? @db.Text // Encrypted JSON string
+  proRegistration Json?
+  digitalSignature String?
+  
+  // Status
+  status      ApplicationStatus @default(PENDING)
+  
+  // Timestamps
+  submittedAt DateTime @default(now())
+  reviewedAt  DateTime?
+  approvedAt  DateTime?
+  
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([status])
+  @@index([applicationId])
+  @@index([submittedAt])
+  @@map("artist_applications")
+}
+
+enum ApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// Playlists
+model Playlist {
+  id          String   @id @default(uuid())
+  name        String
+  description String?  @db.Text
+  userId      String
+  
+  // Privacy
+  isPublic    Boolean  @default(false)
+  isCollaborative Boolean @default(false)
+  
+  // Cover image
+  coverImage  String?
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tracks      PlaylistTrack[]
+  
+  @@index([userId])
+  @@index([isPublic])
+  @@index([createdAt])
+  @@map("playlists")
+}
+
+// Playlist-Track junction table (many-to-many)
+model PlaylistTrack {
+  id          String   @id @default(uuid())
+  playlistId  String
+  trackId     String
+  position    Int      // Order in playlist
+  
+  // Timestamps
+  addedAt     DateTime @default(now())
+  
+  // Relations
+  playlist    Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  track       Track    @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  
+  @@unique([playlistId, trackId])
+  @@index([playlistId])
+  @@index([trackId])
+  @@map("playlist_tracks")
+}
