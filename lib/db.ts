@@ -15,17 +15,46 @@ declare global {
   var prisma: PrismaClient | undefined;
 }
 
-// Prisma Client singleton - optimized for edge runtime compatibility
-// Uses binary engine (default) which works in both Node.js and Edge runtimes
-export const prisma =
-  globalThis.prisma ??
-  new PrismaClient({
+// Lazy Prisma Client getter - only creates client when actually accessed
+// This prevents build-time instantiation errors when DATABASE_URL is not available
+function getPrismaClient(): PrismaClient {
+  if (globalThis.prisma) {
+    return globalThis.prisma;
+  }
+
+  // During build, if DATABASE_URL is not set, Prisma 7 requires adapter/accelerateUrl
+  // We'll create client anyway - it will fail at runtime if DATABASE_URL is missing
+  // This allows Next.js build to complete (build doesn't execute API routes)
+  const client = new PrismaClient({
     log:
       process.env.NODE_ENV === 'development'
         ? ['query', 'warn', 'error']
         : ['warn', 'error'],
     errorFormat: 'pretty',
   });
+
+  // Cache in global for development hot reload
+  if (process.env.NODE_ENV !== 'production') {
+    globalThis.prisma = client;
+  }
+
+  return client;
+}
+
+// Export as Proxy to defer instantiation until runtime
+// This prevents PrismaClient from being created during Next.js build analysis
+export const prisma = new Proxy({} as PrismaClient, {
+  get(_target, prop) {
+    const client = getPrismaClient();
+    const value = (client as any)[prop];
+    return typeof value === 'function' ? value.bind(client) : value;
+  },
+  set(_target, prop, value) {
+    const client = getPrismaClient();
+    (client as any)[prop] = value;
+    return true;
+  },
+});
 
 /**
  * Execute Prisma query with timeout
@@ -38,23 +67,37 @@ export async function dbQueryWithTimeout<T>(
   return withTimeout(query, timeoutMs, 'Database query timeout');
 }
 
-// Handle connection errors gracefully
-prisma.$on('error' as never, (e: unknown) => {
-  logger.error('Prisma database error', e);
-});
+// Handle connection errors gracefully (only at runtime)
+// Skip during build to avoid Proxy access issues
+if (typeof window === 'undefined') {
+  try {
+    const client = getPrismaClient();
+    client.$on('error' as never, (e: unknown) => {
+      logger.error('Prisma database error', e);
+    });
+  } catch (e) {
+    // Ignore during build
+  }
+}
 
 // In development, prevent multiple instances during hot reload
 if (process.env.NODE_ENV !== 'production') {
   globalThis.prisma = prisma;
 }
 
-// Graceful shutdown
-async function disconnect() {
-  await prisma.$disconnect();
-}
+// Graceful shutdown (only at runtime)
+if (typeof window === 'undefined') {
+  async function disconnect() {
+    try {
+      const client = getPrismaClient();
+      await client.$disconnect();
+    } catch (e) {
+      // Ignore during build
+    }
+  }
 
-// Handle process termination
-process.on('SIGTERM', disconnect);
-process.on('SIGINT', disconnect);
+  process.on('SIGTERM', disconnect);
+  process.on('SIGINT', disconnect);
+}
 
 export default prisma;
