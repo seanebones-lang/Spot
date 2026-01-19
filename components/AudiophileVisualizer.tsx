@@ -491,7 +491,6 @@ function AudiophileVisualizer({
           antialias: true,
           alpha: false,
           powerPreference: 'high-performance',
-          pixelRatio: pixelRatio, // 4K rendering
         }}
         dpr={pixelRatio} // Device pixel ratio for 4K
         style={{ width: '100%', height: '100%' }}
