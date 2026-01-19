@@ -3,6 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
   outputFileTracingRoot: require('path').join(__dirname),
+  // Prisma configuration for edge runtime compatibility
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '50mb',
+    },
+  },
   images: {
     domains: ['i.scdn.co', 'mosaic.scdn.co', 'wrapped-images.spotifycdn.com', 'images.unsplash.com'],
     unoptimized: false,
