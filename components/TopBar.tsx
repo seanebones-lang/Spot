@@ -147,7 +147,15 @@ export default function TopBar() {
           <div className="flex items-center gap-1">
             <span className="text-sm font-semibold">🔥 Check-in</span>
             {streak > 0 && (
-              <span className="text-xs bg-empulse-purple/80 px-2 py-0.5 rounded text-white font-medium">
+              <span
+                className="text-xs px-2 py-0.5 rounded text-white font-medium shadow-lg"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(114, 9, 183, 0.8) 100%), linear-gradient(to right, #7209B7, #8a1dd0)',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: '0 2px 8px rgba(114, 9, 183, 0.4)',
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)'
+                }}
+              >
                 {streak}
               </span>
             )}
