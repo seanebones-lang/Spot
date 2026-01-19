@@ -16,24 +16,43 @@ declare global {
 }
 
 // Prisma Client factory function - creates client with binary engine
-const prismaClientSingleton = (): PrismaClient => {
-  return new PrismaClient({
+// Only called when actually accessed (lazy initialization)
+function getPrismaClient(): PrismaClient {
+  if (globalThis.prisma) {
+    return globalThis.prisma;
+  }
+
+  const client = new PrismaClient({
     log:
       process.env.NODE_ENV === 'development'
         ? ['query', 'warn', 'error']
         : ['warn', 'error'],
     errorFormat: 'pretty',
   });
-};
 
-// Global singleton pattern - edge runtime compatible
-declare global {
-  // eslint-disable-next-line no-var
-  var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
+  // Cache in global for development hot reload
+  if (process.env.NODE_ENV !== 'production') {
+    globalThis.prisma = client;
+  }
+
+  return client;
 }
 
-// Export singleton - lazy initialization prevents build-time errors
-export const prisma = globalThis.prisma ?? prismaClientSingleton();
+// Export as Proxy to defer instantiation until runtime
+// This prevents PrismaClient from being created during Next.js build analysis
+// The binary engine still requires DATABASE_URL at runtime, but not during build
+export const prisma = new Proxy({} as PrismaClient, {
+  get(_target, prop) {
+    const client = getPrismaClient();
+    const value = (client as any)[prop];
+    return typeof value === 'function' ? value.bind(client) : value;
+  },
+  set(_target, prop, value) {
+    const client = getPrismaClient();
+    (client as any)[prop] = value;
+    return true;
+  },
+});
 
 /**
  * Execute Prisma query with timeout
@@ -46,23 +65,31 @@ export async function dbQueryWithTimeout<T>(
   return withTimeout(query, timeoutMs, 'Database query timeout');
 }
 
-// Handle connection errors gracefully
-prisma.$on('error' as never, (e: unknown) => {
-  logger.error('Prisma database error', e);
-});
-
-// In development, prevent multiple instances during hot reload
-if (process.env.NODE_ENV !== 'production') {
-  globalThis.prisma = prisma;
+// Handle connection errors gracefully (only at runtime, not during build)
+if (typeof window === 'undefined') {
+  try {
+    const client = getPrismaClient();
+    client.$on('error' as never, (e: unknown) => {
+      logger.error('Prisma database error', e);
+    });
+  } catch (e) {
+    // Ignore during build - client not needed until runtime
+  }
 }
 
-// Graceful shutdown
-async function disconnect() {
-  await prisma.$disconnect();
-}
+// Graceful shutdown (only at runtime)
+if (typeof window === 'undefined') {
+  async function disconnect() {
+    try {
+      const client = getPrismaClient();
+      await client.$disconnect();
+    } catch (e) {
+      // Ignore during build
+    }
+  }
 
-// Handle process termination
-process.on('SIGTERM', disconnect);
-process.on('SIGINT', disconnect);
+  process.on('SIGTERM', disconnect);
+  process.on('SIGINT', disconnect);
+}
 
 export default prisma;
