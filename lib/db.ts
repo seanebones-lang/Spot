@@ -14,20 +14,16 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-// Prisma 7: Conditional initialization to avoid build-time errors
+// Prisma 7: Runtime-only initialization to avoid build-time errors
 // During Next.js build, API routes are analyzed but DATABASE_URL may not be available
-// We'll create the client only when DATABASE_URL is present, otherwise return a no-op proxy
-const createPrismaClient = (): PrismaClient | null => {
-  // During build, if DATABASE_URL is not set, return null
-  // This allows the build to complete, and runtime will handle the error
-  if (!process.env.DATABASE_URL) {
-    return null;
-  }
-
+// We'll use a function-based approach that only creates client when actually called
+function getPrismaClient(): PrismaClient {
   if (globalForPrisma.prisma) {
     return globalForPrisma.prisma;
   }
 
+  // Prisma 7: If DATABASE_URL is not set, Prisma will throw at runtime
+  // This is acceptable - build will complete, runtime will handle the error
   const client = new PrismaClient({
     log:
       process.env.NODE_ENV === 'development'
@@ -42,24 +38,26 @@ const createPrismaClient = (): PrismaClient | null => {
   }
 
   return client;
-};
+}
 
-// Export a getter function that creates client on demand
-let _prismaInstance: PrismaClient | null = null;
-
-export const prisma = (() => {
-  if (_prismaInstance) return _prismaInstance;
-  
-  const client = createPrismaClient();
-  if (!client) {
-    // During build, return a mock that will fail at runtime
-    // This allows Next.js build to complete
-    return {} as PrismaClient;
-  }
-  
-  _prismaInstance = client;
-  return client;
-})() as PrismaClient;
+// Export a Proxy that lazily creates the client only when accessed
+// This prevents PrismaClient from being instantiated during Next.js build analysis
+export const prisma = new Proxy({} as PrismaClient, {
+  get(_target, prop) {
+    // Only create client when actually accessed (runtime)
+    const client = getPrismaClient();
+    const value = (client as any)[prop];
+    if (typeof value === 'function') {
+      return value.bind(client);
+    }
+    return value;
+  },
+  set(_target, prop, value) {
+    const client = getPrismaClient();
+    (client as any)[prop] = value;
+    return true;
+  },
+});
 
 /**
  * Execute Prisma query with timeout
@@ -72,23 +70,32 @@ export async function dbQueryWithTimeout<T>(
   return withTimeout(query, timeoutMs, 'Database query timeout');
 }
 
-// Handle connection errors gracefully
-prisma.$on('error' as never, (e: unknown) => {
-  logger.error('Prisma database error', e);
-});
-
-// In development, prevent multiple instances
-if (process.env.NODE_ENV !== 'production') {
-  globalForPrisma.prisma = prisma;
+// Handle connection errors gracefully (only at runtime)
+if (typeof window === 'undefined') {
+  // Only in Node.js environment (server-side)
+  try {
+    const client = getPrismaClient();
+    client.$on('error' as never, (e: unknown) => {
+      logger.error('Prisma database error', e);
+    });
+  } catch (e) {
+    // Ignore errors during build
+  }
 }
 
-// Graceful shutdown
-async function disconnect() {
-  await prisma.$disconnect();
-}
+// Graceful shutdown (only at runtime)
+if (typeof window === 'undefined') {
+  async function disconnect() {
+    try {
+      const client = getPrismaClient();
+      await client.$disconnect();
+    } catch (e) {
+      // Ignore errors during build
+    }
+  }
 
-// Handle process termination
-process.on('SIGTERM', disconnect);
-process.on('SIGINT', disconnect);
+  process.on('SIGTERM', disconnect);
+  process.on('SIGINT', disconnect);
+}
 
 export default prisma;
