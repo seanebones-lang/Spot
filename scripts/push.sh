@@ -33,16 +33,21 @@ if ssh -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
   exit 0
 fi
 
-# Try GitHub CLI
+# Try GitHub CLI (most seamless)
 if command -v gh &> /dev/null; then
   echo "🔐 Using GitHub CLI"
   if gh auth status &> /dev/null; then
+    # Configure git to use GitHub CLI for credentials
+    git config --global credential.helper "" 2>/dev/null || true
+    git config --global credential.helper "!gh auth git-credential" 2>/dev/null || true
     git push origin main
     echo "✅ Push complete!"
     exit 0
   else
     echo "📝 Authenticating with GitHub CLI..."
-    gh auth login
+    gh auth login --git-protocol https
+    git config --global credential.helper "" 2>/dev/null || true
+    git config --global credential.helper "!gh auth git-credential" 2>/dev/null || true
     git push origin main
     echo "✅ Push complete!"
     exit 0
