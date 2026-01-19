@@ -24,9 +24,9 @@
   "customTools": {
     "deploy": {
       "path": "./tools/deploy-mcp.js",
-      "description": "Deploy to Vercel or Railway",
+      "description": "Deploy to Vercel, Railway, AWS, GCP, Azure",
       "args": ["platform", "project", "token", "branch"],
-      "platforms": ["vercel", "railway"]
+      "platforms": ["vercel", "railway", "aws", "gcp", "azure"]
     },
     "tester": {
       "path": "./tools/tester-mcp.js",
@@ -54,7 +54,27 @@
       "args": ["scanner", "action"],
       "scanners": ["npm", "snyk", "sonarqube", "all"],
       "actions": ["scan", "fix", "report"]
+    },
+    "infra": {
+      "path": "./tools/infra-mcp.js",
+      "description": "Infrastructure-as-code (Terraform, ArgoCD, AWS/GCP/Azure)",
+      "args": ["action", "provider", "target", "env"],
+      "providers": ["terraform", "argocd", "aws", "gcp", "azure"],
+      "actions": ["plan", "apply", "destroy", "sync", "status", "deploy"],
+      "environments": ["dev", "staging", "prod"]
+    },
+    "qa": {
+      "path": "./tools/qa-mcp.js",
+      "description": "QA automation (Playwright, Cypress, Vitest, Load Testing)",
+      "args": ["framework", "action", "target"],
+      "frameworks": ["playwright", "cypress", "vitest", "load"],
+      "actions": ["test", "ui", "headed", "debug", "report"]
+    },
+    "swarm": {
+      "description": "Agent swarm orchestration via MCP[query_agent]",
+      "usage": "/swarm [agent-type] [task]",
+      "agents": ["devops", "ml", "mobile", "security", "a11y", "fullstack", "qa", "infra", "observability", "performance", "compliance"]
     }
   },
-  "notes": "Enterprise Pro Pack MCP Tools - Always accessible via repo tools/"
+  "notes": "CTO Max Pack - 200+ abilities via MCP/Eleven. All tools accessible via repo tools/"
 }

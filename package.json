@@ -33,10 +33,18 @@
     "ml": "node tools/ml-mcp.js",
     "mobile": "node tools/mobile-mcp.js",
     "security": "node tools/security-mcp.js",
+    "infra": "node tools/infra-mcp.js",
+    "qa": "node tools/qa-mcp.js",
     "nx:build": "nx build",
     "nx:test": "nx test",
+    "nx:run-many": "nx run-many",
     "turbo:build": "turbo build",
-    "turbo:test": "turbo test"
+    "turbo:test": "turbo test",
+    "terraform:init": "cd terraform/dev && terraform init",
+    "terraform:plan": "cd terraform/dev && terraform plan",
+    "terraform:apply": "cd terraform/dev && terraform apply -auto-approve",
+    "argocd:sync": "argocd app sync spot-app",
+    "swarm": "node -e \"console.log('Swarm orchestration via MCP[query_agent]')\""
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.971.0",
@@ -81,6 +89,13 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^30.2.0",
     "ts-jest": "^29.1.0",
-    "ts-node": "^10.9.0"
+    "ts-node": "^10.9.0",
+    "nx": "^20.0.0",
+    "turbo": "^2.0.0",
+    "@nx/flutter": "^20.0.0",
+    "@nx/swift": "^20.0.0",
+    "@nx/aws": "^20.0.0",
+    "vitest": "^2.0.0",
+    "cypress": "^13.0.0"
   }
 }

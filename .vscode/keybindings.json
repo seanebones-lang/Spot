@@ -12,12 +12,36 @@
     "command": "workbench.action.chat.open",
     "when": "true",
     "args": {
-      "query": "MCP[deploy] vercel spot-music $VERCEL_TOKEN"
+      "query": "/swarm enterprise"
+    }
+  },
+  {
+    "key": "cmd+shift+d",
+    "command": "workbench.action.chat.open",
+    "when": "true",
+    "args": {
+      "query": "MCP[deploy] vercel spot-music $VERCEL_TOKEN && MCP[infra] apply terraform spot-cluster prod"
     }
   },
   {
     "key": "cmd+shift+t",
     "command": "workbench.action.terminal.runSelectedText",
     "when": "editorTextFocus && terminalProcessSupported"
+  },
+  {
+    "key": "cmd+shift+m",
+    "command": "workbench.action.chat.open",
+    "when": "true",
+    "args": {
+      "query": "MCP[ml] train llama3 data=\"optimize Spot\" backend=ollama"
+    }
+  },
+  {
+    "key": "cmd+shift+s",
+    "command": "workbench.action.chat.open",
+    "when": "true",
+    "args": {
+      "query": "MCP[security] all scan"
+    }
   }
 ]

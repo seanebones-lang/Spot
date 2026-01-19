@@ -1,4 +1,4 @@
-echo "🚀 Running pre-push checks..."
+echo "🚀 Running CTO pre-push checks..."
 
 # Run security scan
 echo "🔒 Running security scan..."
@@ -13,10 +13,16 @@ npm test || {
   exit 1
 }
 
+# Run QA tests
+echo "🎭 Running QA tests..."
+node tools/qa-mcp.js playwright test || {
+  echo "⚠️  QA tests failed, but continuing..."
+}
+
 # Optional: Run e2e tests (can be slow)
 # echo "🧪 Running e2e tests..."
 # npm run test:e2e || {
 #   echo "⚠️  E2E tests failed, but continuing..."
 # }
 
-echo "✅ Pre-push checks passed!"
+echo "✅ CTO pre-push checks passed!"
