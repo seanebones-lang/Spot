@@ -28,10 +28,12 @@ module.exports = {
         ]
       },
       "spacing": {
-        "player-height": "90px"
+        "player-height": "90px",
+        "player-height-mobile": "60px"
       },
       "inset": {
-        "player-height": "90px"
+        "player-height": "90px",
+        "player-height-mobile": "60px"
       },
       "borderRadius": {
         "spotify": "4px"

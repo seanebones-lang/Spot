@@ -33,6 +33,13 @@ export default function Player() {
 
   const [isQueueOpen, setIsQueueOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (currentTrack) {
@@ -114,18 +121,19 @@ export default function Player() {
     : 0;
 
   return (
-    <div 
-      className="fixed bottom-0 left-0 right-0 h-player-height bg-spotify-dark-gray border-t border-spotify-light-gray px-2 sm:px-4 z-50"
+    <div
+      className="fixed bottom-0 left-0 right-0 bg-spotify-dark-gray border-t border-spotify-light-gray px-2 sm:px-4 z-50"
       style={{
         position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
-        height: '90px',
+        height: isMobile ? '60px' : '90px',
         backgroundColor: '#181818',
         borderTop: '1px solid #282828',
         padding: '0 8px',
-        zIndex: 50
+        zIndex: 50,
+        transition: 'height 300ms ease-out'
       }}
     >
       <div 
@@ -225,12 +233,15 @@ export default function Player() {
         </div>
 
         {/* Center - Controls - Responsive for mobile */}
-        <div 
-          className="flex flex-col items-center gap-1 sm:gap-2 flex-1 hidden sm:flex"
+        <div
+          className="flex flex-col items-center gap-1 sm:gap-2 flex-1"
           style={{
-            flex: '1 1 40%',
-            gap: '4px',
-            maxWidth: '722px'
+            flex: isMobile ? '0 0 auto' : '1 1 40%',
+            gap: isMobile ? '2px' : '4px',
+            maxWidth: isMobile ? 'none' : '722px',
+            display: 'flex',
+            flexDirection: isMobile ? 'row' : 'column',
+            justifyContent: 'center'
           }}
         >
           <div 
@@ -257,7 +268,7 @@ export default function Player() {
                 transition: 'color 200ms ease-out',
                 opacity: currentTrack ? 1 : 0.5,
                 padding: '4px',
-                display: 'flex',
+                display: isMobile ? 'none' : 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
@@ -287,7 +298,7 @@ export default function Player() {
                 transition: 'color 200ms ease-out',
                 opacity: currentTrack ? 1 : 0.5,
                 padding: '4px',
-                display: 'flex',
+                display: isMobile ? 'none' : 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
@@ -321,7 +332,7 @@ export default function Player() {
                 transition: 'color 200ms ease-out',
                 opacity: currentTrack ? 1 : 0.5,
                 padding: '4px',
-                display: 'flex',
+                display: isMobile ? 'none' : 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
@@ -356,7 +367,7 @@ export default function Player() {
                 transition: 'color 200ms ease-out',
                 opacity: currentTrack ? 1 : 0.5,
                 padding: '4px',
-                display: 'flex',
+                display: isMobile ? 'none' : 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
@@ -385,13 +396,14 @@ export default function Player() {
         </div>
 
         {/* Right - Volume & Extras - Responsive for mobile */}
-        <div 
+        <div
           className="flex items-center gap-2 sm:gap-4 flex-1 justify-end"
           style={{
-            flex: '1 1 30%',
+            flex: isMobile ? '0 0 auto' : '1 1 30%',
             gap: '8px',
             justifyContent: 'flex-end',
-            alignItems: 'center'
+            alignItems: 'center',
+            display: isMobile ? 'none' : 'flex'
           }}
         >
           <button
