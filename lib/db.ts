@@ -8,21 +8,22 @@ import { PrismaClient } from '@prisma/client';
 import { logger } from './logger';
 import { withTimeout, TIMEOUTS } from './timeout';
 
-// Prisma Client singleton pattern
-// In development, prevent multiple instances during hot reload
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
+// Prisma Client singleton - Edge runtime compatible
+// Prevents multiple instances during hot reload in development
+declare global {
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
+}
 
 // Prisma Client singleton - optimized for edge runtime compatibility
 // Uses binary engine (default) which works in both Node.js and Edge runtimes
 export const prisma =
-  globalForPrisma.prisma ??
+  globalThis.prisma ??
   new PrismaClient({
     log:
       process.env.NODE_ENV === 'development'
-        ? ['warn', 'error']
-        : ['error'],
+        ? ['query', 'warn', 'error']
+        : ['warn', 'error'],
     errorFormat: 'pretty',
   });
 
@@ -42,9 +43,9 @@ prisma.$on('error' as never, (e: unknown) => {
   logger.error('Prisma database error', e);
 });
 
-// In development, prevent multiple instances
+// In development, prevent multiple instances during hot reload
 if (process.env.NODE_ENV !== 'production') {
-  globalForPrisma.prisma = prisma;
+  globalThis.prisma = prisma;
 }
 
 // Graceful shutdown
