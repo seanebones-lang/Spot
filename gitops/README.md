@@ -480,6 +480,8 @@ Based on 2025 GitOps best practices:
 
 ### Documentation Files
 - `GITOPS_SETUP.md` - Detailed setup guide
+- `GITOPS_EXAMPLES_ALIGNMENT.md` - **NEW**: Alignment with three core GitOps examples (2025)
+- `IMPLEMENTATION_STATUS.md` - **NEW**: Implementation status and compliance checklist
 - `QUICK_START.md` - Quick start guide
 - `terraform/README.md` - Terraform infrastructure setup
 - `secrets/README.md` - SOPS secrets management

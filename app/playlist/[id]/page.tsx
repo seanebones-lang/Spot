@@ -431,7 +431,7 @@ export default function PlaylistPage() {
                         style={{
                           width: '4px',
                           height: '4px',
-                          backgroundColor: '#1DB954',
+                          backgroundColor: '#7209B7',
                           borderRadius: '50%'
                         }}
                       ></div>
@@ -466,7 +466,7 @@ export default function PlaylistPage() {
                         fontSize: '14px',
                         lineHeight: '20px',
                         fontWeight: 400,
-                        color: currentTrack?.id === track.id ? '#1DB954' : '#FFFFFF'
+                        color: currentTrack?.id === track.id ? '#7209B7' : '#FFFFFF'
                       }}
                     >
                       {track.name}
@@ -522,7 +522,7 @@ export default function PlaylistPage() {
                       style={{
                         width: '16px',
                         height: '16px',
-                        color: isLiked ? '#1DB954' : '#B3B3B3'
+                        color: isLiked ? '#7209B7' : '#B3B3B3'
                       }}
                     />
                   </button>

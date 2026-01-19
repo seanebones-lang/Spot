@@ -13,4 +13,5 @@ export interface AIMoodSuggestion {
   vibe: number;
   genres: string[];
   confidence: number; // 0-1
+  embedding?: number[]; // Optional embedding vector for vector DB storage
 }

@@ -112,7 +112,7 @@ export default function PictureInPicturePlayer() {
       // Shuffle button
       const shuffleBtn = pipWindow.document.createElement('button');
       shuffleBtn.id = 'shuffle';
-      shuffleBtn.style.cssText = `background: transparent; border: none; color: ${shuffle ? '#1DB954' : '#b3b3b3'}; cursor: pointer; padding: 4px;`;
+      shuffleBtn.style.cssText = `background: transparent; border: none; color: ${shuffle ? '#7209B7' : '#b3b3b3'}; cursor: pointer; padding: 4px;`;
       shuffleBtn.setAttribute('aria-label', shuffle ? 'Shuffle on' : 'Shuffle off');
       shuffleBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.151.922a.75.75 0 10-1.06 1.06L13.109 3H11.16a3.75 3.75 0 00-2.873 1.34l-6.927 9.85A2.75 2.75 0 01.39 15.28H-.75a.75.75 0 000 1.5h1.14a2.75 2.75 0 002.873-1.94L8.9 5.787l1.735 2.464a.75.75 0 001.06-.106l3-4.5a.75.75 0 000-.812l-3-4.5a.75.75 0 00-1.06-.106L9.515 4.25l-1.735-2.464a.75.75 0 00-1.06.106L4.75 6.53l-2.776 3.943A2.75 2.75 0 001.14 14H3.22l1.06-1.06L2.75 11.69l1.06-1.06 1.47 1.47 1.06-1.06-1.47-1.47L7.22 9.22l1.47 1.47 1.06-1.06-1.47-1.47 1.47-1.47 1.06-1.06z"/></svg>';
 
@@ -126,7 +126,7 @@ export default function PictureInPicturePlayer() {
       // Play/Pause button
       const playPauseBtn = pipWindow.document.createElement('button');
       playPauseBtn.id = 'play-pause';
-      playPauseBtn.style.cssText = 'background: #1DB954; border: none; color: black; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;';
+      playPauseBtn.style.cssText = 'background: #7209B7; border: none; color: black; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;';
       playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
       playPauseBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
 
@@ -140,7 +140,7 @@ export default function PictureInPicturePlayer() {
       // Repeat button
       const repeatBtn = pipWindow.document.createElement('button');
       repeatBtn.id = 'repeat';
-      repeatBtn.style.cssText = `background: transparent; border: none; color: ${repeat !== 'off' ? '#1DB954' : '#b3b3b3'}; cursor: pointer; padding: 4px; font-size: 16px;`;
+      repeatBtn.style.cssText = `background: transparent; border: none; color: ${repeat !== 'off' ? '#7209B7' : '#b3b3b3'}; cursor: pointer; padding: 4px; font-size: 16px;`;
       repeatBtn.textContent = '🔁';
       repeatBtn.setAttribute('aria-label', `Repeat ${repeat}`);
 

@@ -24,6 +24,8 @@ import { Track } from '@/types/track';
 import { RAGMoodAnalysisPipeline, getRAGPipeline } from './aiMoodAnalysis';
 import { Neo4jKnowledgeGraph, getKnowledgeGraph } from './knowledgeGraph';
 import { SimilarityMatchingEngine, getSimilarityMatchingEngine } from './similarityMatching';
+import { recordMetric } from './pipelineMetrics';
+import { PERFORMANCE_TARGETS, DEFAULT_LIMITS, SIMILARITY_THRESHOLDS } from './pipelineConfig';
 
 /**
  * Pipeline Stage Status
@@ -279,11 +281,24 @@ export class DataPipelineOrchestrator {
       const moodSuggestion = await this.ragPipeline.analyzeMood(audioFile);
       const duration = performance.now() - startTime;
 
-      // Generate embedding (would be done in RAG pipeline)
-      const embedding: number[] = []; // Placeholder
+      // Extract embedding from RAG pipeline result
+      const embedding: number[] = moodSuggestion.embedding || [];
 
-      if (duration > 200) {
-        console.warn(`⚠️ Mood analysis latency (${duration.toFixed(2)}ms) exceeds target (<200ms)`);
+      // Record metric
+      recordMetric({
+        stage: 'mood_analysis',
+        duration,
+        success: true,
+        metadata: {
+          confidence: moodSuggestion.confidence,
+          embeddingDimensions: embedding.length,
+        },
+      });
+
+      if (duration > PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS) {
+        console.warn(
+          `⚠️ Mood analysis latency (${duration.toFixed(2)}ms) exceeds target (<${PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS}ms)`
+        );
       }
 
       return {
@@ -318,8 +333,56 @@ export class DataPipelineOrchestrator {
     const startTime = performance.now();
 
     try {
-      // In production, index embedding in vector database
-      // For now, log the operation
+      // Check if vector DB is configured
+      if (!this.config.vectorDB) {
+        return {
+          stage: 'vector_indexing',
+          status: PipelineStageStatus.SKIPPED,
+          duration: 0,
+          metadata: {
+            trackId,
+            reason: 'Vector DB not configured',
+          },
+        };
+      }
+
+      // Validate embedding
+      if (!embedding || embedding.length === 0) {
+        return {
+          stage: 'vector_indexing',
+          status: PipelineStageStatus.FAILED,
+          duration: performance.now() - startTime,
+          error: 'Cannot index: embedding is empty or invalid',
+        };
+      }
+
+      if (embedding.some(v => !isFinite(v))) {
+        return {
+          stage: 'vector_indexing',
+          status: PipelineStageStatus.FAILED,
+          duration: performance.now() - startTime,
+          error: 'Cannot index: embedding contains NaN or Infinity values',
+        };
+      }
+
+      // Upsert embedding to vector database
+      await this.ragPipeline.upsertEmbedding(
+        trackId,
+        embedding,
+        {
+          trackId,
+          name: trackMetadata.name || '',
+          artist: trackMetadata.artist || '',
+          moodTags: trackMetadata.moodTags || {
+            mood: 'Content',
+            feelings: [],
+            vibe: 50,
+            genres: [],
+          },
+          genre: trackMetadata.genre || undefined,
+        }
+      );
+
       const duration = performance.now() - startTime;
       return {
         stage: 'vector_indexing',
@@ -327,7 +390,8 @@ export class DataPipelineOrchestrator {
         duration,
         metadata: {
           trackId,
-          embeddingDimensions: embedding?.length || 0,
+          embeddingDimensions: embedding.length,
+          vectorDBType: this.config.vectorDB.type,
         },
       };
     } catch (error) {
@@ -415,7 +479,7 @@ export class DataPipelineOrchestrator {
       await this.knowledgeGraph.createSimilarityRelationships(
         trackId,
         similarityRelationships,
-        0.7
+        SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD
       );
 
       const duration = performance.now() - startTime;
@@ -456,7 +520,8 @@ export class DataPipelineOrchestrator {
 
       // Validate latency
       const moodAnalysisStage = previousStages.find(s => s.stage === 'mood_analysis');
-      const latencyOK = !moodAnalysisStage || moodAnalysisStage.duration < 200;
+      const latencyOK =
+        !moodAnalysisStage || moodAnalysisStage.duration < PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS;
 
       // Validate all stages completed
       const allCompleted = previousStages.every(
@@ -465,7 +530,7 @@ export class DataPipelineOrchestrator {
 
       const duration = performance.now() - startTime;
 
-      return {
+      const result = {
         stage: 'validation',
         status: allCompleted ? PipelineStageStatus.COMPLETED : PipelineStageStatus.FAILED,
         duration,
@@ -476,6 +541,16 @@ export class DataPipelineOrchestrator {
           allStagesCompleted: allCompleted,
         },
       };
+
+      // Record validation metric
+      recordMetric({
+        stage: 'validation',
+        duration,
+        success: allCompleted && meetsTarget && latencyOK,
+        metadata: result.metadata,
+      });
+
+      return result;
     } catch (error) {
       const duration = performance.now() - startTime;
       return {

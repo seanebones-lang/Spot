@@ -83,7 +83,7 @@ export default function PrivacySettingsPage() {
                   width: '20px',
                   height: '20px',
                   cursor: 'pointer',
-                  accentColor: '#1DB954'
+                  accentColor: '#7209B7'
                 }}
               />
             </label>
@@ -116,7 +116,7 @@ export default function PrivacySettingsPage() {
                   width: '20px',
                   height: '20px',
                   cursor: 'pointer',
-                  accentColor: '#1DB954'
+                  accentColor: '#7209B7'
                 }}
               />
             </label>

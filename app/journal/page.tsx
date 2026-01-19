@@ -87,7 +87,7 @@ export default function JournalPage() {
             onClick={() => setIsCreating(true)}
             className="btn-primary"
             style={{
-              backgroundColor: '#1DB954',
+              backgroundColor: '#7209B7',
               color: '#000000',
               fontWeight: 700,
               padding: '12px 24px',
@@ -99,11 +99,11 @@ export default function JournalPage() {
               transition: 'all 200ms ease-out'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#1ed760';
+              e.currentTarget.style.backgroundColor = '#8a1dd0';
               e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#1DB954';
+              e.currentTarget.style.backgroundColor = '#7209B7';
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
@@ -156,7 +156,7 @@ export default function JournalPage() {
               resize: 'vertical'
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#1DB954';
+              e.currentTarget.style.borderColor = '#7209B7';
               e.currentTarget.style.borderWidth = '2px';
             }}
             onBlur={(e) => {

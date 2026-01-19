@@ -7,13 +7,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#121212] border-t border-white/10 px-4 py-12 w-full" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
+    <footer className="bg-[#121212] border-t border-white/10 px-8 w-full" style={{ paddingLeft: '32px', paddingRight: '32px', paddingTop: '16px', paddingBottom: '16px', position: 'relative', zIndex: 10 }}>
       <nav className="w-full">
-        {/* Main Footer Links - Spotify Structure */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8" style={{ gap: '32px', marginBottom: '32px' }}>
+        {/* Main Footer Links - Compact Spotify Structure */}
+        <div className="mb-3" style={{ gap: '16px', marginBottom: '12px', display: 'grid', gridTemplateColumns: 'repeat(4, minmax(150px, 1fr))', width: '100%', maxWidth: '100%' }}>
           {/* Company - TypeList Structure */}
-          <div>
-            <ul role="list" className="space-y-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+          <div style={{ display: 'block', minWidth: '150px' }}>
+            <ul role="list" className="space-y-2" style={{ listStyle: 'none', padding: 0, margin: 0, gap: '8px' }}>
               <li>
                 <Link href="/about" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
                   About
@@ -33,11 +33,16 @@ export default function Footer() {
           </div>
 
           {/* Communities - TypeList Structure */}
-          <div>
-            <ul role="list" className="space-y-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+          <div style={{ display: 'block', minWidth: '150px' }}>
+            <ul role="list" className="space-y-2" style={{ listStyle: 'none', padding: 0, margin: 0, gap: '8px' }}>
               <li>
                 <Link href="/artist/signup" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
                   For Artists
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/artist" className="text-spotify-text-gray hover:text-white transition-colors text-sm font-medium" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
+                  Artist Dashboard
                 </Link>
               </li>
               <li>
@@ -64,11 +69,11 @@ export default function Footer() {
           </div>
 
           {/* Useful Links - TypeList Structure */}
-          <div>
-            <p className="text-white text-sm mb-4" style={{ fontSize: '14px', lineHeight: '20px', fontWeight: 400, color: '#FFFFFF', marginBottom: '16px' }}>
+          <div style={{ display: 'block', minWidth: '150px' }}>
+            <p className="text-white text-sm mb-2" style={{ fontSize: '14px', lineHeight: '20px', fontWeight: 400, color: '#FFFFFF', marginBottom: '8px' }}>
               Useful links
             </p>
-            <ul role="list" className="space-y-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <ul role="list" className="space-y-2" style={{ listStyle: 'none', padding: 0, margin: 0, gap: '8px' }}>
               <li>
                 <Link href="/support" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
                   Support
@@ -93,8 +98,8 @@ export default function Footer() {
           </div>
 
           {/* EmPulse Plans - TypeList Structure */}
-          <div>
-            <ul role="list" className="space-y-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+          <div style={{ display: 'block', minWidth: '150px' }}>
+            <ul role="list" className="space-y-2" style={{ listStyle: 'none', padding: 0, margin: 0, gap: '8px' }}>
               <li>
                 <Link href="/subscription" className="text-spotify-text-gray hover:text-white transition-colors text-sm" style={{ fontSize: '14px', lineHeight: '20px', color: '#B3B3B3' }}>
                   Premium Individual
@@ -130,7 +135,7 @@ export default function Footer() {
         </div>
 
         {/* Social Media Icons */}
-        <div className="mb-8" style={{ marginBottom: '32px' }}>
+        <div className="mb-3" style={{ marginBottom: '12px' }}>
           <div className="flex items-center gap-2" style={{ gap: '16px' }}>
             <a
               href="https://instagram.com/spotify"
@@ -168,9 +173,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Legal & Privacy Links - Spotify Structure */}
-        <div className="border-t border-white/10 pt-8" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '32px' }}>
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4" style={{ gap: '16px', marginBottom: '16px' }}>
+        {/* Legal & Privacy Links - Compact Spotify Structure */}
+        <div className="border-t border-white/10 pt-3" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '12px' }}>
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-3" style={{ gap: '12px', marginBottom: '12px' }}>
             <div className="flex flex-wrap gap-x-4 gap-y-2" style={{ gap: '16px' }}>
               <Link href="/legal" className="text-spotify-text-gray hover:text-white text-xs transition-colors" style={{ fontSize: '12px', lineHeight: '16px', color: '#B3B3B3' }}>
                 Legal

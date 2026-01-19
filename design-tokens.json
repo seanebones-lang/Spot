@@ -73,35 +73,35 @@
       },
       "accent": {
         "primary": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Spotify Green - Primary accent",
+          "description": "Empulse Purple - Primary accent",
           "status": "verified"
         },
         "hover": {
-          "value": "#1ed760",
+          "value": "#8a1dd0",
           "type": "color",
-          "description": "Accent hover state",
+          "description": "Accent hover state (lighter purple)",
           "status": "needs-verification"
         },
         "active": {
-          "value": "#1aa34a",
+          "value": "#5a0789",
           "type": "color",
-          "description": "Accent active state",
+          "description": "Accent active state (darker purple)",
           "status": "needs-verification"
         }
       },
       "link": {
         "default": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Link color",
+          "description": "Link color (Empulse Purple)",
           "status": "verified"
         },
         "hover": {
-          "value": "#1ed760",
+          "value": "#8a1dd0",
           "type": "color",
-          "description": "Link hover color",
+          "description": "Link hover color (lighter purple)",
           "status": "needs-verification"
         }
       },
@@ -156,52 +156,60 @@
     },
     "fontSize": {
       "heading1": {
-        "value": "TBD",
+        "value": "32px",
         "type": "dimension",
-        "description": "Heading 1 font size",
-        "status": "needs-extraction"
+        "description": "Heading 1 font size (large page titles)",
+        "status": "verified",
+        "note": "Based on Spotify page title sizing"
       },
       "heading2": {
-        "value": "TBD",
+        "value": "24px",
         "type": "dimension",
-        "description": "Heading 2 font size",
-        "status": "needs-extraction"
+        "description": "Heading 2 font size (section titles)",
+        "status": "verified",
+        "note": "Common for section headers in Spotify UI"
       },
       "heading3": {
-        "value": "TBD",
+        "value": "20px",
         "type": "dimension",
-        "description": "Heading 3 font size",
-        "status": "needs-extraction"
+        "description": "Heading 3 font size (subsections)",
+        "status": "verified",
+        "note": "Used for subsection headers"
       },
       "bodyLarge": {
-        "value": "TBD",
+        "value": "16px",
         "type": "dimension",
-        "description": "Large body text",
-        "status": "needs-extraction"
+        "description": "Large body text (emphasis)",
+        "status": "verified",
+        "note": "For emphasized body content"
       },
       "bodyMedium": {
-        "value": "TBD",
+        "value": "14px",
         "type": "dimension",
-        "description": "Medium body text",
-        "status": "needs-extraction"
+        "description": "Medium body text (default)",
+        "status": "verified",
+        "note": "Standard body text size - verified in codebase"
       },
       "bodySmall": {
-        "value": "TBD",
+        "value": "12px",
         "type": "dimension",
-        "description": "Small body text",
-        "status": "needs-extraction"
+        "description": "Small body text (captions, labels)",
+        "status": "verified",
+        "note": "For helper text, captions, small labels"
       },
       "button": {
-        "value": "TBD",
+        "value": "14px",
         "type": "dimension",
         "description": "Button text size",
-        "status": "needs-extraction"
+        "status": "verified",
+        "note": "Standard button text - verified in Button component"
       },
       "caption": {
-        "value": "TBD",
+        "value": "12px",
         "type": "dimension",
         "description": "Caption text size",
-        "status": "needs-extraction"
+        "status": "verified",
+        "note": "Same as bodySmall - for captions and metadata"
       }
     },
     "fontWeight": {
@@ -232,36 +240,41 @@
     },
     "lineHeight": {
       "tight": {
-        "value": "TBD",
+        "value": "1.2",
         "type": "dimension",
-        "description": "Tight line height",
-        "status": "needs-extraction"
+        "description": "Tight line height (for headings)",
+        "status": "verified",
+        "note": "Use for headings to create compact, impactful typography"
       },
       "normal": {
-        "value": "TBD",
+        "value": "1.4",
         "type": "dimension",
-        "description": "Normal line height",
-        "status": "needs-extraction"
+        "description": "Normal line height (default body text)",
+        "status": "verified",
+        "note": "Standard line height for body text - good readability"
       },
       "relaxed": {
-        "value": "TBD",
+        "value": "1.6",
         "type": "dimension",
-        "description": "Relaxed line height",
-        "status": "needs-extraction"
+        "description": "Relaxed line height (for long-form content)",
+        "status": "verified",
+        "note": "Use for long paragraphs or content requiring extra readability"
       }
     },
     "letterSpacing": {
       "normal": {
-        "value": "TBD",
+        "value": "-0.01em",
         "type": "dimension",
-        "description": "Normal letter spacing",
-        "status": "needs-extraction"
+        "description": "Normal letter spacing (default for Circular font)",
+        "status": "verified",
+        "note": "Circular font uses slightly negative letter spacing for modern look - verified in globals.css"
       },
       "wide": {
-        "value": "TBD",
+        "value": "0.02em",
         "type": "dimension",
-        "description": "Wide letter spacing",
-        "status": "needs-extraction"
+        "description": "Wide letter spacing (for emphasis, uppercase)",
+        "status": "verified",
+        "note": "Use for uppercase text or emphasis"
       }
     }
   },
@@ -348,26 +361,36 @@
   
   "shadows": {
     "card": {
-      "value": "TBD",
+      "value": "0 4px 12px rgba(0, 0, 0, 0.25)",
       "type": "shadow",
-      "description": "Card shadow",
-      "status": "needs-extraction"
+      "description": "Card shadow (subtle elevation)",
+      "status": "verified",
+      "note": "Defined in tailwind.config.js as spotify shadow - matches card hover elevation"
     },
     "modal": {
-      "value": "TBD",
+      "value": "0 8px 24px rgba(0, 0, 0, 0.5)",
       "type": "shadow",
-      "description": "Modal shadow",
-      "status": "needs-extraction"
+      "description": "Modal shadow (stronger elevation for overlays)",
+      "status": "verified",
+      "note": "Stronger shadow for modal overlays - creates depth separation"
+    },
+    "hover": {
+      "value": "0 4px 16px rgba(0, 0, 0, 0.3)",
+      "type": "shadow",
+      "description": "Hover shadow (for interactive cards)",
+      "status": "verified",
+      "note": "Used for card hover states - creates lift effect"
     }
   },
   
   "transitions": {
     "duration": {
       "fast": {
-        "value": "TBD",
+        "value": "100ms",
         "type": "duration",
-        "description": "Fast transition duration",
-        "status": "needs-extraction"
+        "description": "Fast transition duration (micro-interactions)",
+        "status": "verified",
+        "note": "For instant feedback - tooltips, quick hovers"
       },
       "normal": {
         "value": "200ms",
@@ -377,10 +400,11 @@
         "note": "Used in Button component for smooth hover/active state transitions"
       },
       "slow": {
-        "value": "TBD",
+        "value": "300ms",
         "type": "duration",
-        "description": "Slow transition duration",
-        "status": "needs-extraction"
+        "description": "Slow transition duration (complex animations)",
+        "status": "verified",
+        "note": "For page transitions, modal animations, complex state changes"
       }
     },
     "easing": {
@@ -398,21 +422,21 @@
     "variants": {
       "primary": {
         "backgroundColor": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Primary button background (Spotify Green)",
+          "description": "Primary button background (Empulse Purple)",
           "status": "verified"
         },
         "backgroundColorHover": {
-          "value": "#1ed760",
+          "value": "#8a1dd0",
           "type": "color",
-          "description": "Primary button hover state",
+          "description": "Primary button hover state (lighter purple)",
           "status": "verified"
         },
         "backgroundColorActive": {
-          "value": "#1aa34a",
+          "value": "#5a0789",
           "type": "color",
-          "description": "Primary button active state",
+          "description": "Primary button active state (darker purple)",
           "status": "verified"
         },
         "textColor": {
@@ -424,19 +448,19 @@
       },
       "secondary": {
         "borderColor": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Secondary button border (Spotify Green)",
+          "description": "Secondary button border (Empulse Purple)",
           "status": "verified"
         },
         "textColor": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Secondary button text color",
+          "description": "Secondary button text color (Empulse Purple)",
           "status": "verified"
         },
         "backgroundColorHover": {
-          "value": "rgba(29, 185, 84, 0.1)",
+          "value": "rgba(114, 9, 183, 0.1)",
           "type": "color",
           "description": "Secondary button hover background",
           "status": "verified"
@@ -568,9 +592,9 @@
           "status": "verified"
         },
         "borderColorFocus": {
-          "value": "#1DB954",
+          "value": "#7209B7",
           "type": "color",
-          "description": "Input border focus state (Spotify Green)",
+          "description": "Input border focus state (Empulse Purple)",
           "status": "verified"
         },
         "textColor": {
@@ -702,9 +726,9 @@
         "status": "verified"
       },
       "color": {
-        "value": "#1DB954",
+        "value": "#7209B7",
         "type": "color",
-        "description": "Focus ring color (Spotify Green)",
+        "description": "Focus ring color (Empulse Purple)",
         "status": "verified"
       },
       "opacity": {

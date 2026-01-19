@@ -21,7 +21,7 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
     }
   };
 
-  const handleSeekTouch = (touch: Touch) => {
+  const handleSeekTouch = (touch: React.Touch) => {
     if (barRef.current) {
       const rect = barRef.current.getBoundingClientRect();
       const x = touch.clientX - rect.left;

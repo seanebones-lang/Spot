@@ -10,35 +10,33 @@ import {
   HelpCircle, 
   ChevronRight,
   Check,
-  Music
+  Music,
+  Mic,
+  BookOpen,
+  Radio,
+  LogIn
 } from 'lucide-react';
 import PremiumBadge from '@/components/PremiumBadge';
-import { useUserStore } from '@/stores/userStore';
 import { cn } from '@/lib/utils';
+import { useAuthStore } from '@/stores/authStore';
+import LoginModal from './LoginModal';
 
 interface UserMenuProps {
-  userName?: string;
-  userEmail?: string;
   subscriptionTier?: 'Free' | 'Premium' | 'Artist';
 }
 
 export default function UserMenu({ 
-  userName,
-  userEmail,
-  subscriptionTier
+  subscriptionTier = 'Premium'
 }: UserMenuProps) {
-  const { user, isAuthenticated, logout } = useUserStore();
-  
-  // Use props if provided, otherwise use store values
-  const displayName = userName || user?.name || 'User';
-  const displayEmail = userEmail || user?.email || 'user@example.com';
-  const displayTier = subscriptionTier || 
-    (user?.subscriptionTier === 'artist' ? 'Artist' : 
-     user?.subscriptionTier === 'premium' ? 'Premium' : 'Free');
   const [isOpen, setIsOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const { user, isAuthenticated, logout } = useAuthStore();
+
+  const userName = user?.name || 'User';
+  const userEmail = user?.email || 'user@example.com';
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -59,7 +57,6 @@ export default function UserMenu({
     }
   }, [isOpen]);
 
-  // Build menu items dynamically based on user state
   const menuItems = [
     {
       label: 'Profile',
@@ -73,28 +70,36 @@ export default function UserMenu({
       href: '/settings/account',
       separator: false,
     },
-    // Show artist upgrade if approved but not upgraded
-    ...(user?.artistApplication?.approvalStatus === 'approved' && displayTier !== 'Artist' ? [{
-      label: 'Upgrade to Artist',
-      icon: Music,
-      href: '/artist/upgrade',
-      separator: false,
-      highlight: true,
-    }] : []),
-    // Show artist dashboard if artist
-    ...(displayTier === 'Artist' ? [{
+    {
       label: 'Artist Dashboard',
       icon: Music,
       href: '/dashboard/artist',
-      separator: false,
-    }] : []),
-    // Show subscription option
+      separator: true,
+    },
     {
-      label: displayTier === 'Free' ? 'Upgrade to Premium' : 'Subscription',
+      label: 'Podcaster Dashboard',
+      icon: Mic,
+      href: '/dashboard/podcaster',
+      separator: false,
+    },
+    {
+      label: 'Audiobook Dashboard',
+      icon: BookOpen,
+      href: '/dashboard/audiobook',
+      separator: false,
+    },
+    {
+      label: 'Radio Station Dashboard',
+      icon: Radio,
+      href: '/dashboard/radio',
+      separator: false,
+    },
+    {
+      label: subscriptionTier === 'Free' ? 'Upgrade to Premium' : 'Subscription',
       icon: CreditCard,
       href: '/subscription',
       separator: true,
-      badge: displayTier === 'Free' ? 'Free' : displayTier,
+      badge: subscriptionTier === 'Free' ? 'Free' : subscriptionTier,
     },
     {
       label: 'Settings',
@@ -118,7 +123,7 @@ export default function UserMenu({
       label: 'Log out',
       icon: LogOut,
       href: '/logout',
-      separator: false,
+      separator: true,
       danger: true,
     },
   ];
@@ -128,10 +133,34 @@ export default function UserMenu({
     if (href === '/logout') {
       logout();
       router.push('/');
+    } else if (href === '/login') {
+      setLoginModalOpen(true);
     } else {
       router.push(href);
     }
   };
+
+  // Show login button if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <>
+        <button
+          onClick={() => setLoginModalOpen(true)}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200",
+            "bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold text-sm"
+          )}
+        >
+          <LogIn size={16} />
+          Sign In
+        </button>
+        <LoginModal 
+          isOpen={loginModalOpen} 
+          onClose={() => setLoginModalOpen(false)} 
+        />
+      </>
+    );
+  }
 
   return (
     <div className="relative">
@@ -145,27 +174,19 @@ export default function UserMenu({
           isOpen && "bg-spotify-light-gray"
         )}
         aria-label="User menu"
-        aria-expanded={isOpen ? 'true' : 'false'}
+        aria-expanded={isOpen}
         aria-haspopup="true"
       >
         {/* Avatar */}
-        {user?.profilePicture ? (
-          <img 
-            src={user.profilePicture} 
-            alt={displayName}
-            className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
-          />
-        ) : (
-          <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0">
-            <span className="text-white text-xs font-medium">
-              {displayName.charAt(0).toUpperCase()}
-            </span>
-          </div>
-        )}
+        <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0">
+          <span className="text-white text-xs font-medium">
+            {userName.charAt(0).toUpperCase()}
+          </span>
+        </div>
         
         {/* User Name */}
         <span className="text-sm font-medium text-white whitespace-nowrap max-w-[120px] truncate">
-          {displayName}
+          {userName}
         </span>
 
         {/* Chevron Icon - Spotify uses down arrow when open */}
@@ -189,25 +210,17 @@ export default function UserMenu({
           {/* User Info Header */}
           <div className="px-4 py-3 border-b border-white/10">
             <div className="flex items-center gap-3 mb-2">
-              {user?.profilePicture ? (
-                <img 
-                  src={user.profilePicture} 
-                  alt={displayName}
-                  className="w-10 h-10 rounded-full flex-shrink-0 object-cover"
-                />
-              ) : (
-                <div className="w-10 h-10 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white text-sm font-medium">
-                    {displayName.charAt(0).toUpperCase()}
-                  </span>
-                </div>
-              )}
+              <div className="w-10 h-10 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white text-sm font-medium">
+                  {userName.charAt(0).toUpperCase()}
+                </span>
+              </div>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium text-white truncate">
-                  {displayName}
+                  {userName}
                 </div>
                 <div className="text-xs text-spotify-text-gray truncate">
-                  {displayEmail}
+                  {userEmail}
                 </div>
               </div>
             </div>
@@ -248,21 +261,16 @@ export default function UserMenu({
                     {item.badge && (
                       <span className={cn(
                         "text-xs px-2 py-0.5 rounded-full font-medium",
-                        displayTier === 'Free' 
+                        subscriptionTier === 'Free' 
                           ? "bg-spotify-light-gray text-spotify-text-gray"
-                          : displayTier === 'Premium'
+                          : subscriptionTier === 'Premium'
                           ? "bg-spotify-green text-black"
                           : "bg-empulse-purple text-white"
                       )}>
                         {item.badge}
                       </span>
                     )}
-                    {(item as any).highlight && (
-                      <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-spotify-green/20 text-spotify-green">
-                        New
-                      </span>
-                    )}
-                    {item.label === 'Subscription' && displayTier !== 'Free' && (
+                    {item.label === 'Subscription' && subscriptionTier !== 'Free' && (
                       <Check className="w-4 h-4 text-spotify-green flex-shrink-0" />
                     )}
                   </button>
@@ -272,6 +280,10 @@ export default function UserMenu({
           </div>
         </div>
       )}
+      <LoginModal 
+        isOpen={loginModalOpen} 
+        onClose={() => setLoginModalOpen(false)} 
+      />
     </div>
   );
 }

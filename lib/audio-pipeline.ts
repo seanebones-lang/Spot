@@ -44,8 +44,37 @@ export class AudiophileAudioPipeline {
    * Must be called after user interaction (autoplay restrictions)
    */
   async initialize(audioElement: HTMLAudioElement): Promise<void> {
+    // Check if this is the same element we're already using
+    if (this.audioElement === audioElement && this.source) {
+      console.log('⚠️ Audio element already initialized, skipping re-initialization');
+      return;
+    }
+    
+    // If we have a different element or need to reinitialize, cleanup first
     if (this.audioContext && this.audioContext.state !== 'closed') {
       await this.cleanup();
+    }
+    
+    // Check if the audio element is already connected to a MediaElementSourceNode
+    // This can happen if Howler reuses elements or if we're reinitializing
+    if ((audioElement as any)._mediaElementSourceNode) {
+      console.warn('⚠️ Audio element already has a MediaElementSourceNode, cleaning up first');
+      // Try to disconnect the existing source if possible
+      try {
+        const existingSource = (audioElement as any)._mediaElementSourceNode;
+        if (existingSource && typeof existingSource.disconnect === 'function') {
+          existingSource.disconnect();
+        }
+        // Also close the audio context if it exists
+        if (this.audioContext && this.audioContext.state !== 'closed') {
+          await this.audioContext.close();
+        }
+      } catch (e) {
+        console.warn('Error during cleanup:', e);
+      }
+      delete (audioElement as any)._mediaElementSourceNode;
+      // Reset audio context
+      this.audioContext = null;
     }
     
     this.audioElement = audioElement;
@@ -82,7 +111,18 @@ export class AudiophileAudioPipeline {
     }
     
     // Create source from audio element
-    this.source = this.audioContext.createMediaElementSource(audioElement);
+    try {
+      this.source = this.audioContext.createMediaElementSource(audioElement);
+      // Store reference to prevent duplicate connections
+      (audioElement as any)._mediaElementSourceNode = this.source;
+    } catch (error) {
+      console.error('❌ Failed to create MediaElementSource:', error);
+      // If the element is already connected, we can't use the pipeline
+      // Fall back to direct playback without pipeline
+      this.source = null;
+      this.audioElement = audioElement;
+      return;
+    }
     
     // Create analyser node for visualization (4096 FFT for maximum resolution)
     // Higher FFT = better frequency resolution for audiophile analysis
@@ -285,13 +325,32 @@ export class AudiophileAudioPipeline {
    * Cleanup and disconnect all nodes
    */
   async cleanup(): Promise<void> {
+    // Disconnect source if it exists
     if (this.source) {
       try {
         this.source.disconnect();
       } catch (e) {
-        // Already disconnected
+        // Ignore disconnect errors
+      }
+      this.source = null;
+    }
+    
+    // Remove reference from audio element
+    if (this.audioElement) {
+      delete (this.audioElement as any)._mediaElementSourceNode;
+    }
+    
+    // Close audio context
+    if (this.audioContext && this.audioContext.state !== 'closed') {
+      try {
+        await this.audioContext.close();
+      } catch (e) {
+        console.warn('Error closing audio context:', e);
       }
     }
+    
+    this.audioContext = null;
+    this.audioElement = null;
     
     // Disconnect EQ nodes
     this.eqNodes.forEach(node => {
@@ -318,11 +377,6 @@ export class AudiophileAudioPipeline {
       }
     }
     
-    if (this.audioContext && this.audioContext.state !== 'closed') {
-      await this.audioContext.close();
-    }
-    
-    this.audioContext = null;
     this.source = null;
     this.analyser = null;
     this.eqNodes = [];

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import KeyboardShortcutsProvider from '@/components/KeyboardShortcutsProvider';
 import LayoutContent from '@/components/LayoutContent';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 export const metadata: Metadata = {
   title: 'EmPulse Music - Revolutionary Mood-Based Music Discovery',
@@ -21,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <KeyboardShortcutsProvider>
-          <LayoutContent>
-            {children}
-          </LayoutContent>
-        </KeyboardShortcutsProvider>
+        <ErrorBoundary>
+          <KeyboardShortcutsProvider>
+            <LayoutContent>
+              {children}
+            </LayoutContent>
+          </KeyboardShortcutsProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

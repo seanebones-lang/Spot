@@ -55,7 +55,7 @@ export default function ProgressBar({ progress, duration, currentTime, onSeek }:
     }
   };
 
-  const handleSeekTouch = (touch: Touch) => {
+  const handleSeekTouch = (touch: React.Touch) => {
     if (barRef.current) {
       const rect = barRef.current.getBoundingClientRect();
       const x = touch.clientX - rect.left;
@@ -142,16 +142,21 @@ export default function ProgressBar({ progress, duration, currentTime, onSeek }:
       >
         <div
           className="h-full bg-white rounded-full transition-all group-hover:bg-spotify-green"
-          style={{ width: `${progress}%` }}
+          style={{ 
+            width: `${isDragging && dragProgress !== null ? dragProgress : progress}%`,
+            transition: isDragging ? 'none' : 'width 100ms ease-out, background-color 200ms ease-out',
+            willChange: isDragging ? 'width' : 'auto'
+          }}
         />
         {((hoverProgress !== null && !isDragging) || (dragProgress !== null && isDragging)) && (
           <div
-            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg transition-all"
+            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg"
             style={{ 
               left: `clamp(0px, calc(${(dragProgress !== null ? dragProgress : hoverProgress || 0)}% - 6px), calc(100% - 12px))`,
               opacity: isDragging ? 1 : 0.8,
               transform: isDragging ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%) scale(1)',
-              transition: isDragging ? 'opacity 0ms, transform 150ms ease-out' : 'opacity 200ms ease-out, transform 200ms ease-out'
+              transition: isDragging ? 'left 0ms, opacity 0ms, transform 150ms cubic-bezier(0.3, 0, 0.1, 1)' : 'left 50ms ease-out, opacity 200ms ease-out, transform 200ms cubic-bezier(0.3, 0, 0.1, 1)',
+              willChange: isDragging ? 'left, transform' : 'opacity, transform'
             }}
             onMouseEnter={(e) => {
               if (!isDragging) {

@@ -28,6 +28,14 @@ WORKDIR /app
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
+# Install yt-dlp for radio streaming (required in production)
+# Use --break-system-packages flag for Alpine's PEP 668 protection
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    ffmpeg \
+    && pip3 install --no-cache-dir --break-system-packages yt-dlp
+
 # Create non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -49,5 +57,10 @@ EXPOSE 3000
 
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
+
+# Health check for container orchestration (Docker/Kubernetes)
+# Checks /api/health endpoint every 30 seconds, allows 40s startup time
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:3000/api/health', (r) => { process.exit(r.statusCode === 200 ? 0 : 1); })"
 
 CMD ["node", "server.js"]
