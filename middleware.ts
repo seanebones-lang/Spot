@@ -107,21 +107,39 @@ export async function middleware(request: NextRequest) {
     response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
   }
   
-  // Content Security Policy
-  // Removed 'unsafe-eval' for security - Next.js 15 does not require it
-  // 'unsafe-inline' kept for styles (Tailwind) but should be replaced with nonces in future
+  // Content Security Policy (Enhanced for XSS Protection)
+  // Generate nonce for inline scripts (React hydration)
+  const cspNonce = Buffer.from(Math.random().toString()).toString('base64').slice(0, 32);
+
+  // External API sources for third-party services
+  const externalSources = [
+    'https://api.x.ai', // X.AI for LLM (if integrated)
+    'https://pinecone.io', // Pinecone vector DB
+    'https://api.pinecone.io', // Pinecone API
+    'https://neo4j.io', // Neo4j knowledge graphs
+    'https://*.amazonaws.com', // AWS S3 and other services
+    'https://api.resend.com', // Resend email API
+    'https://api.upstash.com', // Upstash Redis
+  ].join(' ');
+
+  // Content Security Policy directive
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'", // Removed unsafe-eval - XSS protection
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: https:",
+    `script-src 'self' 'nonce-${cspNonce}'`, // Use nonce instead of unsafe-inline
+    "style-src 'self' 'unsafe-inline'", // Tailwind requires inline styles (no nonce needed for CSS)
+    "img-src 'self' data: https: blob:",
     "font-src 'self' data:",
-    "connect-src 'self' https://api.x.ai",
-    "media-src 'self' blob:",
+    `connect-src 'self' ${externalSources}`, // Allow third-party API calls
+    "media-src 'self' blob: https:",
     "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "upgrade-insecure-requests", // Upgrade HTTP to HTTPS in production
   ].join('; ');
-  
+
   response.headers.set('Content-Security-Policy', csp);
+  // Store nonce in request for use in components
+  response.headers.set('X-CSP-Nonce', cspNonce);
   
   return response;
 }
