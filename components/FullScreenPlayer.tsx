@@ -8,7 +8,8 @@ import PlayButton from './PlayButton';
 import ProgressBar from './ProgressBar';
 import VolumeControl from './VolumeControl';
 import AudioVisualizer from './AudioVisualizer';
-import EQControl from './EQControl';
+import AudiophileVisualizer from './AudiophileVisualizer';
+import Equalizer from './Equalizer';
 import AudioQualityBadge from './AudioQualityBadge';
 import { formatDuration } from '@/lib/utils';
 import { cn } from '@/lib/utils';
@@ -30,7 +31,8 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
   } = usePlayerStore();
 
   const [showEQ, setShowEQ] = useState(false);
-  const [visualizerMode, setVisualizerMode] = useState<'spectrum' | 'waveform' | 'circular' | 'particles'>('spectrum');
+  const [visualizerType, setVisualizerType] = useState<'spectrum' | 'waveform' | 'circular' | 'bars' | 'particles'>('spectrum');
+  const [visualizerColorScheme, setVisualizerColorScheme] = useState<'spotify' | 'rainbow' | 'fire' | 'ocean' | 'neon' | 'monochrome'>('spotify');
 
   useEffect(() => {
     if (isOpen) {
@@ -75,13 +77,13 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
           EQ
         </button>
         <div className="flex items-center gap-1 bg-white/10 rounded-lg p-1">
-          {(['spectrum', 'waveform', 'circular'] as const).map((mode) => (
+          {(['spectrum', 'waveform', 'circular', 'bars', 'particles'] as const).map((mode) => (
             <button
               key={mode}
-              onClick={() => setVisualizerMode(mode)}
+              onClick={() => setVisualizerType(mode)}
               className={cn(
                 "px-3 py-1 rounded text-xs font-medium transition-colors",
-                visualizerMode === mode
+                visualizerType === mode
                   ? "bg-spotify-green text-black"
                   : "text-white hover:bg-white/20"
               )}
@@ -95,18 +97,22 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
       {/* Content Area */}
       <div className="flex-1 flex flex-col items-center justify-center p-12">
         {!showEQ && audioPipeline ? (
-          // Visualizer View
-          <div className="w-full max-w-4xl h-full max-h-96">
-            <AudioVisualizer 
-              pipeline={audioPipeline} 
-              mode={visualizerMode}
+          // GLSL Shader Visualizer View (4K capable)
+          <div className="w-full max-w-6xl h-full max-h-[600px]">
+            <AudiophileVisualizer 
+              type={visualizerType}
+              colorScheme={visualizerColorScheme}
+              width={1920}
+              height={1080}
+              pixelRatio={2} // 2x for 4K (3840×2160 effective)
+              showControls={true}
               className="w-full h-full rounded-lg bg-black/30"
             />
           </div>
         ) : showEQ ? (
           // EQ View
           <div className="w-full max-w-4xl">
-            <EQControl showPresets={true} />
+            <Equalizer />
           </div>
         ) : (
           // Album Art (fallback)

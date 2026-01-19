@@ -3,7 +3,7 @@
     "id": "playlist-1",
     "name": "Melancholic Reflections",
     "description": "A curated collection of content tracks for proud, excited, relaxed moments",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Luna Shadows",
     "ownerId": "system",
     "tracks": [
@@ -129,7 +129,7 @@
     "id": "playlist-2",
     "name": "Nostalgic Memories",
     "description": "A curated collection of euphoric tracks for proud moments",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
@@ -254,7 +254,7 @@
     "id": "playlist-3",
     "name": "Deep Thoughts",
     "description": "A curated collection of euphoric tracks for optimistic, great moments",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Solar Flare",
     "ownerId": "system",
     "tracks": [
@@ -381,7 +381,7 @@
     "id": "playlist-4",
     "name": "Content Moments",
     "description": "A curated collection of content tracks for great, excited moments",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Neon Nights",
     "ownerId": "system",
     "tracks": [
@@ -506,7 +506,7 @@
     "id": "playlist-5",
     "name": "Joyful Anthems",
     "description": "A curated collection of joyful tracks for relaxed moments",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -632,7 +632,7 @@
     "id": "playlist-6",
     "name": "Euphoric Beats",
     "description": "A curated collection of melancholic tracks for nostalgic, insecure, tired moments",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -759,7 +759,7 @@
     "id": "playlist-7",
     "name": "Anxious Relief",
     "description": "A curated collection of nostalgic tracks for nostalgic, content moments",
-    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -884,7 +884,7 @@
     "id": "playlist-8",
     "name": "Stress-Free Zone",
     "description": "A curated collection of content tracks for relaxed, great moments",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -1009,7 +1009,7 @@
     "id": "playlist-9",
     "name": "Confidence Boost",
     "description": "A curated collection of melancholic tracks for frustrated moments",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Urban Pulse",
     "ownerId": "system",
     "tracks": [
@@ -1135,7 +1135,7 @@
     "id": "playlist-10",
     "name": "Relaxed Vibes",
     "description": "A curated collection of euphoric tracks for optimistic, proud, great moments",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Wild Sky",
     "ownerId": "system",
     "tracks": [
@@ -1261,7 +1261,7 @@
     "id": "playlist-11",
     "name": "Excited Energy",
     "description": "A curated collection of nostalgic tracks for nostalgic, reflective moments",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -1386,7 +1386,7 @@
     "id": "playlist-12",
     "name": "Grateful Heart",
     "description": "A curated collection of content tracks for confident moments",
-    "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -1510,7 +1510,7 @@
     "id": "playlist-13",
     "name": "Optimistic Outlook",
     "description": "A curated collection of euphoric tracks for optimistic moments",
-    "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Dark Forest",
     "ownerId": "system",
     "tracks": [
@@ -1634,7 +1634,7 @@
     "id": "playlist-14",
     "name": "Chill Electronic",
     "description": "A curated collection of nostalgic tracks for reflective, content moments",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -1760,7 +1760,7 @@
     "id": "playlist-15",
     "name": "Energetic Rock",
     "description": "A curated collection of nostalgic tracks for grateful, content moments",
-    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -1886,7 +1886,7 @@
     "id": "playlist-16",
     "name": "Mellow Jazz",
     "description": "A curated collection of reflective tracks for relaxed moments",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -2010,7 +2010,7 @@
     "id": "playlist-17",
     "name": "Uplifting Pop",
     "description": "A curated collection of content tracks for confident, proud, relaxed moments",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Soft Breeze",
     "ownerId": "system",
     "tracks": [
@@ -2138,7 +2138,7 @@
     "id": "playlist-18",
     "name": "Calm Ambient",
     "description": "A curated collection of nostalgic tracks for reflective moments",
-    "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Hard Rain",
     "ownerId": "system",
     "tracks": [
@@ -2263,7 +2263,7 @@
     "id": "playlist-19",
     "name": "High Energy Hip-Hop",
     "description": "A curated collection of reflective tracks for reflective, content, relaxed moments",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -2390,7 +2390,7 @@
     "id": "playlist-20",
     "name": "Smooth R&B",
     "description": "A curated collection of reflective tracks for content, thoughtful moments",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -2517,7 +2517,7 @@
     "id": "playlist-21",
     "name": "Mental Health Focus",
     "description": "A curated collection of nostalgic tracks for nostalgic, reflective moments",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -2642,7 +2642,7 @@
     "id": "playlist-22",
     "name": "Wellness Soundtrack",
     "description": "A curated collection of melancholic tracks for insecure, reflective, frustrated moments",
-    "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -2768,7 +2768,7 @@
     "id": "playlist-23",
     "name": "Therapy Playlist",
     "description": "A curated collection of content tracks for relaxed, proud moments",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Pure Gold",
     "ownerId": "system",
     "tracks": [
@@ -2895,7 +2895,7 @@
     "id": "playlist-24",
     "name": "Healing Tunes",
     "description": "A curated collection of joyful tracks for great moments",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Silver Lining",
     "ownerId": "system",
     "tracks": [
@@ -3019,7 +3019,7 @@
     "id": "playlist-25",
     "name": "Morning Motivation",
     "description": "A curated collection of joyful tracks for relaxed, proud moments",
-    "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
@@ -3146,7 +3146,7 @@
     "id": "playlist-26",
     "name": "Evening Wind Down",
     "description": "A curated collection of content tracks for confident moments",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -3270,7 +3270,7 @@
     "id": "playlist-27",
     "name": "Workout Mix",
     "description": "A curated collection of reflective tracks for reflective, relaxed moments",
-    "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -3396,7 +3396,7 @@
     "id": "playlist-28",
     "name": "Study Focus",
     "description": "A curated collection of euphoric tracks for optimistic, proud, great moments",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Copper Wire",
     "ownerId": "system",
     "tracks": [
@@ -3523,7 +3523,7 @@
     "id": "playlist-29",
     "name": "Sleep Sounds",
     "description": "A curated collection of melancholic tracks for insecure moments",
-    "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -3648,7 +3648,7 @@
     "id": "playlist-30",
     "name": "Wake Up Call",
     "description": "A curated collection of euphoric tracks for proud moments",
-    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -3773,7 +3773,7 @@
     "id": "playlist-31",
     "name": "Road Trip Tunes",
     "description": "A curated collection of content tracks for proud moments",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
@@ -3898,7 +3898,7 @@
     "id": "playlist-32",
     "name": "Party Starters",
     "description": "A curated collection of content tracks for great moments",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -4022,7 +4022,7 @@
     "id": "playlist-33",
     "name": "Rainy Day Vibes",
     "description": "A curated collection of joyful tracks for optimistic, grateful moments",
-    "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Mars Walk",
     "ownerId": "system",
     "tracks": [
@@ -4149,7 +4149,7 @@
     "id": "playlist-34",
     "name": "Sunny Day Energy",
     "description": "A curated collection of reflective tracks for reflective, thoughtful, content moments",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -4276,7 +4276,7 @@
     "id": "playlist-35",
     "name": "Winter Warmth",
     "description": "A curated collection of melancholic tracks for anxious, nostalgic, overwhelmed moments",
-    "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
@@ -4402,7 +4402,7 @@
     "id": "playlist-36",
     "name": "Summer Cool",
     "description": "A curated collection of euphoric tracks for excited moments",
-    "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
@@ -4526,7 +4526,7 @@
     "id": "playlist-37",
     "name": "Spring Fresh",
     "description": "A curated collection of content tracks for great, relaxed, excited moments",
-    "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Neptune Dive",
     "ownerId": "system",
     "tracks": [
@@ -4652,7 +4652,7 @@
     "id": "playlist-38",
     "name": "Autumn Cozy",
     "description": "A curated collection of euphoric tracks for proud moments",
-    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -4776,7 +4776,7 @@
     "id": "playlist-39",
     "name": "Dark Mood",
     "description": "A curated collection of reflective tracks for relaxed, thoughtful, reflective moments",
-    "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -4904,7 +4904,7 @@
     "id": "playlist-40",
     "name": "Light Heart",
     "description": "A curated collection of content tracks for confident moments",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -5028,7 +5028,7 @@
     "id": "playlist-41",
     "name": "Mixed Emotions",
     "description": "A curated collection of nostalgic tracks for nostalgic moments",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
@@ -5154,7 +5154,7 @@
     "id": "playlist-42",
     "name": "Pure Joy",
     "description": "A curated collection of joyful tracks for great, optimistic, grateful moments",
-    "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "Comet Tail",
     "ownerId": "system",
     "tracks": [
@@ -5282,7 +5282,7 @@
     "id": "playlist-43",
     "name": "Deep Sadness",
     "description": "A curated collection of reflective tracks for relaxed, reflective moments",
-    "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -5409,7 +5409,7 @@
     "id": "playlist-44",
     "name": "Neutral State",
     "description": "A curated collection of euphoric tracks for great, excited, optimistic moments",
-    "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
@@ -5536,7 +5536,7 @@
     "id": "playlist-45",
     "name": "Genre Mix 2024",
     "description": "A curated collection of joyful tracks for excited moments",
-    "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -5661,7 +5661,7 @@
     "id": "playlist-46",
     "name": "New Releases",
     "description": "A curated collection of melancholic tracks for lonely moments",
-    "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "NextEleven",
     "ownerId": "system",
     "tracks": [
@@ -5786,7 +5786,7 @@
     "id": "playlist-47",
     "name": "Throwback Hits",
     "description": "A curated collection of reflective tracks for relaxed, content, reflective moments",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -5913,7 +5913,7 @@
     "id": "playlist-48",
     "name": "Underground Gems",
     "description": "A curated collection of euphoric tracks for optimistic, proud moments",
-    "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "System",
     "ownerId": "system",
     "tracks": [
@@ -6039,7 +6039,7 @@
     "id": "playlist-49",
     "name": "Indie Discoveries",
     "description": "A curated collection of euphoric tracks for proud, optimistic, great moments",
-    "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
@@ -6165,7 +6165,7 @@
     "id": "playlist-50",
     "name": "World Music Journey",
     "description": "A curated collection of euphoric tracks for optimistic, great, excited moments",
-    "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
+    "coverArt": "",
     "owner": "EmPulse Music",
     "ownerId": "system",
     "tracks": [
