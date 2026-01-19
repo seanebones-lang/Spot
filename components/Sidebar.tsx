@@ -120,24 +120,22 @@ export default function Sidebar() {
         )}
       </button>
 
-      {/* Logo */}
+      {/* Logo - Exact Spotify: padding 20px 24px (or 16px when collapsed) */}
       <div 
-        className={cn("px-6 py-5", leftSidebarWidth <= 80 && "px-4 py-4")}
-        style={{ padding: leftSidebarWidth <= 80 ? '16px' : '20px 24px' }}
+        className={cn(
+          leftSidebarWidth <= 80 ? "p-4" : "px-6 py-5"
+        )}
       >
         <Link 
           href="/" 
-          className="flex items-center"
-          style={{ textDecoration: 'none' }}
+          className="flex items-center no-underline"
         >
           {leftSidebarWidth > 100 && (
             <span 
-              className="text-xl font-bold whitespace-nowrap"
+              className="text-2xl font-bold whitespace-nowrap text-white"
               style={{ 
                 fontSize: '24px',
-                lineHeight: '28px',
-                fontWeight: 700,
-                color: '#FFFFFF'
+                lineHeight: '28px'
               }}
             >
               EmPulse Music
@@ -146,107 +144,71 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      {/* Navigation - Exact Spotify Styling */}
-      <nav className="px-2 mb-2" style={{ padding: '0 8px', marginBottom: '8px' }}>
+      {/* Navigation - Exact Spotify: padding 0 8px, gap 16px, font 14px, line-height 20px */}
+      <nav className="px-2 mb-2">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href || 
             (item.href === '/' && pathname === '/') ||
             (item.href === '/search' && pathname?.startsWith('/search')) ||
             (item.href === '/collection' && pathname?.startsWith('/collection'));
+          const isCollapsed = leftSidebarWidth <= 100;
+          
           return (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-md transition-all group relative gpu-accelerated",
+                "rounded transition-all duration-200 gpu-accelerated mb-1 no-underline",
                 isActive 
                   ? "bg-spotify-light-gray" 
                   : "hover:bg-white/10",
-                leftSidebarWidth <= 100 ? "flex flex-col items-center justify-center" : "flex items-center"
+                isCollapsed 
+                  ? "flex flex-col items-center justify-center py-2 px-1 gap-1" 
+                  : "flex items-center py-3 px-4 gap-4"
               )}
               style={{
-                padding: leftSidebarWidth <= 100 ? '8px 4px' : '12px 16px',
                 borderRadius: '4px',
-                gap: leftSidebarWidth <= 100 ? '4px' : '16px',
                 fontSize: '14px',
                 fontWeight: isActive ? 700 : 400,
-                lineHeight: '20px',
-                marginBottom: '4px',
-                textDecoration: 'none',
-                transition: 'all 0.2s ease'
+                lineHeight: '20px'
               }}
-              title={leftSidebarCollapsed && leftSidebarWidth > 100 ? item.label : undefined}
-              onMouseEnter={(e) => {
-                if (!isActive) {
-                  const icon = e.currentTarget.querySelector('svg');
-                  const text = e.currentTarget.querySelector('span');
-                  if (icon) icon.style.color = '#FFFFFF';
-                  if (text) {
-                    const spanEl = text as HTMLElement;
-                    spanEl.style.color = '#FFFFFF';
-                    if (leftSidebarWidth <= 100) {
-                      spanEl.style.transform = 'scale(1)';
-                    }
-                  }
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive) {
-                  const icon = e.currentTarget.querySelector('svg');
-                  const text = e.currentTarget.querySelector('span');
-                  if (icon) icon.style.color = '#535353';
-                  if (text) {
-                    const spanEl = text as HTMLElement;
-                    spanEl.style.color = leftSidebarWidth <= 100 ? '#535353' : '#B3B3B3';
-                    if (leftSidebarWidth <= 100) {
-                      spanEl.style.transform = 'scale(0.97)';
-                    }
-                  }
-                }
-              }}
+              title={leftSidebarCollapsed && !isCollapsed ? item.label : undefined}
+              aria-current={isActive ? 'page' : undefined}
             >
               <Icon 
                 size={24} 
-                className="flex-shrink-0 transition-all" 
-                style={{ 
-                  width: '24px', 
-                  height: '24px', 
-                  flexShrink: 0,
-                  color: isActive ? '#FFFFFF' : '#535353',
-                  transition: 'all 0.2s ease',
-                  position: 'static',
-                  display: 'inline-block'
-                }}
+                className={cn(
+                  "flex-shrink-0 transition-colors duration-200 w-6 h-6",
+                  isActive 
+                    ? "text-white" 
+                    : "text-[#535353] group-hover:text-white"
+                )}
               />
-              {leftSidebarWidth > 100 ? (
+              {!isCollapsed ? (
                 <span 
-                  className="whitespace-nowrap transition-all"
+                  className={cn(
+                    "whitespace-nowrap transition-colors duration-200",
+                    isActive ? "text-white font-bold" : "text-spotify-text-gray group-hover:text-white"
+                  )}
                   style={{ 
                     fontSize: '14px',
-                    lineHeight: '20px',
-                    fontWeight: isActive ? 700 : 400,
-                    color: isActive ? '#FFFFFF' : '#B3B3B3',
-                    transition: 'all 0.2s ease'
+                    lineHeight: '20px'
                   }}
                 >
                   {item.label}
                 </span>
               ) : (
                 <span 
-                  className="transition-all"
+                  className={cn(
+                    "transition-all duration-100 text-center block",
+                    isActive ? "text-white" : "text-[#535353] group-hover:text-white"
+                  )}
                   style={{
                     fontSize: '11px',
                     lineHeight: '15px',
                     height: '15px',
-                    fontWeight: 400,
-                    color: isActive ? '#FFFFFF' : '#535353',
-                    display: 'block',
-                    textAlign: 'center',
-                    transform: 'scale(0.97)',
-                    transition: 'transform 0.1s ease-in-out, color 0.1s ease-in-out',
-                    position: 'static',
-                    width: 'auto'
+                    transform: 'scale(0.97)'
                   }}
                 >
                   {item.label}
@@ -292,29 +254,16 @@ export default function Sidebar() {
             }}
           >
             <h3 
-              className="text-xs font-bold text-spotify-text-gray uppercase tracking-wider"
+              className="text-[11px] leading-4 font-bold text-spotify-text-gray uppercase tracking-wider"
               style={{
-                fontSize: '11px',
-                lineHeight: '16px',
-                fontWeight: 700,
-                letterSpacing: '0.1em',
-                color: '#B3B3B3',
-                textTransform: 'uppercase'
+                letterSpacing: '0.1em'
               }}
             >
               Playlists
             </h3>
             <Link
               href="/collection"
-              className="text-spotify-text-gray hover:text-white transition-colors text-xs"
-              style={{
-                fontSize: '11px',
-                lineHeight: '16px',
-                color: '#B3B3B3',
-                textDecoration: 'none'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#B3B3B3'}
+              className="text-[11px] leading-4 text-spotify-text-gray hover:text-white transition-colors duration-200 no-underline"
             >
               Show all
             </Link>
@@ -332,30 +281,25 @@ export default function Sidebar() {
                   <Link
                     href={`/playlist/${playlist.id}`}
                     className={cn(
-                      "flex-1 flex items-center gap-2 rounded transition-colors min-w-0",
+                      "flex-1 flex items-center gap-2 rounded transition-colors duration-200 min-w-0 py-1.5 px-2 no-underline",
                       isActive
-                        ? "bg-spotify-light-gray text-white"
-                        : "text-spotify-text-gray hover:text-white hover:bg-white/10"
+                        ? "bg-spotify-light-gray text-white font-bold"
+                        : "text-spotify-text-gray hover:text-white hover:bg-white/10 font-normal"
                     )}
                     style={{
-                      padding: '6px 8px',
                       borderRadius: '4px',
-                      gap: '8px',
                       fontSize: '14px',
-                      lineHeight: '20px',
-                      fontWeight: isActive ? 700 : 400,
-                      textDecoration: 'none',
-                      backgroundColor: isActive ? '#282828' : 'transparent'
+                      lineHeight: '20px'
                     }}
+                    aria-current={isActive ? 'page' : undefined}
                   >
                     <div 
-                      className="w-4 h-4 bg-spotify-light-gray rounded flex-shrink-0"
+                      className={cn(
+                        "w-4 h-4 rounded flex-shrink-0 overflow-hidden",
+                        !playlist.coverArt && "bg-spotify-light-gray"
+                      )}
                       style={{ 
-                        width: '16px',
-                        height: '16px',
-                        borderRadius: '2px',
-                        backgroundColor: playlist.coverArt ? 'transparent' : '#282828',
-                        overflow: 'hidden'
+                        borderRadius: '2px'
                       }}
                     >
                       {playlist.coverArt && (
@@ -368,12 +312,13 @@ export default function Sidebar() {
                       )}
                     </div>
                     <span 
-                      className="truncate"
+                      className={cn(
+                        "truncate",
+                        isActive ? "text-white font-bold" : "text-inherit"
+                      )}
                       style={{
                         fontSize: '14px',
-                        lineHeight: '20px',
-                        fontWeight: isActive ? 700 : 400,
-                        color: isActive ? '#FFFFFF' : 'inherit'
+                        lineHeight: '20px'
                       }}
                     >
                       {playlist.name}
@@ -389,27 +334,21 @@ export default function Sidebar() {
                       }
                     }}
                     className={cn(
-                      "opacity-0 group-hover:opacity-100 p-1 text-spotify-text-gray hover:text-white transition-all rounded",
+                      "opacity-0 group-hover:opacity-100 p-1 rounded transition-opacity duration-200 bg-transparent border-none cursor-pointer",
                       isPinned && "opacity-100 text-spotify-green"
                     )}
                     style={{
-                      padding: '4px',
-                      borderRadius: '2px',
-                      transition: 'opacity 200ms ease-out',
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      cursor: 'pointer'
+                      borderRadius: '2px'
                     }}
                     title={isPinned ? "Unpin playlist" : "Pin playlist"}
+                    aria-label={isPinned ? "Unpin playlist" : "Pin playlist"}
                   >
                     <Pin 
                       size={14} 
-                      className={cn(isPinned && "fill-current")}
-                      style={{ 
-                        width: '14px',
-                        height: '14px',
-                        color: isPinned ? '#1DB954' : 'inherit'
-                      }}
+                      className={cn(
+                        "w-3.5 h-3.5",
+                        isPinned && "fill-current text-spotify-green"
+                      )}
                     />
                   </button>
                 </div>
