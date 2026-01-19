@@ -1,7 +1,10 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 echo "🚀 Running pre-push checks..."
+
+# Run security scan
+echo "🔒 Running security scan..."
+node tools/security-mcp.js npm scan || {
+  echo "⚠️  Security scan found issues, but continuing..."
+}
 
 # Run full test suite
 echo "🧪 Running full test suite..."

@@ -33,7 +33,28 @@
       "description": "Run tests via MCP",
       "args": ["cmd", "type"],
       "types": ["unit", "e2e", "integration", "all"]
+    },
+    "ml": {
+      "path": "./tools/ml-mcp.js",
+      "description": "AI/ML training and deployment (Ollama, Jupyter, W&B)",
+      "args": ["model", "data", "action", "backend"],
+      "backends": ["ollama", "jupyter", "wandb"],
+      "actions": ["train", "run", "deploy", "eval"]
+    },
+    "mobile": {
+      "path": "./tools/mobile-mcp.js",
+      "description": "Mobile app testing (Flutter, Swift, iOS, Android)",
+      "args": ["platform", "action", "app"],
+      "platforms": ["flutter", "swift", "ios", "android"],
+      "actions": ["test", "build", "run", "doctor"]
+    },
+    "security": {
+      "path": "./tools/security-mcp.js",
+      "description": "Security scanning (npm audit, Snyk, SonarQube)",
+      "args": ["scanner", "action"],
+      "scanners": ["npm", "snyk", "sonarqube", "all"],
+      "actions": ["scan", "fix", "report"]
     }
   },
-  "notes": "MCP Tools - Always accessible via repo tools/"
+  "notes": "Enterprise Pro Pack MCP Tools - Always accessible via repo tools/"
 }

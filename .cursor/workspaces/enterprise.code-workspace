@@ -1,0 +1,52 @@
+{
+  "folders": [
+    {
+      "name": "Spot (Main App)",
+      "path": "."
+    },
+    {
+      "name": "AI Models",
+      "path": "./ai-models"
+    },
+    {
+      "name": "Flutter App",
+      "path": "./flutter-app"
+    },
+    {
+      "name": "Swift iOS",
+      "path": "./swift-ios"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true
+    },
+    "remote.SSH.remotePlatform": {
+      "codespace": "linux"
+    },
+    "remote.SSH.defaultExtensions": [
+      "ms-vscode.vscode-remote-ssh",
+      "dart-code.flutter",
+      "sswg.swift-lang"
+    ],
+    "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+    "jupyter.notebookFileRoot": "${workspaceFolder}/notebooks",
+    "files.associations": {
+      "*.ipynb": "jupyter-notebook"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.jupyter",
+      "dart-code.flutter",
+      "sswg.swift-lang",
+      "ms-vscode.vscode-typescript-next",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "snyk-security.vscode-vuln-cost"
+    ]
+  }
+}
