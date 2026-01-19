@@ -14,6 +14,8 @@ import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useUIStore } from '@/stores/uiStore';
 import { useSearchStore } from '@/stores/searchStore';
+import { useCheckInStore } from '@/stores/checkInStore';
+import { usePointsStore } from '@/stores/pointsStore';
 import UserMenu from '@/components/UserMenu';
 import KeyboardShortcutsPanel from '@/components/KeyboardShortcutsPanel';
 import SearchDropdown from '@/components/SearchDropdown';
@@ -29,6 +31,8 @@ export default function TopBar() {
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [subscriptionTier, setSubscriptionTier] = useState<'Free' | 'Premium' | 'Artist'>('Premium');
   const { addSearch } = useSearchStore();
+  const { streak, lastCheckIn } = useCheckInStore();
+  const { totalPoints } = usePointsStore();
 
   const { leftSidebarWidth, rightSidebarOpen, rightSidebarWidth, toggleRightSidebar } = useUIStore();
 
@@ -125,7 +129,36 @@ export default function TopBar() {
         <div style={{ flexShrink: 0, flexGrow: 0, minWidth: 'fit-content' }}>
           <BackForwardButtons />
         </div>
-        
+
+        {/* Daily Check-in Widget - Far Left Header */}
+        <Link
+          href="/check-in"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg text-white no-underline hover:bg-white/10 transition-colors hidden md:flex"
+          style={{
+            textDecoration: 'none',
+            backgroundColor: 'transparent',
+            transition: 'background-color 200ms ease-out',
+            flexShrink: 0,
+            flexGrow: 0,
+            whiteSpace: 'nowrap'
+          }}
+          title="Daily Check-in"
+        >
+          <div className="flex items-center gap-1">
+            <span className="text-sm font-semibold">🔥 Check-in</span>
+            {streak > 0 && (
+              <span className="text-xs bg-empulse-purple/80 px-2 py-0.5 rounded text-white font-medium">
+                {streak}
+              </span>
+            )}
+          </div>
+          {lastCheckIn && (
+            <span className="text-xs text-white/70 hidden lg:inline">
+              +{totalPoints}
+            </span>
+          )}
+        </Link>
+
         {/* Search Container - Flex-1 with min-width protection */}
         <div 
           className="flex justify-center min-w-0"

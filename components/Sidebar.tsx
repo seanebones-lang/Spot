@@ -229,36 +229,11 @@ export default function Sidebar() {
             className={cn(
               "flex items-center gap-4 px-4 py-3 rounded-md transition-colors",
               pathname === '/wellness'
-                ? "bg-spotify-light-gray text-white" 
+                ? "bg-spotify-light-gray text-white"
                 : "text-spotify-text-gray hover:text-white hover:bg-spotify-light-gray/50"
             )}
           >
             <span className="font-medium">Mental Health Hub</span>
-          </Link>
-        </div>
-      )}
-
-      {/* Daily Check-in Widget - Moved under Mental Health Hub for better visibility */}
-      {leftSidebarWidth > 100 && (
-        <div className="px-3 mb-4">
-          <Link
-            href="/check-in"
-            className="p-4 rounded-lg text-white no-underline hover:bg-white/10 transition-colors block"
-            style={{ 
-              textDecoration: 'none',
-              backgroundColor: 'transparent',
-              transition: 'background-color 200ms ease-out'
-            }}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-semibold text-sm">Daily Check-in</span>
-              {streak > 0 && (
-                <span className="text-xs bg-white/20 px-2 py-1 rounded">🔥 {streak}</span>
-              )}
-            </div>
-            <div className="text-xs text-white/80">
-              {lastCheckIn ? `${totalPoints} points` : 'Earn points today'}
-            </div>
           </Link>
         </div>
       )}
