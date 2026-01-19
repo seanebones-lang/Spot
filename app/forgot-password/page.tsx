@@ -1,40 +1,49 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useUserStore } from '@/stores/userStore';
-import Input from '@/components/Input';
-import Button from '@/components/Button';
-import { Mail, Lock, Eye, EyeOff, CheckCircle, ArrowLeft, AlertCircle, Loader2 } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useUserStore } from "@/stores/userStore";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  CheckCircle,
+  ArrowLeft,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
-  const { 
-    requestPasswordReset, 
-    verifyResetCode, 
+  const {
+    requestPasswordReset,
+    verifyResetCode,
     resetPassword,
     passwordResetStatus,
     resetEmail,
     clearPasswordReset,
-    isLoading 
+    isLoading,
   } = useUserStore();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Reset state when component unmounts
   useEffect(() => {
     return () => {
-      if (passwordResetStatus === 'password-reset') {
+      if (passwordResetStatus === "password-reset") {
         clearPasswordReset();
       }
     };
@@ -42,11 +51,11 @@ export default function ForgotPasswordPage() {
 
   const validateEmail = () => {
     if (!email.trim()) {
-      setErrors({ email: 'Email is required' });
+      setErrors({ email: "Email is required" });
       return false;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setErrors({ email: 'Please enter a valid email address' });
+      setErrors({ email: "Please enter a valid email address" });
       return false;
     }
     return true;
@@ -54,11 +63,11 @@ export default function ForgotPasswordPage() {
 
   const validateCode = () => {
     if (!code.trim()) {
-      setErrors({ code: 'Reset code is required' });
+      setErrors({ code: "Reset code is required" });
       return false;
     }
     if (!/^\d{6}$/.test(code)) {
-      setErrors({ code: 'Please enter the 6-digit code' });
+      setErrors({ code: "Please enter the 6-digit code" });
       return false;
     }
     return true;
@@ -66,82 +75,85 @@ export default function ForgotPasswordPage() {
 
   const validatePasswords = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!newPassword) {
-      newErrors.newPassword = 'Password is required';
+      newErrors.newPassword = "Password is required";
     } else if (newPassword.length < 8) {
-      newErrors.newPassword = 'Password must be at least 8 characters';
+      newErrors.newPassword = "Password must be at least 8 characters";
     } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(newPassword)) {
-      newErrors.newPassword = 'Password must contain uppercase, lowercase, and number';
+      newErrors.newPassword =
+        "Password must contain uppercase, lowercase, and number";
     }
-    
+
     if (!confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password';
+      newErrors.confirmPassword = "Please confirm your password";
     } else if (newPassword !== confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = "Passwords do not match";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleRequestReset = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateEmail()) return;
-    
+
     setIsSubmitting(true);
     setErrors({});
-    setSuccessMessage('');
-    
+    setSuccessMessage("");
+
     const result = await requestPasswordReset(email);
-    
+
     if (result.success) {
-      setSuccessMessage('Reset code sent! Check your email.');
+      setSuccessMessage("Reset code sent! Check your email.");
       setStep(2);
     } else {
-      setErrors({ general: result.error || 'Failed to send reset code' });
+      setErrors({ general: result.error || "Failed to send reset code" });
     }
-    
+
     setIsSubmitting(false);
   };
 
   const handleVerifyCode = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateCode()) return;
-    
+
     setIsSubmitting(true);
     setErrors({});
-    
+
     const result = await verifyResetCode(email, code);
-    
+
     if (result.success) {
       setStep(3);
     } else {
-      setErrors({ code: result.error || 'Invalid reset code' });
+      setErrors({ code: result.error || "Invalid reset code" });
     }
-    
+
     setIsSubmitting(false);
   };
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validatePasswords()) return;
-    
+
     setIsSubmitting(true);
     setErrors({});
-    
+
     const result = await resetPassword(email, code, newPassword);
-    
+
     if (result.success) {
-      setSuccessMessage('Password reset successfully! Redirecting to sign in...');
+      setSuccessMessage(
+        "Password reset successfully! Redirecting to sign in...",
+      );
       setTimeout(() => {
-        router.push('/signin');
+        router.push("/signin");
       }, 2000);
     } else {
-      setErrors({ general: result.error || 'Failed to reset password' });
+      setErrors({ general: result.error || "Failed to reset password" });
       setIsSubmitting(false);
     }
   };
@@ -151,7 +163,10 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <Link href="/" className="flex items-center gap-2 text-white hover:text-spotify-green transition-colors">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-white hover:text-spotify-green transition-colors"
+          >
             <Lock size={32} className="text-spotify-green" />
             <span className="text-2xl font-bold">EmPulse Music</span>
           </Link>
@@ -162,17 +177,22 @@ export default function ForgotPasswordPage() {
           {/* Step 1: Request Reset */}
           {step === 1 && (
             <>
-              <h1 className="text-3xl font-bold mb-2 text-center">Reset your password</h1>
+              <h1 className="text-3xl font-bold mb-2 text-center">
+                Reset your password
+              </h1>
               <p className="text-spotify-text-gray text-center mb-8">
                 Enter your email address and we&apos;ll send you a reset code
               </p>
 
               {errors.general && (
-                <div 
+                <div
                   className="mb-6 p-4 bg-empulse-red/10 border border-empulse-red/50 rounded-lg flex items-start gap-3"
                   role="alert"
                 >
-                  <AlertCircle size={20} className="text-empulse-red flex-shrink-0 mt-0.5" />
+                  <AlertCircle
+                    size={20}
+                    className="text-empulse-red flex-shrink-0 mt-0.5"
+                  />
                   <p className="text-sm text-empulse-red">{errors.general}</p>
                 </div>
               )}
@@ -185,7 +205,7 @@ export default function ForgotPasswordPage() {
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
-                    if (errors.email) setErrors({ ...errors, email: '' });
+                    if (errors.email) setErrors({ ...errors, email: "" });
                   }}
                   error={errors.email}
                   iconLeft={Mail}
@@ -207,7 +227,7 @@ export default function ForgotPasswordPage() {
               </form>
 
               <div className="mt-6 text-center">
-                <Link 
+                <Link
                   href="/signin"
                   className="text-sm text-spotify-green hover:text-spotify-green/80 hover:underline inline-flex items-center gap-2 transition-colors"
                 >
@@ -233,7 +253,7 @@ export default function ForgotPasswordPage() {
               </div>
 
               {errors.code && (
-                <div 
+                <div
                   className="mb-6 p-4 bg-empulse-red/10 border border-empulse-red/50 rounded-lg"
                   role="alert"
                 >
@@ -248,9 +268,9 @@ export default function ForgotPasswordPage() {
                   placeholder="000000"
                   value={code}
                   onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                    const value = e.target.value.replace(/\D/g, "").slice(0, 6);
                     setCode(value);
-                    if (errors.code) setErrors({ ...errors, code: '' });
+                    if (errors.code) setErrors({ ...errors, code: "" });
                   }}
                   error={errors.code}
                   helperText="Enter the 6-digit code from your email"
@@ -275,7 +295,7 @@ export default function ForgotPasswordPage() {
                   <button
                     type="button"
                     onClick={() => {
-                      setCode('');
+                      setCode("");
                       setStep(1);
                     }}
                     className="text-sm text-spotify-text-gray hover:text-white transition-colors"
@@ -301,17 +321,20 @@ export default function ForgotPasswordPage() {
               </div>
 
               {successMessage && (
-                <div 
+                <div
                   className="mb-6 p-4 bg-spotify-green/10 border border-spotify-green/50 rounded-lg flex items-start gap-3"
                   role="alert"
                 >
-                  <CheckCircle size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                  <CheckCircle
+                    size={20}
+                    className="text-spotify-green flex-shrink-0 mt-0.5"
+                  />
                   <p className="text-sm text-spotify-green">{successMessage}</p>
                 </div>
               )}
 
               {errors.general && (
-                <div 
+                <div
                   className="mb-6 p-4 bg-empulse-red/10 border border-empulse-red/50 rounded-lg"
                   role="alert"
                 >
@@ -321,13 +344,14 @@ export default function ForgotPasswordPage() {
 
               <form onSubmit={handleResetPassword} className="space-y-6">
                 <Input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   label="New password"
                   placeholder="Enter new password"
                   value={newPassword}
                   onChange={(e) => {
                     setNewPassword(e.target.value);
-                    if (errors.newPassword) setErrors({ ...errors, newPassword: '' });
+                    if (errors.newPassword)
+                      setErrors({ ...errors, newPassword: "" });
                   }}
                   error={errors.newPassword}
                   iconLeft={Lock}
@@ -340,18 +364,21 @@ export default function ForgotPasswordPage() {
                 />
 
                 <Input
-                  type={showConfirmPassword ? 'text' : 'password'}
+                  type={showConfirmPassword ? "text" : "password"}
                   label="Confirm new password"
                   placeholder="Re-enter new password"
                   value={confirmPassword}
                   onChange={(e) => {
                     setConfirmPassword(e.target.value);
-                    if (errors.confirmPassword) setErrors({ ...errors, confirmPassword: '' });
+                    if (errors.confirmPassword)
+                      setErrors({ ...errors, confirmPassword: "" });
                   }}
                   error={errors.confirmPassword}
                   iconLeft={Lock}
                   iconRight={showConfirmPassword ? EyeOff : Eye}
-                  onIconRightClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  onIconRightClick={() =>
+                    setShowConfirmPassword(!showConfirmPassword)
+                  }
                   required
                   disabled={isSubmitting || isLoading}
                   autoComplete="new-password"
@@ -375,13 +402,22 @@ export default function ForgotPasswordPage() {
         {/* Footer Links */}
         <div className="mt-8 text-center text-sm text-spotify-text-gray">
           <div className="flex justify-center gap-6">
-            <Link href="/legal/privacy" className="hover:text-white hover:underline transition-colors">
+            <Link
+              href="/legal/privacy"
+              className="hover:text-white hover:underline transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/legal/terms" className="hover:text-white hover:underline transition-colors">
+            <Link
+              href="/legal/terms"
+              className="hover:text-white hover:underline transition-colors"
+            >
               Terms of Service
             </Link>
-            <Link href="/help" className="hover:text-white hover:underline transition-colors">
+            <Link
+              href="/help"
+              className="hover:text-white hover:underline transition-colors"
+            >
               Help
             </Link>
           </div>

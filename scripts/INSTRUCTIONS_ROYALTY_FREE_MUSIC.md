@@ -67,6 +67,7 @@ For each mood, download ~25 tracks:
 ## File Naming
 
 Rename downloaded files to:
+
 - `track-1.mp3` through `track-150.mp3`
 - Place all in `public/audio/` directory
 
@@ -86,13 +87,16 @@ Then copy each to create multiple variations (track-1, track-2, etc. for melanch
 ## Recommended Sources by Mood
 
 ### Melancholic
+
 - Pixabay: "sad piano", "emotional instrumental"
 - Incompetech: "Temptation March", "Darkest Child"
 
 ### Joyful
+
 - Pixabay: "happy upbeat", "cheerful pop"
 - Incompetech: "Jazz Brunch", "Monkeys Spinning Monkeys"
 
 ### Euphoric
+
 - Pixabay: "energetic electronic", "uplifting"
 - Incompetech: "Scheming Weasel", "Blizzards"

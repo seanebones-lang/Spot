@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { ComponentType } from 'react';
+import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ComponentType } from "react";
 
 interface EmptyStateProps {
   icon?: ComponentType<any>;
@@ -15,18 +15,21 @@ interface EmptyStateProps {
   className?: string;
 }
 
-export default function EmptyState({ 
-  icon: Icon, 
-  title, 
-  description, 
+export default function EmptyState({
+  icon: Icon,
+  title,
+  description,
   action,
-  className 
+  className,
 }: EmptyStateProps) {
   return (
-    <div className={cn("flex flex-col items-center justify-center py-24 px-4 text-center", className)}>
-      {Icon && (
-        <Icon className="w-16 h-16 text-spotify-text-gray mb-4" />
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center py-24 px-4 text-center",
+        className,
       )}
+    >
+      {Icon && <Icon className="w-16 h-16 text-spotify-text-gray mb-4" />}
       <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
       {description && (
         <p className="text-spotify-text-gray mb-6 max-w-md">{description}</p>

@@ -1,6 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { generateTokenPair, verifyRefreshToken, revokeRefreshToken } from '@/lib/auth';
-import { logger, generateCorrelationId } from '@/lib/logger';
+import { NextRequest, NextResponse } from "next/server";
+import {
+  generateTokenPair,
+  verifyRefreshToken,
+  revokeRefreshToken,
+} from "@/lib/auth";
+import { logger, generateCorrelationId } from "@/lib/logger";
 
 /**
  * Refresh Token Endpoint
@@ -15,10 +19,10 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { refreshToken } = body;
 
-    if (!refreshToken || typeof refreshToken !== 'string') {
+    if (!refreshToken || typeof refreshToken !== "string") {
       return NextResponse.json(
-        { error: 'Refresh token is required' },
-        { status: 400 }
+        { error: "Refresh token is required" },
+        { status: 400 },
       );
     }
 
@@ -27,10 +31,13 @@ export async function POST(request: NextRequest) {
     try {
       user = await verifyRefreshToken(refreshToken);
     } catch (error) {
-      logger.warn('Invalid refresh token', { correlationId, error: error instanceof Error ? error.message : 'Unknown error' });
+      logger.warn("Invalid refresh token", {
+        correlationId,
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
       return NextResponse.json(
-        { error: 'Invalid or expired refresh token' },
-        { status: 401 }
+        { error: "Invalid or expired refresh token" },
+        { status: 401 },
       );
     }
 
@@ -41,21 +48,24 @@ export async function POST(request: NextRequest) {
     const tokens = await generateTokenPair(user, request);
 
     const duration = Date.now() - startTime;
-    logger.info('Token refresh successful', { correlationId, userId: user.userId, duration });
+    logger.info("Token refresh successful", {
+      correlationId,
+      userId: user.userId,
+      duration,
+    });
 
     return NextResponse.json({
       success: true,
       ...tokens,
-      message: 'Tokens refreshed successfully',
+      message: "Tokens refreshed successfully",
     });
-
   } catch (error) {
     const duration = Date.now() - startTime;
-    logger.error('Token refresh error', error, { correlationId, duration });
+    logger.error("Token refresh error", error, { correlationId, duration });
 
     return NextResponse.json(
-      { error: 'Failed to refresh tokens. Please log in again.' },
-      { status: 500 }
+      { error: "Failed to refresh tokens. Please log in again." },
+      { status: 500 },
     );
   }
 }

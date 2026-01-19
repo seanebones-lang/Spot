@@ -1,17 +1,27 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useDropzone } from 'react-dropzone';
-import { Upload, FileAudio, AlertCircle, CheckCircle, Plus, X, Info, ExternalLink, Music } from 'lucide-react';
-import Link from 'next/link';
-import { MoodState } from '@/types/mood';
-import { Contributor, Publisher } from '@/types/track';
-import MoodSelector from '@/components/mood/MoodSelector';
-import FeelingChips from '@/components/mood/FeelingChips';
-import VibeSlider from '@/components/mood/VibeSlider';
-import GenreSelector from '@/components/mood/GenreSelector';
-import { getRAGPipeline } from '@/lib/aiMoodAnalysis';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useDropzone } from "react-dropzone";
+import {
+  Upload,
+  FileAudio,
+  AlertCircle,
+  CheckCircle,
+  Plus,
+  X,
+  Info,
+  ExternalLink,
+  Music,
+} from "lucide-react";
+import Link from "next/link";
+import { MoodState } from "@/types/mood";
+import { Contributor, Publisher } from "@/types/track";
+import MoodSelector from "@/components/mood/MoodSelector";
+import FeelingChips from "@/components/mood/FeelingChips";
+import VibeSlider from "@/components/mood/VibeSlider";
+import GenreSelector from "@/components/mood/GenreSelector";
+import { getRAGPipeline } from "@/lib/aiMoodAnalysis";
 
 interface AIMoodSuggestion {
   mood: MoodState;
@@ -21,7 +31,7 @@ interface AIMoodSuggestion {
   confidence: number;
 }
 
-type ReleaseType = 'single' | 'ep' | 'lp';
+type ReleaseType = "single" | "ep" | "lp";
 
 interface TrackData {
   id: string;
@@ -37,48 +47,60 @@ interface TrackData {
 
 export default function UploadPage() {
   const [step, setStep] = useState(0); // Step 0: Release Type Selection
-  const [releaseType, setReleaseType] = useState<ReleaseType>('single');
-  
+  const [releaseType, setReleaseType] = useState<ReleaseType>("single");
+
   // Single track upload (legacy support)
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [coverArtFile, setCoverArtFile] = useState<File | null>(null);
-  
+
   // Multi-track support for EP/LP
   const [tracks, setTracks] = useState<TrackData[]>([
-    { id: '1', file: null, trackName: '', isrc: '', trackNumber: 1 }
+    { id: "1", file: null, trackName: "", isrc: "", trackNumber: 1 },
   ]);
-  
+
   // Basic metadata
   const [metadata, setMetadata] = useState({
-    trackName: '',
-    albumName: '', // For EP/LP, this is the release name
-    artistFullLegalName: '',
+    trackName: "",
+    albumName: "", // For EP/LP, this is the release name
+    artistFullLegalName: "",
     featuredArtists: [] as Array<{ fullLegalName: string; role?: string }>,
-    album: '', // Legacy field
-    releaseDate: '',
-    genre: '',
-    subgenre: '',
-    isrc: '',
+    album: "", // Legacy field
+    releaseDate: "",
+    genre: "",
+    subgenre: "",
+    isrc: "",
   });
-  
+
   // Legal & rights metadata
   const [composers, setComposers] = useState<Contributor[]>([
-    { firstName: '', lastName: '', role: 'Composer & Lyricist', ownershipPercentage: 100 },
+    {
+      firstName: "",
+      lastName: "",
+      role: "Composer & Lyricist",
+      ownershipPercentage: 100,
+    },
   ]);
   const [lyricists, setLyricists] = useState<Contributor[]>([]);
   const [publishers, setPublishers] = useState<Publisher[]>([
-    { name: 'Self-Published' },
+    { name: "Self-Published" },
   ]);
   const [rightsMetadata, setRightsMetadata] = useState({
-    iswc: '',
-    upc: '',
-    ean: '',
-    proAffiliation: '' as 'ASCAP' | 'BMI' | 'SESAC' | 'GMR' | 'Multiple' | 'None' | '',
-    proAffiliationDetails: '',
+    iswc: "",
+    upc: "",
+    ean: "",
+    proAffiliation: "" as
+      | "ASCAP"
+      | "BMI"
+      | "SESAC"
+      | "GMR"
+      | "Multiple"
+      | "None"
+      | "",
+    proAffiliationDetails: "",
     explicitContent: false,
-    territoryRights: 'worldwide' as 'worldwide' | string[],
+    territoryRights: "worldwide" as "worldwide" | string[],
   });
-  
+
   // Legal warranties
   const [legalWarranties, setLegalWarranties] = useState({
     ownsMasterRights: false,
@@ -87,14 +109,18 @@ export default function UploadPage() {
     hasMechanicalLicenses: false,
     agreesToIndemnify: false,
   });
-  
+
   // AI Mood Suggestions
-  const [aiSuggestions, setAiSuggestions] = useState<AIMoodSuggestion | null>(null);
-  const [artistMoodTags, setArtistMoodTags] = useState<AIMoodSuggestion | null>(null);
+  const [aiSuggestions, setAiSuggestions] = useState<AIMoodSuggestion | null>(
+    null,
+  );
+  const [artistMoodTags, setArtistMoodTags] = useState<AIMoodSuggestion | null>(
+    null,
+  );
   const [hasAdjusted, setHasAdjusted] = useState(false);
   const [accuracyCertified, setAccuracyCertified] = useState(false);
   const [isAnalyzingMood, setIsAnalyzingMood] = useState(false);
-  
+
   // Submission state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -102,22 +128,26 @@ export default function UploadPage() {
   const router = useRouter();
 
   // Dropzone for single file upload
-  const { getRootProps: getSingleRootProps, getInputProps: getSingleInputProps, isDragActive: isSingleDragActive } = useDropzone({
+  const {
+    getRootProps: getSingleRootProps,
+    getInputProps: getSingleInputProps,
+    isDragActive: isSingleDragActive,
+  } = useDropzone({
     accept: {
-      'audio/*': ['.mp3', '.wav', '.flac', '.m4a', '.mp4'],
+      "audio/*": [".mp3", ".wav", ".flac", ".m4a", ".mp4"],
     },
     multiple: false,
     onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length > 0) {
         const file = acceptedFiles[0];
         setUploadedFile(file);
-        
+
         // Run RAG mood analysis pipeline with loading state
         setIsAnalyzingMood(true);
         try {
           const ragPipeline = getRAGPipeline();
           const moodSuggestion = await ragPipeline.analyzeMood(file);
-          
+
           setAiSuggestions(moodSuggestion);
           setArtistMoodTags({
             mood: moodSuggestion.mood,
@@ -127,17 +157,17 @@ export default function UploadPage() {
             confidence: moodSuggestion.confidence,
           });
         } catch (error) {
-          console.error('Error in RAG mood analysis:', error);
+          console.error("Error in RAG mood analysis:", error);
           // Fallback to default values
           setAiSuggestions({
-            mood: 'Content',
+            mood: "Content",
             feelings: [],
             vibe: 50,
             genres: [],
             confidence: 0.5,
           });
           setArtistMoodTags({
-            mood: 'Content',
+            mood: "Content",
             feelings: [],
             vibe: 50,
             genres: [],
@@ -151,9 +181,13 @@ export default function UploadPage() {
   });
 
   // Dropzone for multiple file upload (EP/LP)
-  const { getRootProps: getMultiRootProps, getInputProps: getMultiInputProps, isDragActive: isMultiDragActive } = useDropzone({
+  const {
+    getRootProps: getMultiRootProps,
+    getInputProps: getMultiInputProps,
+    isDragActive: isMultiDragActive,
+  } = useDropzone({
     accept: {
-      'audio/*': ['.mp3', '.wav', '.flac', '.m4a', '.mp4'],
+      "audio/*": [".mp3", ".wav", ".flac", ".m4a", ".mp4"],
     },
     multiple: true,
     onDrop: async (acceptedFiles) => {
@@ -161,16 +195,16 @@ export default function UploadPage() {
         // Add new tracks with auto-incrementing track numbers
         const newTracks: TrackData[] = acceptedFiles.map((file, index) => {
           const trackNumber = tracks.length + index + 1;
-          const baseName = file.name.replace(/\.[^/.]+$/, ''); // Remove extension
+          const baseName = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
           return {
             id: `track-${Date.now()}-${index}`,
             file,
             trackName: baseName,
-            isrc: '',
+            isrc: "",
             trackNumber,
           };
         });
-        
+
         // Update tracks array
         setTracks([...tracks, ...newTracks]);
       }
@@ -178,14 +212,14 @@ export default function UploadPage() {
   });
 
   // Contributor management
-  const addContributor = (type: 'composer' | 'lyricist') => {
+  const addContributor = (type: "composer" | "lyricist") => {
     const newContributor: Contributor = {
-      firstName: '',
-      lastName: '',
-      role: type === 'composer' ? 'Composer' : 'Lyricist',
+      firstName: "",
+      lastName: "",
+      role: type === "composer" ? "Composer" : "Lyricist",
       ownershipPercentage: 0,
     };
-    if (type === 'composer') {
+    if (type === "composer") {
       setComposers([...composers, newContributor]);
     } else {
       setLyricists([...lyricists, newContributor]);
@@ -193,12 +227,12 @@ export default function UploadPage() {
   };
 
   const updateContributor = (
-    type: 'composer' | 'lyricist',
+    type: "composer" | "lyricist",
     index: number,
     field: keyof Contributor,
-    value: any
+    value: any,
   ) => {
-    if (type === 'composer') {
+    if (type === "composer") {
       const updated = [...composers];
       updated[index] = { ...updated[index], [field]: value };
       setComposers(updated);
@@ -209,8 +243,8 @@ export default function UploadPage() {
     }
   };
 
-  const removeContributor = (type: 'composer' | 'lyricist', index: number) => {
-    if (type === 'composer') {
+  const removeContributor = (type: "composer" | "lyricist", index: number) => {
+    if (type === "composer") {
       setComposers(composers.filter((_, i) => i !== index));
     } else {
       setLyricists(lyricists.filter((_, i) => i !== index));
@@ -218,10 +252,17 @@ export default function UploadPage() {
   };
 
   const addPublisher = () => {
-    setPublishers([...publishers, { name: '', contactEmail: '', contactPhone: '' }]);
+    setPublishers([
+      ...publishers,
+      { name: "", contactEmail: "", contactPhone: "" },
+    ]);
   };
 
-  const updatePublisher = (index: number, field: keyof Publisher, value: string) => {
+  const updatePublisher = (
+    index: number,
+    field: keyof Publisher,
+    value: string,
+  ) => {
     const updated = [...publishers];
     updated[index] = { ...updated[index], [field]: value };
     setPublishers(updated);
@@ -233,17 +274,19 @@ export default function UploadPage() {
 
   // Track management functions for EP/LP
   const updateTrack = (trackId: string, field: keyof TrackData, value: any) => {
-    setTracks(tracks.map(track => 
-      track.id === trackId ? { ...track, [field]: value } : track
-    ));
+    setTracks(
+      tracks.map((track) =>
+        track.id === trackId ? { ...track, [field]: value } : track,
+      ),
+    );
   };
 
   const removeTrack = (trackId: string) => {
-    const filtered = tracks.filter(t => t.id !== trackId);
+    const filtered = tracks.filter((t) => t.id !== trackId);
     // Re-number tracks after removal
     const renumbered = filtered.map((track, index) => ({
       ...track,
-      trackNumber: index + 1
+      trackNumber: index + 1,
     }));
     setTracks(renumbered);
   };
@@ -252,45 +295,48 @@ export default function UploadPage() {
     const newTrack: TrackData = {
       id: `track-${Date.now()}`,
       file: null,
-      trackName: '',
-      isrc: '',
+      trackName: "",
+      isrc: "",
       trackNumber: tracks.length + 1,
     };
     setTracks([...tracks, newTrack]);
   };
 
-  const moveTrack = (trackId: string, direction: 'up' | 'down') => {
-    const index = tracks.findIndex(t => t.id === trackId);
+  const moveTrack = (trackId: string, direction: "up" | "down") => {
+    const index = tracks.findIndex((t) => t.id === trackId);
     if (index === -1) return;
-    
-    const newIndex = direction === 'up' ? index - 1 : index + 1;
+
+    const newIndex = direction === "up" ? index - 1 : index + 1;
     if (newIndex < 0 || newIndex >= tracks.length) return;
 
     const reordered = [...tracks];
-    [reordered[index], reordered[newIndex]] = [reordered[newIndex], reordered[index]];
-    
+    [reordered[index], reordered[newIndex]] = [
+      reordered[newIndex],
+      reordered[index],
+    ];
+
     // Re-number tracks
     const renumbered = reordered.map((track, idx) => ({
       ...track,
-      trackNumber: idx + 1
+      trackNumber: idx + 1,
     }));
     setTracks(renumbered);
   };
 
   const handleTrackFileUpload = (trackId: string, file: File) => {
-    updateTrack(trackId, 'file', file);
+    updateTrack(trackId, "file", file);
     // Auto-populate track name from filename if empty
-    const track = tracks.find(t => t.id === trackId);
+    const track = tracks.find((t) => t.id === trackId);
     if (track && !track.trackName) {
-      const baseName = file.name.replace(/\.[^/.]+$/, '');
-      updateTrack(trackId, 'trackName', baseName);
+      const baseName = file.name.replace(/\.[^/.]+$/, "");
+      updateTrack(trackId, "trackName", baseName);
     }
   };
 
   // Validation
   const compositionOwnershipTotal = [...composers, ...lyricists].reduce(
     (sum, c) => sum + (c.ownershipPercentage || 0),
-    0
+    0,
   );
 
   const handleMoodChange = (field: keyof AIMoodSuggestion, value: any) => {
@@ -300,9 +346,11 @@ export default function UploadPage() {
       if (aiSuggestions) {
         const hasChanges =
           updated.mood !== aiSuggestions.mood ||
-          JSON.stringify(updated.feelings.sort()) !== JSON.stringify(aiSuggestions.feelings.sort()) ||
+          JSON.stringify(updated.feelings.sort()) !==
+            JSON.stringify(aiSuggestions.feelings.sort()) ||
           Math.abs(updated.vibe - aiSuggestions.vibe) > 5 ||
-          JSON.stringify(updated.genres.sort()) !== JSON.stringify(aiSuggestions.genres.sort());
+          JSON.stringify(updated.genres.sort()) !==
+            JSON.stringify(aiSuggestions.genres.sort());
         setHasAdjusted(hasChanges || true);
       }
     }
@@ -311,31 +359,34 @@ export default function UploadPage() {
   const handleToggleFeeling = (feeling: string) => {
     if (artistMoodTags) {
       const feelings = artistMoodTags.feelings.includes(feeling)
-        ? artistMoodTags.feelings.filter(f => f !== feeling)
+        ? artistMoodTags.feelings.filter((f) => f !== feeling)
         : [...artistMoodTags.feelings, feeling];
-      handleMoodChange('feelings', feelings);
+      handleMoodChange("feelings", feelings);
     }
   };
 
   const handleToggleGenre = (genre: string) => {
     if (artistMoodTags) {
       const genres = artistMoodTags.genres.includes(genre)
-        ? artistMoodTags.genres.filter(g => g !== genre)
+        ? artistMoodTags.genres.filter((g) => g !== genre)
         : [...artistMoodTags.genres, genre];
-      handleMoodChange('genres', genres);
+      handleMoodChange("genres", genres);
     }
   };
 
   const canProceed = () => {
     if (step === 0) return releaseType !== null;
     if (step === 1) {
-      if (releaseType === 'single') return uploadedFile !== null;
+      if (releaseType === "single") return uploadedFile !== null;
       // For EP/LP, need minimum tracks: EP needs 2-6, LP needs 7+
-      const minTracks = releaseType === 'ep' ? 2 : 7;
-      return tracks.length >= minTracks && tracks.every(t => t.file !== null && t.trackName);
+      const minTracks = releaseType === "ep" ? 2 : 7;
+      return (
+        tracks.length >= minTracks &&
+        tracks.every((t) => t.file !== null && t.trackName)
+      );
     }
     if (step === 2) {
-      if (releaseType === 'single') {
+      if (releaseType === "single") {
         return metadata.trackName && metadata.artistFullLegalName;
       } else {
         // For EP/LP, need album name and artist name
@@ -343,12 +394,14 @@ export default function UploadPage() {
       }
     }
     if (step === 3) {
-      const hasComposers = composers.length > 0 && composers.every(c => c.firstName && c.lastName);
+      const hasComposers =
+        composers.length > 0 &&
+        composers.every((c) => c.firstName && c.lastName);
       const ownershipValid = Math.abs(compositionOwnershipTotal - 100) < 0.01;
       return hasComposers && ownershipValid;
     }
     if (step === 4) {
-      return Object.values(legalWarranties).every(v => v === true);
+      return Object.values(legalWarranties).every((v) => v === true);
     }
     if (step === 5) {
       return hasAdjusted && accuracyCertified && artistMoodTags !== null;
@@ -364,14 +417,14 @@ export default function UploadPage() {
     try {
       // Create FormData to handle file uploads
       const formDataToSend = new FormData();
-      
-      if (releaseType === 'single') {
+
+      if (releaseType === "single") {
         // Single track upload
         if (uploadedFile) {
-          formDataToSend.append('audioFile', uploadedFile);
+          formDataToSend.append("audioFile", uploadedFile);
         }
         if (coverArtFile) {
-          formDataToSend.append('coverArtFile', coverArtFile);
+          formDataToSend.append("coverArtFile", coverArtFile);
         }
       } else {
         // EP/LP - multiple tracks
@@ -381,24 +434,26 @@ export default function UploadPage() {
           }
         });
         if (coverArtFile) {
-          formDataToSend.append('coverArtFile', coverArtFile);
+          formDataToSend.append("coverArtFile", coverArtFile);
         }
       }
-      
+
       // Add all metadata as JSON string
       const metadataPayload = {
         releaseType,
-        metadata: releaseType === 'single' 
-          ? metadata 
-          : { ...metadata, trackName: metadata.albumName }, // Use albumName for EP/LP
-        tracks: releaseType === 'single' 
-          ? null 
-          : tracks.map(t => ({
-              id: t.id,
-              trackName: t.trackName,
-              isrc: t.isrc,
-              trackNumber: t.trackNumber,
-            })),
+        metadata:
+          releaseType === "single"
+            ? metadata
+            : { ...metadata, trackName: metadata.albumName }, // Use albumName for EP/LP
+        tracks:
+          releaseType === "single"
+            ? null
+            : tracks.map((t) => ({
+                id: t.id,
+                trackName: t.trackName,
+                isrc: t.isrc,
+                trackNumber: t.trackNumber,
+              })),
         composers,
         lyricists,
         publishers,
@@ -407,10 +462,10 @@ export default function UploadPage() {
         artistMoodTags,
         aiSuggestions,
       };
-      formDataToSend.append('payload', JSON.stringify(metadataPayload));
+      formDataToSend.append("payload", JSON.stringify(metadataPayload));
 
       // Get auth token for authenticated request
-      const token = localStorage.getItem('auth-storage');
+      const token = localStorage.getItem("auth-storage");
       let authToken = null;
       if (token) {
         try {
@@ -424,13 +479,15 @@ export default function UploadPage() {
       // Submit to API with FormData
       const headers: HeadersInit = {};
       if (authToken) {
-        headers['Authorization'] = `Bearer ${authToken}`;
+        headers["Authorization"] = `Bearer ${authToken}`;
       }
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const endpoint = apiUrl ? `${apiUrl}/api/tracks/submit` : '/api/tracks/submit';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const endpoint = apiUrl
+        ? `${apiUrl}/api/tracks/submit`
+        : "/api/tracks/submit";
       const response = await fetch(endpoint, {
-        method: 'POST',
+        method: "POST",
         headers,
         // Don't set Content-Type header - browser will set it with boundary for FormData
         body: formDataToSend,
@@ -439,153 +496,205 @@ export default function UploadPage() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit track');
+        throw new Error(result.error || "Failed to submit track");
       }
 
       // Save published release to localStorage for dashboard display
       const submission = result.submission || {};
-      const releaseName = releaseType === 'single' 
-        ? metadata.trackName 
-        : metadata.albumName;
-      
+      const releaseName =
+        releaseType === "single" ? metadata.trackName : metadata.albumName;
+
       const publishedRelease = {
         id: result.submissionId,
         name: releaseName,
-        album: releaseType === 'single' ? (metadata.album || 'Single') : releaseName,
-        artistName: metadata.artistFullLegalName || 'Unknown Artist',
+        album:
+          releaseType === "single" ? metadata.album || "Single" : releaseName,
+        artistName: metadata.artistFullLegalName || "Unknown Artist",
         uploadDate: new Date().toISOString(),
-        status: 'published',
+        status: "published",
         streams: 0,
         earnings: 0,
         releaseType,
-        trackCount: releaseType === 'single' ? 1 : tracks.length,
+        trackCount: releaseType === "single" ? 1 : tracks.length,
         // Include URLs for playback and display
         coverArtUrl: submission.coverArtUrl || null,
         audioFileUrl: submission.audioFileUrl || null,
         audioFileUrls: submission.audioFileUrls || null,
         // Genre, mood, and content flags
-        genre: metadata.genre || '',
-        subgenre: metadata.subgenre || '',
+        genre: metadata.genre || "",
+        subgenre: metadata.subgenre || "",
         moodTags: artistMoodTags || null,
         explicitContent: rightsMetadata.explicitContent || false,
         // Track data for playback
-        trackData: releaseType === 'single' 
-          ? [{
-              id: result.submissionId,
-              name: releaseName,
-              artist: metadata.artistFullLegalName || 'Unknown Artist',
-              artistId: `artist-${result.submissionId}`,
-              album: releaseType === 'single' ? (metadata.album || 'Single') : releaseName,
-              albumId: result.submissionId,
-              duration: 0, // Could estimate from file size
-              audioUrl: submission.audioFileUrl || '',
-              coverArt: submission.coverArtUrl || '',
-            }]
-          : (submission.tracks || []).map((trackInfo: any, idx: number) => ({
-              id: `${result.submissionId}-track-${idx + 1}`,
-              name: trackInfo.trackName || `Track ${idx + 1}`,
-              artist: metadata.artistFullLegalName || 'Unknown Artist',
-              artistId: `artist-${result.submissionId}`,
-              album: releaseName,
-              albumId: result.submissionId,
-              duration: 0,
-              audioUrl: submission.audioFileUrls?.[idx] || '',
-              coverArt: submission.coverArtUrl || '',
-            })),
+        trackData:
+          releaseType === "single"
+            ? [
+                {
+                  id: result.submissionId,
+                  name: releaseName,
+                  artist: metadata.artistFullLegalName || "Unknown Artist",
+                  artistId: `artist-${result.submissionId}`,
+                  album:
+                    releaseType === "single"
+                      ? metadata.album || "Single"
+                      : releaseName,
+                  albumId: result.submissionId,
+                  duration: 0, // Could estimate from file size
+                  audioUrl: submission.audioFileUrl || "",
+                  coverArt: submission.coverArtUrl || "",
+                },
+              ]
+            : (submission.tracks || []).map((trackInfo: any, idx: number) => ({
+                id: `${result.submissionId}-track-${idx + 1}`,
+                name: trackInfo.trackName || `Track ${idx + 1}`,
+                artist: metadata.artistFullLegalName || "Unknown Artist",
+                artistId: `artist-${result.submissionId}`,
+                album: releaseName,
+                albumId: result.submissionId,
+                duration: 0,
+                audioUrl: submission.audioFileUrls?.[idx] || "",
+                coverArt: submission.coverArtUrl || "",
+              })),
       };
 
       // Load existing tracks from localStorage
-      let allTracks = [];
+      let allTracks: any[] = [];
       try {
-        const existingTracks = localStorage.getItem('artist-tracks');
+        const existingTracks = localStorage.getItem("artist-tracks");
         if (existingTracks) {
           allTracks = JSON.parse(existingTracks);
         }
       } catch (e) {
-        console.error('Error loading existing tracks:', e);
+        console.error("Error loading existing tracks:", e);
       }
 
       // Add new release at the beginning
       allTracks.unshift(publishedRelease);
       const tracksJson = JSON.stringify(allTracks);
-      
+
       // Save to localStorage - multiple times to ensure it sticks
-      localStorage.setItem('artist-tracks', tracksJson);
-      console.log('✅ [Upload] Saved track to localStorage:', publishedRelease.name);
-      console.log('✅ [Upload] Track data:', JSON.stringify(publishedRelease, null, 2));
-      console.log('✅ [Upload] Total tracks now:', allTracks.length);
-      
+      localStorage.setItem("artist-tracks", tracksJson);
+      console.log(
+        "✅ [Upload] Saved track to localStorage:",
+        publishedRelease.name,
+      );
+      console.log(
+        "✅ [Upload] Track data:",
+        JSON.stringify(publishedRelease, null, 2),
+      );
+      console.log("✅ [Upload] Total tracks now:", allTracks.length);
+
       // Immediately verify it was saved
-      let verify = localStorage.getItem('artist-tracks');
-      console.log('✅ [Upload] Verification (1) - localStorage has:', verify ? `${verify.length} chars` : 'nothing');
-      
+      let verify = localStorage.getItem("artist-tracks");
+      console.log(
+        "✅ [Upload] Verification (1) - localStorage has:",
+        verify ? `${verify.length} chars` : "nothing",
+      );
+
       // Re-save to be absolutely sure (sometimes localStorage can be flaky)
       if (!verify || verify !== tracksJson) {
-        console.warn('⚠️ [Upload] Verification failed, re-saving...');
-        localStorage.setItem('artist-tracks', tracksJson);
-        verify = localStorage.getItem('artist-tracks');
-        console.log('✅ [Upload] Verification (2) - localStorage has:', verify ? `${verify.length} chars` : 'nothing');
+        console.warn("⚠️ [Upload] Verification failed, re-saving...");
+        localStorage.setItem("artist-tracks", tracksJson);
+        verify = localStorage.getItem("artist-tracks");
+        console.log(
+          "✅ [Upload] Verification (2) - localStorage has:",
+          verify ? `${verify.length} chars` : "nothing",
+        );
       }
-      
+
       // Verify the structure is correct
       if (verify) {
         try {
           const parsedVerify = JSON.parse(verify);
-          const firstTrack = Array.isArray(parsedVerify) ? parsedVerify[0] : null;
+          const firstTrack = Array.isArray(parsedVerify)
+            ? parsedVerify[0]
+            : null;
           if (firstTrack && firstTrack.id && firstTrack.name) {
-            console.log('✅ [Upload] Structure verified - first track:', { id: firstTrack.id, name: firstTrack.name });
+            console.log("✅ [Upload] Structure verified - first track:", {
+              id: firstTrack.id,
+              name: firstTrack.name,
+            });
           } else {
-            console.error('❌ [Upload] Structure invalid - first track:', firstTrack);
+            console.error(
+              "❌ [Upload] Structure invalid - first track:",
+              firstTrack,
+            );
           }
         } catch (e) {
-          console.error('❌ [Upload] Failed to parse verification:', e);
+          console.error("❌ [Upload] Failed to parse verification:", e);
         }
       }
-      
+
       // Dispatch custom event to notify dashboard to reload
-      window.dispatchEvent(new Event('tracks-updated'));
-      console.log('✅ [Upload] Dispatched tracks-updated event');
+      window.dispatchEvent(new Event("tracks-updated"));
+      console.log("✅ [Upload] Dispatched tracks-updated event");
 
       // Success!
       setSubmitSuccess(true);
-      
+
       // Small delay then redirect to new releases - ensures localStorage is written and flushed
       setTimeout(() => {
         // Double-check localStorage one more time before redirect
-        const finalCheck = localStorage.getItem('artist-tracks');
+        const finalCheck = localStorage.getItem("artist-tracks");
         if (finalCheck) {
-          console.log('✅ [Upload] Final check passed - redirecting to new releases with', JSON.parse(finalCheck).length, 'tracks');
+          console.log(
+            "✅ [Upload] Final check passed - redirecting to new releases with",
+            JSON.parse(finalCheck).length,
+            "tracks",
+          );
         } else {
-          console.error('❌ [Upload] Final check FAILED - localStorage is empty!');
+          console.error(
+            "❌ [Upload] Final check FAILED - localStorage is empty!",
+          );
         }
-        router.push('/new-releases');
+        router.push("/new-releases");
       }, 500);
-
     } catch (error: any) {
-      console.error('Error submitting track:', error);
-      setSubmitError(error.message || 'An unexpected error occurred. Please try again.');
+      console.error("Error submitting track:", error);
+      setSubmitError(
+        error.message || "An unexpected error occurred. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const totalSteps = step === 0 ? 1 : 7; // Step 0 is release type, then 1-6 for upload flow
-  const stepLabels = step === 0 
-    ? ['Release Type']
-    : ['Release Type', 'Upload', 'Basic Info', 'Rights', 'Legal', 'Mood Tags', 'Review'];
+  const stepLabels =
+    step === 0
+      ? ["Release Type"]
+      : [
+          "Release Type",
+          "Upload",
+          "Basic Info",
+          "Rights",
+          "Legal",
+          "Mood Tags",
+          "Review",
+        ];
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-4xl font-bold">
-          {releaseType === 'single' ? 'Upload Track' : releaseType === 'ep' ? 'Upload EP' : 'Upload Album'}
+          {releaseType === "single"
+            ? "Upload Track"
+            : releaseType === "ep"
+              ? "Upload EP"
+              : "Upload Album"}
         </h1>
         <div className="flex gap-3 text-sm">
-          <Link href="/help/upload-guidelines" className="text-spotify-green hover:underline flex items-center gap-1">
+          <Link
+            href="/help/upload-guidelines"
+            className="text-spotify-green hover:underline flex items-center gap-1"
+          >
             <Info size={16} />
             Upload Guidelines
           </Link>
-          <Link href="/legal/pro-guide" className="text-spotify-green hover:underline flex items-center gap-1">
+          <Link
+            href="/legal/pro-guide"
+            className="text-spotify-green hover:underline flex items-center gap-1"
+          >
             <Info size={16} />
             PRO Guide
           </Link>
@@ -601,7 +710,9 @@ export default function UploadPage() {
                 <div className="flex flex-col items-center flex-1">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
-                      s <= step ? 'bg-spotify-green text-black' : 'bg-spotify-light-gray text-spotify-text-gray'
+                      s <= step
+                        ? "bg-spotify-green text-black"
+                        : "bg-spotify-light-gray text-spotify-text-gray"
                     }`}
                   >
                     {s < step ? <CheckCircle size={20} /> : s + 1}
@@ -610,7 +721,7 @@ export default function UploadPage() {
                 {s < totalSteps - 1 && (
                   <div
                     className={`h-1 flex-1 mx-1 ${
-                      s < step ? 'bg-spotify-green' : 'bg-spotify-light-gray'
+                      s < step ? "bg-spotify-green" : "bg-spotify-light-gray"
                     }`}
                   />
                 )}
@@ -634,73 +745,82 @@ export default function UploadPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <button
               onClick={() => {
-                setReleaseType('single');
+                setReleaseType("single");
                 setStep(1);
               }}
               className={`p-8 rounded-lg border-2 transition-all ${
-                releaseType === 'single'
-                  ? 'border-spotify-green bg-spotify-green/10'
-                  : 'border-white/10 hover:border-white/30 bg-spotify-dark-gray'
+                releaseType === "single"
+                  ? "border-spotify-green bg-spotify-green/10"
+                  : "border-white/10 hover:border-white/30 bg-spotify-dark-gray"
               }`}
             >
               <Music size={48} className="mx-auto mb-4 text-spotify-green" />
               <h3 className="text-xl font-bold mb-2">Single</h3>
-              <p className="text-sm text-spotify-text-gray">One track release</p>
+              <p className="text-sm text-spotify-text-gray">
+                One track release
+              </p>
             </button>
 
             <button
               onClick={() => {
-                setReleaseType('ep');
+                setReleaseType("ep");
                 setStep(1);
               }}
               className={`p-8 rounded-lg border-2 transition-all ${
-                releaseType === 'ep'
-                  ? 'border-spotify-green bg-spotify-green/10'
-                  : 'border-white/10 hover:border-white/30 bg-spotify-dark-gray'
+                releaseType === "ep"
+                  ? "border-spotify-green bg-spotify-green/10"
+                  : "border-white/10 hover:border-white/30 bg-spotify-dark-gray"
               }`}
             >
               <Music size={48} className="mx-auto mb-4 text-spotify-green" />
               <h3 className="text-xl font-bold mb-2">EP</h3>
-              <p className="text-sm text-spotify-text-gray">2-6 tracks (Extended Play)</p>
+              <p className="text-sm text-spotify-text-gray">
+                2-6 tracks (Extended Play)
+              </p>
             </button>
 
             <button
               onClick={() => {
-                setReleaseType('lp');
+                setReleaseType("lp");
                 setStep(1);
               }}
               className={`p-8 rounded-lg border-2 transition-all ${
-                releaseType === 'lp'
-                  ? 'border-spotify-green bg-spotify-green/10'
-                  : 'border-white/10 hover:border-white/30 bg-spotify-dark-gray'
+                releaseType === "lp"
+                  ? "border-spotify-green bg-spotify-green/10"
+                  : "border-white/10 hover:border-white/30 bg-spotify-dark-gray"
               }`}
             >
               <Music size={48} className="mx-auto mb-4 text-spotify-green" />
               <h3 className="text-xl font-bold mb-2">Album/LP</h3>
-              <p className="text-sm text-spotify-text-gray">7+ tracks (Full Album)</p>
+              <p className="text-sm text-spotify-text-gray">
+                7+ tracks (Full Album)
+              </p>
             </button>
           </div>
         </div>
       )}
 
       {/* Step 1: File Upload */}
-      {step === 1 && releaseType === 'single' && (
+      {step === 1 && releaseType === "single" && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 1: Upload Audio File</h2>
-          
+
           <div
             {...getSingleRootProps()}
             className={`border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors ${
               isSingleDragActive
-                ? 'border-spotify-green bg-spotify-green/10'
-                : 'border-spotify-text-gray/30 hover:border-spotify-text-gray/60'
+                ? "border-spotify-green bg-spotify-green/10"
+                : "border-spotify-text-gray/30 hover:border-spotify-text-gray/60"
             }`}
           >
             <input {...getSingleInputProps()} />
             <Upload size={48} className="mx-auto mb-4 text-spotify-text-gray" />
             {uploadedFile ? (
               <div>
-                <FileAudio size={32} className="mx-auto mb-2 text-spotify-green" />
+                <FileAudio
+                  size={32}
+                  className="mx-auto mb-2 text-spotify-green"
+                />
                 <p className="font-medium text-white">{uploadedFile.name}</p>
                 <p className="text-sm text-spotify-text-gray mt-1">
                   {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB
@@ -708,8 +828,12 @@ export default function UploadPage() {
               </div>
             ) : (
               <div>
-                <p className="text-white font-medium mb-2">Drag & drop your audio file here</p>
-                <p className="text-spotify-text-gray text-sm mb-4">or click to browse</p>
+                <p className="text-white font-medium mb-2">
+                  Drag & drop your audio file here
+                </p>
+                <p className="text-spotify-text-gray text-sm mb-4">
+                  or click to browse
+                </p>
                 <p className="text-xs text-spotify-text-gray">
                   Supported formats: WAV, FLAC, MP3 (320kbps+), M4A, MP4
                 </p>
@@ -731,7 +855,9 @@ export default function UploadPage() {
           {isAnalyzingMood && (
             <div className="mt-6 flex items-center gap-3 p-4 bg-blue-600/20 border border-blue-600/50 rounded-lg">
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-spotify-green" />
-              <span className="text-white text-sm">Analyzing track mood with AI... This may take a few seconds.</span>
+              <span className="text-white text-sm">
+                Analyzing track mood with AI... This may take a few seconds.
+              </span>
             </div>
           )}
 
@@ -747,17 +873,17 @@ export default function UploadPage() {
       )}
 
       {/* Step 1: Multiple Track Upload for EP/LP */}
-      {step === 1 && (releaseType === 'ep' || releaseType === 'lp') && (
+      {step === 1 && (releaseType === "ep" || releaseType === "lp") && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">
-            Step 1: Upload {releaseType === 'ep' ? 'EP' : 'Album'} Tracks
+            Step 1: Upload {releaseType === "ep" ? "EP" : "Album"} Tracks
           </h2>
-          
+
           <div className="mb-6 bg-blue-600/20 border border-blue-600/50 rounded-lg p-4">
             <p className="text-sm text-white/80">
-              {releaseType === 'ep' 
-                ? 'Upload 2-6 tracks for your EP. You can upload multiple files at once or add them one by one.'
-                : 'Upload 7+ tracks for your album. You can upload multiple files at once or add them one by one.'}
+              {releaseType === "ep"
+                ? "Upload 2-6 tracks for your EP. You can upload multiple files at once or add them one by one."
+                : "Upload 7+ tracks for your album. You can upload multiple files at once or add them one by one."}
             </p>
           </div>
 
@@ -766,13 +892,15 @@ export default function UploadPage() {
             {...getMultiRootProps()}
             className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors mb-6 ${
               isMultiDragActive
-                ? 'border-spotify-green bg-spotify-green/10'
-                : 'border-spotify-text-gray/30 hover:border-spotify-text-gray/60'
+                ? "border-spotify-green bg-spotify-green/10"
+                : "border-spotify-text-gray/30 hover:border-spotify-text-gray/60"
             }`}
           >
             <input {...getMultiInputProps()} />
             <Upload size={32} className="mx-auto mb-2 text-spotify-text-gray" />
-            <p className="text-white font-medium mb-1">Drag & drop multiple audio files here</p>
+            <p className="text-white font-medium mb-1">
+              Drag & drop multiple audio files here
+            </p>
             <p className="text-spotify-text-gray text-sm">or click to browse</p>
             <p className="text-xs text-spotify-text-gray mt-2">
               Supported formats: WAV, FLAC, MP3 (320kbps+), M4A, MP4
@@ -782,7 +910,10 @@ export default function UploadPage() {
           {/* Track list */}
           <div className="space-y-4 mb-6">
             {tracks.map((track) => (
-              <div key={track.id} className="bg-spotify-dark-gray rounded-lg p-4 border border-white/10">
+              <div
+                key={track.id}
+                className="bg-spotify-dark-gray rounded-lg p-4 border border-white/10"
+              >
                 <div className="flex items-start gap-4">
                   {/* Track number */}
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-spotify-green/20 flex items-center justify-center font-bold text-spotify-green">
@@ -799,7 +930,9 @@ export default function UploadPage() {
                       <input
                         type="text"
                         value={track.trackName}
-                        onChange={(e) => updateTrack(track.id, 'trackName', e.target.value)}
+                        onChange={(e) =>
+                          updateTrack(track.id, "trackName", e.target.value)
+                        }
                         className="w-full bg-black/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                         placeholder="Enter track name"
                       />
@@ -839,7 +972,9 @@ export default function UploadPage() {
                       <input
                         type="text"
                         value={track.isrc}
-                        onChange={(e) => updateTrack(track.id, 'isrc', e.target.value)}
+                        onChange={(e) =>
+                          updateTrack(track.id, "isrc", e.target.value)
+                        }
                         className="w-full bg-black/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                         placeholder="USRC17607839"
                       />
@@ -849,7 +984,7 @@ export default function UploadPage() {
                   {/* Actions */}
                   <div className="flex flex-col gap-2">
                     <button
-                      onClick={() => moveTrack(track.id, 'up')}
+                      onClick={() => moveTrack(track.id, "up")}
                       disabled={track.trackNumber === 1}
                       className="p-2 rounded hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed"
                       title="Move up"
@@ -857,7 +992,7 @@ export default function UploadPage() {
                       ↑
                     </button>
                     <button
-                      onClick={() => moveTrack(track.id, 'down')}
+                      onClick={() => moveTrack(track.id, "down")}
                       disabled={track.trackNumber === tracks.length}
                       className="p-2 rounded hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed"
                       title="Move down"
@@ -880,7 +1015,8 @@ export default function UploadPage() {
           </div>
 
           {/* Add track button */}
-          {((releaseType === 'ep' && tracks.length < 6) || (releaseType === 'lp' && tracks.length < 30)) && (
+          {((releaseType === "ep" && tracks.length < 6) ||
+            (releaseType === "lp" && tracks.length < 30)) && (
             <button
               onClick={addTrack}
               className="btn-secondary w-full mb-6 flex items-center justify-center gap-2"
@@ -891,14 +1027,13 @@ export default function UploadPage() {
           )}
 
           {/* Validation and continue */}
-          {tracks.length >= (releaseType === 'ep' ? 2 : 7) && tracks.every(t => t.file && t.trackName) && (
-            <button
-              onClick={() => setStep(2)}
-              className="btn-primary w-full"
-            >
-              Continue to Basic Info ({tracks.length} {tracks.length === 1 ? 'track' : 'tracks'})
-            </button>
-          )}
+          {tracks.length >= (releaseType === "ep" ? 2 : 7) &&
+            tracks.every((t) => t.file && t.trackName) && (
+              <button onClick={() => setStep(2)} className="btn-primary w-full">
+                Continue to Basic Info ({tracks.length}{" "}
+                {tracks.length === 1 ? "track" : "tracks"})
+              </button>
+            )}
         </div>
       )}
 
@@ -908,44 +1043,60 @@ export default function UploadPage() {
           <div className="flex items-start gap-3 mb-6 bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-4">
             <Info className="text-yellow-500 flex-shrink-0 mt-0.5" size={24} />
             <div>
-              <h3 className="font-bold text-yellow-500 mb-1">⚠️ Legal Names Required</h3>
+              <h3 className="font-bold text-yellow-500 mb-1">
+                ⚠️ Legal Names Required
+              </h3>
               <p className="text-sm text-white/80">
-                Per 2025 compliance requirements, you must provide <strong>full legal names</strong> (first and last), 
-                not nicknames or initials. This is required for PRO matching and royalty distribution.
+                Per 2025 compliance requirements, you must provide{" "}
+                <strong>full legal names</strong> (first and last), not
+                nicknames or initials. This is required for PRO matching and
+                royalty distribution.
               </p>
             </div>
           </div>
 
           <h2 className="text-2xl font-bold mb-4">
-            Step 2: Basic {releaseType === 'single' ? 'Track' : releaseType === 'ep' ? 'EP' : 'Album'} Information
+            Step 2: Basic{" "}
+            {releaseType === "single"
+              ? "Track"
+              : releaseType === "ep"
+                ? "EP"
+                : "Album"}{" "}
+            Information
           </h2>
 
           <div className="space-y-4">
             {/* Album/EP Name for multi-track releases */}
-            {(releaseType === 'ep' || releaseType === 'lp') && (
+            {(releaseType === "ep" || releaseType === "lp") && (
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {releaseType === 'ep' ? 'EP' : 'Album'} Name *
+                  {releaseType === "ep" ? "EP" : "Album"} Name *
                 </label>
                 <input
                   type="text"
                   value={metadata.albumName}
-                  onChange={(e) => setMetadata({ ...metadata, albumName: e.target.value })}
+                  onChange={(e) =>
+                    setMetadata({ ...metadata, albumName: e.target.value })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
-                  placeholder={`Enter ${releaseType === 'ep' ? 'EP' : 'album'} name`}
+                  placeholder={`Enter ${releaseType === "ep" ? "EP" : "album"} name`}
                   required
                 />
               </div>
             )}
 
             {/* Track Title - only for singles */}
-            {releaseType === 'single' && (
+            {releaseType === "single" && (
               <div>
-                <label className="block text-sm font-medium mb-2">Track Title *</label>
+                <label className="block text-sm font-medium mb-2">
+                  Track Title *
+                </label>
                 <input
                   type="text"
                   value={metadata.trackName}
-                  onChange={(e) => setMetadata({ ...metadata, trackName: e.target.value })}
+                  onChange={(e) =>
+                    setMetadata({ ...metadata, trackName: e.target.value })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                   placeholder="Enter exact track title"
                   required
@@ -954,20 +1105,31 @@ export default function UploadPage() {
             )}
 
             <div>
-              <label className="block text-sm font-medium mb-2">Artist Full Legal Name (Primary) *</label>
+              <label className="block text-sm font-medium mb-2">
+                Artist Full Legal Name (Primary) *
+              </label>
               <input
                 type="text"
                 value={metadata.artistFullLegalName}
-                onChange={(e) => setMetadata({ ...metadata, artistFullLegalName: e.target.value })}
+                onChange={(e) =>
+                  setMetadata({
+                    ...metadata,
+                    artistFullLegalName: e.target.value,
+                  })
+                }
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                 placeholder="First Name Last Name (e.g., John Smith)"
                 required
               />
-              <p className="text-xs text-spotify-text-gray mt-1">Full legal first and last name required for PRO matching</p>
+              <p className="text-xs text-spotify-text-gray mt-1">
+                Full legal first and last name required for PRO matching
+              </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Featured Artist(s) (Optional)</label>
+              <label className="block text-sm font-medium mb-2">
+                Featured Artist(s) (Optional)
+              </label>
               {metadata.featuredArtists.map((artist, idx) => (
                 <div key={idx} className="flex gap-2 mb-2">
                   <input
@@ -982,7 +1144,14 @@ export default function UploadPage() {
                     placeholder="Full Legal Name"
                   />
                   <button
-                    onClick={() => setMetadata({ ...metadata, featuredArtists: metadata.featuredArtists.filter((_, i) => i !== idx) })}
+                    onClick={() =>
+                      setMetadata({
+                        ...metadata,
+                        featuredArtists: metadata.featuredArtists.filter(
+                          (_, i) => i !== idx,
+                        ),
+                      })
+                    }
                     className="px-3 py-2 bg-red-600/20 hover:bg-red-600/40 rounded-lg text-white"
                   >
                     <X size={20} />
@@ -990,7 +1159,15 @@ export default function UploadPage() {
                 </div>
               ))}
               <button
-                onClick={() => setMetadata({ ...metadata, featuredArtists: [...metadata.featuredArtists, { fullLegalName: '' }] })}
+                onClick={() =>
+                  setMetadata({
+                    ...metadata,
+                    featuredArtists: [
+                      ...metadata.featuredArtists,
+                      { fullLegalName: "" },
+                    ],
+                  })
+                }
                 className="text-sm text-spotify-green hover:underline flex items-center gap-1"
               >
                 <Plus size={16} /> Add Featured Artist
@@ -998,13 +1175,17 @@ export default function UploadPage() {
             </div>
 
             {/* Album field only for singles (EP/LP uses albumName field above) */}
-            {releaseType === 'single' && (
+            {releaseType === "single" && (
               <div>
-                <label className="block text-sm font-medium mb-2">Album/EP Title (Optional)</label>
+                <label className="block text-sm font-medium mb-2">
+                  Album/EP Title (Optional)
+                </label>
                 <input
                   type="text"
                   value={metadata.album}
-                  onChange={(e) => setMetadata({ ...metadata, album: e.target.value })}
+                  onChange={(e) =>
+                    setMetadata({ ...metadata, album: e.target.value })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                   placeholder="Enter album/EP title"
                 />
@@ -1013,22 +1194,30 @@ export default function UploadPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Release Date *</label>
+                <label className="block text-sm font-medium mb-2">
+                  Release Date *
+                </label>
                 <input
                   type="date"
                   value={metadata.releaseDate}
-                  onChange={(e) => setMetadata({ ...metadata, releaseDate: e.target.value })}
+                  onChange={(e) =>
+                    setMetadata({ ...metadata, releaseDate: e.target.value })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">ISRC Code</label>
+                <label className="block text-sm font-medium mb-2">
+                  ISRC Code
+                </label>
                 <input
                   type="text"
                   value={metadata.isrc}
-                  onChange={(e) => setMetadata({ ...metadata, isrc: e.target.value })}
+                  onChange={(e) =>
+                    setMetadata({ ...metadata, isrc: e.target.value })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                   placeholder="USRC17607839 (auto-generated if empty)"
                 />
@@ -1037,10 +1226,14 @@ export default function UploadPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Genre *</label>
+                <label className="block text-sm font-medium mb-2">
+                  Genre *
+                </label>
                 <select
                   value={metadata.genre}
-                  onChange={(e) => setMetadata({ ...metadata, genre: e.target.value })}
+                  onChange={(e) =>
+                    setMetadata({ ...metadata, genre: e.target.value })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                   required
                 >
@@ -1061,11 +1254,15 @@ export default function UploadPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Subgenre (Optional)</label>
+                <label className="block text-sm font-medium mb-2">
+                  Subgenre (Optional)
+                </label>
                 <input
                   type="text"
                   value={metadata.subgenre}
-                  onChange={(e) => setMetadata({ ...metadata, subgenre: e.target.value })}
+                  onChange={(e) =>
+                    setMetadata({ ...metadata, subgenre: e.target.value })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                   placeholder="e.g., Synth-pop, Chillwave"
                 />
@@ -1073,7 +1270,9 @@ export default function UploadPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Cover Art * (JPEG/PNG, minimum 1000x1000px)</label>
+              <label className="block text-sm font-medium mb-2">
+                Cover Art * (JPEG/PNG, minimum 1000x1000px)
+              </label>
               <input
                 type="file"
                 accept="image/jpeg,image/png"
@@ -1086,8 +1285,10 @@ export default function UploadPage() {
                     img.onload = () => {
                       URL.revokeObjectURL(objectUrl);
                       if (img.width < 1000 || img.height < 1000) {
-                        alert(`Cover art must be at least 1000x1000px. Your image is ${img.width}x${img.height}px.`);
-                        e.target.value = ''; // Clear input
+                        alert(
+                          `Cover art must be at least 1000x1000px. Your image is ${img.width}x${img.height}px.`,
+                        );
+                        e.target.value = ""; // Clear input
                         setCoverArtFile(null);
                       } else {
                         setCoverArtFile(file);
@@ -1095,8 +1296,10 @@ export default function UploadPage() {
                     };
                     img.onerror = () => {
                       URL.revokeObjectURL(objectUrl);
-                      alert('Failed to load image. Please try a different file.');
-                      e.target.value = '';
+                      alert(
+                        "Failed to load image. Please try a different file.",
+                      );
+                      e.target.value = "";
                       setCoverArtFile(null);
                     };
                     img.src = objectUrl;
@@ -1106,9 +1309,13 @@ export default function UploadPage() {
                 required
               />
               {coverArtFile && (
-                <p className="text-xs text-spotify-text-gray mt-1">Selected: {coverArtFile.name}</p>
+                <p className="text-xs text-spotify-text-gray mt-1">
+                  Selected: {coverArtFile.name}
+                </p>
               )}
-              <p className="text-xs text-spotify-text-gray mt-1">⚠️ Artwork is required and must be at least 1000x1000 pixels</p>
+              <p className="text-xs text-spotify-text-gray mt-1">
+                ⚠️ Artwork is required and must be at least 1000x1000 pixels
+              </p>
             </div>
           </div>
 
@@ -1131,39 +1338,55 @@ export default function UploadPage() {
       {step === 3 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <div className="flex items-start gap-3 mb-6 bg-red-600/20 border border-red-600/50 rounded-lg p-4">
-            <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={24} />
+            <AlertCircle
+              className="text-red-500 flex-shrink-0 mt-0.5"
+              size={24}
+            />
             <div>
-              <h3 className="font-bold text-red-500 mb-1">⚠️ CRITICAL: Rights Metadata Required</h3>
+              <h3 className="font-bold text-red-500 mb-1">
+                ⚠️ CRITICAL: Rights Metadata Required
+              </h3>
               <p className="text-sm text-white/80">
-                This information is required for legal compliance and royalty distribution to PROs/MLC. 
-                Incomplete submissions will be rejected automatically.
+                This information is required for legal compliance and royalty
+                distribution to PROs/MLC. Incomplete submissions will be
+                rejected automatically.
               </p>
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Step 3: Rights & Ownership Metadata</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Step 3: Rights & Ownership Metadata
+          </h2>
 
           {/* Composers */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-3">
-              <label className="block text-sm font-medium">Composer(s)/Songwriter(s) *</label>
+              <label className="block text-sm font-medium">
+                Composer(s)/Songwriter(s) *
+              </label>
               <button
-                onClick={() => addContributor('composer')}
+                onClick={() => addContributor("composer")}
                 className="text-sm text-spotify-green hover:underline flex items-center gap-1"
               >
                 <Plus size={16} /> Add Composer
               </button>
             </div>
             <p className="text-xs text-spotify-text-gray mb-3">
-              Full legal names (first and last) required. Ownership percentages must total 100%.
+              Full legal names (first and last) required. Ownership percentages
+              must total 100%.
             </p>
             {composers.map((composer, idx) => (
-              <div key={idx} className="bg-spotify-dark-gray rounded-lg p-4 mb-3">
+              <div
+                key={idx}
+                className="bg-spotify-dark-gray rounded-lg p-4 mb-3"
+              >
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-medium text-white">Composer {idx + 1}</span>
+                  <span className="text-sm font-medium text-white">
+                    Composer {idx + 1}
+                  </span>
                   {composers.length > 1 && (
                     <button
-                      onClick={() => removeContributor('composer', idx)}
+                      onClick={() => removeContributor("composer", idx)}
                       className="text-red-500 hover:text-red-400"
                     >
                       <X size={20} />
@@ -1172,21 +1395,39 @@ export default function UploadPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-3">
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">First Name (Legal) *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      First Name (Legal) *
+                    </label>
                     <input
                       type="text"
                       value={composer.firstName}
-                      onChange={(e) => updateContributor('composer', idx, 'firstName', e.target.value)}
+                      onChange={(e) =>
+                        updateContributor(
+                          "composer",
+                          idx,
+                          "firstName",
+                          e.target.value,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Last Name (Legal) *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Last Name (Legal) *
+                    </label>
                     <input
                       type="text"
                       value={composer.lastName}
-                      onChange={(e) => updateContributor('composer', idx, 'lastName', e.target.value)}
+                      onChange={(e) =>
+                        updateContributor(
+                          "composer",
+                          idx,
+                          "lastName",
+                          e.target.value,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       required
                     />
@@ -1194,36 +1435,65 @@ export default function UploadPage() {
                 </div>
                 <div className="grid grid-cols-3 gap-3 mb-3">
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Role *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Role *
+                    </label>
                     <select
                       value={composer.role}
-                      onChange={(e) => updateContributor('composer', idx, 'role', e.target.value)}
+                      onChange={(e) =>
+                        updateContributor(
+                          "composer",
+                          idx,
+                          "role",
+                          e.target.value,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                     >
                       <option value="Composer">Composer</option>
                       <option value="Lyricist">Lyricist</option>
-                      <option value="Composer & Lyricist">Composer & Lyricist</option>
+                      <option value="Composer & Lyricist">
+                        Composer & Lyricist
+                      </option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Ownership % *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Ownership % *
+                    </label>
                     <input
                       type="number"
                       min="0"
                       max="100"
                       step="0.01"
                       value={composer.ownershipPercentage}
-                      onChange={(e) => updateContributor('composer', idx, 'ownershipPercentage', parseFloat(e.target.value) || 0)}
+                      onChange={(e) =>
+                        updateContributor(
+                          "composer",
+                          idx,
+                          "ownershipPercentage",
+                          parseFloat(e.target.value) || 0,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">IPI/CAE Number</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      IPI/CAE Number
+                    </label>
                     <input
                       type="text"
-                      value={composer.ipiNumber || ''}
-                      onChange={(e) => updateContributor('composer', idx, 'ipiNumber', e.target.value)}
+                      value={composer.ipiNumber || ""}
+                      onChange={(e) =>
+                        updateContributor(
+                          "composer",
+                          idx,
+                          "ipiNumber",
+                          e.target.value,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       placeholder="Optional"
                     />
@@ -1231,18 +1501,23 @@ export default function UploadPage() {
                 </div>
               </div>
             ))}
-            <div className={`text-sm mt-2 ${Math.abs(compositionOwnershipTotal - 100) < 0.01 ? 'text-green-400' : 'text-red-400'}`}>
-              Total Ownership: {compositionOwnershipTotal.toFixed(2)}% 
-              {Math.abs(compositionOwnershipTotal - 100) >= 0.01 && ' (Must equal 100%)'}
+            <div
+              className={`text-sm mt-2 ${Math.abs(compositionOwnershipTotal - 100) < 0.01 ? "text-green-400" : "text-red-400"}`}
+            >
+              Total Ownership: {compositionOwnershipTotal.toFixed(2)}%
+              {Math.abs(compositionOwnershipTotal - 100) >= 0.01 &&
+                " (Must equal 100%)"}
             </div>
           </div>
 
           {/* Lyricists (separate if different from composers) */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-3">
-              <label className="block text-sm font-medium">Lyricist(s) (If Different from Composer)</label>
+              <label className="block text-sm font-medium">
+                Lyricist(s) (If Different from Composer)
+              </label>
               <button
-                onClick={() => addContributor('lyricist')}
+                onClick={() => addContributor("lyricist")}
                 className="text-sm text-spotify-green hover:underline flex items-center gap-1"
               >
                 <Plus size={16} /> Add Lyricist
@@ -1254,11 +1529,16 @@ export default function UploadPage() {
               </p>
             )}
             {lyricists.map((lyricist, idx) => (
-              <div key={idx} className="bg-spotify-dark-gray rounded-lg p-4 mb-3">
+              <div
+                key={idx}
+                className="bg-spotify-dark-gray rounded-lg p-4 mb-3"
+              >
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-medium text-white">Lyricist {idx + 1}</span>
+                  <span className="text-sm font-medium text-white">
+                    Lyricist {idx + 1}
+                  </span>
                   <button
-                    onClick={() => removeContributor('lyricist', idx)}
+                    onClick={() => removeContributor("lyricist", idx)}
                     className="text-red-500 hover:text-red-400"
                   >
                     <X size={20} />
@@ -1266,21 +1546,39 @@ export default function UploadPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-3">
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">First Name (Legal) *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      First Name (Legal) *
+                    </label>
                     <input
                       type="text"
                       value={lyricist.firstName}
-                      onChange={(e) => updateContributor('lyricist', idx, 'firstName', e.target.value)}
+                      onChange={(e) =>
+                        updateContributor(
+                          "lyricist",
+                          idx,
+                          "firstName",
+                          e.target.value,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Last Name (Legal) *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Last Name (Legal) *
+                    </label>
                     <input
                       type="text"
                       value={lyricist.lastName}
-                      onChange={(e) => updateContributor('lyricist', idx, 'lastName', e.target.value)}
+                      onChange={(e) =>
+                        updateContributor(
+                          "lyricist",
+                          idx,
+                          "lastName",
+                          e.target.value,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       required
                     />
@@ -1288,36 +1586,65 @@ export default function UploadPage() {
                 </div>
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Role *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Role *
+                    </label>
                     <select
                       value={lyricist.role}
-                      onChange={(e) => updateContributor('lyricist', idx, 'role', e.target.value)}
+                      onChange={(e) =>
+                        updateContributor(
+                          "lyricist",
+                          idx,
+                          "role",
+                          e.target.value,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                     >
                       <option value="Lyricist">Lyricist</option>
                       <option value="Composer">Composer</option>
-                      <option value="Composer & Lyricist">Composer & Lyricist</option>
+                      <option value="Composer & Lyricist">
+                        Composer & Lyricist
+                      </option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Ownership % *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Ownership % *
+                    </label>
                     <input
                       type="number"
                       min="0"
                       max="100"
                       step="0.01"
                       value={lyricist.ownershipPercentage}
-                      onChange={(e) => updateContributor('lyricist', idx, 'ownershipPercentage', parseFloat(e.target.value) || 0)}
+                      onChange={(e) =>
+                        updateContributor(
+                          "lyricist",
+                          idx,
+                          "ownershipPercentage",
+                          parseFloat(e.target.value) || 0,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">IPI/CAE Number</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      IPI/CAE Number
+                    </label>
                     <input
                       type="text"
-                      value={lyricist.ipiNumber || ''}
-                      onChange={(e) => updateContributor('lyricist', idx, 'ipiNumber', e.target.value)}
+                      value={lyricist.ipiNumber || ""}
+                      onChange={(e) =>
+                        updateContributor(
+                          "lyricist",
+                          idx,
+                          "ipiNumber",
+                          e.target.value,
+                        )
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       placeholder="Optional"
                     />
@@ -1339,12 +1666,18 @@ export default function UploadPage() {
               </button>
             </div>
             <p className="text-xs text-spotify-text-gray mb-3">
-              Add publisher name if affiliated. If independent/self-published, leave as "Self-Published".
+              Add publisher name if affiliated. If independent/self-published,
+              leave as "Self-Published".
             </p>
             {publishers.map((publisher, idx) => (
-              <div key={idx} className="bg-spotify-dark-gray rounded-lg p-4 mb-3">
+              <div
+                key={idx}
+                className="bg-spotify-dark-gray rounded-lg p-4 mb-3"
+              >
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-medium text-white">Publisher {idx + 1}</span>
+                  <span className="text-sm font-medium text-white">
+                    Publisher {idx + 1}
+                  </span>
                   {publishers.length > 1 && (
                     <button
                       onClick={() => removePublisher(idx)}
@@ -1356,22 +1689,30 @@ export default function UploadPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-3">
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Publisher Name *</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Publisher Name *
+                    </label>
                     <input
                       type="text"
                       value={publisher.name}
-                      onChange={(e) => updatePublisher(idx, 'name', e.target.value)}
+                      onChange={(e) =>
+                        updatePublisher(idx, "name", e.target.value)
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       placeholder="Self-Published or Publisher Name"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">IPI/CAE Number</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      IPI/CAE Number
+                    </label>
                     <input
                       type="text"
-                      value={publisher.ipiNumber || ''}
-                      onChange={(e) => updatePublisher(idx, 'ipiNumber', e.target.value)}
+                      value={publisher.ipiNumber || ""}
+                      onChange={(e) =>
+                        updatePublisher(idx, "ipiNumber", e.target.value)
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       placeholder="Optional"
                     />
@@ -1379,21 +1720,29 @@ export default function UploadPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Contact Email</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Contact Email
+                    </label>
                     <input
                       type="email"
-                      value={publisher.contactEmail || ''}
-                      onChange={(e) => updatePublisher(idx, 'contactEmail', e.target.value)}
+                      value={publisher.contactEmail || ""}
+                      onChange={(e) =>
+                        updatePublisher(idx, "contactEmail", e.target.value)
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       placeholder="Optional"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-spotify-text-gray mb-1">Contact Phone</label>
+                    <label className="block text-xs text-spotify-text-gray mb-1">
+                      Contact Phone
+                    </label>
                     <input
                       type="tel"
-                      value={publisher.contactPhone || ''}
-                      onChange={(e) => updatePublisher(idx, 'contactPhone', e.target.value)}
+                      value={publisher.contactPhone || ""}
+                      onChange={(e) =>
+                        updatePublisher(idx, "contactPhone", e.target.value)
+                      }
                       className="w-full bg-black rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-spotify-green"
                       placeholder="Optional"
                     />
@@ -1405,39 +1754,66 @@ export default function UploadPage() {
 
           {/* Additional Identification Codes */}
           <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3">Additional Identification Codes</h3>
+            <h3 className="text-lg font-medium mb-3">
+              Additional Identification Codes
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">ISWC Code (Composition)</label>
+                <label className="block text-sm font-medium mb-2">
+                  ISWC Code (Composition)
+                </label>
                 <input
                   type="text"
                   value={rightsMetadata.iswc}
-                  onChange={(e) => setRightsMetadata({ ...rightsMetadata, iswc: e.target.value })}
+                  onChange={(e) =>
+                    setRightsMetadata({
+                      ...rightsMetadata,
+                      iswc: e.target.value,
+                    })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                   placeholder="Optional (aids MLC matching)"
                 />
-                <p className="text-xs text-spotify-text-gray mt-1">International Standard Musical Work Code</p>
+                <p className="text-xs text-spotify-text-gray mt-1">
+                  International Standard Musical Work Code
+                </p>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">UPC/EAN (Album)</label>
+                <label className="block text-sm font-medium mb-2">
+                  UPC/EAN (Album)
+                </label>
                 <input
                   type="text"
                   value={rightsMetadata.upc || rightsMetadata.ean}
-                  onChange={(e) => setRightsMetadata({ ...rightsMetadata, upc: e.target.value })}
+                  onChange={(e) =>
+                    setRightsMetadata({
+                      ...rightsMetadata,
+                      upc: e.target.value,
+                    })
+                  }
                   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                   placeholder="Auto-generated if empty"
                 />
-                <p className="text-xs text-spotify-text-gray mt-1">For albums/EPs</p>
+                <p className="text-xs text-spotify-text-gray mt-1">
+                  For albums/EPs
+                </p>
               </div>
             </div>
           </div>
 
           {/* PRO Affiliation */}
           <div className="mb-6">
-            <label className="block text-sm font-medium mb-2">PRO Affiliation (Performance Rights Organization)</label>
+            <label className="block text-sm font-medium mb-2">
+              PRO Affiliation (Performance Rights Organization)
+            </label>
             <select
               value={rightsMetadata.proAffiliation}
-              onChange={(e) => setRightsMetadata({ ...rightsMetadata, proAffiliation: e.target.value as any })}
+              onChange={(e) =>
+                setRightsMetadata({
+                  ...rightsMetadata,
+                  proAffiliation: e.target.value as any,
+                })
+              }
               className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
             >
               <option value="">Select PRO</option>
@@ -1449,16 +1825,45 @@ export default function UploadPage() {
               <option value="None">Not yet registered</option>
             </select>
             <p className="text-xs text-spotify-text-gray mt-1">
-              Register with ASCAP (<a href="https://www.ascap.com" target="_blank" rel="noopener noreferrer" className="text-spotify-green hover:underline">ascap.com</a>), 
-              BMI (<a href="https://www.bmi.com" target="_blank" rel="noopener noreferrer" className="text-spotify-green hover:underline">bmi.com</a>), 
-              or SESAC (<a href="https://www.sesac.com" target="_blank" rel="noopener noreferrer" className="text-spotify-green hover:underline">sesac.com</a>) 
-              to collect performance royalties.
+              Register with ASCAP (
+              <a
+                href="https://www.ascap.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-spotify-green hover:underline"
+              >
+                ascap.com
+              </a>
+              ), BMI (
+              <a
+                href="https://www.bmi.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-spotify-green hover:underline"
+              >
+                bmi.com
+              </a>
+              ), or SESAC (
+              <a
+                href="https://www.sesac.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-spotify-green hover:underline"
+              >
+                sesac.com
+              </a>
+              ) to collect performance royalties.
             </p>
-            {rightsMetadata.proAffiliation === 'Multiple' && (
+            {rightsMetadata.proAffiliation === "Multiple" && (
               <input
                 type="text"
                 value={rightsMetadata.proAffiliationDetails}
-                onChange={(e) => setRightsMetadata({ ...rightsMetadata, proAffiliationDetails: e.target.value })}
+                onChange={(e) =>
+                  setRightsMetadata({
+                    ...rightsMetadata,
+                    proAffiliationDetails: e.target.value,
+                  })
+                }
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white mt-2 focus:outline-none focus:ring-2 focus:ring-spotify-green"
                 placeholder="List all PROs (e.g., ASCAP, BMI)"
               />
@@ -1468,10 +1873,17 @@ export default function UploadPage() {
           {/* Explicit Content & Territory */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="block text-sm font-medium mb-2">Explicit Content</label>
+              <label className="block text-sm font-medium mb-2">
+                Explicit Content
+              </label>
               <select
-                value={rightsMetadata.explicitContent ? 'yes' : 'no'}
-                onChange={(e) => setRightsMetadata({ ...rightsMetadata, explicitContent: e.target.value === 'yes' })}
+                value={rightsMetadata.explicitContent ? "yes" : "no"}
+                onChange={(e) =>
+                  setRightsMetadata({
+                    ...rightsMetadata,
+                    explicitContent: e.target.value === "yes",
+                  })
+                }
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
               >
                 <option value="no">No</option>
@@ -1479,13 +1891,22 @@ export default function UploadPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Territory Rights</label>
+              <label className="block text-sm font-medium mb-2">
+                Territory Rights
+              </label>
               <select
-                value={rightsMetadata.territoryRights === 'worldwide' ? 'worldwide' : 'specific'}
-                onChange={(e) => setRightsMetadata({ 
-                  ...rightsMetadata, 
-                  territoryRights: e.target.value === 'worldwide' ? 'worldwide' : [] 
-                })}
+                value={
+                  rightsMetadata.territoryRights === "worldwide"
+                    ? "worldwide"
+                    : "specific"
+                }
+                onChange={(e) =>
+                  setRightsMetadata({
+                    ...rightsMetadata,
+                    territoryRights:
+                      e.target.value === "worldwide" ? "worldwide" : [],
+                  })
+                }
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
               >
                 <option value="worldwide">Worldwide</option>
@@ -1513,17 +1934,26 @@ export default function UploadPage() {
       {step === 4 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <div className="flex items-start gap-3 mb-6 bg-red-600/20 border border-red-600/50 rounded-lg p-4">
-            <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={24} />
+            <AlertCircle
+              className="text-red-500 flex-shrink-0 mt-0.5"
+              size={24}
+            />
             <div>
-              <h3 className="font-bold text-red-500 mb-1">⚠️ LEGAL WARRANTIES REQUIRED</h3>
+              <h3 className="font-bold text-red-500 mb-1">
+                ⚠️ LEGAL WARRANTIES REQUIRED
+              </h3>
               <p className="text-sm text-white/80">
-                All declarations must be confirmed to proceed. False declarations may result in content takedown, 
-                account termination, and legal liability. Timestamps and IP addresses are recorded for audits.
+                All declarations must be confirmed to proceed. False
+                declarations may result in content takedown, account
+                termination, and legal liability. Timestamps and IP addresses
+                are recorded for audits.
               </p>
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Step 4: Legal Warranties & Declarations</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Step 4: Legal Warranties & Declarations
+          </h2>
 
           <div className="space-y-4">
             <div className="bg-spotify-dark-gray rounded-lg p-4 border-l-4 border-red-500">
@@ -1531,15 +1961,23 @@ export default function UploadPage() {
                 <input
                   type="checkbox"
                   checked={legalWarranties.ownsMasterRights}
-                  onChange={(e) => setLegalWarranties({ ...legalWarranties, ownsMasterRights: e.target.checked })}
+                  onChange={(e) =>
+                    setLegalWarranties({
+                      ...legalWarranties,
+                      ownsMasterRights: e.target.checked,
+                    })
+                  }
                   className="mt-1 rounded"
                   required
                 />
                 <div className="flex-1">
-                  <span className="font-bold text-white">Master Recording Rights Ownership *</span>
+                  <span className="font-bold text-white">
+                    Master Recording Rights Ownership *
+                  </span>
                   <p className="text-sm text-spotify-text-gray mt-1">
-                    I confirm that I own and/or control 100% of the master recording rights for this track, 
-                    or I have valid licenses from all rights holders to distribute this recording.
+                    I confirm that I own and/or control 100% of the master
+                    recording rights for this track, or I have valid licenses
+                    from all rights holders to distribute this recording.
                   </p>
                 </div>
               </label>
@@ -1550,15 +1988,24 @@ export default function UploadPage() {
                 <input
                   type="checkbox"
                   checked={legalWarranties.isOriginalComposition}
-                  onChange={(e) => setLegalWarranties({ ...legalWarranties, isOriginalComposition: e.target.checked })}
+                  onChange={(e) =>
+                    setLegalWarranties({
+                      ...legalWarranties,
+                      isOriginalComposition: e.target.checked,
+                    })
+                  }
                   className="mt-1 rounded"
                   required
                 />
                 <div className="flex-1">
-                  <span className="font-bold text-white">Original Composition *</span>
+                  <span className="font-bold text-white">
+                    Original Composition *
+                  </span>
                   <p className="text-sm text-spotify-text-gray mt-1">
-                    I warrant that this composition is original, or I have obtained all necessary licenses 
-                    for any interpolations, samples, or covers. I have properly cleared all third-party material.
+                    I warrant that this composition is original, or I have
+                    obtained all necessary licenses for any interpolations,
+                    samples, or covers. I have properly cleared all third-party
+                    material.
                   </p>
                 </div>
               </label>
@@ -1569,15 +2016,23 @@ export default function UploadPage() {
                 <input
                   type="checkbox"
                   checked={legalWarranties.samplesCleared}
-                  onChange={(e) => setLegalWarranties({ ...legalWarranties, samplesCleared: e.target.checked })}
+                  onChange={(e) =>
+                    setLegalWarranties({
+                      ...legalWarranties,
+                      samplesCleared: e.target.checked,
+                    })
+                  }
                   className="mt-1 rounded"
                   required
                 />
                 <div className="flex-1">
-                  <span className="font-bold text-white">Samples & Covers Cleared *</span>
+                  <span className="font-bold text-white">
+                    Samples & Covers Cleared *
+                  </span>
                   <p className="text-sm text-spotify-text-gray mt-1">
-                    I confirm that all samples, interpolations, and covers have been properly cleared. 
-                    For covers, I have obtained mechanical licenses via the Harry Fox Agency (HFA) or 
+                    I confirm that all samples, interpolations, and covers have
+                    been properly cleared. For covers, I have obtained
+                    mechanical licenses via the Harry Fox Agency (HFA) or
                     Mechanical Licensing Collective (MLC) as required.
                   </p>
                 </div>
@@ -1589,15 +2044,23 @@ export default function UploadPage() {
                 <input
                   type="checkbox"
                   checked={legalWarranties.hasMechanicalLicenses}
-                  onChange={(e) => setLegalWarranties({ ...legalWarranties, hasMechanicalLicenses: e.target.checked })}
+                  onChange={(e) =>
+                    setLegalWarranties({
+                      ...legalWarranties,
+                      hasMechanicalLicenses: e.target.checked,
+                    })
+                  }
                   className="mt-1 rounded"
                   required
                 />
                 <div className="flex-1">
-                  <span className="font-bold text-white">Mechanical Licenses (If Applicable) *</span>
+                  <span className="font-bold text-white">
+                    Mechanical Licenses (If Applicable) *
+                  </span>
                   <p className="text-sm text-spotify-text-gray mt-1">
-                    If this track is a cover or uses samples requiring mechanical licenses, 
-                    I confirm that I have obtained all necessary mechanical licenses from HFA/MLC.
+                    If this track is a cover or uses samples requiring
+                    mechanical licenses, I confirm that I have obtained all
+                    necessary mechanical licenses from HFA/MLC.
                   </p>
                 </div>
               </label>
@@ -1608,17 +2071,26 @@ export default function UploadPage() {
                 <input
                   type="checkbox"
                   checked={legalWarranties.agreesToIndemnify}
-                  onChange={(e) => setLegalWarranties({ ...legalWarranties, agreesToIndemnify: e.target.checked })}
+                  onChange={(e) =>
+                    setLegalWarranties({
+                      ...legalWarranties,
+                      agreesToIndemnify: e.target.checked,
+                    })
+                  }
                   className="mt-1 rounded"
                   required
                 />
                 <div className="flex-1">
-                  <span className="font-bold text-white">Indemnification Agreement *</span>
+                  <span className="font-bold text-white">
+                    Indemnification Agreement *
+                  </span>
                   <p className="text-sm text-spotify-text-gray mt-1">
-                    I agree to indemnify, defend, and hold harmless the platform, its affiliates, and 
-                    their respective officers, directors, employees, and agents from and against any 
-                    claims, damages, losses, liabilities, and expenses (including legal fees) arising 
-                    from my breach of these warranties or any copyright infringement claims.
+                    I agree to indemnify, defend, and hold harmless the
+                    platform, its affiliates, and their respective officers,
+                    directors, employees, and agents from and against any
+                    claims, damages, losses, liabilities, and expenses
+                    (including legal fees) arising from my breach of these
+                    warranties or any copyright infringement claims.
                   </p>
                 </div>
               </label>
@@ -1631,7 +2103,8 @@ export default function UploadPage() {
             </h3>
             <div className="text-sm text-white/80">
               <p className="mb-2">
-                By submitting this upload, you acknowledge that false declarations may result in:
+                By submitting this upload, you acknowledge that false
+                declarations may result in:
               </p>
               <ul className="list-disc list-inside mt-2 space-y-1 mb-2">
                 <li>Immediate content takedown without notice</li>
@@ -1640,7 +2113,8 @@ export default function UploadPage() {
                 <li>Exposure to DMCA takedown notices and lawsuits</li>
               </ul>
               <p>
-                All declarations are timestamped and stored for legal audits. Your IP address is recorded.
+                All declarations are timestamped and stored for legal audits.
+                Your IP address is recorded.
               </p>
             </div>
           </div>
@@ -1664,40 +2138,53 @@ export default function UploadPage() {
       {step === 5 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <div className="flex items-start gap-3 mb-6 bg-red-600/20 border border-red-600/50 rounded-lg p-4">
-            <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={24} />
+            <AlertCircle
+              className="text-red-500 flex-shrink-0 mt-0.5"
+              size={24}
+            />
             <div>
-              <h3 className="font-bold text-red-500 mb-1">⚠️ REQUIRED: Mood Tag Adjustment</h3>
+              <h3 className="font-bold text-red-500 mb-1">
+                ⚠️ REQUIRED: Mood Tag Adjustment
+              </h3>
               <p className="text-sm text-white/80">
-                AI has pre-populated mood tags for your track. You <strong>MUST</strong> review, adjust if needed, 
-                and certify accuracy before submitting.
+                AI has pre-populated mood tags for your track. You{" "}
+                <strong>MUST</strong> review, adjust if needed, and certify
+                accuracy before submitting.
               </p>
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Step 5: Adjust & Certify Mood Tags</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Step 5: Adjust & Certify Mood Tags
+          </h2>
 
           {/* AI Suggestions Display */}
           {aiSuggestions && (
             <div className="mb-6 bg-blue-600/20 border border-blue-600/50 rounded-lg p-4">
               <h3 className="font-bold mb-2 flex items-center gap-2">
-                AI Suggestions (Confidence: {Math.round(aiSuggestions.confidence * 100)}%)
+                AI Suggestions (Confidence:{" "}
+                {Math.round(aiSuggestions.confidence * 100)}%)
               </h3>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-spotify-text-gray">Mood:</span>{' '}
+                  <span className="text-spotify-text-gray">Mood:</span>{" "}
                   <span className="font-medium">{aiSuggestions.mood}</span>
                 </div>
                 <div>
-                  <span className="text-spotify-text-gray">Vibe:</span>{' '}
+                  <span className="text-spotify-text-gray">Vibe:</span>{" "}
                   <span className="font-medium">{aiSuggestions.vibe}%</span>
                 </div>
                 <div>
-                  <span className="text-spotify-text-gray">Feelings:</span>{' '}
-                  <span className="font-medium">{aiSuggestions.feelings.join(', ')}</span>
+                  <span className="text-spotify-text-gray">Feelings:</span>{" "}
+                  <span className="font-medium">
+                    {aiSuggestions.feelings.join(", ")}
+                  </span>
                 </div>
                 <div>
-                  <span className="text-spotify-text-gray">Genres:</span>{' '}
-                  <span className="font-medium">{aiSuggestions.genres.join(', ')}</span>
+                  <span className="text-spotify-text-gray">Genres:</span>{" "}
+                  <span className="font-medium">
+                    {aiSuggestions.genres.join(", ")}
+                  </span>
                 </div>
               </div>
             </div>
@@ -1708,7 +2195,7 @@ export default function UploadPage() {
             <div>
               <MoodSelector
                 selectedMood={artistMoodTags.mood}
-                onSelect={(mood) => handleMoodChange('mood', mood)}
+                onSelect={(mood) => handleMoodChange("mood", mood)}
               />
 
               <FeelingChips
@@ -1718,7 +2205,7 @@ export default function UploadPage() {
 
               <VibeSlider
                 value={artistMoodTags.vibe}
-                onChange={(vibe) => handleMoodChange('vibe', vibe)}
+                onChange={(vibe) => handleMoodChange("vibe", vibe)}
               />
 
               <GenreSelector
@@ -1738,8 +2225,10 @@ export default function UploadPage() {
                 className="mt-1 rounded"
               />
               <span className="text-sm">
-                <strong className="text-white">I certify</strong> that these mood tags accurately represent this track. 
-                I have reviewed the AI suggestions and made necessary adjustments to ensure accuracy.
+                <strong className="text-white">I certify</strong> that these
+                mood tags accurately represent this track. I have reviewed the
+                AI suggestions and made necessary adjustments to ensure
+                accuracy.
               </span>
             </label>
           </div>
@@ -1773,32 +2262,90 @@ export default function UploadPage() {
             <div>
               <h3 className="font-bold mb-2">Basic Metadata</h3>
               <div className="text-spotify-text-gray space-y-1">
-                <p><strong className="text-white">Track:</strong> {metadata.trackName}</p>
-                <p><strong className="text-white">Artist (Legal Name):</strong> {metadata.artistFullLegalName}</p>
+                <p>
+                  <strong className="text-white">Track:</strong>{" "}
+                  {metadata.trackName}
+                </p>
+                <p>
+                  <strong className="text-white">Artist (Legal Name):</strong>{" "}
+                  {metadata.artistFullLegalName}
+                </p>
                 {metadata.featuredArtists.length > 0 && (
-                  <p><strong className="text-white">Featured:</strong> {metadata.featuredArtists.map(a => a.fullLegalName).join(', ')}</p>
+                  <p>
+                    <strong className="text-white">Featured:</strong>{" "}
+                    {metadata.featuredArtists
+                      .map((a) => a.fullLegalName)
+                      .join(", ")}
+                  </p>
                 )}
                 {metadata.album && (
-                  <p><strong className="text-white">Album:</strong> {metadata.album}</p>
+                  <p>
+                    <strong className="text-white">Album:</strong>{" "}
+                    {metadata.album}
+                  </p>
                 )}
-                <p><strong className="text-white">Release Date:</strong> {metadata.releaseDate}</p>
-                <p><strong className="text-white">Genre:</strong> {metadata.genre} {metadata.subgenre && `(${metadata.subgenre})`}</p>
+                <p>
+                  <strong className="text-white">Release Date:</strong>{" "}
+                  {metadata.releaseDate}
+                </p>
+                <p>
+                  <strong className="text-white">Genre:</strong>{" "}
+                  {metadata.genre}{" "}
+                  {metadata.subgenre && `(${metadata.subgenre})`}
+                </p>
               </div>
             </div>
 
             <div>
               <h3 className="font-bold mb-2">Rights & Ownership</h3>
               <div className="text-spotify-text-gray space-y-1">
-                <p><strong className="text-white">Composers:</strong> {composers.map(c => `${c.firstName} ${c.lastName} (${c.ownershipPercentage}%)`).join(', ')}</p>
+                <p>
+                  <strong className="text-white">Composers:</strong>{" "}
+                  {composers
+                    .map(
+                      (c) =>
+                        `${c.firstName} ${c.lastName} (${c.ownershipPercentage}%)`,
+                    )
+                    .join(", ")}
+                </p>
                 {lyricists.length > 0 && (
-                  <p><strong className="text-white">Lyricists:</strong> {lyricists.map(l => `${l.firstName} ${l.lastName} (${l.ownershipPercentage}%)`).join(', ')}</p>
+                  <p>
+                    <strong className="text-white">Lyricists:</strong>{" "}
+                    {lyricists
+                      .map(
+                        (l) =>
+                          `${l.firstName} ${l.lastName} (${l.ownershipPercentage}%)`,
+                      )
+                      .join(", ")}
+                  </p>
                 )}
-                <p><strong className="text-white">Publishers:</strong> {publishers.map(p => p.name).join(', ')}</p>
-                <p><strong className="text-white">Composition Ownership Total:</strong> {compositionOwnershipTotal.toFixed(2)}%</p>
-                {rightsMetadata.iswc && <p><strong className="text-white">ISWC:</strong> {rightsMetadata.iswc}</p>}
-                {metadata.isrc && <p><strong className="text-white">ISRC:</strong> {metadata.isrc}</p>}
+                <p>
+                  <strong className="text-white">Publishers:</strong>{" "}
+                  {publishers.map((p) => p.name).join(", ")}
+                </p>
+                <p>
+                  <strong className="text-white">
+                    Composition Ownership Total:
+                  </strong>{" "}
+                  {compositionOwnershipTotal.toFixed(2)}%
+                </p>
+                {rightsMetadata.iswc && (
+                  <p>
+                    <strong className="text-white">ISWC:</strong>{" "}
+                    {rightsMetadata.iswc}
+                  </p>
+                )}
+                {metadata.isrc && (
+                  <p>
+                    <strong className="text-white">ISRC:</strong>{" "}
+                    {metadata.isrc}
+                  </p>
+                )}
                 {rightsMetadata.proAffiliation && (
-                  <p><strong className="text-white">PRO Affiliation:</strong> {rightsMetadata.proAffiliation}</p>
+                  <p>
+                    <strong className="text-white">PRO Affiliation:</strong>{" "}
+                    {rightsMetadata.proAffiliation}
+                  </p>
                 )}
               </div>
             </div>
@@ -1811,8 +2358,16 @@ export default function UploadPage() {
                 <p>✓ Samples/covers cleared</p>
                 <p>✓ Mechanical licenses obtained (if applicable)</p>
                 <p>✓ Indemnification agreement accepted</p>
-                <p>✓ Explicit content: {rightsMetadata.explicitContent ? 'Yes' : 'No'}</p>
-                <p>✓ Territory rights: {rightsMetadata.territoryRights === 'worldwide' ? 'Worldwide' : 'Specific'}</p>
+                <p>
+                  ✓ Explicit content:{" "}
+                  {rightsMetadata.explicitContent ? "Yes" : "No"}
+                </p>
+                <p>
+                  ✓ Territory rights:{" "}
+                  {rightsMetadata.territoryRights === "worldwide"
+                    ? "Worldwide"
+                    : "Specific"}
+                </p>
               </div>
             </div>
 
@@ -1824,7 +2379,10 @@ export default function UploadPage() {
                     {artistMoodTags.mood}
                   </span>
                   {artistMoodTags.feelings.map((feeling) => (
-                    <span key={feeling} className="px-3 py-1 bg-empulse-blue/20 text-empulse-blue rounded-full text-sm">
+                    <span
+                      key={feeling}
+                      className="px-3 py-1 bg-empulse-blue/20 text-empulse-blue rounded-full text-sm"
+                    >
                       {feeling}
                     </span>
                   ))}
@@ -1832,7 +2390,10 @@ export default function UploadPage() {
                     Vibe: {artistMoodTags.vibe}%
                   </span>
                   {artistMoodTags.genres.map((genre) => (
-                    <span key={genre} className="px-3 py-1 bg-spotify-green/20 text-spotify-green rounded-full text-sm">
+                    <span
+                      key={genre}
+                      className="px-3 py-1 bg-spotify-green/20 text-spotify-green rounded-full text-sm"
+                    >
                       {genre}
                     </span>
                   ))}
@@ -1847,7 +2408,8 @@ export default function UploadPage() {
               <div className="flex items-center gap-2">
                 <CheckCircle className="text-green-400" size={20} />
                 <p className="text-sm text-white font-medium">
-                  Track published successfully and is now live! Redirecting to dashboard...
+                  Track published successfully and is now live! Redirecting to
+                  dashboard...
                 </p>
               </div>
             </div>
@@ -1867,25 +2429,30 @@ export default function UploadPage() {
 
           <div className="mt-6 bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-4">
             <p className="text-sm text-white/80">
-              <strong>Final Submission:</strong> By clicking "Publish Now", you confirm all information is accurate 
-              and all legal warranties are true. Your track will be published live immediately.
+              <strong>Final Submission:</strong> By clicking "Publish Now", you
+              confirm all information is accurate and all legal warranties are
+              true. Your track will be published live immediately.
             </p>
           </div>
 
           <div className="flex gap-4 mt-6">
-            <button 
-              onClick={() => setStep(5)} 
+            <button
+              onClick={() => setStep(5)}
               className="btn-secondary"
               disabled={isSubmitting || submitSuccess}
             >
               Back
             </button>
-            <button 
+            <button
               onClick={handleSubmit}
               disabled={isSubmitting || submitSuccess}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Publishing...' : submitSuccess ? 'Published!' : 'Publish Now'}
+              {isSubmitting
+                ? "Publishing..."
+                : submitSuccess
+                  ? "Published!"
+                  : "Publish Now"}
             </button>
           </div>
         </div>
@@ -1893,7 +2460,7 @@ export default function UploadPage() {
 
       {/* Dashboard Link at Bottom */}
       <div className="mt-8 pt-6 border-t border-white/10 text-center">
-        <Link 
+        <Link
           href="/dashboard/artist"
           className="text-spotify-green hover:text-[#8a1dd0] text-sm font-medium transition-colors inline-flex items-center gap-1"
         >

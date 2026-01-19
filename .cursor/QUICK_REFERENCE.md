@@ -13,17 +13,17 @@
 
 ## ⌨️ Vim Keybindings
 
-| Key | Action |
-|-----|--------|
+| Key  | Action                         |
+| ---- | ------------------------------ |
 | `\e` | Refactor selection with Eleven |
-| `\s` | Swarm analyze selection |
-| `\d` | Debug selection |
-| `\t` | Terraform validate |
-| `\p` | Terraform plan |
-| `\a` | Terraform apply |
-| `gt` | Show Terraform state |
-| `K` | Terraform hover docs |
-| `jj` | Exit insert mode |
+| `\s` | Swarm analyze selection        |
+| `\d` | Debug selection                |
+| `\t` | Terraform validate             |
+| `\p` | Terraform plan                 |
+| `\a` | Terraform apply                |
+| `gt` | Show Terraform state           |
+| `K`  | Terraform hover docs           |
+| `jj` | Exit insert mode               |
 
 ## 🎯 Agent Types
 
@@ -41,12 +41,14 @@
 ## 📋 Common Workflows
 
 ### Feature Development
+
 ```
 @Eleven MCP /swarm fullstack [feature]
 → Review → Test → Refine
 ```
 
 ### Bug Fixing
+
 ```
 @Eleven MCP /debug [bug]
 → Security + Testing agents
@@ -54,6 +56,7 @@
 ```
 
 ### Optimization
+
 ```
 @Eleven MCP /agent performance [component]
 → Analyze → Optimize → Measure
@@ -62,21 +65,25 @@
 ## ⚡ Quick Examples
 
 **Player Optimization:**
+
 ```
 @Eleven MCP /swarm audiophile player shaders FLAC
 ```
 
 **Auth System:**
+
 ```
 @Eleven MCP /swarm auth system security
 ```
 
 **Terraform Deploy:**
+
 ```
 @Eleven MCP /orchestrate Terraform deploy Spot
 ```
 
 **Single Component:**
+
 ```
 @Eleven MCP /agent frontend optimize Player.tsx
 ```

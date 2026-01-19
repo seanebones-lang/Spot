@@ -14,30 +14,35 @@ const mockStorage: Storage = {
 
 export function createSafeStorage(): Storage {
   // Check if we're in a browser environment
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     // Server-side: return mock storage
     return mockStorage;
   }
 
   try {
     // Test if localStorage is available
-    const test = '__localStorage_test__';
+    const test = "__localStorage_test__";
     localStorage.setItem(test, test);
     localStorage.removeItem(test);
     return localStorage;
   } catch (error) {
-    if (error instanceof DOMException && error.name === 'QuotaExceededError') {
-      console.warn('localStorage quota exceeded, falling back to sessionStorage');
+    if (error instanceof DOMException && error.name === "QuotaExceededError") {
+      console.warn(
+        "localStorage quota exceeded, falling back to sessionStorage",
+      );
       // Check sessionStorage is available too
-      if (typeof sessionStorage !== 'undefined') {
+      if (typeof sessionStorage !== "undefined") {
         return sessionStorage;
       }
       return mockStorage;
     }
     // If localStorage is not available at all, try sessionStorage
-    if (error instanceof DOMException && (error.name === 'SecurityError' || error.name === 'ReferenceError')) {
-      console.warn('localStorage not available, using sessionStorage');
-      if (typeof sessionStorage !== 'undefined') {
+    if (
+      error instanceof DOMException &&
+      (error.name === "SecurityError" || error.name === "ReferenceError")
+    ) {
+      console.warn("localStorage not available, using sessionStorage");
+      if (typeof sessionStorage !== "undefined") {
         return sessionStorage;
       }
       return mockStorage;

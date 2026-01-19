@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export default function GlobalError({
   error,
@@ -10,7 +10,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('Global error:', error);
+    console.error("Global error:", error);
   }, [error]);
 
   return (
@@ -18,9 +18,12 @@ export default function GlobalError({
       <body>
         <div className="flex items-center justify-center min-h-screen bg-spotify-dark text-center p-8">
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-white">Something went wrong!</h2>
+            <h2 className="text-2xl font-bold mb-4 text-white">
+              Something went wrong!
+            </h2>
             <p className="text-spotify-text-gray mb-6">
-              {error.message || 'An unexpected error occurred. Please refresh the page.'}
+              {error.message ||
+                "An unexpected error occurred. Please refresh the page."}
             </p>
             <button
               onClick={() => reset()}

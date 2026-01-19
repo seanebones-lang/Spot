@@ -4,9 +4,9 @@
  * Handles transactional emails: verification, password reset, notifications
  */
 
-import { Resend } from 'resend';
-import { logger } from './logger';
-import { getEnv } from './env';
+import { Resend } from "resend";
+import { logger } from "./logger";
+import { getEnv } from "./env";
 
 // Initialize Resend client
 let resendClient: Resend | null = null;
@@ -18,7 +18,9 @@ function getResendClient(): Resend | null {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    logger.warn('RESEND_API_KEY not configured. Email functionality will be disabled.');
+    logger.warn(
+      "RESEND_API_KEY not configured. Email functionality will be disabled.",
+    );
     return null;
   }
 
@@ -41,12 +43,17 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
   try {
     const client = getResendClient();
     if (!client) {
-      logger.warn('Email service not configured. Email not sent.', { to: options.to, subject: options.subject });
+      logger.warn("Email service not configured. Email not sent.", {
+        to: options.to,
+        subject: options.subject,
+      });
       return false;
     }
 
-    const fromEmail = options.from || process.env.EMAIL_FROM || 'noreply@empulsemusic.com';
-    const fromName = options.fromName || process.env.EMAIL_FROM_NAME || 'EmPulse Music';
+    const fromEmail =
+      options.from || process.env.EMAIL_FROM || "noreply@empulsemusic.com";
+    const fromName =
+      options.fromName || process.env.EMAIL_FROM_NAME || "EmPulse Music";
 
     const result = await client.emails.send({
       from: `${fromName} <${fromEmail}>`,
@@ -56,15 +63,24 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     });
 
     if (result.error) {
-      logger.error('Email sending failed', result.error, { to: options.to, subject: options.subject });
+      logger.error("Email sending failed", result.error, {
+        to: options.to,
+        subject: options.subject,
+      });
       return false;
     }
 
-    logger.info('Email sent successfully', { to: options.to, subject: options.subject, id: result.data?.id });
+    logger.info("Email sent successfully", {
+      to: options.to,
+      subject: options.subject,
+      id: result.data?.id,
+    });
     return true;
-
   } catch (error) {
-    logger.error('Email sending error', error, { to: options.to, subject: options.subject });
+    logger.error("Email sending error", error, {
+      to: options.to,
+      subject: options.subject,
+    });
     return false;
   }
 }
@@ -72,9 +88,15 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
 /**
  * Send email verification email
  */
-export async function sendVerificationEmail(email: string, verificationToken: string): Promise<boolean> {
+export async function sendVerificationEmail(
+  email: string,
+  verificationToken: string,
+): Promise<boolean> {
   const env = getEnv();
-  const appUrl = env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
+  const appUrl =
+    env.NEXT_PUBLIC_API_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    "http://localhost:3001";
   const verificationUrl = `${appUrl}/api/auth/verify?token=${verificationToken}`;
 
   const html = `
@@ -107,7 +129,7 @@ export async function sendVerificationEmail(email: string, verificationToken: st
 
   return sendEmail({
     to: email,
-    subject: 'Verify your EmPulse Music account',
+    subject: "Verify your EmPulse Music account",
     html,
   });
 }
@@ -115,9 +137,15 @@ export async function sendVerificationEmail(email: string, verificationToken: st
 /**
  * Send password reset email
  */
-export async function sendPasswordResetEmail(email: string, resetToken: string): Promise<boolean> {
+export async function sendPasswordResetEmail(
+  email: string,
+  resetToken: string,
+): Promise<boolean> {
   const env = getEnv();
-  const appUrl = env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
+  const appUrl =
+    env.NEXT_PUBLIC_API_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    "http://localhost:3001";
   const resetUrl = `${appUrl}/reset-password?token=${resetToken}`;
 
   const html = `
@@ -153,7 +181,7 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
 
   return sendEmail({
     to: email,
-    subject: 'Reset your EmPulse Music password',
+    subject: "Reset your EmPulse Music password",
     html,
   });
 }
@@ -161,7 +189,11 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
 /**
  * Send artist application confirmation email
  */
-export async function sendArtistApplicationConfirmation(email: string, artistName: string, applicationId: string): Promise<boolean> {
+export async function sendArtistApplicationConfirmation(
+  email: string,
+  artistName: string,
+  applicationId: string,
+): Promise<boolean> {
   const html = `
     <!DOCTYPE html>
     <html>
@@ -190,7 +222,7 @@ export async function sendArtistApplicationConfirmation(email: string, artistNam
 
   return sendEmail({
     to: email,
-    subject: 'Your EmPulse Music Artist Application',
+    subject: "Your EmPulse Music Artist Application",
     html,
   });
 }

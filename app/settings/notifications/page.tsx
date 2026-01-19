@@ -1,122 +1,119 @@
-'use client';
+"use client";
 
 export default function NotificationsSettingsPage() {
   return (
-    <div 
+    <div
       className="min-h-screen bg-spotify-dark text-white p-8"
       style={{
-        minHeight: '100vh',
-        backgroundColor: '#121212',
-        padding: '32px',
-        color: '#FFFFFF'
+        minHeight: "100vh",
+        backgroundColor: "#121212",
+        padding: "32px",
+        color: "#FFFFFF",
       }}
     >
-      <h1 
+      <h1
         className="text-4xl font-bold mb-8"
         style={{
-          fontSize: '32px',
-          lineHeight: '36px',
+          fontSize: "32px",
+          lineHeight: "36px",
           fontWeight: 700,
-          color: '#FFFFFF',
-          marginBottom: '32px'
+          color: "#FFFFFF",
+          marginBottom: "32px",
         }}
       >
         Notifications
       </h1>
-      <div 
+      <div
         className="max-w-2xl space-y-6"
         style={{
-          maxWidth: '672px',
-          gap: '24px'
+          maxWidth: "672px",
+          gap: "24px",
         }}
       >
-        <div 
+        <div
           className="bg-spotify-light-gray rounded-lg p-6"
           style={{
-            backgroundColor: '#181818',
-            borderRadius: '8px',
-            padding: '24px'
+            backgroundColor: "#181818",
+            borderRadius: "8px",
+            padding: "24px",
           }}
         >
-          <h2 
+          <h2
             className="text-xl font-bold mb-4"
             style={{
-              fontSize: '20px',
-              lineHeight: '28px',
+              fontSize: "20px",
+              lineHeight: "28px",
               fontWeight: 700,
-              color: '#FFFFFF',
-              marginBottom: '16px'
+              color: "#FFFFFF",
+              marginBottom: "16px",
             }}
           >
             Email Notifications
           </h2>
-          <div 
-            className="space-y-4"
-            style={{ gap: '16px' }}
-          >
-            <label 
+          <div className="space-y-4" style={{ gap: "16px" }}>
+            <label
               className="flex items-center justify-between cursor-pointer"
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '16px',
-                cursor: 'pointer',
-                padding: '12px 0'
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "16px",
+                cursor: "pointer",
+                padding: "12px 0",
               }}
             >
-              <span 
+              <span
                 style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
+                  fontSize: "14px",
+                  lineHeight: "20px",
                   fontWeight: 400,
-                  color: '#FFFFFF'
+                  color: "#FFFFFF",
                 }}
               >
                 New releases from artists you follow
               </span>
-              <input 
-                type="checkbox" 
-                defaultChecked 
+              <input
+                type="checkbox"
+                defaultChecked
                 className="w-5 h-5"
                 style={{
-                  width: '20px',
-                  height: '20px',
-                  cursor: 'pointer',
-                  accentColor: '#7209B7'
+                  width: "20px",
+                  height: "20px",
+                  cursor: "pointer",
+                  accentColor: "#7209B7",
                 }}
               />
             </label>
-            <label 
+            <label
               className="flex items-center justify-between cursor-pointer"
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '16px',
-                cursor: 'pointer',
-                padding: '12px 0'
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "16px",
+                cursor: "pointer",
+                padding: "12px 0",
               }}
             >
-              <span 
+              <span
                 style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
+                  fontSize: "14px",
+                  lineHeight: "20px",
                   fontWeight: 400,
-                  color: '#FFFFFF'
+                  color: "#FFFFFF",
                 }}
               >
                 New playlists from artists you follow
               </span>
-              <input 
-                type="checkbox" 
-                defaultChecked 
+              <input
+                type="checkbox"
+                defaultChecked
                 className="w-5 h-5"
                 style={{
-                  width: '20px',
-                  height: '20px',
-                  cursor: 'pointer',
-                  accentColor: '#7209B7'
+                  width: "20px",
+                  height: "20px",
+                  cursor: "pointer",
+                  accentColor: "#7209B7",
                 }}
               />
             </label>

@@ -6,13 +6,13 @@ on:
       - main
       - fix-all-complete-v1
     paths:
-      - 'app/**'
-      - 'components/**'
-      - 'lib/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'next.config.js'
-      - 'vercel.json'
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.js"
+      - "vercel.json"
   pull_request:
     branches:
       - main
@@ -36,8 +36,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest

@@ -4,15 +4,15 @@
  * This should be imported early in the application lifecycle
  */
 
-import { validateEnv } from './env';
-import { logger } from './logger';
+import { validateEnv } from "./env";
+import { logger } from "./logger";
 
 let validated = false;
 
 /**
  * Validate environment on startup
  * Call this early in your application (e.g., in a server component or API route handler)
- * 
+ *
  * In Next.js, you can call this in:
  * - A server component that runs on every request
  * - An API route that runs on startup
@@ -26,13 +26,13 @@ export function validateStartup(): void {
   try {
     validateEnv();
     validated = true;
-    logger.info('Startup validation passed', {
+    logger.info("Startup validation passed", {
       nodeEnv: process.env.NODE_ENV,
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
     validated = false;
-    logger.error('Startup validation failed', error, {
+    logger.error("Startup validation failed", error, {
       nodeEnv: process.env.NODE_ENV,
       timestamp: new Date().toISOString(),
     });

@@ -90,6 +90,7 @@ terraform destroy
 ## 🔗 Next Steps
 
 After deployment:
+
 1. Get app URL: `terraform output app_url`
 2. Configure ECR for container images
 3. Build and push Docker image

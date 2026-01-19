@@ -47,6 +47,7 @@ The EmPulse Music backend is built on **Next.js 15** with the App Router, provid
 ## 🔐 Security Features
 
 ### Implemented
+
 1. **CSRF Protection** - Double-submit cookie pattern
 2. **Data Encryption** - AES-256-GCM for sensitive data
 3. **Input Sanitization** - XSS and injection prevention
@@ -57,6 +58,7 @@ The EmPulse Music backend is built on **Next.js 15** with the App Router, provid
 8. **Security Headers** - CSP, HSTS, X-Frame-Options
 
 ### Security Headers
+
 - `Content-Security-Policy` - XSS protection
 - `Strict-Transport-Security` - HTTPS enforcement
 - `X-Frame-Options: DENY` - Clickjacking protection
@@ -69,9 +71,11 @@ The EmPulse Music backend is built on **Next.js 15** with the App Router, provid
 ### Authentication
 
 #### `POST /api/auth/register`
+
 Register new user account.
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -81,6 +85,7 @@ Register new user account.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -92,9 +97,11 @@ Register new user account.
 ```
 
 #### `POST /api/auth/login`
+
 Authenticate user.
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -103,6 +110,7 @@ Authenticate user.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -113,9 +121,11 @@ Authenticate user.
 ```
 
 #### `POST /api/auth/refresh`
+
 Refresh access token.
 
 **Request:**
+
 ```json
 {
   "refreshToken": "..."
@@ -123,18 +133,23 @@ Refresh access token.
 ```
 
 #### `POST /api/auth/logout`
+
 Revoke refresh tokens.
 
 #### `POST /api/auth/forgot-password`
+
 Request password reset.
 
 #### `POST /api/auth/reset-password`
+
 Reset password with token.
 
 #### `GET /api/auth/verify?token=...`
+
 Verify email address.
 
 #### `GET /api/auth/me`
+
 Get current user (requires authentication).
 
 ---
@@ -142,13 +157,16 @@ Get current user (requires authentication).
 ### Track Management
 
 #### `POST /api/tracks/submit`
+
 Submit track for review.
 
 **Headers:**
+
 - `Authorization: Bearer <accessToken>`
 - `X-CSRF-Token: <token>`
 
 **Body:** FormData with:
+
 - `payload` (JSON string) - Track metadata
 - `audioFile` (File) - Audio file
 - `coverArtFile` (File, optional) - Cover art
@@ -158,9 +176,11 @@ Submit track for review.
 ### Health & Monitoring
 
 #### `GET /api/health`
+
 Health check endpoint.
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -174,6 +194,7 @@ Health check endpoint.
 ```
 
 #### `GET /api/startup-check`
+
 Environment validation check.
 
 ---
@@ -200,18 +221,19 @@ See `prisma/schema.prisma` for complete schema.
 
 ### Limits
 
-| Endpoint | Limit |
-|----------|-------|
-| `/api/auth/login` | 5 per minute |
-| `/api/auth/register` | 3 per hour |
-| `/api/auth/forgot-password` | 5 per hour |
-| `/api/auth/reset-password` | 5 per hour |
-| `/api/chat` | 20 per hour |
-| `/api/tracks/submit` | 10 per day |
-| `/api/artist/signup` | 5 per day |
-| `/api/mood/validate` | 30 per minute |
+| Endpoint                    | Limit         |
+| --------------------------- | ------------- |
+| `/api/auth/login`           | 5 per minute  |
+| `/api/auth/register`        | 3 per hour    |
+| `/api/auth/forgot-password` | 5 per hour    |
+| `/api/auth/reset-password`  | 5 per hour    |
+| `/api/chat`                 | 20 per hour   |
+| `/api/tracks/submit`        | 10 per day    |
+| `/api/artist/signup`        | 5 per day     |
+| `/api/mood/validate`        | 30 per minute |
 
 ### Implementation
+
 - Uses Upstash Redis for distributed rate limiting
 - Falls back to in-memory if Redis unavailable
 - Supports per-user rate limiting (not just IP)
@@ -227,6 +249,7 @@ See `prisma/schema.prisma` for complete schema.
 3. **Artist Application** - Confirmation email
 
 ### Configuration
+
 Uses Resend service. Set `RESEND_API_KEY` environment variable.
 
 ---
@@ -234,16 +257,19 @@ Uses Resend service. Set `RESEND_API_KEY` environment variable.
 ## 🗂️ File Storage
 
 ### Supported Providers
+
 - **AWS S3** - Full S3 API support
 - **Cloudflare R2** - S3-compatible, cheaper alternative
 
 ### Features
+
 - File integrity verification (SHA-256 checksums)
 - Public/private file access
 - Signed URLs for private files
 - Automatic CDN integration (with Cloudflare)
 
 ### Configuration
+
 Set either S3 or R2 environment variables (see `.env.example`).
 
 ---
@@ -251,15 +277,18 @@ Set either S3 or R2 environment variables (see `.env.example`).
 ## 🔒 Encryption
 
 ### Encrypted Data
+
 - W-9 tax forms (SSN/EIN)
 - Other sensitive user data
 
 ### Algorithm
+
 - **AES-256-GCM** - Authenticated encryption
 - Prevents tampering
 - Includes authentication tag
 
 ### Key Management
+
 - Primary: `ENCRYPTION_KEY` (64 hex characters)
 - Fallback: Derived from `JWT_SECRET` (development only)
 
@@ -268,6 +297,7 @@ Set either S3 or R2 environment variables (see `.env.example`).
 ## 🧪 Testing
 
 ### Run Tests
+
 ```bash
 npm test              # Run all tests
 npm test -- --watch   # Watch mode
@@ -275,9 +305,11 @@ npm test -- --coverage # With coverage
 ```
 
 ### Test Files
+
 - `__tests__/lib/*.test.ts` - Unit tests for utilities
 
 ### Coverage Goals
+
 - 50% minimum coverage
 - Focus on critical paths
 
@@ -286,6 +318,7 @@ npm test -- --coverage # With coverage
 ## 🚀 Development
 
 ### Setup
+
 ```bash
 # Install dependencies
 npm install
@@ -305,6 +338,7 @@ npm run dev
 ```
 
 ### Database Management
+
 ```bash
 # Generate Prisma Client
 npm run db:generate
@@ -321,16 +355,19 @@ npm run db:studio
 ## 📝 Code Style
 
 ### TypeScript
+
 - Strict mode enabled
 - No `any` types (where possible)
 - Explicit return types for functions
 
 ### Error Handling
+
 - Always use try-catch for async operations
 - Return appropriate HTTP status codes
 - Log errors with correlation IDs
 
 ### Logging
+
 - Use structured logging with `logger` utility
 - Include correlation IDs for request tracking
 - Never log sensitive data (passwords, tokens)
@@ -340,17 +377,20 @@ npm run db:studio
 ## 🔍 Debugging
 
 ### Check Database Connection
+
 ```bash
 npx prisma db pull
 ```
 
 ### Check Redis Connection
+
 ```bash
 curl $UPSTASH_REDIS_REST_URL/ping \
   -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN"
 ```
 
 ### View Logs
+
 All logs include correlation IDs. Search logs by correlation ID to trace request flow.
 
 ---

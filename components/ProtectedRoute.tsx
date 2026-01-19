@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useUserStore } from '@/stores/userStore';
-import { Loader2 } from 'lucide-react';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useUserStore } from "@/stores/userStore";
+import { Loader2 } from "lucide-react";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -15,9 +15,9 @@ interface ProtectedRouteProps {
 
 /**
  * ProtectedRoute Component
- * 
+ *
  * Protects routes based on authentication and subscription status.
- * 
+ *
  * @param requireAuth - If true, user must be authenticated
  * @param requireArtist - If true, user must have artist subscription
  * @param requirePremium - If true, user must have premium or artist subscription
@@ -38,30 +38,42 @@ export default function ProtectedRoute({
 
     // Check authentication
     if (requireAuth && !isAuthenticated) {
-      router.push(redirectTo || '/signin');
+      router.push(redirectTo || "/signin");
       return;
     }
 
     // Check premium subscription
     if (requirePremium && user) {
-      const hasPremium = user.subscriptionTier === 'premium' || user.subscriptionTier === 'artist';
+      const hasPremium =
+        user.subscriptionTier === "premium" ||
+        user.subscriptionTier === "artist";
       if (!hasPremium) {
-        router.push(redirectTo || '/subscription');
+        router.push(redirectTo || "/subscription");
         return;
       }
     }
 
     // Check artist subscription
     if (requireArtist && user) {
-      const isArtist = user.subscriptionTier === 'artist' && 
-                      user.artistApplication && 
-                      user.artistApplication.approvalStatus === 'approved';
+      const isArtist =
+        user.subscriptionTier === "artist" &&
+        user.artistApplication &&
+        user.artistApplication.approvalStatus === "approved";
       if (!isArtist) {
-        router.push(redirectTo || '/artist/upgrade');
+        router.push(redirectTo || "/artist/upgrade");
         return;
       }
     }
-  }, [isAuthenticated, user, isLoading, requireAuth, requireArtist, requirePremium, redirectTo, router]);
+  }, [
+    isAuthenticated,
+    user,
+    isLoading,
+    requireAuth,
+    requireArtist,
+    requirePremium,
+    redirectTo,
+    router,
+  ]);
 
   // Show loading state
   if (isLoading) {
@@ -78,16 +90,18 @@ export default function ProtectedRoute({
   }
 
   if (requirePremium && user) {
-    const hasPremium = user.subscriptionTier === 'premium' || user.subscriptionTier === 'artist';
+    const hasPremium =
+      user.subscriptionTier === "premium" || user.subscriptionTier === "artist";
     if (!hasPremium) {
       return null; // Will redirect
     }
   }
 
   if (requireArtist && user) {
-    const isArtist = user.subscriptionTier === 'artist' && 
-                    user.artistApplication && 
-                    user.artistApplication.approvalStatus === 'approved';
+    const isArtist =
+      user.subscriptionTier === "artist" &&
+      user.artistApplication &&
+      user.artistApplication.approvalStatus === "approved";
     if (!isArtist) {
       return null; // Will redirect
     }

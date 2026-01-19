@@ -2,7 +2,9 @@
   "mcpServers": {
     "grok-agent-mcp": {
       "command": "node",
-      "args": ["/Users/nexteleven/cursor-mcp-integration/server/local-mcp-server.js"],
+      "args": [
+        "/Users/nexteleven/cursor-mcp-integration/server/local-mcp-server.js"
+      ],
       "cwd": "/Users/nexteleven/cursor-mcp-integration",
       "env": {
         "VERCEL_APP_URL": "https://grokcode-30wnt049r-sean-mcdonnells-projects-4fbf31ab.vercel.app",
@@ -12,7 +14,9 @@
     },
     "eleven-agent-mcp": {
       "command": "node",
-      "args": ["/Users/nexteleven/cursor-mcp-integration/server/local-mcp-server.js"],
+      "args": [
+        "/Users/nexteleven/cursor-mcp-integration/server/local-mcp-server.js"
+      ],
       "cwd": "/Users/nexteleven/cursor-mcp-integration",
       "env": {
         "VERCEL_APP_URL": "https://grokcode.vercel.app/",
@@ -73,7 +77,19 @@
     "swarm": {
       "description": "Agent swarm orchestration via MCP[query_agent]",
       "usage": "/swarm [agent-type] [task]",
-      "agents": ["devops", "ml", "mobile", "security", "a11y", "fullstack", "qa", "infra", "observability", "performance", "compliance"]
+      "agents": [
+        "devops",
+        "ml",
+        "mobile",
+        "security",
+        "a11y",
+        "fullstack",
+        "qa",
+        "infra",
+        "observability",
+        "performance",
+        "compliance"
+      ]
     }
   },
   "notes": "CTO Max Pack - 200+ abilities via MCP/Eleven. All tools accessible via repo tools/"

@@ -1,13 +1,13 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { createSafeStorage } from '@/lib/safeStorage';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { createSafeStorage } from "@/lib/safeStorage";
 
 export interface User {
   id: string;
   email: string;
   name: string;
   avatar?: string;
-  role: 'user' | 'artist' | 'admin';
+  role: "user" | "artist" | "admin";
   artistApproved?: boolean;
   createdAt: string;
 }
@@ -33,27 +33,30 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: false,
 
-      setUser: (user) => set({ 
-        user, 
-        isAuthenticated: !!user 
-      }),
+      setUser: (user) =>
+        set({
+          user,
+          isAuthenticated: !!user,
+        }),
 
       setToken: (token) => set({ token }),
 
       login: async (email: string, password: string) => {
         set({ isLoading: true });
         try {
-          const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-          const endpoint = apiUrl ? `${apiUrl}/api/auth/login` : '/api/auth/login';
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+          const endpoint = apiUrl
+            ? `${apiUrl}/api/auth/login`
+            : "/api/auth/login";
           const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
           });
 
           if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.error || 'Login failed');
+            throw new Error(error.error || "Login failed");
           }
 
           const data = await response.json();
@@ -72,15 +75,15 @@ export const useAuthStore = create<AuthState>()(
       register: async (email: string, password: string, name: string) => {
         set({ isLoading: true });
         try {
-          const response = await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+          const response = await fetch("/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password, name }),
           });
 
           if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.error || 'Registration failed');
+            throw new Error(error.error || "Registration failed");
           }
 
           const data = await response.json();
@@ -112,11 +115,11 @@ export const useAuthStore = create<AuthState>()(
         }
 
         try {
-          const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-          const endpoint = apiUrl ? `${apiUrl}/api/auth/me` : '/api/auth/me';
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+          const endpoint = apiUrl ? `${apiUrl}/api/auth/me` : "/api/auth/me";
           const response = await fetch(endpoint, {
             headers: {
-              'Authorization': `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
             },
           });
 
@@ -131,18 +134,18 @@ export const useAuthStore = create<AuthState>()(
             get().logout();
           }
         } catch (error) {
-          console.error('Auth check failed:', error);
+          console.error("Auth check failed:", error);
           get().logout();
         }
       },
     }),
     {
-      name: 'auth-storage',
+      name: "auth-storage",
       storage: createJSONStorage(() => {
         try {
           return createSafeStorage();
         } catch (error) {
-          console.error('Failed to create storage:', error);
+          console.error("Failed to create storage:", error);
           return sessionStorage;
         }
       }),
@@ -151,6 +154,6 @@ export const useAuthStore = create<AuthState>()(
         token: state.token,
         isAuthenticated: state.isAuthenticated,
       }),
-    }
-  )
+    },
+  ),
 );

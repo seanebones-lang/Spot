@@ -1,4 +1,5 @@
 # EmPulse Music
+
 ## Pixel-Perfect Spotify Clone with Mood-Based Selection & Wellness Integration
 
 **Status**: 🟢 **In Development**  
@@ -9,6 +10,7 @@
 ## 🚀 Quick Start
 
 ### Development
+
 ```bash
 npm install
 npm run dev
@@ -17,6 +19,7 @@ npm run dev
 The app will be available at `http://localhost:3001`
 
 ### Build
+
 ```bash
 npm run build
 npm start
@@ -39,6 +42,7 @@ npm start
 ## 🎯 Key Features
 
 ### Core Features
+
 - ✅ Pixel-perfect Spotify UI replication (100% parity verified)
 - ✅ Mood-based music selection (4 dimensions: Mood, Feeling, Vibe, Genre)
 - ✅ Wellness integration (check-ins, journaling, affirmations, points)
@@ -48,12 +52,14 @@ npm start
 - ✅ Responsive design with smooth animations
 
 ### Artist Features
+
 - ✅ Artist dashboard with live stats
 - ✅ Track upload with mandatory mood tag adjustment
 - ✅ Legal signup & compliance (W-9, PRO, digital signatures)
 - ✅ Publish/unpublish toggle for tracks
 
 ### Wellness Features
+
 - ✅ Daily mood check-ins with points & streaks
 - ✅ Journaling system with music association
 - ✅ Affirmations system (audio, personalized)
@@ -81,6 +87,7 @@ spot/Spot/
 ## 📚 Documentation
 
 ### Essential Docs
+
 - [`DEPLOYMENT.md`](./DEPLOYMENT.md) - Deployment instructions
 - [`FEATURES.md`](./FEATURES.md) - Feature list
 - [`QUICK_START.md`](./QUICK_START.md) - Quick start guide
@@ -89,9 +96,11 @@ spot/Spot/
 - [`lib/RAG_SYSTEM_README.md`](./lib/RAG_SYSTEM_README.md) - RAG system docs
 
 ### Verification
+
 - [`SPOTIFY_UI_VERIFICATION_REPORT_V3.json`](./SPOTIFY_UI_VERIFICATION_REPORT_V3.json) - Latest UI verification report
 
 ### Legal (Reference)
+
 - [`LEGAL_DOCUMENTS_VERIFICATION.md`](./LEGAL_DOCUMENTS_VERIFICATION.md) - Legal pages verification
 - [`LEGAL_UPLOAD_SYSTEM_REQUIREMENTS.md`](./LEGAL_UPLOAD_SYSTEM_REQUIREMENTS.md) - Upload system legal requirements
 
@@ -122,6 +131,7 @@ npm run test:coverage
 See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for detailed deployment instructions.
 
 Infrastructure:
+
 - Docker containerization
 - CI/CD pipeline (GitHub Actions)
 - Infrastructure as Code (Terraform)

@@ -9,6 +9,7 @@ Implemented a complete authentication system with JWT-based API authentication a
 ### 1. Authentication System
 
 **Auth Store** (`stores/authStore.ts`):
+
 - User state management with Zustand
 - Login/Register/Logout functionality
 - Token management
@@ -16,11 +17,13 @@ Implemented a complete authentication system with JWT-based API authentication a
 - Auto-check authentication on mount
 
 **API Routes**:
+
 - `/api/auth/register` - User registration
 - `/api/auth/login` - User login
 - `/api/auth/me` - Get current user (protected)
 
 **Auth Utilities** (`lib/auth.ts`):
+
 - JWT token verification
 - `requireAuth()` - Middleware for protected routes
 - `requireRole()` - Role-based access control
@@ -28,11 +31,13 @@ Implemented a complete authentication system with JWT-based API authentication a
 ### 2. Protected API Endpoints
 
 **Track Submission** (`/api/tracks/submit`):
+
 - ✅ Now requires authentication
 - Links submissions to authenticated user
 - Returns 401 if not authenticated
 
 **Artist Signup** (`/api/artist/signup`):
+
 - ✅ New endpoint for artist application submission
 - Requires authentication
 - Validates all required fields
@@ -42,12 +47,14 @@ Implemented a complete authentication system with JWT-based API authentication a
 ### 3. UI Components
 
 **LoginModal** (`components/LoginModal.tsx`):
+
 - Login/Register modal
 - Form validation
 - Error handling
 - Spotify-style design
 
 **UserMenu** (`components/UserMenu.tsx`):
+
 - Updated to use auth store
 - Shows "Sign In" button when not authenticated
 - Shows user menu when authenticated
@@ -56,10 +63,12 @@ Implemented a complete authentication system with JWT-based API authentication a
 ### 4. Frontend Integration
 
 **Upload Page**:
+
 - Sends auth token with track submissions
 - Handles authentication errors gracefully
 
 **Artist Signup Page**:
+
 - Wired to submit to `/api/artist/signup`
 - Includes all form data
 - Error handling and loading states
@@ -67,6 +76,7 @@ Implemented a complete authentication system with JWT-based API authentication a
 ## Environment Variables
 
 Add to `.env.local`:
+
 ```env
 # JWT Secret for authentication tokens
 # Generate with: openssl rand -base64 32
@@ -103,39 +113,42 @@ XAI_API_KEY=xai-your-api-key-here
 ## API Usage Examples
 
 ### Register User
+
 ```typescript
-const response = await fetch('/api/auth/register', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const response = await fetch("/api/auth/register", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
-    email: 'user@example.com',
-    password: 'securepassword123',
-    name: 'User Name'
-  })
+    email: "user@example.com",
+    password: "securepassword123",
+    name: "User Name",
+  }),
 });
 ```
 
 ### Login
+
 ```typescript
-const response = await fetch('/api/auth/login', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const response = await fetch("/api/auth/login", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
-    email: 'user@example.com',
-    password: 'securepassword123'
-  })
+    email: "user@example.com",
+    password: "securepassword123",
+  }),
 });
 ```
 
 ### Authenticated Request
+
 ```typescript
 const token = useAuthStore.getState().token;
-const response = await fetch('/api/tracks/submit', {
-  method: 'POST',
+const response = await fetch("/api/tracks/submit", {
+  method: "POST",
   headers: {
-    'Authorization': `Bearer ${token}`
+    Authorization: `Bearer ${token}`,
   },
-  body: formData
+  body: formData,
 });
 ```
 
@@ -178,6 +191,7 @@ const response = await fetch('/api/tracks/submit', {
 ## Files Created/Modified
 
 **New Files**:
+
 - `stores/authStore.ts` - Auth state management
 - `app/api/auth/register/route.ts` - Registration endpoint
 - `app/api/auth/login/route.ts` - Login endpoint
@@ -187,6 +201,7 @@ const response = await fetch('/api/tracks/submit', {
 - `components/LoginModal.tsx` - Login/Register UI
 
 **Modified Files**:
+
 - `app/api/tracks/submit/route.ts` - Added authentication
 - `app/upload/page.tsx` - Added auth token to requests
 - `app/artist/signup/page.tsx` - Wired to API

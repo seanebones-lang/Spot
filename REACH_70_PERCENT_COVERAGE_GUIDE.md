@@ -1,5 +1,7 @@
 # Guide: Reaching 70% Test Coverage
+
 ## Remaining Work & Implementation Patterns
+
 **Current**: 40-45% | **Target**: 70% | **Remaining**: 25-30%
 
 ---
@@ -7,6 +9,7 @@
 ## 📊 Current Coverage Breakdown
 
 ### ✅ Well Covered (Estimated Coverage):
+
 - **Password utilities**: 100% (~2% of codebase)
 - **CSRF protection**: 100% (~1% of codebase)
 - **Rate limiting**: 100% (~1% of codebase)
@@ -17,10 +20,12 @@
 **Total Well Covered**: ~9-10% of codebase with high coverage
 
 ### ⚠️ Partially Covered (Estimated Coverage):
+
 - **Health API**: ~60% (~1% of codebase)
 - **Authentication utilities**: ~40% (~2% of codebase)
 
 ### 🔴 Not Covered (High Impact Targets):
+
 - **API Routes**: ~5% (~30% of codebase) ⚠️ **HIGHEST IMPACT**
   - `/api/auth/login` - Login endpoint
   - `/api/auth/register` - Registration endpoint
@@ -50,18 +55,18 @@
 
 ```typescript
 // __tests__/api/auth/login.test.ts
-import { POST } from '@/app/api/auth/login/route';
-import { NextRequest } from 'next/server';
+import { POST } from "@/app/api/auth/login/route";
+import { NextRequest } from "next/server";
 
 // Mock all dependencies
-jest.mock('@/lib/db');
-jest.mock('@/lib/auth');
-jest.mock('@/lib/password');
-jest.mock('@/lib/rateLimit');
-jest.mock('@/lib/logger');
-jest.mock('@/lib/env');
+jest.mock("@/lib/db");
+jest.mock("@/lib/auth");
+jest.mock("@/lib/password");
+jest.mock("@/lib/rateLimit");
+jest.mock("@/lib/logger");
+jest.mock("@/lib/env");
 
-describe('Login API Route', () => {
+describe("Login API Route", () => {
   let mockRequest: NextRequest;
 
   beforeEach(() => {
@@ -69,28 +74,28 @@ describe('Login API Route', () => {
     mockRequest = {
       json: jest.fn(),
       headers: new Headers(),
-      nextUrl: new URL('http://localhost:3000/api/auth/login'),
+      nextUrl: new URL("http://localhost:3000/api/auth/login"),
     } as any;
 
     // Setup mocks...
   });
 
-  it('should return 200 with tokens on successful login', async () => {
+  it("should return 200 with tokens on successful login", async () => {
     // Arrange
     mockRequest.json.mockResolvedValue({
-      email: 'test@example.com',
-      password: 'TestPassword123',
+      email: "test@example.com",
+      password: "TestPassword123",
     });
 
     // Mock Prisma user lookup
-    const prisma = require('@/lib/db').default;
+    const prisma = require("@/lib/db").default;
     prisma.user = {
       findUnique: jest.fn().mockResolvedValue({
-        id: 'user-1',
-        email: 'test@example.com',
-        passwordHash: '$2a$12$hashed...',
+        id: "user-1",
+        email: "test@example.com",
+        passwordHash: "$2a$12$hashed...",
         isActive: true,
-        role: 'USER',
+        role: "USER",
         failedLoginAttempts: 0,
         lockedUntil: null,
       }),
@@ -98,14 +103,14 @@ describe('Login API Route', () => {
     };
 
     // Mock password verification
-    const { verifyPassword } = require('@/lib/password');
+    const { verifyPassword } = require("@/lib/password");
     verifyPassword.mockResolvedValue(true);
 
     // Mock token generation
-    const { generateTokenPair } = require('@/lib/auth');
+    const { generateTokenPair } = require("@/lib/auth");
     generateTokenPair.mockResolvedValue({
-      accessToken: 'access-token',
-      refreshToken: 'refresh-token',
+      accessToken: "access-token",
+      refreshToken: "refresh-token",
     });
 
     // Act
@@ -186,7 +191,7 @@ describe('ErrorBoundary', () => {
 
     const retryButton = screen.getByText(/try again/i);
     fireEvent.click(retryButton);
-    
+
     // Should reset error state
   });
 });
@@ -209,11 +214,11 @@ describe('ErrorBoundary', () => {
 
 ```typescript
 // __tests__/stores/playerStore.test.ts
-import { renderHook, act } from '@testing-library/react';
-import { usePlayerStore } from '@/stores/playerStore';
-import { Track } from '@/types/track';
+import { renderHook, act } from "@testing-library/react";
+import { usePlayerStore } from "@/stores/playerStore";
+import { Track } from "@/types/track";
 
-describe('Player Store', () => {
+describe("Player Store", () => {
   beforeEach(() => {
     // Reset store state
     usePlayerStore.setState({
@@ -223,11 +228,11 @@ describe('Player Store', () => {
     });
   });
 
-  it('should set current track', () => {
+  it("should set current track", () => {
     const { result } = renderHook(() => usePlayerStore());
     const track: Track = {
-      id: '1',
-      name: 'Test Track',
+      id: "1",
+      name: "Test Track",
       // ... other fields
     };
 
@@ -247,6 +252,7 @@ describe('Player Store', () => {
 ## 📋 Implementation Checklist
 
 ### API Route Tests:
+
 - [ ] `__tests__/api/auth/login.test.ts` - Login endpoint
 - [ ] `__tests__/api/auth/register.test.ts` - Registration endpoint
 - [ ] `__tests__/api/auth/logout.test.ts` - Logout endpoint
@@ -254,11 +260,13 @@ describe('Player Store', () => {
 - [ ] `__tests__/api/artist/signup.test.ts` - Artist signup
 
 ### Component Tests:
+
 - [ ] `__tests__/components/ErrorBoundary.test.tsx` - Error boundary
 - [ ] `__tests__/components/Player.test.tsx` - Audio player
 - [ ] `__tests__/components/Modal.test.tsx` - Modal component
 
 ### State Management Tests:
+
 - [ ] `__tests__/stores/playerStore.test.ts` - Player state
 - [ ] `__tests__/stores/authStore.test.ts` - Auth state
 
@@ -277,10 +285,10 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom @testing
 ```javascript
 module.exports = {
   // ... existing config
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testEnvironment: 'jsdom', // For React component tests
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  testEnvironment: "jsdom", // For React component tests
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1',
+    "^@/(.*)$": "<rootDir>/$1",
   },
 };
 ```
@@ -288,7 +296,7 @@ module.exports = {
 ### Update `jest.setup.js`:
 
 ```javascript
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 // ... existing setup
 ```
 
@@ -341,12 +349,12 @@ See `__tests__/api/auth/login.test.ts.example` for a complete working example (w
 
 ## 🚀 Estimated Time to 70%
 
-| Phase | Effort | Coverage Gain |
-|-------|--------|---------------|
-| API Route Tests | 15-20 hours | +20-25% |
-| Component Tests | 8-10 hours | +10% |
-| State Management | 4-5 hours | +5% |
-| **Total** | **27-35 hours** | **+35-40%** |
+| Phase            | Effort          | Coverage Gain |
+| ---------------- | --------------- | ------------- |
+| API Route Tests  | 15-20 hours     | +20-25%       |
+| Component Tests  | 8-10 hours      | +10%          |
+| State Management | 4-5 hours       | +5%           |
+| **Total**        | **27-35 hours** | **+35-40%**   |
 
 **Current**: 40-45%  
 **After**: 75-85% ✅ (exceeds 70% target)

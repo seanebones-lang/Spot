@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getEnv } from '@/lib/env';
-import { sanitizeEmail } from '@/lib/sanitize';
-import { verifyPassword } from '@/lib/password';
-import { checkRateLimit, getClientIdentifier } from '@/lib/rateLimit';
-import { logger, generateCorrelationId } from '@/lib/logger';
-import { generateTokenPair } from '@/lib/auth';
-import prisma, { dbQueryWithTimeout } from '@/lib/db';
+import { NextRequest, NextResponse } from "next/server";
+import { getEnv } from "@/lib/env";
+import { sanitizeEmail } from "@/lib/sanitize";
+import { verifyPassword } from "@/lib/password";
+import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
+import { logger, generateCorrelationId } from "@/lib/logger";
+import { generateTokenPair } from "@/lib/auth";
+import prisma, { dbQueryWithTimeout } from "@/lib/db";
 
 /**
  * User Login API
@@ -15,24 +15,26 @@ import prisma, { dbQueryWithTimeout } from '@/lib/db';
 export async function POST(request: NextRequest) {
   const correlationId = generateCorrelationId();
   const startTime = Date.now();
-  
+
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);
-    const rateLimit = await checkRateLimit(clientId, '/api/auth/login');
+    const rateLimit = await checkRateLimit(clientId, "/api/auth/login");
     if (!rateLimit.allowed) {
-      logger.warn('Rate limit exceeded for login', { correlationId, clientId });
+      logger.warn("Rate limit exceeded for login", { correlationId, clientId });
       return NextResponse.json(
-        { error: 'Too many login attempts. Please try again later.' },
+        { error: "Too many login attempts. Please try again later." },
         {
           status: 429,
           headers: {
-            'X-RateLimit-Limit': '5',
-            'X-RateLimit-Remaining': String(rateLimit.remaining),
-            'X-RateLimit-Reset': String(rateLimit.resetTime),
-            'Retry-After': String(Math.ceil((rateLimit.resetTime - Date.now()) / 1000)),
+            "X-RateLimit-Limit": "5",
+            "X-RateLimit-Remaining": String(rateLimit.remaining),
+            "X-RateLimit-Reset": String(rateLimit.resetTime),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetTime - Date.now()) / 1000),
+            ),
           },
-        }
+        },
       );
     }
 
@@ -42,16 +44,16 @@ export async function POST(request: NextRequest) {
     // Validation and sanitization
     if (!email || !password) {
       return NextResponse.json(
-        { error: 'Email and password are required' },
-        { status: 400 }
+        { error: "Email and password are required" },
+        { status: 400 },
       );
     }
 
     const sanitizedEmail = sanitizeEmail(email);
     if (!sanitizedEmail) {
       return NextResponse.json(
-        { error: 'Invalid email format' },
-        { status: 400 }
+        { error: "Invalid email format" },
+        { status: 400 },
       );
     }
 
@@ -66,7 +68,7 @@ export async function POST(request: NextRequest) {
       lockedUntil: Date | null;
       failedLoginAttempts: number;
     };
-    
+
     const userQuery = prisma.user.findUnique({
       where: { email: sanitizedEmail },
       select: {
@@ -80,42 +82,52 @@ export async function POST(request: NextRequest) {
         failedLoginAttempts: true,
       },
     }) as Promise<UserWithLock | null>;
-    
+
     const user = await dbQueryWithTimeout<UserWithLock | null>(userQuery);
 
     // Use generic error message to prevent email enumeration
     if (!user) {
-      logger.warn('Login attempt with non-existent email', { correlationId, email: sanitizedEmail });
+      logger.warn("Login attempt with non-existent email", {
+        correlationId,
+        email: sanitizedEmail,
+      });
       return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
+        { error: "Invalid credentials" },
+        { status: 401 },
       );
     }
 
     // Check if account is locked
     if (user.lockedUntil && user.lockedUntil > new Date()) {
-      const minutesRemaining = Math.ceil((user.lockedUntil.getTime() - Date.now()) / 1000 / 60);
-      logger.warn('Login attempt on locked account', { correlationId, userId: user.id });
+      const minutesRemaining = Math.ceil(
+        (user.lockedUntil.getTime() - Date.now()) / 1000 / 60,
+      );
+      logger.warn("Login attempt on locked account", {
+        correlationId,
+        userId: user.id,
+      });
       return NextResponse.json(
-        { 
-          error: 'Account is temporarily locked due to too many failed login attempts',
+        {
+          error:
+            "Account is temporarily locked due to too many failed login attempts",
           lockedUntil: user.lockedUntil.toISOString(),
           minutesRemaining,
         },
-        { status: 423 } // 423 Locked
+        { status: 423 }, // 423 Locked
       );
     }
 
     // Verify password
     const passwordValid = await verifyPassword(password, user.passwordHash);
-    
+
     if (!passwordValid) {
       // Increment failed login attempts
       const newFailedAttempts = user.failedLoginAttempts + 1;
-      const lockUntil = newFailedAttempts >= 5 
-        ? new Date(Date.now() + 15 * 60 * 1000) // Lock for 15 minutes
-        : null;
-      
+      const lockUntil =
+        newFailedAttempts >= 5
+          ? new Date(Date.now() + 15 * 60 * 1000) // Lock for 15 minutes
+          : null;
+
       await prisma.user.update({
         where: { id: user.id },
         data: {
@@ -124,32 +136,33 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      logger.warn('Login attempt with invalid password', { 
-        correlationId, 
+      logger.warn("Login attempt with invalid password", {
+        correlationId,
         userId: user.id,
         failedAttempts: newFailedAttempts,
       });
 
       if (lockUntil) {
         return NextResponse.json(
-          { 
-            error: 'Account locked due to too many failed login attempts. Please try again in 15 minutes.',
+          {
+            error:
+              "Account locked due to too many failed login attempts. Please try again in 15 minutes.",
           },
-          { status: 423 }
+          { status: 423 },
         );
       }
 
       return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
+        { error: "Invalid credentials" },
+        { status: 401 },
       );
     }
 
     // Check if account is active/verified
     if (!user.isActive) {
       return NextResponse.json(
-        { error: 'Account is not active. Please verify your email address.' },
-        { status: 403 }
+        { error: "Account is not active. Please verify your email address." },
+        { status: 403 },
       );
     }
 
@@ -166,21 +179,25 @@ export async function POST(request: NextRequest) {
     // Generate JWT token
     const env = getEnv();
     if (!env.JWT_SECRET) {
-      logger.error('JWT_SECRET not configured', { correlationId });
+      logger.error("JWT_SECRET not configured", { correlationId });
       return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
+        { error: "Server configuration error" },
+        { status: 500 },
       );
     }
 
     // Generate token pair (access token + refresh token)
     const tokens = await generateTokenPair(
       { userId: user.id, email: user.email, role: user.role },
-      request
+      request,
     );
 
     const duration = Date.now() - startTime;
-    logger.info('Login successful', { correlationId, userId: user.id, duration });
+    logger.info("Login successful", {
+      correlationId,
+      userId: user.id,
+      duration,
+    });
 
     return NextResponse.json({
       success: true,
@@ -192,14 +209,14 @@ export async function POST(request: NextRequest) {
       },
       accessToken: tokens.accessToken,
       refreshToken: tokens.refreshToken,
-      message: 'Login successful',
+      message: "Login successful",
     });
   } catch (error) {
     const duration = Date.now() - startTime;
-    logger.error('Login error', error, { correlationId, duration });
+    logger.error("Login error", error, { correlationId, duration });
     return NextResponse.json(
-      { error: 'Login failed. Please try again.' },
-      { status: 500 }
+      { error: "Login failed. Please try again." },
+      { status: 500 },
     );
   }
 }

@@ -47,7 +47,7 @@ export class MetricsCollector {
    * Get metrics for a specific stage
    */
   getStageMetrics(stage: string): PipelineMetrics[] {
-    return this.metrics.filter(m => m.stage === stage);
+    return this.metrics.filter((m) => m.stage === stage);
   }
 
   /**
@@ -55,7 +55,7 @@ export class MetricsCollector {
    */
   getAggregateMetrics(stage?: string): AggregateMetrics[] {
     const stageMetrics = stage
-      ? this.metrics.filter(m => m.stage === stage)
+      ? this.metrics.filter((m) => m.stage === stage)
       : this.metrics;
 
     const stageGroups = new Map<string, PipelineMetrics[]>();
@@ -69,15 +69,16 @@ export class MetricsCollector {
     const aggregates: AggregateMetrics[] = [];
 
     for (const [stageName, metrics] of stageGroups.entries()) {
-      const durations = metrics.map(m => m.duration);
-      const successCount = metrics.filter(m => m.success).length;
+      const durations = metrics.map((m) => m.duration);
+      const successCount = metrics.filter((m) => m.success).length;
       const failureCount = metrics.length - successCount;
 
       aggregates.push({
         stage: stageName,
         count: metrics.length,
         totalDuration: durations.reduce((sum, d) => sum + d, 0),
-        avgDuration: durations.reduce((sum, d) => sum + d, 0) / durations.length,
+        avgDuration:
+          durations.reduce((sum, d) => sum + d, 0) / durations.length,
         minDuration: Math.min(...durations),
         maxDuration: Math.max(...durations),
         successCount,
@@ -132,7 +133,7 @@ export function getMetricsCollector(): MetricsCollector {
 /**
  * Record pipeline stage metric (convenience function)
  */
-export function recordMetric(metric: Omit<PipelineMetrics, 'timestamp'>): void {
+export function recordMetric(metric: Omit<PipelineMetrics, "timestamp">): void {
   getMetricsCollector().record({
     ...metric,
     success: !metric.error,

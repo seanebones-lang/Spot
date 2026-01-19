@@ -3,6 +3,7 @@
 ## Overview
 
 GitHub Codespaces provides a cloud-based development environment for your EmPulse Music project. This allows you to:
+
 - Develop from anywhere with just a browser
 - Share consistent development environments with your team
 - Skip local setup - everything is pre-configured
@@ -13,6 +14,7 @@ GitHub Codespaces provides a cloud-based development environment for your EmPuls
 ### Development Container (`.devcontainer/`)
 
 **devcontainer.json:**
+
 - Node.js 20 environment
 - Port forwarding (3001, 3000, 5173)
 - VS Code extensions pre-installed
@@ -21,6 +23,7 @@ GitHub Codespaces provides a cloud-based development environment for your EmPuls
 - Auto-formatting and linting
 
 **Extensions Included:**
+
 - ESLint & Prettier (code quality)
 - Tailwind CSS IntelliSense
 - Terraform (Infrastructure as Code)
@@ -30,6 +33,7 @@ GitHub Codespaces provides a cloud-based development environment for your EmPuls
 - Playwright & Jest (testing)
 
 **Post-Create Setup:**
+
 - Automatically installs npm dependencies
 - Builds the project to verify setup
 - Configures environment variables
@@ -71,6 +75,7 @@ npm run dev
 ```
 
 Your app will be available at:
+
 - **Local URL**: `http://localhost:3001`
 - **Public URL**: Automatically forwarded by Codespaces
   - Look for the port notification in VS Code
@@ -79,6 +84,7 @@ Your app will be available at:
 ## Features
 
 ### Port Forwarding
+
 - **3001**: Next.js development server (primary)
 - **3000**: Alternative port
 - **5173**: Vite dev server (if needed)
@@ -97,17 +103,20 @@ Ports are automatically forwarded with notifications.
 ### Environment Variables
 
 Set these in Codespace secrets or `.devcontainer/devcontainer.json`:
+
 - `NODE_ENV=development`
 - Add your API keys via Codespace secrets (Settings → Secrets)
 
 ## Machine Sizes
 
 The configuration uses **Basic Linux 32GB** which includes:
+
 - 2 vCPUs
 - 32 GB RAM
 - 32 GB storage
 
 For larger builds, upgrade to:
+
 - **Premium** (4 vCPUs, 8 GB RAM)
 - **Premium Plus** (8 vCPUs, 16 GB RAM)
 
@@ -123,11 +132,13 @@ Change in `.codespaces/settings.json` or when creating.
 ## Troubleshooting
 
 ### Port Not Accessing
+
 1. Check "Ports" tab in Terminal panel
 2. Right-click port → "Port Visibility" → "Public"
 3. Click the globe icon to open in browser
 
 ### Build Fails
+
 ```bash
 # Clean install
 rm -rf node_modules package-lock.json
@@ -136,11 +147,13 @@ npm run build
 ```
 
 ### Extensions Not Loading
+
 - Extensions install automatically on first start
 - Check Extensions panel if missing
 - Reload window: `Cmd+Shift+P` → "Reload Window"
 
 ### Out of Space
+
 ```bash
 # Check disk usage
 df -h
@@ -159,7 +172,7 @@ npm install
 ✅ **No Local Installation**: Skip Node.js, dependencies, etc.  
 ✅ **Fast Machines**: Cloud hardware is powerful  
 ✅ **Easy Sharing**: Share Codespace URL for collaboration  
-✅ **Pre-configured**: All extensions and settings ready  
+✅ **Pre-configured**: All extensions and settings ready
 
 ## Next Steps
 

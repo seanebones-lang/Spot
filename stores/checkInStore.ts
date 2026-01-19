@@ -1,15 +1,29 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface CheckInState {
   lastCheckIn: string | null; // ISO date string
   streak: number;
   todaysCheckIn: {
-    mood?: { tired?: number; energetic?: number; lonely?: number; connected?: number };
+    mood?: {
+      tired?: number;
+      energetic?: number;
+      lonely?: number;
+      connected?: number;
+    };
     feelings?: string[];
     journalEntry?: string;
   } | null;
-  checkIn: (mood?: { tired?: number; energetic?: number; lonely?: number; connected?: number }, feelings?: string[], journalEntry?: string) => void;
+  checkIn: (
+    mood?: {
+      tired?: number;
+      energetic?: number;
+      lonely?: number;
+      connected?: number;
+    },
+    feelings?: string[],
+    journalEntry?: string,
+  ) => void;
   getStreak: () => number;
 }
 
@@ -32,11 +46,11 @@ export const useCheckInStore = create<CheckInState>()(
       lastCheckIn: null,
       streak: 0,
       todaysCheckIn: null,
-      
+
       checkIn: (mood, feelings, journalEntry) => {
         const today = new Date().toISOString();
         const { lastCheckIn, streak } = get();
-        
+
         let newStreak = streak;
         if (!lastCheckIn || isToday(lastCheckIn)) {
           // First check-in or already checked in today
@@ -48,14 +62,14 @@ export const useCheckInStore = create<CheckInState>()(
           // Streak broken
           newStreak = 1;
         }
-        
+
         set({
           lastCheckIn: today,
           streak: newStreak,
           todaysCheckIn: { mood, feelings, journalEntry },
         });
       },
-      
+
       getStreak: () => {
         const { lastCheckIn, streak } = get();
         if (!lastCheckIn) return 0;
@@ -65,8 +79,8 @@ export const useCheckInStore = create<CheckInState>()(
       },
     }),
     {
-      name: 'checkin-storage',
+      name: "checkin-storage",
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

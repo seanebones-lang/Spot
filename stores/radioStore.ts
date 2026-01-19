@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { createSafeStorage } from '@/lib/safeStorage';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { createSafeStorage } from "@/lib/safeStorage";
 
 export interface RadioStation {
   id: string;
@@ -44,13 +44,13 @@ export const useRadioStore = create<RadioState>()(
       startTime: 0,
 
       setStations: (stations) => set({ stations }),
-      
+
       setCurrentStation: (station) => {
         // Generate random start time when switching stations
-        const randomStart = station 
+        const randomStart = station
           ? Math.floor(Math.random() * station.duration)
           : 0;
-        set({ 
+        set({
           currentStation: station,
           startTime: randomStart,
           error: null,
@@ -58,13 +58,14 @@ export const useRadioStore = create<RadioState>()(
       },
 
       setIsPlaying: (isPlaying) => set({ isPlaying }),
-      
+
       setIsLoading: (isLoading) => set({ isLoading }),
-      
+
       setError: (error) => set({ error }),
-      
-      setVolume: (volume) => set({ volume: Math.max(0, Math.min(100, volume)) }),
-      
+
+      setVolume: (volume) =>
+        set({ volume: Math.max(0, Math.min(100, volume)) }),
+
       setStartTime: (time) => set({ startTime: time }),
 
       playStation: (station) => {
@@ -95,12 +96,12 @@ export const useRadioStore = create<RadioState>()(
       },
     }),
     {
-      name: 'radio-storage',
+      name: "radio-storage",
       storage: createJSONStorage(() => {
         try {
           return createSafeStorage();
         } catch (error) {
-          console.error('Failed to create storage:', error);
+          console.error("Failed to create storage:", error);
           return sessionStorage;
         }
       }),
@@ -109,6 +110,6 @@ export const useRadioStore = create<RadioState>()(
         volume: state.volume,
         startTime: state.startTime,
       }),
-    }
-  )
+    },
+  ),
 );

@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getCsrfToken } from '@/lib/csrf';
-import { logger, generateCorrelationId } from '@/lib/logger';
+import { NextRequest, NextResponse } from "next/server";
+import { getCsrfToken } from "@/lib/csrf";
+import { logger, generateCorrelationId } from "@/lib/logger";
 
 /**
  * Get CSRF Token Endpoint
@@ -17,16 +17,15 @@ export async function GET(request: NextRequest) {
       { csrfToken: token },
       {
         headers: {
-          'X-CSRF-Token': token,
+          "X-CSRF-Token": token,
         },
-      }
+      },
     );
-
   } catch (error) {
-    logger.error('Error generating CSRF token', error, { correlationId });
+    logger.error("Error generating CSRF token", error, { correlationId });
     return NextResponse.json(
-      { error: 'Failed to generate CSRF token' },
-      { status: 500 }
+      { error: "Failed to generate CSRF token" },
+      { status: 500 },
     );
   }
 }

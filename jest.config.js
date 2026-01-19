@@ -3,30 +3,27 @@
  * Test runner configuration for unit and integration tests
  */
 
-const nextJest = require('next/jest');
+const nextJest = require("next/jest");
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files
-  dir: './',
+  dir: "./",
 });
 
 // Add any custom config to be passed to Jest
 const customJestConfig = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testEnvironment: 'jest-environment-jsdom',
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1',
+    "^@/(.*)$": "<rootDir>/$1",
   },
-  testMatch: [
-    '**/__tests__/**/*.[jt]s?(x)',
-    '**/?(*.)+(spec|test).[jt]s?(x)',
-  ],
+  testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
   collectCoverageFrom: [
-    'lib/**/*.{js,ts}',
-    'app/api/**/*.{js,ts}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
-    '!**/.next/**',
+    "lib/**/*.{js,ts}",
+    "app/api/**/*.{js,ts}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!**/.next/**",
   ],
   coverageThreshold: {
     global: {

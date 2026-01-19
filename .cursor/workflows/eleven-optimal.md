@@ -33,11 +33,11 @@
 ```
 1. @Eleven MCP /swarm fullstack [feature-name]
    → Frontend + Backend + Testing agents
-   
+
 2. Review agent outputs
-   
+
 3. @Eleven MCP /agent testing create tests
-   
+
 4. Test → Refine → Deploy
 ```
 
@@ -45,9 +45,9 @@
 
 ```
 1. @Eleven MCP /debug [bug-description]
-   
+
 2. Security Agent + Testing Agent review
-   
+
 3. Apply fix → Test → Verify
 ```
 
@@ -55,11 +55,11 @@
 
 ```
 1. @Eleven MCP /agent performance analyze [component]
-   
+
 2. Bundle analysis + Memory profiling
-   
+
 3. @Eleven MCP /agent frontend optimize [component]
-   
+
 4. Measure improvement
 ```
 
@@ -67,11 +67,11 @@
 
 ```
 1. @Eleven MCP /orchestrate Terraform deploy Spot ECS RDS S3
-   
+
 2. DevOps Agent plans deployment
-   
+
 3. Review → terraform apply
-   
+
 4. Verify → Monitor
 ```
 

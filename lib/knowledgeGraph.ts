@@ -1,14 +1,14 @@
 /**
  * Knowledge Graph System for Music Recommendation
- * 
+ *
  * This module implements a Neo4j-based knowledge graph for track relationships,
  * mood-based similarity, and user preference graphs for intelligent recommendations.
- * 
+ *
  * Graph Schema:
  * - Nodes: Track, Artist, Album, User, Mood, Genre, Feeling
  * - Relationships: SIMILAR_TO, MOOD_MATCHES, LIKES, LISTENED_TO, SIMILAR_MOOD,
  *   COLLABORATES_WITH, CONTAINS, BELONGS_TO
- * 
+ *
  * Use Cases:
  * - Find similar tracks based on mood
  * - Discover tracks via graph traversals
@@ -16,9 +16,13 @@
  * - Collaborative filtering with graph structure
  */
 
-import { Track } from '@/types/track';
-import { MoodState, MoodTags } from '@/types/mood';
-import { SIMILARITY_THRESHOLDS, DEFAULT_LIMITS, NEO4J_CONFIG } from './pipelineConfig';
+import { Track } from "@/types/track";
+import { MoodState, MoodTags } from "@/types/mood";
+import {
+  SIMILARITY_THRESHOLDS,
+  DEFAULT_LIMITS,
+  NEO4J_CONFIG,
+} from "./pipelineConfig";
 
 /**
  * Neo4j Knowledge Graph Manager
@@ -41,8 +45,8 @@ export class Neo4jKnowledgeGraph {
   async initialize(): Promise<void> {
     try {
       // Import Neo4j driver (dynamic import for browser compatibility)
-      const neo4j = await import('neo4j-driver');
-      
+      const neo4j = await import("neo4j-driver");
+
       // Create driver instance
       this.driver = neo4j.driver(
         this.uri,
@@ -50,18 +54,18 @@ export class Neo4jKnowledgeGraph {
         {
           maxConnectionPoolSize: NEO4J_CONFIG.MAX_POOL_SIZE,
           connectionAcquisitionTimeout: NEO4J_CONFIG.CONNECTION_TIMEOUT_MS,
-        }
+        },
       );
 
       // Verify connectivity
       await this.driver.verifyConnectivity();
-      
+
       // Note: Sessions are created per-query in executeCypher() for proper cleanup
       // No need to store a session instance here
-      
-      console.log('✅ Neo4j Knowledge Graph initialized');
+
+      console.log("✅ Neo4j Knowledge Graph initialized");
     } catch (error) {
-      console.error('❌ Failed to initialize Neo4j:', error);
+      console.error("❌ Failed to initialize Neo4j:", error);
       throw error;
     }
   }
@@ -72,15 +76,15 @@ export class Neo4jKnowledgeGraph {
   async createSchema(): Promise<void> {
     const schemaQueries = [
       // Constraints
-      'CREATE CONSTRAINT track_id IF NOT EXISTS FOR (t:Track) REQUIRE t.id IS UNIQUE',
-      'CREATE CONSTRAINT artist_id IF NOT EXISTS FOR (a:Artist) REQUIRE a.id IS UNIQUE',
-      'CREATE CONSTRAINT user_id IF NOT EXISTS FOR (u:User) REQUIRE u.id IS UNIQUE',
-      'CREATE CONSTRAINT mood_name IF NOT EXISTS FOR (m:Mood) REQUIRE m.name IS UNIQUE',
-      
+      "CREATE CONSTRAINT track_id IF NOT EXISTS FOR (t:Track) REQUIRE t.id IS UNIQUE",
+      "CREATE CONSTRAINT artist_id IF NOT EXISTS FOR (a:Artist) REQUIRE a.id IS UNIQUE",
+      "CREATE CONSTRAINT user_id IF NOT EXISTS FOR (u:User) REQUIRE u.id IS UNIQUE",
+      "CREATE CONSTRAINT mood_name IF NOT EXISTS FOR (m:Mood) REQUIRE m.name IS UNIQUE",
+
       // Indexes for performance
-      'CREATE INDEX track_mood IF NOT EXISTS FOR (t:Track) ON (t.mood)',
-      'CREATE INDEX track_genre IF NOT EXISTS FOR (t:Track) ON (t.genre)',
-      'CREATE INDEX track_vibe IF NOT EXISTS FOR (t:Track) ON (t.vibe)',
+      "CREATE INDEX track_mood IF NOT EXISTS FOR (t:Track) ON (t.mood)",
+      "CREATE INDEX track_genre IF NOT EXISTS FOR (t:Track) ON (t.genre)",
+      "CREATE INDEX track_vibe IF NOT EXISTS FOR (t:Track) ON (t.vibe)",
     ];
 
     for (const query of schemaQueries) {
@@ -89,7 +93,9 @@ export class Neo4jKnowledgeGraph {
         console.log(`📊 Schema created: ${query.substring(0, 60)}...`);
       } catch (error) {
         // Schema may already exist, log but don't fail
-        console.warn(`⚠️ Schema creation warning (may already exist): ${query.substring(0, 60)}...`);
+        console.warn(
+          `⚠️ Schema creation warning (may already exist): ${query.substring(0, 60)}...`,
+        );
       }
     }
   }
@@ -100,7 +106,7 @@ export class Neo4jKnowledgeGraph {
    */
   async upsertTrack(track: Track): Promise<void> {
     if (!this.driver) {
-      throw new Error('Neo4j driver not initialized. Call initialize() first.');
+      throw new Error("Neo4j driver not initialized. Call initialize() first.");
     }
 
     const query = `
@@ -169,8 +175,8 @@ export class Neo4jKnowledgeGraph {
     };
 
     // Use transaction for atomic operation (single query already atomic, but explicit transaction adds safety)
-    const { withRetry } = await import('./retry');
-    const { withTimeout, TIMEOUTS } = await import('./timeout');
+    const { withRetry } = await import("./retry");
+    const { withTimeout, TIMEOUTS } = await import("./timeout");
 
     await withRetry(
       async () => {
@@ -180,7 +186,7 @@ export class Neo4jKnowledgeGraph {
           const result = await withTimeout(
             session.run(query, parameters),
             TIMEOUTS.DATABASE_QUERY,
-            'Neo4j upsert track timeout'
+            "Neo4j upsert track timeout",
           );
           return result;
         } finally {
@@ -190,8 +196,8 @@ export class Neo4jKnowledgeGraph {
       {
         maxRetries: 2,
         initialDelayMs: 500,
-        retryableErrors: ['timeout', 'ECONNRESET', 'ServiceUnavailable'],
-      }
+        retryableErrors: ["timeout", "ECONNRESET", "ServiceUnavailable"],
+      },
     ).catch((error) => {
       console.error(`❌ Failed to upsert track ${track.id}:`, error);
       throw error;
@@ -207,7 +213,7 @@ export class Neo4jKnowledgeGraph {
   async createSimilarityRelationships(
     trackId: string,
     similarTracks: Array<{ trackId: string; similarity: number }>,
-    threshold: number = SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD
+    threshold: number = SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD,
   ): Promise<void> {
     for (const similar of similarTracks) {
       if (similar.similarity >= threshold) {
@@ -241,7 +247,7 @@ export class Neo4jKnowledgeGraph {
   async createMoodSimilarityRelationships(
     trackId: string,
     similarMoodTracks: Array<{ trackId: string; moodSimilarity: number }>,
-    threshold: number = SIMILARITY_THRESHOLDS.MOOD_SIMILARITY_THRESHOLD
+    threshold: number = SIMILARITY_THRESHOLDS.MOOD_SIMILARITY_THRESHOLD,
   ): Promise<void> {
     for (const similar of similarMoodTracks) {
       if (similar.moodSimilarity >= threshold) {
@@ -276,10 +282,11 @@ export class Neo4jKnowledgeGraph {
       limit?: number;
       minSimilarity?: number;
       includeMoodMatches?: boolean;
-    } = {}
+    } = {},
   ): Promise<Array<{ track: Track; similarity: number; path: string }>> {
     const limit = options.limit || DEFAULT_LIMITS.TOP_K_RECOMMENDATIONS;
-    const minSimilarity = options.minSimilarity || SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD;
+    const minSimilarity =
+      options.minSimilarity || SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD;
     const includeMoodMatches = options.includeMoodMatches ?? true;
 
     let query = `
@@ -316,9 +323,9 @@ export class Neo4jKnowledgeGraph {
 
     const result = await this.executeCypher(query, parameters);
     return result.records.map((record: any) => ({
-      track: record.get('similar').properties,
-      similarity: record.get('similarity'),
-      path: record.get('path'),
+      track: record.get("similar").properties,
+      similarity: record.get("similarity"),
+      path: record.get("path"),
     }));
   }
 
@@ -331,7 +338,7 @@ export class Neo4jKnowledgeGraph {
       limit?: number;
       includeFeelings?: string[];
       vibeRange?: { min: number; max: number };
-    } = {}
+    } = {},
   ): Promise<Track[]> {
     const limit = options.limit || DEFAULT_LIMITS.MAX_RECOMMENDATIONS;
     let query = `
@@ -363,7 +370,7 @@ export class Neo4jKnowledgeGraph {
     `;
 
     const result = await this.executeCypher(query, parameters);
-    return result.records.map((record: any) => record.get('t').properties);
+    return result.records.map((record: any) => record.get("t").properties);
   }
 
   /**
@@ -376,7 +383,7 @@ export class Neo4jKnowledgeGraph {
       listenedTracks: string[];
       favoriteGenres: string[];
       favoriteMoods: MoodState[];
-    }
+    },
   ): Promise<void> {
     // Create user node
     const userQuery = `
@@ -450,7 +457,7 @@ export class Neo4jKnowledgeGraph {
     options: {
       limit?: number;
       useCollaborativeFiltering?: boolean;
-    } = {}
+    } = {},
   ): Promise<Track[]> {
     const limit = options.limit || DEFAULT_LIMITS.MAX_RECOMMENDATIONS;
     const useCollaborativeFiltering = options.useCollaborativeFiltering ?? true;
@@ -484,13 +491,18 @@ export class Neo4jKnowledgeGraph {
     const parameters = { userId, limit };
 
     const result = await this.executeCypher(query, parameters);
-    return result.records.map((record: any) => record.get('recommended').properties);
+    return result.records.map(
+      (record: any) => record.get("recommended").properties,
+    );
   }
 
   /**
    * Calculate track similarity based on graph structure
    */
-  async calculateTrackSimilarity(trackId1: string, trackId2: string): Promise<number> {
+  async calculateTrackSimilarity(
+    trackId1: string,
+    trackId2: string,
+  ): Promise<number> {
     const query = `
       MATCH (t1:Track {id: $trackId1})
       MATCH (t2:Track {id: $trackId2})
@@ -516,16 +528,19 @@ export class Neo4jKnowledgeGraph {
 
     const result = await this.executeCypher(query, parameters);
     const record = result.records[0];
-    
+
     if (!record) return 0;
-    
-    const directSimilarity = record.get('directSimilarity') || 0;
-    const moodMatch = record.get('moodMatch') || 0;
-    const genreOverlap = record.get('genreOverlap') || 0;
-    
+
+    const directSimilarity = record.get("directSimilarity") || 0;
+    const moodMatch = record.get("moodMatch") || 0;
+    const genreOverlap = record.get("genreOverlap") || 0;
+
     // Weighted combination
-    const similarity = (directSimilarity * 0.5) + (moodMatch * 0.3) + (Math.min(genreOverlap / 3, 1) * 0.2);
-    
+    const similarity =
+      directSimilarity * 0.5 +
+      moodMatch * 0.3 +
+      Math.min(genreOverlap / 3, 1) * 0.2;
+
     return similarity;
   }
 
@@ -535,12 +550,12 @@ export class Neo4jKnowledgeGraph {
    */
   private async executeCypher(query: string, parameters?: any): Promise<any> {
     if (!this.driver) {
-      throw new Error('Neo4j driver not initialized. Call initialize() first.');
+      throw new Error("Neo4j driver not initialized. Call initialize() first.");
     }
 
     // Import retry and timeout utilities
-    const { withRetry } = await import('./retry');
-    const { withTimeout, TIMEOUTS } = await import('./timeout');
+    const { withRetry } = await import("./retry");
+    const { withTimeout, TIMEOUTS } = await import("./timeout");
 
     return withRetry(
       async () => {
@@ -549,7 +564,7 @@ export class Neo4jKnowledgeGraph {
           const result = await withTimeout(
             session.run(query, parameters),
             TIMEOUTS.DATABASE_QUERY,
-            'Neo4j query timeout'
+            "Neo4j query timeout",
           );
           return result;
         } finally {
@@ -559,11 +574,11 @@ export class Neo4jKnowledgeGraph {
       {
         maxRetries: 2,
         initialDelayMs: 500,
-        retryableErrors: ['timeout', 'ECONNRESET', 'ServiceUnavailable'],
-      }
+        retryableErrors: ["timeout", "ECONNRESET", "ServiceUnavailable"],
+      },
     ).catch((error) => {
-      console.error('❌ Cypher query failed:', error);
-      console.error('Query:', query.substring(0, 200));
+      console.error("❌ Cypher query failed:", error);
+      console.error("Query:", query.substring(0, 200));
       throw error;
     });
   }
@@ -576,7 +591,7 @@ export class Neo4jKnowledgeGraph {
       await this.driver.close();
       this.driver = null;
     }
-    console.log('🧹 Neo4j Knowledge Graph cleaned up');
+    console.log("🧹 Neo4j Knowledge Graph cleaned up");
   }
 }
 
@@ -588,13 +603,15 @@ let graphInstance: Neo4jKnowledgeGraph | null = null;
 export function getKnowledgeGraph(
   uri?: string,
   user?: string,
-  password?: string
+  password?: string,
 ): Neo4jKnowledgeGraph {
   if (!graphInstance && uri && user && password) {
     graphInstance = new Neo4jKnowledgeGraph(uri, user, password);
   }
   if (!graphInstance) {
-    throw new Error('Knowledge Graph not initialized. Provide uri, user, and password.');
+    throw new Error(
+      "Knowledge Graph not initialized. Provide uri, user, and password.",
+    );
   }
   return graphInstance;
 }

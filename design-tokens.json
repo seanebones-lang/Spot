@@ -4,7 +4,7 @@
   "name": "EmPulse Music Design Tokens",
   "source": "Spotify.com Reverse Engineering - January 16, 2026",
   "status": "draft",
-  
+
   "colors": {
     "spotify": {
       "background": {
@@ -144,7 +144,7 @@
       }
     }
   },
-  
+
   "typography": {
     "fontFamily": {
       "primary": {
@@ -278,19 +278,55 @@
       }
     }
   },
-  
+
   "spacing": {
     "scale": {
       "0": { "value": "0px", "type": "dimension" },
-      "1": { "value": "4px", "type": "dimension", "status": "needs-verification" },
-      "2": { "value": "8px", "type": "dimension", "status": "needs-verification" },
-      "3": { "value": "12px", "type": "dimension", "status": "needs-verification" },
-      "4": { "value": "16px", "type": "dimension", "status": "needs-verification" },
-      "5": { "value": "20px", "type": "dimension", "status": "needs-verification" },
-      "6": { "value": "24px", "type": "dimension", "status": "needs-verification" },
-      "8": { "value": "32px", "type": "dimension", "status": "needs-verification" },
-      "10": { "value": "40px", "type": "dimension", "status": "needs-verification" },
-      "12": { "value": "48px", "type": "dimension", "status": "needs-verification" }
+      "1": {
+        "value": "4px",
+        "type": "dimension",
+        "status": "needs-verification"
+      },
+      "2": {
+        "value": "8px",
+        "type": "dimension",
+        "status": "needs-verification"
+      },
+      "3": {
+        "value": "12px",
+        "type": "dimension",
+        "status": "needs-verification"
+      },
+      "4": {
+        "value": "16px",
+        "type": "dimension",
+        "status": "needs-verification"
+      },
+      "5": {
+        "value": "20px",
+        "type": "dimension",
+        "status": "needs-verification"
+      },
+      "6": {
+        "value": "24px",
+        "type": "dimension",
+        "status": "needs-verification"
+      },
+      "8": {
+        "value": "32px",
+        "type": "dimension",
+        "status": "needs-verification"
+      },
+      "10": {
+        "value": "40px",
+        "type": "dimension",
+        "status": "needs-verification"
+      },
+      "12": {
+        "value": "48px",
+        "type": "dimension",
+        "status": "needs-verification"
+      }
     },
     "component": {
       "sidebar": {
@@ -323,7 +359,7 @@
       }
     }
   },
-  
+
   "borderRadius": {
     "small": {
       "value": "4px",
@@ -358,7 +394,7 @@
       "status": "needs-extraction"
     }
   },
-  
+
   "shadows": {
     "card": {
       "value": "0 4px 12px rgba(0, 0, 0, 0.25)",
@@ -382,7 +418,7 @@
       "note": "Used for card hover states - creates lift effect"
     }
   },
-  
+
   "transitions": {
     "duration": {
       "fast": {
@@ -417,7 +453,7 @@
       }
     }
   },
-  
+
   "buttons": {
     "variants": {
       "primary": {
@@ -569,7 +605,7 @@
       }
     }
   },
-  
+
   "inputs": {
     "variants": {
       "default": {
@@ -803,7 +839,7 @@
       }
     }
   },
-  
+
   "cards": {
     "variants": {
       "default": {
@@ -955,7 +991,7 @@
       }
     }
   },
-  
+
   "modals": {
     "sizes": {
       "small": {
@@ -1092,7 +1128,7 @@
       "status": "verified"
     }
   },
-  
+
   "sidebar": {
     "resizable": {
       "divider": {

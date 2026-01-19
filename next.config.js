@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
-  outputFileTracingRoot: require('path').join(__dirname),
+  output: "standalone",
+  outputFileTracingRoot: require("path").join(__dirname),
   // ESLint: Ignore during builds (warnings non-blocking)
   eslint: {
     ignoreDuringBuilds: true,
@@ -14,18 +14,19 @@ const nextConfig = {
   // Request body size limit (50MB for file uploads)
   experimental: {
     serverActions: {
-      bodySizeLimit: '50mb',
+      bodySizeLimit: "50mb",
     },
+    // React 19 compatibility (disabled - requires babel-plugin-react-compiler)
+    // reactCompiler: true,
   },
   images: {
-    domains: ['i.scdn.co', 'mosaic.scdn.co', 'wrapped-images.spotifycdn.com', 'images.unsplash.com'],
+    domains: [
+      "i.scdn.co",
+      "mosaic.scdn.co",
+      "wrapped-images.spotifycdn.com",
+      "images.unsplash.com",
+    ],
     unoptimized: false,
-  },
-  // Request body size limit (50MB for file uploads)
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '50mb',
-    },
   },
   // Compress responses
   compress: true,
@@ -37,14 +38,15 @@ const nextConfig = {
     if (dev && !process.env.PINECONE_API_KEY) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        '@pinecone-database/pinecone': require.resolve('./lib/pinecone-stub.js'),
+        "@pinecone-database/pinecone":
+          require.resolve("./lib/pinecone-stub.js"),
       };
     }
     // In production, if PINECONE_API_KEY is missing, env validation will fail startup
-    
+
     return config;
   },
   // Headers are handled in middleware.ts for dynamic control
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

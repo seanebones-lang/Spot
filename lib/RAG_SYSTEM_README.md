@@ -25,7 +25,7 @@ This RAG (Retrieval-Augmented Generation) and Graph/Pipeline system implements A
 
 3. **Similarity Matching Engine** (`lib/similarityMatching.ts`)
    - Hybrid similarity matching (vector + graph + feature + collaborative)
-   - >90% recall/precision target
+   - > 90% recall/precision target
    - Mood-based track recommendations
 
 4. **Pipeline Orchestration** (`lib/pipelineOrchestration.ts`)
@@ -77,12 +77,12 @@ NEO4J_PASSWORD=your_password
 ### 1. RAG Mood Analysis Pipeline
 
 ```typescript
-import { getRAGPipeline } from '@/lib/aiMoodAnalysis';
+import { getRAGPipeline } from "@/lib/aiMoodAnalysis";
 
 // Initialize pipeline with vector database
 const ragPipeline = getRAGPipeline();
 await ragPipeline.initializeVectorDB({
-  type: 'pinecone',
+  type: "pinecone",
   apiKey: process.env.PINECONE_API_KEY!,
   indexName: process.env.PINECONE_INDEX_NAME!,
   environment: process.env.PINECONE_ENVIRONMENT!,
@@ -92,23 +92,23 @@ await ragPipeline.initializeVectorDB({
 const audioFile = event.target.files[0];
 const moodSuggestion = await ragPipeline.analyzeMood(audioFile);
 
-console.log('Mood:', moodSuggestion.mood);
-console.log('Feelings:', moodSuggestion.feelings);
-console.log('Vibe:', moodSuggestion.vibe);
-console.log('Genres:', moodSuggestion.genres);
-console.log('Confidence:', moodSuggestion.confidence);
+console.log("Mood:", moodSuggestion.mood);
+console.log("Feelings:", moodSuggestion.feelings);
+console.log("Vibe:", moodSuggestion.vibe);
+console.log("Genres:", moodSuggestion.genres);
+console.log("Confidence:", moodSuggestion.confidence);
 ```
 
 ### 2. Knowledge Graph System
 
 ```typescript
-import { getKnowledgeGraph } from '@/lib/knowledgeGraph';
+import { getKnowledgeGraph } from "@/lib/knowledgeGraph";
 
 // Initialize knowledge graph
 const graph = getKnowledgeGraph(
   process.env.NEO4J_URI!,
   process.env.NEO4J_USER!,
-  process.env.NEO4J_PASSWORD!
+  process.env.NEO4J_PASSWORD!,
 );
 await graph.initialize();
 await graph.createSchema();
@@ -124,17 +124,17 @@ const similarTracks = await graph.findSimilarTracks(trackId, {
 });
 
 // Find tracks by mood
-const tracks = await graph.findTracksByMood('Joyful', {
+const tracks = await graph.findTracksByMood("Joyful", {
   limit: 20,
   vibeRange: { min: 60, max: 80 },
-  includeFeelings: ['Great', 'Confident'],
+  includeFeelings: ["Great", "Confident"],
 });
 ```
 
 ### 3. Similarity Matching Engine
 
 ```typescript
-import { getSimilarityMatchingEngine } from '@/lib/similarityMatching';
+import { getSimilarityMatchingEngine } from "@/lib/similarityMatching";
 
 // Initialize similarity engine with knowledge graph
 const engine = getSimilarityMatchingEngine(graph, {
@@ -156,23 +156,26 @@ const matches = await engine.findSimilarTracks(sourceTrack, {
 });
 
 // Find mood matches
-const moodMatches = await engine.findMoodMatches({
-  mood: 'Joyful',
-  vibeRange: { min: 70, max: 90 },
-  feelings: ['Great', 'Optimistic'],
-  genres: ['Pop', 'Electronic'],
-}, { limit: 20 });
+const moodMatches = await engine.findMoodMatches(
+  {
+    mood: "Joyful",
+    vibeRange: { min: 70, max: 90 },
+    feelings: ["Great", "Optimistic"],
+    genres: ["Pop", "Electronic"],
+  },
+  { limit: 20 },
+);
 ```
 
 ### 4. Pipeline Orchestration
 
 ```typescript
-import { getPipelineOrchestrator } from '@/lib/pipelineOrchestration';
+import { getPipelineOrchestrator } from "@/lib/pipelineOrchestration";
 
 // Initialize orchestrator
 const orchestrator = getPipelineOrchestrator({
   vectorDB: {
-    type: 'pinecone',
+    type: "pinecone",
     apiKey: process.env.PINECONE_API_KEY!,
     indexName: process.env.PINECONE_INDEX_NAME!,
     environment: process.env.PINECONE_ENVIRONMENT!,
@@ -189,26 +192,31 @@ await orchestrator.initialize();
 // Execute pipeline for single track
 const result = await orchestrator.executePipeline(audioFile, trackMetadata);
 
-console.log('Status:', result.status);
-console.log('Stages:', result.stages);
-console.log('Total Duration:', result.totalDuration, 'ms');
-console.log('Accuracy:', result.overallAccuracy);
+console.log("Status:", result.status);
+console.log("Stages:", result.stages);
+console.log("Total Duration:", result.totalDuration, "ms");
+console.log("Accuracy:", result.overallAccuracy);
 
 // Batch process multiple tracks
-const batchResults = await orchestrator.batchProcess([
-  { file: file1, metadata: metadata1 },
-  { file: file2, metadata: metadata2 },
-], { parallel: true, maxConcurrency: 3 });
+const batchResults = await orchestrator.batchProcess(
+  [
+    { file: file1, metadata: metadata1 },
+    { file: file2, metadata: metadata2 },
+  ],
+  { parallel: true, maxConcurrency: 3 },
+);
 ```
 
 ## Pipeline Stages
 
 ### 1. Data Ingestion
+
 - Validate file format (MP3, WAV, FLAC, M4A, MP4)
 - Validate file size (max 500MB)
 - Validate metadata (name, artist required)
 
 ### 2. Feature Extraction
+
 - Extract audio features using Web Audio API
 - Temporal features: tempo, beat strength, duration
 - Spectral features: centroid, rolloff, flux, zero crossing rate
@@ -218,6 +226,7 @@ const batchResults = await orchestrator.batchProcess([
 - Timbre features: brightness, roughness
 
 ### 3. Mood Analysis (RAG)
+
 - Generate embeddings from audio features
 - Retrieve similar tracks from vector database
 - Predict mood using trained classifier
@@ -225,20 +234,24 @@ const batchResults = await orchestrator.batchProcess([
 - Predict feelings, vibe, and genres
 
 ### 4. Vector DB Indexing
+
 - Store embeddings in Pinecone/FAISS
 - Index metadata for retrieval
 
 ### 5. Graph Update
+
 - Create/update track node in Neo4j
 - Create mood, genre, feeling relationships
 - Create artist and album relationships
 
 ### 6. Similarity Computation
+
 - Find similar tracks via graph traversal
 - Calculate similarity relationships
 - Store similarity edges in graph
 
 ### 7. Validation
+
 - Validate accuracy (>90% target)
 - Validate latency (<200ms target)
 - Validate all stages completed
@@ -254,19 +267,22 @@ const batchResults = await orchestrator.batchProcess([
 ## Evaluation Metrics
 
 ### Mood Classification Metrics
+
 - **Accuracy**: Percentage of correct mood predictions
 - **Confidence**: Average confidence score (0-1)
 - **Precision**: True positives / (True positives + False positives)
 - **Recall**: True positives / (True positives + False negatives)
-- **F1 Score**: 2 * (Precision * Recall) / (Precision + Recall)
+- **F1 Score**: 2 _ (Precision _ Recall) / (Precision + Recall)
 
 ### Similarity Matching Metrics
+
 - **Recall@10**: Percentage of relevant tracks in top 10
 - **Precision@10**: Percentage of top 10 that are relevant
 - **NDCG@10**: Normalized Discounted Cumulative Gain at rank 10
 - **MAP@10**: Mean Average Precision at rank 10
 
 ### Pipeline Performance Metrics
+
 - **Stage Duration**: Time for each pipeline stage
 - **Total Duration**: End-to-end pipeline execution time
 - **Success Rate**: Percentage of successful pipeline runs
@@ -286,6 +302,7 @@ The RAG pipeline is integrated into the upload page (`app/upload/page.tsx`):
 ## Current Implementation Status
 
 ### ✅ Production-Ready Features
+
 - Audio feature extraction (Web Audio API)
 - Rule-based mood classification
 - Pinecone vector database integration
@@ -321,35 +338,42 @@ The RAG pipeline is integrated into the upload page (`app/upload/page.tsx`):
 ## Implementation Notes
 
 ### Mood Classification
+
 Currently uses rule-based scoring based on audio features (tempo, brightness, harmony, etc.). This works well for MVP but ML models will improve accuracy in future releases.
 
 ### Embeddings
+
 Embeddings are currently normalized audio features (26 dimensions). Future implementation will use trained embedding models (e.g., fine-tuned BERT variants) for semantic understanding.
 
 ### Vector Database
+
 Pinecone is fully supported and production-ready. FAISS implementation is stubbed and returns empty results - use Pinecone for production deployments.
 
 ## Troubleshooting
 
 ### High Latency (>200ms)
+
 - Reduce embedding dimensions
 - Optimize feature extraction
 - Use faster vector database (FAISS vs Pinecone)
 - Cache frequently accessed embeddings
 
 ### Low Accuracy (<90%)
+
 - Improve feature extraction
 - Fine-tune mood classification model
 - Increase training data
 - Adjust similarity weights
 
 ### Vector Database Errors
+
 - Check API keys and credentials
 - Verify index exists and is accessible
 - Check network connectivity
 - Review rate limits
 
 ### Neo4j Connection Issues
+
 - Verify URI, user, and password
 - Check Neo4j server is running
 - Review firewall settings

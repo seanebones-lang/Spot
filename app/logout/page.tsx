@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useUserStore } from '@/stores/userStore';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useUserStore } from "@/stores/userStore";
 
 export default function LogoutPage() {
   const router = useRouter();
@@ -10,7 +10,7 @@ export default function LogoutPage() {
 
   useEffect(() => {
     logout();
-    router.push('/');
+    router.push("/");
   }, [logout, router]);
 
   return null;

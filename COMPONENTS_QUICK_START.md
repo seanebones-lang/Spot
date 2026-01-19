@@ -11,15 +11,13 @@
 
 ```tsx
 // app/layout.tsx
-import { ToastProvider } from '@/components';
+import { ToastProvider } from "@/components";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ToastProvider>
-          {children}
-        </ToastProvider>
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );
@@ -30,7 +28,7 @@ export default function RootLayout({ children }) {
 
 ```tsx
 // components/LayoutContent.tsx or main layout
-import { SkipLinks } from '@/components';
+import { SkipLinks } from "@/components";
 
 export default function LayoutContent({ children }) {
   return (
@@ -66,6 +64,7 @@ import { Skeleton, SkeletonCard, SkeletonList } from '@/components';
 ```
 
 **Use Cases:**
+
 - Loading album grids
 - Loading track lists
 - Loading playlists
@@ -76,33 +75,31 @@ import { Skeleton, SkeletonCard, SkeletonList } from '@/components';
 ### Toast Notifications
 
 ```tsx
-import { useToast } from '@/components';
+import { useToast } from "@/components";
 
 function MyComponent() {
   const { showToast } = useToast();
 
   const handleSuccess = () => {
     showToast({
-      message: 'Playlist created successfully!',
-      variant: 'success',
+      message: "Playlist created successfully!",
+      variant: "success",
       duration: 4000,
     });
   };
 
   const handleError = () => {
     showToast({
-      message: 'Failed to save changes',
-      variant: 'error',
+      message: "Failed to save changes",
+      variant: "error",
       action: {
-        label: 'Retry',
+        label: "Retry",
         onClick: () => retrySave(),
       },
     });
   };
 
-  return (
-    <button onClick={handleSuccess}>Save</button>
-  );
+  return <button onClick={handleSuccess}>Save</button>;
 }
 ```
 
@@ -113,15 +110,15 @@ function MyComponent() {
 ### Select Dropdown
 
 ```tsx
-import { Select } from '@/components';
+import { Select } from "@/components";
 
 function GenreSelector() {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState("");
 
   const genres = [
-    { value: 'rock', label: 'Rock' },
-    { value: 'pop', label: 'Pop' },
-    { value: 'jazz', label: 'Jazz' },
+    { value: "rock", label: "Rock" },
+    { value: "pop", label: "Pop" },
+    { value: "jazz", label: "Jazz" },
   ];
 
   return (
@@ -144,7 +141,7 @@ function GenreSelector() {
 ### Tabs Component
 
 ```tsx
-import { Tabs } from '@/components';
+import { Tabs } from "@/components";
 
 function ProfileTabs() {
   return (
@@ -154,15 +151,15 @@ function ProfileTabs() {
         <Tabs.Trigger value="playlists">Playlists</Tabs.Trigger>
         <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
       </Tabs.List>
-      
+
       <Tabs.Content value="overview">
         <OverviewContent />
       </Tabs.Content>
-      
+
       <Tabs.Content value="playlists">
         <PlaylistsContent />
       </Tabs.Content>
-      
+
       <Tabs.Content value="settings">
         <SettingsContent />
       </Tabs.Content>
@@ -172,6 +169,7 @@ function ProfileTabs() {
 ```
 
 **With URL Hash:**
+
 ```tsx
 <Tabs defaultValue="tab1" hashSupport>
   {/* Tab changes update URL hash */}
@@ -215,12 +213,12 @@ import { LazyImage } from '@/components';
 ### Performance Utilities
 
 ```tsx
-import { 
-  debounce, 
-  throttle, 
-  useMemoized, 
-  useStableCallback 
-} from '@/lib/performance';
+import {
+  debounce,
+  throttle,
+  useMemoized,
+  useStableCallback,
+} from "@/lib/performance";
 
 // Debounce search
 const debouncedSearch = debounce((query) => {
@@ -243,11 +241,7 @@ const handleClick = useStableCallback((id) => {
 ### Accessibility Utilities
 
 ```tsx
-import { 
-  trapFocus, 
-  announce, 
-  focusElement 
-} from '@/lib/accessibility';
+import { trapFocus, announce, focusElement } from "@/lib/accessibility";
 
 // Focus trap for modal
 const cleanup = trapFocus(modalRef, {
@@ -256,10 +250,10 @@ const cleanup = trapFocus(modalRef, {
 });
 
 // Announce to screen readers
-announce('Playlist created successfully!');
+announce("Playlist created successfully!");
 
 // Focus element
-focusElement('main-content');
+focusElement("main-content");
 ```
 
 ---
@@ -267,6 +261,7 @@ focusElement('main-content');
 ## ✅ Testing Checklist
 
 ### Visual Testing
+
 - [ ] Test all component variants (primary, secondary, etc.)
 - [ ] Test all sizes (sm, md, lg)
 - [ ] Test disabled states
@@ -275,6 +270,7 @@ focusElement('main-content');
 - [ ] Test responsive breakpoints (mobile, tablet, desktop)
 
 ### Accessibility Testing
+
 - [ ] Tab through all interactive elements
 - [ ] Test keyboard navigation (Arrow keys in Select, Tabs)
 - [ ] Test skip links (Tab key on page load)
@@ -283,6 +279,7 @@ focusElement('main-content');
 - [ ] Test ARIA announcements (toast notifications)
 
 ### Performance Testing
+
 - [ ] Check bundle size (should be smaller with lazy loading)
 - [ ] Test lazy image loading (Intersection Observer)
 - [ ] Test debounced search (no excessive API calls)
@@ -290,6 +287,7 @@ focusElement('main-content');
 - [ ] Lighthouse audit (target 90+ score)
 
 ### Browser Testing
+
 - [ ] Chrome/Edge (latest)
 - [ ] Firefox (latest)
 - [ ] Safari (latest)
@@ -301,18 +299,23 @@ focusElement('main-content');
 ## 🔍 Common Issues & Solutions
 
 ### Issue: Toast not showing
+
 **Solution:** Ensure `ToastProvider` wraps your app in root layout
 
 ### Issue: Select dropdown not closing
+
 **Solution:** Check z-index conflicts, ensure container ref is set
 
 ### Issue: Skeleton not animating
+
 **Solution:** Check `animate` prop (defaults to `true`), verify CSS animations
 
 ### Issue: LazyImage not loading
+
 **Solution:** Check `src` is valid, verify Intersection Observer support
 
 ### Issue: Tabs keyboard nav not working
+
 **Solution:** Ensure `Tabs.List` wraps `Tabs.Trigger` components
 
 ---
@@ -332,11 +335,11 @@ focusElement('main-content');
 
 ```tsx
 // Before
-<div className="error-toast">Error message</div>
+<div className="error-toast">Error message</div>;
 
 // After
 const { showToast } = useToast();
-showToast({ message: 'Error message', variant: 'error' });
+showToast({ message: "Error message", variant: "error" });
 ```
 
 ### Replace Native Select with New Select
@@ -348,7 +351,7 @@ showToast({ message: 'Error message', variant: 'error' });
 </select>
 
 // After
-<Select 
+<Select
   options={[{ value: '1', label: 'Option 1' }]}
   value={value}
   onChange={setValue}
@@ -359,10 +362,14 @@ showToast({ message: 'Error message', variant: 'error' });
 
 ```tsx
 // Before
-{loading ? <Spinner /> : <Content />}
+{
+  loading ? <Spinner /> : <Content />;
+}
 
 // After
-{loading ? <Skeleton variant="card" /> : <Content />}
+{
+  loading ? <Skeleton variant="card" /> : <Content />;
+}
 ```
 
 ---

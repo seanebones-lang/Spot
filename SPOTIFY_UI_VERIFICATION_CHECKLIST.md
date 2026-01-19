@@ -1,4 +1,5 @@
 # Spotify UI Verification Checklist
+
 ## Component-by-Component Exact Measurements
 
 **Purpose:** Verify every component matches Spotify's exact specifications  
@@ -9,6 +10,7 @@
 ## 🔍 TopBar Verification
 
 ### Container
+
 - [ ] Height: `56px` (exact)
 - [ ] Background: `#000000` (pure black)
 - [ ] z-index: `2`
@@ -16,12 +18,14 @@
 - [ ] Padding: `16px` all sides
 
 ### Logo
+
 - [ ] Position: `left: 16px, top: 16px`
 - [ ] Size: `88px × 24px` (or verify actual logo dimensions)
 - [ ] Hover opacity: `0.7`
 - [ ] Transition: `200ms ease-out`
 
 ### Back/Forward Buttons
+
 - [ ] Size: `32px × 32px`
 - [ ] Background: `rgba(0,0,0,0.7)`
 - [ ] Border radius: `50%` (circular)
@@ -29,6 +33,7 @@
 - [ ] Hover: `background: rgba(0,0,0,0.9)`
 
 ### Navigation Links
+
 - [ ] Font size: `14px`
 - [ ] Font weight: `700` (bold)
 - [ ] Line height: `16px`
@@ -40,6 +45,7 @@
 - [ ] Gap between links: `32px`
 
 ### Search Bar
+
 - [ ] Max width: `364px`
 - [ ] Height: `40px`
 - [ ] Background: `#FFFFFF`
@@ -54,6 +60,7 @@
 - [ ] Focus state: Slight scale increase (verify)
 
 ### Right Controls (Premium, Downloads, etc.)
+
 - [ ] Size: `32px × 32px`
 - [ ] Border radius: `50%` (circular)
 - [ ] Color (inactive): `#B3B3B3`
@@ -66,6 +73,7 @@
 ## 🔍 Sidebar Verification
 
 ### Container
+
 - [ ] Default width: `256px`
 - [ ] Min width: `200px`
 - [ ] Max width: `50% viewport`
@@ -75,12 +83,14 @@
 - [ ] z-index: `40`
 
 ### Logo Section
+
 - [ ] Padding: `20px 24px`
 - [ ] Font size: `24px`
 - [ ] Font weight: `700`
 - [ ] Color: `#FFFFFF`
 
 ### Navigation Items
+
 - [ ] Container padding: `0 8px`
 - [ ] Item padding: `12px 16px`
 - [ ] Gap (icon to text): `16px`
@@ -98,6 +108,7 @@
 - [ ] Margin bottom: `4px`
 
 ### Playlists Section
+
 - [ ] Header font size: `11px`
 - [ ] Header font weight: `700`
 - [ ] Header letter spacing: `0.1em`
@@ -119,6 +130,7 @@
 - [ ] Pin button color (pinned): `#1DB954`
 
 ### Resize Handle
+
 - [ ] Width: `1px`
 - [ ] Background: `transparent`
 - [ ] Hover background: `#1DB954` at `60% opacity`
@@ -126,6 +138,7 @@
 - [ ] Position: `fixed` at right edge
 
 ### Collapsed State
+
 - [ ] Width: `64px`
 - [ ] Icon only display
 - [ ] Text hidden or very small
@@ -136,12 +149,14 @@
 ## 🔍 Main Content Area Verification
 
 ### Container
+
 - [ ] Background: `#121212`
 - [ ] Padding: `32px`
 - [ ] Padding bottom: `24px`
 - [ ] Margin top: `56px` (for TopBar)
 
 ### Section Headers
+
 - [ ] Font size: `20px`
 - [ ] Font weight: `700`
 - [ ] Line height: `24px`
@@ -153,6 +168,7 @@
 - [ ] Transition: `color 0.05s cubic-bezier(0.3, 0, 1)`
 
 ### "See All" Links
+
 - [ ] Font size: `14px`
 - [ ] Font weight: `700`
 - [ ] Line height: `20px`
@@ -162,6 +178,7 @@
 - [ ] Transition: `200ms ease-out`
 
 ### Card Components
+
 - [ ] Width: `168px`
 - [ ] Height: `220px`
 - [ ] Background: `#181818`
@@ -173,12 +190,14 @@
 - [ ] Transition: `all 0.2s ease`
 
 ### Card Image
+
 - [ ] Size: `168px × 168px`
 - [ ] Border radius: `4px`
 - [ ] Object fit: `cover`
 - [ ] Margin bottom: `12px`
 
 ### Card Title
+
 - [ ] Font size: `14px`
 - [ ] Font weight: `600`
 - [ ] Line height: `20px`
@@ -187,6 +206,7 @@
 - [ ] Truncate: `ellipsis`
 
 ### Card Description
+
 - [ ] Font size: `13px`
 - [ ] Line height: `16px`
 - [ ] Color: `#B3B3B3`
@@ -194,6 +214,7 @@
 - [ ] Height: `32px`
 
 ### Play Button Overlay
+
 - [ ] Position: `absolute bottom-2 right-2`
 - [ ] Opacity (default): `0`
 - [ ] Opacity (hover): `1`
@@ -201,6 +222,7 @@
 - [ ] Size: `32px × 32px` (sm)
 
 ### Horizontal Scroll
+
 - [ ] Gap: `16px`
 - [ ] Overflow: `auto`
 - [ ] Scroll behavior: `smooth`
@@ -211,6 +233,7 @@
 ## 🔍 Player Component Verification
 
 ### Container
+
 - [ ] Height: `90px`
 - [ ] Background: `#181818`
 - [ ] Border top: `1px solid #282828`
@@ -221,6 +244,7 @@
 - [ ] Margin: `0 auto`
 
 ### Now Playing Section
+
 - [ ] Flex basis: `30%`
 - [ ] Min width: `0`
 - [ ] Gap: `16px`
@@ -237,6 +261,7 @@
 - [ ] Gap between title/artist: `8px`
 
 ### Controls Section
+
 - [ ] Flex basis: `40%`
 - [ ] Max width: `722px`
 - [ ] Gap: `8px` (vertical)
@@ -252,6 +277,7 @@
 - [ ] Play button hover: `scale(1.05)`
 
 ### Progress Bar
+
 - [ ] Height: `4px`
 - [ ] Background: `rgba(255,255,255,0.3)`
 - [ ] Fill color: `#FFFFFF`
@@ -265,6 +291,7 @@
 - [ ] Current time width: `40px`
 
 ### Volume Section
+
 - [ ] Flex basis: `30%`
 - [ ] Justify: `flex-end`
 - [ ] Gap: `16px`
@@ -280,6 +307,7 @@
 ## 🔍 Animation Verification
 
 ### Hover Transitions
+
 - [ ] Button color: `200ms ease-out`
 - [ ] Card scale: `200ms ease`
 - [ ] Background color: `200ms ease-out`
@@ -287,16 +315,19 @@
 - [ ] Transform: `200ms ease`
 
 ### Active States
+
 - [ ] Background change: `200ms ease-out`
 - [ ] Color change: `200ms ease-out`
 - [ ] Scale change: `200ms ease-out`
 
 ### Focus States
+
 - [ ] Outline: `2px solid #1DB954`
 - [ ] Outline offset: `2px`
 - [ ] Transition: `200ms ease-out`
 
 ### Disabled States
+
 - [ ] Opacity: `0.5`
 - [ ] Cursor: `not-allowed`
 - [ ] Pointer events: `none`
@@ -306,6 +337,7 @@
 ## 🔍 Functional Verification
 
 ### Keyboard Shortcuts
+
 - [ ] `Space`: Play/Pause
 - [ ] `Arrow Left`: Seek backward 10s
 - [ ] `Arrow Right`: Seek forward 10s
@@ -317,6 +349,7 @@
 - [ ] `Ctrl+/` / `Cmd+/`: Keyboard shortcuts panel
 
 ### Scroll Behavior
+
 - [ ] Smooth scrolling enabled
 - [ ] Horizontal scroll works
 - [ ] Mouse wheel horizontal scroll
@@ -324,12 +357,14 @@
 - [ ] Scroll position persistence
 
 ### Drag Interactions
+
 - [ ] Sidebar resize drag
 - [ ] Progress bar seek drag
 - [ ] Volume control drag
 - [ ] Queue reorder drag
 
 ### Focus Management
+
 - [ ] Tab navigation works
 - [ ] Focus visible on all interactive elements
 - [ ] Focus trap in modals
@@ -340,11 +375,13 @@
 ## 📊 Measurement Tools
 
 ### Browser DevTools
+
 - Use element inspector for exact pixel values
 - Use computed styles for final values
 - Use layout panel for spacing
 
 ### Comparison Method
+
 1. Open Spotify in browser
 2. Open EmPulse in browser
 3. Side-by-side comparison
@@ -353,20 +390,25 @@
 6. Fix to match exactly
 
 ### Verification Script
+
 ```javascript
 // Run in browser console to verify measurements
 const verifyComponent = (selector, expected) => {
   const el = document.querySelector(selector);
-  if (!el) return { error: 'Element not found' };
-  
+  if (!el) return { error: "Element not found" };
+
   const computed = window.getComputedStyle(el);
   const actual = {};
-  
-  Object.keys(expected).forEach(prop => {
+
+  Object.keys(expected).forEach((prop) => {
     actual[prop] = computed[prop];
   });
-  
-  return { expected, actual, match: JSON.stringify(expected) === JSON.stringify(actual) };
+
+  return {
+    expected,
+    actual,
+    match: JSON.stringify(expected) === JSON.stringify(actual),
+  };
 };
 ```
 
@@ -375,6 +417,7 @@ const verifyComponent = (selector, expected) => {
 ## ✅ Completion Criteria
 
 A component is verified when:
+
 - [ ] All measurements match exactly
 - [ ] All colors match exactly
 - [ ] All fonts match exactly

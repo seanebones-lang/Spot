@@ -3,16 +3,19 @@
 ## 🚀 Get Started in 3 Steps
 
 ### 1. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 2. Start Development Server
+
 ```bash
 npm run dev
 ```
 
 ### 3. Open in Browser
+
 Navigate to: **http://localhost:3000**
 
 ## 📋 Available Commands
@@ -32,12 +35,14 @@ npm run lint         # Run ESLint
 ## 🎯 Key Pages to Explore
 
 ### Music Features
+
 - **Home**: `http://localhost:3000/` - Main dashboard with wellness features
 - **Mood**: `http://localhost:3000/mood` - Revolutionary mood-based music selection
 - **Search**: `http://localhost:3000/search` - Search all content
 - **Library**: `http://localhost:3000/collection` - Your saved content
 
 ### Wellness Features
+
 - **Check-in**: `http://localhost:3000/check-in` - Daily mood check-in
 - **Journal**: `http://localhost:3000/journal` - Journaling
 - **Affirmations**: `http://localhost:3000/affirmations` - Affirmations library
@@ -45,11 +50,13 @@ npm run lint         # Run ESLint
 - **Rewards**: `http://localhost:3000/rewards` - Points & rewards catalog
 
 ### Artist Features
+
 - **Artist Signup**: `http://localhost:3000/artist/signup` - Complete onboarding workflow
 - **Upload**: `http://localhost:3000/upload` - Track upload with mandatory mood tags
 - **Dashboard**: `http://localhost:3000/dashboard/artist` - Artist dashboard with live stats
 
 ### Additional Pages
+
 - **Radio**: `http://localhost:3000/radio` - Radio stations
 
 ## ⌨️ Keyboard Shortcuts
@@ -65,6 +72,7 @@ Try these while using the app:
 ## 🎨 Key Features to Test
 
 ### Mood-Based Discovery
+
 1. Go to `/mood`
 2. Select a mood (e.g., "Joyful")
 3. Choose feelings (e.g., "Great", "Confident")
@@ -73,6 +81,7 @@ Try these while using the app:
 6. See filtered playlists update in real-time
 
 ### Daily Check-in
+
 1. Go to `/check-in`
 2. Adjust mood sliders
 3. Select feeling chips
@@ -80,6 +89,7 @@ Try these while using the app:
 5. Complete check-in to earn points
 
 ### Artist Upload Workflow
+
 1. Go to `/artist/signup` (if not approved)
 2. Complete 6-step legal signup
 3. Go to `/upload` (after approval)
@@ -89,6 +99,7 @@ Try these while using the app:
 7. Review and submit
 
 ### Player Features
+
 1. Play any track from home/search/playlist
 2. Click mood widget in player bar to see track mood tags
 3. Click queue icon to view/manage queue
@@ -114,6 +125,7 @@ Try these while using the app:
 ## 🐛 Troubleshooting
 
 **Build Errors?**
+
 ```bash
 rm -rf .next node_modules
 npm install
@@ -121,12 +133,14 @@ npm run build
 ```
 
 **Port 3000 in use?**
+
 ```bash
 # Kill process on port 3000
 lsof -ti:3000 | xargs kill -9
 ```
 
 **TypeScript Errors?**
+
 - All types are defined in `types/` directory
 - Check `tsconfig.json` for path aliases
 

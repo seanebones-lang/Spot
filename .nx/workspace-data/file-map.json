@@ -1,0 +1,2357 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.8.4",
+  "pathMappings": {
+    "@/*": ["./*"]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {},
+    "nonProjectFiles": [
+      {
+        "file": ".codespaces/settings.json",
+        "hash": "12075280621540843257"
+      },
+      {
+        "file": ".commitlintrc.json",
+        "hash": "16756562078167579500"
+      },
+      {
+        "file": ".continue/config.json",
+        "hash": "483490133691857662"
+      },
+      {
+        "file": ".cursor/QUICK_REFERENCE.md",
+        "hash": "503710393940099924"
+      },
+      {
+        "file": ".cursor/commands/cto-max-install.md",
+        "hash": "4910952904321702221"
+      },
+      {
+        "file": ".cursor/commands/deploy.md",
+        "hash": "12962091115378676323"
+      },
+      {
+        "file": ".cursor/commands/eleven-swarm-and-look-for-gaps-errors-and-issues.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".cursor/commands/eleven-swarm.md",
+        "hash": "5677009888187830574"
+      },
+      {
+        "file": ".cursor/commands/eleven.md",
+        "hash": "8296210665636315757"
+      },
+      {
+        "file": ".cursor/commands/enterprise-pro-install.md",
+        "hash": "1155443763864595157"
+      },
+      {
+        "file": ".cursor/commands/mcp-power-install.md",
+        "hash": "5822928361587571479"
+      },
+      {
+        "file": ".cursor/commands/push.md",
+        "hash": "6632465026507320021"
+      },
+      {
+        "file": ".cursor/commands/swarm.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".cursor/mcp.json",
+        "hash": "11623984892661919742"
+      },
+      {
+        "file": ".cursor/prompts/deployment-optimization.md",
+        "hash": "2501919711561778067"
+      },
+      {
+        "file": ".cursor/prompts/eleven-swarm-templates.md",
+        "hash": "10795857794639345250"
+      },
+      {
+        "file": ".cursor/workflows/eleven-optimal.md",
+        "hash": "12246957894143619716"
+      },
+      {
+        "file": ".cursor/workspaces/cto.code-workspace",
+        "hash": "16125717278540212844"
+      },
+      {
+        "file": ".cursor/workspaces/enterprise.code-workspace",
+        "hash": "8091941187789366477"
+      },
+      {
+        "file": ".devcontainer/Dockerfile",
+        "hash": "8044360567666293223"
+      },
+      {
+        "file": ".devcontainer/README.md",
+        "hash": "12445939407548563514"
+      },
+      {
+        "file": ".devcontainer/devcontainer.json",
+        "hash": "8694224654404811312"
+      },
+      {
+        "file": ".devcontainer/post-create.sh",
+        "hash": "6853999471750794930"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "13197621052860884946"
+      },
+      {
+        "file": ".env",
+        "hash": "3580635829800494886"
+      },
+      {
+        "file": ".env.example",
+        "hash": "17998855181000055805"
+      },
+      {
+        "file": ".env.local.example",
+        "hash": "6097012456959561037"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "8137542588703424526"
+      },
+      {
+        "file": ".github/workflows/README.md",
+        "hash": "7224661211418371867"
+      },
+      {
+        "file": ".github/workflows/build-and-push.yml",
+        "hash": "1015706020786720635"
+      },
+      {
+        "file": ".github/workflows/comprehensive-ci.yml",
+        "hash": "1405127679414248816"
+      },
+      {
+        "file": ".github/workflows/daily-backup.yml",
+        "hash": "4771148017668297408"
+      },
+      {
+        "file": ".github/workflows/deploy-all.yml",
+        "hash": "16101104049465507584"
+      },
+      {
+        "file": ".github/workflows/deployment-status.yml",
+        "hash": "16853468355632838358"
+      },
+      {
+        "file": ".github/workflows/e2e-tests.yml",
+        "hash": "2297176672954187599"
+      },
+      {
+        "file": ".github/workflows/error-free-deploy.yml",
+        "hash": "14896941414010921278"
+      },
+      {
+        "file": ".github/workflows/gitops-deploy.yml",
+        "hash": "5123764115412027578"
+      },
+      {
+        "file": ".github/workflows/pre-deployment-validation.yml",
+        "hash": "15747837644808406567"
+      },
+      {
+        "file": ".github/workflows/railway-deploy.yml",
+        "hash": "12852911550988836636"
+      },
+      {
+        "file": ".github/workflows/vercel-deploy.yml",
+        "hash": "6450408818885883979"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "9857878354671531728"
+      },
+      {
+        "file": ".husky/pre-commit",
+        "hash": "9064178827237311480"
+      },
+      {
+        "file": ".husky/pre-push",
+        "hash": "13508260659127882589"
+      },
+      {
+        "file": ".lintstagedrc.json",
+        "hash": "7312746701457909674"
+      },
+      {
+        "file": ".npmrc",
+        "hash": "18085261541358865259"
+      },
+      {
+        "file": ".railwayignore",
+        "hash": "3194760911214212627"
+      },
+      {
+        "file": ".railwayrc",
+        "hash": "5078369116473332081"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "13239477729741511975"
+      },
+      {
+        "file": ".vscode/keybindings.json",
+        "hash": "2046801263122649052"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "18247753733934575749"
+      },
+      {
+        "file": "AUDIOPHILE_FEATURES.md",
+        "hash": "13075440146625979961"
+      },
+      {
+        "file": "AUDIO_PIPELINE_STRATEGY.md",
+        "hash": "17264118477214071886"
+      },
+      {
+        "file": "AUDIT_EXECUTIVE_SUMMARY_2026-01-14.md",
+        "hash": "2801618988156487166"
+      },
+      {
+        "file": "AUTH_API_INTEGRATION.md",
+        "hash": "6686651457292783096"
+      },
+      {
+        "file": "AUTH_INTEGRATION_COMPLETE.md",
+        "hash": "16880310091853809353"
+      },
+      {
+        "file": "AUTH_SYSTEM_COMPLETE.md",
+        "hash": "16497086937316982657"
+      },
+      {
+        "file": "BACKEND_AUDIT_REPORT_2026-01-14.md",
+        "hash": "619038784558687528"
+      },
+      {
+        "file": "BACKEND_COMPLETE_SUMMARY.md",
+        "hash": "12820190644874419838"
+      },
+      {
+        "file": "BEFORE_AFTER_CHANGES.md",
+        "hash": "2777340926385431121"
+      },
+      {
+        "file": "BETA_TEST_REPORT.json",
+        "hash": "6638052670022479428"
+      },
+      {
+        "file": "BLOCKCHAIN_ROYALTIES.md",
+        "hash": "4997406658128328593"
+      },
+      {
+        "file": "BUGFIX_BUTTONS_NOT_WORKING.md",
+        "hash": "9038081732976625271"
+      },
+      {
+        "file": "BUG_FIXES_SUMMARY.md",
+        "hash": "9753970061163417146"
+      },
+      {
+        "file": "CHANGELOG.md",
+        "hash": "18209180473793884399"
+      },
+      {
+        "file": "CHANGELOG_2026-01-XX.md",
+        "hash": "4643536680998769113"
+      },
+      {
+        "file": "COMPLETE.md",
+        "hash": "3071672743749283750"
+      },
+      {
+        "file": "COMPLETE_SETUP_SUMMARY.md",
+        "hash": "3955802669935165060"
+      },
+      {
+        "file": "COMPONENTS_QUICK_START.md",
+        "hash": "6823915981419764181"
+      },
+      {
+        "file": "COMPREHENSIVE_FIXES_SUMMARY.md",
+        "hash": "14428644497351634491"
+      },
+      {
+        "file": "COMPREHENSIVE_ISSUES_REPORT.md",
+        "hash": "16247286963085727958"
+      },
+      {
+        "file": "COMPREHENSIVE_UI_VERIFICATION_REPORT.json",
+        "hash": "6779842145423868287"
+      },
+      {
+        "file": "CRITICAL_FIXES_APPLIED.md",
+        "hash": "4787099277774702068"
+      },
+      {
+        "file": "CUSTOM_DOMAIN_SETUP.md",
+        "hash": "12683173754223879896"
+      },
+      {
+        "file": "DEPLOYMENT.md",
+        "hash": "15756565214924370129"
+      },
+      {
+        "file": "DEPLOYMENT_AGENTS_SETUP.md",
+        "hash": "1834248389465919492"
+      },
+      {
+        "file": "DEPLOYMENT_CHECKLIST.md",
+        "hash": "12506843237574301234"
+      },
+      {
+        "file": "DEPLOYMENT_COMPLETE.md",
+        "hash": "15529254654347065451"
+      },
+      {
+        "file": "DEPLOYMENT_FIXES_COMPLETE.md",
+        "hash": "15010937297264190440"
+      },
+      {
+        "file": "DEPLOYMENT_GUIDE.md",
+        "hash": "7756263936128825162"
+      },
+      {
+        "file": "DEPLOYMENT_READINESS_CHECKLIST.md",
+        "hash": "16638385105351510112"
+      },
+      {
+        "file": "DEPLOYMENT_SETUP_GUIDE.md",
+        "hash": "14595206408221264422"
+      },
+      {
+        "file": "DEPLOYMENT_STATUS_REPORT.md",
+        "hash": "3909192726958553000"
+      },
+      {
+        "file": "DEPLOYMENT_SUCCESS.md",
+        "hash": "13823708879169518900"
+      },
+      {
+        "file": "DEPLOYMENT_VERIFICATION.md",
+        "hash": "10027625328147449699"
+      },
+      {
+        "file": "DONE.md",
+        "hash": "10969789377737164730"
+      },
+      {
+        "file": "Dockerfile",
+        "hash": "14593055733305971158"
+      },
+      {
+        "file": "E2E_COMPREHENSIVE_SUMMARY.md",
+        "hash": "12050162045155079899"
+      },
+      {
+        "file": "E2E_TESTING.md",
+        "hash": "17637987089037255431"
+      },
+      {
+        "file": "E2E_TEST_SUITE_README.md",
+        "hash": "2137292728613713086"
+      },
+      {
+        "file": "ELEVEN_MCP_SETUP_COMPLETE.md",
+        "hash": "6474685672643343519"
+      },
+      {
+        "file": "EXECUTIVE_SUMMARY.md",
+        "hash": "3541350843111873470"
+      },
+      {
+        "file": "FEATURES.md",
+        "hash": "13763294051796078167"
+      },
+      {
+        "file": "FINAL_DEPLOYMENT_CHECKLIST_2026-01-14.md",
+        "hash": "6575115534230676007"
+      },
+      {
+        "file": "FINAL_IMPLEMENTATION_STATUS.md",
+        "hash": "5347659451816210747"
+      },
+      {
+        "file": "FINAL_IMPLEMENTATION_STATUS_2026-01-14.md",
+        "hash": "9583063544242789391"
+      },
+      {
+        "file": "FINAL_STATUS.md",
+        "hash": "10572880776024128424"
+      },
+      {
+        "file": "FINAL_SWARM_REPORT.md",
+        "hash": "15429574809589644367"
+      },
+      {
+        "file": "FINAL_VERIFICATION.md",
+        "hash": "17792963509992691178"
+      },
+      {
+        "file": "FIXES_COMPLETE.md",
+        "hash": "668508453030720909"
+      },
+      {
+        "file": "FIXES_COMPLETION_CERTIFICATE.md",
+        "hash": "559263632257751229"
+      },
+      {
+        "file": "FIXES_INDEX.md",
+        "hash": "9399777243553461818"
+      },
+      {
+        "file": "GITHUB_CODESPACES_SETUP.md",
+        "hash": "8225320965766397490"
+      },
+      {
+        "file": "GITOPS_SETUP.md",
+        "hash": "4869480281659558232"
+      },
+      {
+        "file": "GLOBAL_LAUNCH_CHECKLIST.md",
+        "hash": "3201775369214268972"
+      },
+      {
+        "file": "GLSL_VISUALIZER.md",
+        "hash": "4967994954734240565"
+      },
+      {
+        "file": "IMPLEMENTATION_COMPLETE.md",
+        "hash": "9138691795966199149"
+      },
+      {
+        "file": "IMPLEMENTATION_PROGRESS_2026-01-14.md",
+        "hash": "5466446521792554865"
+      },
+      {
+        "file": "IMPLEMENTATION_PROGRESS_UPDATE_2026-01-14.md",
+        "hash": "1364611929610698883"
+      },
+      {
+        "file": "LEGAL_DOCUMENTS_VERIFICATION.md",
+        "hash": "5527308516038440583"
+      },
+      {
+        "file": "LEGAL_UPLOAD_SYSTEM_REQUIREMENTS.md",
+        "hash": "832965035436013933"
+      },
+      {
+        "file": "LICENSE",
+        "hash": "1025649829108197332"
+      },
+      {
+        "file": "MASTER_ENGINEER_INSPECTION_REPORT_2026-01-14.md",
+        "hash": "11533932188826306948"
+      },
+      {
+        "file": "MASTER_FIXES_REPORT.md",
+        "hash": "8602533231580747670"
+      },
+      {
+        "file": "MASTER_GATEKEEPER_SIGNOFF.md",
+        "hash": "4205891759615320811"
+      },
+      {
+        "file": "MASTER_IMPLEMENTATION_REPORT_2026-01-14.md",
+        "hash": "15554146215627866336"
+      },
+      {
+        "file": "MCP_SETUP.md",
+        "hash": "5706265018029663691"
+      },
+      {
+        "file": "MERGE_CONFLICT_RESOLUTION.md",
+        "hash": "17740679046904904178"
+      },
+      {
+        "file": "MERGE_RESOLUTION_COMPLETE.md",
+        "hash": "4742646042760807459"
+      },
+      {
+        "file": "MOBILE_APP_SETUP.md",
+        "hash": "786720868807248731"
+      },
+      {
+        "file": "MOBILE_FLUTTER_KICKOFF.md",
+        "hash": "3057107604588993188"
+      },
+      {
+        "file": "MOBILE_SOUNDCLOUD_INTEGRATION.md",
+        "hash": "15587830287792805872"
+      },
+      {
+        "file": "MONITOR_WORKFLOWS.md",
+        "hash": "9059713417155876701"
+      },
+      {
+        "file": "NODE_VERSION_FIX.md",
+        "hash": "13624047344627620956"
+      },
+      {
+        "file": "P0_FIXES_COMPLETED_2026-01-14.md",
+        "hash": "9862540978693523736"
+      },
+      {
+        "file": "P1_FIXES_COMPLETED_2026-01-14.md",
+        "hash": "10762910382150016896"
+      },
+      {
+        "file": "PAGEWIREMAP_REPORT_2026-01-14.md",
+        "hash": "436884304262733650"
+      },
+      {
+        "file": "PRODUCTION_BUILD_FIX.md",
+        "hash": "2146656750905507438"
+      },
+      {
+        "file": "PRODUCTION_FIXES_ACTION_PLAN_2026-01-14.md",
+        "hash": "6490613603781049264"
+      },
+      {
+        "file": "PRODUCTION_FIXES_COMPLETE.md",
+        "hash": "1663024312626953716"
+      },
+      {
+        "file": "PRODUCTION_LINKS.md",
+        "hash": "6775469663293335524"
+      },
+      {
+        "file": "PRODUCTION_READINESS_AUDIT.md",
+        "hash": "17842532641283630268"
+      },
+      {
+        "file": "PRODUCTION_READINESS_AUDIT_2026-01-14.md",
+        "hash": "16312721134284119119"
+      },
+      {
+        "file": "PRODUCTION_READINESS_COMPLETE_2026-01-14.md",
+        "hash": "4477260171606245595"
+      },
+      {
+        "file": "PRODUCTION_READINESS_REPORT.md",
+        "hash": "860285611218836684"
+      },
+      {
+        "file": "PROJECT_COMPLETE.md",
+        "hash": "1702433650044515882"
+      },
+      {
+        "file": "QUICK_REFERENCE.md",
+        "hash": "187712357703932080"
+      },
+      {
+        "file": "QUICK_REFERENCE_IMPLEMENTATION_STATUS.md",
+        "hash": "14772062506894801191"
+      },
+      {
+        "file": "QUICK_REFERENCE_UI_FIXES.md",
+        "hash": "1545206615388464135"
+      },
+      {
+        "file": "QUICK_START.md",
+        "hash": "17687379275589744227"
+      },
+      {
+        "file": "RADIO_SETUP.md",
+        "hash": "392346106753756697"
+      },
+      {
+        "file": "RAG_100_COMPLETE_2026-01-14.md",
+        "hash": "7195590966262255818"
+      },
+      {
+        "file": "RAG_100_FINAL_2026-01-14.md",
+        "hash": "5250284650008555343"
+      },
+      {
+        "file": "RAG_100_STATUS_2026-01-14.md",
+        "hash": "1149255685989028032"
+      },
+      {
+        "file": "RAG_FINAL_STATUS_2026-01-14.md",
+        "hash": "3966394282527744588"
+      },
+      {
+        "file": "RAG_IMPROVEMENTS_SUMMARY_2026-01-14.md",
+        "hash": "4593184938641339475"
+      },
+      {
+        "file": "RAG_PIPELINE_AUDIT_REPORT_2026-01-14.md",
+        "hash": "12075022510291000729"
+      },
+      {
+        "file": "RAILWAY_DEPLOYMENT.md",
+        "hash": "17275018623535065554"
+      },
+      {
+        "file": "RAILWAY_DEPLOY_EXECUTE.md",
+        "hash": "12266544557672457924"
+      },
+      {
+        "file": "RAILWAY_QUICK_START.md",
+        "hash": "10947879214127475514"
+      },
+      {
+        "file": "RAILWAY_SETUP.md",
+        "hash": "8792700939455181990"
+      },
+      {
+        "file": "REACH_70_PERCENT_COVERAGE_GUIDE.md",
+        "hash": "477987807440002680"
+      },
+      {
+        "file": "README.md",
+        "hash": "4215445302691011425"
+      },
+      {
+        "file": "README_BACKEND.md",
+        "hash": "8022963477968456336"
+      },
+      {
+        "file": "README_FIXES.md",
+        "hash": "4533969953068208688"
+      },
+      {
+        "file": "README_PRODUCTION_READINESS.md",
+        "hash": "9198488590825846641"
+      },
+      {
+        "file": "README_PRODUCTION_SETUP.md",
+        "hash": "1695174017249608914"
+      },
+      {
+        "file": "README_VERIFICATION.md",
+        "hash": "4245763968796015355"
+      },
+      {
+        "file": "REALITY_CHECK_PRODUCTION.md",
+        "hash": "1038023015587127951"
+      },
+      {
+        "file": "SCALE_ENHANCEMENTS.md",
+        "hash": "15851653222776764137"
+      },
+      {
+        "file": "SESSION_SUMMARY.md",
+        "hash": "5918239268250260555"
+      },
+      {
+        "file": "SPOTIFY_UI_FIXES_REPORT.json",
+        "hash": "15725909174887662363"
+      },
+      {
+        "file": "SPOTIFY_UI_REPLICATION_PLAN.md",
+        "hash": "8003138966226060831"
+      },
+      {
+        "file": "SPOTIFY_UI_REVERSE_ENGINEERING_V2.json",
+        "hash": "2880204038514404969"
+      },
+      {
+        "file": "SPOTIFY_UI_REVERSE_ENGINEERING_V2.md",
+        "hash": "15767399360823245206"
+      },
+      {
+        "file": "SPOTIFY_UI_VERIFICATION_2026-01-14.md",
+        "hash": "51664244843716004"
+      },
+      {
+        "file": "SPOTIFY_UI_VERIFICATION_CHECKLIST.md",
+        "hash": "12505088986848125893"
+      },
+      {
+        "file": "SPOTIFY_UI_VERIFICATION_FINAL.md",
+        "hash": "2486174769992124635"
+      },
+      {
+        "file": "SPOTIFY_UI_VERIFICATION_REPORT.json",
+        "hash": "14898389192712475782"
+      },
+      {
+        "file": "SPOT_2.0_FEATURES.md",
+        "hash": "273864724849533456"
+      },
+      {
+        "file": "SPOT_2.0_ROADMAP.md",
+        "hash": "6091947568001802945"
+      },
+      {
+        "file": "SPOT_INFINITY_NEURAL.md",
+        "hash": "16124559780166384006"
+      },
+      {
+        "file": "SPOT_INFINITY_SUMMARY.md",
+        "hash": "4136440012318377382"
+      },
+      {
+        "file": "SPOT_SINGULARITY.md",
+        "hash": "14094624177379977969"
+      },
+      {
+        "file": "START_HERE.md",
+        "hash": "11366796931503365545"
+      },
+      {
+        "file": "SWARM_ANALYSIS_2026.md",
+        "hash": "4682973766200464622"
+      },
+      {
+        "file": "SWARM_ANALYSIS_REPORT.md",
+        "hash": "10365064429602790785"
+      },
+      {
+        "file": "SWARM_EXECUTION_REPORT.md",
+        "hash": "6899481140649618433"
+      },
+      {
+        "file": "SWARM_PHASE2_COMPLETE.md",
+        "hash": "16725673754348268530"
+      },
+      {
+        "file": "SWARM_PHASE3_COMPLETE.md",
+        "hash": "15979182966234089164"
+      },
+      {
+        "file": "SWARM_QUICK_WINS_COMPLETE.md",
+        "hash": "13051425912744762768"
+      },
+      {
+        "file": "TERRAFORM_SETUP_COMPLETE.md",
+        "hash": "2878079160971218715"
+      },
+      {
+        "file": "TEST_COVERAGE_IMPROVEMENTS_2026-01-14.md",
+        "hash": "7084165554980039247"
+      },
+      {
+        "file": "TEST_IMPLEMENTATION_SUMMARY_2026-01-14.md",
+        "hash": "8190361496359780658"
+      },
+      {
+        "file": "UI_ENHANCEMENTS_COMPLETE.md",
+        "hash": "18114600920833827108"
+      },
+      {
+        "file": "UI_FIXES_COMPLETE.md",
+        "hash": "7088402426316317924"
+      },
+      {
+        "file": "UI_FIXES_PROGRESS.md",
+        "hash": "7887897252552630960"
+      },
+      {
+        "file": "UI_GAP_ANALYSIS_REPORT.md",
+        "hash": "14614357327018043082"
+      },
+      {
+        "file": "UI_VERIFICATION_COMPLETE.md",
+        "hash": "16566531723681944152"
+      },
+      {
+        "file": "ULTIMATE_BETA_TEST.md",
+        "hash": "2180503442284910097"
+      },
+      {
+        "file": "USER_GUIDE.md",
+        "hash": "17825021407217252668"
+      },
+      {
+        "file": "UX_AUDIT_REPORT_2026-01-14.md",
+        "hash": "1457181702944792319"
+      },
+      {
+        "file": "UX_IMPLEMENTATION_SUMMARY_2026-01-14.md",
+        "hash": "5283399545850142475"
+      },
+      {
+        "file": "UX_IMPROVEMENTS_COMPLETE_2026-01-14.md",
+        "hash": "1531442853278180745"
+      },
+      {
+        "file": "VERIFICATION_CHECKLIST.md",
+        "hash": "7694284888777949310"
+      },
+      {
+        "file": "VERIFICATION_SUMMARY.md",
+        "hash": "17761381288780309266"
+      },
+      {
+        "file": "VERIFICATION_SUMMARY_FINAL.md",
+        "hash": "399411454274080873"
+      },
+      {
+        "file": "VERIFICATION_TESTING_GUIDE.md",
+        "hash": "9839589400512775902"
+      },
+      {
+        "file": "VISUAL_FIXES_REPORT.json",
+        "hash": "10527257395631643597"
+      },
+      {
+        "file": "WORKFLOW_TEST.md",
+        "hash": "17478219436253892789"
+      },
+      {
+        "file": "WORKFLOW_TEST_STATUS.md",
+        "hash": "4906670413770295263"
+      },
+      {
+        "file": "__tests__/api/health.test.ts",
+        "hash": "16644266956828180184"
+      },
+      {
+        "file": "__tests__/lib/auth.test.ts",
+        "hash": "8310117165379559623"
+      },
+      {
+        "file": "__tests__/lib/csrf.test.ts",
+        "hash": "2308641472699090728"
+      },
+      {
+        "file": "__tests__/lib/db.test.ts",
+        "hash": "4781086410879935894"
+      },
+      {
+        "file": "__tests__/lib/env.test.ts",
+        "hash": "16272772950432805046"
+      },
+      {
+        "file": "__tests__/lib/password.test.ts",
+        "hash": "14307768108652220687"
+      },
+      {
+        "file": "__tests__/lib/pipeline.integration.test.ts",
+        "hash": "13507631620423334606"
+      },
+      {
+        "file": "__tests__/lib/ragTestHelpers.ts",
+        "hash": "5720084203943417309"
+      },
+      {
+        "file": "__tests__/lib/rateLimit.test.ts",
+        "hash": "7959517372926600561"
+      },
+      {
+        "file": "__tests__/lib/sanitize.test.ts",
+        "hash": "5596511429271348860"
+      },
+      {
+        "file": "app/about-ads/page.tsx",
+        "hash": "2139793285059325014"
+      },
+      {
+        "file": "app/about/page.tsx",
+        "hash": "5041054362289933961"
+      },
+      {
+        "file": "app/accessibility/page.tsx",
+        "hash": "15277146747798048567"
+      },
+      {
+        "file": "app/advertising/page.tsx",
+        "hash": "14165826644561986538"
+      },
+      {
+        "file": "app/affirmations/page.tsx",
+        "hash": "1424804039617148103"
+      },
+      {
+        "file": "app/album/[id]/page.tsx",
+        "hash": "15720146232259341539"
+      },
+      {
+        "file": "app/announcements/page.tsx",
+        "hash": "2257949512817582605"
+      },
+      {
+        "file": "app/api/admin/delete-all-album-art/route.ts",
+        "hash": "184598065589976173"
+      },
+      {
+        "file": "app/api/artist/signup/route.ts",
+        "hash": "17901176861401618777"
+      },
+      {
+        "file": "app/api/auth/forgot-password/route.ts",
+        "hash": "1164290213089320700"
+      },
+      {
+        "file": "app/api/auth/login/route.ts",
+        "hash": "68445041463244989"
+      },
+      {
+        "file": "app/api/auth/logout/route.ts",
+        "hash": "2585944828903920343"
+      },
+      {
+        "file": "app/api/auth/me/route.ts",
+        "hash": "12919984052352394321"
+      },
+      {
+        "file": "app/api/auth/refresh/route.ts",
+        "hash": "39075676253322956"
+      },
+      {
+        "file": "app/api/auth/register/route.ts",
+        "hash": "17769733312693263705"
+      },
+      {
+        "file": "app/api/auth/reset-password/route.ts",
+        "hash": "4165332340637498336"
+      },
+      {
+        "file": "app/api/auth/verify/route.ts",
+        "hash": "799787615677934771"
+      },
+      {
+        "file": "app/api/chat/route.ts",
+        "hash": "5058507580159982543"
+      },
+      {
+        "file": "app/api/csrf-token/route.ts",
+        "hash": "332362194130902520"
+      },
+      {
+        "file": "app/api/health/pipeline/route.ts",
+        "hash": "1758592688535116094"
+      },
+      {
+        "file": "app/api/health/route.ts",
+        "hash": "12362985636968859702"
+      },
+      {
+        "file": "app/api/mood/analyze/route.ts",
+        "hash": "17524266731551066141"
+      },
+      {
+        "file": "app/api/mood/validate/route.ts",
+        "hash": "11076662967057267815"
+      },
+      {
+        "file": "app/api/neural/brainwaves/route.ts",
+        "hash": "11578741895966556932"
+      },
+      {
+        "file": "app/api/radio/stations/route.ts",
+        "hash": "17918351536361402803"
+      },
+      {
+        "file": "app/api/radio/stream/[station]/route.ts",
+        "hash": "1936222659645715443"
+      },
+      {
+        "file": "app/api/startup-check/route.ts",
+        "hash": "13957941733132783386"
+      },
+      {
+        "file": "app/api/tracks/submit/route.ts",
+        "hash": "12263432782598881841"
+      },
+      {
+        "file": "app/api/voice/commands/route.ts",
+        "hash": "13736744541184757588"
+      },
+      {
+        "file": "app/api/voice/synthesize/route.ts",
+        "hash": "12014677262607433649"
+      },
+      {
+        "file": "app/artist/[id]/page.tsx",
+        "hash": "1792153839507555004"
+      },
+      {
+        "file": "app/artist/signup/page.tsx",
+        "hash": "12022031227350789993"
+      },
+      {
+        "file": "app/artist/upgrade/page.tsx",
+        "hash": "5898797573805099802"
+      },
+      {
+        "file": "app/artist/verification/page.tsx",
+        "hash": "7012216761148529668"
+      },
+      {
+        "file": "app/artist/verification/pending/page.tsx",
+        "hash": "2680930074392490539"
+      },
+      {
+        "file": "app/audiobooks/page.tsx",
+        "hash": "4401033039128416632"
+      },
+      {
+        "file": "app/broadcasts/page.tsx",
+        "hash": "14583451584587673031"
+      },
+      {
+        "file": "app/categories/[category]/page.tsx",
+        "hash": "7759635528292333685"
+      },
+      {
+        "file": "app/charts/page.tsx",
+        "hash": "2541659518242947185"
+      },
+      {
+        "file": "app/check-in/page.tsx",
+        "hash": "3083906037009870715"
+      },
+      {
+        "file": "app/collection/page.tsx",
+        "hash": "502317423563513515"
+      },
+      {
+        "file": "app/community/page.tsx",
+        "hash": "7525837260017960030"
+      },
+      {
+        "file": "app/cookies/page.tsx",
+        "hash": "6934570871371953823"
+      },
+      {
+        "file": "app/dashboard/artist/analytics/page.tsx",
+        "hash": "2996528911308457994"
+      },
+      {
+        "file": "app/dashboard/artist/collaborations/page.tsx",
+        "hash": "8273475301598374349"
+      },
+      {
+        "file": "app/dashboard/artist/fans/page.tsx",
+        "hash": "3252935356732182724"
+      },
+      {
+        "file": "app/dashboard/artist/marketing/page.tsx",
+        "hash": "1745850408151719314"
+      },
+      {
+        "file": "app/dashboard/artist/page.tsx",
+        "hash": "12349912581196027550"
+      },
+      {
+        "file": "app/dashboard/artist/payouts/page.tsx",
+        "hash": "4749113161229883577"
+      },
+      {
+        "file": "app/dashboard/audiobook/page.tsx",
+        "hash": "9411741677477525447"
+      },
+      {
+        "file": "app/dashboard/podcaster/page.tsx",
+        "hash": "1317299588815529876"
+      },
+      {
+        "file": "app/dashboard/radio/page.tsx",
+        "hash": "11884311219324525174"
+      },
+      {
+        "file": "app/developers/page.tsx",
+        "hash": "397224484937797244"
+      },
+      {
+        "file": "app/downloads/page.tsx",
+        "hash": "10754664990568242071"
+      },
+      {
+        "file": "app/error.tsx",
+        "hash": "3224299218023611135"
+      },
+      {
+        "file": "app/events/page.tsx",
+        "hash": "9179531231204187765"
+      },
+      {
+        "file": "app/for-the-record/page.tsx",
+        "hash": "16771395748044744440"
+      },
+      {
+        "file": "app/forgot-password/page.tsx",
+        "hash": "14835004581458526989"
+      },
+      {
+        "file": "app/fresh/page.tsx",
+        "hash": "15415880334402008066"
+      },
+      {
+        "file": "app/friends/page.tsx",
+        "hash": "8405133753321768682"
+      },
+      {
+        "file": "app/global-error.tsx",
+        "hash": "2911044141120956253"
+      },
+      {
+        "file": "app/globals.css",
+        "hash": "11879972218218003303"
+      },
+      {
+        "file": "app/help/page.tsx",
+        "hash": "15038403168218382754"
+      },
+      {
+        "file": "app/help/upload-guidelines/page.tsx",
+        "hash": "3339536322432200253"
+      },
+      {
+        "file": "app/history/page.tsx",
+        "hash": "1876844046391635495"
+      },
+      {
+        "file": "app/import-music/page.tsx",
+        "hash": "6366609187285903227"
+      },
+      {
+        "file": "app/interviews/page.tsx",
+        "hash": "17191536066179397927"
+      },
+      {
+        "file": "app/investors/page.tsx",
+        "hash": "9097680195387808506"
+      },
+      {
+        "file": "app/jobs/page.tsx",
+        "hash": "15436485270440836215"
+      },
+      {
+        "file": "app/journal/page.tsx",
+        "hash": "5258302185927823912"
+      },
+      {
+        "file": "app/layout.tsx",
+        "hash": "14321194814931127129"
+      },
+      {
+        "file": "app/legal/dmca/page.tsx",
+        "hash": "13904521400499889412"
+      },
+      {
+        "file": "app/legal/page.tsx",
+        "hash": "17769863856944322526"
+      },
+      {
+        "file": "app/legal/privacy/page.tsx",
+        "hash": "5534455895558374568"
+      },
+      {
+        "file": "app/legal/pro-guide/page.tsx",
+        "hash": "18112529232611425187"
+      },
+      {
+        "file": "app/legal/royalty-policy/page.tsx",
+        "hash": "17550155144239721468"
+      },
+      {
+        "file": "app/legal/terms/page.tsx",
+        "hash": "10860877410876016094"
+      },
+      {
+        "file": "app/loading.tsx",
+        "hash": "5796496184040291091"
+      },
+      {
+        "file": "app/logout/page.tsx",
+        "hash": "14444796128242763839"
+      },
+      {
+        "file": "app/merch/artists/page.tsx",
+        "hash": "16561956506942585773"
+      },
+      {
+        "file": "app/merch/page.tsx",
+        "hash": "6403084811950590133"
+      },
+      {
+        "file": "app/mobile-app/page.tsx",
+        "hash": "9957939120516595836"
+      },
+      {
+        "file": "app/mood/page.tsx",
+        "hash": "13185030556644132995"
+      },
+      {
+        "file": "app/new-releases/page.tsx",
+        "hash": "11005834537936989103"
+      },
+      {
+        "file": "app/newsletters/page.tsx",
+        "hash": "285885297224435983"
+      },
+      {
+        "file": "app/not-found.tsx",
+        "hash": "2016100315341137033"
+      },
+      {
+        "file": "app/page.tsx",
+        "hash": "18141949669665438132"
+      },
+      {
+        "file": "app/playlist/[id]/page.tsx",
+        "hash": "8780304547258181276"
+      },
+      {
+        "file": "app/popular-by-country/page.tsx",
+        "hash": "16597927873721560653"
+      },
+      {
+        "file": "app/profile/page.tsx",
+        "hash": "5261656481589185387"
+      },
+      {
+        "file": "app/radio/page.tsx",
+        "hash": "4732657971634989884"
+      },
+      {
+        "file": "app/rewards/page.tsx",
+        "hash": "1783772018096006557"
+      },
+      {
+        "file": "app/safety-privacy/page.tsx",
+        "hash": "15311060212945526299"
+      },
+      {
+        "file": "app/search/page.tsx",
+        "hash": "17706623298939661958"
+      },
+      {
+        "file": "app/settings/account/page.tsx",
+        "hash": "7686318019451873755"
+      },
+      {
+        "file": "app/settings/artist/page.tsx",
+        "hash": "3880592603419412745"
+      },
+      {
+        "file": "app/settings/devices/page.tsx",
+        "hash": "6364739850957768649"
+      },
+      {
+        "file": "app/settings/language/page.tsx",
+        "hash": "6435502775890300686"
+      },
+      {
+        "file": "app/settings/notifications/page.tsx",
+        "hash": "14743990286384650502"
+      },
+      {
+        "file": "app/settings/page.tsx",
+        "hash": "2557798040732506649"
+      },
+      {
+        "file": "app/settings/playback/page.tsx",
+        "hash": "6103711734139155876"
+      },
+      {
+        "file": "app/settings/privacy/page.tsx",
+        "hash": "13021006543253996487"
+      },
+      {
+        "file": "app/settings/security/page.tsx",
+        "hash": "13982435265322504510"
+      },
+      {
+        "file": "app/signin/page.tsx",
+        "hash": "13448756939816420292"
+      },
+      {
+        "file": "app/signup/page.tsx",
+        "hash": "8940290818244262477"
+      },
+      {
+        "file": "app/social/page.tsx",
+        "hash": "5719494924142950848"
+      },
+      {
+        "file": "app/subscription/page.tsx",
+        "hash": "11297930272764308126"
+      },
+      {
+        "file": "app/support/page.tsx",
+        "hash": "14635980289078429656"
+      },
+      {
+        "file": "app/tickets/page.tsx",
+        "hash": "14377270370619076565"
+      },
+      {
+        "file": "app/tours/page.tsx",
+        "hash": "5035686966331779640"
+      },
+      {
+        "file": "app/trending/page.tsx",
+        "hash": "2032486998503515236"
+      },
+      {
+        "file": "app/trials/page.tsx",
+        "hash": "5369629276326142205"
+      },
+      {
+        "file": "app/underground/page.tsx",
+        "hash": "16608136787216497054"
+      },
+      {
+        "file": "app/upload/page.tsx",
+        "hash": "4106789580393828733"
+      },
+      {
+        "file": "app/vendors/page.tsx",
+        "hash": "12016815567347392100"
+      },
+      {
+        "file": "app/viral/page.tsx",
+        "hash": "4993763454310201107"
+      },
+      {
+        "file": "app/wellness/donations/page.tsx",
+        "hash": "3205473113186049846"
+      },
+      {
+        "file": "app/wellness/page.tsx",
+        "hash": "9184013238651607609"
+      },
+      {
+        "file": "app/wellness/therapy/page.tsx",
+        "hash": "6377851257353787881"
+      },
+      {
+        "file": "components/AdBanner.tsx",
+        "hash": "17470101923159648642"
+      },
+      {
+        "file": "components/AudioQualityBadge.tsx",
+        "hash": "11649581990464949436"
+      },
+      {
+        "file": "components/AudioQualitySettings.tsx",
+        "hash": "11324981181270710322"
+      },
+      {
+        "file": "components/AudioVisualizer.tsx",
+        "hash": "1278182309947066651"
+      },
+      {
+        "file": "components/AudiophileVisualizer.tsx",
+        "hash": "11087217987484253908"
+      },
+      {
+        "file": "components/Avatar.tsx",
+        "hash": "14313328423086162650"
+      },
+      {
+        "file": "components/BUTTON_ACCESSIBILITY.md",
+        "hash": "9033532597615540153"
+      },
+      {
+        "file": "components/BackForwardButtons.tsx",
+        "hash": "3548816288204833766"
+      },
+      {
+        "file": "components/Breadcrumbs.tsx",
+        "hash": "1848652251841410132"
+      },
+      {
+        "file": "components/Button.examples.tsx",
+        "hash": "6704956955924976527"
+      },
+      {
+        "file": "components/Button.tsx",
+        "hash": "12455587032024278812"
+      },
+      {
+        "file": "components/Card.tsx",
+        "hash": "7198496107549027768"
+      },
+      {
+        "file": "components/ContextMenu.tsx",
+        "hash": "4128930347693547841"
+      },
+      {
+        "file": "components/ControlButton.tsx",
+        "hash": "7390071000360717619"
+      },
+      {
+        "file": "components/EQControl.tsx",
+        "hash": "191372474929234243"
+      },
+      {
+        "file": "components/EmptyState.tsx",
+        "hash": "10066588224504295223"
+      },
+      {
+        "file": "components/Equalizer.tsx",
+        "hash": "3245288159271905299"
+      },
+      {
+        "file": "components/ErrorBoundary.tsx",
+        "hash": "10527786036067178441"
+      },
+      {
+        "file": "components/ErrorToast.tsx",
+        "hash": "1490851665169564603"
+      },
+      {
+        "file": "components/Footer.tsx",
+        "hash": "12231723241752793560"
+      },
+      {
+        "file": "components/FormField.tsx",
+        "hash": "16533155973211876885"
+      },
+      {
+        "file": "components/FriendsActivity.tsx",
+        "hash": "10018554541209321237"
+      },
+      {
+        "file": "components/FullScreenPlayer.tsx",
+        "hash": "4032832775125897320"
+      },
+      {
+        "file": "components/GlobalErrorHandler.tsx",
+        "hash": "3943639997409618419"
+      },
+      {
+        "file": "components/IMPLEMENTATION_GUIDE.md",
+        "hash": "6688556486317395860"
+      },
+      {
+        "file": "components/ImageWithFallback.tsx",
+        "hash": "18010230345067857073"
+      },
+      {
+        "file": "components/Input.tsx",
+        "hash": "5453788553123749153"
+      },
+      {
+        "file": "components/InterstitialAdPlayer.tsx",
+        "hash": "11105480511525449842"
+      },
+      {
+        "file": "components/KeyboardShortcutsPanel.tsx",
+        "hash": "18101460740477008277"
+      },
+      {
+        "file": "components/KeyboardShortcutsProvider.tsx",
+        "hash": "6369693700894173615"
+      },
+      {
+        "file": "components/LayoutContent.tsx",
+        "hash": "812597448723494076"
+      },
+      {
+        "file": "components/LazyImage.tsx",
+        "hash": "10451742734662793744"
+      },
+      {
+        "file": "components/LoginModal.tsx",
+        "hash": "13121265041139759702"
+      },
+      {
+        "file": "components/LyricsView.tsx",
+        "hash": "2763903707301197819"
+      },
+      {
+        "file": "components/Modal.tsx",
+        "hash": "15737145585562414725"
+      },
+      {
+        "file": "components/OnboardingTour.tsx",
+        "hash": "467274230418551038"
+      },
+      {
+        "file": "components/PLAYER_SWARM_IMPROVEMENTS.md",
+        "hash": "15502557734351446444"
+      },
+      {
+        "file": "components/PictureInPicturePlayer.tsx",
+        "hash": "5616005991086196911"
+      },
+      {
+        "file": "components/PlayButton.tsx",
+        "hash": "13121204571473928134"
+      },
+      {
+        "file": "components/PlaybackStats.tsx",
+        "hash": "3874092888543497916"
+      },
+      {
+        "file": "components/Player.tsx",
+        "hash": "4732555294921633681"
+      },
+      {
+        "file": "components/Player.tsx.bak",
+        "hash": "9501379666019147619"
+      },
+      {
+        "file": "components/PlaylistEditModal.tsx",
+        "hash": "5521247425525934300"
+      },
+      {
+        "file": "components/PodcastPlayer.tsx",
+        "hash": "261803449112252725"
+      },
+      {
+        "file": "components/PremiumBadge.tsx",
+        "hash": "3761395682994496346"
+      },
+      {
+        "file": "components/ProgressBar.tsx",
+        "hash": "10175243251502724949"
+      },
+      {
+        "file": "components/ProtectedRoute.tsx",
+        "hash": "17877241152116191363"
+      },
+      {
+        "file": "components/QUICK_START.md",
+        "hash": "9720292140198105565"
+      },
+      {
+        "file": "components/QualitySelector.tsx",
+        "hash": "2104714732167919242"
+      },
+      {
+        "file": "components/QueuePanel.tsx",
+        "hash": "1085046198090359901"
+      },
+      {
+        "file": "components/QueuePanel.tsx.bak",
+        "hash": "4059138528699970325"
+      },
+      {
+        "file": "components/README.md",
+        "hash": "13477425317525546009"
+      },
+      {
+        "file": "components/RightSidebar.tsx",
+        "hash": "11552806531595775770"
+      },
+      {
+        "file": "components/SearchDropdown.tsx",
+        "hash": "1291262073826344558"
+      },
+      {
+        "file": "components/Select.tsx",
+        "hash": "8170677750653499937"
+      },
+      {
+        "file": "components/Sidebar.tsx",
+        "hash": "12161048361645121442"
+      },
+      {
+        "file": "components/Skeleton.tsx",
+        "hash": "15022622902647526646"
+      },
+      {
+        "file": "components/SkipLinks.tsx",
+        "hash": "7579492141476757368"
+      },
+      {
+        "file": "components/Tabs.tsx",
+        "hash": "4080945605438332751"
+      },
+      {
+        "file": "components/Toast.tsx",
+        "hash": "2659527949681982239"
+      },
+      {
+        "file": "components/Tooltip.tsx",
+        "hash": "1340204218086309480"
+      },
+      {
+        "file": "components/TopBar.tsx",
+        "hash": "17562552096229769038"
+      },
+      {
+        "file": "components/UI_COMPONENT_SYSTEM.md",
+        "hash": "8739912170476976066"
+      },
+      {
+        "file": "components/UserMenu.tsx",
+        "hash": "5954377507400647205"
+      },
+      {
+        "file": "components/VolumeControl.tsx",
+        "hash": "11210526914854467332"
+      },
+      {
+        "file": "components/__tests__/ControlButton.test.tsx",
+        "hash": "257920084403130064"
+      },
+      {
+        "file": "components/__tests__/PlayButton.test.tsx",
+        "hash": "4336056356296144456"
+      },
+      {
+        "file": "components/__tests__/ProgressBar.test.tsx",
+        "hash": "18423515172008773112"
+      },
+      {
+        "file": "components/index.ts",
+        "hash": "4354865265017658055"
+      },
+      {
+        "file": "components/mood/FeelingChips.tsx",
+        "hash": "3291480613731046855"
+      },
+      {
+        "file": "components/mood/GenreSelector.tsx",
+        "hash": "9078174800102554443"
+      },
+      {
+        "file": "components/mood/MoodSelector.tsx",
+        "hash": "2088963409448994900"
+      },
+      {
+        "file": "components/mood/MoodWidget.tsx",
+        "hash": "14215277765193661788"
+      },
+      {
+        "file": "components/mood/VibeSlider.tsx",
+        "hash": "13404098169451293479"
+      },
+      {
+        "file": "data/mock/albums.json",
+        "hash": "7132962064390784421"
+      },
+      {
+        "file": "data/mock/artists.json",
+        "hash": "6080441809128111152"
+      },
+      {
+        "file": "data/mock/playlists.json",
+        "hash": "9505798394802455583"
+      },
+      {
+        "file": "data/mock/tracks.json",
+        "hash": "7098541057504645154"
+      },
+      {
+        "file": "design-tokens.json",
+        "hash": "9369678144664319607"
+      },
+      {
+        "file": "e2e/COMPREHENSIVE_TEST_SUITE.md",
+        "hash": "6765659317115675589"
+      },
+      {
+        "file": "e2e/README.md",
+        "hash": "376113878454476739"
+      },
+      {
+        "file": "e2e/comprehensive-interactions.spec.ts",
+        "hash": "5992034339629346117"
+      },
+      {
+        "file": "e2e/navigation.spec.ts",
+        "hash": "17887821909198738980"
+      },
+      {
+        "file": "e2e/player.spec.ts",
+        "hash": "3815645313452704441"
+      },
+      {
+        "file": "e2e/responsive.spec.ts",
+        "hash": "5356806203240712707"
+      },
+      {
+        "file": "e2e/ui-components.spec.ts",
+        "hash": "13606797069626549860"
+      },
+      {
+        "file": "e2e/upload-flow.spec.ts",
+        "hash": "17364419623290208519"
+      },
+      {
+        "file": "gitops/.gitkeep",
+        "hash": "16325500827459924437"
+      },
+      {
+        "file": "gitops/CHANGELOG_2026.md",
+        "hash": "11208313500740736984"
+      },
+      {
+        "file": "gitops/GITOPS_EXAMPLES_ALIGNMENT.md",
+        "hash": "391421648098350421"
+      },
+      {
+        "file": "gitops/GITOPS_SETUP.md",
+        "hash": "4659482750909816816"
+      },
+      {
+        "file": "gitops/IMPLEMENTATION_STATUS.md",
+        "hash": "6316836117233054034"
+      },
+      {
+        "file": "gitops/QUICK_START.md",
+        "hash": "6925848697651588911"
+      },
+      {
+        "file": "gitops/README.md",
+        "hash": "9860381924208484788"
+      },
+      {
+        "file": "gitops/applications/spot-app.yaml",
+        "hash": "13101186174324601093"
+      },
+      {
+        "file": "gitops/argocd/applications/spot-music-prod.yaml",
+        "hash": "16672795348293624886"
+      },
+      {
+        "file": "gitops/bootstrap/flux.yaml",
+        "hash": "13016106500583214331"
+      },
+      {
+        "file": "gitops/clusters/prod/apps/empulse-music-deployment.yaml",
+        "hash": "6733672950482802355"
+      },
+      {
+        "file": "gitops/clusters/prod/apps/empulse-music-ingress.yaml",
+        "hash": "10407333951321651463"
+      },
+      {
+        "file": "gitops/clusters/prod/apps/empulse-music-service.yaml",
+        "hash": "16006860597901403778"
+      },
+      {
+        "file": "gitops/clusters/prod/apps/kustomization.yaml",
+        "hash": "4780113977604475992"
+      },
+      {
+        "file": "gitops/clusters/prod/kustomization.yaml",
+        "hash": "15212990790769329854"
+      },
+      {
+        "file": "gitops/clusters/prod/namespaces.yaml",
+        "hash": "3081549400430194369"
+      },
+      {
+        "file": "gitops/clusters/staging/apps/empulse-music-deployment.yaml",
+        "hash": "17997294373454002200"
+      },
+      {
+        "file": "gitops/clusters/staging/apps/empulse-music-service.yaml",
+        "hash": "6929941965088688225"
+      },
+      {
+        "file": "gitops/clusters/staging/apps/kustomization.yaml",
+        "hash": "15651472125728134630"
+      },
+      {
+        "file": "gitops/clusters/staging/kustomization.yaml",
+        "hash": "9554574676247791577"
+      },
+      {
+        "file": "gitops/clusters/staging/namespaces.yaml",
+        "hash": "1794985630162184542"
+      },
+      {
+        "file": "gitops/k8s/production/deployment.yaml",
+        "hash": "12020726460732328555"
+      },
+      {
+        "file": "gitops/monitoring/README.md",
+        "hash": "7031726995473925270"
+      },
+      {
+        "file": "gitops/monitoring/prometheus-config.yaml",
+        "hash": "2618625474671682586"
+      },
+      {
+        "file": "gitops/secrets/.sops.yaml",
+        "hash": "569648864393408739"
+      },
+      {
+        "file": "gitops/secrets/README.md",
+        "hash": "2541399459583581855"
+      },
+      {
+        "file": "gitops/terraform/README.md",
+        "hash": "16466858971318344151"
+      },
+      {
+        "file": "gitops/terraform/main.tf",
+        "hash": "16595829260169419880"
+      },
+      {
+        "file": "gitops/terraform/outputs.tf",
+        "hash": "7908767201262217901"
+      },
+      {
+        "file": "gitops/terraform/variables.tf",
+        "hash": "16411342743100350687"
+      },
+      {
+        "file": "globals.css",
+        "hash": "11629168621246307675"
+      },
+      {
+        "file": "jest.config.js",
+        "hash": "18224262029760291735"
+      },
+      {
+        "file": "jest.setup.js",
+        "hash": "14531411133323522160"
+      },
+      {
+        "file": "lib/RAG_SYSTEM_README.md",
+        "hash": "2291568918383991668"
+      },
+      {
+        "file": "lib/__tests__/utils.test.ts",
+        "hash": "10134480153600782391"
+      },
+      {
+        "file": "lib/accessibility.ts",
+        "hash": "9358920200896718426"
+      },
+      {
+        "file": "lib/aiMoodAnalysis.ts",
+        "hash": "5979787904218992725"
+      },
+      {
+        "file": "lib/api.ts",
+        "hash": "1543860972268539354"
+      },
+      {
+        "file": "lib/audio-format-detection.ts",
+        "hash": "11228923581919895284"
+      },
+      {
+        "file": "lib/audio-pipeline-manager.ts",
+        "hash": "11915751862085688312"
+      },
+      {
+        "file": "lib/audio-pipeline.ts",
+        "hash": "14818245276811724324"
+      },
+      {
+        "file": "lib/auth.ts",
+        "hash": "11240254234583161013"
+      },
+      {
+        "file": "lib/bodyLimit.ts",
+        "hash": "16086925746890708902"
+      },
+      {
+        "file": "lib/csrf.ts",
+        "hash": "11765445317131921508"
+      },
+      {
+        "file": "lib/data.ts",
+        "hash": "4842374877194829577"
+      },
+      {
+        "file": "lib/db.ts",
+        "hash": "9706789989493812948"
+      },
+      {
+        "file": "lib/email.ts",
+        "hash": "13480034554294011334"
+      },
+      {
+        "file": "lib/embeddingCache.ts",
+        "hash": "16015557733027898177"
+      },
+      {
+        "file": "lib/encryption.ts",
+        "hash": "16193435646657441565"
+      },
+      {
+        "file": "lib/env.ts",
+        "hash": "17422433246959506101"
+      },
+      {
+        "file": "lib/errorMessages.ts",
+        "hash": "14783356934138921927"
+      },
+      {
+        "file": "lib/keyboardShortcuts.ts",
+        "hash": "18015063744419294998"
+      },
+      {
+        "file": "lib/knowledgeGraph.ts",
+        "hash": "2623889599052421358"
+      },
+      {
+        "file": "lib/logger.ts",
+        "hash": "4773521902094543692"
+      },
+      {
+        "file": "lib/mlModels.ts",
+        "hash": "11522414369052253252"
+      },
+      {
+        "file": "lib/neuralink-mock.ts",
+        "hash": "15570887999247102437"
+      },
+      {
+        "file": "lib/password.ts",
+        "hash": "12950531716144234080"
+      },
+      {
+        "file": "lib/performance.ts",
+        "hash": "10922830729891670936"
+      },
+      {
+        "file": "lib/pinecone-stub.js",
+        "hash": "3435007494714940906"
+      },
+      {
+        "file": "lib/pipelineConfig.ts",
+        "hash": "5416918700488077047"
+      },
+      {
+        "file": "lib/pipelineHealth.ts",
+        "hash": "6000818222928880296"
+      },
+      {
+        "file": "lib/pipelineMetrics.ts",
+        "hash": "5634948965493946293"
+      },
+      {
+        "file": "lib/pipelineOrchestration.ts",
+        "hash": "14030741782419793400"
+      },
+      {
+        "file": "lib/player.ts",
+        "hash": "9470084335412385985"
+      },
+      {
+        "file": "lib/rateLimit.ts",
+        "hash": "16471922929241319272"
+      },
+      {
+        "file": "lib/rateLimitRedis.ts",
+        "hash": "16932727843341692927"
+      },
+      {
+        "file": "lib/retry.ts",
+        "hash": "17098022078737255662"
+      },
+      {
+        "file": "lib/safeStorage.ts",
+        "hash": "5549118144847042208"
+      },
+      {
+        "file": "lib/sanitize.ts",
+        "hash": "13024091371521075641"
+      },
+      {
+        "file": "lib/share.ts",
+        "hash": "3963476195032484561"
+      },
+      {
+        "file": "lib/similarityMatching.ts",
+        "hash": "165952714082787128"
+      },
+      {
+        "file": "lib/spotifyStyles.ts",
+        "hash": "10231130813066123249"
+      },
+      {
+        "file": "lib/startup-validation.ts",
+        "hash": "17844970380518760678"
+      },
+      {
+        "file": "lib/storage.ts",
+        "hash": "3955761202623795467"
+      },
+      {
+        "file": "lib/timeout.ts",
+        "hash": "8924511636270038998"
+      },
+      {
+        "file": "lib/types/pipeline.ts",
+        "hash": "6502698639996426661"
+      },
+      {
+        "file": "lib/utils.ts",
+        "hash": "16476130668917705629"
+      },
+      {
+        "file": "lib/validation.ts",
+        "hash": "4044004742736716398"
+      },
+      {
+        "file": "middleware.ts",
+        "hash": "4548134390673340513"
+      },
+      {
+        "file": "mobile/spot_music_mobile/lib/services/ar_visualizer.dart",
+        "hash": "11946391687398318785"
+      },
+      {
+        "file": "mobile/spot_music_mobile/lib/services/spot_player.dart",
+        "hash": "10186332554915254937"
+      },
+      {
+        "file": "mobile/spot_music_mobile/pubspec.yaml",
+        "hash": "14599722126225385071"
+      },
+      {
+        "file": "next.config.js",
+        "hash": "4077094951369774439"
+      },
+      {
+        "file": "nx.json",
+        "hash": "16164396216280876002"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "9151434290227819238"
+      },
+      {
+        "file": "package.json",
+        "hash": "6570819021899334277"
+      },
+      {
+        "file": "playwright-report/index.html",
+        "hash": "14233443749307110531"
+      },
+      {
+        "file": "playwright.config.ts",
+        "hash": "12396300910814928565"
+      },
+      {
+        "file": "postcss.config.js",
+        "hash": "8055263870272897227"
+      },
+      {
+        "file": "prisma.config.ts",
+        "hash": "455749580409383361"
+      },
+      {
+        "file": "prisma/schema.prisma",
+        "hash": "6186890294064243488"
+      },
+      {
+        "file": "public/audio/README.md",
+        "hash": "12714253299568621197"
+      },
+      {
+        "file": "public/empulseheart.png",
+        "hash": "4663064663911011214"
+      },
+      {
+        "file": "public/seanfy.png",
+        "hash": "2255462142829746177"
+      },
+      {
+        "file": "railway-auth.sh",
+        "hash": "2625822186135898233"
+      },
+      {
+        "file": "railway.toml",
+        "hash": "12984412662846842428"
+      },
+      {
+        "file": "scripts/INSTRUCTIONS_ROYALTY_FREE_MUSIC.md",
+        "hash": "18157319464567409691"
+      },
+      {
+        "file": "scripts/backup-database.sh",
+        "hash": "16822076272812873146"
+      },
+      {
+        "file": "scripts/benchmark-performance.ts",
+        "hash": "17603595103588387729"
+      },
+      {
+        "file": "scripts/build-mobile.sh",
+        "hash": "7973375226731596763"
+      },
+      {
+        "file": "scripts/delete-album-art.sql",
+        "hash": "13701859209813592494"
+      },
+      {
+        "file": "scripts/delete-all-album-art.ts",
+        "hash": "11470230478939406464"
+      },
+      {
+        "file": "scripts/deploy-railway-api.sh",
+        "hash": "14708372383158064716"
+      },
+      {
+        "file": "scripts/deploy-railway.js",
+        "hash": "9910134746656336247"
+      },
+      {
+        "file": "scripts/deploy-railway.sh",
+        "hash": "2451556679294983963"
+      },
+      {
+        "file": "scripts/deploy.sh",
+        "hash": "13038264743165466556"
+      },
+      {
+        "file": "scripts/download_pixabay_music.py",
+        "hash": "11421270958714580909"
+      },
+      {
+        "file": "scripts/download_royalty_free_music.md",
+        "hash": "11091244993005083499"
+      },
+      {
+        "file": "scripts/e2e_audio_test.js",
+        "hash": "18173040549403481639"
+      },
+      {
+        "file": "scripts/generate_all_audio.sh",
+        "hash": "6237588869326900429"
+      },
+      {
+        "file": "scripts/generate_mood_matched_audio.py",
+        "hash": "2248721837420309315"
+      },
+      {
+        "file": "scripts/generate_musical_audio.sh",
+        "hash": "5116850880815508898"
+      },
+      {
+        "file": "scripts/generate_seed_data.py",
+        "hash": "2377329227754948669"
+      },
+      {
+        "file": "scripts/push.sh",
+        "hash": "13673920682396930657"
+      },
+      {
+        "file": "scripts/quick_demo_audio.sh",
+        "hash": "12176110154636076607"
+      },
+      {
+        "file": "scripts/quick_download_instructions.txt",
+        "hash": "12380442818505779461"
+      },
+      {
+        "file": "scripts/railway-deploy-api.js",
+        "hash": "15016086308469284251"
+      },
+      {
+        "file": "scripts/railway-deploy-final.js",
+        "hash": "4182690490229034098"
+      },
+      {
+        "file": "scripts/railway-deploy-now.js",
+        "hash": "14041867973200488501"
+      },
+      {
+        "file": "scripts/railway-graphql-deploy.js",
+        "hash": "7665587777462111728"
+      },
+      {
+        "file": "scripts/set-railway-vars.js",
+        "hash": "1327143508843992211"
+      },
+      {
+        "file": "scripts/setup-infrastructure.sh",
+        "hash": "5805176290169750305"
+      },
+      {
+        "file": "scripts/setup_test_audio.sh",
+        "hash": "12836950455104341593"
+      },
+      {
+        "file": "scripts/test-rag-system.test.ts",
+        "hash": "941287740455670316"
+      },
+      {
+        "file": "scripts/train-mood-model.ts",
+        "hash": "2944017715688168265"
+      },
+      {
+        "file": "scripts/trigger-railway-deploy.sh",
+        "hash": "7015149697248048839"
+      },
+      {
+        "file": "stores/affirmationsStore.ts",
+        "hash": "7911576088263478569"
+      },
+      {
+        "file": "stores/artistSignupStore.ts",
+        "hash": "8435252566241617655"
+      },
+      {
+        "file": "stores/authStore.ts",
+        "hash": "5350970655235388814"
+      },
+      {
+        "file": "stores/cartStore.ts",
+        "hash": "5056255555981600493"
+      },
+      {
+        "file": "stores/checkInStore.ts",
+        "hash": "12347984392174294058"
+      },
+      {
+        "file": "stores/journalStore.ts",
+        "hash": "11713678260768617770"
+      },
+      {
+        "file": "stores/libraryStore.ts",
+        "hash": "17124726308732319629"
+      },
+      {
+        "file": "stores/moodStore.ts",
+        "hash": "1766029437485988828"
+      },
+      {
+        "file": "stores/playerStore.ts",
+        "hash": "18387289591866423015"
+      },
+      {
+        "file": "stores/pointsStore.ts",
+        "hash": "224501168569660554"
+      },
+      {
+        "file": "stores/radioStore.ts",
+        "hash": "8920578457448530088"
+      },
+      {
+        "file": "stores/searchStore.ts",
+        "hash": "2831976015715767631"
+      },
+      {
+        "file": "stores/uiStore.ts",
+        "hash": "13215547916383876367"
+      },
+      {
+        "file": "stores/userStore.ts",
+        "hash": "16491951066821796603"
+      },
+      {
+        "file": "tailwind.config.js",
+        "hash": "7588120529770827911"
+      },
+      {
+        "file": "terraform/.terraform-version",
+        "hash": "17699368038837788699"
+      },
+      {
+        "file": "terraform/QUICK_START.md",
+        "hash": "8568864244221932978"
+      },
+      {
+        "file": "terraform/README.md",
+        "hash": "5781871278449051413"
+      },
+      {
+        "file": "terraform/dev/main.tf",
+        "hash": "4102820538855284785"
+      },
+      {
+        "file": "terraform/main.tf",
+        "hash": "10031693737365002091"
+      },
+      {
+        "file": "terraform/modules/ecs/main.tf",
+        "hash": "2023145011120538046"
+      },
+      {
+        "file": "terraform/modules/ecs/outputs.tf",
+        "hash": "16634560404574821097"
+      },
+      {
+        "file": "terraform/modules/ecs/variables.tf",
+        "hash": "11364378578023749962"
+      },
+      {
+        "file": "terraform/modules/rds/main.tf",
+        "hash": "10838317646200449231"
+      },
+      {
+        "file": "terraform/modules/rds/outputs.tf",
+        "hash": "7334451869288633883"
+      },
+      {
+        "file": "terraform/modules/rds/variables.tf",
+        "hash": "11307249628436438665"
+      },
+      {
+        "file": "terraform/modules/vpc/main.tf",
+        "hash": "18183021512130647164"
+      },
+      {
+        "file": "terraform/modules/vpc/outputs.tf",
+        "hash": "2234041463980561336"
+      },
+      {
+        "file": "terraform/modules/vpc/variables.tf",
+        "hash": "793089941772253804"
+      },
+      {
+        "file": "terraform/outputs.tf",
+        "hash": "17364509698344839857"
+      },
+      {
+        "file": "terraform/terraform.tfvars.example",
+        "hash": "17582584744386406237"
+      },
+      {
+        "file": "terraform/variables.tf",
+        "hash": "8416134872576287878"
+      },
+      {
+        "file": "terraform/versions.tf",
+        "hash": "5049278317158492388"
+      },
+      {
+        "file": "test-results.json",
+        "hash": "13082422857779342633"
+      },
+      {
+        "file": "test-results/.last-run.json",
+        "hash": "17692718336871667602"
+      },
+      {
+        "file": "tools/soundcloud-mcp.js",
+        "hash": "10581601932202466170"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "16358053358629262764"
+      },
+      {
+        "file": "turbo.json",
+        "hash": "1490592416383904609"
+      },
+      {
+        "file": "types/album.ts",
+        "hash": "17085957305910633930"
+      },
+      {
+        "file": "types/artist.ts",
+        "hash": "16419255865831594375"
+      },
+      {
+        "file": "types/mood.ts",
+        "hash": "4001751580209921446"
+      },
+      {
+        "file": "types/playlist.ts",
+        "hash": "16244320502814451104"
+      },
+      {
+        "file": "types/track.ts",
+        "hash": "14623907447587859556"
+      },
+      {
+        "file": "vercel.json",
+        "hash": "2151280781340547180"
+      }
+    ]
+  }
+}

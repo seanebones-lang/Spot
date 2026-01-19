@@ -1,24 +1,27 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Minimize2 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useState, useRef, useEffect } from "react";
+import { Send, Bot, User, Minimize2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function SupportPage() {
-  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string; timestamp: Date }>>([
+  const [messages, setMessages] = useState<
+    Array<{ role: "user" | "assistant"; content: string; timestamp: Date }>
+  >([
     {
-      role: 'assistant',
-      content: 'Hello! I\'m your EmPulse Music AI assistant powered by xAI Grok. How can I help you today?',
-      timestamp: new Date()
-    }
+      role: "assistant",
+      content:
+        "Hello! I'm your EmPulse Music AI assistant powered by xAI Grok. How can I help you today?",
+      timestamp: new Date(),
+    },
   ]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -30,19 +33,23 @@ export default function SupportPage() {
     if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
-    setInput('');
-    const userMessageObj = { role: 'user' as const, content: userMessage, timestamp: new Date() };
-    setMessages(prev => [...prev, userMessageObj]);
+    setInput("");
+    const userMessageObj = {
+      role: "user" as const,
+      content: userMessage,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMessageObj]);
     setIsLoading(true);
 
     try {
       // Call our API route which handles xAI Grok API communication
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const endpoint = apiUrl ? `${apiUrl}/api/chat` : '/api/chat';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const endpoint = apiUrl ? `${apiUrl}/api/chat` : "/api/chat";
       const response = await fetch(endpoint, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           messages: [...messages, userMessageObj],
@@ -51,105 +58,116 @@ export default function SupportPage() {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Failed to get response from assistant');
+        throw new Error(
+          errorData.error || "Failed to get response from assistant",
+        );
       }
 
       const data = await response.json();
-      
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: data.message || 'I apologize, but I encountered an issue. Please try again.',
-        timestamp: new Date()
-      }]);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            data.message ||
+            "I apologize, but I encountered an issue. Please try again.",
+          timestamp: new Date(),
+        },
+      ]);
     } catch (error) {
-      console.error('Error sending message:', error);
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: error instanceof Error 
-          ? `Sorry, I encountered an error: ${error.message}. Please try again or contact support if the issue persists.`
-          : 'Sorry, I encountered an unexpected error. Please try again.',
-        timestamp: new Date()
-      }]);
+      console.error("Error sending message:", error);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            error instanceof Error
+              ? `Sorry, I encountered an error: ${error.message}. Please try again or contact support if the issue persists.`
+              : "Sorry, I encountered an unexpected error. Please try again.",
+          timestamp: new Date(),
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-spotify-dark flex flex-col z-50"
       style={{
-        position: 'fixed',
+        position: "fixed",
         inset: 0,
-        backgroundColor: '#121212',
-        display: 'flex',
-        flexDirection: 'column',
-        zIndex: 50
+        backgroundColor: "#121212",
+        display: "flex",
+        flexDirection: "column",
+        zIndex: 50,
       }}
     >
       {/* Header - Exact Spotify Style */}
-      <div 
+      <div
         className="h-16 bg-spotify-dark-gray border-b border-white/10 flex items-center justify-between px-6 flex-shrink-0"
         style={{
-          height: '64px',
-          backgroundColor: '#181818',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 24px',
-          flexShrink: 0
+          height: "64px",
+          backgroundColor: "#181818",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 24px",
+          flexShrink: 0,
         }}
       >
-        <div 
+        <div
           className="flex items-center gap-4"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px'
+            display: "flex",
+            alignItems: "center",
+            gap: "16px",
           }}
         >
-          <div 
+          <div
             className="w-10 h-10 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center"
             style={{
-              width: '40px',
-              height: '40px',
-              background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0
+              width: "40px",
+              height: "40px",
+              background: "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
             }}
           >
-            <Bot 
+            <Bot
               className="w-6 h-6 text-white"
               style={{
-                width: '24px',
-                height: '24px',
-                color: '#FFFFFF'
+                width: "24px",
+                height: "24px",
+                color: "#FFFFFF",
               }}
             />
           </div>
           <div>
-            <h1 
+            <h1
               className="text-white font-bold text-lg"
               style={{
-                fontSize: '18px',
-                lineHeight: '24px',
+                fontSize: "18px",
+                lineHeight: "24px",
                 fontWeight: 700,
-                color: '#FFFFFF',
-                marginBottom: '2px'
+                color: "#FFFFFF",
+                marginBottom: "2px",
               }}
             >
               EmPulse Music Support
             </h1>
-            <p 
+            <p
               className="text-sm text-spotify-text-gray"
               style={{
-                fontSize: '13px',
-                lineHeight: '16px',
-                color: '#B3B3B3'
+                fontSize: "13px",
+                lineHeight: "16px",
+                color: "#B3B3B3",
               }}
             >
               Powered by xAI Grok-3
@@ -160,42 +178,42 @@ export default function SupportPage() {
           onClick={() => window.history.back()}
           className="p-2 hover:bg-spotify-light-gray rounded-full transition-colors"
           style={{
-            padding: '8px',
-            backgroundColor: 'transparent',
-            borderRadius: '50%',
-            border: 'none',
-            cursor: 'pointer',
-            transition: 'background-color 200ms ease-out'
+            padding: "8px",
+            backgroundColor: "transparent",
+            borderRadius: "50%",
+            border: "none",
+            cursor: "pointer",
+            transition: "background-color 200ms ease-out",
           }}
           aria-label="Close chat"
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#282828';
+            e.currentTarget.style.backgroundColor = "#282828";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.backgroundColor = "transparent";
           }}
         >
-          <Minimize2 
+          <Minimize2
             className="w-5 h-5 text-spotify-text-gray"
             style={{
-              width: '20px',
-              height: '20px',
-              color: '#B3B3B3'
+              width: "20px",
+              height: "20px",
+              color: "#B3B3B3",
             }}
           />
         </button>
       </div>
 
       {/* Messages Area - Exact Spotify Style */}
-      <div 
+      <div
         className="flex-1 overflow-y-auto px-6 py-6 space-y-6"
         style={{
-          flex: '1 1 0%',
-          overflowY: 'auto',
-          padding: '24px',
-          gap: '24px',
-          backgroundColor: '#121212',
-          minHeight: 0
+          flex: "1 1 0%",
+          overflowY: "auto",
+          padding: "24px",
+          gap: "24px",
+          backgroundColor: "#121212",
+          minHeight: 0,
         }}
       >
         {messages.map((message, index) => (
@@ -203,35 +221,37 @@ export default function SupportPage() {
             key={index}
             className={cn(
               "flex gap-4",
-              message.role === 'user' ? "justify-end" : "justify-start"
+              message.role === "user" ? "justify-end" : "justify-start",
             )}
             style={{
-              display: 'flex',
-              gap: '16px',
-              justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start'
+              display: "flex",
+              gap: "16px",
+              justifyContent:
+                message.role === "user" ? "flex-end" : "flex-start",
             }}
           >
-            {message.role === 'assistant' && (
-              <div 
+            {message.role === "assistant" && (
+              <div
                 className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 style={{
-                  width: '32px',
-                  height: '32px',
-                  background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  width: "32px",
+                  height: "32px",
+                  background:
+                    "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   flexShrink: 0,
-                  marginTop: '4px'
+                  marginTop: "4px",
                 }}
               >
-                <Bot 
+                <Bot
                   className="w-5 h-5 text-white"
                   style={{
-                    width: '20px',
-                    height: '20px',
-                    color: '#FFFFFF'
+                    width: "20px",
+                    height: "20px",
+                    color: "#FFFFFF",
                   }}
                 />
               </div>
@@ -239,72 +259,79 @@ export default function SupportPage() {
             <div
               className={cn(
                 "max-w-[70%] rounded-lg px-4 py-3",
-                message.role === 'user'
+                message.role === "user"
                   ? "bg-spotify-green text-black"
-                  : "bg-spotify-light-gray text-white"
+                  : "bg-spotify-light-gray text-white",
               )}
               style={{
-                maxWidth: '70%',
-                borderRadius: '8px',
-                padding: '12px 16px',
-                backgroundColor: message.role === 'user' ? '#7209B7' : '#181818',
-                color: message.role === 'user' ? '#000000' : '#FFFFFF'
+                maxWidth: "70%",
+                borderRadius: "8px",
+                padding: "12px 16px",
+                backgroundColor:
+                  message.role === "user" ? "#7209B7" : "#181818",
+                color: message.role === "user" ? "#000000" : "#FFFFFF",
               }}
             >
-              <p 
+              <p
                 className="text-sm whitespace-pre-wrap"
                 style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
+                  fontSize: "14px",
+                  lineHeight: "20px",
                   fontWeight: 400,
-                  whiteSpace: 'pre-wrap'
+                  whiteSpace: "pre-wrap",
                 }}
               >
                 {message.content}
               </p>
-              <p 
+              <p
                 className={cn(
                   "text-xs mt-2",
-                  message.role === 'user' ? "text-black/60" : "text-spotify-text-gray"
+                  message.role === "user"
+                    ? "text-black/60"
+                    : "text-spotify-text-gray",
                 )}
                 style={{
-                  fontSize: '11px',
-                  lineHeight: '16px',
-                  marginTop: '8px',
-                  color: message.role === 'user' ? 'rgba(0, 0, 0, 0.6)' : '#B3B3B3'
+                  fontSize: "11px",
+                  lineHeight: "16px",
+                  marginTop: "8px",
+                  color:
+                    message.role === "user" ? "rgba(0, 0, 0, 0.6)" : "#B3B3B3",
                 }}
               >
-                {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                {message.timestamp.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </p>
             </div>
-            {message.role === 'user' && (
-              <div 
+            {message.role === "user" && (
+              <div
                 className="w-8 h-8 bg-spotify-light-gray rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 style={{
-                  width: '32px',
-                  height: '32px',
-                  backgroundColor: '#282828',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  width: "32px",
+                  height: "32px",
+                  backgroundColor: "#282828",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   flexShrink: 0,
-                  marginTop: '4px'
+                  marginTop: "4px",
                 }}
               >
-                <User 
+                <User
                   className="w-5 h-5 text-white"
                   style={{
-                    width: '20px',
-                    height: '20px',
-                    color: '#FFFFFF'
+                    width: "20px",
+                    height: "20px",
+                    color: "#FFFFFF",
                   }}
                 />
               </div>
             )}
           </div>
         ))}
-        
+
         {isLoading && (
           <div className="flex gap-4 justify-start">
             <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0 mt-1">
@@ -312,9 +339,18 @@ export default function SupportPage() {
             </div>
             <div className="bg-spotify-light-gray rounded-lg px-4 py-3">
               <div className="flex gap-1">
-                <div className="w-2 h-2 bg-spotify-text-gray rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <div className="w-2 h-2 bg-spotify-text-gray rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <div className="w-2 h-2 bg-spotify-text-gray rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <div
+                  className="w-2 h-2 bg-spotify-text-gray rounded-full animate-bounce"
+                  style={{ animationDelay: "0ms" }}
+                />
+                <div
+                  className="w-2 h-2 bg-spotify-text-gray rounded-full animate-bounce"
+                  style={{ animationDelay: "150ms" }}
+                />
+                <div
+                  className="w-2 h-2 bg-spotify-text-gray rounded-full animate-bounce"
+                  style={{ animationDelay: "300ms" }}
+                />
               </div>
             </div>
           </div>
@@ -323,28 +359,28 @@ export default function SupportPage() {
       </div>
 
       {/* Input Area - Exact Spotify Style */}
-      <div 
+      <div
         className="border-t border-white/10 flex-shrink-0"
         style={{
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-          padding: '16px 24px',
-          paddingBottom: 'calc(16px + 90px)', // Account for player bar height (90px)
+          borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+          padding: "16px 24px",
+          paddingBottom: "calc(16px + 90px)", // Account for player bar height (90px)
           flexShrink: 0,
-          backgroundColor: '#181818',
-          position: 'relative',
+          backgroundColor: "#181818",
+          position: "relative",
           zIndex: 60,
-          minHeight: '80px',
-          display: 'flex',
-          alignItems: 'center'
+          minHeight: "80px",
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        <form 
-          onSubmit={handleSend} 
+        <form
+          onSubmit={handleSend}
           className="flex gap-3 w-full"
           style={{
-            display: 'flex',
-            gap: '12px',
-            width: '100%'
+            display: "flex",
+            gap: "12px",
+            width: "100%",
           }}
         >
           <input
@@ -355,31 +391,31 @@ export default function SupportPage() {
             placeholder="Type your message..."
             className="flex-1 bg-spotify-light-gray text-white rounded-full px-6 py-3 focus:outline-none focus:ring-2 focus:ring-spotify-green placeholder:text-spotify-text-gray"
             style={{
-              flex: '1 1 0%',
-              backgroundColor: '#282828',
-              color: '#FFFFFF',
-              borderRadius: '500px',
-              padding: '12px 24px',
-              fontSize: '14px',
-              lineHeight: '20px',
+              flex: "1 1 0%",
+              backgroundColor: "#282828",
+              color: "#FFFFFF",
+              borderRadius: "500px",
+              padding: "12px 24px",
+              fontSize: "14px",
+              lineHeight: "20px",
               fontWeight: 400,
-              border: '1px solid transparent',
-              outline: 'none',
-              fontFamily: 'inherit',
-              transition: 'all 200ms ease-out',
-              minWidth: '0',
-              width: '100%',
-              display: 'block'
+              border: "1px solid transparent",
+              outline: "none",
+              fontFamily: "inherit",
+              transition: "all 200ms ease-out",
+              minWidth: "0",
+              width: "100%",
+              display: "block",
             }}
             disabled={isLoading}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#7209B7';
-              e.currentTarget.style.borderWidth = '2px';
-              e.currentTarget.style.borderStyle = 'solid';
+              e.currentTarget.style.borderColor = "#7209B7";
+              e.currentTarget.style.borderWidth = "2px";
+              e.currentTarget.style.borderStyle = "solid";
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = 'transparent';
-              e.currentTarget.style.borderWidth = '1px';
+              e.currentTarget.style.borderColor = "transparent";
+              e.currentTarget.style.borderWidth = "1px";
             }}
           />
           <button
@@ -387,39 +423,39 @@ export default function SupportPage() {
             disabled={!input.trim() || isLoading}
             className={cn(
               "w-12 h-12 bg-spotify-green hover:bg-[#8a1dd0] rounded-full flex items-center justify-center transition-colors",
-              (!input.trim() || isLoading) && "opacity-50 cursor-not-allowed"
+              (!input.trim() || isLoading) && "opacity-50 cursor-not-allowed",
             )}
             style={{
-              width: '48px',
-              height: '48px',
-              backgroundColor: '#7209B7',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: 'none',
-              cursor: (!input.trim() || isLoading) ? 'not-allowed' : 'pointer',
-              transition: 'all 200ms ease-out',
-              opacity: (!input.trim() || isLoading) ? 0.5 : 1
+              width: "48px",
+              height: "48px",
+              backgroundColor: "#7209B7",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "none",
+              cursor: !input.trim() || isLoading ? "not-allowed" : "pointer",
+              transition: "all 200ms ease-out",
+              opacity: !input.trim() || isLoading ? 0.5 : 1,
             }}
             aria-label="Send message"
             onMouseEnter={(e) => {
               if (input.trim() && !isLoading) {
-                e.currentTarget.style.backgroundColor = '#8a1dd0';
-                e.currentTarget.style.transform = 'scale(1.05)';
+                e.currentTarget.style.backgroundColor = "#8a1dd0";
+                e.currentTarget.style.transform = "scale(1.05)";
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#7209B7';
-              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.backgroundColor = "#7209B7";
+              e.currentTarget.style.transform = "scale(1)";
             }}
           >
-            <Send 
+            <Send
               className="w-5 h-5 text-black"
               style={{
-                width: '20px',
-                height: '20px',
-                color: '#000000'
+                width: "20px",
+                height: "20px",
+                color: "#000000",
               }}
             />
           </button>

@@ -14,6 +14,7 @@ A comprehensive, professional authentication system with sign in, sign up, passw
 ## ✨ Features Implemented
 
 ### 1. ✅ Sign In Page (`/signin`)
+
 - Email/password authentication
 - Password visibility toggle
 - "Forgot password" link
@@ -24,6 +25,7 @@ A comprehensive, professional authentication system with sign in, sign up, passw
 - Professional UI matching Spotify design
 
 ### 2. ✅ Sign Up Page (`/signup`)
+
 - Multi-step registration process (3 steps)
 - **Step 1:** Basic account information
   - Name, email, password with confirmation
@@ -46,6 +48,7 @@ A comprehensive, professional authentication system with sign in, sign up, passw
 - Social sign up options
 
 ### 3. ✅ Password Recovery Flow (`/forgot-password`)
+
 - **Step 1:** Request Reset
   - Email input
   - Send reset code via email
@@ -64,6 +67,7 @@ A comprehensive, professional authentication system with sign in, sign up, passw
 ### 4. ✅ Artist Verification System
 
 #### Verification Page (`/artist/verification`)
+
 - Upload proof documents (drag & drop)
 - File type validation (images, PDFs)
 - File size validation (max 10MB)
@@ -73,6 +77,7 @@ A comprehensive, professional authentication system with sign in, sign up, passw
 - Professional upload interface
 
 #### Pending Status Page (`/artist/verification/pending`)
+
 - Shows approval status
 - Visual status indicators
 - Next steps information
@@ -83,6 +88,7 @@ A comprehensive, professional authentication system with sign in, sign up, passw
   - **Rejected:** Option to resubmit
 
 ### 5. ✅ Artist Upgrade Page (`/artist/upgrade`)
+
 - Comparison between current plan and artist plan
 - Clear feature listing
 - Upgrade to artist account option
@@ -91,6 +97,7 @@ A comprehensive, professional authentication system with sign in, sign up, passw
 - Professional upgrade flow
 
 ### 6. ✅ Add Artist Type Later (`/settings/artist`)
+
 - Add artist types to existing account
 - Same verification process
 - Upload proof documents
@@ -102,6 +109,7 @@ A comprehensive, professional authentication system with sign in, sign up, passw
 ## 🏗️ Architecture
 
 ### User Store (`stores/userStore.ts`)
+
 Comprehensive user state management with:
 
 - **User Types:**
@@ -118,6 +126,7 @@ Comprehensive user state management with:
   - Approval status tracking
 
 ### Component Structure
+
 - All pages use consistent design system
 - Reusable Input and Button components
 - Professional error handling
@@ -129,6 +138,7 @@ Comprehensive user state management with:
 ## 🔐 Password Recovery Flow
 
 ### Features
+
 1. **Email-based reset**
    - Secure code generation
    - Email delivery (simulated)
@@ -145,6 +155,7 @@ Comprehensive user state management with:
    - Automatic sign-in redirect
 
 ### Security
+
 - Codes are generated securely (in production, server-side)
 - Passwords validated for strength
 - Clear instructions and feedback
@@ -155,18 +166,21 @@ Comprehensive user state management with:
 ## 🎨 Artist Type System
 
 ### At Sign Up
+
 - User can select one or more artist types
 - Can select management/label option
 - Selection is optional
 - Creates pending application
 
 ### After Sign Up
+
 - If artist types selected → redirects to verification
 - If not → regular account creation
 - Free profile created immediately
 - Artist features locked until approval
 
 ### Verification Process
+
 1. Upload proof documents
 2. Submit for review
 3. Admin reviews (24-48 hours)
@@ -174,6 +188,7 @@ Comprehensive user state management with:
 5. User can upgrade or stay free/premium
 
 ### Approval Options
+
 - **Approved:** Can upgrade to artist account OR stay free/premium
 - **Rejected:** Can resubmit with more documentation
 - **Pending/Under Review:** Wait for decision
@@ -183,12 +198,14 @@ Comprehensive user state management with:
 ## 📋 Management Registration
 
 ### Same Process as Artists
+
 - Management/Label option available at signup
 - Same verification requirements
 - Same approval process
 - Can combine with artist types (e.g., Artist + Management)
 
 ### Verification Documents
+
 - Management contracts
 - Label registration
 - Artist representation proof
@@ -199,12 +216,14 @@ Comprehensive user state management with:
 ## 🎯 User Experience Flow
 
 ### New User (Regular)
+
 1. Sign up → Basic info
 2. Skip artist selection
 3. Account created → Free profile active
 4. Can upgrade to premium anytime
 
 ### New User (Artist)
+
 1. Sign up → Basic info
 2. Select artist type(s) or management
 3. Upload proof documents
@@ -214,6 +233,7 @@ Comprehensive user state management with:
 7. If approved → Option to upgrade to artist OR stay free/premium
 
 ### Existing User Adding Artist
+
 1. Go to Settings → Artist
 2. Select artist type(s)
 3. Upload proof documents
@@ -221,6 +241,7 @@ Comprehensive user state management with:
 5. Same approval process
 
 ### Password Recovery
+
 1. Click "Forgot password" on sign in
 2. Enter email
 3. Receive reset code
@@ -233,6 +254,7 @@ Comprehensive user state management with:
 ## 🎨 Design Features
 
 ### Professional UI
+
 - Spotify-style dark theme
 - Smooth transitions and animations
 - Clear visual feedback
@@ -241,6 +263,7 @@ Comprehensive user state management with:
 - Professional form validation
 
 ### Accessibility
+
 - Proper ARIA labels
 - Keyboard navigation
 - Screen reader support
@@ -249,6 +272,7 @@ Comprehensive user state management with:
 - Clear visual hierarchy
 
 ### Responsive Design
+
 - Mobile-friendly layouts
 - Touch-friendly inputs
 - Responsive forms
@@ -259,6 +283,7 @@ Comprehensive user state management with:
 ## 📁 Files Created
 
 ### Pages
+
 - `/app/signin/page.tsx` - Sign in page
 - `/app/signup/page.tsx` - Sign up page with artist selection
 - `/app/forgot-password/page.tsx` - Password recovery flow
@@ -268,9 +293,11 @@ Comprehensive user state management with:
 - `/app/settings/artist/page.tsx` - Add artist type later
 
 ### Stores
+
 - `/stores/userStore.ts` - Complete user state management
 
 ### Components Updated
+
 - `/components/Input.tsx` - Added `onIconRightClick` prop for password visibility toggle
 
 ---
@@ -278,6 +305,7 @@ Comprehensive user state management with:
 ## ✅ Features Checklist
 
 ### Sign In ✅
+
 - [x] Email/password authentication
 - [x] Password visibility toggle
 - [x] Forgot password link
@@ -288,6 +316,7 @@ Comprehensive user state management with:
 - [x] Auto-redirect if authenticated
 
 ### Sign Up ✅
+
 - [x] Multi-step process (3 steps)
 - [x] Basic account creation
 - [x] Artist type selection (optional)
@@ -300,6 +329,7 @@ Comprehensive user state management with:
 - [x] Professional validation
 
 ### Password Recovery ✅
+
 - [x] Email input
 - [x] Code generation & sending
 - [x] Code verification
@@ -310,6 +340,7 @@ Comprehensive user state management with:
 - [x] Auto-redirect
 
 ### Artist Verification ✅
+
 - [x] Document upload
 - [x] Drag & drop interface
 - [x] File validation
@@ -319,6 +350,7 @@ Comprehensive user state management with:
 - [x] Professional UI
 
 ### Approval System ✅
+
 - [x] Status tracking
 - [x] Pending state
 - [x] Under review state
@@ -328,6 +360,7 @@ Comprehensive user state management with:
 - [x] Next steps guidance
 
 ### Upgrade Flow ✅
+
 - [x] Plan comparison
 - [x] Feature listing
 - [x] Upgrade option
@@ -336,6 +369,7 @@ Comprehensive user state management with:
 - [x] Professional presentation
 
 ### Add Artist Later ✅
+
 - [x] Settings page
 - [x] Type selection
 - [x] Proof upload
@@ -347,18 +381,21 @@ Comprehensive user state management with:
 ## 🔒 Security Features
 
 ### Password Security
+
 - Minimum 8 characters
 - Requires uppercase, lowercase, and number
 - Secure password confirmation
 - Password visibility toggle (client-side only)
 
 ### Account Security
+
 - Email verification (ready for implementation)
 - Secure password reset codes
 - Session management
 - Protected routes (ready for implementation)
 
 ### Data Security
+
 - Secure file uploads
 - File type validation
 - File size limits
@@ -369,6 +406,7 @@ Comprehensive user state management with:
 ## 🚀 Integration Points
 
 ### Ready for Backend
+
 All authentication functions are structured for easy API integration:
 
 ```typescript
@@ -390,6 +428,7 @@ requestPasswordReset: async (email) => {
 ```
 
 ### API Endpoints Needed
+
 1. `POST /api/auth/login` - Authenticate user
 2. `POST /api/auth/signup` - Create account
 3. `POST /api/auth/forgot-password` - Request reset code
@@ -404,31 +443,36 @@ requestPasswordReset: async (email) => {
 ## 📝 User Flows
 
 ### Flow 1: Regular User Sign Up
+
 ```
 Sign Up → Basic Info → Skip Artist → Account Created → Free Profile
 ```
 
 ### Flow 2: Artist Sign Up
+
 ```
-Sign Up → Basic Info → Select Artist Type → Upload Proof → 
-Account Created (Free) → Pending Approval → Approved → 
+Sign Up → Basic Info → Select Artist Type → Upload Proof →
+Account Created (Free) → Pending Approval → Approved →
 Option to Upgrade OR Stay Free/Premium
 ```
 
 ### Flow 3: Management Sign Up
+
 ```
-Sign Up → Basic Info → Select Management → Upload Proof → 
-Account Created (Free) → Pending Approval → Approved → 
+Sign Up → Basic Info → Select Management → Upload Proof →
+Account Created (Free) → Pending Approval → Approved →
 Option to Upgrade OR Stay Free/Premium
 ```
 
 ### Flow 4: Add Artist Type Later
+
 ```
-Settings → Artist → Select Type → Upload Proof → 
+Settings → Artist → Select Type → Upload Proof →
 Submit → Pending Approval → Approved → Upgrade Option
 ```
 
 ### Flow 5: Password Recovery
+
 ```
 Forgot Password → Enter Email → Verify Code → Reset Password → Sign In
 ```
@@ -438,6 +482,7 @@ Forgot Password → Enter Email → Verify Code → Reset Password → Sign In
 ## 🎯 Key Features
 
 ### Professional & Smooth
+
 - ✅ Polished UI matching Spotify design
 - ✅ Smooth transitions and animations
 - ✅ Clear progress indicators
@@ -446,6 +491,7 @@ Forgot Password → Enter Email → Verify Code → Reset Password → Sign In
 - ✅ Success feedback
 
 ### Seamless Experience
+
 - ✅ Multi-step flows with progress tracking
 - ✅ Auto-redirects where appropriate
 - ✅ Clear next steps at each stage
@@ -453,6 +499,7 @@ Forgot Password → Enter Email → Verify Code → Reset Password → Sign In
 - ✅ Professional messaging
 
 ### Complete Functionality
+
 - ✅ Sign in/up working
 - ✅ Password recovery complete
 - ✅ Artist verification ready
@@ -465,6 +512,7 @@ Forgot Password → Enter Email → Verify Code → Reset Password → Sign In
 ## 🧪 Testing
 
 ### Manual Testing Checklist
+
 - [ ] Sign in with email/password
 - [ ] Sign up new account
 - [ ] Sign up with artist type
@@ -485,7 +533,9 @@ Forgot Password → Enter Email → Verify Code → Reset Password → Sign In
 ## 📚 Documentation
 
 ### Component Usage
+
 All pages follow consistent patterns:
+
 - Professional error handling
 - Loading states
 - Form validation
@@ -493,20 +543,21 @@ All pages follow consistent patterns:
 - Responsive design
 
 ### Store Usage
-```typescript
-import { useUserStore } from '@/stores/userStore';
 
-const { 
-  user, 
-  isAuthenticated, 
-  login, 
-  signup, 
+```typescript
+import { useUserStore } from "@/stores/userStore";
+
+const {
+  user,
+  isAuthenticated,
+  login,
+  signup,
   logout,
   requestPasswordReset,
   verifyResetCode,
   resetPassword,
   submitArtistApplication,
-  updateSubscriptionTier
+  updateSubscriptionTier,
 } = useUserStore();
 ```
 
@@ -519,7 +570,7 @@ const {
 **Password Recovery:** ✅ Seamless  
 **Artist Verification:** ✅ Complete  
 **Management Support:** ✅ Complete  
-**Add Artist Later:** ✅ Supported  
+**Add Artist Later:** ✅ Supported
 
 ---
 

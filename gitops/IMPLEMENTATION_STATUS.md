@@ -19,12 +19,12 @@ The setup is production-ready and follows enterprise standards. All core tenets 
 
 ## Core Tenets Compliance
 
-| Tenet | Implementation | Status |
-|-------|---------------|--------|
-| **Declarative Configurations** | All Kubernetes manifests and Terraform configs in Git | ✅ Complete |
-| **Pull-Based Reconciliation** | Flux polls Git every 1m, reconciles every 5m | ✅ Complete |
+| Tenet                           | Implementation                                           | Status      |
+| ------------------------------- | -------------------------------------------------------- | ----------- |
+| **Declarative Configurations**  | All Kubernetes manifests and Terraform configs in Git    | ✅ Complete |
+| **Pull-Based Reconciliation**   | Flux polls Git every 1m, reconciles every 5m             | ✅ Complete |
 | **Observability and Rollbacks** | Prometheus/Grafana configured, Git history for rollbacks | ✅ Complete |
-| **Security** | SOPS ready, security contexts, signed commits ready | ✅ Complete |
+| **Security**                    | SOPS ready, security contexts, signed commits ready      | ✅ Complete |
 
 ---
 
@@ -41,6 +41,7 @@ The setup is production-ready and follows enterprise standards. All core tenets 
 - ✅ Health checks and auto-scaling ready
 
 **Files**:
+
 - `gitops/bootstrap/flux.yaml` - Flux configuration
 - `gitops/clusters/prod/apps/empulse-music-deployment.yaml` - Deployment manifest
 - `gitops/clusters/staging/apps/empulse-music-deployment.yaml` - Staging deployment
@@ -55,6 +56,7 @@ The setup is production-ready and follows enterprise standards. All core tenets 
 - ✅ Outputs for Flux bootstrap
 
 **Files**:
+
 - `gitops/terraform/main.tf` - EKS cluster provisioning
 - `gitops/terraform/variables.tf` - Configuration variables
 - `gitops/terraform/outputs.tf` - Cluster outputs
@@ -72,6 +74,7 @@ The setup is production-ready and follows enterprise standards. All core tenets 
 - ✅ Slack notifications on failure
 
 **Files**:
+
 - `.github/workflows/gitops-deploy.yml` - CI/CD pipeline
 
 ---
@@ -79,11 +82,13 @@ The setup is production-ready and follows enterprise standards. All core tenets 
 ## Key Features Implemented
 
 ### 1. Multi-Environment Support ✅
+
 - **Production**: Full configuration with ingress, TLS, 3 replicas
 - **Staging**: Simplified configuration for testing, 2 replicas
 - Both use Kustomize overlays for easy maintenance
 
 ### 2. Security Best Practices ✅
+
 - Non-root containers (`runAsUser: 1001`)
 - Dropped capabilities (security contexts)
 - Resource limits (CPU, memory)
@@ -92,6 +97,7 @@ The setup is production-ready and follows enterprise standards. All core tenets 
 - SOPS configuration ready for secrets encryption
 
 ### 3. Observability ✅
+
 - Prometheus scraping configured
 - Flux metrics collection
 - Application metrics (EmPulse Music pods)
@@ -104,6 +110,7 @@ The setup is production-ready and follows enterprise standards. All core tenets 
   - HighCPUUsage
 
 ### 4. Automation ✅
+
 - **Build**: Automated Docker image builds with caching
 - **Push**: Automatic push to GHCR with tags (branch, SHA, latest)
 - **Deploy**: Automatic manifest updates and Flux reconciliation
@@ -156,6 +163,7 @@ git config --global commit.gpgsign true
 ```
 
 **Benefits**:
+
 - Verifies commit authenticity
 - Required by enterprise security policies
 - Prevents unauthorized commits
@@ -169,6 +177,7 @@ git config --global commit.gpgsign true
 **Recommended**: Use image digests for production (e.g., `ghcr.io/nexteleven/empulse-music@sha256:abc123...`)
 
 **Benefits**:
+
 - Immutable image references (tag can change, digest cannot)
 - Better security (prevents tag manipulation)
 - More reliable deployments
@@ -180,12 +189,14 @@ git config --global commit.gpgsign true
 **Priority**: Medium (Policy Enforcement)
 
 **Use Cases**:
+
 - Resource limits enforcement
 - Image registry whitelist
 - Namespace restrictions
 - Security context requirements
 
 **Setup**:
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/master/deploy/gatekeeper.yaml
 ```
@@ -195,6 +206,7 @@ kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/
 **Priority**: High (Security Best Practice)
 
 **Configuration** (GitHub Repository Settings):
+
 - Require pull request reviews before merging
 - Require status checks to pass before merging
 - Require signed commits (after Git signing is enabled)
@@ -279,15 +291,15 @@ kubectl get pods -n flux-system
 
 ## Documentation Files
 
-| File | Description |
-|------|-------------|
-| `gitops/README.md` | Comprehensive GitOps documentation |
-| `gitops/GITOPS_SETUP.md` | Setup and implementation guide |
+| File                                  | Description                        |
+| ------------------------------------- | ---------------------------------- |
+| `gitops/README.md`                    | Comprehensive GitOps documentation |
+| `gitops/GITOPS_SETUP.md`              | Setup and implementation guide     |
 | `gitops/GITOPS_EXAMPLES_ALIGNMENT.md` | Alignment with three core examples |
-| `gitops/QUICK_START.md` | Quick start guide |
-| `gitops/terraform/README.md` | Terraform setup guide |
-| `gitops/secrets/README.md` | SOPS secrets management |
-| `gitops/monitoring/README.md` | Prometheus/Grafana setup |
+| `gitops/QUICK_START.md`               | Quick start guide                  |
+| `gitops/terraform/README.md`          | Terraform setup guide              |
+| `gitops/secrets/README.md`            | SOPS secrets management            |
+| `gitops/monitoring/README.md`         | Prometheus/Grafana setup           |
 
 ---
 
@@ -315,6 +327,7 @@ kubectl get pods -n flux-system
 NextEleven's GitOps implementation is fully aligned with 2025 best practices and all three core examples. The setup is operational, secure, and ready for production use.
 
 **Recommended Next Steps**:
+
 1. Enable Git signing (mandatory for enterprise)
 2. Consider image digests for production
 3. Enable branch protection on GitHub

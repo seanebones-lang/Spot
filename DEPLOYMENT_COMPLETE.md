@@ -27,6 +27,7 @@ Since Railway's API requires OAuth setup (which must be done in the dashboard), 
    - Railway will auto-detect Next.js
 
 5. **Set Environment Variables** (in service → Variables):
+
    ```
    JWT_SECRET=<generate with: openssl rand -base64 32>
    XAI_API_KEY=<your-xai-api-key>
@@ -68,7 +69,7 @@ railway up
 ## 🎯 After Deployment
 
 1. **Get your URL**: Railway provides a `.railway.app` domain
-2. **Test endpoints**: 
+2. **Test endpoints**:
    - `https://your-app.railway.app/api/auth/register`
    - `https://your-app.railway.app/api/chat`
 3. **Monitor**: Check logs in Railway dashboard

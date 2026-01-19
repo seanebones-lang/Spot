@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 export default function ArtistFansPage() {
   return (
@@ -7,7 +7,9 @@ export default function ArtistFansPage() {
       <div className="max-w-4xl">
         <div className="bg-spotify-light-gray rounded-lg p-6">
           <h2 className="text-xl font-bold mb-4">Your Fans</h2>
-          <p className="text-spotify-text-gray">Analytics and insights about your fan base coming soon</p>
+          <p className="text-spotify-text-gray">
+            Analytics and insights about your fan base coming soon
+          </p>
         </div>
       </div>
     </div>

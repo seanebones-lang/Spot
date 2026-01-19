@@ -7,6 +7,7 @@ The system now supports **two strategies** for managing audio pipelines:
 ### Strategy 1: Single Shared Pipeline (Default - Recommended) ✅
 
 **Pros:**
+
 - ✅ **Efficient**: One AudioContext, one set of nodes (EQ, compressor, analyser)
 - ✅ **Lower memory**: ~2-5MB vs 10-25MB for multiple pipelines
 - ✅ **Lower CPU**: Single processing chain
@@ -14,6 +15,7 @@ The system now supports **two strategies** for managing audio pipelines:
 - ✅ **Fixed conflicts**: The recent fixes prevent `createMediaElementSource` errors
 
 **Cons:**
+
 - ⚠️ Shared EQ settings across all stations
 - ⚠️ Can't have different effects per station simultaneously
 
@@ -22,11 +24,13 @@ The system now supports **two strategies** for managing audio pipelines:
 ### Strategy 2: Per-Station Pipelines (Optional)
 
 **Pros:**
+
 - ✅ **Isolation**: Each station can have unique EQ/effects
 - ✅ **No conflicts**: Complete separation between stations
 - ✅ **Flexible**: Can apply station-specific audio processing
 
 **Cons:**
+
 - ❌ **Higher memory**: ~10-25MB per station (6 stations = 60-150MB)
 - ❌ **Higher CPU**: Multiple AudioContexts processing simultaneously
 - ❌ **Complexity**: More cleanup and lifecycle management
@@ -45,6 +49,7 @@ The system now supports **two strategies** for managing audio pipelines:
 ## How to Switch Strategies
 
 ### Use Single Pipeline (Current - No Changes Needed)
+
 ```typescript
 // Already using this - no code changes needed
 // The pipeline manager defaults to shared pipeline
@@ -56,7 +61,7 @@ If you want isolation, update the radio page:
 
 ```typescript
 // In app/radio/page.tsx
-import { getAudioPipelineManager } from '@/lib/audio-pipeline-manager';
+import { getAudioPipelineManager } from "@/lib/audio-pipeline-manager";
 
 // Enable per-station pipelines
 useEffect(() => {
@@ -69,8 +74,8 @@ Then update `lib/player.ts` to use station-specific pipelines:
 
 ```typescript
 // In initializeAudioPipeline(), detect if it's a radio station
-if (this.currentTrackId?.startsWith('radio-')) {
-  const stationId = this.currentTrackId.replace('radio-', '');
+if (this.currentTrackId?.startsWith("radio-")) {
+  const stationId = this.currentTrackId.replace("radio-", "");
   this.audioPipeline = getStationPipeline(stationId);
 } else {
   this.audioPipeline = getSharedPipeline();
@@ -79,13 +84,13 @@ if (this.currentTrackId?.startsWith('radio-')) {
 
 ## Performance Comparison
 
-| Metric | Single Pipeline | Per-Station (6 stations) |
-|--------|----------------|--------------------------|
-| Memory | ~5MB | ~60-150MB |
-| CPU (idle) | ~0.5% | ~3-5% |
-| CPU (active) | ~2-3% | ~12-18% |
-| Audio Latency | ~10ms | ~10ms (per pipeline) |
-| Context Switching | None | Minimal overhead |
+| Metric            | Single Pipeline | Per-Station (6 stations) |
+| ----------------- | --------------- | ------------------------ |
+| Memory            | ~5MB            | ~60-150MB                |
+| CPU (idle)        | ~0.5%           | ~3-5%                    |
+| CPU (active)      | ~2-3%           | ~12-18%                  |
+| Audio Latency     | ~10ms           | ~10ms (per pipeline)     |
+| Context Switching | None            | Minimal overhead         |
 
 ## When to Use Per-Station Pipelines
 
@@ -108,9 +113,9 @@ Consider per-station pipelines if:
 Check pipeline usage:
 
 ```typescript
-import { getAudioPipelineManager } from '@/lib/audio-pipeline-manager';
+import { getAudioPipelineManager } from "@/lib/audio-pipeline-manager";
 
 const manager = getAudioPipelineManager();
-console.log('Active pipelines:', manager.getPipelineCount());
-console.log('Contexts:', manager.getActiveContexts());
+console.log("Active pipelines:", manager.getPipelineCount());
+console.log("Contexts:", manager.getActiveContexts());
 ```

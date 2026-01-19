@@ -7,6 +7,7 @@
 ## Conflicted Files
 
 ### High Priority (Core Functionality):
+
 1. `package.json` - Dependencies
 2. `next.config.js` - Next.js configuration
 3. `components/Player.tsx` - Audio player
@@ -14,6 +15,7 @@
 5. `components/UserMenu.tsx` - User interface
 
 ### Medium Priority:
+
 6. `components/Sidebar.tsx`
 7. `components/PlayButton.tsx`
 8. `components/AudioVisualizer.tsx`
@@ -22,6 +24,7 @@
 11. `app/upload/page.tsx`
 
 ### Configuration:
+
 12. `.gitignore`
 13. `jest.config.js`
 14. `jest.setup.js`

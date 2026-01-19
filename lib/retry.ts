@@ -26,14 +26,22 @@ const DEFAULT_RETRY_OPTIONS: Required<RetryOptions> = {
  */
 function isRetryableError(error: Error, retryableErrors: string[]): boolean {
   // Always retry on network/timeout errors
-  const networkErrors = ['ECONNRESET', 'ETIMEDOUT', 'ENOTFOUND', 'ECONNREFUSED', 'timeout'];
-  if (networkErrors.some(e => error.message.includes(e) || error.name === e)) {
+  const networkErrors = [
+    "ECONNRESET",
+    "ETIMEDOUT",
+    "ENOTFOUND",
+    "ECONNREFUSED",
+    "timeout",
+  ];
+  if (
+    networkErrors.some((e) => error.message.includes(e) || error.name === e)
+  ) {
     return true;
   }
 
   // Retry on specific error messages
   if (retryableErrors.length > 0) {
-    return retryableErrors.some(pattern => error.message.includes(pattern));
+    return retryableErrors.some((pattern) => error.message.includes(pattern));
   }
 
   // Default: don't retry
@@ -47,7 +55,7 @@ function calculateDelay(
   attempt: number,
   initialDelayMs: number,
   maxDelayMs: number,
-  backoffMultiplier: number
+  backoffMultiplier: number,
 ): number {
   const delay = initialDelayMs * Math.pow(backoffMultiplier, attempt);
   return Math.min(delay, maxDelayMs);
@@ -57,7 +65,7 @@ function calculateDelay(
  * Sleep for specified milliseconds
  */
 function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
@@ -65,7 +73,7 @@ function sleep(ms: number): Promise<void> {
  */
 export async function withRetry<T>(
   fn: () => Promise<T>,
-  options: RetryOptions = {}
+  options: RetryOptions = {},
 ): Promise<T> {
   const opts = { ...DEFAULT_RETRY_OPTIONS, ...options };
   let lastError: Error | null = null;
@@ -91,7 +99,7 @@ export async function withRetry<T>(
         attempt,
         opts.initialDelayMs,
         opts.maxDelayMs,
-        opts.backoffMultiplier
+        opts.backoffMultiplier,
       );
 
       // Call retry callback
@@ -103,7 +111,7 @@ export async function withRetry<T>(
   }
 
   // All retries exhausted
-  throw lastError || new Error('Retry failed: unknown error');
+  throw lastError || new Error("Retry failed: unknown error");
 }
 
 /**
@@ -112,23 +120,20 @@ export async function withRetry<T>(
 export async function withRetryAndTimeout<T>(
   fn: () => Promise<T>,
   timeoutMs: number,
-  options: RetryOptions = {}
+  options: RetryOptions = {},
 ): Promise<T> {
-  const { withTimeout } = await import('./timeout');
+  const { withTimeout } = await import("./timeout");
 
-  return withRetry(
-    () => withTimeout(fn(), timeoutMs),
-    options
-  );
+  return withRetry(() => withTimeout(fn(), timeoutMs), options);
 }
 
 /**
  * Circuit breaker state
  */
 export enum CircuitState {
-  CLOSED = 'closed',    // Normal operation
-  OPEN = 'open',        // Failing, reject requests
-  HALF_OPEN = 'half_open', // Testing if recovered
+  CLOSED = "closed", // Normal operation
+  OPEN = "open", // Failing, reject requests
+  HALF_OPEN = "half_open", // Testing if recovered
 }
 
 /**
@@ -146,7 +151,7 @@ export class CircuitBreaker {
       successThreshold?: number;
       timeoutMs?: number;
       resetTimeoutMs?: number;
-    } = {}
+    } = {},
   ) {
     this.options = {
       failureThreshold: 5,
@@ -172,7 +177,7 @@ export class CircuitBreaker {
 
     // Reject if circuit is open
     if (this.state === CircuitState.OPEN) {
-      throw new Error('Circuit breaker is OPEN - service unavailable');
+      throw new Error("Circuit breaker is OPEN - service unavailable");
     }
 
     // Execute function

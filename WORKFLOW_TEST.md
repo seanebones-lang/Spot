@@ -21,6 +21,7 @@
 ## Monitoring
 
 Check GitHub Actions tab for:
+
 - Workflow run status
 - Individual job results
 - Validation check outcomes

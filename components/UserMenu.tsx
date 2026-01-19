@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { 
-  User, 
-  Settings, 
-  LogOut, 
-  CreditCard, 
-  HelpCircle, 
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import {
+  User,
+  Settings,
+  LogOut,
+  CreditCard,
+  HelpCircle,
   ChevronRight,
   Check,
   Music,
   Mic,
   BookOpen,
   Radio,
-  LogIn
-} from 'lucide-react';
-import PremiumBadge from '@/components/PremiumBadge';
-import { cn } from '@/lib/utils';
-import { useAuthStore } from '@/stores/authStore';
-import LoginModal from './LoginModal';
+  LogIn,
+} from "lucide-react";
+import PremiumBadge from "@/components/PremiumBadge";
+import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/stores/authStore";
+import LoginModal from "./LoginModal";
 
 interface UserMenuProps {
-  subscriptionTier?: 'Free' | 'Premium' | 'Artist';
+  subscriptionTier?: "Free" | "Premium" | "Artist";
 }
 
-export default function UserMenu({ 
-  subscriptionTier = 'Premium'
+export default function UserMenu({
+  subscriptionTier = "Premium",
 }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -35,8 +35,8 @@ export default function UserMenu({
   const router = useRouter();
   const { user, isAuthenticated, logout } = useAuthStore();
 
-  const userName = user?.name || 'User';
-  const userEmail = user?.email || 'user@example.com';
+  const userName = user?.name || "User";
+  const userEmail = user?.email || "user@example.com";
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -52,77 +52,79 @@ export default function UserMenu({
     }
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isOpen]);
 
   const menuItems = [
     {
-      label: 'Profile',
+      label: "Profile",
       icon: User,
-      href: '/profile',
+      href: "/profile",
       separator: false,
     },
     {
-      label: 'Account',
+      label: "Account",
       icon: Settings,
-      href: '/settings/account',
+      href: "/settings/account",
       separator: false,
     },
     {
-      label: 'Artist Dashboard',
+      label: "Artist Dashboard",
       icon: Music,
-      href: '/dashboard/artist',
+      href: "/dashboard/artist",
       separator: true,
     },
     {
-      label: 'Podcaster Dashboard',
+      label: "Podcaster Dashboard",
       icon: Mic,
-      href: '/dashboard/podcaster',
+      href: "/dashboard/podcaster",
       separator: false,
     },
     {
-      label: 'Audiobook Dashboard',
+      label: "Audiobook Dashboard",
       icon: BookOpen,
-      href: '/dashboard/audiobook',
+      href: "/dashboard/audiobook",
       separator: false,
     },
     {
-      label: 'Radio Station Dashboard',
+      label: "Radio Station Dashboard",
       icon: Radio,
-      href: '/dashboard/radio',
+      href: "/dashboard/radio",
       separator: false,
     },
     {
-      label: subscriptionTier === 'Free' ? 'Upgrade to Premium' : 'Subscription',
+      label:
+        subscriptionTier === "Free" ? "Upgrade to Premium" : "Subscription",
       icon: CreditCard,
-      href: '/subscription',
+      href: "/subscription",
       separator: true,
-      badge: subscriptionTier === 'Free' ? 'Free' : subscriptionTier,
+      badge: subscriptionTier === "Free" ? "Free" : subscriptionTier,
     },
     {
-      label: 'Settings',
+      label: "Settings",
       icon: Settings,
-      href: '/settings',
+      href: "/settings",
       separator: false,
     },
     {
-      label: 'Help',
+      label: "Help",
       icon: HelpCircle,
-      href: '/help',
+      href: "/help",
       separator: true,
     },
     {
-      label: 'Chat Support',
+      label: "Chat Support",
       icon: HelpCircle,
-      href: '/support',
+      href: "/support",
       separator: false,
     },
     {
-      label: 'Log out',
+      label: "Log out",
       icon: LogOut,
-      href: '/logout',
+      href: "/logout",
       separator: true,
       danger: true,
     },
@@ -130,10 +132,10 @@ export default function UserMenu({
 
   const handleItemClick = (href: string) => {
     setIsOpen(false);
-    if (href === '/logout') {
+    if (href === "/logout") {
       logout();
-      router.push('/');
-    } else if (href === '/login') {
+      router.push("/");
+    } else if (href === "/login") {
       setLoginModalOpen(true);
     } else {
       router.push(href);
@@ -148,15 +150,15 @@ export default function UserMenu({
           onClick={() => setLoginModalOpen(true)}
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200",
-            "bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold text-sm"
+            "bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold text-sm",
           )}
         >
           <LogIn size={16} />
           Sign In
         </button>
-        <LoginModal 
-          isOpen={loginModalOpen} 
-          onClose={() => setLoginModalOpen(false)} 
+        <LoginModal
+          isOpen={loginModalOpen}
+          onClose={() => setLoginModalOpen(false)}
         />
       </>
     );
@@ -171,7 +173,7 @@ export default function UserMenu({
         className={cn(
           "flex items-center gap-3 px-2 py-1.5 rounded-full transition-all duration-200",
           "hover:bg-spotify-light-gray active:bg-[#3e3e3e]",
-          isOpen && "bg-spotify-light-gray"
+          isOpen && "bg-spotify-light-gray",
         )}
         aria-label="User menu"
         aria-expanded={isOpen}
@@ -183,17 +185,17 @@ export default function UserMenu({
             {userName.charAt(0).toUpperCase()}
           </span>
         </div>
-        
+
         {/* User Name */}
         <span className="text-sm font-medium text-white whitespace-nowrap max-w-[120px] truncate">
           {userName}
         </span>
 
         {/* Chevron Icon - Spotify uses down arrow when open */}
-        <ChevronRight 
+        <ChevronRight
           className={cn(
             "w-4 h-4 text-spotify-text-gray transition-transform duration-200",
-            isOpen && "transform -rotate-90"
+            isOpen && "transform -rotate-90",
           )}
         />
       </button>
@@ -204,7 +206,7 @@ export default function UserMenu({
           ref={menuRef}
           className="absolute top-full right-0 mt-2 w-56 bg-[#282828] rounded-md shadow-2xl overflow-hidden z-50"
           style={{
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5)",
           }}
         >
           {/* User Info Header */}
@@ -243,36 +245,41 @@ export default function UserMenu({
                       "w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors",
                       "hover:bg-white/10 active:bg-white/15",
                       item.danger && "hover:bg-red-500/20 hover:text-red-400",
-                      !item.danger && "text-white"
+                      !item.danger && "text-white",
                     )}
                   >
-                    <Icon 
+                    <Icon
                       className={cn(
                         "w-5 h-5 flex-shrink-0",
-                        item.danger ? "text-red-400" : "text-spotify-text-gray"
-                      )} 
+                        item.danger ? "text-red-400" : "text-spotify-text-gray",
+                      )}
                     />
-                    <span className={cn(
-                      "text-sm font-medium flex-1",
-                      item.danger && "text-red-400"
-                    )}>
+                    <span
+                      className={cn(
+                        "text-sm font-medium flex-1",
+                        item.danger && "text-red-400",
+                      )}
+                    >
                       {item.label}
                     </span>
                     {item.badge && (
-                      <span className={cn(
-                        "text-xs px-2 py-0.5 rounded-full font-medium",
-                        subscriptionTier === 'Free' 
-                          ? "bg-spotify-light-gray text-spotify-text-gray"
-                          : subscriptionTier === 'Premium'
-                          ? "bg-spotify-green text-black"
-                          : "bg-empulse-purple text-white"
-                      )}>
+                      <span
+                        className={cn(
+                          "text-xs px-2 py-0.5 rounded-full font-medium",
+                          subscriptionTier === "Free"
+                            ? "bg-spotify-light-gray text-spotify-text-gray"
+                            : subscriptionTier === "Premium"
+                              ? "bg-spotify-green text-black"
+                              : "bg-empulse-purple text-white",
+                        )}
+                      >
                         {item.badge}
                       </span>
                     )}
-                    {item.label === 'Subscription' && subscriptionTier !== 'Free' && (
-                      <Check className="w-4 h-4 text-spotify-green flex-shrink-0" />
-                    )}
+                    {item.label === "Subscription" &&
+                      subscriptionTier !== "Free" && (
+                        <Check className="w-4 h-4 text-spotify-green flex-shrink-0" />
+                      )}
                   </button>
                 </div>
               );
@@ -280,9 +287,9 @@ export default function UserMenu({
           </div>
         </div>
       )}
-      <LoginModal 
-        isOpen={loginModalOpen} 
-        onClose={() => setLoginModalOpen(false)} 
+      <LoginModal
+        isOpen={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
       />
     </div>
   );

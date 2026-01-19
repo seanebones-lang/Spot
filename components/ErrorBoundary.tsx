@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { Component, ReactNode } from 'react';
-import { AlertCircle, RefreshCw } from 'lucide-react';
-import { logger } from '@/lib/logger';
+import React, { Component, ReactNode } from "react";
+import { AlertCircle, RefreshCw } from "lucide-react";
+import { logger } from "@/lib/logger";
 
 interface Props {
   children: ReactNode;
@@ -26,7 +26,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Use structured logger instead of console.error
-    logger.error('React Error Boundary caught error', error, {
+    logger.error("React Error Boundary caught error", error, {
       componentStack: errorInfo.componentStack,
       errorBoundary: true,
     });
@@ -48,7 +48,8 @@ class ErrorBoundary extends Component<Props, State> {
             <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-2">Something went wrong</h2>
             <p className="text-spotify-text-gray mb-6">
-              {this.state.error?.message || 'An unexpected error occurred. Please try again.'}
+              {this.state.error?.message ||
+                "An unexpected error occurred. Please try again."}
             </p>
             <button
               onClick={this.handleReset}

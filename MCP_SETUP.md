@@ -9,26 +9,31 @@ Your MCP (Model Context Protocol) tools and agents are configured separately fro
 Your MCP servers are configured in `~/.cursor/mcp.json`:
 
 ### Configured Servers:
+
 1. **grok-agent-mcp** - Custom Grok agent for code suggestions and debugging
 2. **eleven-agent-mcp** - Custom Eleven agent for code suggestions and debugging
 
 ### MCP Server Location:
+
 - Server script: `/Users/nexteleven/cursor-mcp-integration/server/local-mcp-server.js`
 - Working directory: `/Users/nexteleven/cursor-mcp-integration`
 
 ## MCP Tools Available
 
 ### Grok Agent MCP:
+
 - `query_agent` - Query custom agent for code suggestions, debugging, or planning
 - `git_review_and_commit` - Generate smart commit messages from git diff
 - `process_browser_content` - Process browser content for analysis or summarization
 
 ### Eleven Agent MCP:
+
 - `query_agent` - Query custom agent for code suggestions, debugging, or planning
 - `git_review_and_commit` - Generate smart commit messages from git diff
 - `process_browser_content` - Process browser content for analysis or summarization
 
 ### Browser Extension MCP:
+
 - Navigation tools (navigate, back, resize, snapshot)
 - Interaction tools (click, hover, type, drag)
 - Evaluation tools (execute JavaScript, fill forms)
@@ -42,6 +47,7 @@ Your MCP servers are configured in `~/.cursor/mcp.json`:
 - **MCP Tools**: Work through Cursor's AI agent system (custom agents, browser automation, git tools)
 
 They don't directly integrate, but they can work together:
+
 - Terraform extension provides syntax highlighting for `.tf` files
 - MCP tools can help with Terraform code suggestions through the agent
 - Vim extension provides keybindings
@@ -52,10 +58,11 @@ They don't directly integrate, but they can work together:
 To verify your MCP setup is working:
 
 1. **Check MCP Server Status:**
+
    ```bash
    # Verify server file exists
    ls -la /Users/nexteleven/cursor-mcp-integration/server/local-mcp-server.js
-   
+
    # Verify Node.js is available
    which node
    node --version
@@ -75,7 +82,7 @@ To verify your MCP setup is working:
 
 ✅ **MCP Configuration:** Found and configured in `~/.cursor/mcp.json`  
 ✅ **Server Script:** Located at configured path  
-✅ **Extensions:** Separate setup (Terraform & Vim)  
+✅ **Extensions:** Separate setup (Terraform & Vim)
 
 ## Next Steps
 

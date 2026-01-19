@@ -110,16 +110,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Proud",
-        "Excited",
-        "Relaxed"
-      ],
+      "feelings": ["Proud", "Excited", "Relaxed"],
       "vibe": 60,
-      "genres": [
-        "Jazz",
-        "Punk"
-      ]
+      "genres": ["Jazz", "Punk"]
     },
     "totalDuration": 4446777,
     "createdAt": "2024-09-02T00:00:00Z",
@@ -236,15 +229,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud"
-      ],
+      "feelings": ["Proud"],
       "vibe": 95,
-      "genres": [
-        "Electronic",
-        "Indie",
-        "Punk"
-      ]
+      "genres": ["Electronic", "Indie", "Punk"]
     },
     "totalDuration": 4407647,
     "createdAt": "2024-10-22T12:00:00Z",
@@ -361,17 +348,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic",
-        "Great"
-      ],
+      "feelings": ["Optimistic", "Great"],
       "vibe": 89,
-      "genres": [
-        "Techno",
-        "World",
-        "Afrobeats",
-        "Blues"
-      ]
+      "genres": ["Techno", "World", "Afrobeats", "Blues"]
     },
     "totalDuration": 4655992,
     "createdAt": "2024-03-08T18:00:00Z",
@@ -488,15 +467,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Great",
-        "Excited"
-      ],
+      "feelings": ["Great", "Excited"],
       "vibe": 63,
-      "genres": [
-        "Ambient",
-        "Indie"
-      ]
+      "genres": ["Ambient", "Indie"]
     },
     "totalDuration": 4432340,
     "createdAt": "2024-07-22T16:00:00Z",
@@ -613,16 +586,9 @@
     ],
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed"
-      ],
+      "feelings": ["Relaxed"],
       "vibe": 82,
-      "genres": [
-        "Disco",
-        "Country",
-        "Soul",
-        "Folk"
-      ]
+      "genres": ["Disco", "Country", "Soul", "Folk"]
     },
     "totalDuration": 4655264,
     "createdAt": "2024-10-12T20:00:00Z",
@@ -739,17 +705,9 @@
     ],
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Nostalgic",
-        "Insecure",
-        "Tired"
-      ],
+      "feelings": ["Nostalgic", "Insecure", "Tired"],
       "vibe": 25,
-      "genres": [
-        "Classical",
-        "Blues",
-        "Rock"
-      ]
+      "genres": ["Classical", "Blues", "Rock"]
     },
     "totalDuration": 4547707,
     "createdAt": "2024-01-11T14:00:00Z",
@@ -866,15 +824,9 @@
     ],
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic",
-        "Content"
-      ],
+      "feelings": ["Nostalgic", "Content"],
       "vibe": 27,
-      "genres": [
-        "Metal",
-        "Rock"
-      ]
+      "genres": ["Metal", "Rock"]
     },
     "totalDuration": 4604632,
     "createdAt": "2024-05-08T18:00:00Z",
@@ -991,15 +943,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed",
-        "Great"
-      ],
+      "feelings": ["Relaxed", "Great"],
       "vibe": 49,
-      "genres": [
-        "World",
-        "Latin"
-      ]
+      "genres": ["World", "Latin"]
     },
     "totalDuration": 4419633,
     "createdAt": "2024-09-18T06:00:00Z",
@@ -1116,16 +1062,9 @@
     ],
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Frustrated"
-      ],
+      "feelings": ["Frustrated"],
       "vibe": 17,
-      "genres": [
-        "World",
-        "Folk",
-        "Country",
-        "R&B"
-      ]
+      "genres": ["World", "Folk", "Country", "R&B"]
     },
     "totalDuration": 4547707,
     "createdAt": "2024-12-05T19:00:00Z",
@@ -1242,16 +1181,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic",
-        "Proud",
-        "Great"
-      ],
+      "feelings": ["Optimistic", "Proud", "Great"],
       "vibe": 95,
-      "genres": [
-        "Reggae",
-        "R&B"
-      ]
+      "genres": ["Reggae", "R&B"]
     },
     "totalDuration": 4749279,
     "createdAt": "2024-04-13T03:00:00Z",
@@ -1368,15 +1300,9 @@
     ],
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic",
-        "Reflective"
-      ],
+      "feelings": ["Nostalgic", "Reflective"],
       "vibe": 29,
-      "genres": [
-        "House",
-        "Metal"
-      ]
+      "genres": ["House", "Metal"]
     },
     "totalDuration": 4473634,
     "createdAt": "2024-10-18T16:00:00Z",
@@ -1493,14 +1419,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Confident"
-      ],
+      "feelings": ["Confident"],
       "vibe": 48,
-      "genres": [
-        "Country",
-        "Folk"
-      ]
+      "genres": ["Country", "Folk"]
     },
     "totalDuration": 4758255,
     "createdAt": "2024-05-17T18:00:00Z",
@@ -1617,14 +1538,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic"
-      ],
+      "feelings": ["Optimistic"],
       "vibe": 100,
-      "genres": [
-        "Punk",
-        "Classical"
-      ]
+      "genres": ["Punk", "Classical"]
     },
     "totalDuration": 4542450,
     "createdAt": "2024-08-13T13:00:00Z",
@@ -1741,16 +1657,9 @@
     ],
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Reflective",
-        "Content"
-      ],
+      "feelings": ["Reflective", "Content"],
       "vibe": 29,
-      "genres": [
-        "Indie",
-        "Rock",
-        "K-Pop"
-      ]
+      "genres": ["Indie", "Rock", "K-Pop"]
     },
     "totalDuration": 4448250,
     "createdAt": "2024-10-14T05:00:00Z",
@@ -1867,16 +1776,9 @@
     ],
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Grateful",
-        "Content"
-      ],
+      "feelings": ["Grateful", "Content"],
       "vibe": 38,
-      "genres": [
-        "Reggae",
-        "Soul",
-        "Metal"
-      ]
+      "genres": ["Reggae", "Soul", "Metal"]
     },
     "totalDuration": 4613357,
     "createdAt": "2024-01-28T00:00:00Z",
@@ -1993,14 +1895,9 @@
     ],
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed"
-      ],
+      "feelings": ["Relaxed"],
       "vibe": 37,
-      "genres": [
-        "Hip-Hop",
-        "Disco"
-      ]
+      "genres": ["Hip-Hop", "Disco"]
     },
     "totalDuration": 4369120,
     "createdAt": "2024-05-07T09:00:00Z",
@@ -2117,18 +2014,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Confident",
-        "Proud",
-        "Relaxed"
-      ],
+      "feelings": ["Confident", "Proud", "Relaxed"],
       "vibe": 61,
-      "genres": [
-        "House",
-        "Country",
-        "Pop",
-        "Electronic"
-      ]
+      "genres": ["House", "Country", "Pop", "Electronic"]
     },
     "totalDuration": 4521445,
     "createdAt": "2024-03-12T13:00:00Z",
@@ -2245,15 +2133,9 @@
     ],
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 23,
-      "genres": [
-        "Trap",
-        "Rock",
-        "Jazz"
-      ]
+      "genres": ["Trap", "Rock", "Jazz"]
     },
     "totalDuration": 4460036,
     "createdAt": "2024-06-15T13:00:00Z",
@@ -2370,17 +2252,9 @@
     ],
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Reflective",
-        "Content",
-        "Relaxed"
-      ],
+      "feelings": ["Reflective", "Content", "Relaxed"],
       "vibe": 29,
-      "genres": [
-        "Electronic",
-        "Blues",
-        "Disco"
-      ]
+      "genres": ["Electronic", "Blues", "Disco"]
     },
     "totalDuration": 4375394,
     "createdAt": "2024-01-25T04:00:00Z",
@@ -2497,17 +2371,9 @@
     ],
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content",
-        "Thoughtful"
-      ],
+      "feelings": ["Content", "Thoughtful"],
       "vibe": 35,
-      "genres": [
-        "Trap",
-        "Afrobeats",
-        "Latin",
-        "Electronic"
-      ]
+      "genres": ["Trap", "Afrobeats", "Latin", "Electronic"]
     },
     "totalDuration": 4545558,
     "createdAt": "2024-01-01T13:00:00Z",
@@ -2624,15 +2490,9 @@
     ],
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic",
-        "Reflective"
-      ],
+      "feelings": ["Nostalgic", "Reflective"],
       "vibe": 34,
-      "genres": [
-        "Soul",
-        "Afrobeats"
-      ]
+      "genres": ["Soul", "Afrobeats"]
     },
     "totalDuration": 4429975,
     "createdAt": "2024-03-12T19:00:00Z",
@@ -2749,16 +2609,9 @@
     ],
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Insecure",
-        "Reflective",
-        "Frustrated"
-      ],
+      "feelings": ["Insecure", "Reflective", "Frustrated"],
       "vibe": 32,
-      "genres": [
-        "Funk",
-        "Reggae"
-      ]
+      "genres": ["Funk", "Reggae"]
     },
     "totalDuration": 4547707,
     "createdAt": "2024-07-05T21:00:00Z",
@@ -2875,17 +2728,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed",
-        "Proud"
-      ],
+      "feelings": ["Relaxed", "Proud"],
       "vibe": 55,
-      "genres": [
-        "Afrobeats",
-        "Hip-Hop",
-        "R&B",
-        "World"
-      ]
+      "genres": ["Afrobeats", "Hip-Hop", "R&B", "World"]
     },
     "totalDuration": 4599266,
     "createdAt": "2024-04-16T05:00:00Z",
@@ -3002,14 +2847,9 @@
     ],
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Great"
-      ],
+      "feelings": ["Great"],
       "vibe": 69,
-      "genres": [
-        "K-Pop",
-        "Folk"
-      ]
+      "genres": ["K-Pop", "Folk"]
     },
     "totalDuration": 4711652,
     "createdAt": "2024-06-12T08:00:00Z",
@@ -3126,17 +2966,9 @@
     ],
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed",
-        "Proud"
-      ],
+      "feelings": ["Relaxed", "Proud"],
       "vibe": 66,
-      "genres": [
-        "Reggae",
-        "K-Pop",
-        "Metal",
-        "Ambient"
-      ]
+      "genres": ["Reggae", "K-Pop", "Metal", "Ambient"]
     },
     "totalDuration": 4371964,
     "createdAt": "2024-11-09T01:00:00Z",
@@ -3253,14 +3085,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Confident"
-      ],
+      "feelings": ["Confident"],
       "vibe": 52,
-      "genres": [
-        "Jazz",
-        "Ambient"
-      ]
+      "genres": ["Jazz", "Ambient"]
     },
     "totalDuration": 4500407,
     "createdAt": "2024-10-08T00:00:00Z",
@@ -3377,16 +3204,9 @@
     ],
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Reflective",
-        "Relaxed"
-      ],
+      "feelings": ["Reflective", "Relaxed"],
       "vibe": 30,
-      "genres": [
-        "Afrobeats",
-        "World",
-        "Punk"
-      ]
+      "genres": ["Afrobeats", "World", "Punk"]
     },
     "totalDuration": 4178656,
     "createdAt": "2024-11-26T21:00:00Z",
@@ -3503,17 +3323,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic",
-        "Proud",
-        "Great"
-      ],
+      "feelings": ["Optimistic", "Proud", "Great"],
       "vibe": 89,
-      "genres": [
-        "Disco",
-        "Latin",
-        "House"
-      ]
+      "genres": ["Disco", "Latin", "House"]
     },
     "totalDuration": 4427352,
     "createdAt": "2024-02-11T02:00:00Z",
@@ -3630,15 +3442,9 @@
     ],
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Insecure"
-      ],
+      "feelings": ["Insecure"],
       "vibe": 17,
-      "genres": [
-        "Metal",
-        "Blues",
-        "R&B"
-      ]
+      "genres": ["Metal", "Blues", "R&B"]
     },
     "totalDuration": 4547707,
     "createdAt": "2024-09-25T16:00:00Z",
@@ -3755,15 +3561,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud"
-      ],
+      "feelings": ["Proud"],
       "vibe": 99,
-      "genres": [
-        "R&B",
-        "Ambient",
-        "Rock"
-      ]
+      "genres": ["R&B", "Ambient", "Rock"]
     },
     "totalDuration": 4538377,
     "createdAt": "2024-11-20T04:00:00Z",
@@ -3880,15 +3680,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Proud"
-      ],
+      "feelings": ["Proud"],
       "vibe": 46,
-      "genres": [
-        "Rock",
-        "Metal",
-        "World"
-      ]
+      "genres": ["Rock", "Metal", "World"]
     },
     "totalDuration": 4455214,
     "createdAt": "2024-03-12T21:00:00Z",
@@ -4005,14 +3799,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Great"
-      ],
+      "feelings": ["Great"],
       "vibe": 58,
-      "genres": [
-        "Metal",
-        "Trap"
-      ]
+      "genres": ["Metal", "Trap"]
     },
     "totalDuration": 4520243,
     "createdAt": "2024-04-05T21:00:00Z",
@@ -4129,17 +3918,9 @@
     ],
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Optimistic",
-        "Grateful"
-      ],
+      "feelings": ["Optimistic", "Grateful"],
       "vibe": 82,
-      "genres": [
-        "Techno",
-        "Indie",
-        "Ambient",
-        "Soul"
-      ]
+      "genres": ["Techno", "Indie", "Ambient", "Soul"]
     },
     "totalDuration": 4421735,
     "createdAt": "2024-09-07T23:00:00Z",
@@ -4256,17 +4037,9 @@
     ],
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Reflective",
-        "Thoughtful",
-        "Content"
-      ],
+      "feelings": ["Reflective", "Thoughtful", "Content"],
       "vibe": 41,
-      "genres": [
-        "Trap",
-        "R&B",
-        "Classical"
-      ]
+      "genres": ["Trap", "R&B", "Classical"]
     },
     "totalDuration": 4504344,
     "createdAt": "2024-10-03T13:00:00Z",
@@ -4383,16 +4156,9 @@
     ],
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Anxious",
-        "Nostalgic",
-        "Overwhelmed"
-      ],
+      "feelings": ["Anxious", "Nostalgic", "Overwhelmed"],
       "vibe": 34,
-      "genres": [
-        "Country",
-        "Ambient"
-      ]
+      "genres": ["Country", "Ambient"]
     },
     "totalDuration": 4547707,
     "createdAt": "2024-05-27T12:00:00Z",
@@ -4509,14 +4275,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 85,
-      "genres": [
-        "K-Pop",
-        "Funk"
-      ]
+      "genres": ["K-Pop", "Funk"]
     },
     "totalDuration": 4551885,
     "createdAt": "2024-04-20T20:00:00Z",
@@ -4633,16 +4394,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Great",
-        "Relaxed",
-        "Excited"
-      ],
+      "feelings": ["Great", "Relaxed", "Excited"],
       "vibe": 62,
-      "genres": [
-        "Pop",
-        "Indie"
-      ]
+      "genres": ["Pop", "Indie"]
     },
     "totalDuration": 4435650,
     "createdAt": "2024-06-15T06:00:00Z",
@@ -4759,14 +4513,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud"
-      ],
+      "feelings": ["Proud"],
       "vibe": 88,
-      "genres": [
-        "Blues",
-        "Indie"
-      ]
+      "genres": ["Blues", "Indie"]
     },
     "totalDuration": 4479679,
     "createdAt": "2024-02-02T05:00:00Z",
@@ -4883,18 +4632,9 @@
     ],
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed",
-        "Thoughtful",
-        "Reflective"
-      ],
+      "feelings": ["Relaxed", "Thoughtful", "Reflective"],
       "vibe": 44,
-      "genres": [
-        "Indie",
-        "Classical",
-        "Reggae",
-        "R&B"
-      ]
+      "genres": ["Indie", "Classical", "Reggae", "R&B"]
     },
     "totalDuration": 4303926,
     "createdAt": "2024-03-15T03:00:00Z",
@@ -5011,14 +4751,9 @@
     ],
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Confident"
-      ],
+      "feelings": ["Confident"],
       "vibe": 50,
-      "genres": [
-        "Indie",
-        "Techno"
-      ]
+      "genres": ["Indie", "Techno"]
     },
     "totalDuration": 4577588,
     "createdAt": "2024-09-25T11:00:00Z",
@@ -5135,16 +4870,9 @@
     ],
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic"
-      ],
+      "feelings": ["Nostalgic"],
       "vibe": 32,
-      "genres": [
-        "Reggae",
-        "R&B",
-        "Pop",
-        "Trap"
-      ]
+      "genres": ["Reggae", "R&B", "Pop", "Trap"]
     },
     "totalDuration": 4527990,
     "createdAt": "2024-02-11T03:00:00Z",
@@ -5261,18 +4989,9 @@
     ],
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Great",
-        "Optimistic",
-        "Grateful"
-      ],
+      "feelings": ["Great", "Optimistic", "Grateful"],
       "vibe": 68,
-      "genres": [
-        "Indie",
-        "Latin",
-        "Jazz",
-        "Punk"
-      ]
+      "genres": ["Indie", "Latin", "Jazz", "Punk"]
     },
     "totalDuration": 4462670,
     "createdAt": "2024-09-06T20:00:00Z",
@@ -5389,17 +5108,9 @@
     ],
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed",
-        "Reflective"
-      ],
+      "feelings": ["Relaxed", "Reflective"],
       "vibe": 32,
-      "genres": [
-        "House",
-        "Pop",
-        "Ambient",
-        "Punk"
-      ]
+      "genres": ["House", "Pop", "Ambient", "Punk"]
     },
     "totalDuration": 4247889,
     "createdAt": "2024-09-27T15:00:00Z",
@@ -5516,17 +5227,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Great",
-        "Excited",
-        "Optimistic"
-      ],
+      "feelings": ["Great", "Excited", "Optimistic"],
       "vibe": 89,
-      "genres": [
-        "R&B",
-        "Metal",
-        "Reggae"
-      ]
+      "genres": ["R&B", "Metal", "Reggae"]
     },
     "totalDuration": 4486395,
     "createdAt": "2024-04-03T14:00:00Z",
@@ -5643,15 +5346,9 @@
     ],
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 77,
-      "genres": [
-        "Country",
-        "Pop",
-        "Soul"
-      ]
+      "genres": ["Country", "Pop", "Soul"]
     },
     "totalDuration": 4805160,
     "createdAt": "2024-04-10T22:00:00Z",
@@ -5768,15 +5465,9 @@
     ],
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Lonely"
-      ],
+      "feelings": ["Lonely"],
       "vibe": 20,
-      "genres": [
-        "Reggae",
-        "Techno",
-        "Rock"
-      ]
+      "genres": ["Reggae", "Techno", "Rock"]
     },
     "totalDuration": 4547707,
     "createdAt": "2024-05-15T21:00:00Z",
@@ -5893,17 +5584,9 @@
     ],
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed",
-        "Content",
-        "Reflective"
-      ],
+      "feelings": ["Relaxed", "Content", "Reflective"],
       "vibe": 44,
-      "genres": [
-        "Funk",
-        "K-Pop",
-        "Ambient"
-      ]
+      "genres": ["Funk", "K-Pop", "Ambient"]
     },
     "totalDuration": 4307825,
     "createdAt": "2024-04-05T07:00:00Z",
@@ -6020,16 +5703,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic",
-        "Proud"
-      ],
+      "feelings": ["Optimistic", "Proud"],
       "vibe": 97,
-      "genres": [
-        "Metal",
-        "Ambient",
-        "Rock"
-      ]
+      "genres": ["Metal", "Ambient", "Rock"]
     },
     "totalDuration": 4379481,
     "createdAt": "2024-04-07T01:00:00Z",
@@ -6146,16 +5822,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud",
-        "Optimistic",
-        "Great"
-      ],
+      "feelings": ["Proud", "Optimistic", "Great"],
       "vibe": 97,
-      "genres": [
-        "K-Pop",
-        "Metal"
-      ]
+      "genres": ["K-Pop", "Metal"]
     },
     "totalDuration": 4667888,
     "createdAt": "2024-08-14T12:00:00Z",
@@ -6272,17 +5941,9 @@
     ],
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic",
-        "Great",
-        "Excited"
-      ],
+      "feelings": ["Optimistic", "Great", "Excited"],
       "vibe": 86,
-      "genres": [
-        "Latin",
-        "Techno",
-        "Afrobeats"
-      ]
+      "genres": ["Latin", "Techno", "Afrobeats"]
     },
     "totalDuration": 4579118,
     "createdAt": "2024-09-03T15:00:00Z",

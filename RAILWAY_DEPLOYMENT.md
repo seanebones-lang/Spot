@@ -1,153 +1,152 @@
-# Railway Deployment Guide
+# 🚂 Railway Deployment Guide - Spot Music App
 
-## Project Information
+## Quick Start (5 minutes)
 
-- **Project ID**: `109bb4f8-7620-422c-8360-3b0298f9fb90`
-- **Workspace ID**: `16b963d0-f37c-49bc-baa9-efb2eb901503`
-- **Railway Token**: `0be18ca8-43bf-4a21-ae29-b0a5f7903b08`
-
-## Quick Deploy
-
-### Option 1: Railway Dashboard (Recommended)
-
-1. Go to [Railway Dashboard](https://railway.app/project/109bb4f8-7620-422c-8360-3b0298f9fb90)
-2. Click **"+ Create"** or **"Add a Service"**
-3. Select **"GitHub Repo"** or **"Deploy from GitHub"**
-4. Connect your GitHub repository
-5. Railway will auto-detect Next.js and deploy automatically
-
-### Option 2: Railway CLI
+### 1. Install Railway CLI
 
 ```bash
-# Set Railway token
-export RAILWAY_TOKEN="0be18ca8-43bf-4a21-ae29-b0a5f7903b08"
-
-# Link to project
-railway link --project 109bb4f8-7620-422c-8360-3b0298f9fb90
-
-# Deploy
-railway up
+npm i -g @railway/cli
+# OR
+brew install railway
 ```
 
-### Option 3: GitHub Integration (Auto-Deploy)
-
-1. Push your code to GitHub
-2. In Railway dashboard, connect your GitHub repository
-3. Railway will automatically deploy on every push to `main` branch
-
-## Configuration Files
-
-### `railway.toml`
-Already created with Dockerfile build configuration.
-
-### `Dockerfile`
-Multi-stage build optimized for Next.js production.
-
-## Environment Variables
-
-Set these in Railway dashboard under your service → Variables:
-
-### Required
-```env
-# JWT Secret (generate with: openssl rand -base64 32)
-JWT_SECRET=your-jwt-secret-key-change-in-production
-
-# xAI Grok API Key
-XAI_API_KEY=xai-your-api-key-here
-```
-
-### Optional
-```env
-# Node Environment
-NODE_ENV=production
-
-# Port (Railway sets this automatically)
-PORT=3000
-
-# Next.js Telemetry
-NEXT_TELEMETRY_DISABLED=1
-```
-
-## Setting Environment Variables in Railway
-
-1. Go to your service in Railway dashboard
-2. Click on **"Variables"** tab
-3. Click **"+ New Variable"**
-4. Add each variable:
-   - `JWT_SECRET` = (generate a secure random string)
-   - `XAI_API_KEY` = (your xAI API key)
-   - `NODE_ENV` = `production`
-   - `NEXT_TELEMETRY_DISABLED` = `1`
-
-## Build Configuration
-
-Railway will automatically:
-- Detect `Dockerfile` and use it for builds
-- Run `npm ci` to install dependencies
-- Run `npm run build` to build Next.js app
-- Start with `node server.js` (from standalone output)
-
-## Deployment Process
-
-1. **Build**: Railway builds using Dockerfile
-2. **Deploy**: Deploys the built container
-3. **Health Check**: Automatically checks service health
-4. **Domain**: Railway provides a `.railway.app` domain
-
-## Custom Domain (Optional)
-
-1. Go to service → **"Settings"** → **"Networking"**
-2. Click **"Generate Domain"** for Railway domain
-3. Or add custom domain in **"Custom Domains"** section
-
-## Monitoring
-
-- **Logs**: View in Railway dashboard → Service → **"Logs"**
-- **Metrics**: View in **"Observability"** tab
-- **Deployments**: View in **"Deployments"** tab
-
-## Troubleshooting
-
-### Build Fails
-- Check logs in Railway dashboard
-- Verify `Dockerfile` is correct
-- Ensure `package.json` has all dependencies
-
-### Service Won't Start
-- Check environment variables are set
-- Verify `PORT` is set (Railway sets automatically)
-- Check logs for errors
-
-### API Routes Not Working
-- Verify `JWT_SECRET` is set
-- Verify `XAI_API_KEY` is set
-- Check API route logs
-
-## Next Steps After Deployment
-
-1. ✅ Set environment variables
-2. ✅ Verify deployment is running
-3. ✅ Test API endpoints
-4. ✅ Set up custom domain (optional)
-5. ✅ Configure auto-deploy from GitHub
-
-## Useful Commands
+### 2. Authenticate
 
 ```bash
+railway login
+```
+
+### 3. Initialize Project
+
+```bash
+# Option A: Link to existing project
+railway link
+
+# Option B: Create new project
+railway init --name spot-music-api
+```
+
+### 4. Add PostgreSQL Database
+
+```bash
+railway add postgresql
+# Service name: spot-db
+```
+
+### 5. Deploy Application
+
+```bash
+railway up --detach
+```
+
+### 6. Verify Deployment
+
+```bash
+# Check status
+railway status
+
 # View logs
 railway logs
 
-# Open service in browser
+# Open in browser
 railway open
 
-# Check service status
-railway status
-
-# View environment variables
-railway variables
+# Test health endpoint
+curl $(railway domain)/api/health
 ```
 
-## Support
+## Configuration
 
-- Railway Docs: https://docs.railway.app
-- Railway Dashboard: https://railway.app/project/109bb4f8-7620-422c-8360-3b0298f9fb90
+### railway.toml
+
+- ✅ Build command: `prisma generate && npm run build`
+- ✅ Start command: `npm start`
+- ✅ Health check: `/api/health`
+- ✅ Auto-restart on failure
+
+### Environment Variables
+
+Railway automatically sets:
+
+- `DATABASE_URL` (from PostgreSQL service)
+- `PORT` (default: 3000)
+- `NODE_ENV` (from environment)
+
+### Manual Variables (if needed)
+
+```bash
+railway variables set NODE_ENV=production
+railway variables set NEXT_PUBLIC_API_URL=https://your-api.railway.app
+```
+
+## Database Setup
+
+### Run Migrations
+
+```bash
+railway run npx prisma migrate deploy
+```
+
+### Connect to Database
+
+```bash
+railway connect postgresql
+```
+
+### Sync DATABASE_URL to Vercel
+
+After Railway deployment:
+
+1. Get DATABASE_URL from Railway:
+   ```bash
+   railway variables | grep DATABASE_URL
+   ```
+2. Add to Vercel dashboard:
+   - Settings → Environment Variables
+   - Add: `DATABASE_URL` = (Railway value)
+
+## Service Architecture
+
+```
+Railway:
+  ├── spot-db (PostgreSQL)
+  │   └── DATABASE_URL (auto-generated)
+  │
+  └── spot-music-api (Next.js API)
+      ├── /api/health
+      ├── /api/auth/*
+      ├── /api/tracks/*
+      └── Prisma Client (binary engine)
+```
+
+## Troubleshooting
+
+### "Unauthorized" Error
+
+```bash
+railway login  # Re-authenticate
+```
+
+### Database Connection Issues
+
+- Verify PostgreSQL service is running: `railway status`
+- Check DATABASE_URL: `railway variables`
+- Test connection: `railway connect postgresql`
+
+### Build Failures
+
+- Check logs: `railway logs`
+- Verify railway.toml build command
+- Ensure Prisma is configured: `prisma generate`
+
+## Next Steps
+
+1. ✅ Railway deployment complete
+2. ⏭️ Mobile app (Flutter/React Native)
+3. ⏭️ AI/ML enhancements
+4. ⏭️ Monitoring (Sentry)
+5. ⏭️ Scale (Redis, CDN)
+
+---
+
+**Status**: Ready for deployment 🚀

@@ -1,8 +1,5 @@
 {
-  "*.{ts,tsx,js,jsx}": [
-    "eslint --fix"
-  ],
-  "*.{json,md,yml,yaml}": [
-    "eslint --fix --max-warnings=0"
-  ]
+  "*.{ts,tsx,js,jsx}": ["eslint --fix"],
+  "*.{md,yml,yaml}": ["prettier --write"],
+  "*.json": false
 }

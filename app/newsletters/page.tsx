@@ -1,142 +1,149 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Mail, Check } from 'lucide-react';
+import { useState } from "react";
+import { Mail, Check } from "lucide-react";
 
 export default function NewslettersPage() {
   const [subscribed, setSubscribed] = useState(false);
 
   return (
-    <div 
+    <div
       className="min-h-screen bg-spotify-dark text-white p-8"
       style={{
-        minHeight: '100vh',
-        backgroundColor: '#121212',
-        padding: '32px',
-        color: '#FFFFFF'
+        minHeight: "100vh",
+        backgroundColor: "#121212",
+        padding: "32px",
+        color: "#FFFFFF",
       }}
     >
-      <h1 
+      <h1
         className="text-4xl font-bold mb-8"
         style={{
-          fontSize: '32px',
-          lineHeight: '36px',
+          fontSize: "32px",
+          lineHeight: "36px",
           fontWeight: 700,
-          color: '#FFFFFF',
-          marginBottom: '32px'
+          color: "#FFFFFF",
+          marginBottom: "32px",
         }}
       >
         Newsletters
       </h1>
-      <div 
+      <div
         className="max-w-2xl"
         style={{
-          maxWidth: '672px'
+          maxWidth: "672px",
         }}
       >
-        <div 
+        <div
           className="bg-spotify-light-gray rounded-lg p-6 mb-6"
           style={{
-            backgroundColor: '#181818',
-            borderRadius: '8px',
-            padding: '24px',
-            marginBottom: '24px'
+            backgroundColor: "#181818",
+            borderRadius: "8px",
+            padding: "24px",
+            marginBottom: "24px",
           }}
         >
-          <div 
+          <div
             className="flex items-start gap-4 mb-4"
             style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '16px',
-              marginBottom: '16px'
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "16px",
+              marginBottom: "16px",
             }}
           >
-            <Mail 
+            <Mail
               className="w-6 h-6 text-spotify-green flex-shrink-0 mt-1"
               style={{
-                width: '24px',
-                height: '24px',
-                color: '#7209B7',
+                width: "24px",
+                height: "24px",
+                color: "#7209B7",
                 flexShrink: 0,
-                marginTop: '4px'
+                marginTop: "4px",
               }}
             />
             <div>
-              <h3 
+              <h3
                 className="font-bold text-lg mb-2"
                 style={{
-                  fontSize: '18px',
-                  lineHeight: '24px',
+                  fontSize: "18px",
+                  lineHeight: "24px",
                   fontWeight: 700,
-                  color: '#FFFFFF',
-                  marginBottom: '8px'
+                  color: "#FFFFFF",
+                  marginBottom: "8px",
                 }}
               >
                 Stay Updated
               </h3>
-              <p 
+              <p
                 className="text-spotify-text-gray mb-4"
                 style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  color: '#B3B3B3',
-                  marginBottom: '16px'
+                  fontSize: "14px",
+                  lineHeight: "20px",
+                  color: "#B3B3B3",
+                  marginBottom: "16px",
                 }}
               >
-                Get the latest news, new releases, and exclusive content delivered to your inbox.
+                Get the latest news, new releases, and exclusive content
+                delivered to your inbox.
               </p>
               <button
                 onClick={() => setSubscribed(!subscribed)}
                 className={`rounded-full font-medium transition-colors ${
-                  subscribed ? 'bg-spotify-green text-black hover:bg-[#8a1dd0]' : 'bg-white text-black hover:bg-[#f5f5f5]'
+                  subscribed
+                    ? "bg-spotify-green text-black hover:bg-[#8a1dd0]"
+                    : "bg-white text-black hover:bg-[#f5f5f5]"
                 }`}
                 style={{
-                  padding: '12px 24px',
-                  borderRadius: '500px',
-                  fontSize: '14px',
-                  lineHeight: '20px',
+                  padding: "12px 24px",
+                  borderRadius: "500px",
+                  fontSize: "14px",
+                  lineHeight: "20px",
                   fontWeight: 700,
-                  letterSpacing: '0.05em',
-                  transition: 'all 200ms ease-out',
-                  backgroundColor: subscribed ? '#7209B7' : '#FFFFFF',
-                  color: '#000000',
-                  border: 'none',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px'
+                  letterSpacing: "0.05em",
+                  transition: "all 200ms ease-out",
+                  backgroundColor: subscribed ? "#7209B7" : "#FFFFFF",
+                  color: "#000000",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = subscribed ? '#8a1dd0' : '#f5f5f5';
-                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.backgroundColor = subscribed
+                    ? "#8a1dd0"
+                    : "#f5f5f5";
+                  e.currentTarget.style.transform = "scale(1.05)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = subscribed ? '#7209B7' : '#FFFFFF';
-                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.backgroundColor = subscribed
+                    ? "#7209B7"
+                    : "#FFFFFF";
+                  e.currentTarget.style.transform = "scale(1)";
                 }}
               >
                 {subscribed ? (
-                  <span 
+                  <span
                     className="flex items-center gap-2"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px'
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
                     }}
                   >
-                    <Check 
+                    <Check
                       className="w-5 h-5"
                       style={{
-                        width: '20px',
-                        height: '20px',
-                        flexShrink: 0
+                        width: "20px",
+                        height: "20px",
+                        flexShrink: 0,
                       }}
                     />
                     Subscribed
                   </span>
                 ) : (
-                  'Subscribe'
+                  "Subscribe"
                 )}
               </button>
             </div>

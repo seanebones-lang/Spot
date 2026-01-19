@@ -5,16 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  
+
   source:
     repoURL: https://github.com/seanebones-lang/Spot.git
     targetRevision: main
     path: gitops/overlays/production
-    
+
   destination:
     server: https://kubernetes.default.svc
     namespace: spot-production
-    
+
   syncPolicy:
     automated:
       prune: true
@@ -23,5 +23,5 @@ spec:
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
       - PruneLast=true
-    
+
   revisionHistoryLimit: 10

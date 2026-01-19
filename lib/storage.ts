@@ -4,11 +4,16 @@
  * Handles file uploads with integrity verification
  */
 
-import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { createHash } from 'crypto';
-import { logger } from './logger';
-import { getEnv } from './env';
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { createHash } from "crypto";
+import { logger } from "./logger";
+import { getEnv } from "./env";
 
 // Storage client singleton
 let s3Client: S3Client | null = null;
@@ -29,14 +34,14 @@ function getS3Client(): S3Client | null {
 
   if (r2AccountId && r2AccessKeyId && r2SecretAccessKey && r2Endpoint) {
     s3Client = new S3Client({
-      region: 'auto',
+      region: "auto",
       endpoint: r2Endpoint,
       credentials: {
         accessKeyId: r2AccessKeyId,
         secretAccessKey: r2SecretAccessKey,
       },
     });
-    logger.info('Initialized Cloudflare R2 storage client');
+    logger.info("Initialized Cloudflare R2 storage client");
     return s3Client;
   }
 
@@ -53,11 +58,13 @@ function getS3Client(): S3Client | null {
         secretAccessKey: awsSecretAccessKey,
       },
     });
-    logger.info('Initialized AWS S3 storage client');
+    logger.info("Initialized AWS S3 storage client");
     return s3Client;
   }
 
-  logger.warn('No cloud storage configured. File uploads will fail. Set R2_* or AWS_* environment variables.');
+  logger.warn(
+    "No cloud storage configured. File uploads will fail. Set R2_* or AWS_* environment variables.",
+  );
   return null;
 }
 
@@ -72,7 +79,7 @@ function getBucketName(): string | null {
  * Calculate file checksum (SHA-256)
  */
 export function calculateFileHash(buffer: Buffer): string {
-  return createHash('sha256').update(buffer).digest('hex');
+  return createHash("sha256").update(buffer).digest("hex");
 }
 
 /**
@@ -89,13 +96,15 @@ export async function uploadFile(
   buffer: Buffer,
   key: string,
   contentType: string,
-  makePublic: boolean = true
+  makePublic: boolean = true,
 ): Promise<UploadResult> {
   const client = getS3Client();
   const bucket = getBucketName();
 
   if (!client || !bucket) {
-    throw new Error('Cloud storage not configured. Set R2_* or AWS_* environment variables.');
+    throw new Error(
+      "Cloud storage not configured. Set R2_* or AWS_* environment variables.",
+    );
   }
 
   // Calculate file checksum for integrity verification
@@ -107,10 +116,10 @@ export async function uploadFile(
     Key: key,
     Body: buffer,
     ContentType: contentType,
-    ...(makePublic ? { ACL: 'public-read' } : {}), // Public read for R2, use signed URLs for private files
+    ...(makePublic ? { ACL: "public-read" } : {}), // Public read for R2, use signed URLs for private files
     // Store checksum as metadata for verification
     Metadata: {
-      'checksum': checksum,
+      checksum: checksum,
     },
   });
 
@@ -126,11 +135,15 @@ export async function uploadFile(
     url = `${process.env.R2_ENDPOINT}/${bucket}/${key}`;
   } else {
     // AWS S3
-    const region = process.env.AWS_REGION || 'us-east-1';
+    const region = process.env.AWS_REGION || "us-east-1";
     url = `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
   }
 
-  logger.info('File uploaded to cloud storage', { key, size: buffer.length, checksum });
+  logger.info("File uploaded to cloud storage", {
+    key,
+    size: buffer.length,
+    checksum,
+  });
 
   return {
     url,
@@ -143,12 +156,15 @@ export async function uploadFile(
 /**
  * Generate signed URL for private file access (valid for 1 hour)
  */
-export async function getSignedFileUrl(key: string, expiresIn: number = 3600): Promise<string> {
+export async function getSignedFileUrl(
+  key: string,
+  expiresIn: number = 3600,
+): Promise<string> {
   const client = getS3Client();
   const bucket = getBucketName();
 
   if (!client || !bucket) {
-    throw new Error('Cloud storage not configured');
+    throw new Error("Cloud storage not configured");
   }
 
   const command = new GetObjectCommand({
@@ -168,7 +184,7 @@ export async function deleteFile(key: string): Promise<void> {
   const bucket = getBucketName();
 
   if (!client || !bucket) {
-    throw new Error('Cloud storage not configured');
+    throw new Error("Cloud storage not configured");
   }
 
   const command = new DeleteObjectCommand({
@@ -177,13 +193,16 @@ export async function deleteFile(key: string): Promise<void> {
   });
 
   await client.send(command);
-  logger.info('File deleted from cloud storage', { key });
+  logger.info("File deleted from cloud storage", { key });
 }
 
 /**
  * Verify file integrity using stored checksum
  */
-export async function verifyFileIntegrity(key: string, expectedChecksum: string): Promise<boolean> {
+export async function verifyFileIntegrity(
+  key: string,
+  expectedChecksum: string,
+): Promise<boolean> {
   const client = getS3Client();
   const bucket = getBucketName();
 
@@ -201,13 +220,13 @@ export async function verifyFileIntegrity(key: string, expectedChecksum: string)
     const storedChecksum = response.Metadata?.checksum;
 
     if (!storedChecksum) {
-      logger.warn('No checksum metadata found for file', { key });
+      logger.warn("No checksum metadata found for file", { key });
       return false;
     }
 
     return storedChecksum === expectedChecksum;
   } catch (error) {
-    logger.error('Error verifying file integrity', error, { key });
+    logger.error("Error verifying file integrity", error, { key });
     return false;
   }
 }

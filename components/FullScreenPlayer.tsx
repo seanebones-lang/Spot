@@ -1,25 +1,38 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { X, Maximize2, Sliders, Music2 } from 'lucide-react';
-import { usePlayerStore } from '@/stores/playerStore';
-import { audioPlayer } from '@/lib/player';
-import PlayButton from './PlayButton';
-import ProgressBar from './ProgressBar';
-import VolumeControl from './VolumeControl';
-import AudioVisualizer from './AudioVisualizer';
-import AudiophileVisualizer from './AudiophileVisualizer';
-import Equalizer from './Equalizer';
-import AudioQualityBadge from './AudioQualityBadge';
-import { formatDuration } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { X, Maximize2, Sliders, Music2 } from "lucide-react";
+import { usePlayerStore } from "@/stores/playerStore";
+import { audioPlayer } from "@/lib/player";
+import PlayButton from "./PlayButton";
+import ProgressBar from "./ProgressBar";
+import VolumeControl from "./VolumeControl";
+import AudioVisualizer from "./AudioVisualizer";
+import Equalizer from "./Equalizer";
+import AudioQualityBadge from "./AudioQualityBadge";
+import { formatDuration } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+
+// Dynamically import AudiophileVisualizer to prevent SSR issues with Three.js
+const AudiophileVisualizer = dynamic(() => import("./AudiophileVisualizer"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center text-gray-400">
+      Loading visualizer...
+    </div>
+  ),
+});
 
 interface FullScreenPlayerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerProps) {
+export default function FullScreenPlayer({
+  isOpen,
+  onClose,
+}: FullScreenPlayerProps) {
   const {
     currentTrack,
     isPlaying,
@@ -31,17 +44,21 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
   } = usePlayerStore();
 
   const [showEQ, setShowEQ] = useState(false);
-  const [visualizerType, setVisualizerType] = useState<'spectrum' | 'waveform' | 'circular' | 'bars' | 'particles'>('spectrum');
-  const [visualizerColorScheme, setVisualizerColorScheme] = useState<'spotify' | 'rainbow' | 'fire' | 'ocean' | 'neon' | 'monochrome'>('spotify');
+  const [visualizerType, setVisualizerType] = useState<
+    "spectrum" | "waveform" | "circular" | "bars" | "particles"
+  >("spectrum");
+  const [visualizerColorScheme, setVisualizerColorScheme] = useState<
+    "spotify" | "rainbow" | "fire" | "ocean" | "neon" | "monochrome"
+  >("spotify");
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
@@ -68,16 +85,18 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
           onClick={() => setShowEQ(!showEQ)}
           className={cn(
             "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-            showEQ 
-              ? "bg-spotify-green text-black" 
-              : "bg-white/10 text-white hover:bg-white/20"
+            showEQ
+              ? "bg-spotify-green text-black"
+              : "bg-white/10 text-white hover:bg-white/20",
           )}
         >
           <Sliders size={16} className="inline mr-2" />
           EQ
         </button>
         <div className="flex items-center gap-1 bg-white/10 rounded-lg p-1">
-          {(['spectrum', 'waveform', 'circular', 'bars', 'particles'] as const).map((mode) => (
+          {(
+            ["spectrum", "waveform", "circular", "bars", "particles"] as const
+          ).map((mode) => (
             <button
               key={mode}
               onClick={() => setVisualizerType(mode)}
@@ -85,7 +104,7 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
                 "px-3 py-1 rounded text-xs font-medium transition-colors",
                 visualizerType === mode
                   ? "bg-spotify-green text-black"
-                  : "text-white hover:bg-white/20"
+                  : "text-white hover:bg-white/20",
               )}
             >
               {mode.charAt(0).toUpperCase() + mode.slice(1)}
@@ -99,7 +118,7 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
         {!showEQ && audioPipeline ? (
           // GLSL Shader Visualizer View (4K capable)
           <div className="w-full max-w-6xl h-full max-h-[600px]">
-            <AudiophileVisualizer 
+            <AudiophileVisualizer
               type={visualizerType}
               colorScheme={visualizerColorScheme}
               width={1920}
@@ -135,7 +154,9 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
       {/* Track Info */}
       <div className="px-12 pb-8 text-center min-h-[200px]">
         <h2 className="text-4xl font-bold mb-2">{currentTrack.name}</h2>
-        <p className="text-xl text-spotify-text-gray mb-4">{currentTrack.artist}</p>
+        <p className="text-xl text-spotify-text-gray mb-4">
+          {currentTrack.artist}
+        </p>
 
         {/* Progress Bar */}
         <div className="mb-6">
@@ -153,10 +174,7 @@ export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerPr
         {/* Controls */}
         <div className="flex items-center justify-center gap-6 mb-6">
           <div className="w-32">
-            <VolumeControl
-              volume={volume}
-              onVolumeChange={setVolume}
-            />
+            <VolumeControl volume={volume} onVolumeChange={setVolume} />
           </div>
           <PlayButton
             isPlaying={isPlaying}

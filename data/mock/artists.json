@@ -6,10 +6,7 @@
     "followers": 23630951,
     "verified": true,
     "bio": "Award-winning artist specializing in K-Pop, Pop",
-    "genre": [
-      "K-Pop",
-      "Pop"
-    ]
+    "genre": ["K-Pop", "Pop"]
   },
   {
     "id": "artist-2",
@@ -18,11 +15,7 @@
     "followers": 37824696,
     "verified": true,
     "bio": "Award-winning artist specializing in Punk, Techno",
-    "genre": [
-      "Punk",
-      "Techno",
-      "Trap"
-    ]
+    "genre": ["Punk", "Techno", "Trap"]
   },
   {
     "id": "artist-3",
@@ -31,11 +24,7 @@
     "followers": 17062466,
     "verified": true,
     "bio": "Award-winning artist specializing in Afrobeats, Reggae",
-    "genre": [
-      "Afrobeats",
-      "Reggae",
-      "Country"
-    ]
+    "genre": ["Afrobeats", "Reggae", "Country"]
   },
   {
     "id": "artist-4",
@@ -44,9 +33,7 @@
     "followers": 32655121,
     "verified": false,
     "bio": "Award-winning artist specializing in Punk",
-    "genre": [
-      "Punk"
-    ]
+    "genre": ["Punk"]
   },
   {
     "id": "artist-5",
@@ -55,9 +42,7 @@
     "followers": 14426593,
     "verified": false,
     "bio": "Award-winning artist specializing in Soul",
-    "genre": [
-      "Soul"
-    ]
+    "genre": ["Soul"]
   },
   {
     "id": "artist-6",
@@ -66,11 +51,7 @@
     "followers": 14797121,
     "verified": false,
     "bio": "Award-winning artist specializing in Indie, Metal",
-    "genre": [
-      "Indie",
-      "Metal",
-      "Blues"
-    ]
+    "genre": ["Indie", "Metal", "Blues"]
   },
   {
     "id": "artist-7",
@@ -79,11 +60,7 @@
     "followers": 36395088,
     "verified": true,
     "bio": "Award-winning artist specializing in Indie, Metal",
-    "genre": [
-      "Indie",
-      "Metal",
-      "Classical"
-    ]
+    "genre": ["Indie", "Metal", "Classical"]
   },
   {
     "id": "artist-8",
@@ -92,11 +69,7 @@
     "followers": 34013233,
     "verified": true,
     "bio": "Award-winning artist specializing in Classical, Electronic",
-    "genre": [
-      "Classical",
-      "Electronic",
-      "Afrobeats"
-    ]
+    "genre": ["Classical", "Electronic", "Afrobeats"]
   },
   {
     "id": "artist-9",
@@ -105,10 +78,7 @@
     "followers": 3352889,
     "verified": false,
     "bio": "Award-winning artist specializing in Funk, House",
-    "genre": [
-      "Funk",
-      "House"
-    ]
+    "genre": ["Funk", "House"]
   },
   {
     "id": "artist-10",
@@ -117,10 +87,7 @@
     "followers": 22120750,
     "verified": true,
     "bio": "Award-winning artist specializing in Hip-Hop, Funk",
-    "genre": [
-      "Hip-Hop",
-      "Funk"
-    ]
+    "genre": ["Hip-Hop", "Funk"]
   },
   {
     "id": "artist-11",
@@ -129,10 +96,7 @@
     "followers": 35797837,
     "verified": true,
     "bio": "Award-winning artist specializing in Punk, Soul",
-    "genre": [
-      "Punk",
-      "Soul"
-    ]
+    "genre": ["Punk", "Soul"]
   },
   {
     "id": "artist-12",
@@ -141,11 +105,7 @@
     "followers": 45553758,
     "verified": true,
     "bio": "Award-winning artist specializing in Metal, Afrobeats",
-    "genre": [
-      "Metal",
-      "Afrobeats",
-      "Blues"
-    ]
+    "genre": ["Metal", "Afrobeats", "Blues"]
   },
   {
     "id": "artist-13",
@@ -154,9 +114,7 @@
     "followers": 15057018,
     "verified": true,
     "bio": "Award-winning artist specializing in Indie",
-    "genre": [
-      "Indie"
-    ]
+    "genre": ["Indie"]
   },
   {
     "id": "artist-14",
@@ -165,9 +123,7 @@
     "followers": 45828233,
     "verified": false,
     "bio": "Award-winning artist specializing in Metal",
-    "genre": [
-      "Metal"
-    ]
+    "genre": ["Metal"]
   },
   {
     "id": "artist-15",
@@ -176,11 +132,7 @@
     "followers": 27248861,
     "verified": true,
     "bio": "Award-winning artist specializing in Techno, Blues",
-    "genre": [
-      "Techno",
-      "Blues",
-      "K-Pop"
-    ]
+    "genre": ["Techno", "Blues", "K-Pop"]
   },
   {
     "id": "artist-16",
@@ -189,10 +141,7 @@
     "followers": 33694051,
     "verified": true,
     "bio": "Award-winning artist specializing in Trap, Disco",
-    "genre": [
-      "Trap",
-      "Disco"
-    ]
+    "genre": ["Trap", "Disco"]
   },
   {
     "id": "artist-17",
@@ -201,11 +150,7 @@
     "followers": 25146031,
     "verified": true,
     "bio": "Award-winning artist specializing in Latin, Metal",
-    "genre": [
-      "Latin",
-      "Metal",
-      "Hip-Hop"
-    ]
+    "genre": ["Latin", "Metal", "Hip-Hop"]
   },
   {
     "id": "artist-18",
@@ -214,11 +159,7 @@
     "followers": 17014126,
     "verified": true,
     "bio": "Award-winning artist specializing in Trap, Metal",
-    "genre": [
-      "Trap",
-      "Metal",
-      "Soul"
-    ]
+    "genre": ["Trap", "Metal", "Soul"]
   },
   {
     "id": "artist-19",
@@ -227,10 +168,7 @@
     "followers": 35889739,
     "verified": true,
     "bio": "Award-winning artist specializing in Trap, Disco",
-    "genre": [
-      "Trap",
-      "Disco"
-    ]
+    "genre": ["Trap", "Disco"]
   },
   {
     "id": "artist-20",
@@ -239,11 +177,7 @@
     "followers": 45763216,
     "verified": true,
     "bio": "Award-winning artist specializing in Classical, Blues",
-    "genre": [
-      "Classical",
-      "Blues",
-      "World"
-    ]
+    "genre": ["Classical", "Blues", "World"]
   },
   {
     "id": "artist-21",
@@ -252,9 +186,7 @@
     "followers": 38571388,
     "verified": true,
     "bio": "Award-winning artist specializing in Trap",
-    "genre": [
-      "Trap"
-    ]
+    "genre": ["Trap"]
   },
   {
     "id": "artist-22",
@@ -263,10 +195,7 @@
     "followers": 40661819,
     "verified": false,
     "bio": "Award-winning artist specializing in Jazz, Classical",
-    "genre": [
-      "Jazz",
-      "Classical"
-    ]
+    "genre": ["Jazz", "Classical"]
   },
   {
     "id": "artist-23",
@@ -275,11 +204,7 @@
     "followers": 13292116,
     "verified": true,
     "bio": "Award-winning artist specializing in Blues, Indie",
-    "genre": [
-      "Blues",
-      "Indie",
-      "House"
-    ]
+    "genre": ["Blues", "Indie", "House"]
   },
   {
     "id": "artist-24",
@@ -288,9 +213,7 @@
     "followers": 9605991,
     "verified": true,
     "bio": "Award-winning artist specializing in R&B",
-    "genre": [
-      "R&B"
-    ]
+    "genre": ["R&B"]
   },
   {
     "id": "artist-25",
@@ -299,9 +222,7 @@
     "followers": 17424234,
     "verified": true,
     "bio": "Award-winning artist specializing in Funk",
-    "genre": [
-      "Funk"
-    ]
+    "genre": ["Funk"]
   },
   {
     "id": "artist-26",
@@ -310,10 +231,7 @@
     "followers": 12281256,
     "verified": true,
     "bio": "Award-winning artist specializing in Pop, Hip-Hop",
-    "genre": [
-      "Pop",
-      "Hip-Hop"
-    ]
+    "genre": ["Pop", "Hip-Hop"]
   },
   {
     "id": "artist-27",
@@ -322,10 +240,7 @@
     "followers": 9929261,
     "verified": true,
     "bio": "Award-winning artist specializing in Country, Folk",
-    "genre": [
-      "Country",
-      "Folk"
-    ]
+    "genre": ["Country", "Folk"]
   },
   {
     "id": "artist-28",
@@ -334,11 +249,7 @@
     "followers": 43274924,
     "verified": false,
     "bio": "Award-winning artist specializing in Soul, K-Pop",
-    "genre": [
-      "Soul",
-      "K-Pop",
-      "Trap"
-    ]
+    "genre": ["Soul", "K-Pop", "Trap"]
   },
   {
     "id": "artist-29",
@@ -347,9 +258,7 @@
     "followers": 4729872,
     "verified": true,
     "bio": "Award-winning artist specializing in Electronic",
-    "genre": [
-      "Electronic"
-    ]
+    "genre": ["Electronic"]
   },
   {
     "id": "artist-30",
@@ -358,9 +267,7 @@
     "followers": 22566075,
     "verified": true,
     "bio": "Award-winning artist specializing in Trap",
-    "genre": [
-      "Trap"
-    ]
+    "genre": ["Trap"]
   },
   {
     "id": "artist-31",
@@ -369,10 +276,7 @@
     "followers": 23871555,
     "verified": false,
     "bio": "Award-winning artist specializing in Techno, Indie",
-    "genre": [
-      "Techno",
-      "Indie"
-    ]
+    "genre": ["Techno", "Indie"]
   },
   {
     "id": "artist-32",
@@ -381,9 +285,7 @@
     "followers": 10229878,
     "verified": true,
     "bio": "Award-winning artist specializing in K-Pop",
-    "genre": [
-      "K-Pop"
-    ]
+    "genre": ["K-Pop"]
   },
   {
     "id": "artist-33",
@@ -392,11 +294,7 @@
     "followers": 11530130,
     "verified": true,
     "bio": "Award-winning artist specializing in Jazz, Trap",
-    "genre": [
-      "Jazz",
-      "Trap",
-      "Funk"
-    ]
+    "genre": ["Jazz", "Trap", "Funk"]
   },
   {
     "id": "artist-34",
@@ -405,11 +303,7 @@
     "followers": 48445912,
     "verified": true,
     "bio": "Award-winning artist specializing in Jazz, World",
-    "genre": [
-      "Jazz",
-      "World",
-      "Techno"
-    ]
+    "genre": ["Jazz", "World", "Techno"]
   },
   {
     "id": "artist-35",
@@ -418,10 +312,7 @@
     "followers": 20874384,
     "verified": true,
     "bio": "Award-winning artist specializing in Pop, World",
-    "genre": [
-      "Pop",
-      "World"
-    ]
+    "genre": ["Pop", "World"]
   },
   {
     "id": "artist-36",
@@ -430,9 +321,7 @@
     "followers": 2433280,
     "verified": false,
     "bio": "Award-winning artist specializing in Ambient",
-    "genre": [
-      "Ambient"
-    ]
+    "genre": ["Ambient"]
   },
   {
     "id": "artist-37",
@@ -441,11 +330,7 @@
     "followers": 19076069,
     "verified": false,
     "bio": "Award-winning artist specializing in World, Funk",
-    "genre": [
-      "World",
-      "Funk",
-      "Folk"
-    ]
+    "genre": ["World", "Funk", "Folk"]
   },
   {
     "id": "artist-38",
@@ -454,11 +339,7 @@
     "followers": 14765959,
     "verified": true,
     "bio": "Award-winning artist specializing in Trap, Electronic",
-    "genre": [
-      "Trap",
-      "Electronic",
-      "Funk"
-    ]
+    "genre": ["Trap", "Electronic", "Funk"]
   },
   {
     "id": "artist-39",
@@ -467,9 +348,7 @@
     "followers": 45459323,
     "verified": true,
     "bio": "Award-winning artist specializing in Trap",
-    "genre": [
-      "Trap"
-    ]
+    "genre": ["Trap"]
   },
   {
     "id": "artist-40",
@@ -478,10 +357,7 @@
     "followers": 31104100,
     "verified": true,
     "bio": "Award-winning artist specializing in Techno, Metal",
-    "genre": [
-      "Techno",
-      "Metal"
-    ]
+    "genre": ["Techno", "Metal"]
   },
   {
     "id": "artist-41",
@@ -490,9 +366,7 @@
     "followers": 2952376,
     "verified": false,
     "bio": "Award-winning artist specializing in Funk",
-    "genre": [
-      "Funk"
-    ]
+    "genre": ["Funk"]
   },
   {
     "id": "artist-42",
@@ -501,10 +375,7 @@
     "followers": 36534367,
     "verified": true,
     "bio": "Award-winning artist specializing in World, Electronic",
-    "genre": [
-      "World",
-      "Electronic"
-    ]
+    "genre": ["World", "Electronic"]
   },
   {
     "id": "artist-43",
@@ -513,10 +384,7 @@
     "followers": 37175124,
     "verified": true,
     "bio": "Award-winning artist specializing in Electronic, Latin",
-    "genre": [
-      "Electronic",
-      "Latin"
-    ]
+    "genre": ["Electronic", "Latin"]
   },
   {
     "id": "artist-44",
@@ -525,11 +393,7 @@
     "followers": 14184720,
     "verified": false,
     "bio": "Award-winning artist specializing in Pop, Indie",
-    "genre": [
-      "Pop",
-      "Indie",
-      "Techno"
-    ]
+    "genre": ["Pop", "Indie", "Techno"]
   },
   {
     "id": "artist-45",
@@ -538,10 +402,7 @@
     "followers": 36804906,
     "verified": true,
     "bio": "Award-winning artist specializing in R&B, Funk",
-    "genre": [
-      "R&B",
-      "Funk"
-    ]
+    "genre": ["R&B", "Funk"]
   },
   {
     "id": "artist-46",
@@ -550,10 +411,7 @@
     "followers": 8248085,
     "verified": false,
     "bio": "Award-winning artist specializing in Folk, Techno",
-    "genre": [
-      "Folk",
-      "Techno"
-    ]
+    "genre": ["Folk", "Techno"]
   },
   {
     "id": "artist-47",
@@ -562,11 +420,7 @@
     "followers": 44019781,
     "verified": true,
     "bio": "Award-winning artist specializing in Reggae, Folk",
-    "genre": [
-      "Reggae",
-      "Folk",
-      "House"
-    ]
+    "genre": ["Reggae", "Folk", "House"]
   },
   {
     "id": "artist-48",
@@ -575,10 +429,7 @@
     "followers": 31051497,
     "verified": false,
     "bio": "Award-winning artist specializing in Hip-Hop, R&B",
-    "genre": [
-      "Hip-Hop",
-      "R&B"
-    ]
+    "genre": ["Hip-Hop", "R&B"]
   },
   {
     "id": "artist-49",
@@ -587,11 +438,7 @@
     "followers": 28815485,
     "verified": true,
     "bio": "Award-winning artist specializing in Latin, K-Pop",
-    "genre": [
-      "Latin",
-      "K-Pop",
-      "Classical"
-    ]
+    "genre": ["Latin", "K-Pop", "Classical"]
   },
   {
     "id": "artist-50",
@@ -600,10 +447,6 @@
     "followers": 3097178,
     "verified": true,
     "bio": "Award-winning artist specializing in Soul, Blues",
-    "genre": [
-      "Soul",
-      "Blues",
-      "World"
-    ]
+    "genre": ["Soul", "Blues", "World"]
   }
 ]

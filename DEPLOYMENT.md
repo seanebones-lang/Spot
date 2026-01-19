@@ -27,6 +27,7 @@ npm start
 Railway is ideal for deploying Next.js applications with full Docker support and easy database integration.
 
 #### Prerequisites
+
 1. **Railway Account:** Sign up at [railway.app](https://railway.app)
 2. **Git Repository:** Push your code to GitHub, GitLab, or Bitbucket
 3. **Railway CLI (Optional):** `npm i -g @railway/cli`
@@ -87,6 +88,7 @@ railway up
 #### Railway Configuration Files
 
 The project includes:
+
 - **`railway.toml`** - Railway-specific configuration
 - **`.railwayignore`** - Files to exclude from deployment
 - **`Dockerfile`** - Docker build configuration (if using Docker)
@@ -124,6 +126,7 @@ RAILWAY_ENVIRONMENT=production
 #### Automatic Deployments
 
 Railway automatically deploys when you push to your connected branch:
+
 - Connect your GitHub repository
 - Select branch (usually `main` or `master`)
 - Every push triggers a new deployment
@@ -131,6 +134,7 @@ Railway automatically deploys when you push to your connected branch:
 #### Rollback
 
 If deployment fails:
+
 1. Go to your service in Railway dashboard
 2. Click "Deployments"
 3. Find previous successful deployment
@@ -146,16 +150,19 @@ Both work - Docker is already configured in this project.
 #### Troubleshooting
 
 **Build Fails:**
+
 - Check build logs in Railway dashboard
 - Verify `package.json` scripts are correct
 - Ensure all dependencies are listed
 
 **App Crashes:**
+
 - Check runtime logs
 - Verify `PORT` environment variable is set
 - Ensure `next.config.js` has `output: 'standalone'`
 
 **Static Files Not Loading:**
+
 - Verify `public/` folder is included
 - Check `next.config.js` image domains
 - Ensure build completes successfully
@@ -226,6 +233,7 @@ CMD ["node", "server.js"]
 ```
 
 Build and run:
+
 ```bash
 docker build -t empulse-music .
 docker run -p 3000:3000 empulse-music
@@ -234,6 +242,7 @@ docker run -p 3000:3000 empulse-music
 ## Pre-Deployment Checklist
 
 ### General Checklist
+
 - [ ] All environment variables configured
 - [ ] Build completes successfully (`npm run build`)
 - [ ] No console errors
@@ -245,6 +254,7 @@ docker run -p 3000:3000 empulse-music
 - [ ] SSL certificate active
 
 ### Railway-Specific Checklist
+
 - [ ] `railway.toml` configured (already done)
 - [ ] `.railwayignore` file created (already done)
 - [ ] `Dockerfile` tested locally (optional)

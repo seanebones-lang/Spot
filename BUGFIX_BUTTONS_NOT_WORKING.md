@@ -30,6 +30,7 @@ Switched from React.lazy() + Suspense to **Next.js dynamic imports**, which:
 ### Changes Made
 
 **Before:**
+
 ```tsx
 import { lazy, Suspense } from 'react';
 
@@ -44,6 +45,7 @@ const Equalizer = lazy(() => import('./Equalizer'));
 ```
 
 **After:**
+
 ```tsx
 import dynamic from 'next/dynamic';
 

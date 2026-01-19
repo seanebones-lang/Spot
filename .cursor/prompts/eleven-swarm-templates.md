@@ -187,6 +187,7 @@ Deploy: terraform apply with approval
 ## Response Format
 
 Eleven will respond with:
+
 1. **Agent Assignment**: Which agents will work on what
 2. **Analysis**: Detailed findings from each agent
 3. **Action Plan**: Step-by-step implementation

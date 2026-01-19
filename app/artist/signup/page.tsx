@@ -1,23 +1,64 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useArtistSignupStore } from '@/stores/artistSignupStore';
-import { getUserFriendlyError, formatErrorWithRecovery, getErrorRecovery } from '@/lib/errorMessages';
-import { Check, FileText, Download, AlertCircle, Music, Mic, BookOpen, Radio } from 'lucide-react';
+import { useState } from "react";
+import { useArtistSignupStore } from "@/stores/artistSignupStore";
+import {
+  getUserFriendlyError,
+  formatErrorWithRecovery,
+  getErrorRecovery,
+} from "@/lib/errorMessages";
+import {
+  Check,
+  FileText,
+  Download,
+  AlertCircle,
+  Music,
+  Mic,
+  BookOpen,
+  Radio,
+} from "lucide-react";
 
 const legalDocuments = [
-  { id: 'artist-agreement', name: 'Artist Agreement', required: true },
-  { id: 'payment-terms', name: 'Payment Terms & Conditions', required: true },
-  { id: 'ip-rights', name: 'Intellectual Property Rights Agreement', required: true },
-  { id: 'revenue-share', name: 'Revenue Share Agreement', required: true },
-  { id: 'terms-of-service', name: 'Platform Terms of Service (Artist)', required: true },
+  { id: "artist-agreement", name: "Artist Agreement", required: true },
+  { id: "payment-terms", name: "Payment Terms & Conditions", required: true },
+  {
+    id: "ip-rights",
+    name: "Intellectual Property Rights Agreement",
+    required: true,
+  },
+  { id: "revenue-share", name: "Revenue Share Agreement", required: true },
+  {
+    id: "terms-of-service",
+    name: "Platform Terms of Service (Artist)",
+    required: true,
+  },
 ];
 
 const mediumOptions = [
-  { id: 'artist' as const, label: 'Musician/Artist', icon: Music, description: 'Upload tracks, albums, EPs, and LPs' },
-  { id: 'podcaster' as const, label: 'Podcaster', icon: Mic, description: 'Upload and manage podcast episodes' },
-  { id: 'audiobook' as const, label: 'Audiobook Creator', icon: BookOpen, description: 'Upload and distribute audiobooks' },
-  { id: 'radio' as const, label: 'Radio Station Host', icon: Radio, description: 'Manage radio station content' },
+  {
+    id: "artist" as const,
+    label: "Musician/Artist",
+    icon: Music,
+    description: "Upload tracks, albums, EPs, and LPs",
+  },
+  {
+    id: "podcaster" as const,
+    label: "Podcaster",
+    icon: Mic,
+    description: "Upload and manage podcast episodes",
+  },
+  {
+    id: "audiobook" as const,
+    label: "Audiobook Creator",
+    icon: BookOpen,
+    description: "Upload and distribute audiobooks",
+  },
+  {
+    id: "radio" as const,
+    label: "Radio Station Host",
+    icon: Radio,
+    description: "Manage radio station content",
+  },
 ];
 
 export default function ArtistSignupPage() {
@@ -37,53 +78,58 @@ export default function ArtistSignupPage() {
   } = useArtistSignupStore();
 
   const [w9Data, setW9Data] = useState({
-    ssn: '',
-    ein: '',
-    businessName: '',
-    address: '',
-    taxClassification: '',
+    ssn: "",
+    ein: "",
+    businessName: "",
+    address: "",
+    taxClassification: "",
     completed: false,
   });
-  const [digitalSignature, setDigitalSignature] = useState('');
+  const [digitalSignature, setDigitalSignature] = useState("");
   const [accountInfo, setAccountInfo] = useState({
-    artistName: '',
-    email: '',
-    password: '',
+    artistName: "",
+    email: "",
+    password: "",
   });
-  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+  const [validationErrors, setValidationErrors] = useState<
+    Record<string, string>
+  >({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const allDocumentsSigned = legalDocuments.every(doc => documentsSigned.includes(doc.id));
+  const allDocumentsSigned = legalDocuments.every((doc) =>
+    documentsSigned.includes(doc.id),
+  );
 
   // Validation function for Step 2 (Account Creation)
   const validateStep2 = (): boolean => {
     const errors: Record<string, string> = {};
 
     if (!accountInfo.artistName.trim()) {
-      errors.artistName = 'Artist/Management name is required';
+      errors.artistName = "Artist/Management name is required";
     } else if (accountInfo.artistName.trim().length < 2) {
-      errors.artistName = 'Name must be at least 2 characters';
+      errors.artistName = "Name must be at least 2 characters";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!accountInfo.email) {
-      errors.email = 'Email address is required';
+      errors.email = "Email address is required";
     } else if (!emailRegex.test(accountInfo.email)) {
-      errors.email = 'Please enter a valid email address (e.g., name@example.com)';
+      errors.email =
+        "Please enter a valid email address (e.g., name@example.com)";
     }
 
     if (!accountInfo.password) {
-      errors.password = 'Password is required';
+      errors.password = "Password is required";
     } else if (accountInfo.password.length < 8) {
-      errors.password = 'Password must be at least 8 characters';
+      errors.password = "Password must be at least 8 characters";
     } else if (!/(?=.*[a-z])/.test(accountInfo.password)) {
-      errors.password = 'Password must contain at least one lowercase letter';
+      errors.password = "Password must contain at least one lowercase letter";
     } else if (!/(?=.*[A-Z])/.test(accountInfo.password)) {
-      errors.password = 'Password must contain at least one uppercase letter';
+      errors.password = "Password must contain at least one uppercase letter";
     } else if (!/(?=.*\d)/.test(accountInfo.password)) {
-      errors.password = 'Password must contain at least one number';
+      errors.password = "Password must contain at least one number";
     }
 
     setValidationErrors(errors);
@@ -99,7 +145,7 @@ export default function ArtistSignupPage() {
 
   const handleSubmit = async () => {
     if (!allDocumentsSigned || !w9Completed || !digitalSignature.trim()) {
-      setSubmitError('Please complete all required fields');
+      setSubmitError("Please complete all required fields");
       return;
     }
 
@@ -108,7 +154,7 @@ export default function ArtistSignupPage() {
 
     try {
       // Get auth token from store (user should be logged in)
-      const token = localStorage.getItem('auth-storage');
+      const token = localStorage.getItem("auth-storage");
       let authToken = null;
       if (token) {
         try {
@@ -120,18 +166,20 @@ export default function ArtistSignupPage() {
       }
 
       if (!authToken) {
-        setSubmitError(getUserFriendlyError('AUTH_REQUIRED'));
+        setSubmitError(getUserFriendlyError("AUTH_REQUIRED"));
         setIsSubmitting(false);
         return;
       }
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const endpoint = apiUrl ? `${apiUrl}/api/artist/signup` : '/api/artist/signup';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const endpoint = apiUrl
+        ? `${apiUrl}/api/artist/signup`
+        : "/api/artist/signup";
       const response = await fetch(endpoint, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({
           selectedMediums,
@@ -151,15 +199,16 @@ export default function ArtistSignupPage() {
 
       if (!response.ok) {
         // Use server error message if available, otherwise map error code
-        const errorMessage = result.error || result.errorCode || 'Failed to submit application';
+        const errorMessage =
+          result.error || result.errorCode || "Failed to submit application";
         throw new Error(errorMessage);
       }
 
       // Success - update approval status
-      setApprovalStatus('pending');
+      setApprovalStatus("pending");
       setCurrentStep(7);
     } catch (error) {
-      console.error('Signup submission error:', error);
+      console.error("Signup submission error:", error);
       // Use user-friendly error message
       const { message } = formatErrorWithRecovery(error);
       setSubmitError(message);
@@ -170,7 +219,9 @@ export default function ArtistSignupPage() {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8">Artist Signup - Legal Compliance</h1>
+      <h1 className="text-4xl font-bold mb-8">
+        Artist Signup - Legal Compliance
+      </h1>
 
       {/* Progress Indicator */}
       <div className="mb-8">
@@ -180,8 +231,8 @@ export default function ArtistSignupPage() {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
                   step <= currentStep
-                    ? 'bg-spotify-green text-black'
-                    : 'bg-spotify-light-gray text-spotify-text-gray'
+                    ? "bg-spotify-green text-black"
+                    : "bg-spotify-light-gray text-spotify-text-gray"
                 }`}
               >
                 {step < currentStep ? <Check size={20} /> : step}
@@ -189,7 +240,9 @@ export default function ArtistSignupPage() {
               {step < 7 && (
                 <div
                   className={`w-16 h-1 mx-1 ${
-                    step < currentStep ? 'bg-spotify-green' : 'bg-spotify-light-gray'
+                    step < currentStep
+                      ? "bg-spotify-green"
+                      : "bg-spotify-light-gray"
                   }`}
                 />
               )}
@@ -210,9 +263,12 @@ export default function ArtistSignupPage() {
       {/* Step 1: Medium Selection */}
       {currentStep === 1 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Step 1: Select Your Creator Mediums</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Step 1: Select Your Creator Mediums
+          </h2>
           <p className="text-sm text-white/80 mb-6">
-            Select all the mediums you want to create content for. You can select multiple options.
+            Select all the mediums you want to create content for. You can
+            select multiple options.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -225,31 +281,45 @@ export default function ArtistSignupPage() {
                   onClick={() => toggleMedium(medium.id)}
                   className={`p-6 rounded-lg border-2 transition-all text-left ${
                     isSelected
-                      ? 'border-spotify-green bg-spotify-green/10'
-                      : 'border-spotify-light-gray bg-spotify-dark-gray hover:border-white/30'
+                      ? "border-spotify-green bg-spotify-green/10"
+                      : "border-spotify-light-gray bg-spotify-dark-gray hover:border-white/30"
                   }`}
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`p-3 rounded-lg ${
-                      isSelected ? 'bg-spotify-green/20' : 'bg-spotify-light-gray'
-                    }`}>
-                      <Icon 
-                        size={32} 
-                        className={isSelected ? 'text-spotify-green' : 'text-spotify-text-gray'} 
+                    <div
+                      className={`p-3 rounded-lg ${
+                        isSelected
+                          ? "bg-spotify-green/20"
+                          : "bg-spotify-light-gray"
+                      }`}
+                    >
+                      <Icon
+                        size={32}
+                        className={
+                          isSelected
+                            ? "text-spotify-green"
+                            : "text-spotify-text-gray"
+                        }
                       />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="font-bold text-lg">{medium.label}</h3>
-                        <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                          isSelected 
-                            ? 'border-spotify-green bg-spotify-green' 
-                            : 'border-spotify-text-gray bg-transparent'
-                        }`}>
-                          {isSelected && <Check size={14} className="text-black" />}
+                        <div
+                          className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                            isSelected
+                              ? "border-spotify-green bg-spotify-green"
+                              : "border-spotify-text-gray bg-transparent"
+                          }`}
+                        >
+                          {isSelected && (
+                            <Check size={14} className="text-black" />
+                          )}
                         </div>
                       </div>
-                      <p className="text-sm text-spotify-text-gray">{medium.description}</p>
+                      <p className="text-sm text-spotify-text-gray">
+                        {medium.description}
+                      </p>
                     </div>
                   </div>
                 </button>
@@ -260,7 +330,10 @@ export default function ArtistSignupPage() {
           {selectedMediums.length === 0 && (
             <div className="mb-6 p-4 bg-yellow-600/20 border border-yellow-600/50 rounded-lg">
               <p className="text-sm text-white/80">
-                <strong className="text-yellow-500">Please select at least one medium</strong> to continue.
+                <strong className="text-yellow-500">
+                  Please select at least one medium
+                </strong>{" "}
+                to continue.
               </p>
             </div>
           )}
@@ -281,7 +354,10 @@ export default function ArtistSignupPage() {
           <h2 className="text-2xl font-bold mb-4">Step 2: Account Creation</h2>
           <div className="space-y-4">
             <div>
-              <label htmlFor="artistName" className="block text-sm font-medium mb-2">
+              <label
+                htmlFor="artistName"
+                className="block text-sm font-medium mb-2"
+              >
                 Artist/Management Name
               </label>
               <input
@@ -289,25 +365,37 @@ export default function ArtistSignupPage() {
                 type="text"
                 value={accountInfo.artistName}
                 onChange={(e) => {
-                  setAccountInfo({ ...accountInfo, artistName: e.target.value });
+                  setAccountInfo({
+                    ...accountInfo,
+                    artistName: e.target.value,
+                  });
                   // Clear error when user starts typing
                   if (validationErrors.artistName) {
-                    setValidationErrors({ ...validationErrors, artistName: '' });
+                    setValidationErrors({
+                      ...validationErrors,
+                      artistName: "",
+                    });
                   }
                 }}
-                onBlur={() => handleBlur('artistName')}
+                onBlur={() => handleBlur("artistName")}
                 className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
                   touched.artistName && validationErrors.artistName
-                    ? 'border-2 border-red-500 focus:ring-red-500'
-                    : 'focus:ring-spotify-green'
+                    ? "border-2 border-red-500 focus:ring-red-500"
+                    : "focus:ring-spotify-green"
                 }`}
                 placeholder="Enter artist or management name"
-                aria-invalid={validationErrors.artistName ? 'true' : 'false'}
-                aria-describedby={validationErrors.artistName ? 'artistName-error' : undefined}
+                aria-invalid={validationErrors.artistName ? "true" : "false"}
+                aria-describedby={
+                  validationErrors.artistName ? "artistName-error" : undefined
+                }
                 required
               />
               {touched.artistName && validationErrors.artistName && (
-                <p id="artistName-error" className="text-red-500 text-sm mt-1" role="alert">
+                <p
+                  id="artistName-error"
+                  className="text-red-500 text-sm mt-1"
+                  role="alert"
+                >
                   {validationErrors.artistName}
                 </p>
               )}
@@ -323,30 +411,41 @@ export default function ArtistSignupPage() {
                 onChange={(e) => {
                   setAccountInfo({ ...accountInfo, email: e.target.value });
                   if (validationErrors.email) {
-                    setValidationErrors({ ...validationErrors, email: '' });
+                    setValidationErrors({ ...validationErrors, email: "" });
                   }
                 }}
-                onBlur={() => handleBlur('email')}
+                onBlur={() => handleBlur("email")}
                 className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
                   touched.email && validationErrors.email
-                    ? 'border-2 border-red-500 focus:ring-red-500'
-                    : 'focus:ring-spotify-green'
+                    ? "border-2 border-red-500 focus:ring-red-500"
+                    : "focus:ring-spotify-green"
                 }`}
                 placeholder="your@email.com"
-                aria-invalid={validationErrors.email ? 'true' : 'false'}
-                aria-describedby={validationErrors.email ? 'email-error' : undefined}
+                aria-invalid={validationErrors.email ? "true" : "false"}
+                aria-describedby={
+                  validationErrors.email ? "email-error" : undefined
+                }
                 required
               />
               {touched.email && validationErrors.email ? (
-                <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
+                <p
+                  id="email-error"
+                  className="text-red-500 text-sm mt-1"
+                  role="alert"
+                >
                   {validationErrors.email}
                 </p>
               ) : (
-                <p className="text-xs text-spotify-text-gray mt-1">Verification required</p>
+                <p className="text-xs text-spotify-text-gray mt-1">
+                  Verification required
+                </p>
               )}
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium mb-2"
+              >
                 Password
               </label>
               <input
@@ -356,28 +455,35 @@ export default function ArtistSignupPage() {
                 onChange={(e) => {
                   setAccountInfo({ ...accountInfo, password: e.target.value });
                   if (validationErrors.password) {
-                    setValidationErrors({ ...validationErrors, password: '' });
+                    setValidationErrors({ ...validationErrors, password: "" });
                   }
                 }}
-                onBlur={() => handleBlur('password')}
+                onBlur={() => handleBlur("password")}
                 className={`w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 ${
                   touched.password && validationErrors.password
-                    ? 'border-2 border-red-500 focus:ring-red-500'
-                    : 'focus:ring-spotify-green'
+                    ? "border-2 border-red-500 focus:ring-red-500"
+                    : "focus:ring-spotify-green"
                 }`}
                 placeholder="Create a strong password"
-                aria-invalid={validationErrors.password ? 'true' : 'false'}
-                aria-describedby={validationErrors.password ? 'password-error' : undefined}
+                aria-invalid={validationErrors.password ? "true" : "false"}
+                aria-describedby={
+                  validationErrors.password ? "password-error" : undefined
+                }
                 minLength={8}
                 required
               />
               {touched.password && validationErrors.password ? (
-                <p id="password-error" className="text-red-500 text-sm mt-1" role="alert">
+                <p
+                  id="password-error"
+                  className="text-red-500 text-sm mt-1"
+                  role="alert"
+                >
                   {validationErrors.password}
                 </p>
               ) : (
                 <p className="text-xs text-spotify-text-gray mt-1">
-                  Must be at least 8 characters with uppercase, lowercase, and numbers
+                  Must be at least 8 characters with uppercase, lowercase, and
+                  numbers
                 </p>
               )}
             </div>
@@ -404,14 +510,17 @@ export default function ArtistSignupPage() {
       {/* Step 3: Legal Document Review */}
       {currentStep === 3 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Step 2: Legal Document Review</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Step 2: Legal Document Review
+          </h2>
           <div className="mb-6">
             <AlertCircle className="text-yellow-500 mb-2" size={24} />
             <p className="text-sm text-white/80 mb-4">
-              Please review all legal documents carefully. You must scroll through each document and download/read before signing.
+              Please review all legal documents carefully. You must scroll
+              through each document and download/read before signing.
             </p>
           </div>
-          
+
           <div className="space-y-3 mb-6">
             {legalDocuments.map((doc) => {
               const isSigned = documentsSigned.includes(doc.id);
@@ -420,13 +529,20 @@ export default function ArtistSignupPage() {
                   key={doc.id}
                   className={`p-4 rounded-lg border-2 ${
                     isSigned
-                      ? 'border-spotify-green bg-spotify-green/10'
-                      : 'border-spotify-light-gray bg-spotify-dark-gray'
+                      ? "border-spotify-green bg-spotify-green/10"
+                      : "border-spotify-light-gray bg-spotify-dark-gray"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <FileText size={24} className={isSigned ? 'text-spotify-green' : 'text-spotify-text-gray'} />
+                      <FileText
+                        size={24}
+                        className={
+                          isSigned
+                            ? "text-spotify-green"
+                            : "text-spotify-text-gray"
+                        }
+                      />
                       <div>
                         <div className="font-medium">{doc.name}</div>
                         {doc.required && (
@@ -450,7 +566,9 @@ export default function ArtistSignupPage() {
                           }}
                           className="rounded"
                         />
-                        <span className="text-sm">I&apos;ve read and agree</span>
+                        <span className="text-sm">
+                          I&apos;ve read and agree
+                        </span>
                       </label>
                     </div>
                   </div>
@@ -460,9 +578,12 @@ export default function ArtistSignupPage() {
           </div>
 
           <div className="mb-6 bg-blue-600/20 border border-blue-600/50 rounded-lg p-4">
-            <h3 className="font-bold mb-2">Performance Rights Organizations (PRO) Guidance</h3>
+            <h3 className="font-bold mb-2">
+              Performance Rights Organizations (PRO) Guidance
+            </h3>
             <p className="text-sm text-white/80 mb-2">
-              You should register with a PRO (BMI, ASCAP, or SESAC) to collect performance royalties. Download our PRO guide:
+              You should register with a PRO (BMI, ASCAP, or SESAC) to collect
+              performance royalties. Download our PRO guide:
             </p>
             <button className="text-blue-400 hover:underline text-sm flex items-center gap-1">
               <Download size={16} />
@@ -490,7 +611,8 @@ export default function ArtistSignupPage() {
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 3: Tax Documentation</h2>
           <p className="text-sm text-white/80 mb-6">
-            Complete the W-9 form (or equivalent for international artists) for tax reporting purposes.
+            Complete the W-9 form (or equivalent for international artists) for
+            tax reporting purposes.
           </p>
 
           <div className="space-y-4 mb-6">
@@ -507,29 +629,41 @@ export default function ArtistSignupPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Business Name/Legal Entity</label>
+              <label className="block text-sm font-medium mb-2">
+                Business Name/Legal Entity
+              </label>
               <input
                 type="text"
                 value={w9Data.businessName}
-                onChange={(e) => setW9Data({ ...w9Data, businessName: e.target.value })}
+                onChange={(e) =>
+                  setW9Data({ ...w9Data, businessName: e.target.value })
+                }
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
                 placeholder="If different from artist name"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Address *</label>
+              <label className="block text-sm font-medium mb-2">
+                Address *
+              </label>
               <textarea
                 value={w9Data.address}
-                onChange={(e) => setW9Data({ ...w9Data, address: e.target.value })}
+                onChange={(e) =>
+                  setW9Data({ ...w9Data, address: e.target.value })
+                }
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green min-h-20"
                 placeholder="Street address, City, State, ZIP"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Tax Classification *</label>
+              <label className="block text-sm font-medium mb-2">
+                Tax Classification *
+              </label>
               <select
                 value={w9Data.taxClassification}
-                onChange={(e) => setW9Data({ ...w9Data, taxClassification: e.target.value })}
+                onChange={(e) =>
+                  setW9Data({ ...w9Data, taxClassification: e.target.value })
+                }
                 className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
               >
                 <option value="">Select classification</option>
@@ -544,7 +678,9 @@ export default function ArtistSignupPage() {
 
           <div className="mb-6 p-4 bg-yellow-600/20 border border-yellow-600/50 rounded-lg">
             <p className="text-sm text-white/80">
-              <strong className="text-yellow-500">Note:</strong> This information is required for tax reporting and will be kept secure and confidential.
+              <strong className="text-yellow-500">Note:</strong> This
+              information is required for tax reporting and will be kept secure
+              and confidential.
             </p>
           </div>
 
@@ -556,7 +692,8 @@ export default function ArtistSignupPage() {
               className="mt-1 rounded"
             />
             <span className="text-sm">
-              I certify that the information provided is correct and complete. I understand that this is a legally binding document.
+              I certify that the information provided is correct and complete. I
+              understand that this is a legally binding document.
             </span>
           </label>
 
@@ -566,7 +703,9 @@ export default function ArtistSignupPage() {
             </button>
             <button
               onClick={() => setCurrentStep(5)}
-              disabled={!w9Completed || !w9Data.address || !w9Data.taxClassification}
+              disabled={
+                !w9Completed || !w9Data.address || !w9Data.taxClassification
+              }
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Continue to PRO Registration
@@ -580,7 +719,8 @@ export default function ArtistSignupPage() {
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 4: PRO Registration</h2>
           <p className="text-sm text-white/80 mb-6">
-            Register with a Performance Rights Organization (BMI, ASCAP, or SESAC) to collect performance royalties.
+            Register with a Performance Rights Organization (BMI, ASCAP, or
+            SESAC) to collect performance royalties.
           </p>
 
           <div className="space-y-4 mb-6">
@@ -588,12 +728,19 @@ export default function ArtistSignupPage() {
               <h3 className="font-medium mb-2">BMI Registration</h3>
               <input
                 type="text"
-                value={proRegistration.bmi || ''}
-                onChange={(e) => setPRORegistration('bmi', e.target.value || null)}
+                value={proRegistration.bmi || ""}
+                onChange={(e) =>
+                  setPRORegistration("bmi", e.target.value || null)
+                }
                 className="w-full bg-spotify-light-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green mt-2"
                 placeholder="BMI Registration Number (if already registered)"
               />
-              <a href="https://www.bmi.com" target="_blank" rel="noopener noreferrer" className="text-spotify-green hover:underline text-sm mt-2 inline-block">
+              <a
+                href="https://www.bmi.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-spotify-green hover:underline text-sm mt-2 inline-block"
+              >
                 Register with BMI →
               </a>
             </div>
@@ -602,12 +749,19 @@ export default function ArtistSignupPage() {
               <h3 className="font-medium mb-2">ASCAP Registration</h3>
               <input
                 type="text"
-                value={proRegistration.ascap || ''}
-                onChange={(e) => setPRORegistration('ascap', e.target.value || null)}
+                value={proRegistration.ascap || ""}
+                onChange={(e) =>
+                  setPRORegistration("ascap", e.target.value || null)
+                }
                 className="w-full bg-spotify-light-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green mt-2"
                 placeholder="ASCAP Registration Number (if already registered)"
               />
-              <a href="https://www.ascap.com" target="_blank" rel="noopener noreferrer" className="text-spotify-green hover:underline text-sm mt-2 inline-block">
+              <a
+                href="https://www.ascap.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-spotify-green hover:underline text-sm mt-2 inline-block"
+              >
                 Register with ASCAP →
               </a>
             </div>
@@ -616,12 +770,19 @@ export default function ArtistSignupPage() {
               <h3 className="font-medium mb-2">SESAC Registration</h3>
               <input
                 type="text"
-                value={proRegistration.sesac || ''}
-                onChange={(e) => setPRORegistration('sesac', e.target.value || null)}
+                value={proRegistration.sesac || ""}
+                onChange={(e) =>
+                  setPRORegistration("sesac", e.target.value || null)
+                }
                 className="w-full bg-spotify-light-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green mt-2"
                 placeholder="SESAC Registration Number (if already registered)"
               />
-              <a href="https://www.sesac.com" target="_blank" rel="noopener noreferrer" className="text-spotify-green hover:underline text-sm mt-2 inline-block">
+              <a
+                href="https://www.sesac.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-spotify-green hover:underline text-sm mt-2 inline-block"
+              >
                 Register with SESAC →
               </a>
             </div>
@@ -629,7 +790,9 @@ export default function ArtistSignupPage() {
 
           <div className="mb-6 p-4 bg-blue-600/20 border border-blue-600/50 rounded-lg">
             <p className="text-sm text-white/80">
-              <strong className="text-blue-400">Note:</strong> PRO registration is recommended but not required for signup. You can register later and update your information.
+              <strong className="text-blue-400">Note:</strong> PRO registration
+              is recommended but not required for signup. You can register later
+              and update your information.
             </p>
           </div>
 
@@ -652,7 +815,8 @@ export default function ArtistSignupPage() {
         <div className="bg-spotify-light-gray rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-4">Step 6: Document Signing</h2>
           <p className="text-sm text-white/80 mb-6">
-            Provide your digital signature to finalize the legally binding agreement.
+            Provide your digital signature to finalize the legally binding
+            agreement.
           </p>
 
           <div className="mb-6 space-y-4">
@@ -661,13 +825,16 @@ export default function ArtistSignupPage() {
               <label className="flex items-start gap-3 mb-4 cursor-pointer">
                 <input type="checkbox" className="mt-1 rounded" />
                 <span className="text-sm">
-                  I understand this is a legally binding agreement. I have read and agree to all terms and conditions.
+                  I understand this is a legally binding agreement. I have read
+                  and agree to all terms and conditions.
                 </span>
               </label>
             </div>
 
             <div className="p-4 bg-spotify-dark-gray rounded-lg">
-              <label className="block text-sm font-medium mb-2">Digital Signature</label>
+              <label className="block text-sm font-medium mb-2">
+                Digital Signature
+              </label>
               <input
                 type="text"
                 value={digitalSignature}
@@ -676,7 +843,10 @@ export default function ArtistSignupPage() {
                 placeholder="Type your full legal name"
                 required
               />
-              <p className="text-xs text-spotify-text-gray mt-1">By typing your name, you are providing a legally binding signature</p>
+              <p className="text-xs text-spotify-text-gray mt-1">
+                By typing your name, you are providing a legally binding
+                signature
+              </p>
             </div>
 
             <div className="p-4 bg-spotify-dark-gray rounded-lg">
@@ -684,41 +854,56 @@ export default function ArtistSignupPage() {
               <input
                 type="date"
                 className="w-full bg-spotify-light-gray rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green"
-                defaultValue={new Date().toISOString().split('T')[0]}
+                defaultValue={new Date().toISOString().split("T")[0]}
                 readOnly
               />
             </div>
           </div>
 
-          {submitError && (() => {
-            const { recovery } = formatErrorWithRecovery(submitError);
-            return (
-              <div className="mb-4 p-4 bg-red-900/20 border border-red-500/50 rounded-lg">
-                <div className="flex items-start gap-2 mb-2">
-                  <AlertCircle size={20} className="text-red-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-red-400 text-sm font-medium">{submitError}</p>
+          {submitError &&
+            (() => {
+              const { recovery } = formatErrorWithRecovery(submitError);
+              return (
+                <div className="mb-4 p-4 bg-red-900/20 border border-red-500/50 rounded-lg">
+                  <div className="flex items-start gap-2 mb-2">
+                    <AlertCircle
+                      size={20}
+                      className="text-red-400 flex-shrink-0 mt-0.5"
+                    />
+                    <p className="text-red-400 text-sm font-medium">
+                      {submitError}
+                    </p>
+                  </div>
+                  {recovery && recovery.steps.length > 0 && (
+                    <ul className="text-red-300 text-xs mt-2 ml-7 list-disc list-inside space-y-1">
+                      {recovery.steps.map((step, index) => (
+                        <li key={index}>{step}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                {recovery && recovery.steps.length > 0 && (
-                  <ul className="text-red-300 text-xs mt-2 ml-7 list-disc list-inside space-y-1">
-                    {recovery.steps.map((step, index) => (
-                      <li key={index}>{step}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            );
-          })()}
+              );
+            })()}
 
           <div className="flex gap-4">
-            <button onClick={() => setCurrentStep(5)} className="btn-secondary" disabled={isSubmitting}>
+            <button
+              onClick={() => setCurrentStep(5)}
+              className="btn-secondary"
+              disabled={isSubmitting}
+            >
               Back
             </button>
             <button
               onClick={handleSubmit}
-              disabled={!allDocumentsSigned || !w9Completed || !digitalSignature.trim() || isSubmitting}
+              disabled={
+                !allDocumentsSigned ||
+                !w9Completed ||
+                !digitalSignature.trim() ||
+                isSubmitting
+              }
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Submitting...' : 'Submit for Approval'}
+              {isSubmitting ? "Submitting..." : "Submit for Approval"}
             </button>
           </div>
         </div>
@@ -732,22 +917,27 @@ export default function ArtistSignupPage() {
               <AlertCircle size={40} className="text-yellow-500" />
             </div>
             <h2 className="text-2xl font-bold mb-2">
-              {approvalStatus === 'pending' && 'Pending Approval'}
-              {approvalStatus === 'under-review' && 'Under Review'}
-              {approvalStatus === 'approved' && 'Approved!'}
-              {approvalStatus === 'rejected' && 'Rejected'}
+              {approvalStatus === "pending" && "Pending Approval"}
+              {approvalStatus === "under-review" && "Under Review"}
+              {approvalStatus === "approved" && "Approved!"}
+              {approvalStatus === "rejected" && "Rejected"}
             </h2>
             <p className="text-spotify-text-gray mb-4">
-              {approvalStatus === 'pending' && 'Your application has been submitted and is awaiting admin review.'}
-              {approvalStatus === 'approved' && 'Congratulations! You can now upload content.'}
-              {approvalStatus === 'rejected' && 'Your application was rejected. Please review the requirements and resubmit.'}
+              {approvalStatus === "pending" &&
+                "Your application has been submitted and is awaiting admin review."}
+              {approvalStatus === "approved" &&
+                "Congratulations! You can now upload content."}
+              {approvalStatus === "rejected" &&
+                "Your application was rejected. Please review the requirements and resubmit."}
             </p>
             {selectedMediums.length > 0 && (
               <div className="mb-4">
-                <p className="text-sm text-spotify-text-gray mb-2">Selected mediums:</p>
+                <p className="text-sm text-spotify-text-gray mb-2">
+                  Selected mediums:
+                </p>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {selectedMediums.map((medium) => {
-                    const option = mediumOptions.find(m => m.id === medium);
+                    const option = mediumOptions.find((m) => m.id === medium);
                     if (!option) return null;
                     const Icon = option.icon;
                     return (
@@ -763,17 +953,15 @@ export default function ArtistSignupPage() {
                 </div>
               </div>
             )}
-            {approvalStatus === 'pending' && (
+            {approvalStatus === "pending" && (
               <p className="text-sm text-spotify-text-gray mt-2">
                 Estimated approval time: 24-48 hours
               </p>
             )}
           </div>
-          
-          {approvalStatus === 'approved' && (
-            <button className="btn-primary">
-              Go to Artist Dashboard
-            </button>
+
+          {approvalStatus === "approved" && (
+            <button className="btn-primary">Go to Artist Dashboard</button>
           )}
         </div>
       )}

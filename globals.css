@@ -1,4 +1,4 @@
-@import url('https://assets.website-files.com/62d5ec0b9e7676278af9e793/64d81d2c4a4e7305d5c2b7a1_spotify-circular.css');
+@import url("https://assets.website-files.com/62d5ec0b9e7676278af9e793/64d81d2c4a4e7305d5c2b7a1_spotify-circular.css");
 
 :root {
   /* Colors - Background */
@@ -8,29 +8,29 @@
   --color-bg-card: #1a1a1a;
   --color-bg-hover: #2a2a2a;
   --color-bg-active: #333333;
-  
+
   /* Colors - Text */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #B3B3B3;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b3b3b3;
   --color-text-tertiary: #727272;
   --color-text-disabled: #535353;
-  
+
   /* Colors - Accent */
-  --color-accent-primary: #7209B7; /* Empulse Purple */
+  --color-accent-primary: #7209b7; /* Empulse Purple */
   --color-accent-hover: #8a1dd0; /* Lighter purple for hover */
   --color-accent-active: #5a0789; /* Darker purple for active */
-  
+
   /* Colors - Border */
   --color-border-default: #2a2a2a;
   --color-border-hover: #3a3a3a;
-  --color-border-focus: #7209B7; /* Empulse Purple */
-  
+  --color-border-focus: #7209b7; /* Empulse Purple */
+
   /* Legacy Color Names (for backwards compatibility) */
   --spotify-green: var(--color-accent-primary);
   --spotify-black: #000000;
   --spotify-dark: var(--color-bg-primary);
   --spotify-light: var(--color-text-secondary);
-  
+
   /* Spacing Scale */
   --spacing-0: 0px;
   --spacing-1: 4px;
@@ -42,7 +42,7 @@
   --spacing-8: 32px;
   --spacing-10: 40px;
   --spacing-12: 48px;
-  
+
   /* Border Radius */
   --radius-small: 4px;
   --radius-medium: 8px;
@@ -50,31 +50,49 @@
   --radius-pill: 9999px;
   --radius-circular: 50%;
   --radius-md: var(--radius-large); /* Legacy */
-  
+
   /* Shadows */
   --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.25);
   --shadow-modal: 0 8px 24px rgba(0, 0, 0, 0.5);
   --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.3);
-  
+
   /* Transitions */
   --transition-fast: 100ms;
   --transition-normal: 200ms;
   --transition-slow: 300ms;
   --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* Typography */
-  --font-family-primary: 'Circular Std Book', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-primary:
+    "Circular Std Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --letter-spacing-tight: -0.01em;
   --letter-spacing-normal: 0em;
   --letter-spacing-wide: 0.02em;
 }
-* { font-family: 'Circular Std Book', sans-serif; letter-spacing: -0.01em; }
+* {
+  font-family: "Circular Std Book", sans-serif;
+  letter-spacing: -0.01em;
+}
 
-.card-hover { transition: transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94); }
-.card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.card-hover {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
 
-.progress-shine { /* shine anim */ }
-@keyframes shine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.progress-shine {
+  /* shine anim */
+}
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
 /* Skeleton Loader Animations */
 @keyframes shimmer {

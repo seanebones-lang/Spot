@@ -5,12 +5,12 @@
 
 const getApiUrl = () => {
   // Use Railway backend URL if set, otherwise use relative path (for local dev)
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     // Client-side: use environment variable or relative path
-    return process.env.NEXT_PUBLIC_API_URL || '';
+    return process.env.NEXT_PUBLIC_API_URL || "";
   }
   // Server-side: use environment variable or default to Railway
-  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || '';
+  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "";
 };
 
 /**
@@ -18,13 +18,13 @@ const getApiUrl = () => {
  */
 export const getApiEndpoint = (path: string): string => {
   const baseUrl = getApiUrl();
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+
   if (baseUrl) {
     // Remove trailing slash from baseUrl and leading slash from path
-    return `${baseUrl.replace(/\/$/, '')}${cleanPath}`;
+    return `${baseUrl.replace(/\/$/, "")}${cleanPath}`;
   }
-  
+
   // Fallback to relative path (for same-origin requests)
   return cleanPath;
 };
@@ -34,21 +34,25 @@ export const getApiEndpoint = (path: string): string => {
  */
 export async function apiRequest<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
 ): Promise<T> {
   const url = getApiEndpoint(endpoint);
-  
+
   const response = await fetch(url, {
     ...options,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...options.headers,
     },
   });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'Request failed' }));
-    throw new Error(error.error || `API request failed: ${response.statusText}`);
+    const error = await response
+      .json()
+      .catch(() => ({ error: "Request failed" }));
+    throw new Error(
+      error.error || `API request failed: ${response.statusText}`,
+    );
   }
 
   return response.json();

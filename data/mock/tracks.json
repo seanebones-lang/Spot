@@ -11,15 +11,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Nostalgic",
-        "Stressed",
-        "Insecure"
-      ],
+      "feelings": ["Nostalgic", "Stressed", "Insecure"],
       "vibe": 10,
-      "genres": [
-        "Electronic"
-      ]
+      "genres": ["Electronic"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -37,14 +31,9 @@
     "coverArt": "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=1000&h=1000&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Stressed"
-      ],
+      "feelings": ["Stressed"],
       "vibe": 12,
-      "genres": [
-        "Funk",
-        "Folk"
-      ]
+      "genres": ["Funk", "Folk"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -62,13 +51,9 @@
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Overwhelmed"
-      ],
+      "feelings": ["Overwhelmed"],
       "vibe": 10,
-      "genres": [
-        "Rock"
-      ]
+      "genres": ["Rock"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -86,16 +71,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Overwhelmed",
-        "Tired",
-        "Lonely"
-      ],
+      "feelings": ["Overwhelmed", "Tired", "Lonely"],
       "vibe": 33,
-      "genres": [
-        "Metal",
-        "Pop"
-      ]
+      "genres": ["Metal", "Pop"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -113,15 +91,9 @@
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Stressed",
-        "Overwhelmed",
-        "Nostalgic"
-      ],
+      "feelings": ["Stressed", "Overwhelmed", "Nostalgic"],
       "vibe": 30,
-      "genres": [
-        "Rock"
-      ]
+      "genres": ["Rock"]
     },
     "format": "MP3",
     "quality": "high",
@@ -139,16 +111,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Nostalgic",
-        "Insecure",
-        "Reflective"
-      ],
+      "feelings": ["Nostalgic", "Insecure", "Reflective"],
       "vibe": 27,
-      "genres": [
-        "Rock",
-        "Indie"
-      ]
+      "genres": ["Rock", "Indie"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -166,16 +131,9 @@
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Reflective",
-        "Nostalgic",
-        "Overwhelmed"
-      ],
+      "feelings": ["Reflective", "Nostalgic", "Overwhelmed"],
       "vibe": 12,
-      "genres": [
-        "K-Pop",
-        "Reggae"
-      ]
+      "genres": ["K-Pop", "Reggae"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -193,14 +151,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Tired",
-        "Lonely"
-      ],
+      "feelings": ["Tired", "Lonely"],
       "vibe": 24,
-      "genres": [
-        "House"
-      ]
+      "genres": ["House"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -218,16 +171,9 @@
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Insecure",
-        "Overwhelmed",
-        "Nostalgic"
-      ],
+      "feelings": ["Insecure", "Overwhelmed", "Nostalgic"],
       "vibe": 16,
-      "genres": [
-        "Latin",
-        "K-Pop"
-      ]
+      "genres": ["Latin", "K-Pop"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -245,15 +191,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Lonely",
-        "Stressed",
-        "Frustrated"
-      ],
+      "feelings": ["Lonely", "Stressed", "Frustrated"],
       "vibe": 11,
-      "genres": [
-        "Ambient"
-      ]
+      "genres": ["Ambient"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -271,15 +211,9 @@
     "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Insecure",
-        "Nostalgic",
-        "Lonely"
-      ],
+      "feelings": ["Insecure", "Nostalgic", "Lonely"],
       "vibe": 31,
-      "genres": [
-        "Hip-Hop"
-      ]
+      "genres": ["Hip-Hop"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -297,16 +231,9 @@
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Frustrated",
-        "Stressed",
-        "Reflective"
-      ],
+      "feelings": ["Frustrated", "Stressed", "Reflective"],
       "vibe": 27,
-      "genres": [
-        "Disco",
-        "Classical"
-      ]
+      "genres": ["Disco", "Classical"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -324,14 +251,9 @@
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Insecure",
-        "Tired"
-      ],
+      "feelings": ["Insecure", "Tired"],
       "vibe": 30,
-      "genres": [
-        "Metal"
-      ]
+      "genres": ["Metal"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -349,13 +271,9 @@
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Overwhelmed"
-      ],
+      "feelings": ["Overwhelmed"],
       "vibe": 33,
-      "genres": [
-        "Disco"
-      ]
+      "genres": ["Disco"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -373,14 +291,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Anxious"
-      ],
+      "feelings": ["Anxious"],
       "vibe": 10,
-      "genres": [
-        "Folk",
-        "R&B"
-      ]
+      "genres": ["Folk", "R&B"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -398,14 +311,9 @@
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Stressed",
-        "Tired"
-      ],
+      "feelings": ["Stressed", "Tired"],
       "vibe": 22,
-      "genres": [
-        "World"
-      ]
+      "genres": ["World"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -423,15 +331,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Anxious",
-        "Overwhelmed"
-      ],
+      "feelings": ["Anxious", "Overwhelmed"],
       "vibe": 23,
-      "genres": [
-        "Metal",
-        "Afrobeats"
-      ]
+      "genres": ["Metal", "Afrobeats"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -449,13 +351,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Overwhelmed"
-      ],
+      "feelings": ["Overwhelmed"],
       "vibe": 13,
-      "genres": [
-        "Afrobeats"
-      ]
+      "genres": ["Afrobeats"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -473,16 +371,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Lonely",
-        "Reflective",
-        "Insecure"
-      ],
+      "feelings": ["Lonely", "Reflective", "Insecure"],
       "vibe": 34,
-      "genres": [
-        "Ambient",
-        "Soul"
-      ]
+      "genres": ["Ambient", "Soul"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -500,13 +391,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Stressed"
-      ],
+      "feelings": ["Stressed"],
       "vibe": 32,
-      "genres": [
-        "Metal"
-      ]
+      "genres": ["Metal"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -524,14 +411,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 29,
-      "genres": [
-        "Disco",
-        "Ambient"
-      ]
+      "genres": ["Disco", "Ambient"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -549,15 +431,9 @@
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Grateful",
-        "Nostalgic",
-        "Content"
-      ],
+      "feelings": ["Grateful", "Nostalgic", "Content"],
       "vibe": 26,
-      "genres": [
-        "Pop"
-      ]
+      "genres": ["Pop"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -575,15 +451,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Grateful",
-        "Nostalgic",
-        "Content"
-      ],
+      "feelings": ["Grateful", "Nostalgic", "Content"],
       "vibe": 33,
-      "genres": [
-        "Classical"
-      ]
+      "genres": ["Classical"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -601,15 +471,9 @@
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Grateful",
-        "Content",
-        "Reflective"
-      ],
+      "feelings": ["Grateful", "Content", "Reflective"],
       "vibe": 33,
-      "genres": [
-        "Trap"
-      ]
+      "genres": ["Trap"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -627,16 +491,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Grateful",
-        "Reflective",
-        "Content"
-      ],
+      "feelings": ["Grateful", "Reflective", "Content"],
       "vibe": 24,
-      "genres": [
-        "Folk",
-        "Classical"
-      ]
+      "genres": ["Folk", "Classical"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -654,13 +511,9 @@
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic"
-      ],
+      "feelings": ["Nostalgic"],
       "vibe": 20,
-      "genres": [
-        "Trap"
-      ]
+      "genres": ["Trap"]
     },
     "format": "WAV",
     "quality": "high",
@@ -678,14 +531,9 @@
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Content"
-      ],
+      "feelings": ["Content"],
       "vibe": 28,
-      "genres": [
-        "Latin",
-        "Jazz"
-      ]
+      "genres": ["Latin", "Jazz"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -703,14 +551,9 @@
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Content"
-      ],
+      "feelings": ["Content"],
       "vibe": 20,
-      "genres": [
-        "Folk",
-        "Classical"
-      ]
+      "genres": ["Folk", "Classical"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -728,13 +571,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Content"
-      ],
+      "feelings": ["Content"],
       "vibe": 20,
-      "genres": [
-        "Folk"
-      ]
+      "genres": ["Folk"]
     },
     "format": "MP3",
     "quality": "high",
@@ -752,14 +591,9 @@
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 16,
-      "genres": [
-        "Folk",
-        "R&B"
-      ]
+      "genres": ["Folk", "R&B"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -777,13 +611,9 @@
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 27,
-      "genres": [
-        "Folk"
-      ]
+      "genres": ["Folk"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -801,15 +631,9 @@
     "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic",
-        "Grateful"
-      ],
+      "feelings": ["Nostalgic", "Grateful"],
       "vibe": 36,
-      "genres": [
-        "Classical",
-        "Folk"
-      ]
+      "genres": ["Classical", "Folk"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -827,16 +651,9 @@
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Content",
-        "Reflective",
-        "Nostalgic"
-      ],
+      "feelings": ["Content", "Reflective", "Nostalgic"],
       "vibe": 15,
-      "genres": [
-        "Trap",
-        "Jazz"
-      ]
+      "genres": ["Trap", "Jazz"]
     },
     "format": "MP3",
     "quality": "high",
@@ -854,15 +671,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic",
-        "Reflective",
-        "Grateful"
-      ],
+      "feelings": ["Nostalgic", "Reflective", "Grateful"],
       "vibe": 18,
-      "genres": [
-        "Trap"
-      ]
+      "genres": ["Trap"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -880,13 +691,9 @@
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Content"
-      ],
+      "feelings": ["Content"],
       "vibe": 22,
-      "genres": [
-        "Techno"
-      ]
+      "genres": ["Techno"]
     },
     "format": "MP3",
     "quality": "high",
@@ -904,13 +711,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic"
-      ],
+      "feelings": ["Nostalgic"],
       "vibe": 17,
-      "genres": [
-        "Metal"
-      ]
+      "genres": ["Metal"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -928,14 +731,9 @@
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Grateful",
-        "Reflective"
-      ],
+      "feelings": ["Grateful", "Reflective"],
       "vibe": 25,
-      "genres": [
-        "Jazz"
-      ]
+      "genres": ["Jazz"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -953,14 +751,9 @@
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic"
-      ],
+      "feelings": ["Nostalgic"],
       "vibe": 35,
-      "genres": [
-        "World",
-        "Pop"
-      ]
+      "genres": ["World", "Pop"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -978,15 +771,9 @@
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Reflective",
-        "Nostalgic",
-        "Content"
-      ],
+      "feelings": ["Reflective", "Nostalgic", "Content"],
       "vibe": 19,
-      "genres": [
-        "Hip-Hop"
-      ]
+      "genres": ["Hip-Hop"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -1004,14 +791,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic",
-        "Content"
-      ],
+      "feelings": ["Nostalgic", "Content"],
       "vibe": 33,
-      "genres": [
-        "Reggae"
-      ]
+      "genres": ["Reggae"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1029,15 +811,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content",
-        "Reflective"
-      ],
+      "feelings": ["Content", "Reflective"],
       "vibe": 20,
-      "genres": [
-        "K-Pop",
-        "Jazz"
-      ]
+      "genres": ["K-Pop", "Jazz"]
     },
     "format": "WAV",
     "quality": "high",
@@ -1055,14 +831,9 @@
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Thoughtful",
-        "Content"
-      ],
+      "feelings": ["Thoughtful", "Content"],
       "vibe": 31,
-      "genres": [
-        "Funk"
-      ]
+      "genres": ["Funk"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -1080,15 +851,9 @@
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content",
-        "Relaxed",
-        "Thoughtful"
-      ],
+      "feelings": ["Content", "Relaxed", "Thoughtful"],
       "vibe": 30,
-      "genres": [
-        "Disco"
-      ]
+      "genres": ["Disco"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1106,16 +871,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content",
-        "Reflective",
-        "Relaxed"
-      ],
+      "feelings": ["Content", "Reflective", "Relaxed"],
       "vibe": 23,
-      "genres": [
-        "R&B",
-        "K-Pop"
-      ]
+      "genres": ["R&B", "K-Pop"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -1133,13 +891,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 43,
-      "genres": [
-        "House"
-      ]
+      "genres": ["House"]
     },
     "format": "MP3",
     "quality": "high",
@@ -1157,14 +911,9 @@
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content"
-      ],
+      "feelings": ["Content"],
       "vibe": 29,
-      "genres": [
-        "Country",
-        "Reggae"
-      ]
+      "genres": ["Country", "Reggae"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -1182,16 +931,9 @@
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content",
-        "Thoughtful",
-        "Relaxed"
-      ],
+      "feelings": ["Content", "Thoughtful", "Relaxed"],
       "vibe": 28,
-      "genres": [
-        "Rock",
-        "Trap"
-      ]
+      "genres": ["Rock", "Trap"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -1209,14 +951,9 @@
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Thoughtful"
-      ],
+      "feelings": ["Thoughtful"],
       "vibe": 28,
-      "genres": [
-        "Reggae",
-        "House"
-      ]
+      "genres": ["Reggae", "House"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1234,16 +971,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content",
-        "Reflective",
-        "Relaxed"
-      ],
+      "feelings": ["Content", "Reflective", "Relaxed"],
       "vibe": 41,
-      "genres": [
-        "Metal",
-        "Country"
-      ]
+      "genres": ["Metal", "Country"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -1261,13 +991,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 25,
-      "genres": [
-        "Metal"
-      ]
+      "genres": ["Metal"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -1285,16 +1011,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed",
-        "Content",
-        "Reflective"
-      ],
+      "feelings": ["Relaxed", "Content", "Reflective"],
       "vibe": 39,
-      "genres": [
-        "Metal",
-        "Trap"
-      ]
+      "genres": ["Metal", "Trap"]
     },
     "format": "WAV",
     "quality": "high",
@@ -1312,15 +1031,9 @@
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed",
-        "Reflective",
-        "Content"
-      ],
+      "feelings": ["Relaxed", "Reflective", "Content"],
       "vibe": 31,
-      "genres": [
-        "Disco"
-      ]
+      "genres": ["Disco"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -1338,13 +1051,9 @@
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Thoughtful"
-      ],
+      "feelings": ["Thoughtful"],
       "vibe": 38,
-      "genres": [
-        "Ambient"
-      ]
+      "genres": ["Ambient"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -1362,16 +1071,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed",
-        "Thoughtful",
-        "Reflective"
-      ],
+      "feelings": ["Relaxed", "Thoughtful", "Reflective"],
       "vibe": 36,
-      "genres": [
-        "K-Pop",
-        "Pop"
-      ]
+      "genres": ["K-Pop", "Pop"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -1389,14 +1091,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Thoughtful"
-      ],
+      "feelings": ["Thoughtful"],
       "vibe": 27,
-      "genres": [
-        "K-Pop",
-        "Latin"
-      ]
+      "genres": ["K-Pop", "Latin"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -1414,13 +1111,9 @@
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Thoughtful"
-      ],
+      "feelings": ["Thoughtful"],
       "vibe": 28,
-      "genres": [
-        "House"
-      ]
+      "genres": ["House"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -1438,14 +1131,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 39,
-      "genres": [
-        "Country",
-        "Hip-Hop"
-      ]
+      "genres": ["Country", "Hip-Hop"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -1463,14 +1151,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Thoughtful"
-      ],
+      "feelings": ["Thoughtful"],
       "vibe": 25,
-      "genres": [
-        "Afrobeats",
-        "Classical"
-      ]
+      "genres": ["Afrobeats", "Classical"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -1488,13 +1171,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content"
-      ],
+      "feelings": ["Content"],
       "vibe": 38,
-      "genres": [
-        "Ambient"
-      ]
+      "genres": ["Ambient"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -1512,16 +1191,9 @@
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed",
-        "Content",
-        "Thoughtful"
-      ],
+      "feelings": ["Relaxed", "Content", "Thoughtful"],
       "vibe": 24,
-      "genres": [
-        "Latin",
-        "Funk"
-      ]
+      "genres": ["Latin", "Funk"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -1539,15 +1211,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Proud",
-        "Great",
-        "Confident"
-      ],
+      "feelings": ["Proud", "Great", "Confident"],
       "vibe": 51,
-      "genres": [
-        "Hip-Hop"
-      ]
+      "genres": ["Hip-Hop"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1565,13 +1231,9 @@
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Proud"
-      ],
+      "feelings": ["Proud"],
       "vibe": 54,
-      "genres": [
-        "Trap"
-      ]
+      "genres": ["Trap"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -1589,14 +1251,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 64,
-      "genres": [
-        "Classical",
-        "Afrobeats"
-      ]
+      "genres": ["Classical", "Afrobeats"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1614,14 +1271,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 57,
-      "genres": [
-        "Indie",
-        "Folk"
-      ]
+      "genres": ["Indie", "Folk"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -1639,15 +1291,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Confident",
-        "Relaxed"
-      ],
+      "feelings": ["Confident", "Relaxed"],
       "vibe": 47,
-      "genres": [
-        "Country",
-        "Reggae"
-      ]
+      "genres": ["Country", "Reggae"]
     },
     "format": "WAV",
     "quality": "high",
@@ -1665,16 +1311,9 @@
     "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Excited",
-        "Relaxed",
-        "Confident"
-      ],
+      "feelings": ["Excited", "Relaxed", "Confident"],
       "vibe": 47,
-      "genres": [
-        "R&B",
-        "Afrobeats"
-      ]
+      "genres": ["R&B", "Afrobeats"]
     },
     "format": "WAV",
     "quality": "high",
@@ -1692,15 +1331,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed",
-        "Great"
-      ],
+      "feelings": ["Relaxed", "Great"],
       "vibe": 64,
-      "genres": [
-        "Electronic",
-        "Hip-Hop"
-      ]
+      "genres": ["Electronic", "Hip-Hop"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -1718,15 +1351,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed",
-        "Confident",
-        "Proud"
-      ],
+      "feelings": ["Relaxed", "Confident", "Proud"],
       "vibe": 64,
-      "genres": [
-        "Rock"
-      ]
+      "genres": ["Rock"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1744,15 +1371,9 @@
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Excited",
-        "Relaxed",
-        "Confident"
-      ],
+      "feelings": ["Excited", "Relaxed", "Confident"],
       "vibe": 46,
-      "genres": [
-        "Punk"
-      ]
+      "genres": ["Punk"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -1770,15 +1391,9 @@
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Great",
-        "Relaxed"
-      ],
+      "feelings": ["Great", "Relaxed"],
       "vibe": 50,
-      "genres": [
-        "Classical",
-        "K-Pop"
-      ]
+      "genres": ["Classical", "K-Pop"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -1796,13 +1411,9 @@
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Confident"
-      ],
+      "feelings": ["Confident"],
       "vibe": 51,
-      "genres": [
-        "Punk"
-      ]
+      "genres": ["Punk"]
     },
     "format": "MP3",
     "quality": "high",
@@ -1820,15 +1431,9 @@
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed",
-        "Proud"
-      ],
+      "feelings": ["Relaxed", "Proud"],
       "vibe": 57,
-      "genres": [
-        "Electronic",
-        "Jazz"
-      ]
+      "genres": ["Electronic", "Jazz"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1846,16 +1451,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed",
-        "Proud",
-        "Confident"
-      ],
+      "feelings": ["Relaxed", "Proud", "Confident"],
       "vibe": 56,
-      "genres": [
-        "Latin",
-        "Country"
-      ]
+      "genres": ["Latin", "Country"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -1873,15 +1471,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed",
-        "Proud",
-        "Great"
-      ],
+      "feelings": ["Relaxed", "Proud", "Great"],
       "vibe": 62,
-      "genres": [
-        "Rock"
-      ]
+      "genres": ["Rock"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -1899,15 +1491,9 @@
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Proud",
-        "Excited",
-        "Great"
-      ],
+      "feelings": ["Proud", "Excited", "Great"],
       "vibe": 59,
-      "genres": [
-        "Trap"
-      ]
+      "genres": ["Trap"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -1925,14 +1511,9 @@
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Proud"
-      ],
+      "feelings": ["Proud"],
       "vibe": 53,
-      "genres": [
-        "Jazz",
-        "Trap"
-      ]
+      "genres": ["Jazz", "Trap"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -1950,13 +1531,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed"
-      ],
+      "feelings": ["Relaxed"],
       "vibe": 54,
-      "genres": [
-        "Hip-Hop"
-      ]
+      "genres": ["Hip-Hop"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1974,16 +1551,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Great",
-        "Confident",
-        "Relaxed"
-      ],
+      "feelings": ["Great", "Confident", "Relaxed"],
       "vibe": 53,
-      "genres": [
-        "Blues",
-        "Pop"
-      ]
+      "genres": ["Blues", "Pop"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -2001,15 +1571,9 @@
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Relaxed",
-        "Excited",
-        "Proud"
-      ],
+      "feelings": ["Relaxed", "Excited", "Proud"],
       "vibe": 49,
-      "genres": [
-        "Country"
-      ]
+      "genres": ["Country"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -2027,15 +1591,9 @@
     "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Great",
-        "Excited"
-      ],
+      "feelings": ["Great", "Excited"],
       "vibe": 53,
-      "genres": [
-        "Jazz",
-        "Country"
-      ]
+      "genres": ["Jazz", "Country"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -2053,14 +1611,9 @@
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Excited",
-        "Relaxed"
-      ],
+      "feelings": ["Excited", "Relaxed"],
       "vibe": 79,
-      "genres": [
-        "House"
-      ]
+      "genres": ["House"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2078,13 +1631,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed"
-      ],
+      "feelings": ["Relaxed"],
       "vibe": 72,
-      "genres": [
-        "Techno"
-      ]
+      "genres": ["Techno"]
     },
     "format": "WAV",
     "quality": "high",
@@ -2102,13 +1651,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Confident"
-      ],
+      "feelings": ["Confident"],
       "vibe": 69,
-      "genres": [
-        "Reggae"
-      ]
+      "genres": ["Reggae"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -2126,15 +1671,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed",
-        "Proud"
-      ],
+      "feelings": ["Relaxed", "Proud"],
       "vibe": 69,
-      "genres": [
-        "Country",
-        "Blues"
-      ]
+      "genres": ["Country", "Blues"]
     },
     "format": "WAV",
     "quality": "high",
@@ -2152,14 +1691,9 @@
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Optimistic"
-      ],
+      "feelings": ["Optimistic"],
       "vibe": 82,
-      "genres": [
-        "R&B",
-        "Metal"
-      ]
+      "genres": ["R&B", "Metal"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -2177,15 +1711,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed",
-        "Excited",
-        "Proud"
-      ],
+      "feelings": ["Relaxed", "Excited", "Proud"],
       "vibe": 75,
-      "genres": [
-        "Disco"
-      ]
+      "genres": ["Disco"]
     },
     "format": "WAV",
     "quality": "high",
@@ -2203,15 +1731,9 @@
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed",
-        "Proud"
-      ],
+      "feelings": ["Relaxed", "Proud"],
       "vibe": 67,
-      "genres": [
-        "Blues",
-        "Afrobeats"
-      ]
+      "genres": ["Blues", "Afrobeats"]
     },
     "format": "WAV",
     "quality": "high",
@@ -2229,14 +1751,9 @@
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 75,
-      "genres": [
-        "Jazz",
-        "World"
-      ]
+      "genres": ["Jazz", "World"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -2254,13 +1771,9 @@
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Great"
-      ],
+      "feelings": ["Great"],
       "vibe": 83,
-      "genres": [
-        "R&B"
-      ]
+      "genres": ["R&B"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2278,13 +1791,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Confident"
-      ],
+      "feelings": ["Confident"],
       "vibe": 79,
-      "genres": [
-        "Afrobeats"
-      ]
+      "genres": ["Afrobeats"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -2302,16 +1811,9 @@
     "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed",
-        "Excited",
-        "Great"
-      ],
+      "feelings": ["Relaxed", "Excited", "Great"],
       "vibe": 80,
-      "genres": [
-        "Reggae",
-        "Blues"
-      ]
+      "genres": ["Reggae", "Blues"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2329,14 +1831,9 @@
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed",
-        "Excited"
-      ],
+      "feelings": ["Relaxed", "Excited"],
       "vibe": 85,
-      "genres": [
-        "Latin"
-      ]
+      "genres": ["Latin"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -2354,14 +1851,9 @@
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Great"
-      ],
+      "feelings": ["Great"],
       "vibe": 76,
-      "genres": [
-        "Latin",
-        "House"
-      ]
+      "genres": ["Latin", "House"]
     },
     "format": "WAV",
     "quality": "high",
@@ -2379,16 +1871,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Optimistic",
-        "Excited",
-        "Great"
-      ],
+      "feelings": ["Optimistic", "Excited", "Great"],
       "vibe": 77,
-      "genres": [
-        "R&B",
-        "Hip-Hop"
-      ]
+      "genres": ["R&B", "Hip-Hop"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -2406,14 +1891,9 @@
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Confident",
-        "Optimistic"
-      ],
+      "feelings": ["Confident", "Optimistic"],
       "vibe": 69,
-      "genres": [
-        "House"
-      ]
+      "genres": ["House"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -2431,16 +1911,9 @@
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Great",
-        "Excited",
-        "Grateful"
-      ],
+      "feelings": ["Great", "Excited", "Grateful"],
       "vibe": 78,
-      "genres": [
-        "Trap",
-        "Folk"
-      ]
+      "genres": ["Trap", "Folk"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2458,14 +1931,9 @@
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Optimistic"
-      ],
+      "feelings": ["Optimistic"],
       "vibe": 84,
-      "genres": [
-        "Metal",
-        "Country"
-      ]
+      "genres": ["Metal", "Country"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -2483,14 +1951,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed",
-        "Grateful"
-      ],
+      "feelings": ["Relaxed", "Grateful"],
       "vibe": 84,
-      "genres": [
-        "House"
-      ]
+      "genres": ["House"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -2508,14 +1971,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Grateful",
-        "Relaxed"
-      ],
+      "feelings": ["Grateful", "Relaxed"],
       "vibe": 83,
-      "genres": [
-        "R&B"
-      ]
+      "genres": ["R&B"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -2533,16 +1991,9 @@
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Proud",
-        "Excited",
-        "Relaxed"
-      ],
+      "feelings": ["Proud", "Excited", "Relaxed"],
       "vibe": 84,
-      "genres": [
-        "House",
-        "Soul"
-      ]
+      "genres": ["House", "Soul"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -2560,14 +2011,9 @@
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 99,
-      "genres": [
-        "Disco",
-        "Reggae"
-      ]
+      "genres": ["Disco", "Reggae"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -2585,13 +2031,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Great"
-      ],
+      "feelings": ["Great"],
       "vibe": 88,
-      "genres": [
-        "House"
-      ]
+      "genres": ["House"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2609,14 +2051,9 @@
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Great"
-      ],
+      "feelings": ["Great"],
       "vibe": 85,
-      "genres": [
-        "Rock",
-        "K-Pop"
-      ]
+      "genres": ["Rock", "K-Pop"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -2634,14 +2071,9 @@
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited",
-        "Proud"
-      ],
+      "feelings": ["Excited", "Proud"],
       "vibe": 99,
-      "genres": [
-        "Trap"
-      ]
+      "genres": ["Trap"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2659,13 +2091,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud"
-      ],
+      "feelings": ["Proud"],
       "vibe": 94,
-      "genres": [
-        "Soul"
-      ]
+      "genres": ["Soul"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -2683,14 +2111,9 @@
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic",
-        "Great"
-      ],
+      "feelings": ["Optimistic", "Great"],
       "vibe": 90,
-      "genres": [
-        "Rock"
-      ]
+      "genres": ["Rock"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -2708,15 +2131,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud",
-        "Optimistic"
-      ],
+      "feelings": ["Proud", "Optimistic"],
       "vibe": 91,
-      "genres": [
-        "Rock",
-        "Folk"
-      ]
+      "genres": ["Rock", "Folk"]
     },
     "format": "MP3",
     "quality": "high",
@@ -2734,14 +2151,9 @@
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud",
-        "Optimistic"
-      ],
+      "feelings": ["Proud", "Optimistic"],
       "vibe": 85,
-      "genres": [
-        "Afrobeats"
-      ]
+      "genres": ["Afrobeats"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -2759,16 +2171,9 @@
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic",
-        "Excited",
-        "Proud"
-      ],
+      "feelings": ["Optimistic", "Excited", "Proud"],
       "vibe": 87,
-      "genres": [
-        "Folk",
-        "Hip-Hop"
-      ]
+      "genres": ["Folk", "Hip-Hop"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -2786,16 +2191,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited",
-        "Great",
-        "Proud"
-      ],
+      "feelings": ["Excited", "Great", "Proud"],
       "vibe": 86,
-      "genres": [
-        "Electronic",
-        "Hip-Hop"
-      ]
+      "genres": ["Electronic", "Hip-Hop"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2813,13 +2211,9 @@
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 88,
-      "genres": [
-        "R&B"
-      ]
+      "genres": ["R&B"]
     },
     "format": "WAV",
     "quality": "high",
@@ -2837,15 +2231,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited",
-        "Proud"
-      ],
+      "feelings": ["Excited", "Proud"],
       "vibe": 92,
-      "genres": [
-        "Rock",
-        "Soul"
-      ]
+      "genres": ["Rock", "Soul"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -2863,14 +2251,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited",
-        "Proud"
-      ],
+      "feelings": ["Excited", "Proud"],
       "vibe": 96,
-      "genres": [
-        "Indie"
-      ]
+      "genres": ["Indie"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2888,15 +2271,9 @@
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited",
-        "Optimistic"
-      ],
+      "feelings": ["Excited", "Optimistic"],
       "vibe": 95,
-      "genres": [
-        "House",
-        "Techno"
-      ]
+      "genres": ["House", "Techno"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -2914,14 +2291,9 @@
     "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic"
-      ],
+      "feelings": ["Optimistic"],
       "vibe": 96,
-      "genres": [
-        "Funk",
-        "Country"
-      ]
+      "genres": ["Funk", "Country"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -2939,15 +2311,9 @@
     "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited",
-        "Optimistic",
-        "Proud"
-      ],
+      "feelings": ["Excited", "Optimistic", "Proud"],
       "vibe": 88,
-      "genres": [
-        "Pop"
-      ]
+      "genres": ["Pop"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2965,16 +2331,9 @@
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Great",
-        "Optimistic",
-        "Excited"
-      ],
+      "feelings": ["Great", "Optimistic", "Excited"],
       "vibe": 92,
-      "genres": [
-        "Pop",
-        "Soul"
-      ]
+      "genres": ["Pop", "Soul"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -2992,14 +2351,9 @@
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 90,
-      "genres": [
-        "World",
-        "Folk"
-      ]
+      "genres": ["World", "Folk"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -3017,15 +2371,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud",
-        "Excited",
-        "Optimistic"
-      ],
+      "feelings": ["Proud", "Excited", "Optimistic"],
       "vibe": 99,
-      "genres": [
-        "Techno"
-      ]
+      "genres": ["Techno"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -3043,15 +2391,9 @@
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited",
-        "Proud",
-        "Optimistic"
-      ],
+      "feelings": ["Excited", "Proud", "Optimistic"],
       "vibe": 94,
-      "genres": [
-        "K-Pop"
-      ]
+      "genres": ["K-Pop"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -3069,14 +2411,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Great"
-      ],
+      "feelings": ["Great"],
       "vibe": 78,
-      "genres": [
-        "R&B",
-        "World"
-      ]
+      "genres": ["R&B", "World"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -3094,14 +2431,9 @@
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 52,
-      "genres": [
-        "Metal",
-        "House"
-      ]
+      "genres": ["Metal", "House"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -3119,16 +2451,9 @@
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Stressed",
-        "Nostalgic",
-        "Insecure"
-      ],
+      "feelings": ["Stressed", "Nostalgic", "Insecure"],
       "vibe": 29,
-      "genres": [
-        "Country",
-        "Jazz"
-      ]
+      "genres": ["Country", "Jazz"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -3146,13 +2471,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Proud"
-      ],
+      "feelings": ["Proud"],
       "vibe": 46,
-      "genres": [
-        "Jazz"
-      ]
+      "genres": ["Jazz"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -3170,14 +2491,9 @@
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Insecure"
-      ],
+      "feelings": ["Insecure"],
       "vibe": 30,
-      "genres": [
-        "Classical",
-        "Latin"
-      ]
+      "genres": ["Classical", "Latin"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -3195,15 +2511,9 @@
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Content",
-        "Thoughtful",
-        "Relaxed"
-      ],
+      "feelings": ["Content", "Thoughtful", "Relaxed"],
       "vibe": 26,
-      "genres": [
-        "Electronic"
-      ]
+      "genres": ["Electronic"]
     },
     "format": "MP3",
     "quality": "high",
@@ -3221,14 +2531,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Great",
-        "Excited"
-      ],
+      "feelings": ["Great", "Excited"],
       "vibe": 66,
-      "genres": [
-        "Hip-Hop"
-      ]
+      "genres": ["Hip-Hop"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -3246,15 +2551,9 @@
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Reflective",
-        "Relaxed",
-        "Thoughtful"
-      ],
+      "feelings": ["Reflective", "Relaxed", "Thoughtful"],
       "vibe": 30,
-      "genres": [
-        "House"
-      ]
+      "genres": ["House"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -3272,15 +2571,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Grateful",
-        "Nostalgic",
-        "Content"
-      ],
+      "feelings": ["Grateful", "Nostalgic", "Content"],
       "vibe": 15,
-      "genres": [
-        "Funk"
-      ]
+      "genres": ["Funk"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -3298,13 +2591,9 @@
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Great"
-      ],
+      "feelings": ["Great"],
       "vibe": 84,
-      "genres": [
-        "Jazz"
-      ]
+      "genres": ["Jazz"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -3322,13 +2611,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Thoughtful"
-      ],
+      "feelings": ["Thoughtful"],
       "vibe": 41,
-      "genres": [
-        "K-Pop"
-      ]
+      "genres": ["K-Pop"]
     },
     "format": "WAV",
     "quality": "lossless",
@@ -3346,16 +2631,9 @@
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Reflective",
-        "Tired",
-        "Lonely"
-      ],
+      "feelings": ["Reflective", "Tired", "Lonely"],
       "vibe": 14,
-      "genres": [
-        "Trap",
-        "Blues"
-      ]
+      "genres": ["Trap", "Blues"]
     },
     "format": "WAV",
     "quality": "standard",
@@ -3373,16 +2651,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Excited",
-        "Great",
-        "Optimistic"
-      ],
+      "feelings": ["Excited", "Great", "Optimistic"],
       "vibe": 85,
-      "genres": [
-        "Ambient",
-        "Reggae"
-      ]
+      "genres": ["Ambient", "Reggae"]
     },
     "format": "FLAC",
     "quality": "standard",
@@ -3400,16 +2671,9 @@
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Great",
-        "Optimistic",
-        "Proud"
-      ],
+      "feelings": ["Great", "Optimistic", "Proud"],
       "vibe": 87,
-      "genres": [
-        "Folk",
-        "Punk"
-      ]
+      "genres": ["Folk", "Punk"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -3427,16 +2691,9 @@
     "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud",
-        "Optimistic",
-        "Excited"
-      ],
+      "feelings": ["Proud", "Optimistic", "Excited"],
       "vibe": 88,
-      "genres": [
-        "R&B",
-        "Indie"
-      ]
+      "genres": ["R&B", "Indie"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -3454,15 +2711,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Optimistic",
-        "Excited"
-      ],
+      "feelings": ["Optimistic", "Excited"],
       "vibe": 99,
-      "genres": [
-        "Latin",
-        "Trap"
-      ]
+      "genres": ["Latin", "Trap"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -3480,13 +2731,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Grateful"
-      ],
+      "feelings": ["Grateful"],
       "vibe": 23,
-      "genres": [
-        "Reggae"
-      ]
+      "genres": ["Reggae"]
     },
     "format": "MP3",
     "quality": "high",
@@ -3504,15 +2751,9 @@
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Excited",
-        "Great",
-        "Confident"
-      ],
+      "feelings": ["Excited", "Great", "Confident"],
       "vibe": 71,
-      "genres": [
-        "Trap"
-      ]
+      "genres": ["Trap"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -3530,15 +2771,9 @@
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Confident",
-        "Proud",
-        "Excited"
-      ],
+      "feelings": ["Confident", "Proud", "Excited"],
       "vibe": 58,
-      "genres": [
-        "World"
-      ]
+      "genres": ["World"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -3556,14 +2791,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Melancholic",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 25,
-      "genres": [
-        "Hip-Hop",
-        "Metal"
-      ]
+      "genres": ["Hip-Hop", "Metal"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -3581,14 +2811,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Content",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 52,
-      "genres": [
-        "K-Pop",
-        "Pop"
-      ]
+      "genres": ["K-Pop", "Pop"]
     },
     "format": "MP3",
     "quality": "high",
@@ -3606,13 +2831,9 @@
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Reflective"
-      ],
+      "feelings": ["Reflective"],
       "vibe": 34,
-      "genres": [
-        "Metal"
-      ]
+      "genres": ["Metal"]
     },
     "format": "FLAC",
     "quality": "high",
@@ -3630,14 +2851,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Proud",
-        "Great"
-      ],
+      "feelings": ["Proud", "Great"],
       "vibe": 99,
-      "genres": [
-        "K-Pop"
-      ]
+      "genres": ["K-Pop"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -3655,14 +2871,9 @@
     "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Grateful",
-        "Excited"
-      ],
+      "feelings": ["Grateful", "Excited"],
       "vibe": 83,
-      "genres": [
-        "K-Pop"
-      ]
+      "genres": ["K-Pop"]
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -3680,15 +2891,9 @@
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited",
-        "Great"
-      ],
+      "feelings": ["Excited", "Great"],
       "vibe": 98,
-      "genres": [
-        "Jazz",
-        "Metal"
-      ]
+      "genres": ["Jazz", "Metal"]
     },
     "format": "MP3",
     "quality": "high",
@@ -3706,15 +2911,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Reflective",
-      "feelings": [
-        "Relaxed",
-        "Content",
-        "Thoughtful"
-      ],
+      "feelings": ["Relaxed", "Content", "Thoughtful"],
       "vibe": 36,
-      "genres": [
-        "Latin"
-      ]
+      "genres": ["Latin"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -3732,16 +2931,9 @@
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Joyful",
-      "feelings": [
-        "Relaxed",
-        "Proud",
-        "Optimistic"
-      ],
+      "feelings": ["Relaxed", "Proud", "Optimistic"],
       "vibe": 74,
-      "genres": [
-        "Punk",
-        "Ambient"
-      ]
+      "genres": ["Punk", "Ambient"]
     },
     "format": "MP3",
     "quality": "standard",
@@ -3759,15 +2951,9 @@
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Great",
-        "Excited",
-        "Proud"
-      ],
+      "feelings": ["Great", "Excited", "Proud"],
       "vibe": 99,
-      "genres": [
-        "Country"
-      ]
+      "genres": ["Country"]
     },
     "format": "MP3",
     "quality": "lossless",
@@ -3785,16 +2971,9 @@
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Nostalgic",
-      "feelings": [
-        "Nostalgic",
-        "Content",
-        "Reflective"
-      ],
+      "feelings": ["Nostalgic", "Content", "Reflective"],
       "vibe": 18,
-      "genres": [
-        "Afrobeats",
-        "R&B"
-      ]
+      "genres": ["Afrobeats", "R&B"]
     },
     "format": "MP3",
     "quality": "high",
@@ -3812,14 +2991,9 @@
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
       "mood": "Euphoric",
-      "feelings": [
-        "Excited"
-      ],
+      "feelings": ["Excited"],
       "vibe": 87,
-      "genres": [
-        "Soul",
-        "Folk"
-      ]
+      "genres": ["Soul", "Folk"]
     },
     "format": "FLAC",
     "quality": "standard",

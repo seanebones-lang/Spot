@@ -2,7 +2,8 @@ name: Deployment Status Check
 
 on:
   workflow_run:
-    workflows: ["Deploy to Railway", "Deploy to Vercel", "Deploy to Railway and Vercel"]
+    workflows:
+      ["Deploy to Railway", "Deploy to Vercel", "Deploy to Railway and Vercel"]
     types:
       - completed
   workflow_dispatch:

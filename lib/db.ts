@@ -4,9 +4,9 @@
  * Use this for all database operations
  */
 
-import { PrismaClient } from '@prisma/client';
-import { logger } from './logger';
-import { withTimeout, TIMEOUTS } from './timeout';
+import { PrismaClient } from "@prisma/client";
+import { logger } from "./logger";
+import { withTimeout, TIMEOUTS } from "./timeout";
 
 // Prisma Client singleton - Edge runtime compatible with binary engine
 // Prevents multiple instances during hot reload in development
@@ -24,14 +24,14 @@ function getPrismaClient(): PrismaClient {
 
   const client = new PrismaClient({
     log:
-      process.env.NODE_ENV === 'development'
-        ? ['query', 'warn', 'error']
-        : ['warn', 'error'],
-    errorFormat: 'pretty',
+      process.env.NODE_ENV === "development"
+        ? ["query", "warn", "error"]
+        : ["warn", "error"],
+    errorFormat: "pretty",
   });
 
   // Cache in global for development hot reload
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     globalThis.prisma = client;
   }
 
@@ -45,7 +45,7 @@ export const prisma = new Proxy({} as PrismaClient, {
   get(_target, prop) {
     const client = getPrismaClient();
     const value = (client as any)[prop];
-    return typeof value === 'function' ? value.bind(client) : value;
+    return typeof value === "function" ? value.bind(client) : value;
   },
   set(_target, prop, value) {
     const client = getPrismaClient();
@@ -60,17 +60,17 @@ export const prisma = new Proxy({} as PrismaClient, {
  */
 export async function dbQueryWithTimeout<T>(
   query: Promise<T>,
-  timeoutMs: number = TIMEOUTS.DATABASE_QUERY
+  timeoutMs: number = TIMEOUTS.DATABASE_QUERY,
 ): Promise<T> {
-  return withTimeout(query, timeoutMs, 'Database query timeout');
+  return withTimeout(query, timeoutMs, "Database query timeout");
 }
 
 // Handle connection errors gracefully (only at runtime, not during build)
-if (typeof window === 'undefined') {
+if (typeof window === "undefined") {
   try {
     const client = getPrismaClient();
-    client.$on('error' as never, (e: unknown) => {
-      logger.error('Prisma database error', e);
+    client.$on("error" as never, (e: unknown) => {
+      logger.error("Prisma database error", e);
     });
   } catch (e) {
     // Ignore during build - client not needed until runtime
@@ -78,7 +78,7 @@ if (typeof window === 'undefined') {
 }
 
 // Graceful shutdown (only at runtime)
-if (typeof window === 'undefined') {
+if (typeof window === "undefined") {
   async function disconnect() {
     try {
       const client = getPrismaClient();
@@ -88,8 +88,8 @@ if (typeof window === 'undefined') {
     }
   }
 
-  process.on('SIGTERM', disconnect);
-  process.on('SIGINT', disconnect);
+  process.on("SIGTERM", disconnect);
+  process.on("SIGINT", disconnect);
 }
 
 export default prisma;

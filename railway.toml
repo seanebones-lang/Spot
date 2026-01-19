@@ -1,33 +1,23 @@
 # Railway configuration for EmPulse Music
+# Dual-deploy: Railway (DB/API) + Vercel (Frontend)
 
 [build]
 builder = "nixpacks"
+command = "prisma generate && npm run build"
 
 [deploy]
 startCommand = "npm start"
-healthcheckPath = "/"
+healthcheckPath = "/api/health"
 healthcheckTimeout = 100
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
+# Environment variables
+# DATABASE_URL will be auto-set from PostgreSQL service
+# PORT is automatically set by Railway (default: 3000)
+
 [environments.production]
-# Production environment variables should be set in Railway dashboard
-# NODE_ENV=production
-# PORT=3000 (automatically set by Railway)
+NODE_ENV = "production"
 
 [environments.staging]
-# Staging environment variables
-
-# Build configuration
-[build.buildCommand]
-command = "prisma generate && npm run build"
-
-# Environment variables (set in Railway dashboard)
-# Required:
-# - NODE_ENV=production
-# - PORT (set automatically by Railway)
-
-# Optional:
-# - DATABASE_URL (if using database)
-# - API_URL (if using external API)
-# - NEXT_PUBLIC_API_URL (for client-side API calls)
+NODE_ENV = "staging"

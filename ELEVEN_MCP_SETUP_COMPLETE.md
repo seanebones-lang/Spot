@@ -8,24 +8,28 @@
 ## 🎯 What's Been Configured
 
 ### 1. ✅ Eleven-First Rules (`.cursor/rules/eleven.md`)
+
 - Response prefix: `[Eleven MCP]`
 - Swarm activation keywords
 - Tool usage strategy
 - Agent orchestration patterns
 
 ### 2. ✅ Swarm Agent Definitions (`.cursor/rules/swarm-agents.md`)
+
 - **25 specialized agents** defined
 - Agent responsibilities and domains
 - Swarm orchestration patterns
 - Agent communication protocols
 
 ### 3. ✅ Continue Config (`.continue/config.json`)
+
 - Eleven model configuration
 - Eleven MCP custom provider
 - Rules for refactoring and swarms
 - Tab autocomplete with Eleven
 
 ### 4. ✅ VS Code Vim Integration
+
 - `<leader>e` - Refactor with Eleven
 - `<leader>s` - Swarm analyze
 - `<leader>d` - Debug with Eleven
@@ -33,18 +37,21 @@
 - `<leader>p` - Terraform plan
 
 ### 5. ✅ Workflow Templates (`.cursor/workflows/`)
+
 - Optimal workflows documented
 - Spot-specific patterns
 - Iterative refinement loops
 - Error recovery strategies
 
 ### 6. ✅ Prompt Templates (`.cursor/prompts/`)
+
 - Copy-paste ready templates
 - Spot-specific examples
 - Agent combination patterns
 - Best practices guide
 
 ### 7. ✅ Command Shortcuts (`.cursor/commands/eleven.md`)
+
 - Quick reference for all commands
 - Agent types catalog
 - Command combinations
@@ -85,16 +92,17 @@
 
 ### Quantified Improvements
 
-| Metric | Before | After | Gain |
-|--------|--------|-------|------|
-| **Speed** | 1x | 5x | +400% |
-| **Accuracy** | 70% | 95% | +25% |
-| **Coverage** | 30% | 100% | +233% |
-| **Iterations** | 1-2 | 10+ | +500% |
+| Metric         | Before | After | Gain  |
+| -------------- | ------ | ----- | ----- |
+| **Speed**      | 1x     | 5x    | +400% |
+| **Accuracy**   | 70%    | 95%   | +25%  |
+| **Coverage**   | 30%    | 100%  | +233% |
+| **Iterations** | 1-2    | 10+   | +500% |
 
 ### Spot Repository ROI
 
 **Example**: Player Component → Audiophile Player
+
 - **Before**: 2-3 hours manual work
 - **After**: 1 session with swarm (30 min)
 - **Result**: Shaders + FLAC + Haptics complete
@@ -143,7 +151,7 @@
 ✅ `.cursor/workflows/eleven-optimal.md` - Workflows  
 ✅ `.cursor/prompts/eleven-swarm-templates.md` - Templates  
 ✅ `.cursor/commands/eleven.md` - Command reference  
-✅ `.vscode/settings.json` - Vim + Eleven bindings  
+✅ `.vscode/settings.json` - Vim + Eleven bindings
 
 ---
 
@@ -152,11 +160,13 @@
 ### 1. Always Prefix Prompts
 
 **✅ Good**:
+
 ```
 @Eleven MCP /swarm optimize Player.tsx
 ```
 
 **❌ Bad**:
+
 ```
 optimize Player.tsx
 ```
@@ -164,11 +174,13 @@ optimize Player.tsx
 ### 2. Use Swarms for Complex Tasks
 
 **✅ Good**:
+
 ```
 @Eleven MCP /swarm fullstack audio upload feature
 ```
 
 **❌ Bad**:
+
 ```
 make audio upload
 ```
@@ -176,11 +188,13 @@ make audio upload
 ### 3. Specify Agent Types
 
 **✅ Good**:
+
 ```
 @Eleven MCP /agent performance analyze bundle size
 ```
 
 **❌ Bad**:
+
 ```
 check performance
 ```
@@ -188,6 +202,7 @@ check performance
 ### 4. Include Context
 
 **✅ Good**:
+
 ```
 @Eleven MCP /debug autoplay fails in Player.tsx
 Error: [paste error]
@@ -195,6 +210,7 @@ Context: Using Howler.js, Next.js 15
 ```
 
 **❌ Bad**:
+
 ```
 fix bug
 ```
@@ -240,11 +256,13 @@ fix bug
 ## 📈 Optimization Strategies
 
 ### 1. Model Switching
+
 - Use `@Eleven` for agentic tasks
 - Use `@Eleven MCP` for swarm orchestration
 - Pin to Composer for quick access
 
 ### 2. Iterative Refinement
+
 ```
 Generate → Test → Refine → Deploy
 @Eleven MCP /swarm [task]
@@ -254,11 +272,13 @@ npm run build
 ```
 
 ### 3. Tool Emulation
+
 - When tools fail, Eleven provides manual steps
 - Report tool failures: `@Eleven MCP /report [error]`
 - Use workarounds, continue workflow
 
 ### 4. Telemetry Feedback
+
 - Share telemetry with Eleven
 - Meta-prompts: `@Eleven MCP /research bottlenecks`
 - Self-improvement analysis
@@ -286,16 +306,19 @@ npm run build
 ## 🎓 Learning Curve
 
 ### Beginner
+
 - Use: `@Eleven MCP /swarm [simple-task]`
 - Focus: Understanding agent outputs
 - Practice: Single component optimization
 
 ### Intermediate
+
 - Use: Multiple agents in sequence
 - Focus: Agent orchestration
 - Practice: Full feature development
 
 ### Advanced
+
 - Use: Custom agent combinations
 - Focus: Workflow optimization
 - Practice: Complex deployments
@@ -305,12 +328,14 @@ npm run build
 ## 📚 Resources
 
 ### Documentation
+
 - `.cursor/rules/eleven.md` - Core rules
 - `.cursor/rules/swarm-agents.md` - Agent catalog
 - `.cursor/workflows/eleven-optimal.md` - Workflows
 - `.cursor/prompts/eleven-swarm-templates.md` - Templates
 
 ### Quick Reference
+
 - `.cursor/commands/eleven.md` - All commands
 - Vim bindings: `<leader>e`, `<leader>s`, `<leader>d`
 

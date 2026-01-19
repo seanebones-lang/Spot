@@ -6,14 +6,14 @@ on:
       - main
       - fix-all-complete-v1
     paths:
-      - 'app/**'
-      - 'components/**'
-      - 'lib/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'next.config.js'
-      - 'Dockerfile'
-      - 'railway.toml'
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.js"
+      - "Dockerfile"
+      - "railway.toml"
   pull_request:
     branches:
       - main
@@ -29,7 +29,7 @@ jobs:
     name: Deploy to Railway
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,8 +37,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install Railway CLI
         run: |

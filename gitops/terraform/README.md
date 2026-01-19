@@ -5,6 +5,7 @@ This directory contains Terraform configurations for provisioning AWS infrastruc
 ## Overview
 
 This Terraform setup provisions:
+
 - **AWS EKS Cluster**: Kubernetes 1.31 (latest as of Dec 2025)
 - **VPC**: Multi-AZ VPC with public and private subnets
 - **Node Groups**: EKS managed node groups with auto-scaling
@@ -74,15 +75,16 @@ Once Terraform creates the infrastructure, Flux will manage all application depl
 
 ## Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `aws_region` | AWS region | `us-west-2` |
+| Variable       | Description      | Default           |
+| -------------- | ---------------- | ----------------- |
+| `aws_region`   | AWS region       | `us-west-2`       |
 | `cluster_name` | EKS cluster name | `nexteleven-prod` |
-| `environment` | Environment name | `prod` |
+| `environment`  | Environment name | `prod`            |
 
 ## Outputs
 
 After applying, Terraform outputs:
+
 - `cluster_id`: EKS cluster ID
 - `cluster_endpoint`: Kubernetes API endpoint
 - `kubeconfig_command`: Command to configure kubectl

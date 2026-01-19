@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --font-circular: 'Circular', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --font-circular:
+    "Circular", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 * {
@@ -18,9 +19,10 @@ html {
 }
 
 body {
-  font-family: var(--font-circular), 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-family:
+    var(--font-circular), "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   background-color: #121212;
-  color: #FFFFFF;
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -107,12 +109,12 @@ body {
     @apply bg-spotify-green text-white rounded-full px-6 py-2 font-bold hover:scale-105 transition-transform;
     will-change: transform;
   }
-  
+
   .btn-secondary {
     @apply bg-transparent border border-white/30 text-white rounded-full px-6 py-2 font-bold hover:border-white transition-colors;
     will-change: border-color;
   }
-  
+
   .card-hover {
     @apply transition-transform hover:scale-105 cursor-pointer;
     will-change: transform;

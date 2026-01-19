@@ -9,6 +9,7 @@ The EmPulse Music player has been enhanced with professional-grade audiophile fe
 ## 🎚️ 10-Band Parametric Equalizer
 
 ### Features
+
 - **10 ISO Standard Frequency Bands**: 31Hz, 62Hz, 125Hz, 250Hz, 500Hz, 1kHz, 2kHz, 4kHz, 8kHz, 16kHz
 - **Range**: -12dB to +12dB per band
 - **Real-time Processing**: Changes apply instantly without audio interruption
@@ -16,6 +17,7 @@ The EmPulse Music player has been enhanced with professional-grade audiophile fe
 - **Save/Load**: Persist custom EQ settings
 
 ### Presets
+
 1. **Flat** - No EQ adjustment (reference)
 2. **Bass Boost** - Enhanced low frequencies
 3. **Treble Boost** - Enhanced high frequencies
@@ -27,6 +29,7 @@ The EmPulse Music player has been enhanced with professional-grade audiophile fe
 9. **Custom** - User-defined settings
 
 ### Usage
+
 - Access from Player: Click the EQ button (⚙️) in the player controls
 - Access from Full Screen: Click "EQ" button in toolbar
 - Drag sliders vertically to adjust gain
@@ -74,11 +77,13 @@ The EmPulse Music player has been enhanced with professional-grade audiophile fe
 - **Monochrome** - White/gray scale
 
 ### Customization
+
 - **Sensitivity**: Adjust visualization responsiveness (0-100%)
 - **Real-time Controls**: Change type and colors on the fly
 - **High Resolution**: 4096 FFT for maximum detail
 
 ### Usage
+
 - Access from Full Screen Player
 - Select visualizer type from toolbar
 - Click settings icon (⚙️) for customization
@@ -89,6 +94,7 @@ The EmPulse Music player has been enhanced with professional-grade audiophile fe
 ## 🔊 Audio Quality & Processing
 
 ### FLAC Lossless Support
+
 - **Full FLAC Support**: Native playback of FLAC files
 - **High Sample Rates**: Up to 192kHz (hardware dependent)
 - **Bit Depth**: 16-bit and 24-bit support
@@ -117,6 +123,7 @@ The EmPulse Music player has been enhanced with professional-grade audiophile fe
    - Can be disabled for pure audiophile mode
 
 ### Audio Context Settings
+
 - **Sample Rate**: Up to 192kHz (browser/hardware dependent)
 - **Latency**: Interactive mode for low latency
 - **Processing**: Minimal, transparent processing chain
@@ -126,11 +133,13 @@ The EmPulse Music player has been enhanced with professional-grade audiophile fe
 ## 🎛️ Integration Points
 
 ### Main Player
+
 - **EQ Button**: Quick access to equalizer
 - **EQ Panel**: Slides up from bottom when active
 - **Compact Mode**: Space-efficient display
 
 ### Full Screen Player
+
 - **Visualizer Display**: Large, immersive visualization
 - **EQ Toggle**: Switch between visualizer and EQ
 - **Type Selection**: Quick switch between visualizer types
@@ -141,6 +150,7 @@ The EmPulse Music player has been enhanced with professional-grade audiophile fe
 ## 🔧 Technical Details
 
 ### Audio Pipeline Architecture
+
 ```
 Audio Source (FLAC/MP3/etc)
     ↓
@@ -158,12 +168,14 @@ AudioDestinationNode (speakers)
 ```
 
 ### Performance
+
 - **Real-time Processing**: All effects process in real-time
 - **GPU Acceleration**: Canvas rendering for visualizers
 - **Optimized FFT**: Efficient frequency analysis
 - **Low Latency**: Interactive audio context for responsiveness
 
 ### Browser Compatibility
+
 - **Chrome/Edge**: Full support (192kHz on supported hardware)
 - **Firefox**: Full support (up to 96kHz typically)
 - **Safari**: Full support (up to 96kHz typically)
@@ -174,14 +186,16 @@ AudioDestinationNode (speakers)
 ## 📊 Quality Metrics
 
 ### Sample Rate Support
-| Format | Max Sample Rate | Bit Depth | Status |
-|--------|----------------|-----------|--------|
-| FLAC | 192kHz | 24-bit | ✅ Full Support |
-| WAV | 192kHz | 32-bit | ✅ Full Support |
-| MP3 | 48kHz | 16-bit | ✅ Supported |
-| M4A | 48kHz | 16-bit | ✅ Supported |
+
+| Format | Max Sample Rate | Bit Depth | Status          |
+| ------ | --------------- | --------- | --------------- |
+| FLAC   | 192kHz          | 24-bit    | ✅ Full Support |
+| WAV    | 192kHz          | 32-bit    | ✅ Full Support |
+| MP3    | 48kHz           | 16-bit    | ✅ Supported    |
+| M4A    | 48kHz           | 16-bit    | ✅ Supported    |
 
 ### EQ Specifications
+
 - **Bands**: 10 parametric bands
 - **Frequency Range**: 31Hz - 16kHz
 - **Gain Range**: -12dB to +12dB
@@ -189,6 +203,7 @@ AudioDestinationNode (speakers)
 - **Processing**: Real-time, zero-latency
 
 ### Visualization Specs
+
 - **FFT Size**: 4096 points
 - **Frequency Bins**: 2048
 - **Update Rate**: 60 FPS (requestAnimationFrame)
@@ -200,6 +215,7 @@ AudioDestinationNode (speakers)
 ## 🎯 Best Practices
 
 ### For Audiophile Listening
+
 1. **Use FLAC Files**: Maximum quality source material
 2. **Disable Compressor**: For pure, unprocessed sound
 3. **Flat EQ**: Start with flat preset for reference
@@ -207,6 +223,7 @@ AudioDestinationNode (speakers)
 5. **Quality Headphones**: Use high-quality audio equipment
 
 ### For Visualization
+
 1. **Spectrum Analyzer**: Best for frequency analysis
 2. **Waveform**: Best for seeing audio dynamics
 3. **Circular**: Most visually impressive
@@ -214,6 +231,7 @@ AudioDestinationNode (speakers)
 5. **Color Scheme**: Choose based on preference/theme
 
 ### For EQ Tuning
+
 1. **Start Flat**: Begin with flat preset
 2. **Make Small Adjustments**: ±3dB is usually enough
 3. **Test Different Presets**: Find what works for your music
@@ -225,6 +243,7 @@ AudioDestinationNode (speakers)
 ## 🚀 Future Enhancements
 
 Potential future additions:
+
 - **Parametric EQ**: Adjustable Q factor per band
 - **Convolution Reverb**: Room simulation
 - **Crossfade**: Smooth track transitions

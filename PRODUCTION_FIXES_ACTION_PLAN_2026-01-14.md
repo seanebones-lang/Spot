@@ -1,5 +1,7 @@
 # Production Fixes Action Plan
+
 ## Prioritized Implementation Guide
+
 **Date**: January 14, 2026  
 **Based on**: PRODUCTION_READINESS_AUDIT_2026-01-14.md
 
@@ -8,30 +10,34 @@
 ## 🔴 Priority P0: Critical Security & Reliability Fixes
 
 ### Fix 1: Content Security Policy (CSP) Hardening
+
 **File**: `middleware.ts`  
 **Severity**: Critical  
 **Estimated Time**: 2 hours
 
 **Current Issue** (Line 112):
+
 ```typescript
 "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // ⚠️ VULNERABLE
 ```
 
 **Fix**:
+
 ```typescript
 // Generate nonces for inline scripts
-const nonce = crypto.randomBytes(16).toString('base64');
-response.headers.set('X-Nonce', nonce);
+const nonce = crypto.randomBytes(16).toString("base64");
+response.headers.set("X-Nonce", nonce);
 
 const csp = [
   "default-src 'self'",
   `script-src 'self' 'nonce-${nonce}'`, // Remove unsafe-eval
   "style-src 'self' 'unsafe-inline'", // Keep unsafe-inline for Tailwind
   // ... rest of CSP
-].join('; ');
+].join("; ");
 ```
 
 **Action Items**:
+
 - [ ] Generate nonce per request in middleware
 - [ ] Pass nonce to React via `next/script` component
 - [ ] Remove all inline `<script>` tags (move to separate files)
@@ -40,11 +46,13 @@ const csp = [
 ---
 
 ### Fix 2: Add Error Boundaries (Frontend)
+
 **File**: `components/ErrorBoundary.tsx` (NEW)  
 **Severity**: Critical  
 **Estimated Time**: 3 hours
 
 **Implementation**:
+
 ```typescript
 'use client';
 
@@ -100,6 +108,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
 ```
 
 **Update `app/layout.tsx`**:
+
 ```typescript
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
@@ -117,6 +126,7 @@ export default function RootLayout({ children }) {
 ```
 
 **Action Items**:
+
 - [ ] Create `components/ErrorBoundary.tsx`
 - [ ] Wrap root layout with ErrorBoundary
 - [ ] Add per-route error boundaries for critical pages
@@ -125,29 +135,37 @@ export default function RootLayout({ children }) {
 ---
 
 ### Fix 3: Remove CSRF Exclusions for Admin Endpoints
+
 **File**: `middleware.ts` (Line 81)  
 **Severity**: High  
 **Estimated Time**: 1 hour
 
 **Current Issue**:
+
 ```typescript
-const skipCsrfPaths = ['/api/auth/login', '/api/auth/register', '/api/admin/delete-all-album-art'];
+const skipCsrfPaths = [
+  "/api/auth/login",
+  "/api/auth/register",
+  "/api/admin/delete-all-album-art",
+];
 ```
 
 **Fix**:
+
 ```typescript
-const skipCsrfPaths = ['/api/auth/login', '/api/auth/register']; // Remove admin path
+const skipCsrfPaths = ["/api/auth/login", "/api/auth/register"]; // Remove admin path
 
 // In admin route, require role + CSRF:
 // app/api/admin/delete-all-album-art/route.ts
 export async function DELETE(request: NextRequest) {
   requireCsrfToken(request); // Add this
-  const user = requireRole(request, ['ADMIN']); // Ensure role check
+  const user = requireRole(request, ["ADMIN"]); // Ensure role check
   // ... rest of handler
 }
 ```
 
 **Action Items**:
+
 - [ ] Remove `/api/admin/*` from skipCsrfPaths
 - [ ] Add CSRF validation in admin route handlers
 - [ ] Ensure role-based auth checks in admin routes
@@ -156,6 +174,7 @@ export async function DELETE(request: NextRequest) {
 ---
 
 ### Fix 4: Environment Variable Validation at Startup
+
 **File**: `lib/startup-validation.ts` (UPDATE)  
 **Severity**: Critical  
 **Estimated Time**: 1 hour
@@ -163,24 +182,33 @@ export async function DELETE(request: NextRequest) {
 **Current Issue**: Neo4j and Pinecone may be undefined in production, causing silent failures.
 
 **Fix** - Update `lib/env.ts`:
+
 ```typescript
 export function validateEnv(): EnvSchema {
   const errors: string[] = [];
   // ... existing validation ...
 
   // NEW: Validate production dependencies
-  if (process.env.NODE_ENV === 'production') {
-    if (!process.env.NEO4J_URI && !process.env.NEO4J_URI?.startsWith('neo4j://')) {
-      errors.push('NEO4J_URI is required in production. Format: neo4j://host:port');
+  if (process.env.NODE_ENV === "production") {
+    if (
+      !process.env.NEO4J_URI &&
+      !process.env.NEO4J_URI?.startsWith("neo4j://")
+    ) {
+      errors.push(
+        "NEO4J_URI is required in production. Format: neo4j://host:port",
+      );
     }
     if (!process.env.NEO4J_USER) {
-      errors.push('NEO4J_USER is required in production');
+      errors.push("NEO4J_USER is required in production");
     }
     if (!process.env.NEO4J_PASSWORD) {
-      errors.push('NEO4J_PASSWORD is required in production');
+      errors.push("NEO4J_PASSWORD is required in production");
     }
-    if (!process.env.PINECONE_API_KEY && !process.env.PINECONE_API_KEY?.startsWith('pcsk')) {
-      errors.push('PINECONE_API_KEY is required in production');
+    if (
+      !process.env.PINECONE_API_KEY &&
+      !process.env.PINECONE_API_KEY?.startsWith("pcsk")
+    ) {
+      errors.push("PINECONE_API_KEY is required in production");
     }
   }
 
@@ -189,6 +217,7 @@ export function validateEnv(): EnvSchema {
 ```
 
 **Update `next.config.js`** - Remove Pinecone stub in production:
+
 ```javascript
 webpack: (config, { dev }) => {
   // Only stub in development
@@ -203,6 +232,7 @@ webpack: (config, { dev }) => {
 ```
 
 **Action Items**:
+
 - [ ] Add Neo4j env var validation to `lib/env.ts`
 - [ ] Add Pinecone env var validation
 - [ ] Update `next.config.js` to only stub in dev
@@ -213,11 +243,13 @@ webpack: (config, { dev }) => {
 ## 🟡 Priority P1: Testing & Reliability
 
 ### Fix 5: Add E2E Tests to CI/CD
+
 **File**: `.github/workflows/e2e-tests.yml` (NEW)  
 **Severity**: High  
 **Estimated Time**: 4 hours
 
 **Create new workflow**:
+
 ```yaml
 name: E2E Tests
 
@@ -234,7 +266,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright browsers
@@ -252,6 +284,7 @@ jobs:
 ```
 
 **Action Items**:
+
 - [ ] Create `.github/workflows/e2e-tests.yml`
 - [ ] Add test environment secrets to GitHub
 - [ ] Update `playwright.config.ts` to use test database
@@ -260,6 +293,7 @@ jobs:
 ---
 
 ### Fix 6: Increase Test Coverage
+
 **Files**: `__tests__/**/*.test.ts` (NEW FILES)  
 **Severity**: High  
 **Estimated Time**: 20 hours
@@ -291,6 +325,7 @@ jobs:
 **Target**: 70% code coverage minimum
 
 **Action Items**:
+
 - [ ] Create API route test suite (10 test files)
 - [ ] Create component test suite (5 test files)
 - [ ] Add coverage reporting: `jest --coverage`
@@ -299,17 +334,20 @@ jobs:
 ---
 
 ### Fix 7: Add Docker Health Check
+
 **File**: `Dockerfile`  
 **Severity**: Medium  
 **Estimated Time**: 1 hour
 
 **Add to Dockerfile** (before CMD):
+
 ```dockerfile
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000/api/health', (r) => { process.exit(r.statusCode === 200 ? 0 : 1); })"
 ```
 
 **Action Items**:
+
 - [ ] Add HEALTHCHECK instruction to Dockerfile
 - [ ] Test: `docker run` and verify `docker ps` shows healthy status
 - [ ] Update deployment to use health check for rolling updates
@@ -319,11 +357,13 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
 ## 🟢 Priority P2: Infrastructure & Monitoring
 
 ### Fix 8: Database Backup Strategy
+
 **File**: `scripts/backup-database.sh` (NEW)  
 **Severity**: High  
 **Estimated Time**: 4 hours
 
 **Create backup script**:
+
 ```bash
 #!/bin/bash
 # scripts/backup-database.sh
@@ -352,15 +392,17 @@ echo "Backup completed: $BACKUP_FILE.gz"
 ```
 
 **Add to cron/GitHub Actions**:
+
 ```yaml
 # .github/workflows/daily-backup.yml
 name: Daily Database Backup
 on:
   schedule:
-    - cron: '0 2 * * *' # 2 AM UTC daily
+    - cron: "0 2 * * *" # 2 AM UTC daily
 ```
 
 **Action Items**:
+
 - [ ] Create `scripts/backup-database.sh`
 - [ ] Add GitHub Actions workflow for automated backups
 - [ ] Configure S3/Cloud Storage for backup storage
@@ -369,11 +411,13 @@ on:
 ---
 
 ### Fix 9: Track Submission Moderation Queue
+
 **File**: `app/api/tracks/submit/route.ts` (Line 435)  
 **Severity**: Medium  
 **Estimated Time**: 2 hours
 
 **Change**:
+
 ```typescript
 // BEFORE:
 status: 'PUBLISHED',
@@ -385,22 +429,31 @@ publishedAt: null, // Set on approval
 ```
 
 **Create admin approval endpoint**:
+
 ```typescript
 // app/api/admin/tracks/[id]/approve/route.ts
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) {
   requireCsrfToken(request);
-  const user = requireRole(request, ['ADMIN']);
-  
+  const user = requireRole(request, ["ADMIN"]);
+
   await prisma.trackSubmission.update({
     where: { submissionId: params.id },
-    data: { status: 'PUBLISHED', publishedAt: new Date(), reviewedAt: new Date() },
+    data: {
+      status: "PUBLISHED",
+      publishedAt: new Date(),
+      reviewedAt: new Date(),
+    },
   });
-  
+
   return NextResponse.json({ success: true });
 }
 ```
 
 **Action Items**:
+
 - [ ] Change default status to `PENDING_REVIEW`
 - [ ] Create admin approval API endpoint
 - [ ] Add admin UI for track moderation
@@ -409,6 +462,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 ---
 
 ### Fix 10: Remove Pinecone Stub in Production
+
 **File**: `next.config.js` (Already addressed in Fix 4)  
 **Status**: ✅ Covered in Fix 4
 
@@ -417,6 +471,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 ## Summary Checklist
 
 ### Before Staging Deployment:
+
 - [ ] Fix 1: CSP hardening (2h)
 - [ ] Fix 2: Error boundaries (3h)
 - [ ] Fix 3: CSRF on admin endpoints (1h)
@@ -425,6 +480,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 **Total: 7 hours** ✅ Ready for staging
 
 ### Before Production Deployment:
+
 - [ ] Fix 5: E2E tests in CI (4h)
 - [ ] Fix 6: Test coverage to 70% (20h)
 - [ ] Fix 7: Docker health check (1h)
@@ -434,6 +490,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 **Total: 31 hours** ✅ Ready for production
 
 ### Post-Launch Optimizations:
+
 - [ ] Fix 10: Monitoring integration (6h)
 - [ ] Implement caching layer (8h)
 - [ ] CDN configuration (4h)
@@ -445,6 +502,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 **Total Estimated Time**: 56 hours (7 days with 1 engineer full-time)
 
 **Recommended Timeline**:
+
 - **Week 1**: P0 fixes (7h) → Deploy to staging
 - **Week 2**: P1 fixes (27h) → Deploy to production
 - **Week 3**: P2 fixes (18h) → Monitor and optimize
@@ -452,6 +510,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 ---
 
 **Next Steps**:
+
 1. Review this plan with team
 2. Assign owners to each fix
 3. Create GitHub issues for each fix

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useUserStore } from '@/stores/userStore';
-import Button from '@/components/Button';
-import { CheckCircle, Clock, XCircle, AlertCircle, Music } from 'lucide-react';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useUserStore } from "@/stores/userStore";
+import Button from "@/components/Button";
+import { CheckCircle, Clock, XCircle, AlertCircle, Music } from "lucide-react";
 
 export default function ArtistVerificationPendingPage() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function ArtistVerificationPendingPage() {
   useEffect(() => {
     // Redirect if no artist application
     if (!user || !user.artistApplication) {
-      router.push('/');
+      router.push("/");
     }
   }, [user, router]);
 
@@ -26,41 +26,48 @@ export default function ArtistVerificationPendingPage() {
 
   const getStatusContent = () => {
     switch (approvalStatus) {
-      case 'pending':
+      case "pending":
         return {
           icon: Clock,
-          iconColor: 'text-yellow-500',
-          bgColor: 'bg-yellow-500/20',
-          title: 'Application Pending Review',
-          message: 'Your artist/management application has been submitted and is awaiting admin review.',
-          details: 'This typically takes 24-48 hours. You&apos;ll receive an email notification once your application has been reviewed.',
+          iconColor: "text-yellow-500",
+          bgColor: "bg-yellow-500/20",
+          title: "Application Pending Review",
+          message:
+            "Your artist/management application has been submitted and is awaiting admin review.",
+          details:
+            "This typically takes 24-48 hours. You&apos;ll receive an email notification once your application has been reviewed.",
         };
-      case 'under-review':
+      case "under-review":
         return {
           icon: AlertCircle,
-          iconColor: 'text-blue-500',
-          bgColor: 'bg-blue-500/20',
-          title: 'Under Review',
-          message: 'Your application is currently being reviewed by our team.',
-          details: 'We&apos;re carefully reviewing your submission. You&apos;ll be notified as soon as a decision is made.',
+          iconColor: "text-blue-500",
+          bgColor: "bg-blue-500/20",
+          title: "Under Review",
+          message: "Your application is currently being reviewed by our team.",
+          details:
+            "We&apos;re carefully reviewing your submission. You&apos;ll be notified as soon as a decision is made.",
         };
-      case 'approved':
+      case "approved":
         return {
           icon: CheckCircle,
-          iconColor: 'text-spotify-green',
-          bgColor: 'bg-spotify-green/20',
-          title: 'Approved!',
-          message: 'Congratulations! Your artist/management application has been approved.',
-          details: 'You can now upgrade your account to access artist features, or continue using free/premium without artist access.',
+          iconColor: "text-spotify-green",
+          bgColor: "bg-spotify-green/20",
+          title: "Approved!",
+          message:
+            "Congratulations! Your artist/management application has been approved.",
+          details:
+            "You can now upgrade your account to access artist features, or continue using free/premium without artist access.",
         };
-      case 'rejected':
+      case "rejected":
         return {
           icon: XCircle,
-          iconColor: 'text-empulse-red',
-          bgColor: 'bg-empulse-red/20',
-          title: 'Application Rejected',
-          message: 'Your application was not approved at this time.',
-          details: user.artistApplication?.rejectionReason || 'Please review the requirements and resubmit with additional documentation if needed.',
+          iconColor: "text-empulse-red",
+          bgColor: "bg-empulse-red/20",
+          title: "Application Rejected",
+          message: "Your application was not approved at this time.",
+          details:
+            user.artistApplication?.rejectionReason ||
+            "Please review the requirements and resubmit with additional documentation if needed.",
         };
       default:
         return null;
@@ -78,7 +85,9 @@ export default function ArtistVerificationPendingPage() {
         {/* Status Card */}
         <div className="bg-spotify-dark-gray rounded-lg p-12 text-center shadow-2xl">
           {/* Icon */}
-          <div className={`w-24 h-24 ${statusContent.bgColor} rounded-full flex items-center justify-center mx-auto mb-6`}>
+          <div
+            className={`w-24 h-24 ${statusContent.bgColor} rounded-full flex items-center justify-center mx-auto mb-6`}
+          >
             <StatusIcon size={48} className={statusContent.iconColor} />
           </div>
 
@@ -92,19 +101,17 @@ export default function ArtistVerificationPendingPage() {
 
           {/* Details */}
           <div className="bg-spotify-light-gray rounded-lg p-6 mb-8 max-w-lg mx-auto">
-            <p className="text-sm text-white/80">
-              {statusContent.details}
-            </p>
+            <p className="text-sm text-white/80">{statusContent.details}</p>
           </div>
 
           {/* Actions */}
           <div className="space-y-4">
-            {approvalStatus === 'approved' && (
+            {approvalStatus === "approved" && (
               <>
                 <Button
                   variant="primary"
                   size="lg"
-                  onClick={() => router.push('/subscription?upgrade=artist')}
+                  onClick={() => router.push("/subscription?upgrade=artist")}
                   className="w-full max-w-md mx-auto"
                 >
                   Upgrade to Artist Account
@@ -112,7 +119,7 @@ export default function ArtistVerificationPendingPage() {
                 <Button
                   variant="secondary"
                   size="lg"
-                  onClick={() => router.push('/')}
+                  onClick={() => router.push("/")}
                   className="w-full max-w-md mx-auto"
                 >
                   Continue with Free/Premium Account
@@ -120,12 +127,12 @@ export default function ArtistVerificationPendingPage() {
               </>
             )}
 
-            {approvalStatus === 'rejected' && (
+            {approvalStatus === "rejected" && (
               <>
                 <Button
                   variant="primary"
                   size="lg"
-                  onClick={() => router.push('/artist/verification')}
+                  onClick={() => router.push("/artist/verification")}
                   className="w-full max-w-md mx-auto"
                 >
                   Resubmit Application
@@ -133,7 +140,7 @@ export default function ArtistVerificationPendingPage() {
                 <Button
                   variant="secondary"
                   size="lg"
-                  onClick={() => router.push('/')}
+                  onClick={() => router.push("/")}
                   className="w-full max-w-md mx-auto"
                 >
                   Go to Home
@@ -141,11 +148,12 @@ export default function ArtistVerificationPendingPage() {
               </>
             )}
 
-            {(approvalStatus === 'pending' || approvalStatus === 'under-review') && (
+            {(approvalStatus === "pending" ||
+              approvalStatus === "under-review") && (
               <Button
                 variant="primary"
                 size="lg"
-                onClick={() => router.push('/')}
+                onClick={() => router.push("/")}
                 className="w-full max-w-md mx-auto"
               >
                 Go to Home

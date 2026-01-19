@@ -1,14 +1,38 @@
-'use client';
+"use client";
 
-import { usePointsStore } from '@/stores/pointsStore';
-import { useCheckInStore } from '@/stores/checkInStore';
-import { Award, Ticket, Gift, Star } from 'lucide-react';
+import { usePointsStore } from "@/stores/pointsStore";
+import { useCheckInStore } from "@/stores/checkInStore";
+import { Award, Ticket, Gift, Star } from "lucide-react";
 
 const rewards = [
-  { id: '1', name: 'EmPulse Music T-Shirt', points: 500, type: 'merch', icon: Gift },
-  { id: '2', name: 'Concert Tickets', points: 1000, type: 'tickets', icon: Ticket },
-  { id: '3', name: 'Extended Free Trial (90 days)', points: 750, type: 'trial', icon: Star },
-  { id: '4', name: 'Exclusive Content Access', points: 300, type: 'content', icon: Award },
+  {
+    id: "1",
+    name: "EmPulse Music T-Shirt",
+    points: 500,
+    type: "merch",
+    icon: Gift,
+  },
+  {
+    id: "2",
+    name: "Concert Tickets",
+    points: 1000,
+    type: "tickets",
+    icon: Ticket,
+  },
+  {
+    id: "3",
+    name: "Extended Free Trial (90 days)",
+    points: 750,
+    type: "trial",
+    icon: Star,
+  },
+  {
+    id: "4",
+    name: "Exclusive Content Access",
+    points: 300,
+    type: "content",
+    icon: Award,
+  },
 ];
 
 export default function RewardsPage() {
@@ -17,129 +41,129 @@ export default function RewardsPage() {
   const streak = getStreak();
 
   return (
-    <div 
+    <div
       className="p-8"
       style={{
-        padding: '32px',
-        backgroundColor: '#121212',
-        minHeight: '100vh',
-        color: '#FFFFFF'
+        padding: "32px",
+        backgroundColor: "#121212",
+        minHeight: "100vh",
+        color: "#FFFFFF",
       }}
     >
-      <h1 
+      <h1
         className="text-4xl font-bold mb-8"
         style={{
-          fontSize: '32px',
-          lineHeight: '36px',
+          fontSize: "32px",
+          lineHeight: "36px",
           fontWeight: 700,
-          color: '#FFFFFF',
-          marginBottom: '32px'
+          color: "#FFFFFF",
+          marginBottom: "32px",
         }}
       >
         Points & Rewards
       </h1>
 
       {/* Points Dashboard - Exact Spotify Style */}
-      <div 
+      <div
         className="grid grid-cols-3 gap-4 mb-8"
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '16px',
-          marginBottom: '32px'
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "16px",
+          marginBottom: "32px",
         }}
       >
-        <div 
+        <div
           className="bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg p-6 text-white"
           style={{
-            background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
-            borderRadius: '8px',
-            padding: '24px',
-            color: '#FFFFFF'
+            background: "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+            borderRadius: "8px",
+            padding: "24px",
+            color: "#FFFFFF",
           }}
         >
-          <div 
+          <div
             className="text-sm opacity-80 mb-1"
             style={{
-              fontSize: '13px',
-              lineHeight: '16px',
-              color: 'rgba(255, 255, 255, 0.8)',
-              marginBottom: '4px'
+              fontSize: "13px",
+              lineHeight: "16px",
+              color: "rgba(255, 255, 255, 0.8)",
+              marginBottom: "4px",
             }}
           >
             Total Points
           </div>
-          <div 
+          <div
             className="text-3xl font-bold"
             style={{
-              fontSize: '32px',
-              lineHeight: '36px',
+              fontSize: "32px",
+              lineHeight: "36px",
               fontWeight: 700,
-              color: '#FFFFFF'
+              color: "#FFFFFF",
             }}
           >
             {totalPoints}
           </div>
         </div>
-        <div 
+        <div
           className="bg-gradient-to-br from-orange-500 to-red-500 rounded-lg p-6 text-white"
           style={{
-            background: 'linear-gradient(135deg, #F97316 0%, #EF4444 100%)',
-            borderRadius: '8px',
-            padding: '24px',
-            color: '#FFFFFF'
+            background: "linear-gradient(135deg, #F97316 0%, #EF4444 100%)",
+            borderRadius: "8px",
+            padding: "24px",
+            color: "#FFFFFF",
           }}
         >
-          <div 
+          <div
             className="text-sm opacity-80 mb-1"
             style={{
-              fontSize: '13px',
-              lineHeight: '16px',
-              color: 'rgba(255, 255, 255, 0.8)',
-              marginBottom: '4px'
+              fontSize: "13px",
+              lineHeight: "16px",
+              color: "rgba(255, 255, 255, 0.8)",
+              marginBottom: "4px",
             }}
           >
             Current Streak
           </div>
-          <div 
+          <div
             className="text-3xl font-bold"
             style={{
-              fontSize: '32px',
-              lineHeight: '36px',
+              fontSize: "32px",
+              lineHeight: "36px",
               fontWeight: 700,
-              color: '#FFFFFF'
+              color: "#FFFFFF",
             }}
           >
             🔥 {streak} days
           </div>
         </div>
-        <div 
+        <div
           className="bg-gradient-to-br from-green-500 to-teal-500 rounded-lg p-6 text-white"
           style={{
-            background: 'linear-gradient(135deg, #22C55E 0%, #14B8A6 100%)',
-            borderRadius: '8px',
-            padding: '24px',
-            color: '#FFFFFF'
+            background: "linear-gradient(135deg, #22C55E 0%, #14B8A6 100%)",
+            borderRadius: "8px",
+            padding: "24px",
+            color: "#FFFFFF",
           }}
         >
-          <div 
+          <div
             className="text-sm opacity-80 mb-1"
             style={{
-              fontSize: '13px',
-              lineHeight: '16px',
-              color: 'rgba(255, 255, 255, 0.8)',
-              marginBottom: '4px'
+              fontSize: "13px",
+              lineHeight: "16px",
+              color: "rgba(255, 255, 255, 0.8)",
+              marginBottom: "4px",
             }}
           >
             Available
           </div>
-          <div 
+          <div
             className="text-3xl font-bold"
             style={{
-              fontSize: '32px',
-              lineHeight: '36px',
+              fontSize: "32px",
+              lineHeight: "36px",
               fontWeight: 700,
-              color: '#FFFFFF'
+              color: "#FFFFFF",
             }}
           >
             {totalPoints} pts
@@ -148,64 +172,61 @@ export default function RewardsPage() {
       </div>
 
       {/* Badges - Exact Spotify Style */}
-      <section 
-        className="mb-8"
-        style={{ marginBottom: '32px' }}
-      >
-        <h2 
+      <section className="mb-8" style={{ marginBottom: "32px" }}>
+        <h2
           className="text-2xl font-bold mb-4"
           style={{
-            fontSize: '24px',
-            lineHeight: '28px',
+            fontSize: "24px",
+            lineHeight: "28px",
             fontWeight: 700,
-            color: '#FFFFFF',
-            marginBottom: '16px'
+            color: "#FFFFFF",
+            marginBottom: "16px",
           }}
         >
           Your Badges
         </h2>
-        <div 
+        <div
           className="flex flex-wrap gap-4"
           style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '16px'
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "16px",
           }}
         >
           {streak >= 7 && (
-            <div 
+            <div
               className="bg-spotify-light-gray rounded-lg p-4 text-center"
               style={{
-                backgroundColor: '#181818',
-                borderRadius: '8px',
-                padding: '16px',
-                textAlign: 'center',
-                transition: 'background-color 200ms ease-out'
+                backgroundColor: "#181818",
+                borderRadius: "8px",
+                padding: "16px",
+                textAlign: "center",
+                transition: "background-color 200ms ease-out",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#282828';
+                e.currentTarget.style.backgroundColor = "#282828";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#181818';
+                e.currentTarget.style.backgroundColor = "#181818";
               }}
             >
-              <div 
+              <div
                 className="text-3xl mb-2"
                 style={{
-                  fontSize: '32px',
-                  lineHeight: '36px',
-                  marginBottom: '8px'
+                  fontSize: "32px",
+                  lineHeight: "36px",
+                  marginBottom: "8px",
                 }}
               >
                 🔥
               </div>
-              <div 
+              <div
                 className="text-sm font-medium"
                 style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
+                  fontSize: "14px",
+                  lineHeight: "20px",
                   fontWeight: 600,
-                  color: '#FFFFFF'
+                  color: "#FFFFFF",
                 }}
               >
                 7-Day Streak
@@ -213,39 +234,39 @@ export default function RewardsPage() {
             </div>
           )}
           {streak >= 30 && (
-            <div 
+            <div
               className="bg-spotify-light-gray rounded-lg p-4 text-center"
               style={{
-                backgroundColor: '#181818',
-                borderRadius: '8px',
-                padding: '16px',
-                textAlign: 'center',
-                transition: 'background-color 200ms ease-out'
+                backgroundColor: "#181818",
+                borderRadius: "8px",
+                padding: "16px",
+                textAlign: "center",
+                transition: "background-color 200ms ease-out",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#282828';
+                e.currentTarget.style.backgroundColor = "#282828";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#181818';
+                e.currentTarget.style.backgroundColor = "#181818";
               }}
             >
-              <div 
+              <div
                 className="text-3xl mb-2"
                 style={{
-                  fontSize: '32px',
-                  lineHeight: '36px',
-                  marginBottom: '8px'
+                  fontSize: "32px",
+                  lineHeight: "36px",
+                  marginBottom: "8px",
                 }}
               >
                 ⭐
               </div>
-              <div 
+              <div
                 className="text-sm font-medium"
                 style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
+                  fontSize: "14px",
+                  lineHeight: "20px",
                   fontWeight: 600,
-                  color: '#FFFFFF'
+                  color: "#FFFFFF",
                 }}
               >
                 30-Day Streak
@@ -253,39 +274,39 @@ export default function RewardsPage() {
             </div>
           )}
           {totalPoints >= 500 && (
-            <div 
+            <div
               className="bg-spotify-light-gray rounded-lg p-4 text-center"
               style={{
-                backgroundColor: '#181818',
-                borderRadius: '8px',
-                padding: '16px',
-                textAlign: 'center',
-                transition: 'background-color 200ms ease-out'
+                backgroundColor: "#181818",
+                borderRadius: "8px",
+                padding: "16px",
+                textAlign: "center",
+                transition: "background-color 200ms ease-out",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#282828';
+                e.currentTarget.style.backgroundColor = "#282828";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#181818';
+                e.currentTarget.style.backgroundColor = "#181818";
               }}
             >
-              <div 
+              <div
                 className="text-3xl mb-2"
                 style={{
-                  fontSize: '32px',
-                  lineHeight: '36px',
-                  marginBottom: '8px'
+                  fontSize: "32px",
+                  lineHeight: "36px",
+                  marginBottom: "8px",
                 }}
               >
                 🏆
               </div>
-              <div 
+              <div
                 className="text-sm font-medium"
                 style={{
-                  fontSize: '14px',
-                  lineHeight: '20px',
+                  fontSize: "14px",
+                  lineHeight: "20px",
                   fontWeight: 600,
-                  color: '#FFFFFF'
+                  color: "#FFFFFF",
                 }}
               >
                 500 Points
@@ -297,24 +318,24 @@ export default function RewardsPage() {
 
       {/* Rewards Catalog - Exact Spotify Style */}
       <section>
-        <h2 
+        <h2
           className="text-2xl font-bold mb-4"
           style={{
-            fontSize: '24px',
-            lineHeight: '28px',
+            fontSize: "24px",
+            lineHeight: "28px",
             fontWeight: 700,
-            color: '#FFFFFF',
-            marginBottom: '16px'
+            color: "#FFFFFF",
+            marginBottom: "16px",
           }}
         >
           Rewards Catalog
         </h2>
-        <div 
+        <div
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '16px'
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "16px",
           }}
         >
           {rewards.map((reward) => {
@@ -324,64 +345,64 @@ export default function RewardsPage() {
               <div
                 key={reward.id}
                 className={`bg-spotify-light-gray rounded-lg p-6 transition-all duration-200 ${
-                  canAfford ? 'hover:bg-spotify-dark-gray' : 'opacity-60'
+                  canAfford ? "hover:bg-spotify-dark-gray" : "opacity-60"
                 }`}
                 style={{
-                  backgroundColor: '#181818',
-                  borderRadius: '8px',
-                  padding: '24px',
-                  transition: 'background-color 200ms ease-out',
-                  opacity: canAfford ? 1 : 0.6
+                  backgroundColor: "#181818",
+                  borderRadius: "8px",
+                  padding: "24px",
+                  transition: "background-color 200ms ease-out",
+                  opacity: canAfford ? 1 : 0.6,
                 }}
                 onMouseEnter={(e) => {
                   if (canAfford) {
-                    e.currentTarget.style.backgroundColor = '#282828';
+                    e.currentTarget.style.backgroundColor = "#282828";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (canAfford) {
-                    e.currentTarget.style.backgroundColor = '#181818';
+                    e.currentTarget.style.backgroundColor = "#181818";
                   }
                 }}
               >
-                <Icon 
-                  size={32} 
+                <Icon
+                  size={32}
                   className="mb-3 text-spotify-green"
                   style={{
-                    width: '32px',
-                    height: '32px',
-                    color: '#7209B7',
-                    marginBottom: '12px'
+                    width: "32px",
+                    height: "32px",
+                    color: "#7209B7",
+                    marginBottom: "12px",
                   }}
                 />
-                <h3 
+                <h3
                   className="font-bold mb-2"
                   style={{
-                    fontSize: '16px',
-                    lineHeight: '24px',
+                    fontSize: "16px",
+                    lineHeight: "24px",
                     fontWeight: 700,
-                    color: '#FFFFFF',
-                    marginBottom: '8px'
+                    color: "#FFFFFF",
+                    marginBottom: "8px",
                   }}
                 >
                   {reward.name}
                 </h3>
-                <div 
+                <div
                   className="flex items-center justify-between mt-4"
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginTop: '16px',
-                    gap: '16px'
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginTop: "16px",
+                    gap: "16px",
                   }}
                 >
-                  <span 
+                  <span
                     className="text-sm text-spotify-text-gray"
                     style={{
-                      fontSize: '14px',
-                      lineHeight: '20px',
-                      color: '#B3B3B3'
+                      fontSize: "14px",
+                      lineHeight: "20px",
+                      color: "#B3B3B3",
                     }}
                   >
                     {reward.points} points
@@ -390,34 +411,34 @@ export default function RewardsPage() {
                     disabled={!canAfford}
                     className={`rounded-full text-sm font-medium transition-colors ${
                       canAfford
-                        ? 'bg-spotify-green text-black hover:bg-[#8a1dd0]'
-                        : 'bg-spotify-dark-gray text-spotify-text-gray cursor-not-allowed'
+                        ? "bg-spotify-green text-black hover:bg-[#8a1dd0]"
+                        : "bg-spotify-dark-gray text-spotify-text-gray cursor-not-allowed"
                     }`}
                     style={{
-                      padding: '8px 16px',
-                      borderRadius: '500px',
-                      fontSize: '14px',
-                      lineHeight: '20px',
+                      padding: "8px 16px",
+                      borderRadius: "500px",
+                      fontSize: "14px",
+                      lineHeight: "20px",
                       fontWeight: 700,
-                      letterSpacing: '0.05em',
-                      transition: 'all 200ms ease-out',
-                      backgroundColor: canAfford ? '#7209B7' : '#282828',
-                      color: canAfford ? '#000000' : '#B3B3B3',
-                      border: 'none',
-                      cursor: canAfford ? 'pointer' : 'not-allowed'
+                      letterSpacing: "0.05em",
+                      transition: "all 200ms ease-out",
+                      backgroundColor: canAfford ? "#7209B7" : "#282828",
+                      color: canAfford ? "#000000" : "#B3B3B3",
+                      border: "none",
+                      cursor: canAfford ? "pointer" : "not-allowed",
                     }}
                     onMouseEnter={(e) => {
                       if (canAfford) {
-                        e.currentTarget.style.backgroundColor = '#8a1dd0';
+                        e.currentTarget.style.backgroundColor = "#8a1dd0";
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (canAfford) {
-                        e.currentTarget.style.backgroundColor = '#7209B7';
+                        e.currentTarget.style.backgroundColor = "#7209B7";
                       }
                     }}
                   >
-                    {canAfford ? 'Redeem' : 'Not Enough Points'}
+                    {canAfford ? "Redeem" : "Not Enough Points"}
                   </button>
                 </div>
               </div>

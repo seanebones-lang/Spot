@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useUIStore } from '@/stores/uiStore';
-import { cn } from '@/lib/utils';
-import PlayButton from './PlayButton';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useUIStore } from "@/stores/uiStore";
+import { cn } from "@/lib/utils";
+import PlayButton from "./PlayButton";
 
 interface FriendActivity {
   id: string;
@@ -22,24 +22,24 @@ interface FriendActivity {
 // Mock friend activity data
 const mockFriendActivity: FriendActivity[] = [
   {
-    id: '1',
-    name: 'Alex Johnson',
+    id: "1",
+    name: "Alex Johnson",
     track: {
-      id: 'track1',
-      name: 'Midnight Vibes',
-      artist: 'DJ Smooth',
-      coverArt: '/api/placeholder/40/40',
+      id: "track1",
+      name: "Midnight Vibes",
+      artist: "DJ Smooth",
+      coverArt: "/api/placeholder/40/40",
     },
     timestamp: 120, // 2 minutes ago
   },
   {
-    id: '2',
-    name: 'Sarah Chen',
+    id: "2",
+    name: "Sarah Chen",
     track: {
-      id: 'track2',
-      name: 'Electric Dreams',
-      artist: 'Neon Waves',
-      coverArt: '/api/placeholder/40/40',
+      id: "track2",
+      name: "Electric Dreams",
+      artist: "Neon Waves",
+      coverArt: "/api/placeholder/40/40",
     },
     timestamp: 450, // 7.5 minutes ago
   },
@@ -47,23 +47,26 @@ const mockFriendActivity: FriendActivity[] = [
 
 export default function FriendsActivity() {
   const { leftSidebarWidth } = useUIStore();
-  const [activities, setActivities] = useState<FriendActivity[]>(mockFriendActivity);
+  const [activities, setActivities] =
+    useState<FriendActivity[]>(mockFriendActivity);
 
   // In production, this would poll or use WebSocket for real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
       // Simulate real-time updates
-      setActivities(prev => prev.map(activity => ({
-        ...activity,
-        timestamp: activity.timestamp + 1,
-      })));
+      setActivities((prev) =>
+        prev.map((activity) => ({
+          ...activity,
+          timestamp: activity.timestamp + 1,
+        })),
+      );
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
   const formatTimestamp = (seconds: number) => {
-    if (seconds < 60) return 'just now';
+    if (seconds < 60) return "just now";
     const minutes = Math.floor(seconds / 60);
     if (minutes < 60) return `${minutes}m ago`;
     const hours = Math.floor(minutes / 60);

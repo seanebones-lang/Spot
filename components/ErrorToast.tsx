@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useEffect } from "react";
+import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ErrorToastProps {
   message: string;
@@ -12,12 +12,12 @@ interface ErrorToastProps {
   autoDismissDelay?: number;
 }
 
-export default function ErrorToast({ 
-  message, 
-  onRetry, 
+export default function ErrorToast({
+  message,
+  onRetry,
   onDismiss,
   autoDismiss = true,
-  autoDismissDelay = 5000
+  autoDismissDelay = 5000,
 }: ErrorToastProps) {
   useEffect(() => {
     if (autoDismiss) {
@@ -30,17 +30,17 @@ export default function ErrorToast({
   }, [autoDismiss, autoDismissDelay, onDismiss]);
 
   return (
-    <div 
+    <div
       role="alert"
       aria-live="polite"
       className={cn(
         "fixed bottom-24 left-1/2 transform -translate-x-1/2",
         "bg-red-600 text-white px-6 py-3 rounded-lg shadow-2xl z-50",
         "flex items-center gap-4 max-w-md",
-        "opacity-100 transition-opacity duration-300"
+        "opacity-100 transition-opacity duration-300",
       )}
       style={{
-        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5)",
       }}
     >
       <div className="flex-1 min-w-0">
@@ -55,7 +55,7 @@ export default function ErrorToast({
           Retry
         </button>
       )}
-      <button 
+      <button
         onClick={onDismiss}
         className="flex-shrink-0 p-1 hover:bg-white/20 rounded-md transition-colors"
         aria-label="Dismiss error message"

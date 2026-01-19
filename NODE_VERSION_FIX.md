@@ -9,6 +9,7 @@
 Node.js v25.3.0 (unstable/nightly) breaks Next.js 15's internal semver validation in `node_modules/next/dist/bin/next`. The `_semver.default.satisfies` function fails due to module system changes in Node 25.
 
 **Next.js 15 officially supports:**
+
 - Node.js >= 18.18.0
 - Node.js >= 20 LTS (recommended)
 - Node.js >= 19.8.0
@@ -24,6 +25,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 
 **Then restart your terminal or run:**
+
 ```bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -85,6 +87,7 @@ Added `engines` field to `package.json`:
 ```
 
 This ensures:
+
 - ✅ Vercel/Railway deployments use Node 20
 - ✅ Team members get warnings if using wrong Node version
 - ✅ CI/CD pipelines enforce correct version
@@ -124,17 +127,20 @@ node --version
 Once Node 20 is installed:
 
 1. **Kill any running processes:**
+
    ```bash
    lsof -ti:3001 | xargs kill -9 2>/dev/null || true
    ```
 
 2. **Clean and reinstall:**
+
    ```bash
    rm -rf node_modules package-lock.json .next
    npm install
    ```
 
 3. **Start server:**
+
    ```bash
    npm run dev
    ```

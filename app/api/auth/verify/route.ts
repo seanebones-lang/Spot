@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { logger, generateCorrelationId } from '@/lib/logger';
-import prisma from '@/lib/db';
+import { NextRequest, NextResponse } from "next/server";
+import { logger, generateCorrelationId } from "@/lib/logger";
+import prisma from "@/lib/db";
 
 /**
  * Email Verification Endpoint
@@ -12,12 +12,12 @@ export async function GET(request: NextRequest) {
   const startTime = Date.now();
 
   try {
-    const token = request.nextUrl.searchParams.get('token');
+    const token = request.nextUrl.searchParams.get("token");
 
     if (!token) {
       return NextResponse.json(
-        { error: 'Verification token is required' },
-        { status: 400 }
+        { error: "Verification token is required" },
+        { status: 400 },
       );
     }
 
@@ -32,10 +32,10 @@ export async function GET(request: NextRequest) {
     });
 
     if (!user) {
-      logger.warn('Invalid or expired verification token', { correlationId });
+      logger.warn("Invalid or expired verification token", { correlationId });
       return NextResponse.json(
-        { error: 'Invalid or expired verification token' },
-        { status: 400 }
+        { error: "Invalid or expired verification token" },
+        { status: 400 },
       );
     }
 
@@ -51,21 +51,28 @@ export async function GET(request: NextRequest) {
     });
 
     const duration = Date.now() - startTime;
-    logger.info('Email verified successfully', { correlationId, userId: user.id, duration });
+    logger.info("Email verified successfully", {
+      correlationId,
+      userId: user.id,
+      duration,
+    });
 
     // Redirect to frontend success page or return JSON
-    const frontendUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
-    const redirectUrl = new URL('/login?verified=true', frontendUrl);
+    const frontendUrl =
+      process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3001";
+    const redirectUrl = new URL("/login?verified=true", frontendUrl);
 
     return NextResponse.redirect(redirectUrl);
-
   } catch (error) {
     const duration = Date.now() - startTime;
-    logger.error('Email verification error', error, { correlationId, duration });
+    logger.error("Email verification error", error, {
+      correlationId,
+      duration,
+    });
 
     return NextResponse.json(
-      { error: 'Failed to verify email. Please try again.' },
-      { status: 500 }
+      { error: "Failed to verify email. Please try again." },
+      { status: 500 },
     );
   }
 }
@@ -82,10 +89,10 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { token } = body;
 
-    if (!token || typeof token !== 'string') {
+    if (!token || typeof token !== "string") {
       return NextResponse.json(
-        { error: 'Verification token is required' },
-        { status: 400 }
+        { error: "Verification token is required" },
+        { status: 400 },
       );
     }
 
@@ -100,10 +107,10 @@ export async function POST(request: NextRequest) {
     });
 
     if (!user) {
-      logger.warn('Invalid or expired verification token', { correlationId });
+      logger.warn("Invalid or expired verification token", { correlationId });
       return NextResponse.json(
-        { error: 'Invalid or expired verification token' },
-        { status: 400 }
+        { error: "Invalid or expired verification token" },
+        { status: 400 },
       );
     }
 
@@ -119,20 +126,26 @@ export async function POST(request: NextRequest) {
     });
 
     const duration = Date.now() - startTime;
-    logger.info('Email verified successfully', { correlationId, userId: user.id, duration });
+    logger.info("Email verified successfully", {
+      correlationId,
+      userId: user.id,
+      duration,
+    });
 
     return NextResponse.json({
       success: true,
-      message: 'Email verified successfully',
+      message: "Email verified successfully",
     });
-
   } catch (error) {
     const duration = Date.now() - startTime;
-    logger.error('Email verification error', error, { correlationId, duration });
+    logger.error("Email verification error", error, {
+      correlationId,
+      duration,
+    });
 
     return NextResponse.json(
-      { error: 'Failed to verify email. Please try again.' },
-      { status: 500 }
+      { error: "Failed to verify email. Please try again." },
+      { status: 500 },
     );
   }
 }

@@ -8,15 +8,15 @@ on:
   push:
     branches: [main]
     paths:
-      - 'app/**'
-      - 'components/**'
-      - 'lib/**'
-      - 'package.json'
-      - 'Dockerfile'
-      - '.github/workflows/gitops-deploy.yml'
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "package.json"
+      - "Dockerfile"
+      - ".github/workflows/gitops-deploy.yml"
   pull_request:
     branches: [main]
-  workflow_dispatch:  # Allow manual triggers
+  workflow_dispatch: # Allow manual triggers
 
 env:
   REGISTRY: ghcr.io
@@ -37,8 +37,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci

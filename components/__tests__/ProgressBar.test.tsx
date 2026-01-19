@@ -1,18 +1,18 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import ProgressBar from '../ProgressBar';
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import ProgressBar from "../ProgressBar";
 
 // Mock formatDuration
-jest.mock('@/lib/utils', () => ({
+jest.mock("@/lib/utils", () => ({
   formatDuration: jest.fn((ms: number) => {
     const totalSeconds = Math.floor(ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }),
-  cn: jest.fn((...inputs: any[]) => inputs.filter(Boolean).join(' ')),
+  cn: jest.fn((...inputs: any[]) => inputs.filter(Boolean).join(" ")),
 }));
 
-describe('ProgressBar', () => {
+describe("ProgressBar", () => {
   const mockOnSeek = jest.fn();
   const defaultProps = {
     progress: 50,
@@ -25,28 +25,28 @@ describe('ProgressBar', () => {
     jest.clearAllMocks();
   });
 
-  it('renders with correct progress percentage', () => {
+  it("renders with correct progress percentage", () => {
     render(<ProgressBar {...defaultProps} />);
 
-    const progressBar = screen.getByRole('progressbar');
+    const progressBar = screen.getByRole("progressbar");
     expect(progressBar).toBeInTheDocument();
-    expect(progressBar).toHaveAttribute('aria-valuenow', '50');
-    expect(progressBar).toHaveAttribute('aria-valuemin', '0');
-    expect(progressBar).toHaveAttribute('aria-valuemax', '100');
+    expect(progressBar).toHaveAttribute("aria-valuenow", "50");
+    expect(progressBar).toHaveAttribute("aria-valuemin", "0");
+    expect(progressBar).toHaveAttribute("aria-valuemax", "100");
   });
 
-  it('displays current time and duration', () => {
+  it("displays current time and duration", () => {
     render(<ProgressBar {...defaultProps} />);
 
     const timeElements = screen.getAllByText(/^\d+:\d{2}$/);
     expect(timeElements.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('calls onSeek when clicked', () => {
+  it("calls onSeek when clicked", () => {
     render(<ProgressBar {...defaultProps} />);
 
-    const progressBar = screen.getByRole('progressbar');
-    
+    const progressBar = screen.getByRole("progressbar");
+
     // Mock getBoundingClientRect
     const mockRect = {
       left: 0,
@@ -63,10 +63,10 @@ describe('ProgressBar', () => {
     expect(mockOnSeek).toHaveBeenCalled();
   });
 
-  it('calculates seek position correctly', () => {
+  it("calculates seek position correctly", () => {
     render(<ProgressBar {...defaultProps} duration={100000} />);
 
-    const progressBar = screen.getByRole('progressbar');
+    const progressBar = screen.getByRole("progressbar");
     const mockRect = {
       left: 0,
       width: 1000,
@@ -83,10 +83,10 @@ describe('ProgressBar', () => {
     expect(mockOnSeek).toHaveBeenCalledWith(50000); // 50% of 100000ms
   });
 
-  it('clamps seek position to valid range', () => {
+  it("clamps seek position to valid range", () => {
     render(<ProgressBar {...defaultProps} duration={100000} />);
 
-    const progressBar = screen.getByRole('progressbar');
+    const progressBar = screen.getByRole("progressbar");
     const mockRect = {
       left: 0,
       width: 1000,
@@ -107,39 +107,39 @@ describe('ProgressBar', () => {
     expect(mockOnSeek).toHaveBeenCalledWith(0);
   });
 
-  it('has correct accessibility attributes', () => {
+  it("has correct accessibility attributes", () => {
     render(<ProgressBar {...defaultProps} progress={75} />);
 
-    const progressBar = screen.getByRole('progressbar');
-    expect(progressBar).toHaveAttribute('aria-valuenow', '75');
-    expect(progressBar).toHaveAttribute('aria-label');
-    expect(progressBar.getAttribute('aria-label')).toContain('Progress:');
+    const progressBar = screen.getByRole("progressbar");
+    expect(progressBar).toHaveAttribute("aria-valuenow", "75");
+    expect(progressBar).toHaveAttribute("aria-label");
+    expect(progressBar.getAttribute("aria-label")).toContain("Progress:");
   });
 
-  it('handles zero progress', () => {
+  it("handles zero progress", () => {
     render(<ProgressBar {...defaultProps} progress={0} currentTime={0} />);
 
-    const progressBar = screen.getByRole('progressbar');
-    expect(progressBar).toHaveAttribute('aria-valuenow', '0');
+    const progressBar = screen.getByRole("progressbar");
+    expect(progressBar).toHaveAttribute("aria-valuenow", "0");
   });
 
-  it('handles full progress', () => {
+  it("handles full progress", () => {
     render(
       <ProgressBar
         {...defaultProps}
         progress={100}
         currentTime={defaultProps.duration}
-      />
+      />,
     );
 
-    const progressBar = screen.getByRole('progressbar');
-    expect(progressBar).toHaveAttribute('aria-valuenow', '100');
+    const progressBar = screen.getByRole("progressbar");
+    expect(progressBar).toHaveAttribute("aria-valuenow", "100");
   });
 
-  it('handles touch events', () => {
+  it("handles touch events", () => {
     render(<ProgressBar {...defaultProps} />);
 
-    const progressBar = screen.getByRole('progressbar');
+    const progressBar = screen.getByRole("progressbar");
     const mockRect = {
       left: 0,
       width: 1000,
@@ -157,10 +157,10 @@ describe('ProgressBar', () => {
     expect(mockOnSeek).toHaveBeenCalled();
   });
 
-  it('shows hover indicator on mouse move', () => {
+  it("shows hover indicator on mouse move", () => {
     render(<ProgressBar {...defaultProps} />);
 
-    const progressBar = screen.getByRole('progressbar');
+    const progressBar = screen.getByRole("progressbar");
     const mockRect = {
       left: 0,
       width: 1000,
@@ -178,10 +178,10 @@ describe('ProgressBar', () => {
     expect(indicator).toBeInTheDocument();
   });
 
-  it('hides hover indicator on mouse leave', () => {
+  it("hides hover indicator on mouse leave", () => {
     render(<ProgressBar {...defaultProps} />);
 
-    const progressBar = screen.getByRole('progressbar');
+    const progressBar = screen.getByRole("progressbar");
     const mockRect = {
       left: 0,
       width: 1000,

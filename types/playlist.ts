@@ -1,5 +1,5 @@
-import { Track } from './track';
-import { MoodTags } from './mood';
+import { Track } from "./track";
+import { MoodTags } from "./mood";
 
 export interface Playlist {
   id: string;

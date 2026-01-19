@@ -25,12 +25,14 @@ This directory contains the configuration for GitHub Codespaces and VS Code Dev 
 ## Customization
 
 Edit `devcontainer.json` to:
+
 - Add more VS Code extensions
 - Change port forwarding
 - Modify environment variables
 - Add additional tools
 
 Edit `post-create.sh` to:
+
 - Add custom setup commands
 - Install additional dependencies
 - Configure tools

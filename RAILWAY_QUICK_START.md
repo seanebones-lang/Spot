@@ -29,6 +29,7 @@ NEXT_TELEMETRY_DISABLED=1
 ### Step 3: Wait for Deployment
 
 Railway will:
+
 - ✅ Install dependencies
 - ✅ Build your Next.js app
 - ✅ Deploy to production
@@ -80,13 +81,16 @@ railway up
 ## 🆘 Troubleshooting
 
 **Build fails?**
+
 - Check logs in Railway dashboard
 - Verify all dependencies in `package.json`
 
 **Service won't start?**
+
 - Check environment variables are set
 - Verify `JWT_SECRET` and `XAI_API_KEY` are configured
 
 **Need help?**
+
 - Railway Docs: https://docs.railway.app
 - Railway Support: support@railway.app

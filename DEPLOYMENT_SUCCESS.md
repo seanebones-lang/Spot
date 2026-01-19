@@ -23,9 +23,11 @@ Your backend has been **successfully deployed to Railway**!
 **Set these in Railway Dashboard → Service → Variables:**
 
 1. **JWT_SECRET**
+
    ```bash
    openssl rand -base64 32
    ```
+
    - Used for authentication tokens
 
 2. **XAI_API_KEY**

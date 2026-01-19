@@ -1,16 +1,19 @@
 /**
  * Audio Pipeline Manager
  * Manages multiple audio pipeline instances for different contexts (stations, tracks, etc.)
- * 
+ *
  * Strategy:
  * - Single shared pipeline for regular tracks (default, efficient)
  * - Optional per-station pipelines for radio (if isolation needed)
  * - Automatic cleanup and resource management
  */
 
-import { AudiophileAudioPipeline, getAudioPipeline } from './audio-pipeline';
+import { AudiophileAudioPipeline, getAudioPipeline } from "./audio-pipeline";
 
-export type PipelineContext = 'shared' | `station-${string}` | `track-${string}`;
+export type PipelineContext =
+  | "shared"
+  | `station-${string}`
+  | `track-${string}`;
 
 class AudioPipelineManager {
   private pipelines: Map<PipelineContext, AudiophileAudioPipeline> = new Map();
@@ -23,7 +26,9 @@ class AudioPipelineManager {
    */
   setPerStationPipelines(enabled: boolean): void {
     this.usePerStationPipelines = enabled;
-    console.log(`📊 Per-station pipelines: ${enabled ? 'enabled' : 'disabled'}`);
+    console.log(
+      `📊 Per-station pipelines: ${enabled ? "enabled" : "disabled"}`,
+    );
   }
 
   /**
@@ -31,23 +36,26 @@ class AudioPipelineManager {
    * @param context - Pipeline context identifier
    * @param createIfMissing - Create new pipeline if it doesn't exist
    */
-  getPipeline(context: PipelineContext = 'shared', createIfMissing: boolean = true): AudiophileAudioPipeline {
+  getPipeline(
+    context: PipelineContext = "shared",
+    createIfMissing: boolean = true,
+  ): AudiophileAudioPipeline {
     // For regular tracks, always use shared pipeline
-    if (context === 'shared' || context.startsWith('track-')) {
-      if (!this.pipelines.has('shared')) {
-        this.pipelines.set('shared', getAudioPipeline());
+    if (context === "shared" || context.startsWith("track-")) {
+      if (!this.pipelines.has("shared")) {
+        this.pipelines.set("shared", getAudioPipeline());
       }
-      return this.pipelines.get('shared')!;
+      return this.pipelines.get("shared")!;
     }
 
     // For stations, check if per-station pipelines are enabled
-    if (context.startsWith('station-')) {
+    if (context.startsWith("station-")) {
       if (!this.usePerStationPipelines) {
         // Use shared pipeline for stations too
-        if (!this.pipelines.has('shared')) {
-          this.pipelines.set('shared', getAudioPipeline());
+        if (!this.pipelines.has("shared")) {
+          this.pipelines.set("shared", getAudioPipeline());
         }
-        return this.pipelines.get('shared')!;
+        return this.pipelines.get("shared")!;
       }
 
       // Use per-station pipeline
@@ -59,14 +67,14 @@ class AudioPipelineManager {
           console.log(`📻 Created pipeline for station: ${context}`);
         } else {
           // Fallback to shared if not creating
-          return this.getPipeline('shared', true);
+          return this.getPipeline("shared", true);
         }
       }
       return this.pipelines.get(context)!;
     }
 
     // Default to shared
-    return this.getPipeline('shared', createIfMissing);
+    return this.getPipeline("shared", createIfMissing);
   }
 
   /**
@@ -100,9 +108,9 @@ class AudioPipelineManager {
    */
   async cleanupAllExceptShared(): Promise<void> {
     const contextsToCleanup: PipelineContext[] = [];
-    
+
     for (const context of this.pipelines.keys()) {
-      if (context !== 'shared') {
+      if (context !== "shared") {
         contextsToCleanup.push(context);
       }
     }
@@ -117,13 +125,13 @@ class AudioPipelineManager {
    */
   async cleanupAll(): Promise<void> {
     const cleanupPromises: Promise<void>[] = [];
-    
+
     for (const [context, pipeline] of this.pipelines.entries()) {
       cleanupPromises.push(
         pipeline.cleanup().then(() => {
           this.pipelines.delete(context);
           console.log(`🧹 Cleaned up pipeline: ${context}`);
-        })
+        }),
       );
     }
 
@@ -172,5 +180,5 @@ export function getStationPipeline(stationId: string): AudiophileAudioPipeline {
  */
 export function getSharedPipeline(): AudiophileAudioPipeline {
   const manager = getAudioPipelineManager();
-  return manager.getPipeline('shared');
+  return manager.getPipeline("shared");
 }

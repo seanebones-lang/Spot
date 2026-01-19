@@ -1,9 +1,9 @@
 /**
  * Data Pipeline Orchestration System
- * 
+ *
  * This module implements Apache Airflow/Kubeflow-style pipeline orchestration
  * for batch processing of audio files, mood analysis, and knowledge graph updates.
- * 
+ *
  * Pipeline Stages:
  * 1. Data Ingestion: Upload and validate audio files
  * 2. Feature Extraction: Extract audio features using Librosa-style processing
@@ -13,29 +13,36 @@
  * 6. Graph Update: Update Neo4j knowledge graph
  * 7. Similarity Computation: Calculate similarity relationships
  * 8. Validation: Validate accuracy and quality metrics
- * 
+ *
  * Target Performance:
  * - Batch processing: <5 seconds per track
  * - Real-time inference: <200ms latency
  * - Daily batch jobs: Scheduled via Airflow
  */
 
-import { Track } from '@/types/track';
-import { RAGMoodAnalysisPipeline, getRAGPipeline } from './aiMoodAnalysis';
-import { Neo4jKnowledgeGraph, getKnowledgeGraph } from './knowledgeGraph';
-import { SimilarityMatchingEngine, getSimilarityMatchingEngine } from './similarityMatching';
-import { recordMetric } from './pipelineMetrics';
-import { PERFORMANCE_TARGETS, DEFAULT_LIMITS, SIMILARITY_THRESHOLDS } from './pipelineConfig';
+import { Track } from "@/types/track";
+import { RAGMoodAnalysisPipeline, getRAGPipeline } from "./aiMoodAnalysis";
+import { Neo4jKnowledgeGraph, getKnowledgeGraph } from "./knowledgeGraph";
+import {
+  SimilarityMatchingEngine,
+  getSimilarityMatchingEngine,
+} from "./similarityMatching";
+import { recordMetric } from "./pipelineMetrics";
+import {
+  PERFORMANCE_TARGETS,
+  DEFAULT_LIMITS,
+  SIMILARITY_THRESHOLDS,
+} from "./pipelineConfig";
 
 /**
  * Pipeline Stage Status
  */
 export enum PipelineStageStatus {
-  PENDING = 'pending',
-  RUNNING = 'running',
-  COMPLETED = 'completed',
-  FAILED = 'failed',
-  SKIPPED = 'skipped',
+  PENDING = "pending",
+  RUNNING = "running",
+  COMPLETED = "completed",
+  FAILED = "failed",
+  SKIPPED = "skipped",
 }
 
 /**
@@ -54,7 +61,7 @@ export interface PipelineStageResult {
  */
 export interface PipelineExecutionResult {
   trackId: string;
-  status: 'success' | 'failed' | 'partial';
+  status: "success" | "failed" | "partial";
   stages: PipelineStageResult[];
   totalDuration: number;
   overallAccuracy?: number;
@@ -72,7 +79,9 @@ export class DataPipelineOrchestrator {
   constructor(config: PipelineConfig) {
     this.config = config;
     this.ragPipeline = getRAGPipeline();
-    this.similarityEngine = getSimilarityMatchingEngine(this.knowledgeGraph || undefined);
+    this.similarityEngine = getSimilarityMatchingEngine(
+      this.knowledgeGraph || undefined,
+    );
   }
 
   /**
@@ -90,15 +99,15 @@ export class DataPipelineOrchestrator {
         this.knowledgeGraph = getKnowledgeGraph(
           this.config.neo4j.uri,
           this.config.neo4j.user,
-          this.config.neo4j.password
+          this.config.neo4j.password,
         );
         await this.knowledgeGraph.initialize();
         await this.knowledgeGraph.createSchema();
       }
 
-      console.log('✅ Data Pipeline Orchestrator initialized');
+      console.log("✅ Data Pipeline Orchestrator initialized");
     } catch (error) {
-      console.error('❌ Failed to initialize pipeline:', error);
+      console.error("❌ Failed to initialize pipeline:", error);
       throw error;
     }
   }
@@ -108,7 +117,7 @@ export class DataPipelineOrchestrator {
    */
   async executePipeline(
     audioFile: File,
-    trackMetadata: Partial<Track>
+    trackMetadata: Partial<Track>,
   ): Promise<PipelineExecutionResult> {
     const startTime = performance.now();
     const stages: PipelineStageResult[] = [];
@@ -116,7 +125,10 @@ export class DataPipelineOrchestrator {
 
     try {
       // Stage 1: Data Ingestion & Validation
-      const ingestionResult = await this.stageIngestion(audioFile, trackMetadata);
+      const ingestionResult = await this.stageIngestion(
+        audioFile,
+        trackMetadata,
+      );
       stages.push(ingestionResult);
       if (ingestionResult.status === PipelineStageStatus.FAILED) {
         return this.createFailureResult(trackId, stages, startTime);
@@ -143,17 +155,17 @@ export class DataPipelineOrchestrator {
         const indexingResult = await this.stageVectorIndexing(
           trackId,
           moodResult.metadata?.embedding,
-          trackMetadata
+          trackMetadata,
         );
         stages.push(indexingResult);
       }
 
       // Stage 5: Graph Update
       if (this.knowledgeGraph && moodSuggestion) {
-        const graphResult = await this.stageGraphUpdate(
-          trackId,
-          { ...trackMetadata, moodTags: moodSuggestion } as Track
-        );
+        const graphResult = await this.stageGraphUpdate(trackId, {
+          ...trackMetadata,
+          moodTags: moodSuggestion,
+        } as Track);
         stages.push(graphResult);
       }
 
@@ -161,32 +173,37 @@ export class DataPipelineOrchestrator {
       if (this.knowledgeGraph && moodSuggestion) {
         const similarityResult = await this.stageSimilarityComputation(
           trackId,
-          { ...trackMetadata, moodTags: moodSuggestion } as Track
+          { ...trackMetadata, moodTags: moodSuggestion } as Track,
         );
         stages.push(similarityResult);
       }
 
       // Stage 7: Validation
-      const validationResult = await this.stageValidation(stages, moodSuggestion);
+      const validationResult = await this.stageValidation(
+        stages,
+        moodSuggestion,
+      );
       stages.push(validationResult);
 
       const totalDuration = performance.now() - startTime;
-      const success = stages.every(s => s.status !== PipelineStageStatus.FAILED);
+      const success = stages.every(
+        (s) => s.status !== PipelineStageStatus.FAILED,
+      );
 
       return {
         trackId,
-        status: success ? 'success' : 'partial',
+        status: success ? "success" : "partial",
         stages,
         totalDuration,
         overallAccuracy: validationResult.metadata?.accuracy,
       };
     } catch (error) {
-      console.error('❌ Pipeline execution failed:', error);
+      console.error("❌ Pipeline execution failed:", error);
       return this.createFailureResult(
         trackId,
         stages,
         startTime,
-        error instanceof Error ? error.message : 'Unknown error'
+        error instanceof Error ? error.message : "Unknown error",
       );
     }
   }
@@ -196,32 +213,44 @@ export class DataPipelineOrchestrator {
    */
   private async stageIngestion(
     audioFile: File,
-    trackMetadata: Partial<Track>
+    trackMetadata: Partial<Track>,
   ): Promise<PipelineStageResult> {
     const startTime = performance.now();
 
     try {
       // Validate file format
-      const validFormats = ['audio/mpeg', 'audio/wav', 'audio/flac', 'audio/mp4', 'audio/x-m4a'];
-      if (!validFormats.includes(audioFile.type) && 
-          !['.mp3', '.wav', '.flac', '.m4a', '.mp4'].some(ext => audioFile.name.endsWith(ext))) {
+      const validFormats = [
+        "audio/mpeg",
+        "audio/wav",
+        "audio/flac",
+        "audio/mp4",
+        "audio/x-m4a",
+      ];
+      if (
+        !validFormats.includes(audioFile.type) &&
+        ![".mp3", ".wav", ".flac", ".m4a", ".mp4"].some((ext) =>
+          audioFile.name.endsWith(ext),
+        )
+      ) {
         throw new Error(`Invalid audio format: ${audioFile.type}`);
       }
 
       // Validate file size (max 500MB)
       const maxSize = 500 * 1024 * 1024;
       if (audioFile.size > maxSize) {
-        throw new Error(`File size exceeds maximum: ${(audioFile.size / 1024 / 1024).toFixed(2)}MB`);
+        throw new Error(
+          `File size exceeds maximum: ${(audioFile.size / 1024 / 1024).toFixed(2)}MB`,
+        );
       }
 
       // Validate metadata
       if (!trackMetadata.name || !trackMetadata.artist) {
-        throw new Error('Missing required metadata: name, artist');
+        throw new Error("Missing required metadata: name, artist");
       }
 
       const duration = performance.now() - startTime;
       return {
-        stage: 'ingestion',
+        stage: "ingestion",
         status: PipelineStageStatus.COMPLETED,
         duration,
         metadata: {
@@ -233,10 +262,10 @@ export class DataPipelineOrchestrator {
     } catch (error) {
       const duration = performance.now() - startTime;
       return {
-        stage: 'ingestion',
+        stage: "ingestion",
         status: PipelineStageStatus.FAILED,
         duration,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -245,7 +274,7 @@ export class DataPipelineOrchestrator {
    * Stage 2: Feature Extraction
    */
   private async stageFeatureExtraction(
-    audioFile: File
+    audioFile: File,
   ): Promise<PipelineStageResult> {
     const startTime = performance.now();
 
@@ -254,17 +283,17 @@ export class DataPipelineOrchestrator {
       // This stage is for tracking/logging
       const duration = performance.now() - startTime;
       return {
-        stage: 'feature_extraction',
+        stage: "feature_extraction",
         status: PipelineStageStatus.COMPLETED,
         duration,
       };
     } catch (error) {
       const duration = performance.now() - startTime;
       return {
-        stage: 'feature_extraction',
+        stage: "feature_extraction",
         status: PipelineStageStatus.FAILED,
         duration,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -272,9 +301,11 @@ export class DataPipelineOrchestrator {
   /**
    * Stage 3: Mood Analysis (RAG)
    */
-  private async stageMoodAnalysis(
-    audioFile: File
-  ): Promise<PipelineStageResult & { metadata?: { moodSuggestion: any; embedding: number[] } }> {
+  private async stageMoodAnalysis(audioFile: File): Promise<
+    PipelineStageResult & {
+      metadata?: { moodSuggestion: any; embedding: number[] };
+    }
+  > {
     const startTime = performance.now();
 
     try {
@@ -286,7 +317,7 @@ export class DataPipelineOrchestrator {
 
       // Record metric
       recordMetric({
-        stage: 'mood_analysis',
+        stage: "mood_analysis",
         duration,
         success: true,
         metadata: {
@@ -297,12 +328,12 @@ export class DataPipelineOrchestrator {
 
       if (duration > PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS) {
         console.warn(
-          `⚠️ Mood analysis latency (${duration.toFixed(2)}ms) exceeds target (<${PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS}ms)`
+          `⚠️ Mood analysis latency (${duration.toFixed(2)}ms) exceeds target (<${PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS}ms)`,
         );
       }
 
       return {
-        stage: 'mood_analysis',
+        stage: "mood_analysis",
         status: PipelineStageStatus.COMPLETED,
         duration,
         metadata: {
@@ -314,10 +345,10 @@ export class DataPipelineOrchestrator {
     } catch (error) {
       const duration = performance.now() - startTime;
       return {
-        stage: 'mood_analysis',
+        stage: "mood_analysis",
         status: PipelineStageStatus.FAILED,
         duration,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -328,7 +359,7 @@ export class DataPipelineOrchestrator {
   private async stageVectorIndexing(
     trackId: string,
     embedding: number[] | undefined,
-    trackMetadata: Partial<Track>
+    trackMetadata: Partial<Track>,
   ): Promise<PipelineStageResult> {
     const startTime = performance.now();
 
@@ -336,12 +367,12 @@ export class DataPipelineOrchestrator {
       // Check if vector DB is configured
       if (!this.config.vectorDB) {
         return {
-          stage: 'vector_indexing',
+          stage: "vector_indexing",
           status: PipelineStageStatus.SKIPPED,
           duration: 0,
           metadata: {
             trackId,
-            reason: 'Vector DB not configured',
+            reason: "Vector DB not configured",
           },
         };
       }
@@ -349,43 +380,39 @@ export class DataPipelineOrchestrator {
       // Validate embedding
       if (!embedding || embedding.length === 0) {
         return {
-          stage: 'vector_indexing',
+          stage: "vector_indexing",
           status: PipelineStageStatus.FAILED,
           duration: performance.now() - startTime,
-          error: 'Cannot index: embedding is empty or invalid',
+          error: "Cannot index: embedding is empty or invalid",
         };
       }
 
-      if (embedding.some(v => !isFinite(v))) {
+      if (embedding.some((v) => !isFinite(v))) {
         return {
-          stage: 'vector_indexing',
+          stage: "vector_indexing",
           status: PipelineStageStatus.FAILED,
           duration: performance.now() - startTime,
-          error: 'Cannot index: embedding contains NaN or Infinity values',
+          error: "Cannot index: embedding contains NaN or Infinity values",
         };
       }
 
       // Upsert embedding to vector database
-      await this.ragPipeline.upsertEmbedding(
+      await this.ragPipeline.upsertEmbedding(trackId, embedding, {
         trackId,
-        embedding,
-        {
-          trackId,
-          name: trackMetadata.name || '',
-          artist: trackMetadata.artist || '',
-          moodTags: trackMetadata.moodTags || {
-            mood: 'Content',
-            feelings: [],
-            vibe: 50,
-            genres: [],
-          },
-          genre: trackMetadata.genre || undefined,
-        }
-      );
+        name: trackMetadata.name || "",
+        artist: trackMetadata.artist || "",
+        moodTags: trackMetadata.moodTags || {
+          mood: "Content",
+          feelings: [],
+          vibe: 50,
+          genres: [],
+        },
+        genre: trackMetadata.genre || undefined,
+      });
 
       const duration = performance.now() - startTime;
       return {
-        stage: 'vector_indexing',
+        stage: "vector_indexing",
         status: PipelineStageStatus.COMPLETED,
         duration,
         metadata: {
@@ -397,10 +424,10 @@ export class DataPipelineOrchestrator {
     } catch (error) {
       const duration = performance.now() - startTime;
       return {
-        stage: 'vector_indexing',
+        stage: "vector_indexing",
         status: PipelineStageStatus.FAILED,
         duration,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -410,14 +437,14 @@ export class DataPipelineOrchestrator {
    */
   private async stageGraphUpdate(
     trackId: string,
-    track: Track
+    track: Track,
   ): Promise<PipelineStageResult> {
     const startTime = performance.now();
 
     try {
       if (!this.knowledgeGraph) {
         return {
-          stage: 'graph_update',
+          stage: "graph_update",
           status: PipelineStageStatus.SKIPPED,
           duration: 0,
         };
@@ -427,7 +454,7 @@ export class DataPipelineOrchestrator {
       const duration = performance.now() - startTime;
 
       return {
-        stage: 'graph_update',
+        stage: "graph_update",
         status: PipelineStageStatus.COMPLETED,
         duration,
         metadata: {
@@ -438,10 +465,10 @@ export class DataPipelineOrchestrator {
     } catch (error) {
       const duration = performance.now() - startTime;
       return {
-        stage: 'graph_update',
+        stage: "graph_update",
         status: PipelineStageStatus.FAILED,
         duration,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -451,27 +478,30 @@ export class DataPipelineOrchestrator {
    */
   private async stageSimilarityComputation(
     trackId: string,
-    track: Track
+    track: Track,
   ): Promise<PipelineStageResult> {
     const startTime = performance.now();
 
     try {
       if (!this.knowledgeGraph) {
         return {
-          stage: 'similarity_computation',
+          stage: "similarity_computation",
           status: PipelineStageStatus.SKIPPED,
           duration: 0,
         };
       }
 
       // Find similar tracks
-      const similarTracks = await this.similarityEngine.findSimilarTracks(track, {
-        limit: 10,
-        minSimilarity: 0.7,
-      });
+      const similarTracks = await this.similarityEngine.findSimilarTracks(
+        track,
+        {
+          limit: 10,
+          minSimilarity: 0.7,
+        },
+      );
 
       // Create similarity relationships in graph
-      const similarityRelationships = similarTracks.map(match => ({
+      const similarityRelationships = similarTracks.map((match) => ({
         trackId: match.track.id,
         similarity: match.overallSimilarity,
       }));
@@ -479,13 +509,13 @@ export class DataPipelineOrchestrator {
       await this.knowledgeGraph.createSimilarityRelationships(
         trackId,
         similarityRelationships,
-        SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD
+        SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD,
       );
 
       const duration = performance.now() - startTime;
 
       return {
-        stage: 'similarity_computation',
+        stage: "similarity_computation",
         status: PipelineStageStatus.COMPLETED,
         duration,
         metadata: {
@@ -496,10 +526,10 @@ export class DataPipelineOrchestrator {
     } catch (error) {
       const duration = performance.now() - startTime;
       return {
-        stage: 'similarity_computation',
+        stage: "similarity_computation",
         status: PipelineStageStatus.FAILED,
         duration,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -509,7 +539,7 @@ export class DataPipelineOrchestrator {
    */
   private async stageValidation(
     previousStages: PipelineStageResult[],
-    moodSuggestion: any
+    moodSuggestion: any,
   ): Promise<PipelineStageResult> {
     const startTime = performance.now();
 
@@ -519,20 +549,28 @@ export class DataPipelineOrchestrator {
       const meetsTarget = accuracy >= 0.9;
 
       // Validate latency
-      const moodAnalysisStage = previousStages.find(s => s.stage === 'mood_analysis');
+      const moodAnalysisStage = previousStages.find(
+        (s) => s.stage === "mood_analysis",
+      );
       const latencyOK =
-        !moodAnalysisStage || moodAnalysisStage.duration < PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS;
+        !moodAnalysisStage ||
+        moodAnalysisStage.duration <
+          PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS;
 
       // Validate all stages completed
       const allCompleted = previousStages.every(
-        s => s.status === PipelineStageStatus.COMPLETED || s.status === PipelineStageStatus.SKIPPED
+        (s) =>
+          s.status === PipelineStageStatus.COMPLETED ||
+          s.status === PipelineStageStatus.SKIPPED,
       );
 
       const duration = performance.now() - startTime;
 
       const result = {
-        stage: 'validation',
-        status: allCompleted ? PipelineStageStatus.COMPLETED : PipelineStageStatus.FAILED,
+        stage: "validation",
+        status: allCompleted
+          ? PipelineStageStatus.COMPLETED
+          : PipelineStageStatus.FAILED,
         duration,
         metadata: {
           accuracy,
@@ -544,7 +582,7 @@ export class DataPipelineOrchestrator {
 
       // Record validation metric
       recordMetric({
-        stage: 'validation',
+        stage: "validation",
         duration,
         success: allCompleted && meetsTarget && latencyOK,
         metadata: result.metadata,
@@ -554,10 +592,10 @@ export class DataPipelineOrchestrator {
     } catch (error) {
       const duration = performance.now() - startTime;
       return {
-        stage: 'validation',
+        stage: "validation",
         status: PipelineStageStatus.FAILED,
         duration,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -569,12 +607,12 @@ export class DataPipelineOrchestrator {
     trackId: string,
     stages: PipelineStageResult[],
     startTime: number,
-    error?: string
+    error?: string,
   ): PipelineExecutionResult {
     const totalDuration = performance.now() - startTime;
     if (error) {
       stages.push({
-        stage: 'error',
+        stage: "error",
         status: PipelineStageStatus.FAILED,
         duration: 0,
         error,
@@ -583,7 +621,7 @@ export class DataPipelineOrchestrator {
 
     return {
       trackId,
-      status: 'failed',
+      status: "failed",
       stages,
       totalDuration,
     };
@@ -594,21 +632,23 @@ export class DataPipelineOrchestrator {
    */
   async batchProcess(
     tracks: Array<{ file: File; metadata: Partial<Track> }>,
-    options: { parallel?: boolean; maxConcurrency?: number } = {}
+    options: { parallel?: boolean; maxConcurrency?: number } = {},
   ): Promise<PipelineExecutionResult[]> {
     const { parallel = false, maxConcurrency = 3 } = options;
     const results: PipelineExecutionResult[] = [];
 
     if (parallel) {
       // Process in parallel with concurrency limit
-      const chunks = [];
+      const chunks: typeof tracks[] = [];
       for (let i = 0; i < tracks.length; i += maxConcurrency) {
         chunks.push(tracks.slice(i, i + maxConcurrency));
       }
 
       for (const chunk of chunks) {
         const chunkResults = await Promise.all(
-          chunk.map(({ file, metadata }) => this.executePipeline(file, metadata))
+          chunk.map(({ file, metadata }) =>
+            this.executePipeline(file, metadata),
+          ),
         );
         results.push(...chunkResults);
       }
@@ -639,7 +679,7 @@ export class DataPipelineOrchestrator {
  */
 export interface PipelineConfig {
   vectorDB?: {
-    type: 'pinecone' | 'faiss';
+    type: "pinecone" | "faiss";
     apiKey?: string;
     indexName?: string;
     environment?: string;
@@ -660,7 +700,7 @@ export interface PipelineConfig {
 let orchestratorInstance: DataPipelineOrchestrator | null = null;
 
 export function getPipelineOrchestrator(
-  config: PipelineConfig
+  config: PipelineConfig,
 ): DataPipelineOrchestrator {
   if (!orchestratorInstance) {
     orchestratorInstance = new DataPipelineOrchestrator(config);

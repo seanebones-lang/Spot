@@ -1,6 +1,6 @@
 /**
  * Performance Utilities
- * 
+ *
  * Helper functions and hooks for performance optimization:
  * - Lazy loading utilities
  * - Memoization helpers
@@ -8,7 +8,7 @@
  * - Performance monitoring
  */
 
-import React, { useMemo, useCallback, useRef, useEffect } from 'react';
+import React, { useMemo, useCallback, useRef, useEffect } from "react";
 
 /**
  * Lazy load component with loading state
@@ -18,7 +18,7 @@ export function lazyLoad<T extends React.ComponentType<any>>(
   options: {
     fallback?: React.ReactNode;
     delay?: number;
-  } = {}
+  } = {},
 ) {
   const { fallback = null, delay = 200 } = options;
 
@@ -37,12 +37,12 @@ export function lazyLoad<T extends React.ComponentType<any>>(
     return React.createElement(
       React.Suspense,
       { fallback },
-      React.createElement(LazyComponent, props as any)
+      React.createElement(LazyComponent, props as any),
     );
   }
 
-  LazyWrapper.displayName = 'LazyWrapper';
-  
+  LazyWrapper.displayName = "LazyWrapper";
+
   return LazyWrapper;
 }
 
@@ -51,7 +51,7 @@ export function lazyLoad<T extends React.ComponentType<any>>(
  */
 export function useMemoized<T>(
   factory: () => T,
-  deps: React.DependencyList
+  deps: React.DependencyList,
 ): T {
   return useMemo(factory, deps);
 }
@@ -60,7 +60,7 @@ export function useMemoized<T>(
  * Stable callback reference (prevents unnecessary re-renders)
  */
 export function useStableCallback<T extends (...args: any[]) => any>(
-  callback: T
+  callback: T,
 ): T {
   const callbackRef = useRef(callback);
 
@@ -70,7 +70,7 @@ export function useStableCallback<T extends (...args: any[]) => any>(
 
   return useCallback(
     ((...args: any[]) => callbackRef.current(...args)) as T,
-    []
+    [],
   );
 }
 
@@ -79,7 +79,7 @@ export function useStableCallback<T extends (...args: any[]) => any>(
  */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
 
@@ -101,7 +101,7 @@ export function debounce<T extends (...args: any[]) => any>(
  */
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
-  limit: number
+  limit: number,
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
 
@@ -120,7 +120,7 @@ export function throttle<T extends (...args: any[]) => any>(
  * Intersection Observer hook for lazy loading images/content
  */
 export function useIntersectionObserver(
-  options: IntersectionObserverInit = {}
+  options: IntersectionObserverInit = {},
 ) {
   const elementRef = useRef<HTMLElement | null>(null);
   const [isIntersecting, setIsIntersecting] = React.useState(false);
@@ -151,15 +151,12 @@ export function calculateVisibleRange(
   containerHeight: number,
   itemHeight: number,
   totalItems: number,
-  overscan: number = 3
+  overscan: number = 3,
 ) {
-  const startIndex = Math.max(
-    0,
-    Math.floor(scrollTop / itemHeight) - overscan
-  );
+  const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan);
   const endIndex = Math.min(
     totalItems - 1,
-    Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan
+    Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan,
   );
 
   return { startIndex, endIndex };
@@ -179,7 +176,7 @@ export function useRenderTime(componentName?: string) {
       if (componentName && renderTime > 16) {
         // Warn if render takes longer than one frame (16ms)
         console.warn(
-          `[Performance] ${componentName} took ${renderTime.toFixed(2)}ms to render`
+          `[Performance] ${componentName} took ${renderTime.toFixed(2)}ms to render`,
         );
       }
     };
@@ -195,9 +192,9 @@ export function shallowEqual<T>(objA: T, objB: T): boolean {
   }
 
   if (
-    typeof objA !== 'object' ||
+    typeof objA !== "object" ||
     objA === null ||
-    typeof objB !== 'object' ||
+    typeof objB !== "object" ||
     objB === null
   ) {
     return false;
@@ -257,7 +254,7 @@ export function useBatchedUpdates() {
  * Image lazy loading with placeholder
  */
 export function useLazyImage(src: string, placeholder?: string) {
-  const [imageSrc, setImageSrc] = React.useState<string>(placeholder || '');
+  const [imageSrc, setImageSrc] = React.useState<string>(placeholder || "");
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   useEffect(() => {
@@ -290,12 +287,12 @@ export function useLazyImage(src: string, placeholder?: string) {
  */
 export async function loadModule<T>(
   importFn: () => Promise<T>,
-  timeout: number = 5000
+  timeout: number = 5000,
 ): Promise<T> {
   return Promise.race([
     importFn(),
     new Promise<T>((_, reject) =>
-      setTimeout(() => reject(new Error('Module load timeout')), timeout)
+      setTimeout(() => reject(new Error("Module load timeout")), timeout),
     ),
   ]);
 }

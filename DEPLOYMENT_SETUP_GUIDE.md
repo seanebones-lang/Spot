@@ -25,6 +25,7 @@ This repository is now fully configured for deployment to both **Railway** and *
    - Choose this repository
 
 2. **Configure Environment Variables** (in Railway dashboard):
+
    ```
    NODE_ENV=production
    PORT=3000 (automatically set by Railway)
@@ -107,6 +108,7 @@ This repository is now fully configured for deployment to both **Railway** and *
 The `.github/workflows/deploy-all.yml` workflow deploys to both platforms simultaneously.
 
 **To use:**
+
 1. Ensure all secrets are configured (Railway + Vercel)
 2. Push to `main` or manually trigger via GitHub Actions
 3. Both deployments run in parallel
@@ -116,22 +118,26 @@ The `.github/workflows/deploy-all.yml` workflow deploys to both platforms simult
 ## 🔧 Configuration Files
 
 ### `railway.toml`
+
 - Build configuration for Railway
 - Health check settings
 - Restart policies
 
 ### `vercel.json`
+
 - Next.js framework detection
 - Security headers
 - Function timeouts
 - Region configuration
 
 ### `Dockerfile`
+
 - Updated to Node 20 (matches package.json)
 - Multi-stage build for optimization
 - Standalone output for Railway
 
 ### `next.config.js`
+
 - Standalone output mode (required for Railway)
 - Image optimization configured
 - Remote patterns for Vercel
@@ -175,6 +181,7 @@ vercel --prod
 ## ✅ Verification Checklist
 
 ### Railway
+
 - [ ] Railway project created and connected to GitHub
 - [ ] `RAILWAY_TOKEN` secret added to GitHub
 - [ ] `RAILWAY_SERVICE_ID` secret added to GitHub
@@ -183,6 +190,7 @@ vercel --prod
 - [ ] App accessible at Railway-provided domain
 
 ### Vercel
+
 - [ ] Vercel project created and connected to GitHub
 - [ ] `VERCEL_TOKEN` secret added to GitHub
 - [ ] `VERCEL_ORG_ID` secret added to GitHub

@@ -1,162 +1,166 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import ControlButton from '../ControlButton';
-import { Shuffle } from 'lucide-react';
+import { render, screen, fireEvent } from "@testing-library/react";
+import ControlButton from "../ControlButton";
+import { Shuffle } from "lucide-react";
 
-describe('ControlButton', () => {
+describe("ControlButton", () => {
   const mockOnClick = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('renders with children', () => {
+  it("renders with children", () => {
     render(
       <ControlButton onClick={mockOnClick} ariaLabel="Test button">
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button', { name: /test button/i });
+    const button = screen.getByRole("button", { name: /test button/i });
     expect(button).toBeInTheDocument();
   });
 
-  it('calls onClick when clicked', () => {
+  it("calls onClick when clicked", () => {
     render(
       <ControlButton onClick={mockOnClick} ariaLabel="Test button">
         Click me
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
+    const button = screen.getByRole("button");
     fireEvent.click(button);
     expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call onClick when disabled', () => {
+  it("does not call onClick when disabled", () => {
     render(
       <ControlButton onClick={mockOnClick} ariaLabel="Test button" disabled>
         Click me
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
+    const button = screen.getByRole("button");
     fireEvent.click(button);
     expect(mockOnClick).not.toHaveBeenCalled();
   });
 
-  it('has correct aria-label', () => {
+  it("has correct aria-label", () => {
     render(
       <ControlButton onClick={mockOnClick} ariaLabel="Shuffle toggle">
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button', { name: /shuffle toggle/i });
-    expect(button).toHaveAttribute('aria-label', 'Shuffle toggle');
+    const button = screen.getByRole("button", { name: /shuffle toggle/i });
+    expect(button).toHaveAttribute("aria-label", "Shuffle toggle");
   });
 
-  it('shows active state with correct classes', () => {
+  it("shows active state with correct classes", () => {
     render(
       <ControlButton onClick={mockOnClick} ariaLabel="Test button" active>
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass('text-spotify-green');
+    const button = screen.getByRole("button");
+    expect(button).toHaveClass("text-spotify-green");
   });
 
-  it('shows inactive state with correct classes', () => {
+  it("shows inactive state with correct classes", () => {
     render(
-      <ControlButton onClick={mockOnClick} ariaLabel="Test button" active={false}>
+      <ControlButton
+        onClick={mockOnClick}
+        ariaLabel="Test button"
+        active={false}
+      >
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass('text-spotify-text-gray');
-    expect(button).not.toHaveClass('text-spotify-green');
+    const button = screen.getByRole("button");
+    expect(button).toHaveClass("text-spotify-text-gray");
+    expect(button).not.toHaveClass("text-spotify-green");
   });
 
-  it('sets aria-pressed when provided', () => {
+  it("sets aria-pressed when provided", () => {
     render(
-      <ControlButton 
-        onClick={mockOnClick} 
-        ariaLabel="Test button" 
+      <ControlButton
+        onClick={mockOnClick}
+        ariaLabel="Test button"
         ariaPressed={true}
       >
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('aria-pressed', 'true');
+    const button = screen.getByRole("button");
+    expect(button).toHaveAttribute("aria-pressed", "true");
   });
 
-  it('has disabled attribute when disabled', () => {
+  it("has disabled attribute when disabled", () => {
     render(
       <ControlButton onClick={mockOnClick} ariaLabel="Test button" disabled>
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
+    const button = screen.getByRole("button");
     expect(button).toBeDisabled();
-    expect(button).toHaveClass('disabled:opacity-50');
+    expect(button).toHaveClass("disabled:opacity-50");
   });
 
-  it('uses title when provided', () => {
+  it("uses title when provided", () => {
     render(
-      <ControlButton 
-        onClick={mockOnClick} 
-        ariaLabel="Test button" 
+      <ControlButton
+        onClick={mockOnClick}
+        ariaLabel="Test button"
         title="Custom title"
       >
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('title', 'Custom title');
+    const button = screen.getByRole("button");
+    expect(button).toHaveAttribute("title", "Custom title");
   });
 
-  it('falls back to ariaLabel for title when title not provided', () => {
+  it("falls back to ariaLabel for title when title not provided", () => {
     render(
       <ControlButton onClick={mockOnClick} ariaLabel="Fallback title">
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('title', 'Fallback title');
+    const button = screen.getByRole("button");
+    expect(button).toHaveAttribute("title", "Fallback title");
   });
 
-  it('applies custom className', () => {
+  it("applies custom className", () => {
     render(
-      <ControlButton 
-        onClick={mockOnClick} 
+      <ControlButton
+        onClick={mockOnClick}
         ariaLabel="Test button"
         className="custom-class"
       >
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass('custom-class');
+    const button = screen.getByRole("button");
+    expect(button).toHaveClass("custom-class");
   });
 
-  it('has correct base classes', () => {
+  it("has correct base classes", () => {
     render(
       <ControlButton onClick={mockOnClick} ariaLabel="Test button">
         <Shuffle />
-      </ControlButton>
+      </ControlButton>,
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-transparent');
-    expect(button).toHaveClass('border-none');
-    expect(button).toHaveClass('transition-colors');
-    expect(button).toHaveClass('cursor-pointer');
+    const button = screen.getByRole("button");
+    expect(button).toHaveClass("bg-transparent");
+    expect(button).toHaveClass("border-none");
+    expect(button).toHaveClass("transition-colors");
+    expect(button).toHaveClass("cursor-pointer");
   });
 });

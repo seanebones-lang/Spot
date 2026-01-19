@@ -1,5 +1,5 @@
-import { Track } from './track';
-import { Artist } from './artist';
+import { Track } from "./track";
+import { Artist } from "./artist";
 
 export interface Album {
   id: string;

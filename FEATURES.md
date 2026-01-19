@@ -3,6 +3,7 @@
 ## 🎵 Music Player Features
 
 ### Core Playback
+
 - ✅ Play/Pause controls
 - ✅ Previous/Next track navigation
 - ✅ Seek/scrub through tracks (10s forward/backward with keyboard)
@@ -13,6 +14,7 @@
 - ✅ Current track display (art, title, artist)
 
 ### Advanced Player Features
+
 - ✅ **Picture-in-Picture**: Pop-out player window using browser PiP API
 - ✅ **Quality Selector**: Choose between Lossless, High, Standard, Data Saver
 - ✅ **Queue Management**: Add tracks, view queue, remove from queue
@@ -21,6 +23,7 @@
 - ✅ **Similar Tracks**: Popover to find tracks matching current mood
 
 ### Audio Support
+
 - ✅ Multiple format support (MP3, WAV, FLAC, M4A, MP4)
 - ✅ Lossless audio playback (WAV, FLAC detection)
 - ✅ Format detection and quality indicators
@@ -29,6 +32,7 @@
 ## 🎨 Mood-Based Music Discovery
 
 ### Mood Selection System (4-Dimensional)
+
 1. **MOOD** - Discrete Emotional States
    - ✅ Melancholic, Nostalgic, Reflective, Content, Joyful, Euphoric
    - ✅ Visual tile selector with color-coded gradients
@@ -52,6 +56,7 @@
    - ✅ Multi-select capability
 
 ### Mood Matching Algorithm
+
 - ✅ Weighted scoring system:
   - Mood exact match: 40% weight
   - Feeling overlap: 30% weight
@@ -64,7 +69,8 @@
 ## 🏠 Pages & Navigation
 
 ### Main Pages
-- ✅ **Home Page**: 
+
+- ✅ **Home Page**:
   - Daily check-in card
   - Today's affirmation
   - Wellness dashboard (streak, points, journal count)
@@ -74,37 +80,38 @@
   - Specialized categories (MHz sounds, Withdrawal sounds, Mental Health Podcasts)
   - Radio stations preview
 
-- ✅ **Search Page**: 
+- ✅ **Search Page**:
   - Live search across tracks, artists, albums, playlists
   - Category filters
   - Genre quick-select
   - No results state
 
-- ✅ **Library/Collection**: 
+- ✅ **Library/Collection**:
   - Filterable view (All, Playlists, Artists, Albums)
   - Grid/list view ready
   - Recently added
 
-- ✅ **Mood Page**: 
+- ✅ **Mood Page**:
   - Full 4-dimensional mood selection interface
   - Real-time filtering results
   - Filtered playlist grid
 
 ### Content Detail Pages
-- ✅ **Playlist Page**: 
+
+- ✅ **Playlist Page**:
   - Playlist header with artwork
   - Play button and follow
   - Track list with play controls
   - Mood tags display
   - Duration calculations
 
-- ✅ **Album Page**: 
+- ✅ **Album Page**:
   - Album artwork and metadata
   - Artist link
   - Track listing
   - Release date and copyright
 
-- ✅ **Artist Page**: 
+- ✅ **Artist Page**:
   - Artist header with profile image
   - Popular tracks section
   - Albums grid
@@ -114,6 +121,7 @@
 ## 💚 Wellness Features
 
 ### Daily Check-in System
+
 - ✅ Mood sliders (Tired↔Energetic, Lonely↔Connected, Stressed↔Relaxed)
 - ✅ Feeling chips multi-select
 - ✅ Optional journal entry
@@ -123,6 +131,7 @@
 - ✅ Sidebar compact widget
 
 ### Journaling
+
 - ✅ Timeline view of journal entries
 - ✅ Rich text editor for entries
 - ✅ Mood tags association
@@ -133,6 +142,7 @@
 - ✅ Delete/edit entries
 
 ### Affirmations System
+
 - ✅ Audio affirmations library
 - ✅ Categories: Morning, Calm, Confidence, Empowerment
 - ✅ Team and artist voices
@@ -142,6 +152,7 @@
 - ✅ Affirmation toggle in player bar
 
 ### Points & Gamification
+
 - ✅ Points counter in TopBar
 - ✅ Streak badge display
 - ✅ Points earned for:
@@ -159,6 +170,7 @@
 - ✅ Transaction history
 
 ### Mental Health Hub
+
 - ✅ Crisis support section:
   - 988 Suicide & Crisis Lifeline
   - Crisis Text Line
@@ -178,10 +190,10 @@
 - ✅ "Tune In" functionality
 - ✅ Station cards with genre labels
 
-
 ## 🎤 Artist Features
 
 ### Legal Signup (6-Step Workflow)
+
 1. ✅ Account Creation
    - Artist/Management name
    - Email verification
@@ -222,6 +234,7 @@
    - Status tracking
 
 ### Upload Interface (4-Step Process)
+
 1. ✅ File Upload
    - Drag-and-drop interface
    - Format validation (WAV, FLAC, MP3, M4A, MP4)
@@ -249,6 +262,7 @@
    - Submit for review
 
 ### Artist Dashboard
+
 - ✅ Live Statistics:
   - Total streams (real-time toggle)
   - Estimated earnings ($0.004/stream)
@@ -273,6 +287,7 @@
 ## ⌨️ User Experience Features
 
 ### Keyboard Shortcuts
+
 - ✅ Space: Play/Pause
 - ✅ Left Arrow: Seek backward 10 seconds
 - ✅ Right Arrow: Seek forward 10 seconds
@@ -283,6 +298,7 @@
 - ✅ Ctrl/Cmd + Arrow Left: Previous track
 
 ### UI/UX Enhancements
+
 - ✅ Context menus (right-click on tracks)
 - ✅ Hover states matching Spotify
 - ✅ Loading states
@@ -292,6 +308,7 @@
 - ✅ Smooth animations and transitions
 
 ### Responsive Design
+
 - ✅ Mobile breakpoints
 - ✅ Tablet breakpoints
 - ✅ Desktop optimized
@@ -301,6 +318,7 @@
 ## 💾 State Management
 
 ### Zustand Stores
+
 - ✅ `playerStore`: Playback state, queue, volume, shuffle, repeat
 - ✅ `moodStore`: Mood selection state (mood, feelings, vibe, genres)
 - ✅ `checkInStore`: Daily check-in data, streaks, last check-in
@@ -312,6 +330,7 @@
 - ✅ `artistSignupStore`: Artist onboarding state, approval status
 
 ### Persistence
+
 - ✅ localStorage persistence for:
   - Player state (current track, progress, volume, queue)
   - Check-in streaks and last check-in date
@@ -324,6 +343,7 @@
 ## 🎨 Design & Styling
 
 ### Design System
+
 - ✅ Exact Spotify color palette:
   - Background: #121212, #181818, #282828
   - Green: #1DB954
@@ -337,6 +357,7 @@
 - ✅ Border radius, shadows matching Spotify
 
 ### Components
+
 - ✅ All components styled to match Spotify exactly
 - ✅ Hover states and active states
 - ✅ Transitions and animations
@@ -346,6 +367,7 @@
 ## 📊 Data Structure
 
 ### Mock Data (Ready for Backend)
+
 - ✅ Tracks with mood tags
 - ✅ Artists with metadata
 - ✅ Albums with track listings

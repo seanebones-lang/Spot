@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { Clock, X, Search, Music, User, List, Disc } from 'lucide-react';
-import { useSearchStore } from '@/stores/searchStore';
-import { useRouter } from 'next/navigation';
-import { mockData } from '@/lib/data';
-import { cn } from '@/lib/utils';
+import { useState, useEffect, useRef } from "react";
+import { Clock, X, Search, Music, User, List, Disc } from "lucide-react";
+import { useSearchStore } from "@/stores/searchStore";
+import { useRouter } from "next/navigation";
+import { mockData } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 interface SearchResult {
   id: string;
-  type: 'track' | 'artist' | 'playlist' | 'album';
+  type: "track" | "artist" | "playlist" | "album";
   name: string;
   subtitle?: string;
   image?: string;
@@ -22,7 +22,12 @@ interface SearchDropdownProps {
   onSelect: (query: string) => void;
 }
 
-export default function SearchDropdown({ query, isOpen, onClose, onSelect }: SearchDropdownProps) {
+export default function SearchDropdown({
+  query,
+  isOpen,
+  onClose,
+  onSelect,
+}: SearchDropdownProps) {
   const { recentSearches, removeSearch } = useSearchStore();
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,10 +41,13 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
 
       // Search tracks
       mockData.getTracks().forEach((track) => {
-        if (track.name.toLowerCase().includes(queryLower) || track.artist.toLowerCase().includes(queryLower)) {
+        if (
+          track.name.toLowerCase().includes(queryLower) ||
+          track.artist.toLowerCase().includes(queryLower)
+        ) {
           results.push({
             id: track.id,
-            type: 'track',
+            type: "track",
             name: track.name,
             subtitle: track.artist,
             image: track.coverArt,
@@ -52,7 +60,7 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
         if (artist.name.toLowerCase().includes(queryLower)) {
           results.push({
             id: artist.id,
-            type: 'artist',
+            type: "artist",
             name: artist.name,
             subtitle: `${artist.followers} followers`,
             image: artist.image,
@@ -65,7 +73,7 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
         if (playlist.name.toLowerCase().includes(queryLower)) {
           results.push({
             id: playlist.id,
-            type: 'playlist',
+            type: "playlist",
             name: playlist.name,
             subtitle: playlist.description,
             image: playlist.coverArt,
@@ -75,12 +83,18 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
 
       // Search albums
       mockData.getAlbums().forEach((album) => {
-        if (album.name.toLowerCase().includes(queryLower) || album.artist?.name?.toLowerCase().includes(queryLower)) {
+        if (
+          album.name.toLowerCase().includes(queryLower) ||
+          album.artist?.name?.toLowerCase().includes(queryLower)
+        ) {
           results.push({
             id: album.id,
-            type: 'album',
+            type: "album",
             name: album.name,
-            subtitle: typeof album.artist === 'string' ? album.artist : album.artist?.name || '',
+            subtitle:
+              typeof album.artist === "string"
+                ? album.artist
+                : album.artist?.name || "",
             image: album.coverArt,
           });
         }
@@ -94,14 +108,18 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isOpen, onClose]);
 
@@ -112,13 +130,13 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
 
   const getResultIcon = (type: string) => {
     switch (type) {
-      case 'track':
+      case "track":
         return <Music size={16} className="text-spotify-green" />;
-      case 'artist':
+      case "artist":
         return <User size={16} className="text-spotify-blue" />;
-      case 'playlist':
+      case "playlist":
         return <List size={16} className="text-empulse-purple" />;
-      case 'album':
+      case "album":
         return <Disc size={16} className="text-orange-500" />;
       default:
         return <Search size={16} />;
@@ -127,16 +145,16 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
 
   const getResultLink = (result: SearchResult) => {
     switch (result.type) {
-      case 'track':
-        return '/track';
-      case 'artist':
+      case "track":
+        return "/track";
+      case "artist":
         return `/artist/${result.id}`;
-      case 'playlist':
+      case "playlist":
         return `/playlist/${result.id}`;
-      case 'album':
+      case "album":
         return `/album/${result.id}`;
       default:
-        return '/search';
+        return "/search";
     }
   };
 
@@ -145,15 +163,17 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
       ref={dropdownRef}
       className="absolute top-full left-0 right-0 mt-2 bg-spotify-dark-gray rounded-lg shadow-2xl border border-white/10 z-50 max-h-96 overflow-y-auto custom-scrollbar"
       style={{
-        animation: 'fadeIn 200ms ease-out',
-        transformOrigin: 'top center'
+        animation: "fadeIn 200ms ease-out",
+        transformOrigin: "top center",
       }}
     >
       {/* Search Results (while typing) */}
       {hasResults && !showRecent && (
         <div className="p-2">
           <div className="px-3 py-2 mb-2">
-            <h3 className="text-xs font-bold text-spotify-text-gray uppercase">Results</h3>
+            <h3 className="text-xs font-bold text-spotify-text-gray uppercase">
+              Results
+            </h3>
           </div>
           {searchResults.map((result) => (
             <button
@@ -177,9 +197,13 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
                 </div>
               )}
               <div className="flex-1 min-w-0 text-left">
-                <div className="text-white truncate font-medium">{result.name}</div>
+                <div className="text-white truncate font-medium">
+                  {result.name}
+                </div>
                 {result.subtitle && (
-                  <div className="text-xs text-spotify-text-gray truncate">{result.subtitle}</div>
+                  <div className="text-xs text-spotify-text-gray truncate">
+                    {result.subtitle}
+                  </div>
                 )}
               </div>
               <div className="flex-shrink-0 text-spotify-text-gray">
@@ -203,7 +227,9 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
       {showRecent && recentSearches.length > 0 && (
         <div className="p-2">
           <div className="flex items-center justify-between px-3 py-2 mb-2">
-            <h3 className="text-xs font-bold text-spotify-text-gray uppercase">Recent Searches</h3>
+            <h3 className="text-xs font-bold text-spotify-text-gray uppercase">
+              Recent Searches
+            </h3>
             <button
               onClick={() => {
                 useSearchStore.getState().clearHistory();
@@ -222,7 +248,10 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
               }}
               className="w-full flex items-center gap-3 px-3 py-2 rounded hover:bg-white/10 transition-colors group"
             >
-              <Clock size={16} className="text-spotify-text-gray flex-shrink-0" />
+              <Clock
+                size={16}
+                className="text-spotify-text-gray flex-shrink-0"
+              />
               <span className="flex-1 text-left text-white">{search}</span>
               <button
                 onClick={(e) => {
@@ -243,7 +272,9 @@ export default function SearchDropdown({ query, isOpen, onClose, onSelect }: Sea
         <div className="p-8 text-center">
           <Search size={32} className="text-spotify-text-gray mx-auto mb-2" />
           <p className="text-spotify-text-gray text-sm">No recent searches</p>
-          <p className="text-spotify-text-gray text-xs mt-1">Type to search for tracks, artists, playlists, and albums</p>
+          <p className="text-spotify-text-gray text-xs mt-1">
+            Type to search for tracks, artists, playlists, and albums
+          </p>
         </div>
       )}
     </div>

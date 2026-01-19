@@ -1,135 +1,147 @@
-'use client';
+"use client";
 
 export default function LanguageSettingsPage() {
   return (
-    <div 
+    <div
       className="min-h-screen bg-spotify-dark text-white p-8"
       style={{
-        minHeight: '100vh',
-        backgroundColor: '#121212',
-        padding: '32px',
-        color: '#FFFFFF'
+        minHeight: "100vh",
+        backgroundColor: "#121212",
+        padding: "32px",
+        color: "#FFFFFF",
       }}
     >
-      <h1 
+      <h1
         className="text-4xl font-bold mb-8"
         style={{
-          fontSize: '32px',
-          lineHeight: '36px',
+          fontSize: "32px",
+          lineHeight: "36px",
           fontWeight: 700,
-          color: '#FFFFFF',
-          marginBottom: '32px'
+          color: "#FFFFFF",
+          marginBottom: "32px",
         }}
       >
         Language & Region
       </h1>
-      <div 
+      <div
         className="max-w-2xl space-y-6"
         style={{
-          maxWidth: '672px',
-          gap: '24px'
+          maxWidth: "672px",
+          gap: "24px",
         }}
       >
-        <div 
+        <div
           className="bg-spotify-light-gray rounded-lg p-6"
           style={{
-            backgroundColor: '#181818',
-            borderRadius: '8px',
-            padding: '24px'
+            backgroundColor: "#181818",
+            borderRadius: "8px",
+            padding: "24px",
           }}
         >
-          <label 
+          <label
             className="block text-sm font-medium mb-2"
             style={{
-              fontSize: '14px',
-              lineHeight: '20px',
+              fontSize: "14px",
+              lineHeight: "20px",
               fontWeight: 600,
-              color: '#FFFFFF',
-              marginBottom: '8px',
-              display: 'block'
+              color: "#FFFFFF",
+              marginBottom: "8px",
+              display: "block",
             }}
           >
             Language
           </label>
-          <select 
+          <select
             className="w-full bg-spotify-dark-gray text-white px-4 py-2 rounded"
             style={{
-              width: '100%',
-              backgroundColor: '#282828',
-              color: '#FFFFFF',
-              padding: '12px 16px',
-              borderRadius: '4px',
-              fontSize: '14px',
-              lineHeight: '20px',
+              width: "100%",
+              backgroundColor: "#282828",
+              color: "#FFFFFF",
+              padding: "12px 16px",
+              borderRadius: "4px",
+              fontSize: "14px",
+              lineHeight: "20px",
               fontWeight: 400,
-              border: '1px solid transparent',
-              fontFamily: 'inherit',
-              cursor: 'pointer',
-              transition: 'border-color 200ms ease-out'
+              border: "1px solid transparent",
+              fontFamily: "inherit",
+              cursor: "pointer",
+              transition: "border-color 200ms ease-out",
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#7209B7';
-              e.currentTarget.style.borderWidth = '2px';
+              e.currentTarget.style.borderColor = "#7209B7";
+              e.currentTarget.style.borderWidth = "2px";
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = 'transparent';
-              e.currentTarget.style.borderWidth = '1px';
+              e.currentTarget.style.borderColor = "transparent";
+              e.currentTarget.style.borderWidth = "1px";
             }}
           >
-            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>English (US)</option>
-            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>Spanish</option>
-            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>French</option>
+            <option style={{ backgroundColor: "#282828", color: "#FFFFFF" }}>
+              English (US)
+            </option>
+            <option style={{ backgroundColor: "#282828", color: "#FFFFFF" }}>
+              Spanish
+            </option>
+            <option style={{ backgroundColor: "#282828", color: "#FFFFFF" }}>
+              French
+            </option>
           </select>
         </div>
-        <div 
+        <div
           className="bg-spotify-light-gray rounded-lg p-6"
           style={{
-            backgroundColor: '#181818',
-            borderRadius: '8px',
-            padding: '24px'
+            backgroundColor: "#181818",
+            borderRadius: "8px",
+            padding: "24px",
           }}
         >
-          <label 
+          <label
             className="block text-sm font-medium mb-2"
             style={{
-              fontSize: '14px',
-              lineHeight: '20px',
+              fontSize: "14px",
+              lineHeight: "20px",
               fontWeight: 600,
-              color: '#FFFFFF',
-              marginBottom: '8px',
-              display: 'block'
+              color: "#FFFFFF",
+              marginBottom: "8px",
+              display: "block",
             }}
           >
             Region
           </label>
-          <select 
+          <select
             className="w-full bg-spotify-dark-gray text-white px-4 py-2 rounded"
             style={{
-              width: '100%',
-              backgroundColor: '#282828',
-              color: '#FFFFFF',
-              padding: '12px 16px',
-              borderRadius: '4px',
-              fontSize: '14px',
-              lineHeight: '20px',
+              width: "100%",
+              backgroundColor: "#282828",
+              color: "#FFFFFF",
+              padding: "12px 16px",
+              borderRadius: "4px",
+              fontSize: "14px",
+              lineHeight: "20px",
               fontWeight: 400,
-              border: '1px solid transparent',
-              fontFamily: 'inherit',
-              cursor: 'pointer',
-              transition: 'border-color 200ms ease-out'
+              border: "1px solid transparent",
+              fontFamily: "inherit",
+              cursor: "pointer",
+              transition: "border-color 200ms ease-out",
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#7209B7';
-              e.currentTarget.style.borderWidth = '2px';
+              e.currentTarget.style.borderColor = "#7209B7";
+              e.currentTarget.style.borderWidth = "2px";
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = 'transparent';
-              e.currentTarget.style.borderWidth = '1px';
+              e.currentTarget.style.borderColor = "transparent";
+              e.currentTarget.style.borderWidth = "1px";
             }}
           >
-            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>United States</option>
-            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>United Kingdom</option>
-            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>Canada</option>
+            <option style={{ backgroundColor: "#282828", color: "#FFFFFF" }}>
+              United States
+            </option>
+            <option style={{ backgroundColor: "#282828", color: "#FFFFFF" }}>
+              United Kingdom
+            </option>
+            <option style={{ backgroundColor: "#282828", color: "#FFFFFF" }}>
+              Canada
+            </option>
           </select>
         </div>
       </div>

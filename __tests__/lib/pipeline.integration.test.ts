@@ -1,17 +1,27 @@
 /**
  * Integration Tests for RAG Pipeline System
- * 
+ *
  * These tests demonstrate end-to-end pipeline functionality
  * using mock implementations for external services.
- * 
+ *
  * Run with: npm test -- pipeline.integration
  */
 
-import { describe, it, expect, beforeAll, afterAll, beforeEach } from '@jest/globals';
-import { getRAGPipeline } from '@/lib/aiMoodAnalysis';
-import { getPipelineOrchestrator, PipelineExecutionResult } from '@/lib/pipelineOrchestration';
-import { getMetricsCollector } from '@/lib/pipelineMetrics';
-import { getEmbeddingCache } from '@/lib/embeddingCache';
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  afterAll,
+  beforeEach,
+} from "@jest/globals";
+import { getRAGPipeline } from "@/lib/aiMoodAnalysis";
+import {
+  getPipelineOrchestrator,
+  PipelineExecutionResult,
+} from "@/lib/pipelineOrchestration";
+import { getMetricsCollector } from "@/lib/pipelineMetrics";
+import { getEmbeddingCache } from "@/lib/embeddingCache";
 import {
   createMockAudioFile,
   createMockAudioFeatures,
@@ -21,10 +31,10 @@ import {
   MockNeo4jKnowledgeGraph,
   assertValidMoodSuggestion,
   assertValidEmbedding,
-} from './ragTestHelpers';
-import { Track } from '@/types/track';
+} from "./ragTestHelpers";
+import { Track } from "@/types/track";
 
-describe('RAG Pipeline Integration Tests', () => {
+describe("RAG Pipeline Integration Tests", () => {
   let ragPipeline: ReturnType<typeof getRAGPipeline>;
   let mockVectorDB: MockPineconeVectorDB;
   let mockGraph: MockNeo4jKnowledgeGraph;
@@ -45,16 +55,20 @@ describe('RAG Pipeline Integration Tests', () => {
     cache.clear();
   });
 
-  describe('End-to-End Pipeline Execution', () => {
-    it('should execute full pipeline with mock components', async () => {
+  describe("End-to-End Pipeline Execution", () => {
+    it("should execute full pipeline with mock components", async () => {
       // Create mock audio file
-      const audioFile = createMockAudioFile('test-track.mp3', 1024 * 1024, 'audio/mpeg');
-      
+      const audioFile = createMockAudioFile(
+        "test-track.mp3",
+        1024 * 1024,
+        "audio/mpeg",
+      );
+
       // Create mock track metadata
       const trackMetadata: Partial<Track> = {
-        id: 'test-track-1',
-        name: 'Test Track',
-        artist: 'Test Artist',
+        id: "test-track-1",
+        name: "Test Track",
+        artist: "Test Artist",
         duration: 180000,
       };
 
@@ -67,19 +81,19 @@ describe('RAG Pipeline Integration Tests', () => {
       // Note: This would require actual audio processing
       // For integration test structure, we verify the pipeline exists and can be configured
       expect(orchestrator).toBeDefined();
-      expect(typeof orchestrator.executePipeline).toBe('function');
+      expect(typeof orchestrator.executePipeline).toBe("function");
     });
 
-    it('should validate mood suggestion structure', () => {
+    it("should validate mood suggestion structure", () => {
       const mockSuggestion = createMockMoodSuggestion({
-        mood: 'Joyful',
+        mood: "Joyful",
         confidence: 0.9,
       });
 
       // Use assertion helper
       expect(() => assertValidMoodSuggestion(mockSuggestion)).not.toThrow();
-      
-      expect(mockSuggestion.mood).toBe('Joyful');
+
+      expect(mockSuggestion.mood).toBe("Joyful");
       expect(mockSuggestion.confidence).toBeGreaterThanOrEqual(0);
       expect(mockSuggestion.confidence).toBeLessThanOrEqual(1);
       expect(Array.isArray(mockSuggestion.feelings)).toBe(true);
@@ -88,90 +102,90 @@ describe('RAG Pipeline Integration Tests', () => {
       expect(mockSuggestion.vibe).toBeLessThanOrEqual(100);
     });
 
-    it('should validate embedding structure', () => {
+    it("should validate embedding structure", () => {
       const embedding = new Array(768).fill(0).map(() => Math.random() * 2 - 1);
-      
+
       // Use assertion helper
       expect(() => assertValidEmbedding(embedding)).not.toThrow();
-      
+
       expect(Array.isArray(embedding)).toBe(true);
       expect(embedding.length).toBeGreaterThan(0);
-      expect(embedding.every(v => isFinite(v))).toBe(true);
+      expect(embedding.every((v) => isFinite(v))).toBe(true);
     });
   });
 
-  describe('Component Integration', () => {
-    it('should integrate vector DB with pipeline', async () => {
+  describe("Component Integration", () => {
+    it("should integrate vector DB with pipeline", async () => {
       await mockVectorDB.initialize();
-      
-      const trackId = 'test-track-1';
+
+      const trackId = "test-track-1";
       const embedding = new Array(768).fill(0.5);
       const metadata = {
         trackId,
-        name: 'Test Track',
-        artist: 'Test Artist',
+        name: "Test Track",
+        artist: "Test Artist",
         moodTags: {
-          mood: 'Content' as const,
-          feelings: ['Calm'],
+          mood: "Content" as const,
+          feelings: ["Calm"],
           vibe: 60,
-          genres: ['Pop'],
+          genres: ["Pop"],
         },
       };
 
       await mockVectorDB.upsert(trackId, embedding, metadata);
-      
+
       expect(mockVectorDB.getEmbeddingCount()).toBe(1);
     });
 
-    it('should integrate knowledge graph with pipeline', async () => {
+    it("should integrate knowledge graph with pipeline", async () => {
       await mockGraph.initialize();
-      
+
       const track = createMockTrack({
-        id: 'test-track-2',
-        name: 'Graph Test Track',
+        id: "test-track-2",
+        name: "Graph Test Track",
       });
 
       await mockGraph.upsertTrack(track);
-      
+
       expect(mockGraph.getTrackCount()).toBe(1);
     });
 
-    it('should use caching layer for embeddings', () => {
-      const key = 'test-cache-key';
+    it("should use caching layer for embeddings", () => {
+      const key = "test-cache-key";
       const embedding = new Array(768).fill(0.5);
-      
+
       // Set in cache
       cache.set(key, embedding);
-      
+
       // Get from cache
       const cached = cache.get(key);
-      
+
       expect(cached).not.toBeNull();
       expect(cached?.embedding).toEqual(embedding);
     });
   });
 
-  describe('Metrics Collection Integration', () => {
-    it('should collect metrics from pipeline stages', () => {
+  describe("Metrics Collection Integration", () => {
+    it("should collect metrics from pipeline stages", () => {
       const metricsCollector = getMetricsCollector();
       metricsCollector.clear();
 
       // Simulate pipeline metrics
       metricsCollector.record({
-        stage: 'mood_analysis',
+        stage: "mood_analysis",
         duration: 150,
         success: true,
         metadata: { confidence: 0.9 },
       });
 
       metricsCollector.record({
-        stage: 'vector_indexing',
+        stage: "vector_indexing",
         duration: 50,
         success: true,
         metadata: { embeddingDimensions: 768 },
       });
 
-      const metrics = metricsCollector.getStageMetrics('mood_analysis');
+      const metrics = metricsCollector.getStageMetrics("mood_analysis");
       expect(metrics.length).toBe(1);
       expect(metrics[0].duration).toBe(150);
       expect(metrics[0].success).toBe(true);
@@ -181,48 +195,55 @@ describe('RAG Pipeline Integration Tests', () => {
     });
   });
 
-  describe('Error Handling Integration', () => {
-    it('should handle vector DB failures gracefully', async () => {
+  describe("Error Handling Integration", () => {
+    it("should handle vector DB failures gracefully", async () => {
       // In production, vector DB failures should not break the pipeline
       // The system should degrade gracefully
-      
+
       const audioFile = createMockAudioFile();
       const pipeline = getRAGPipeline();
-      
+
       // Test that pipeline can handle missing vector DB
       // (Vector DB is optional - pipeline should work without it)
       expect(pipeline).toBeDefined();
     });
 
-    it('should validate inputs before processing', () => {
-      const { validateEmbedding } = require('@/lib/validation');
-      
+    it("should validate inputs before processing", () => {
+      const { validateEmbedding } = require("@/lib/validation");
+
       // Invalid embeddings should throw
       expect(() => validateEmbedding([], { required: true })).toThrow();
-      expect(() => validateEmbedding([NaN, 1, 2], { required: true })).toThrow();
-      
+      expect(() =>
+        validateEmbedding([NaN, 1, 2], { required: true }),
+      ).toThrow();
+
       // Valid embeddings should pass
-      expect(() => validateEmbedding([0.5, 0.6, 0.7], { required: true })).not.toThrow();
+      expect(() =>
+        validateEmbedding([0.5, 0.6, 0.7], { required: true }),
+      ).not.toThrow();
     });
   });
 
-  describe('Performance Validation', () => {
-    it('should meet latency targets for mood analysis', () => {
-      const { PERFORMANCE_TARGETS } = require('@/lib/pipelineConfig');
-      
+  describe("Performance Validation", () => {
+    it("should meet latency targets for mood analysis", () => {
+      const { PERFORMANCE_TARGETS } = require("@/lib/pipelineConfig");
+
       // Target: <200ms
       const targetLatency = PERFORMANCE_TARGETS.MOOD_ANALYSIS_LATENCY_MS;
       expect(targetLatency).toBe(200);
-      
+
       // In real tests, would verify actual latency < target
       // For now, verify target is defined
       expect(targetLatency).toBeDefined();
-      expect(typeof targetLatency).toBe('number');
+      expect(typeof targetLatency).toBe("number");
     });
 
-    it('should use configuration constants', () => {
-      const { DEFAULT_LIMITS, SIMILARITY_THRESHOLDS } = require('@/lib/pipelineConfig');
-      
+    it("should use configuration constants", () => {
+      const {
+        DEFAULT_LIMITS,
+        SIMILARITY_THRESHOLDS,
+      } = require("@/lib/pipelineConfig");
+
       // Verify configuration is available
       expect(DEFAULT_LIMITS.TOP_K_SIMILAR).toBe(5);
       expect(DEFAULT_LIMITS.MAX_SIMILAR_TRACKS).toBe(20);

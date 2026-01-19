@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface SearchState {
   history: string[];
@@ -14,30 +14,38 @@ export const useSearchStore = create<SearchState>()(
     (set) => ({
       history: [],
       recentSearches: [],
-      
-      addSearch: (query) => set((state) => {
-        const trimmedQuery = query.trim();
-        if (!trimmedQuery) return state;
-        
-        const newHistory = [trimmedQuery, ...state.history.filter(q => q !== trimmedQuery)].slice(0, 20);
-        const newRecent = [trimmedQuery, ...state.recentSearches.filter(q => q !== trimmedQuery)].slice(0, 10);
-        
-        return {
-          history: newHistory,
-          recentSearches: newRecent,
-        };
-      }),
-      
+
+      addSearch: (query) =>
+        set((state) => {
+          const trimmedQuery = query.trim();
+          if (!trimmedQuery) return state;
+
+          const newHistory = [
+            trimmedQuery,
+            ...state.history.filter((q) => q !== trimmedQuery),
+          ].slice(0, 20);
+          const newRecent = [
+            trimmedQuery,
+            ...state.recentSearches.filter((q) => q !== trimmedQuery),
+          ].slice(0, 10);
+
+          return {
+            history: newHistory,
+            recentSearches: newRecent,
+          };
+        }),
+
       clearHistory: () => set({ history: [], recentSearches: [] }),
-      
-      removeSearch: (query) => set((state) => ({
-        history: state.history.filter(q => q !== query),
-        recentSearches: state.recentSearches.filter(q => q !== query),
-      })),
+
+      removeSearch: (query) =>
+        set((state) => ({
+          history: state.history.filter((q) => q !== query),
+          recentSearches: state.recentSearches.filter((q) => q !== query),
+        })),
     }),
     {
-      name: 'search-storage',
+      name: "search-storage",
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

@@ -141,6 +141,7 @@ terraform destroy
 ### VPC Module
 
 Creates:
+
 - VPC with public/private/database subnets across 3 AZs
 - Internet Gateway and NAT Gateways
 - Route tables and associations
@@ -149,6 +150,7 @@ Creates:
 ### ECS Module
 
 Creates:
+
 - ECS Fargate cluster
 - Application Load Balancer
 - ECS service with auto-scaling
@@ -158,6 +160,7 @@ Creates:
 ### RDS Module
 
 Creates:
+
 - PostgreSQL 15.4 database instance
 - DB subnet group
 - Parameter group with performance settings

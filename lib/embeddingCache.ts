@@ -40,7 +40,7 @@ export class EmbeddingCache {
   async getOrCompute<T>(
     key: string,
     computeFn: () => Promise<T>,
-    extractEmbedding: (result: T) => number[] | undefined
+    extractEmbedding: (result: T) => number[] | undefined,
   ): Promise<{ result: T; fromCache: boolean; embedding?: number[] }> {
     // Check cache first
     const cached = this.get(key);

@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 
 interface VolumeControlProps {
   volume: number; // 0-100
   onVolumeChange: (volume: number) => void;
 }
 
-export default function VolumeControl({ volume, onVolumeChange }: VolumeControlProps) {
+export default function VolumeControl({
+  volume,
+  onVolumeChange,
+}: VolumeControlProps) {
   const [isDragging, setIsDragging] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
 
@@ -50,7 +53,10 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
       if (barRef.current) {
         const rect = barRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
-        const volumePercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        const volumePercent = Math.max(
+          0,
+          Math.min(100, (x / rect.width) * 100),
+        );
         onVolumeChange(volumePercent);
       }
     };
@@ -60,7 +66,10 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
       if (barRef.current && e.touches.length > 0) {
         const rect = barRef.current.getBoundingClientRect();
         const x = e.touches[0].clientX - rect.left;
-        const volumePercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        const volumePercent = Math.max(
+          0,
+          Math.min(100, (x / rect.width) * 100),
+        );
         onVolumeChange(volumePercent);
       }
     };
@@ -73,18 +82,18 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
       setIsDragging(false);
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleTouchEnd);
-    document.addEventListener('touchcancel', handleTouchEnd);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
+    document.addEventListener("touchend", handleTouchEnd);
+    document.addEventListener("touchcancel", handleTouchEnd);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleTouchEnd);
-      document.removeEventListener('touchcancel', handleTouchEnd);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener("touchcancel", handleTouchEnd);
     };
   }, [isDragging, onVolumeChange]);
 
@@ -92,7 +101,7 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
     <div className="flex items-center gap-2 w-32">
       <button
         onClick={handleMute}
-        aria-label={volume === 0 ? 'Unmute' : 'Mute'}
+        aria-label={volume === 0 ? "Unmute" : "Mute"}
         aria-pressed={volume === 0}
         className="text-spotify-text-gray hover:text-white transition-colors"
       >
@@ -112,7 +121,7 @@ export default function VolumeControl({ volume, onVolumeChange }: VolumeControlP
           handleSeek(e);
         }}
         onTouchStart={handleTouchStart}
-        style={{ touchAction: 'none' }}
+        style={{ touchAction: "none" }}
       >
         <div
           className="h-full bg-white rounded-full transition-all group-hover:bg-spotify-green"

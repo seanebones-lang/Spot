@@ -46,19 +46,19 @@ Both endpoints should return `200 OK` if configuration is correct.
 
 ### Critical (App won't start without these)
 
-| Variable | Description | Example |
-|----------|-------------|---------|
+| Variable     | Description                              | Example                       |
+| ------------ | ---------------------------------------- | ----------------------------- |
 | `JWT_SECRET` | Secret key for JWT tokens (min 32 chars) | `a1b2c3d4e5f6...` (generated) |
-| `NODE_ENV` | Environment mode | `production` |
+| `NODE_ENV`   | Environment mode                         | `production`                  |
 
 ### Recommended for Production
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `XAI_API_KEY` | xAI Grok API key for AI features | `xai-...` |
-| `ALLOWED_ORIGINS` | Comma-separated list of allowed CORS origins | `https://yourdomain.com` |
-| `NEXT_PUBLIC_API_URL` | Public API URL (if different from app URL) | `https://api.yourdomain.com` |
-| `API_URL` | Internal API URL | `https://api.yourdomain.com` |
+| Variable              | Description                                  | Example                      |
+| --------------------- | -------------------------------------------- | ---------------------------- |
+| `XAI_API_KEY`         | xAI Grok API key for AI features             | `xai-...`                    |
+| `ALLOWED_ORIGINS`     | Comma-separated list of allowed CORS origins | `https://yourdomain.com`     |
+| `NEXT_PUBLIC_API_URL` | Public API URL (if different from app URL)   | `https://api.yourdomain.com` |
+| `API_URL`             | Internal API URL                             | `https://api.yourdomain.com` |
 
 ## 🔒 Security Checklist
 
@@ -97,11 +97,13 @@ Before deploying to production:
 ### Docker
 
 1. Build the image:
+
    ```bash
    docker build -t empulse-music .
    ```
 
 2. Run with environment variables:
+
    ```bash
    docker run -p 3000:3000 \
      -e JWT_SECRET=your-secret \
@@ -110,6 +112,7 @@ Before deploying to production:
    ```
 
    Or use a `.env` file:
+
    ```bash
    docker run -p 3000:3000 --env-file .env.local empulse-music
    ```
@@ -119,21 +122,27 @@ Before deploying to production:
 After deploying, verify everything works:
 
 1. **Health Check**:
+
    ```bash
    curl https://yourdomain.com/api/health
    ```
+
    Should return `200 OK` with health status.
 
 2. **Startup Check**:
+
    ```bash
    curl https://yourdomain.com/api/startup-check
    ```
+
    Should return `200 OK` if configuration is valid.
 
 3. **Security Headers**:
+
    ```bash
    curl -I https://yourdomain.com
    ```
+
    Verify these headers are present:
    - `X-Content-Type-Options: nosniff`
    - `X-Frame-Options: DENY`
@@ -177,6 +186,7 @@ After deploying, verify everything works:
 ### Health Monitoring
 
 Set up monitoring to check:
+
 - `/api/health` endpoint (should return 200)
 - Response time should be < 100ms
 - Memory usage should be < 90%
@@ -184,6 +194,7 @@ Set up monitoring to check:
 ### Error Tracking
 
 Consider integrating:
+
 - **Sentry** for error tracking
 - **Datadog** or **New Relic** for APM
 - **LogRocket** for session replay
@@ -191,6 +202,7 @@ Consider integrating:
 ### Logs
 
 All API routes now include structured logging with:
+
 - Correlation IDs for request tracking
 - Request/response logging
 - Error logging with stack traces

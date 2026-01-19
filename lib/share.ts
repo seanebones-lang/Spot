@@ -7,7 +7,7 @@ export interface ShareOptions {
   title: string;
   text?: string;
   url: string;
-  type: 'track' | 'playlist' | 'album' | 'artist';
+  type: "track" | "playlist" | "album" | "artist";
 }
 
 /**
@@ -15,7 +15,7 @@ export interface ShareOptions {
  */
 export async function shareContent(options: ShareOptions): Promise<boolean> {
   const { title, text, url, type } = options;
-  
+
   const shareData: ShareData = {
     title,
     text: text || `Check out this ${type} on EmPulse Music`,
@@ -29,8 +29,8 @@ export async function shareContent(options: ShareOptions): Promise<boolean> {
       return true;
     } catch (err) {
       // User cancelled or error occurred
-      if ((err as Error).name !== 'AbortError') {
-        console.error('Error sharing:', err);
+      if ((err as Error).name !== "AbortError") {
+        console.error("Error sharing:", err);
       }
       return false;
     }
@@ -42,7 +42,7 @@ export async function shareContent(options: ShareOptions): Promise<boolean> {
     // You could show a toast notification here
     return true;
   } catch (err) {
-    console.error('Error copying to clipboard:', err);
+    console.error("Error copying to clipboard:", err);
     return false;
   }
 }
@@ -50,10 +50,14 @@ export async function shareContent(options: ShareOptions): Promise<boolean> {
 /**
  * Generate share URL for content
  */
-export function generateShareUrl(type: 'track' | 'playlist' | 'album' | 'artist', id: string): string {
-  const baseUrl = typeof window !== 'undefined' 
-    ? window.location.origin 
-    : 'https://empulse.music';
+export function generateShareUrl(
+  type: "track" | "playlist" | "album" | "artist",
+  id: string,
+): string {
+  const baseUrl =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : "https://empulse.music";
   return `${baseUrl}/${type}/${id}`;
 }
 
@@ -65,7 +69,7 @@ export async function copyLink(url: string): Promise<boolean> {
     await navigator.clipboard.writeText(url);
     return true;
   } catch (err) {
-    console.error('Error copying link:', err);
+    console.error("Error copying link:", err);
     return false;
   }
 }
@@ -73,11 +77,17 @@ export async function copyLink(url: string): Promise<boolean> {
 /**
  * Generate embed code for playlists/albums
  */
-export function generateEmbedCode(type: 'track' | 'playlist' | 'album', id: string, width: number = 352, height: number = 152): string {
-  const baseUrl = typeof window !== 'undefined' 
-    ? window.location.origin 
-    : 'https://empulse.music';
+export function generateEmbedCode(
+  type: "track" | "playlist" | "album",
+  id: string,
+  width: number = 352,
+  height: number = 152,
+): string {
+  const baseUrl =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : "https://empulse.music";
   const url = `${baseUrl}/${type}/${id}`;
-  
+
   return `<iframe src="${url}?embed=true" width="${width}" height="${height}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
 }

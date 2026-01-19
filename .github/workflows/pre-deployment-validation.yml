@@ -6,21 +6,21 @@ on:
   push:
     branches: [main, fix-all-complete-v1]
     paths:
-      - 'app/**'
-      - 'components/**'
-      - 'lib/**'
-      - 'stores/**'
-      - 'types/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'next.config.js'
-      - 'tsconfig.json'
-      - '.github/workflows/**'
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "stores/**"
+      - "types/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.js"
+      - "tsconfig.json"
+      - ".github/workflows/**"
   workflow_dispatch:
 
 env:
-  NODE_VERSION: '20'
-  SKIP_ENV_VALIDATION: 'true'
+  NODE_VERSION: "20"
+  SKIP_ENV_VALIDATION: "true"
 
 jobs:
   # Comprehensive validation before any deployment
@@ -28,7 +28,7 @@ jobs:
     name: Pre-Deployment Validation
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Verify package files
         run: |
@@ -108,7 +108,7 @@ jobs:
       - name: Check for common errors
         run: |
           echo "Checking for common issues..."
-          
+
           # Check for console.log in production code
           CONSOLE_LOGS=$(grep -r "console\.log" app/ components/ lib/ --include="*.ts" --include="*.tsx" 2>/dev/null | wc -l || echo "0")
           if [ "$CONSOLE_LOGS" -gt 10 ]; then
@@ -116,11 +116,11 @@ jobs:
           else
             echo "✅ Console.log check passed"
           fi
-          
+
           # Check for TODO/FIXME
           TODOS=$(grep -ri "TODO\|FIXME" app/ components/ lib/ --include="*.ts" --include="*.tsx" 2>/dev/null | wc -l || echo "0")
           echo "Found $TODOS TODO/FIXME comments"
-          
+
         continue-on-error: true
 
       - name: Build application
@@ -155,21 +155,21 @@ jobs:
       - name: Validate deployment configs
         run: |
           echo "Validating deployment configurations..."
-          
+
           # Check Railway config
           if [ -f "railway.toml" ]; then
             echo "✅ railway.toml exists"
           else
             echo "⚠️ railway.toml not found"
           fi
-          
+
           # Check Vercel config
           if [ -f "vercel.json" ]; then
             node -e "require('./vercel.json')" 2>/dev/null && echo "✅ vercel.json valid" || echo "⚠️ vercel.json invalid"
           else
             echo "⚠️ vercel.json not found"
           fi
-          
+
           # Check Dockerfile
           if [ -f "Dockerfile" ]; then
             echo "✅ Dockerfile exists"

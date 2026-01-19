@@ -1,15 +1,15 @@
 /**
  * Mood Classification Model Training Script
- * 
+ *
  * This script trains a mood classification model on audio features
  * for the EmPulse Music RAG system.
- * 
+ *
  * Usage:
  *   npm run train:mood-model -- --data-path ./data/training --epochs 100
  */
 
-import { AudioFeatureExtractor, AudioFeatures } from '../lib/aiMoodAnalysis';
-import { MoodState } from '../types/mood';
+import { AudioFeatureExtractor, AudioFeatures } from "../lib/aiMoodAnalysis";
+import { MoodState } from "../types/mood";
 
 interface TrainingSample {
   file: File;
@@ -66,10 +66,12 @@ class MoodModelTrainer {
     for (let i = 0; i < samples.length; i++) {
       const sample = samples[i];
       try {
-        const audioFeatures = await this.featureExtractor.extractFeatures(sample.file);
+        const audioFeatures = await this.featureExtractor.extractFeatures(
+          sample.file,
+        );
         features.push(audioFeatures);
         labels.push(sample.label);
-        
+
         if ((i + 1) % 10 === 0) {
           console.log(`   Processed ${i + 1}/${samples.length} samples...`);
         }
@@ -87,9 +89,9 @@ class MoodModelTrainer {
   async buildModel(inputDimensions: number): Promise<any> {
     // In production, use TensorFlow.js to build model
     // This is a placeholder structure
-    
+
     console.log(`🏗️  Building model with input dimensions: ${inputDimensions}`);
-    
+
     // Model architecture:
     // - Input layer: (inputDimensions,)
     // - Dense layer 1: 128 units, ReLU activation
@@ -97,8 +99,8 @@ class MoodModelTrainer {
     // - Dense layer 2: 64 units, ReLU activation
     // - Dropout: 0.3
     // - Output layer: 6 units (mood states), softmax activation
-    
-    console.log('✅ Model architecture defined');
+
+    console.log("✅ Model architecture defined");
     return null; // Placeholder
   }
 
@@ -108,7 +110,7 @@ class MoodModelTrainer {
   async train(
     features: AudioFeatures[],
     labels: MoodState[],
-    config: TrainingConfig
+    config: TrainingConfig,
   ): Promise<void> {
     console.log(`🎓 Training model for ${config.epochs} epochs...`);
     console.log(`   Batch size: ${config.batchSize}`);
@@ -117,11 +119,11 @@ class MoodModelTrainer {
 
     // Convert features to tensor format
     // In production, use TensorFlow.js tensors
-    
+
     // Train model
     // In production, use model.fit()
-    
-    console.log('✅ Training complete');
+
+    console.log("✅ Training complete");
   }
 
   /**
@@ -129,7 +131,7 @@ class MoodModelTrainer {
    */
   async evaluate(
     features: AudioFeatures[],
-    labels: MoodState[]
+    labels: MoodState[],
   ): Promise<{
     accuracy: number;
     precision: number;
@@ -137,7 +139,7 @@ class MoodModelTrainer {
     f1Score: number;
     confusionMatrix: number[][];
   }> {
-    console.log('📊 Evaluating model...');
+    console.log("📊 Evaluating model...");
 
     // In production, use model.predict() and calculate metrics
     return {
@@ -155,7 +157,7 @@ class MoodModelTrainer {
   async saveModel(savePath: string): Promise<void> {
     console.log(`💾 Saving model to: ${savePath}`);
     // In production, use model.save()
-    console.log('✅ Model saved');
+    console.log("✅ Model saved");
   }
 
   /**
@@ -164,7 +166,7 @@ class MoodModelTrainer {
   async loadModel(modelPath: string): Promise<void> {
     console.log(`📥 Loading model from: ${modelPath}`);
     // In production, use tf.loadLayersModel()
-    console.log('✅ Model loaded');
+    console.log("✅ Model loaded");
   }
 }
 
@@ -174,29 +176,29 @@ class MoodModelTrainer {
 async function main() {
   const args = process.argv.slice(2);
   const config: TrainingConfig = {
-    dataPath: args.includes('--data-path') 
-      ? args[args.indexOf('--data-path') + 1] 
-      : './data/training',
-    epochs: args.includes('--epochs')
-      ? parseInt(args[args.indexOf('--epochs') + 1])
+    dataPath: args.includes("--data-path")
+      ? args[args.indexOf("--data-path") + 1]
+      : "./data/training",
+    epochs: args.includes("--epochs")
+      ? parseInt(args[args.indexOf("--epochs") + 1])
       : 100,
-    batchSize: args.includes('--batch-size')
-      ? parseInt(args[args.indexOf('--batch-size') + 1])
+    batchSize: args.includes("--batch-size")
+      ? parseInt(args[args.indexOf("--batch-size") + 1])
       : 32,
-    learningRate: args.includes('--learning-rate')
-      ? parseFloat(args[args.indexOf('--learning-rate') + 1])
+    learningRate: args.includes("--learning-rate")
+      ? parseFloat(args[args.indexOf("--learning-rate") + 1])
       : 0.001,
-    validationSplit: args.includes('--validation-split')
-      ? parseFloat(args[args.indexOf('--validation-split') + 1])
+    validationSplit: args.includes("--validation-split")
+      ? parseFloat(args[args.indexOf("--validation-split") + 1])
       : 0.2,
-    savePath: args.includes('--save-path')
-      ? args[args.indexOf('--save-path') + 1]
-      : './models/mood-classifier',
+    savePath: args.includes("--save-path")
+      ? args[args.indexOf("--save-path") + 1]
+      : "./models/mood-classifier",
   };
 
-  console.log('🎓 Mood Classification Model Training');
-  console.log('=====================================\n');
-  console.log('Configuration:');
+  console.log("🎓 Mood Classification Model Training");
+  console.log("=====================================\n");
+  console.log("Configuration:");
   console.log(`  Data path: ${config.dataPath}`);
   console.log(`  Epochs: ${config.epochs}`);
   console.log(`  Batch size: ${config.batchSize}`);
@@ -210,7 +212,9 @@ async function main() {
     // Step 1: Load training data
     const samples = await trainer.loadTrainingData(config.dataPath);
     if (samples.length === 0) {
-      console.error('❌ No training data found. Please provide training samples.');
+      console.error(
+        "❌ No training data found. Please provide training samples.",
+      );
       process.exit(1);
     }
 
@@ -218,7 +222,9 @@ async function main() {
     const { features, labels } = await trainer.extractFeatures(samples);
 
     // Step 3: Split into training and validation sets
-    const splitIndex = Math.floor(features.length * (1 - config.validationSplit));
+    const splitIndex = Math.floor(
+      features.length * (1 - config.validationSplit),
+    );
     const trainFeatures = features.slice(0, splitIndex);
     const trainLabels = labels.slice(0, splitIndex);
     const valFeatures = features.slice(splitIndex);
@@ -237,7 +243,7 @@ async function main() {
 
     // Step 6: Evaluate model
     const metrics = await trainer.evaluate(valFeatures, valLabels);
-    console.log('\n📊 Model Performance:');
+    console.log("\n📊 Model Performance:");
     console.log(`  Accuracy: ${(metrics.accuracy * 100).toFixed(2)}%`);
     console.log(`  Precision: ${(metrics.precision * 100).toFixed(2)}%`);
     console.log(`  Recall: ${(metrics.recall * 100).toFixed(2)}%`);
@@ -246,9 +252,9 @@ async function main() {
     // Step 7: Save model
     await trainer.saveModel(config.savePath);
 
-    console.log('✅ Training complete!\n');
+    console.log("✅ Training complete!\n");
   } catch (error) {
-    console.error('❌ Training failed:', error);
+    console.error("❌ Training failed:", error);
     process.exit(1);
   }
 }

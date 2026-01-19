@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Music } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React, { useState } from "react";
+import { Music } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ImageWithFallbackProps {
   src: string;
@@ -14,9 +14,9 @@ interface ImageWithFallbackProps {
 
 /**
  * ImageWithFallback Component - Handles image loading errors gracefully
- * 
+ *
  * Replaces broken images with a placeholder instead of showing broken image icons.
- * 
+ *
  * @example
  * ```tsx
  * <ImageWithFallback
@@ -50,27 +50,25 @@ export default function ImageWithFallback({
     return (
       <div
         className={cn(
-          'w-full aspect-square bg-spotify-light-gray flex items-center justify-center rounded',
-          className
+          "w-full aspect-square bg-spotify-light-gray flex items-center justify-center rounded",
+          className,
         )}
         style={style}
         role="img"
-        aria-label={alt || 'Image unavailable'}
+        aria-label={alt || "Image unavailable"}
       >
-        {fallbackIcon || (
-          <Music size={32} className="text-spotify-text-gray" />
-        )}
+        {fallbackIcon || <Music size={32} className="text-spotify-text-gray" />}
       </div>
     );
   }
 
   return (
-    <div className="relative" style={{ width: '100%', height: '100%' }}>
+    <div className="relative" style={{ width: "100%", height: "100%" }}>
       {isLoading && (
         <div
           className={cn(
-            'w-full h-full bg-spotify-light-gray animate-pulse rounded absolute inset-0',
-            className
+            "w-full h-full bg-spotify-light-gray animate-pulse rounded absolute inset-0",
+            className,
           )}
           style={style}
           aria-hidden="true"
@@ -83,8 +81,8 @@ export default function ImageWithFallback({
         onLoad={handleLoad}
         className={cn(
           className,
-          isLoading && 'opacity-0',
-          !isLoading && 'opacity-100 transition-opacity duration-300'
+          isLoading && "opacity-0",
+          !isLoading && "opacity-100 transition-opacity duration-300",
         )}
         style={style}
       />

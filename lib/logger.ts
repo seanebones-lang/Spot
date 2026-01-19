@@ -4,7 +4,7 @@
  * Sanitizes sensitive data to prevent leakage
  */
 
-type LogLevel = 'error' | 'warn' | 'info' | 'debug';
+type LogLevel = "error" | "warn" | "info" | "debug";
 
 interface LogContext {
   [key: string]: any;
@@ -14,31 +14,31 @@ interface LogContext {
  * Sensitive field names that should be redacted from logs
  */
 const SENSITIVE_FIELDS = [
-  'password',
-  'token',
-  'secret',
-  'key',
-  'auth',
-  'authorization',
-  'ssn',
-  'socialSecurity',
-  'creditCard',
-  'cardNumber',
-  'cvv',
-  'apiKey',
-  'apikey',
-  'accessToken',
-  'refreshToken',
-  'email', // Sometimes we want to redact emails in logs
-  'emailVerificationToken',
-  'resetToken',
+  "password",
+  "token",
+  "secret",
+  "key",
+  "auth",
+  "authorization",
+  "ssn",
+  "socialSecurity",
+  "creditCard",
+  "cardNumber",
+  "cvv",
+  "apiKey",
+  "apikey",
+  "accessToken",
+  "refreshToken",
+  "email", // Sometimes we want to redact emails in logs
+  "emailVerificationToken",
+  "resetToken",
 ];
 
 /**
  * Sanitize log data to remove sensitive information
  */
 function sanitizeLogData(data: any): any {
-  if (!data || typeof data !== 'object') {
+  if (!data || typeof data !== "object") {
     return data;
   }
 
@@ -46,15 +46,15 @@ function sanitizeLogData(data: any): any {
 
   for (const key of Object.keys(sanitized)) {
     const keyLower = key.toLowerCase();
-    
+
     // Check if key contains any sensitive field name
-    if (SENSITIVE_FIELDS.some(field => keyLower.includes(field))) {
-      sanitized[key] = '[REDACTED]';
+    if (SENSITIVE_FIELDS.some((field) => keyLower.includes(field))) {
+      sanitized[key] = "[REDACTED]";
       continue;
     }
 
     // Recursively sanitize nested objects
-    if (typeof sanitized[key] === 'object' && sanitized[key] !== null) {
+    if (typeof sanitized[key] === "object" && sanitized[key] !== null) {
       sanitized[key] = sanitizeLogData(sanitized[key]);
     }
   }
@@ -63,14 +63,18 @@ function sanitizeLogData(data: any): any {
 }
 
 class Logger {
-  private isDevelopment = process.env.NODE_ENV === 'development';
-  
-  private formatMessage(level: LogLevel, message: string, context?: LogContext): string {
+  private isDevelopment = process.env.NODE_ENV === "development";
+
+  private formatMessage(
+    level: LogLevel,
+    message: string,
+    context?: LogContext,
+  ): string {
     const timestamp = new Date().toISOString();
-    const contextStr = context ? ` ${JSON.stringify(context)}` : '';
+    const contextStr = context ? ` ${JSON.stringify(context)}` : "";
     return `[${timestamp}] [${level.toUpperCase()}] ${message}${contextStr}`;
   }
-  
+
   error(message: string, error?: Error | unknown, context?: LogContext): void {
     const errorContext = {
       ...sanitizeLogData(context),
@@ -82,26 +86,32 @@ class Logger {
           }
         : { error: String(error) }),
     };
-    
-    console.error(this.formatMessage('error', message, sanitizeLogData(errorContext)));
+
+    console.error(
+      this.formatMessage("error", message, sanitizeLogData(errorContext)),
+    );
   }
-  
+
   warn(message: string, context?: LogContext): void {
-    console.warn(this.formatMessage('warn', message, sanitizeLogData(context)));
+    console.warn(this.formatMessage("warn", message, sanitizeLogData(context)));
   }
-  
+
   info(message: string, context?: LogContext): void {
     if (this.isDevelopment) {
-      console.info(this.formatMessage('info', message, sanitizeLogData(context)));
+      console.info(
+        this.formatMessage("info", message, sanitizeLogData(context)),
+      );
     }
   }
-  
+
   debug(message: string, context?: LogContext): void {
     if (this.isDevelopment) {
-      console.debug(this.formatMessage('debug', message, sanitizeLogData(context)));
+      console.debug(
+        this.formatMessage("debug", message, sanitizeLogData(context)),
+      );
     }
   }
-  
+
   /**
    * Log API request
    */
@@ -110,13 +120,17 @@ class Logger {
     path: string,
     statusCode: number,
     duration: number,
-    context?: LogContext
+    context?: LogContext,
   ): void {
-    const level = statusCode >= 500 ? 'error' : statusCode >= 400 ? 'warn' : 'info';
-    this[level](
-      `${method} ${path} ${statusCode} ${duration}ms`,
-      { method, path, statusCode, duration, ...context }
-    );
+    const level =
+      statusCode >= 500 ? "error" : statusCode >= 400 ? "warn" : "info";
+    this[level](`${method} ${path} ${statusCode} ${duration}ms`, {
+      method,
+      path,
+      statusCode,
+      duration,
+      ...context,
+    });
   }
 }
 

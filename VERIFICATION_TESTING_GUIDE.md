@@ -1,4 +1,5 @@
 # Spotify UI Verification - Testing Guide
+
 **Date:** January 14, 2026  
 **Purpose:** Manual testing checklist for verifying UI fixes
 
@@ -9,6 +10,7 @@
 ### 1. Sidebar Verification
 
 #### Navigation Icons
+
 - [ ] **Home icon** - Click navigates to `/`
 - [ ] **Search icon** - Click navigates to `/search`
 - [ ] **Library icon** - Click navigates to `/collection`
@@ -18,17 +20,20 @@
 - [ ] **Hover tooltips** - Shows label text on hover (accessibility)
 
 #### Logo
+
 - [ ] **Music icon** - White icon displayed (not text)
 - [ ] **Size** - 32px x 32px
 - [ ] **Clickable** - Navigates to home page
 
 #### Layout
+
 - [ ] **Compact spacing** - 12px padding on nav items
 - [ ] **Icon size** - 24px x 24px for navigation icons
 - [ ] **Active state** - Highlighted with background color
 - [ ] **Hover state** - Smooth color transition
 
 #### Custom Sections (EmPulse Features)
+
 - [ ] **Mental Health Hub** - Visible when sidebar width > 100px
 - [ ] **Daily Check-in** - Visible when sidebar width > 100px
 - [ ] **Playlists section** - Scrollable list of playlists
@@ -39,18 +44,21 @@
 ### 2. TopBar Verification
 
 #### Layout
+
 - [ ] **Logo** - Left side, 113px x 24px
 - [ ] **Back/Forward buttons** - Functional navigation
 - [ ] **Search bar** - Centered, "What do you want to play?" placeholder
 - [ ] **Right side** - Premium, Downloads, Notifications, Settings, Keyboard Shortcuts, Right Sidebar Toggle, User Menu
 
 #### Removed Elements (Should NOT be present)
+
 - [ ] ❌ **No duplicate nav links** (Home/Search/Library)
 - [ ] ❌ **No Points counter badge**
 - [ ] ❌ **No Streak badge**
 - [ ] ❌ **No Affirmations button**
 
 #### Interactions
+
 - [ ] **Search focus** - Ctrl+K (Cmd+K) focuses search
 - [ ] **Search dropdown** - Fades in smoothly on focus
 - [ ] **Keyboard shortcuts** - Ctrl+/ (Cmd+/) opens shortcuts panel
@@ -61,12 +69,14 @@
 ### 3. Player Bar Verification
 
 #### Left Section (Now Playing)
+
 - [ ] **Album art** - Square 56px x 56px image
 - [ ] **Track title** - White text, 14px, truncated if long
 - [ ] **Artist name** - Gray text, 13px, truncated if long
 - [ ] **No custom badges** - No Quality/Mood/Standard badges
 
 #### Center Section (Controls)
+
 - [ ] **Shuffle button** - 16px icon, purple when active
 - [ ] **Previous button** - 20px icon
 - [ ] **Play/Pause button** - Circular, smooth scale animation
@@ -75,12 +85,14 @@
 - [ ] **Progress bar** - Smooth dragging, optimized transitions
 
 #### Right Section (Extras)
+
 - [ ] **Queue button** - Opens queue panel
 - [ ] **Full screen button** - Opens full screen player
 - [ ] **Volume control** - Functional slider
 - [ ] **No QualitySelector** - Should NOT be present
 
 #### Removed Elements (Should NOT be present)
+
 - [ ] ❌ **No AudioQualityBadge** (Standard/Lossless/HiFi)
 - [ ] ❌ **No MoodWidget** (Mood: Melancholic)
 - [ ] ❌ **No QualitySelector dropdown**
@@ -90,6 +102,7 @@
 ### 4. Home Page Verification
 
 #### Layout
+
 - [ ] **No Wellness Dashboard widget** - Should NOT be present at top
 - [ ] **Recently Played section** - Grid of track cards
 - [ ] **Made for You section** - Horizontal scrollable playlists
@@ -98,6 +111,7 @@
 - [ ] **Clean grid layout** - No breaking widgets
 
 #### Card Interactions
+
 - [ ] **Hover effect** - Cards scale to 1.05x with smooth transition
 - [ ] **Play button** - Appears on hover (bottom-right of image)
 - [ ] **Smooth animations** - Uses `cubic-bezier(0.3, 0, 0.1, 1)`
@@ -108,16 +122,19 @@
 ### 5. Animation & Transition Verification
 
 #### Hover Transitions
+
 - [ ] **Card hovers** - Smooth scale with `cubic-bezier(0.3, 0, 0.1, 1)`
 - [ ] **Button hovers** - Color transitions smooth
 - [ ] **Icon hovers** - Color changes smooth
 
 #### Loading States
+
 - [ ] **Search dropdown** - Fades in with translateY animation
 - [ ] **Modal** - Fades in with scale animation
 - [ ] **Context menu** - Smooth fade-in
 
 #### Interactions
+
 - [ ] **Progress bar drag** - No stutter, 60fps smooth
 - [ ] **Sidebar resize** - Smooth during drag
 - [ ] **Scroll** - Smooth momentum scrolling
@@ -127,11 +144,13 @@
 ### 6. Responsive & Edge Cases
 
 #### Breakpoints
+
 - [ ] **Narrow sidebar** - Icons remain visible and functional
 - [ ] **Wide sidebar** - Layout maintains proportions
 - [ ] **Mobile view** - Verify responsive behavior
 
 #### Edge Cases
+
 - [ ] **Empty states** - No track selected, empty playlists
 - [ ] **Long text** - Track/artist names truncate properly
 - [ ] **Rapid clicks** - No animation stutter
@@ -142,17 +161,20 @@
 ### 7. Accessibility Verification
 
 #### Keyboard
+
 - [ ] **Tab navigation** - All interactive elements accessible
 - [ ] **Ctrl+K** - Focuses search
 - [ ] **Ctrl+/** - Opens shortcuts panel
 - [ ] **ESC** - Closes modals/dropdowns
 
 #### Screen Readers
+
 - [ ] **Icon buttons** - Have `aria-label` attributes
 - [ ] **Navigation links** - Have `title` attributes
 - [ ] **Interactive elements** - Proper ARIA roles
 
 #### Visual
+
 - [ ] **Color contrast** - Text readable on backgrounds
 - [ ] **Focus indicators** - Visible on keyboard navigation
 - [ ] **Tooltips** - Appear on hover for icon-only elements
@@ -180,16 +202,16 @@ Date: ___________
 Tester: ___________
 
 Sidebar: [ ] Pass [ ] Fail
-TopBar: [ ] Pass [ ] Fail  
+TopBar: [ ] Pass [ ] Fail
 Player: [ ] Pass [ ] Fail
 Home Page: [ ] Pass [ ] Fail
 Animations: [ ] Pass [ ] Fail
 Accessibility: [ ] Pass [ ] Fail
 
 Issues Found:
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 Overall Status: [ ] Ready [ ] Needs Fixes
 ```
@@ -204,5 +226,5 @@ If any critical check fails, document the issue and fix before deployment.
 
 ---
 
-*Testing Guide - SpotifyUIVerifier Agent*  
-*Date: January 14, 2026*
+_Testing Guide - SpotifyUIVerifier Agent_  
+_Date: January 14, 2026_

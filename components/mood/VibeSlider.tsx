@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 interface VibeSliderProps {
   value: number; // 0-100
@@ -35,7 +35,12 @@ export default function VibeSlider({ value, onChange }: VibeSliderProps) {
   };
 
   // Calculate angle from center point
-  const getAngleFromCenter = (clientX: number, clientY: number, centerX: number, centerY: number) => {
+  const getAngleFromCenter = (
+    clientX: number,
+    clientY: number,
+    centerX: number,
+    centerY: number,
+  ) => {
     const deltaX = clientX - centerX;
     const deltaY = clientY - centerY;
     let angle = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
@@ -50,13 +55,13 @@ export default function VibeSlider({ value, onChange }: VibeSliderProps) {
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement> | MouseEvent) => {
     if (!dialRef.current) return;
-    
+
     const rect = dialRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const clientX = e.clientX;
     const clientY = e.clientY;
-    
+
     const angle = getAngleFromCenter(clientX, clientY, centerX, centerY);
     const newValue = angleToValue(angle);
     onChange(Math.max(0, Math.min(100, newValue)));
@@ -66,13 +71,13 @@ export default function VibeSlider({ value, onChange }: VibeSliderProps) {
     if (isDragging) {
       const handleMouseMove = (e: MouseEvent) => handleMove(e);
       const handleMouseUp = () => setIsDragging(false);
-      
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-      
+
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleMouseUp);
+
       return () => {
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('mouseup', handleMouseUp);
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("mouseup", handleMouseUp);
       };
     }
   }, [isDragging]);
@@ -105,7 +110,10 @@ export default function VibeSlider({ value, onChange }: VibeSliderProps) {
           onMouseDown={handleMouseDown}
         >
           {/* SVG Track */}
-          <svg className="absolute inset-0 w-full h-full transform rotate-[-135deg]" viewBox="0 0 200 200">
+          <svg
+            className="absolute inset-0 w-full h-full transform rotate-[-135deg]"
+            viewBox="0 0 200 200"
+          >
             {/* Outer track ring */}
             <circle
               cx="100"
@@ -128,14 +136,19 @@ export default function VibeSlider({ value, onChange }: VibeSliderProps) {
               strokeDasharray={`${(value / 100) * 424.1} 424.1`}
               className="transition-all duration-300"
               style={{
-                filter: isDragging ? `drop-shadow(0 0 15px ${getTrackColor()})` : 'none',
+                filter: isDragging
+                  ? `drop-shadow(0 0 15px ${getTrackColor()})`
+                  : "none",
               }}
             />
           </svg>
 
           {/* Center circle */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-spotify-dark-gray rounded-full border-2 border-white/10 flex items-center justify-center">
-            <span className="text-2xl font-bold" style={{ color: getTrackColor() }}>
+            <span
+              className="text-2xl font-bold"
+              style={{ color: getTrackColor() }}
+            >
               {Math.round(value)}
             </span>
           </div>
@@ -146,17 +159,19 @@ export default function VibeSlider({ value, onChange }: VibeSliderProps) {
             style={{
               transform: `translate(calc(-50% + ${knobCoords.x}px), calc(-50% + ${knobCoords.y}px))`,
               borderColor: getTrackColor(),
-              boxShadow: isDragging 
-                ? `0 0 20px ${getTrackColor()}, 0 0 30px ${getTrackColor()}` 
-                : '0 2px 8px rgba(0,0,0,0.3)',
+              boxShadow: isDragging
+                ? `0 0 20px ${getTrackColor()}, 0 0 30px ${getTrackColor()}`
+                : "0 2px 8px rgba(0,0,0,0.3)",
             }}
           />
         </div>
-        
+
         {/* Labels */}
         <div className="flex justify-between w-64 mt-4 text-sm text-spotify-text-gray">
           <span>Calm</span>
-          <span className="font-medium text-white">{Math.round(value)}% Energetic</span>
+          <span className="font-medium text-white">
+            {Math.round(value)}% Energetic
+          </span>
           <span>Energetic</span>
         </div>
       </div>

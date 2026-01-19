@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { Radio, Mic } from 'lucide-react';
-import PlayButton from '@/components/PlayButton';
-import { useRadioStore, RadioStation } from '@/stores/radioStore';
-import { usePlayerStore } from '@/stores/playerStore';
-import { audioPlayer } from '@/lib/player';
-import { Track } from '@/types/track';
-import { MoodState } from '@/types/mood';
+import { useEffect, useRef } from "react";
+import { Radio, Mic } from "lucide-react";
+import PlayButton from "@/components/PlayButton";
+import { useRadioStore, RadioStation } from "@/stores/radioStore";
+import { usePlayerStore } from "@/stores/playerStore";
+import { audioPlayer } from "@/lib/player";
+import { Track } from "@/types/track";
+import { MoodState } from "@/types/mood";
 
 export default function RadioPage() {
   const {
@@ -22,9 +22,9 @@ export default function RadioPage() {
     togglePlayPause,
   } = useRadioStore();
 
-  const { 
-    currentTrack, 
-    setCurrentTrack, 
+  const {
+    currentTrack,
+    setCurrentTrack,
     setIsPlaying: setPlayerIsPlaying,
     isPlaying: playerIsPlaying,
     setProgress,
@@ -37,17 +37,19 @@ export default function RadioPage() {
   useEffect(() => {
     const fetchStations = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-        const endpoint = apiUrl ? `${apiUrl}/api/radio/stations` : '/api/radio/stations';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+        const endpoint = apiUrl
+          ? `${apiUrl}/api/radio/stations`
+          : "/api/radio/stations";
         const response = await fetch(endpoint);
         if (response.ok) {
           const data = await response.json();
           setStations(data.stations);
         } else {
-          console.error('Failed to fetch stations');
+          console.error("Failed to fetch stations");
         }
       } catch (error) {
-        console.error('Error fetching stations:', error);
+        console.error("Error fetching stations:", error);
       }
     };
 
@@ -58,7 +60,7 @@ export default function RadioPage() {
   useEffect(() => {
     if (!currentStation) {
       // If no station selected, clear track if it's a radio track
-      if (currentTrack?.id?.startsWith('radio-')) {
+      if (currentTrack?.id?.startsWith("radio-")) {
         setCurrentTrack(null);
         setPlayerIsPlaying(false);
       }
@@ -68,52 +70,52 @@ export default function RadioPage() {
     // Convert radio station to Track format for system player
     const createTrackFromStation = (station: RadioStation): Track => {
       const randomStart = Math.floor(Math.random() * station.duration);
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
       const streamUrl = apiUrl
         ? `${apiUrl}/api/radio/stream/${station.id}?start=${randomStart}&random=false`
         : `/api/radio/stream/${station.id}?start=${randomStart}&random=false`;
-      
+
       return {
         id: `radio-${station.id}`,
         name: station.name,
-        artist: 'Radio Station',
-        artistId: 'radio',
+        artist: "Radio Station",
+        artistId: "radio",
         album: station.genre,
-        albumId: 'radio-stations',
+        albumId: "radio-stations",
         duration: station.duration * 1000, // Convert to milliseconds
         audioUrl: streamUrl,
-        coverArt: '', // Radio stations don't have cover art
+        coverArt: "", // Radio stations don't have cover art
         moodTags: {
-          mood: 'Content' as MoodState,
+          mood: "Content" as MoodState,
           feelings: [],
           vibe: 5,
           genres: [],
         },
-        format: 'MP3',
-        quality: 'high',
+        format: "MP3",
+        quality: "high",
         genre: station.genre,
       };
     };
 
     // Create track from station
     const radioTrack = createTrackFromStation(currentStation);
-    
+
     // Only load if it's a different station
     if (currentTrack?.id !== radioTrack.id) {
-      console.log('📻 Loading radio station:', currentStation.name);
+      console.log("📻 Loading radio station:", currentStation.name);
       useRadioStore.getState().setIsLoading(true);
-      
+
       // Set up load callback with error handling
       let loadTimeout: NodeJS.Timeout | null = null;
-      
+
       audioPlayer.setOnLoadCallback(() => {
-        console.log('✅ Radio station loaded');
+        console.log("✅ Radio station loaded");
         if (loadTimeout) clearTimeout(loadTimeout);
         useRadioStore.getState().setIsLoading(false);
         // Check current playing state from store (not closure) to handle async state updates
         const currentIsPlaying = useRadioStore.getState().isPlaying;
         if (currentIsPlaying) {
-          console.log('▶️ Auto-playing radio station');
+          console.log("▶️ Auto-playing radio station");
           // Small delay to ensure audio is fully ready
           setTimeout(() => {
             audioPlayer.play();
@@ -121,15 +123,21 @@ export default function RadioPage() {
           }, 100);
         }
       });
-      
+
       // Log stream URL for debugging
-      console.log('📡 Radio stream URL:', radioTrack.audioUrl);
-      
+      console.log("📡 Radio stream URL:", radioTrack.audioUrl);
+
       // Set a timeout to detect if loading is taking too long or failing silently
       loadTimeout = setTimeout(() => {
         if (!audioPlayer.isTrackLoaded()) {
-          console.warn('⚠️ Radio station taking too long to load, checking for errors...');
-          useRadioStore.getState().setError('Radio stream is taking too long to load. Please check if yt-dlp is installed on the server.');
+          console.warn(
+            "⚠️ Radio station taking too long to load, checking for errors...",
+          );
+          useRadioStore
+            .getState()
+            .setError(
+              "Radio stream is taking too long to load. Please check if yt-dlp is installed on the server.",
+            );
           useRadioStore.getState().setIsLoading(false);
         }
       }, 15000); // 15 second timeout
@@ -137,11 +145,11 @@ export default function RadioPage() {
       // Helper function to restart stream with new random start
       const restartStream = (station: RadioStation, trackId: string) => {
         const newRandomStart = Math.floor(Math.random() * station.duration);
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
         const newStreamUrl = apiUrl
           ? `${apiUrl}/api/radio/stream/${station.id}?start=${newRandomStart}&random=false`
           : `/api/radio/stream/${station.id}?start=${newRandomStart}&random=false`;
-        
+
         audioPlayer.loadTrack(
           newStreamUrl,
           trackId,
@@ -151,9 +159,9 @@ export default function RadioPage() {
             if (currentStation?.id === station.id) {
               restartStream(station, trackId);
             }
-          }
+          },
         );
-        
+
         // Auto-play the new stream if currently playing (check store value)
         const currentIsPlaying = useRadioStore.getState().isPlaying;
         if (currentIsPlaying) {
@@ -171,11 +179,13 @@ export default function RadioPage() {
         },
         () => {
           // When stream ends, restart with new random start (seamless loop)
-          console.log('🔄 Radio stream ended, restarting with new random start');
+          console.log(
+            "🔄 Radio stream ended, restarting with new random start",
+          );
           if (currentStation) {
             restartStream(currentStation, radioTrack.id);
           }
-        }
+        },
       );
 
       // Set as current track in player store
@@ -184,16 +194,23 @@ export default function RadioPage() {
       // Track is already loaded - if playing state changed, ensure playback state matches
       // This handles the case where user clicks play on an already-loaded station
       if (isPlaying && !audioPlayer.isPlaying()) {
-        console.log('▶️ Track already loaded, starting playback');
+        console.log("▶️ Track already loaded, starting playback");
         audioPlayer.play();
         setPlayerIsPlaying(true);
       }
     }
-  }, [currentStation?.id, currentTrack?.id, isPlaying, setCurrentTrack, setPlayerIsPlaying, setProgress]);
+  }, [
+    currentStation?.id,
+    currentTrack?.id,
+    isPlaying,
+    setCurrentTrack,
+    setPlayerIsPlaying,
+    setProgress,
+  ]);
 
   // Handle play/pause state changes - sync radio store to player store
   useEffect(() => {
-    if (!currentStation || !currentTrack?.id?.startsWith('radio-')) {
+    if (!currentStation || !currentTrack?.id?.startsWith("radio-")) {
       return;
     }
 
@@ -205,28 +222,34 @@ export default function RadioPage() {
     // When radio store play state changes, update the player
     if (isPlaying !== playerIsPlaying) {
       isSyncingRef.current = true;
-      
+
       if (isPlaying) {
-        console.log('▶️ Playing radio station');
+        console.log("▶️ Playing radio station");
         audioPlayer.play();
         setPlayerIsPlaying(true);
       } else {
-        console.log('⏸️ Pausing radio station');
+        console.log("⏸️ Pausing radio station");
         audioPlayer.pause();
         setPlayerIsPlaying(false);
       }
-      
+
       // Reset sync flag after state update
       setTimeout(() => {
         isSyncingRef.current = false;
       }, 0);
     }
-  }, [isPlaying, currentStation?.id, currentTrack?.id, playerIsPlaying, setPlayerIsPlaying]);
+  }, [
+    isPlaying,
+    currentStation?.id,
+    currentTrack?.id,
+    playerIsPlaying,
+    setPlayerIsPlaying,
+  ]);
 
   // Listen to player store changes from external controls (Player component)
   // Only sync if change came from outside (not from radio store)
   useEffect(() => {
-    if (!currentTrack?.id?.startsWith('radio-') || !currentStation) {
+    if (!currentTrack?.id?.startsWith("radio-") || !currentStation) {
       return;
     }
 
@@ -240,7 +263,7 @@ export default function RadioPage() {
     if (playerIsPlaying !== radioStore.isPlaying) {
       isSyncingRef.current = true;
       radioStore.setIsPlaying(playerIsPlaying);
-      
+
       // Reset sync flag
       setTimeout(() => {
         isSyncingRef.current = false;
@@ -260,23 +283,23 @@ export default function RadioPage() {
   };
 
   return (
-    <div 
+    <div
       className="p-8"
       style={{
-        padding: '32px',
-        backgroundColor: '#121212',
-        minHeight: '100vh',
-        color: '#FFFFFF'
+        padding: "32px",
+        backgroundColor: "#121212",
+        minHeight: "100vh",
+        color: "#FFFFFF",
       }}
     >
-      <h1 
+      <h1
         className="text-4xl font-bold mb-8"
         style={{
-          fontSize: '32px',
-          lineHeight: '36px',
+          fontSize: "32px",
+          lineHeight: "36px",
           fontWeight: 700,
-          color: '#FFFFFF',
-          marginBottom: '32px'
+          color: "#FFFFFF",
+          marginBottom: "32px",
         }}
       >
         Radio Stations
@@ -284,33 +307,40 @@ export default function RadioPage() {
 
       {/* Error Message */}
       {error && (
-        <div 
+        <div
           className="mb-4 p-4 bg-red-900/20 border border-red-500/50 rounded-lg"
           style={{
-            marginBottom: '16px',
-            padding: '16px',
-            backgroundColor: 'rgba(239, 68, 68, 0.1)',
-            border: '1px solid rgba(239, 68, 68, 0.5)',
-            borderRadius: '8px',
+            marginBottom: "16px",
+            padding: "16px",
+            backgroundColor: "rgba(239, 68, 68, 0.1)",
+            border: "1px solid rgba(239, 68, 68, 0.5)",
+            borderRadius: "8px",
           }}
         >
           <p className="text-red-400 text-sm">{error}</p>
           <p className="text-red-300 text-xs mt-2">
-            To enable radio streaming, install yt-dlp: <code className="bg-black/30 px-2 py-1 rounded">brew install yt-dlp</code> (macOS) or <code className="bg-black/30 px-2 py-1 rounded">pip install yt-dlp</code>
+            To enable radio streaming, install yt-dlp:{" "}
+            <code className="bg-black/30 px-2 py-1 rounded">
+              brew install yt-dlp
+            </code>{" "}
+            (macOS) or{" "}
+            <code className="bg-black/30 px-2 py-1 rounded">
+              pip install yt-dlp
+            </code>
           </p>
         </div>
       )}
 
       {/* Featured Stations - GTA V Los Santos Radio */}
-      <section className="mb-8" style={{ marginBottom: '32px' }}>
-        <h2 
+      <section className="mb-8" style={{ marginBottom: "32px" }}>
+        <h2
           className="text-2xl font-bold mb-4"
           style={{
-            fontSize: '24px',
-            lineHeight: '28px',
+            fontSize: "24px",
+            lineHeight: "28px",
             fontWeight: 700,
-            color: '#FFFFFF',
-            marginBottom: '16px'
+            color: "#FFFFFF",
+            marginBottom: "16px",
           }}
         >
           Featured Stations
@@ -318,96 +348,96 @@ export default function RadioPage() {
         {isLoading && stations.length === 0 ? (
           <div className="text-spotify-text-gray">Loading stations...</div>
         ) : (
-          <div 
+          <div
             className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
-            style={{ gap: '16px' }}
+            style={{ gap: "16px" }}
           >
             {stations.map((station) => {
               const isCurrentStation = currentStation?.id === station.id;
               const isStationPlaying = isCurrentStation && isPlaying;
-              
+
               return (
                 <div
                   key={station.id}
                   className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-dark-gray transition-all duration-200 group cursor-pointer"
                   style={{
-                    backgroundColor: isCurrentStation ? '#282828' : '#181818',
-                    borderRadius: '8px',
-                    padding: '16px',
-                    transition: 'background-color 200ms ease-out',
-                    border: isCurrentStation ? '1px solid #7209B7' : 'none',
+                    backgroundColor: isCurrentStation ? "#282828" : "#181818",
+                    borderRadius: "8px",
+                    padding: "16px",
+                    transition: "background-color 200ms ease-out",
+                    border: isCurrentStation ? "1px solid #7209B7" : "none",
                   }}
                   onMouseEnter={(e) => {
                     if (!isCurrentStation) {
-                      e.currentTarget.style.backgroundColor = '#282828';
+                      e.currentTarget.style.backgroundColor = "#282828";
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isCurrentStation) {
-                      e.currentTarget.style.backgroundColor = '#181818';
+                      e.currentTarget.style.backgroundColor = "#181818";
                     }
                   }}
                   onClick={() => handleStationClick(station)}
                 >
-                  <div 
+                  <div
                     className="w-full aspect-square bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg mb-3 flex items-center justify-center"
                     style={{
-                      borderRadius: '4px',
-                      aspectRatio: '1',
-                      marginBottom: '12px',
-                      background: isCurrentStation 
-                        ? 'linear-gradient(135deg, #7209B7 0%, #8a1dd0 100%)'
-                        : 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)'
+                      borderRadius: "4px",
+                      aspectRatio: "1",
+                      marginBottom: "12px",
+                      background: isCurrentStation
+                        ? "linear-gradient(135deg, #7209B7 0%, #8a1dd0 100%)"
+                        : "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
                     }}
                   >
-                    <Radio 
-                      size={32} 
+                    <Radio
+                      size={32}
                       className="text-white opacity-50"
                       style={{
-                        width: '32px',
-                        height: '32px',
-                        color: '#FFFFFF',
-                        opacity: 0.5
+                        width: "32px",
+                        height: "32px",
+                        color: "#FFFFFF",
+                        opacity: 0.5,
                       }}
                     />
                   </div>
-                  <h3 
+                  <h3
                     className="font-semibold text-sm truncate mb-1"
                     style={{
-                      fontSize: '14px',
-                      lineHeight: '20px',
+                      fontSize: "14px",
+                      lineHeight: "20px",
                       fontWeight: 600,
-                      color: '#FFFFFF',
-                      marginBottom: '4px'
+                      color: "#FFFFFF",
+                      marginBottom: "4px",
                     }}
                   >
                     {station.name}
                   </h3>
-                  <p 
+                  <p
                     className="text-xs text-spotify-text-gray"
                     style={{
-                      fontSize: '13px',
-                      lineHeight: '16px',
-                      color: '#B3B3B3'
+                      fontSize: "13px",
+                      lineHeight: "16px",
+                      color: "#B3B3B3",
                     }}
                   >
                     {station.genre}
                   </p>
-                  <div 
+                  <div
                     className="opacity-0 group-hover:opacity-100 transition-opacity mt-2"
                     style={{
-                      marginTop: '8px',
-                      transition: 'opacity 200ms ease-out',
+                      marginTop: "8px",
+                      transition: "opacity 200ms ease-out",
                       opacity: isCurrentStation ? 1 : 0,
                     }}
                   >
-                    <PlayButton 
-                      isPlaying={isStationPlaying} 
+                    <PlayButton
+                      isPlaying={isStationPlaying}
                       onClick={(e) => {
                         e?.stopPropagation();
                         togglePlayPause();
-                      }} 
-                      size="sm" 
+                      }}
+                      size="sm"
                       disabled={isLoading && isCurrentStation}
                     />
                   </div>
@@ -427,42 +457,46 @@ export default function RadioPage() {
       {currentStation && (
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Now Playing</h2>
-          <div 
+          <div
             className="bg-spotify-light-gray rounded-lg p-6 flex items-center gap-4"
             style={{
-              backgroundColor: '#181818',
-              borderRadius: '8px',
-              padding: '24px',
+              backgroundColor: "#181818",
+              borderRadius: "8px",
+              padding: "24px",
             }}
           >
-            <div 
+            <div
               className="w-20 h-20 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg flex items-center justify-center"
               style={{
-                borderRadius: '8px',
-                background: 'linear-gradient(135deg, #7209B7 0%, #8a1dd0 100%)'
+                borderRadius: "8px",
+                background: "linear-gradient(135deg, #7209B7 0%, #8a1dd0 100%)",
               }}
             >
-              <Radio 
-                size={48} 
+              <Radio
+                size={48}
                 className="text-white opacity-50"
                 style={{
-                  width: '48px',
-                  height: '48px',
-                  color: '#FFFFFF',
-                  opacity: 0.5
+                  width: "48px",
+                  height: "48px",
+                  color: "#FFFFFF",
+                  opacity: 0.5,
                 }}
               />
             </div>
             <div className="flex-1">
               <h3 className="text-xl font-bold mb-1">{currentStation.name}</h3>
-              <p className="text-spotify-text-gray mb-2">{currentStation.genre}</p>
+              <p className="text-spotify-text-gray mb-2">
+                {currentStation.genre}
+              </p>
               {currentStation.description && (
-                <p className="text-sm text-spotify-text-gray">{currentStation.description}</p>
+                <p className="text-sm text-spotify-text-gray">
+                  {currentStation.description}
+                </p>
               )}
             </div>
-            <PlayButton 
-              isPlaying={isPlaying} 
-              onClick={togglePlayPause} 
+            <PlayButton
+              isPlaying={isPlaying}
+              onClick={togglePlayPause}
               size="lg"
               disabled={isLoading}
             />
@@ -477,12 +511,21 @@ export default function RadioPage() {
           <div className="flex items-start gap-4">
             <Mic size={48} className="text-green-500 flex-shrink-0" />
             <div className="flex-1">
-              <h3 className="text-xl font-bold mb-2">Wellness & Recovery Podcasts</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Wellness & Recovery Podcasts
+              </h3>
               <p className="text-spotify-text-gray mb-4">
-                Stories of resilience, expert advice, and community support for mental health and recovery journeys.
+                Stories of resilience, expert advice, and community support for
+                mental health and recovery journeys.
               </p>
               <div className="flex flex-wrap gap-2">
-                {['Recovery Stories', 'Mindfulness', 'Therapy Talk', 'Community Support', 'Coping Strategies'].map((topic) => (
+                {[
+                  "Recovery Stories",
+                  "Mindfulness",
+                  "Therapy Talk",
+                  "Community Support",
+                  "Coping Strategies",
+                ].map((topic) => (
                   <span
                     key={topic}
                     className="px-3 py-1 bg-green-600/30 text-green-400 rounded-full text-sm"
@@ -501,11 +544,10 @@ export default function RadioPage() {
         <h2 className="text-2xl font-bold mb-4">Create Custom Station</h2>
         <div className="bg-spotify-light-gray rounded-lg p-6">
           <p className="text-spotify-text-gray mb-4">
-            Build your own radio station based on mood, genre, or artist preferences
+            Build your own radio station based on mood, genre, or artist
+            preferences
           </p>
-          <button className="btn-primary">
-            Create Station
-          </button>
+          <button className="btn-primary">Create Station</button>
         </div>
       </section>
     </div>

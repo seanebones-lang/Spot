@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { Track } from '@/types/track';
-import { createSafeStorage } from '@/lib/safeStorage';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { Track } from "@/types/track";
+import { createSafeStorage } from "@/lib/safeStorage";
 
 interface PlayerState {
   currentTrack: Track | null;
@@ -11,7 +11,7 @@ interface PlayerState {
   queue: Track[];
   recentlyPlayed: Track[];
   shuffle: boolean;
-  repeat: 'off' | 'all' | 'one';
+  repeat: "off" | "all" | "one";
   autoplay: boolean;
   smartShuffle: boolean;
   crossfade: boolean;
@@ -28,7 +28,7 @@ interface PlayerState {
   reorderQueue: (fromIndex: number, toIndex: number) => void;
   addToRecentlyPlayed: (track: Track) => void;
   setShuffle: (shuffle: boolean) => void;
-  setRepeat: (repeat: 'off' | 'all' | 'one') => void;
+  setRepeat: (repeat: "off" | "all" | "one") => void;
   setAutoplay: (autoplay: boolean) => void;
   setSmartShuffle: (smartShuffle: boolean) => void;
   setCrossfade: (crossfade: boolean) => void;
@@ -49,80 +49,88 @@ export const usePlayerStore = create<PlayerState>()(
       queue: [],
       recentlyPlayed: [],
       shuffle: false,
-      repeat: 'off',
+      repeat: "off",
       autoplay: false,
       smartShuffle: false,
       crossfade: false,
       crossfadeDuration: 0,
       gaplessPlayback: false,
       normalizeVolume: false,
-      
+
       setCurrentTrack: (track) => set({ currentTrack: track }),
       setIsPlaying: (isPlaying) => set({ isPlaying }),
       setProgress: (progress) => set({ progress }),
       setVolume: (volume) => set({ volume }),
-      
-      addToQueue: (track) => set((state) => ({ queue: [...state.queue, track] })),
-      removeFromQueue: (trackId) => set((state) => ({
-        queue: state.queue.filter(t => t.id !== trackId)
-      })),
+
+      addToQueue: (track) =>
+        set((state) => ({ queue: [...state.queue, track] })),
+      removeFromQueue: (trackId) =>
+        set((state) => ({
+          queue: state.queue.filter((t) => t.id !== trackId),
+        })),
       clearQueue: () => set({ queue: [] }),
-      reorderQueue: (fromIndex, toIndex) => set((state) => {
-        const newQueue = [...state.queue];
-        const [removed] = newQueue.splice(fromIndex, 1);
-        newQueue.splice(toIndex, 0, removed);
-        return { queue: newQueue };
-      }),
-      
-      addToRecentlyPlayed: (track) => set((state) => {
-        // Remove track if already exists, then add to front
-        const filtered = state.recentlyPlayed.filter(t => t.id !== track.id);
-        return { recentlyPlayed: [track, ...filtered].slice(0, 10) }; // Keep last 10
-      }),
-      
+      reorderQueue: (fromIndex, toIndex) =>
+        set((state) => {
+          const newQueue = [...state.queue];
+          const [removed] = newQueue.splice(fromIndex, 1);
+          newQueue.splice(toIndex, 0, removed);
+          return { queue: newQueue };
+        }),
+
+      addToRecentlyPlayed: (track) =>
+        set((state) => {
+          // Remove track if already exists, then add to front
+          const filtered = state.recentlyPlayed.filter(
+            (t) => t.id !== track.id,
+          );
+          return { recentlyPlayed: [track, ...filtered].slice(0, 10) }; // Keep last 10
+        }),
+
       setShuffle: (shuffle) => set({ shuffle }),
       setRepeat: (repeat) => set({ repeat }),
       setAutoplay: (autoplay) => set({ autoplay }),
       setSmartShuffle: (smartShuffle) => set({ smartShuffle }),
       setCrossfade: (crossfade) => set({ crossfade }),
-      setCrossfadeDuration: (duration) => set({ crossfadeDuration: Math.max(0, Math.min(12, duration)) }),
+      setCrossfadeDuration: (duration) =>
+        set({ crossfadeDuration: Math.max(0, Math.min(12, duration)) }),
       setGaplessPlayback: (gapless) => set({ gaplessPlayback: gapless }),
       setNormalizeVolume: (normalize) => set({ normalizeVolume: normalize }),
-      
+
       playNext: () => {
         const { queue, shuffle, currentTrack } = get();
         if (queue.length === 0) return;
-        
+
         if (shuffle) {
           const randomIndex = Math.floor(Math.random() * queue.length);
           set({ currentTrack: queue[randomIndex] });
         } else {
-          const currentIndex = currentTrack 
-            ? queue.findIndex(t => t.id === currentTrack.id)
+          const currentIndex = currentTrack
+            ? queue.findIndex((t) => t.id === currentTrack.id)
             : -1;
           const nextIndex = (currentIndex + 1) % queue.length;
           set({ currentTrack: queue[nextIndex] });
         }
       },
-      
+
       playPrevious: () => {
         const { queue, currentTrack } = get();
         if (queue.length === 0) return;
-        
-        const currentIndex = currentTrack 
-          ? queue.findIndex(t => t.id === currentTrack.id)
+
+        const currentIndex = currentTrack
+          ? queue.findIndex((t) => t.id === currentTrack.id)
           : -1;
-        const prevIndex = currentIndex <= 0 ? queue.length - 1 : currentIndex - 1;
+        const prevIndex =
+          currentIndex <= 0 ? queue.length - 1 : currentIndex - 1;
         set({ currentTrack: queue[prevIndex] });
       },
     }),
     {
-      name: 'player-storage',
+      name: "player-storage",
       storage: createJSONStorage(() => {
         try {
           return createSafeStorage();
         } catch (error) {
-          console.error('Failed to create storage:', error);
+          console.error("Failed to create storage:", error);
           return sessionStorage; // Fallback to sessionStorage
         }
       }),
@@ -133,6 +141,6 @@ export const usePlayerStore = create<PlayerState>()(
         queue: state.queue,
         recentlyPlayed: state.recentlyPlayed,
       }),
-    }
-  )
+    },
+  ),
 );

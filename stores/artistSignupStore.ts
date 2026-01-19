@@ -1,8 +1,12 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
-export type ApprovalStatus = 'pending' | 'under-review' | 'approved' | 'rejected';
-export type CreatorMedium = 'artist' | 'podcaster' | 'audiobook' | 'radio';
+export type ApprovalStatus =
+  | "pending"
+  | "under-review"
+  | "approved"
+  | "rejected";
+export type CreatorMedium = "artist" | "podcaster" | "audiobook" | "radio";
 
 interface ArtistSignupState {
   currentStep: number;
@@ -19,7 +23,10 @@ interface ArtistSignupState {
   toggleMedium: (medium: CreatorMedium) => void; // Toggle medium selection
   markDocumentSigned: (docId: string) => void;
   setW9Completed: (completed: boolean) => void;
-  setPRORegistration: (org: 'bmi' | 'ascap' | 'sesac', regNumber: string | null) => void;
+  setPRORegistration: (
+    org: "bmi" | "ascap" | "sesac",
+    regNumber: string | null,
+  ) => void;
   setApprovalStatus: (status: ApprovalStatus) => void;
 }
 
@@ -36,25 +43,31 @@ export const useArtistSignupStore = create<ArtistSignupState>()(
         ascap: null,
         sesac: null,
       },
-      
+
       setCurrentStep: (step) => set({ currentStep: step }),
-      toggleMedium: (medium) => set((state) => ({
-        selectedMediums: state.selectedMediums.includes(medium)
-          ? state.selectedMediums.filter(m => m !== medium)
-          : [...state.selectedMediums, medium]
-      })),
-      markDocumentSigned: (docId) => set((state) => ({
-        documentsSigned: [...state.documentsSigned.filter(d => d !== docId), docId]
-      })),
+      toggleMedium: (medium) =>
+        set((state) => ({
+          selectedMediums: state.selectedMediums.includes(medium)
+            ? state.selectedMediums.filter((m) => m !== medium)
+            : [...state.selectedMediums, medium],
+        })),
+      markDocumentSigned: (docId) =>
+        set((state) => ({
+          documentsSigned: [
+            ...state.documentsSigned.filter((d) => d !== docId),
+            docId,
+          ],
+        })),
       setW9Completed: (completed) => set({ w9Completed: completed }),
-      setPRORegistration: (org, regNumber) => set((state) => ({
-        proRegistration: { ...state.proRegistration, [org]: regNumber }
-      })),
+      setPRORegistration: (org, regNumber) =>
+        set((state) => ({
+          proRegistration: { ...state.proRegistration, [org]: regNumber },
+        })),
       setApprovalStatus: (status) => set({ approvalStatus: status }),
     }),
     {
-      name: 'artist-signup-storage',
+      name: "artist-signup-storage",
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

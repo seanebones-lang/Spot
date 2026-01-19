@@ -1,4 +1,5 @@
 # Production Deployment Guide
+
 **EmPulse Music Backend**  
 **Version:** 1.0.0  
 **Date:** January 14, 2026
@@ -8,6 +9,7 @@
 ## 📋 Pre-Deployment Checklist
 
 ### ✅ Code Complete
+
 - [x] Database schema defined
 - [x] All API endpoints implemented
 - [x] Security measures in place
@@ -17,30 +19,36 @@
 ### ⚙️ Infrastructure Setup Required
 
 #### 1. Database (PostgreSQL)
+
 - [ ] Create PostgreSQL database (Supabase, Neon, AWS RDS, or self-hosted)
 - [ ] Get connection string
 - [ ] Set `DATABASE_URL` environment variable
 
 #### 2. Email Service (Resend)
+
 - [ ] Create account at [resend.com](https://resend.com)
 - [ ] Verify domain (optional but recommended)
 - [ ] Get API key
 - [ ] Set `RESEND_API_KEY` environment variable
 
 #### 3. Cloud Storage (S3 or R2)
+
 **Option A: AWS S3**
+
 - [ ] Create S3 bucket
 - [ ] Configure CORS policy
 - [ ] Create IAM user with S3 permissions
 - [ ] Set AWS environment variables
 
 **Option B: Cloudflare R2 (Recommended - Cheaper)**
+
 - [ ] Create R2 bucket
 - [ ] Get account ID and credentials
 - [ ] Set up custom domain (optional)
 - [ ] Set R2 environment variables
 
 #### 4. Redis (Upstash)
+
 - [ ] Create account at [upstash.com](https://upstash.com)
 - [ ] Create Redis database
 - [ ] Get REST URL and token
@@ -199,11 +207,13 @@ CMD ["node", "server.js"]
 ### Step 5: Post-Deployment Verification
 
 #### 1. Health Check
+
 ```bash
 curl https://yourdomain.com/api/health
 ```
 
 Expected response:
+
 ```json
 {
   "status": "healthy",
@@ -219,11 +229,13 @@ Expected response:
 ```
 
 #### 2. Startup Check
+
 ```bash
 curl https://yourdomain.com/api/startup-check
 ```
 
 #### 3. Test Authentication Flow
+
 ```bash
 # Register user
 curl -X POST https://yourdomain.com/api/auth/register \
@@ -237,6 +249,7 @@ curl -X POST https://yourdomain.com/api/auth/login \
 ```
 
 #### 4. Test CSRF Protection
+
 ```bash
 # Get CSRF token
 curl https://yourdomain.com/api/csrf-token
@@ -268,12 +281,14 @@ curl -X POST https://yourdomain.com/api/tracks/submit \
 ### 1. Health Check Monitoring
 
 Set up uptime monitoring (e.g., UptimeRobot, Pingdom) to check:
+
 - `/api/health` endpoint
 - Expected status: 200 with `"status": "healthy"`
 
 ### 2. Error Tracking
 
 Consider integrating:
+
 - **Sentry** - Error tracking
 - **Datadog** - Full APM
 - **CloudWatch** - AWS native monitoring
@@ -281,6 +296,7 @@ Consider integrating:
 ### 3. Log Aggregation
 
 Forward logs to:
+
 - **Datadog** - Structured logs
 - **CloudWatch** - AWS logs
 - **Logtail** - Simple log aggregation
@@ -316,6 +332,7 @@ npx prisma db pull
 ### Rate Limiting Not Working
 
 1. Check Redis connection:
+
 ```bash
 curl $UPSTASH_REDIS_REST_URL/ping -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN"
 ```
@@ -330,6 +347,7 @@ curl $UPSTASH_REDIS_REST_URL/ping -H "Authorization: Bearer $UPSTASH_REDIS_REST_
 ### 1. Database Indexing
 
 Ensure indexes are created:
+
 ```sql
 -- Check indexes
 SELECT tablename, indexname FROM pg_indexes WHERE schemaname = 'public';
@@ -338,6 +356,7 @@ SELECT tablename, indexname FROM pg_indexes WHERE schemaname = 'public';
 ### 2. Connection Pooling
 
 Already configured in Prisma. Adjust in `DATABASE_URL`:
+
 ```
 ?connection_limit=10&pool_timeout=20
 ```
@@ -345,6 +364,7 @@ Already configured in Prisma. Adjust in `DATABASE_URL`:
 ### 3. CDN Setup
 
 For Cloudflare R2:
+
 1. Set up Cloudflare CDN
 2. Point custom domain to R2 bucket
 3. Enable caching headers
@@ -356,6 +376,7 @@ For Cloudflare R2:
 If deployment fails:
 
 1. **Database Rollback:**
+
 ```bash
 npx prisma migrate resolve --rolled-back <migration_name>
 ```
@@ -376,16 +397,19 @@ npx prisma migrate resolve --rolled-back <migration_name>
 ### Common Issues:
 
 **Error: "Database connection failed"**
+
 - Check `DATABASE_URL` format
 - Verify database is accessible
 - Check firewall rules
 
 **Error: "CSRF token validation failed"**
+
 - Ensure client includes token in header
 - Check cookie is set
 - Verify same-origin policy
 
 **Error: "Cloud storage not configured"**
+
 - Set S3 or R2 environment variables
 - Verify credentials are correct
 

@@ -9,6 +9,7 @@ The `AudiophileVisualizer` component uses **GLSL shaders** and **WebGL** for GPU
 ## 🚀 Features
 
 ### GPU-Accelerated Rendering
+
 - **WebGL/Three.js**: Hardware-accelerated graphics
 - **GLSL Shaders**: Custom vertex and fragment shaders
 - **4K Support**: Up to 3840×2160 effective resolution
@@ -56,18 +57,21 @@ The `AudiophileVisualizer` component uses **GLSL shaders** and **WebGL** for GPU
 ## 📊 Technical Specifications
 
 ### Resolution Support
+
 - **Base Resolution**: 1920×1080 (Full HD)
 - **Pixel Ratio**: 2x (configurable)
 - **Effective Resolution**: 3840×2160 (4K UHD)
 - **Scalable**: Supports any resolution
 
 ### Performance
+
 - **Frame Rate**: 60 FPS (requestAnimationFrame)
 - **GPU Acceleration**: Hardware-accelerated WebGL
 - **Memory**: Efficient Float32 texture usage
 - **Latency**: <16ms per frame
 
 ### Audio Data
+
 - **Sample Rate**: Up to 1024 frequency bins
 - **Precision**: Float32 (32-bit floating point)
 - **Update Rate**: 60 Hz (every frame)
@@ -91,7 +95,7 @@ All color schemes are defined in RGB (0-1 range) for shader compatibility:
 ## 💻 Usage
 
 ```tsx
-import AudiophileVisualizer from '@/components/AudiophileVisualizer';
+import AudiophileVisualizer from "@/components/AudiophileVisualizer";
 
 <AudiophileVisualizer
   type="spectrum"
@@ -101,7 +105,7 @@ import AudiophileVisualizer from '@/components/AudiophileVisualizer';
   height={1080}
   pixelRatio={2} // For 4K
   showControls={true}
-/>
+/>;
 ```
 
 ### Props
@@ -120,11 +124,13 @@ import AudiophileVisualizer from '@/components/AudiophileVisualizer';
 ## 🔧 Shader Details
 
 ### Vertex Shader
+
 - Handles geometry transformation
 - Passes UV coordinates to fragment shader
 - Standard Three.js projection
 
 ### Fragment Shader
+
 - Main visualization logic
 - Real-time audio processing
 - Color generation and effects
@@ -145,12 +151,14 @@ import AudiophileVisualizer from '@/components/AudiophileVisualizer';
 ## 🎯 Performance Optimization
 
 ### GPU Optimization
+
 - **Single Pass Rendering**: All effects in one shader
 - **Efficient Textures**: LuminanceFormat for memory
 - **Float32 Precision**: High-quality audio data
 - **Minimal Overhead**: Direct GPU processing
 
 ### CPU Optimization
+
 - **RequestAnimationFrame**: Smooth frame timing
 - **Efficient Updates**: Only update changed data
 - **Texture Caching**: Reuse texture objects
@@ -177,6 +185,7 @@ import AudiophileVisualizer from '@/components/AudiophileVisualizer';
 - **Mobile**: ✅ Supported (with performance considerations)
 
 ### Requirements
+
 - WebGL 2.0 support
 - Float texture support
 - Hardware acceleration recommended
@@ -196,6 +205,7 @@ import AudiophileVisualizer from '@/components/AudiophileVisualizer';
 ## 🚀 Future Enhancements
 
 Potential additions:
+
 - **3D Visualizations**: Depth-based effects
 - **Post-Processing**: Bloom, blur, distortion
 - **Custom Shaders**: User-defined shader code

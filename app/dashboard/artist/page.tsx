@@ -1,20 +1,55 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { TrendingUp, DollarSign, Music, Upload, Eye, EyeOff, BarChart3, AlertTriangle, CheckCircle, Sparkles } from 'lucide-react';
-import { useArtistSignupStore } from '@/stores/artistSignupStore';
-import { MoodState, MoodTags } from '@/types/mood';
-import MoodSelector from '@/components/mood/MoodSelector';
-import FeelingChips from '@/components/mood/FeelingChips';
-import VibeSlider from '@/components/mood/VibeSlider';
-import GenreSelector from '@/components/mood/GenreSelector';
+import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import {
+  TrendingUp,
+  DollarSign,
+  Music,
+  Upload,
+  Eye,
+  EyeOff,
+  BarChart3,
+  AlertTriangle,
+  CheckCircle,
+  Sparkles,
+} from "lucide-react";
+import { useArtistSignupStore } from "@/stores/artistSignupStore";
+import { MoodState, MoodTags } from "@/types/mood";
+import MoodSelector from "@/components/mood/MoodSelector";
+import FeelingChips from "@/components/mood/FeelingChips";
+import VibeSlider from "@/components/mood/VibeSlider";
+import GenreSelector from "@/components/mood/GenreSelector";
 
 // Mock track data
 const mockTracks = [
-  { id: '1', name: 'I Just Might', album: 'Example Album', uploadDate: '2024-01-10', status: 'published', streams: 1250, earnings: 5.00 },
-  { id: '2', name: 'HELICOPTER', album: 'Another Album', uploadDate: '2024-01-12', status: 'published', streams: 890, earnings: 3.56 },
-  { id: '3', name: 'New Track (Draft)', album: 'Work in Progress', uploadDate: '2024-01-14', status: 'unpublished', streams: 0, earnings: 0 },
+  {
+    id: "1",
+    name: "I Just Might",
+    album: "Example Album",
+    uploadDate: "2024-01-10",
+    status: "published",
+    streams: 1250,
+    earnings: 5.0,
+  },
+  {
+    id: "2",
+    name: "HELICOPTER",
+    album: "Another Album",
+    uploadDate: "2024-01-12",
+    status: "published",
+    streams: 890,
+    earnings: 3.56,
+  },
+  {
+    id: "3",
+    name: "New Track (Draft)",
+    album: "Work in Progress",
+    uploadDate: "2024-01-14",
+    status: "unpublished",
+    streams: 0,
+    earnings: 0,
+  },
 ];
 
 interface MoodValidationResult {
@@ -32,72 +67,97 @@ export default function ArtistDashboardPage() {
   const router = useRouter();
   const pathname = usePathname();
   const { approvalStatus, setApprovalStatus } = useArtistSignupStore();
-  
+
   // Initialize tracks from localStorage first, fallback to mockTracks
   const [tracks, setTracks] = useState(() => {
     try {
-      if (typeof window !== 'undefined') {
-        const savedTracks = localStorage.getItem('artist-tracks');
+      if (typeof window !== "undefined") {
+        const savedTracks = localStorage.getItem("artist-tracks");
         if (savedTracks) {
           const parsed = JSON.parse(savedTracks);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            console.log('📥 Initialized tracks from localStorage:', parsed.length, 'tracks');
+            console.log(
+              "📥 Initialized tracks from localStorage:",
+              parsed.length,
+              "tracks",
+            );
             return parsed;
           }
         }
       }
     } catch (e) {
-      console.error('Error loading initial tracks:', e);
+      console.error("Error loading initial tracks:", e);
     }
     return mockTracks;
   });
   const [autoRefresh, setAutoRefresh] = useState(true);
-  
+
   // Mood Settings State
   const [moodSettings, setMoodSettings] = useState<MoodTags | null>(null);
-  const [moodValidation, setMoodValidation] = useState<MoodValidationResult | null>(null);
+  const [moodValidation, setMoodValidation] =
+    useState<MoodValidationResult | null>(null);
   const [isValidatingMood, setIsValidatingMood] = useState(false);
-  
+
   // Load saved tracks from localStorage
   const loadTracks = () => {
     try {
-      if (typeof window === 'undefined') return;
-      
-      const savedTracks = localStorage.getItem('artist-tracks');
-      console.log('📥 [Dashboard] Loading tracks from localStorage:', savedTracks ? `found (${savedTracks.length} chars)` : 'not found');
-      
+      if (typeof window === "undefined") return;
+
+      const savedTracks = localStorage.getItem("artist-tracks");
+      console.log(
+        "📥 [Dashboard] Loading tracks from localStorage:",
+        savedTracks ? `found (${savedTracks.length} chars)` : "not found",
+      );
+
       if (savedTracks) {
         const parsed = JSON.parse(savedTracks);
-        console.log('📥 [Dashboard] Parsed tracks:', parsed);
-        
+        console.log("📥 [Dashboard] Parsed tracks:", parsed);
+
         if (Array.isArray(parsed) && parsed.length > 0) {
           // Filter out any invalid tracks and ensure required fields
-          const validTracks = parsed.filter(t => {
+          const validTracks = parsed.filter((t) => {
             const isValid = t && t.id && t.name;
             if (!isValid) {
-              console.warn('⚠️ [Dashboard] Invalid track filtered out:', t);
+              console.warn("⚠️ [Dashboard] Invalid track filtered out:", t);
             }
             return isValid;
           });
-          console.log(`✅ [Dashboard] Loaded ${validTracks.length} valid tracks from ${parsed.length} total:`, validTracks.map(t => ({ id: t.id, name: t.name, status: t.status })));
-          
+          console.log(
+            `✅ [Dashboard] Loaded ${validTracks.length} valid tracks from ${parsed.length} total:`,
+            validTracks.map((t) => ({
+              id: t.id,
+              name: t.name,
+              status: t.status,
+            })),
+          );
+
           if (validTracks.length > 0) {
-            console.log('✅ [Dashboard] Setting tracks state with:', validTracks.length, 'tracks');
+            console.log(
+              "✅ [Dashboard] Setting tracks state with:",
+              validTracks.length,
+              "tracks",
+            );
             setTracks(validTracks);
           } else {
-            console.log('⚠️ [Dashboard] No valid tracks found after filtering, using mockTracks');
+            console.log(
+              "⚠️ [Dashboard] No valid tracks found after filtering, using mockTracks",
+            );
             setTracks(mockTracks);
           }
         } else {
-          console.log('⚠️ [Dashboard] Parsed tracks is empty or not array, using mockTracks');
+          console.log(
+            "⚠️ [Dashboard] Parsed tracks is empty or not array, using mockTracks",
+          );
           setTracks(mockTracks);
         }
       } else {
-        console.log('⚠️ [Dashboard] No tracks found in localStorage, using mockTracks');
+        console.log(
+          "⚠️ [Dashboard] No tracks found in localStorage, using mockTracks",
+        );
         setTracks(mockTracks);
       }
     } catch (e) {
-      console.error('❌ [Dashboard] Error loading tracks:', e);
+      console.error("❌ [Dashboard] Error loading tracks:", e);
       setTracks(mockTracks);
     }
   };
@@ -106,69 +166,76 @@ export default function ArtistDashboardPage() {
   useEffect(() => {
     // Always reload on mount to ensure we have latest
     loadTracks();
-    
+
     // Listen for custom event (for same-tab updates)
     const handleTracksUpdated = () => {
       loadTracks();
     };
-    window.addEventListener('tracks-updated', handleTracksUpdated);
-    
+    window.addEventListener("tracks-updated", handleTracksUpdated);
+
     // Reload when window gains focus (user navigates back)
     const handleFocus = () => {
       loadTracks();
     };
-    window.addEventListener('focus', handleFocus);
-    
+    window.addEventListener("focus", handleFocus);
+
     // Also reload on visibility change
     const handleVisibilityChange = () => {
       if (!document.hidden) {
         loadTracks();
       }
     };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
-      window.removeEventListener('tracks-updated', handleTracksUpdated);
-      window.removeEventListener('focus', handleFocus);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener("tracks-updated", handleTracksUpdated);
+      window.removeEventListener("focus", handleFocus);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
-  
+
   // Only save tracks when they're manually changed (toggle publish, etc.), not on load
   // Don't auto-save on mount/load to prevent overwriting
-  
+
   // Load saved mood settings from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem('artist-mood-settings');
+    const saved = localStorage.getItem("artist-mood-settings");
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
         setMoodSettings(parsed);
       } catch (e) {
-        console.error('Error loading mood settings:', e);
+        console.error("Error loading mood settings:", e);
       }
     }
   }, []);
-  
+
   // Save mood settings to localStorage
   const saveMoodSettings = (settings: MoodTags) => {
     setMoodSettings(settings);
-    localStorage.setItem('artist-mood-settings', JSON.stringify(settings));
+    localStorage.setItem("artist-mood-settings", JSON.stringify(settings));
   };
-  
+
   // Validate mood settings with AI
   const validateMoodSettings = async () => {
-    if (!moodSettings || !moodSettings.mood || moodSettings.feelings.length === 0 || moodSettings.genres.length === 0) {
+    if (
+      !moodSettings ||
+      !moodSettings.mood ||
+      moodSettings.feelings.length === 0 ||
+      moodSettings.genres.length === 0
+    ) {
       return;
     }
-    
+
     setIsValidatingMood(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const endpoint = apiUrl ? `${apiUrl}/api/mood/validate` : '/api/mood/validate';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const endpoint = apiUrl
+        ? `${apiUrl}/api/mood/validate`
+        : "/api/mood/validate";
       const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           mood: moodSettings.mood,
           feelings: moodSettings.feelings,
@@ -176,100 +243,104 @@ export default function ArtistDashboardPage() {
           genres: moodSettings.genres,
         }),
       });
-      
+
       if (response.ok) {
         const result = await response.json();
         setMoodValidation(result);
       } else {
-        console.error('Validation failed');
+        console.error("Validation failed");
       }
     } catch (error) {
-      console.error('Error validating mood:', error);
+      console.error("Error validating mood:", error);
     } finally {
       setIsValidatingMood(false);
     }
   };
 
   const togglePublish = (trackId: string) => {
-    const updatedTracks = tracks.map(track => 
-      track.id === trackId 
-        ? { ...track, status: track.status === 'published' ? 'unpublished' : 'published' }
-        : track
+    const updatedTracks = tracks.map((track) =>
+      track.id === trackId
+        ? {
+            ...track,
+            status: track.status === "published" ? "unpublished" : "published",
+          }
+        : track,
     );
     setTracks(updatedTracks);
-    localStorage.setItem('artist-tracks', JSON.stringify(updatedTracks));
+    localStorage.setItem("artist-tracks", JSON.stringify(updatedTracks));
   };
 
   const totalStreams = tracks.reduce((sum, track) => sum + track.streams, 0);
   const totalEarnings = tracks.reduce((sum, track) => sum + track.earnings, 0);
-  const publishedTracks = tracks.filter(t => t.status === 'published');
+  const publishedTracks = tracks.filter((t) => t.status === "published");
 
-  if (approvalStatus !== 'approved') {
+  if (approvalStatus !== "approved") {
     return (
-      <div 
+      <div
         className="w-full"
         style={{
-          padding: '32px',
-          paddingBottom: '24px',
-          backgroundColor: '#121212'
+          padding: "32px",
+          paddingBottom: "24px",
+          backgroundColor: "#121212",
         }}
       >
-        <div 
+        <div
           className="bg-yellow-600/20 border border-yellow-600/50 rounded-lg text-center max-w-2xl mx-auto"
           style={{
-            padding: '24px',
-            borderRadius: '8px'
+            padding: "24px",
+            borderRadius: "8px",
           }}
         >
-          <h2 
+          <h2
             className="text-2xl font-bold mb-4"
             style={{
-              fontSize: '20px',
-              lineHeight: '24px',
+              fontSize: "20px",
+              lineHeight: "24px",
               fontWeight: 700,
-              color: '#FFFFFF',
-              marginBottom: '16px'
+              color: "#FFFFFF",
+              marginBottom: "16px",
             }}
           >
             Account Pending Approval
           </h2>
-          <p 
+          <p
             className="text-spotify-text-gray mb-4"
             style={{
-              fontSize: '14px',
-              lineHeight: '20px',
-              color: '#B3B3B3',
-              marginBottom: '16px'
+              fontSize: "14px",
+              lineHeight: "20px",
+              color: "#B3B3B3",
+              marginBottom: "16px",
             }}
           >
-            Your artist account is currently {approvalStatus === 'pending' ? 'pending approval' : 'under review'}.
-            You&apos;ll be able to upload tracks once approved.
+            Your artist account is currently{" "}
+            {approvalStatus === "pending" ? "pending approval" : "under review"}
+            . You&apos;ll be able to upload tracks once approved.
           </p>
-          <p 
+          <p
             className="text-sm text-spotify-text-gray mb-4"
             style={{
-              fontSize: '13px',
-              lineHeight: '16px',
-              color: '#B3B3B3',
-              marginBottom: '16px'
+              fontSize: "13px",
+              lineHeight: "16px",
+              color: "#B3B3B3",
+              marginBottom: "16px",
             }}
           >
             Estimated approval time: 24-48 hours
           </p>
           {/* Dev/Test Button - Remove in production */}
           <button
-            onClick={() => setApprovalStatus('approved')}
+            onClick={() => setApprovalStatus("approved")}
             className="mt-4 px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#8a1dd0] transition-colors"
             style={{
-              marginTop: '16px',
-              padding: '8px 16px',
-              backgroundColor: '#7209B7',
-              color: '#000000',
-              borderRadius: '500px',
-              fontSize: '14px',
+              marginTop: "16px",
+              padding: "8px 16px",
+              backgroundColor: "#7209B7",
+              color: "#000000",
+              borderRadius: "500px",
+              fontSize: "14px",
               fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer'
+              border: "none",
+              cursor: "pointer",
             }}
           >
             [Dev] Approve Account
@@ -280,73 +351,81 @@ export default function ArtistDashboardPage() {
   }
 
   return (
-    <div 
+    <div
       className="p-8"
       style={{
-        padding: '32px',
-        backgroundColor: '#121212',
-        minHeight: '100vh',
-        color: '#FFFFFF'
+        padding: "32px",
+        backgroundColor: "#121212",
+        minHeight: "100vh",
+        color: "#FFFFFF",
       }}
     >
-      <div 
+      <div
         className="flex items-center justify-between mb-8"
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: '32px',
-          gap: '16px'
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "32px",
+          gap: "16px",
         }}
       >
-        <h1 
+        <h1
           className="text-4xl font-bold"
           style={{
-            fontSize: '32px',
-            lineHeight: '36px',
+            fontSize: "32px",
+            lineHeight: "36px",
             fontWeight: 700,
-            color: '#FFFFFF'
+            color: "#FFFFFF",
           }}
         >
           Artist Dashboard
         </h1>
-        <button 
-          onClick={() => router.push('/upload')}
+        <button
+          onClick={() => router.push("/upload")}
           className="btn-primary flex items-center gap-2"
           style={{
-            backgroundColor: '#7209B7',
-            color: '#000000',
+            backgroundColor: "#7209B7",
+            color: "#000000",
             fontWeight: 700,
-            padding: '12px 24px',
-            borderRadius: '500px',
-            fontSize: '14px',
-            lineHeight: '20px',
-            border: 'none',
-            cursor: 'pointer',
-            transition: 'all 200ms ease-out',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
+            padding: "12px 24px",
+            borderRadius: "500px",
+            fontSize: "14px",
+            lineHeight: "20px",
+            border: "none",
+            cursor: "pointer",
+            transition: "all 200ms ease-out",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
           }}
           onMouseEnter={(e) => {
-            if (moodSettings && moodSettings.feelings.length > 0 && moodSettings.genres.length > 0) {
-              e.currentTarget.style.backgroundColor = '#8a1dd0';
-              e.currentTarget.style.transform = 'scale(1.05)';
+            if (
+              moodSettings &&
+              moodSettings.feelings.length > 0 &&
+              moodSettings.genres.length > 0
+            ) {
+              e.currentTarget.style.backgroundColor = "#8a1dd0";
+              e.currentTarget.style.transform = "scale(1.05)";
             }
           }}
           onMouseLeave={(e) => {
-            if (moodSettings && moodSettings.feelings.length > 0 && moodSettings.genres.length > 0) {
-              e.currentTarget.style.backgroundColor = '#7209B7';
-              e.currentTarget.style.transform = 'scale(1)';
+            if (
+              moodSettings &&
+              moodSettings.feelings.length > 0 &&
+              moodSettings.genres.length > 0
+            ) {
+              e.currentTarget.style.backgroundColor = "#7209B7";
+              e.currentTarget.style.transform = "scale(1)";
             }
           }}
         >
-          <Upload 
+          <Upload
             size={20}
             style={{
-              width: '20px',
-              height: '20px',
-              flexShrink: 0
+              width: "20px",
+              height: "20px",
+              flexShrink: 0,
             }}
           />
           Upload Track
@@ -354,108 +433,123 @@ export default function ArtistDashboardPage() {
       </div>
 
       {/* Mood Settings Section - Required Before Upload */}
-      <div 
+      <div
         className="bg-spotify-light-gray rounded-lg mb-8"
         style={{
-          backgroundColor: '#181818',
-          borderRadius: '8px',
-          padding: '24px',
-          marginBottom: '32px'
+          backgroundColor: "#181818",
+          borderRadius: "8px",
+          padding: "24px",
+          marginBottom: "32px",
         }}
       >
-        <div 
+        <div
           className="flex items-center justify-between mb-6"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '24px'
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "24px",
           }}
         >
           <div>
-            <h2 
+            <h2
               className="text-2xl font-bold mb-2"
               style={{
-                fontSize: '24px',
-                lineHeight: '28px',
+                fontSize: "24px",
+                lineHeight: "28px",
                 fontWeight: 700,
-                color: '#FFFFFF',
-                marginBottom: '8px'
+                color: "#FFFFFF",
+                marginBottom: "8px",
               }}
             >
               Default Mood Settings
             </h2>
-            <p 
+            <p
               className="text-sm text-spotify-text-gray"
               style={{
-                fontSize: '14px',
-                lineHeight: '20px',
-                color: '#B3B3B3'
+                fontSize: "14px",
+                lineHeight: "20px",
+                color: "#B3B3B3",
               }}
             >
-              Configure your default mood preferences before uploading tracks. Default settings are not permitted.
+              Configure your default mood preferences before uploading tracks.
+              Default settings are not permitted.
             </p>
           </div>
-          {moodSettings && moodSettings.feelings.length > 0 && moodSettings.genres.length > 0 && (
-            <button
-              onClick={validateMoodSettings}
-              disabled={isValidatingMood}
-              className="flex items-center gap-2 px-4 py-2 bg-empulse-purple text-white rounded-full font-bold hover:bg-opacity-80 transition-colors disabled:opacity-50"
-              style={{
-                padding: '8px 16px',
-                backgroundColor: '#7209B7',
-                color: '#FFFFFF',
-                borderRadius: '500px',
-                fontSize: '14px',
-                fontWeight: 700,
-                border: 'none',
-                cursor: isValidatingMood ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                opacity: isValidatingMood ? 0.5 : 1
-              }}
-            >
-              <Sparkles size={16} />
-              {isValidatingMood ? 'Validating...' : 'AI Validate Settings'}
-            </button>
-          )}
+          {moodSettings &&
+            moodSettings.feelings.length > 0 &&
+            moodSettings.genres.length > 0 && (
+              <button
+                onClick={validateMoodSettings}
+                disabled={isValidatingMood}
+                className="flex items-center gap-2 px-4 py-2 bg-empulse-purple text-white rounded-full font-bold hover:bg-opacity-80 transition-colors disabled:opacity-50"
+                style={{
+                  padding: "8px 16px",
+                  backgroundColor: "#7209B7",
+                  color: "#FFFFFF",
+                  borderRadius: "500px",
+                  fontSize: "14px",
+                  fontWeight: 700,
+                  border: "none",
+                  cursor: isValidatingMood ? "not-allowed" : "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  opacity: isValidatingMood ? 0.5 : 1,
+                }}
+              >
+                <Sparkles size={16} />
+                {isValidatingMood ? "Validating..." : "AI Validate Settings"}
+              </button>
+            )}
         </div>
 
         {/* AI Validation Results */}
         {moodValidation && (
-          <div 
+          <div
             className={`mb-6 p-4 rounded-lg border-2 ${
-              moodValidation.approved ? 'bg-green-900/20 border-green-600' : 'bg-yellow-900/20 border-yellow-600'
+              moodValidation.approved
+                ? "bg-green-900/20 border-green-600"
+                : "bg-yellow-900/20 border-yellow-600"
             }`}
             style={{
-              padding: '16px',
-              borderRadius: '8px',
-              marginBottom: '24px',
-              border: `2px solid ${moodValidation.approved ? '#7209B7' : '#FFA500'}`
+              padding: "16px",
+              borderRadius: "8px",
+              marginBottom: "24px",
+              border: `2px solid ${moodValidation.approved ? "#7209B7" : "#FFA500"}`,
             }}
           >
             <div className="flex items-start gap-3">
               {moodValidation.approved ? (
-                <CheckCircle size={20} className="text-green-400 flex-shrink-0 mt-0.5" />
+                <CheckCircle
+                  size={20}
+                  className="text-green-400 flex-shrink-0 mt-0.5"
+                />
               ) : (
-                <AlertTriangle size={20} className="text-yellow-400 flex-shrink-0 mt-0.5" />
+                <AlertTriangle
+                  size={20}
+                  className="text-yellow-400 flex-shrink-0 mt-0.5"
+                />
               )}
               <div className="flex-1">
-                <h4 
+                <h4
                   className="font-bold mb-2"
                   style={{
-                    fontSize: '14px',
+                    fontSize: "14px",
                     fontWeight: 700,
-                    color: moodValidation.approved ? '#7209B7' : '#FFA500',
-                    marginBottom: '8px'
+                    color: moodValidation.approved ? "#7209B7" : "#FFA500",
+                    marginBottom: "8px",
                   }}
                 >
-                  {moodValidation.approved ? '✓ Settings Approved' : '⚠️ Settings Need Adjustment'}
+                  {moodValidation.approved
+                    ? "✓ Settings Approved"
+                    : "⚠️ Settings Need Adjustment"}
                 </h4>
                 {moodValidation.issues && moodValidation.issues.length > 0 && (
                   <div className="mb-2">
-                    <p className="text-sm text-white mb-1 font-medium">Issues found:</p>
+                    <p className="text-sm text-white mb-1 font-medium">
+                      Issues found:
+                    </p>
                     <ul className="list-disc list-inside text-sm text-spotify-text-gray space-y-1">
                       {moodValidation.issues.map((issue, idx) => (
                         <li key={idx}>{issue}</li>
@@ -463,37 +557,50 @@ export default function ArtistDashboardPage() {
                     </ul>
                   </div>
                 )}
-                {moodValidation.suggestions && moodValidation.suggestions.length > 0 && (
-                  <div className="mt-2">
-                    <p className="text-sm text-white mb-1 font-medium">Suggestions:</p>
-                    <ul className="list-disc list-inside text-sm text-spotify-text-gray space-y-1">
-                      {moodValidation.suggestions.map((suggestion, idx) => (
-                        <li key={idx}>{suggestion}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                {moodValidation.suggestions &&
+                  moodValidation.suggestions.length > 0 && (
+                    <div className="mt-2">
+                      <p className="text-sm text-white mb-1 font-medium">
+                        Suggestions:
+                      </p>
+                      <ul className="list-disc list-inside text-sm text-spotify-text-gray space-y-1">
+                        {moodValidation.suggestions.map((suggestion, idx) => (
+                          <li key={idx}>{suggestion}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 {!moodValidation.approved && moodValidation.recommendedMood && (
                   <div className="mt-3">
-                    <p className="text-sm text-white mb-2 font-medium">AI Recommendations:</p>
+                    <p className="text-sm text-white mb-2 font-medium">
+                      AI Recommendations:
+                    </p>
                     <button
                       onClick={() => {
                         if (moodSettings && moodValidation) {
                           saveMoodSettings({
-                            mood: moodValidation.recommendedMood || moodSettings.mood,
-                            feelings: moodValidation.recommendedFeelings || moodSettings.feelings,
-                            vibe: moodValidation.recommendedVibe ?? moodSettings.vibe,
-                            genres: moodValidation.recommendedGenres || moodSettings.genres,
+                            mood:
+                              moodValidation.recommendedMood ||
+                              moodSettings.mood,
+                            feelings:
+                              moodValidation.recommendedFeelings ||
+                              moodSettings.feelings,
+                            vibe:
+                              moodValidation.recommendedVibe ??
+                              moodSettings.vibe,
+                            genres:
+                              moodValidation.recommendedGenres ||
+                              moodSettings.genres,
                           });
                           setMoodValidation(null);
                         }
                       }}
                       className="text-sm text-empulse-purple hover:text-empulse-purple/80 underline"
                       style={{
-                        fontSize: '13px',
-                        color: '#7209B7',
-                        textDecoration: 'underline',
-                        cursor: 'pointer'
+                        fontSize: "13px",
+                        color: "#7209B7",
+                        textDecoration: "underline",
+                        cursor: "pointer",
                       }}
                     >
                       Apply AI Recommendations
@@ -508,26 +615,28 @@ export default function ArtistDashboardPage() {
         {/* Mood Configuration UI */}
         {!moodSettings ? (
           <div className="text-center py-8">
-            <p className="text-spotify-text-gray mb-4">Configure your mood settings to start uploading tracks</p>
+            <p className="text-spotify-text-gray mb-4">
+              Configure your mood settings to start uploading tracks
+            </p>
             <button
               onClick={() => {
                 const defaultSettings: MoodTags = {
-                  mood: 'Content',
+                  mood: "Content",
                   feelings: [],
                   vibe: 50,
-                  genres: []
+                  genres: [],
                 };
                 setMoodSettings(defaultSettings);
                 saveMoodSettings(defaultSettings);
               }}
               className="px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#8a1dd0] transition-colors"
               style={{
-                padding: '8px 16px',
-                backgroundColor: '#7209B7',
-                color: '#000000',
-                borderRadius: '500px',
-                fontSize: '14px',
-                fontWeight: 700
+                padding: "8px 16px",
+                backgroundColor: "#7209B7",
+                color: "#000000",
+                borderRadius: "500px",
+                fontSize: "14px",
+                fontWeight: 700,
               }}
             >
               Start Configuration
@@ -543,7 +652,7 @@ export default function ArtistDashboardPage() {
               selectedFeelings={moodSettings.feelings}
               onToggle={(feeling) => {
                 const feelings = moodSettings.feelings.includes(feeling)
-                  ? moodSettings.feelings.filter(f => f !== feeling)
+                  ? moodSettings.feelings.filter((f) => f !== feeling)
                   : [...moodSettings.feelings, feeling];
                 saveMoodSettings({ ...moodSettings, feelings });
               }}
@@ -556,15 +665,16 @@ export default function ArtistDashboardPage() {
               selectedGenres={moodSettings.genres}
               onToggle={(genre) => {
                 const genres = moodSettings.genres.includes(genre)
-                  ? moodSettings.genres.filter(g => g !== genre)
+                  ? moodSettings.genres.filter((g) => g !== genre)
                   : [...moodSettings.genres, genre];
                 saveMoodSettings({ ...moodSettings, genres });
               }}
             />
             <div className="mt-6 p-4 bg-spotify-dark-gray rounded-lg">
               <p className="text-xs text-spotify-text-gray">
-                <strong className="text-white">Note:</strong> These are your default mood settings. 
-                You can adjust them per-track during upload, but you must set defaults before uploading.
+                <strong className="text-white">Note:</strong> These are your
+                default mood settings. You can adjust them per-track during
+                upload, but you must set defaults before uploading.
               </p>
             </div>
           </div>
@@ -572,86 +682,86 @@ export default function ArtistDashboardPage() {
       </div>
 
       {/* Live Statistics - Exact Spotify Style */}
-      <div 
+      <div
         className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8"
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '16px',
-          marginBottom: '32px'
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gap: "16px",
+          marginBottom: "32px",
         }}
       >
-        <div 
+        <div
           className="bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg p-6 text-white"
           style={{
-            background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
-            borderRadius: '8px',
-            padding: '24px',
-            color: '#FFFFFF'
+            background: "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+            borderRadius: "8px",
+            padding: "24px",
+            color: "#FFFFFF",
           }}
         >
-          <div 
+          <div
             className="flex items-center justify-between mb-2"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: '8px'
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "8px",
             }}
           >
-            <TrendingUp 
-              size={24} 
+            <TrendingUp
+              size={24}
               className="opacity-80"
               style={{
-                width: '24px',
-                height: '24px',
-                color: 'rgba(255, 255, 255, 0.8)',
-                flexShrink: 0
+                width: "24px",
+                height: "24px",
+                color: "rgba(255, 255, 255, 0.8)",
+                flexShrink: 0,
               }}
             />
             {autoRefresh && (
-              <div 
+              <div
                 className="w-2 h-2 bg-green-400 rounded-full animate-pulse"
                 style={{
-                  width: '8px',
-                  height: '8px',
-                  backgroundColor: '#22C55E',
-                  borderRadius: '50%',
-                  animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                  flexShrink: 0
+                  width: "8px",
+                  height: "8px",
+                  backgroundColor: "#22C55E",
+                  borderRadius: "50%",
+                  animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                  flexShrink: 0,
                 }}
               />
             )}
           </div>
-          <div 
+          <div
             className="text-sm opacity-80 mb-1"
             style={{
-              fontSize: '13px',
-              lineHeight: '16px',
-              color: 'rgba(255, 255, 255, 0.8)',
-              marginBottom: '4px'
+              fontSize: "13px",
+              lineHeight: "16px",
+              color: "rgba(255, 255, 255, 0.8)",
+              marginBottom: "4px",
             }}
           >
             Total Streams
           </div>
-          <div 
+          <div
             className="text-3xl font-bold"
             style={{
-              fontSize: '32px',
-              lineHeight: '36px',
+              fontSize: "32px",
+              lineHeight: "36px",
               fontWeight: 700,
-              color: '#FFFFFF'
+              color: "#FFFFFF",
             }}
           >
             {totalStreams.toLocaleString()}
           </div>
-          <div 
+          <div
             className="text-xs opacity-60 mt-1"
             style={{
-              fontSize: '11px',
-              lineHeight: '16px',
-              color: 'rgba(255, 255, 255, 0.6)',
-              marginTop: '4px'
+              fontSize: "11px",
+              lineHeight: "16px",
+              color: "rgba(255, 255, 255, 0.6)",
+              marginTop: "4px",
             }}
           >
             +{Math.floor(Math.random() * 10)} today
@@ -669,7 +779,9 @@ export default function ArtistDashboardPage() {
           <Music size={24} className="opacity-80 mb-2" />
           <div className="text-sm opacity-80 mb-1">Published Tracks</div>
           <div className="text-3xl font-bold">{publishedTracks.length}</div>
-          <div className="text-xs opacity-60 mt-1">of {tracks.length} total</div>
+          <div className="text-xs opacity-60 mt-1">
+            of {tracks.length} total
+          </div>
         </div>
 
         <div className="bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg p-6 text-white">
@@ -681,57 +793,57 @@ export default function ArtistDashboardPage() {
       </div>
 
       {/* Auto-refresh Toggle */}
-      <div 
+      <div
         className="bg-spotify-light-gray rounded-lg mb-6 flex items-center justify-between"
         style={{
-          backgroundColor: '#181818',
-          borderRadius: '8px',
-          padding: '16px',
-          marginBottom: '24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
+          backgroundColor: "#181818",
+          borderRadius: "8px",
+          padding: "16px",
+          marginBottom: "24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <div>
-          <h3 
+          <h3
             className="font-bold mb-1"
             style={{
-              fontSize: '14px',
-              lineHeight: '20px',
+              fontSize: "14px",
+              lineHeight: "20px",
               fontWeight: 700,
-              color: '#FFFFFF',
-              marginBottom: '4px'
+              color: "#FFFFFF",
+              marginBottom: "4px",
             }}
           >
             Live Statistics
           </h3>
-          <p 
+          <p
             className="text-sm text-spotify-text-gray"
             style={{
-              fontSize: '13px',
-              lineHeight: '16px',
-              color: '#B3B3B3'
+              fontSize: "13px",
+              lineHeight: "16px",
+              color: "#B3B3B3",
             }}
           >
             Auto-update stream counts and earnings
           </p>
         </div>
-        <label 
+        <label
           className="flex items-center gap-3 cursor-pointer"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            cursor: 'pointer'
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            cursor: "pointer",
           }}
         >
-          <span 
+          <span
             className="text-sm"
             style={{
-              fontSize: '14px',
-              lineHeight: '20px',
-              color: '#FFFFFF'
+              fontSize: "14px",
+              lineHeight: "20px",
+              color: "#FFFFFF",
             }}
           >
             Auto-refresh
@@ -742,27 +854,27 @@ export default function ArtistDashboardPage() {
             aria-label="Auto-refresh statistics"
             onClick={() => setAutoRefresh(!autoRefresh)}
             style={{
-              position: 'relative',
-              width: '44px',
-              height: '24px',
-              borderRadius: '12px',
-              backgroundColor: autoRefresh ? '#7209B7' : '#727272',
-              transition: 'background-color 200ms ease-out',
-              cursor: 'pointer',
-              flexShrink: 0
+              position: "relative",
+              width: "44px",
+              height: "24px",
+              borderRadius: "12px",
+              backgroundColor: autoRefresh ? "#7209B7" : "#727272",
+              transition: "background-color 200ms ease-out",
+              cursor: "pointer",
+              flexShrink: 0,
             }}
           >
             <div
               style={{
-                position: 'absolute',
-                top: '2px',
-                left: autoRefresh ? '22px' : '2px',
-                width: '20px',
-                height: '20px',
-                borderRadius: '50%',
-                backgroundColor: '#FFFFFF',
-                transition: 'left 200ms ease-out',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+                position: "absolute",
+                top: "2px",
+                left: autoRefresh ? "22px" : "2px",
+                width: "20px",
+                height: "20px",
+                borderRadius: "50%",
+                backgroundColor: "#FFFFFF",
+                transition: "left 200ms ease-out",
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
               }}
             />
           </div>
@@ -772,39 +884,55 @@ export default function ArtistDashboardPage() {
       {/* Track Management */}
       <div className="bg-spotify-light-gray rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-bold mb-4">Track Management</h2>
-        
+
         {/* Debug Info - Remove after testing */}
-        {process.env.NODE_ENV === 'development' && (
+        {process.env.NODE_ENV === "development" && (
           <div className="mb-4 p-4 bg-yellow-900/20 border border-yellow-600/30 rounded text-sm">
-            <div className="mb-2"><strong>DEBUG INFO:</strong></div>
-            <div className="mb-1">Tracks state: <strong>{tracks.length}</strong> tracks</div>
-            <div className="mb-1">localStorage: {typeof window !== 'undefined' ? (localStorage.getItem('artist-tracks') ? `${localStorage.getItem('artist-tracks')?.length} chars` : 'empty') : 'N/A'}</div>
+            <div className="mb-2">
+              <strong>DEBUG INFO:</strong>
+            </div>
+            <div className="mb-1">
+              Tracks state: <strong>{tracks.length}</strong> tracks
+            </div>
+            <div className="mb-1">
+              localStorage:{" "}
+              {typeof window !== "undefined"
+                ? localStorage.getItem("artist-tracks")
+                  ? `${localStorage.getItem("artist-tracks")?.length} chars`
+                  : "empty"
+                : "N/A"}
+            </div>
             {tracks.length > 0 ? (
               <div className="mt-2">
-                Track names: {tracks.map(t => t.name).join(', ')}
+                Track names: {tracks.map((t) => t.name).join(", ")}
               </div>
             ) : (
-              <div className="mt-2 text-yellow-400">⚠️ No tracks found - showing mockTracks fallback</div>
+              <div className="mt-2 text-yellow-400">
+                ⚠️ No tracks found - showing mockTracks fallback
+              </div>
             )}
             <button
               onClick={() => {
                 // Simulate an upload - save test track to localStorage
                 const testTrack = {
-                  id: 'TEST-' + Date.now(),
-                  name: 'Test Upload ' + new Date().toLocaleTimeString(),
-                  album: 'Test Album',
+                  id: "TEST-" + Date.now(),
+                  name: "Test Upload " + new Date().toLocaleTimeString(),
+                  album: "Test Album",
                   uploadDate: new Date().toISOString(),
-                  status: 'published',
+                  status: "published",
                   streams: 0,
                   earnings: 0,
                 };
-                const existing = localStorage.getItem('artist-tracks');
+                const existing = localStorage.getItem("artist-tracks");
                 let allTracks = existing ? JSON.parse(existing) : [];
                 allTracks.unshift(testTrack);
-                localStorage.setItem('artist-tracks', JSON.stringify(allTracks));
-                console.log('🧪 [TEST] Added test track:', testTrack);
-                console.log('🧪 [TEST] Total tracks:', allTracks.length);
-                window.dispatchEvent(new Event('tracks-updated'));
+                localStorage.setItem(
+                  "artist-tracks",
+                  JSON.stringify(allTracks),
+                );
+                console.log("🧪 [TEST] Added test track:", testTrack);
+                console.log("🧪 [TEST] Total tracks:", allTracks.length);
+                window.dispatchEvent(new Event("tracks-updated"));
                 loadTracks();
               }}
               className="mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-white text-sm"
@@ -813,8 +941,11 @@ export default function ArtistDashboardPage() {
             </button>
             <button
               onClick={() => {
-                console.log('🧪 [TEST] Current localStorage:', localStorage.getItem('artist-tracks'));
-                console.log('🧪 [TEST] Current tracks state:', tracks);
+                console.log(
+                  "🧪 [TEST] Current localStorage:",
+                  localStorage.getItem("artist-tracks"),
+                );
+                console.log("🧪 [TEST] Current tracks state:", tracks);
                 loadTracks();
               }}
               className="mt-2 ml-2 px-4 py-2 bg-green-600 hover:bg-green-700 rounded text-white text-sm"
@@ -839,35 +970,56 @@ export default function ArtistDashboardPage() {
             </thead>
             <tbody>
               {tracks.map((track) => (
-                <tr key={track.id} className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                <tr
+                  key={track.id}
+                  className="border-b border-white/10 hover:bg-white/5 transition-colors"
+                >
                   <td className="py-3">
                     <div className="font-medium">{track.name}</div>
                   </td>
                   <td className="py-3 text-spotify-text-gray">{track.album}</td>
-                  <td className="py-3 text-spotify-text-gray">{new Date(track.uploadDate).toLocaleDateString()}</td>
+                  <td className="py-3 text-spotify-text-gray">
+                    {new Date(track.uploadDate).toLocaleDateString()}
+                  </td>
                   <td className="py-3">
-                    <span className={`px-2 py-1 rounded text-xs ${
-                      track.status === 'published'
-                        ? 'bg-green-600/20 text-green-400'
-                        : 'bg-yellow-600/20 text-yellow-400'
-                    }`}>
-                      {track.status === 'published' ? 'Published' : 'Unpublished'}
+                    <span
+                      className={`px-2 py-1 rounded text-xs ${
+                        track.status === "published"
+                          ? "bg-green-600/20 text-green-400"
+                          : "bg-yellow-600/20 text-yellow-400"
+                      }`}
+                    >
+                      {track.status === "published"
+                        ? "Published"
+                        : "Unpublished"}
                     </span>
                   </td>
-                  <td className="py-3 text-right font-medium">{track.streams.toLocaleString()}</td>
-                  <td className="py-3 text-right font-medium">${track.earnings.toFixed(2)}</td>
+                  <td className="py-3 text-right font-medium">
+                    {track.streams.toLocaleString()}
+                  </td>
+                  <td className="py-3 text-right font-medium">
+                    ${track.earnings.toFixed(2)}
+                  </td>
                   <td className="py-3">
                     <div className="flex items-center justify-center gap-2">
                       <button
                         onClick={() => togglePublish(track.id)}
                         className={`p-2 rounded hover:bg-white/10 transition-colors ${
-                          track.status === 'published' ? 'text-yellow-400' : 'text-green-400'
+                          track.status === "published"
+                            ? "text-yellow-400"
+                            : "text-green-400"
                         }`}
-                        title={track.status === 'published' ? 'Unpublish' : 'Publish'}
+                        title={
+                          track.status === "published" ? "Unpublish" : "Publish"
+                        }
                       >
-                        {track.status === 'published' ? <EyeOff size={18} /> : <Eye size={18} />}
+                        {track.status === "published" ? (
+                          <EyeOff size={18} />
+                        ) : (
+                          <Eye size={18} />
+                        )}
                       </button>
-                      <button 
+                      <button
                         className="p-2 rounded hover:bg-white/10 transition-colors text-spotify-text-gray hover:text-white"
                         title="View Analytics"
                         aria-label="View track analytics"
@@ -889,23 +1041,37 @@ export default function ArtistDashboardPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between p-4 bg-spotify-dark-gray rounded-lg">
             <div>
-              <div className="text-sm text-spotify-text-gray">Current Payout Rate</div>
+              <div className="text-sm text-spotify-text-gray">
+                Current Payout Rate
+              </div>
               <div className="text-2xl font-bold">$0.004 per stream</div>
-              <div className="text-xs text-spotify-text-gray mt-1">Transparent, higher than industry standard</div>
+              <div className="text-xs text-spotify-text-gray mt-1">
+                Transparent, higher than industry standard
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div className="p-4 bg-spotify-dark-gray rounded-lg">
-              <div className="text-sm text-spotify-text-gray mb-1">Pending Payment</div>
+              <div className="text-sm text-spotify-text-gray mb-1">
+                Pending Payment
+              </div>
               <div className="text-xl font-bold">$0.00</div>
             </div>
             <div className="p-4 bg-spotify-dark-gray rounded-lg">
-              <div className="text-sm text-spotify-text-gray mb-1">This Month</div>
-              <div className="text-xl font-bold">${totalEarnings.toFixed(2)}</div>
+              <div className="text-sm text-spotify-text-gray mb-1">
+                This Month
+              </div>
+              <div className="text-xl font-bold">
+                ${totalEarnings.toFixed(2)}
+              </div>
             </div>
             <div className="p-4 bg-spotify-dark-gray rounded-lg">
-              <div className="text-sm text-spotify-text-gray mb-1">Lifetime</div>
-              <div className="text-xl font-bold">${totalEarnings.toFixed(2)}</div>
+              <div className="text-sm text-spotify-text-gray mb-1">
+                Lifetime
+              </div>
+              <div className="text-xl font-bold">
+                ${totalEarnings.toFixed(2)}
+              </div>
             </div>
           </div>
         </div>
@@ -916,29 +1082,31 @@ export default function ArtistDashboardPage() {
         <h2 className="text-2xl font-bold mb-4">Upload New Track</h2>
         <div className="bg-spotify-dark-gray rounded-lg p-6 text-center">
           <Upload size={48} className="mx-auto mb-4 text-spotify-text-gray" />
-          <p className="text-spotify-text-gray mb-4">Ready to upload a new track?</p>
-          <button 
-            onClick={() => router.push('/upload')}
+          <p className="text-spotify-text-gray mb-4">
+            Ready to upload a new track?
+          </p>
+          <button
+            onClick={() => router.push("/upload")}
             className="btn-primary"
             style={{
-              backgroundColor: '#7209B7',
-              color: '#000000',
+              backgroundColor: "#7209B7",
+              color: "#000000",
               fontWeight: 700,
-              padding: '12px 24px',
-              borderRadius: '500px',
-              fontSize: '14px',
-              lineHeight: '20px',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'all 200ms ease-out'
+              padding: "12px 24px",
+              borderRadius: "500px",
+              fontSize: "14px",
+              lineHeight: "20px",
+              border: "none",
+              cursor: "pointer",
+              transition: "all 200ms ease-out",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#8a1dd0';
-              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.backgroundColor = "#8a1dd0";
+              e.currentTarget.style.transform = "scale(1.05)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#7209B7';
-              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.backgroundColor = "#7209B7";
+              e.currentTarget.style.transform = "scale(1)";
             }}
           >
             Start Upload

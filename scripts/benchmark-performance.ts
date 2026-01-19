@@ -1,18 +1,21 @@
 /**
  * Performance Benchmarking Script
- * 
+ *
  * Benchmarks RAG system performance:
  * - Inference latency (<200ms target)
  * - Semantic search accuracy (>90% target)
  * - Batch processing speed (<5s per track target)
  * - Memory usage
- * 
+ *
  * Usage:
  *   npm run benchmark -- --samples 100 --output ./benchmarks/results.json
  */
 
-import { RAGMoodAnalysisPipeline, getRAGPipeline } from '../lib/aiMoodAnalysis';
-import { DataPipelineOrchestrator, getPipelineOrchestrator } from '../lib/pipelineOrchestration';
+import { RAGMoodAnalysisPipeline, getRAGPipeline } from "../lib/aiMoodAnalysis";
+import {
+  DataPipelineOrchestrator,
+  getPipelineOrchestrator,
+} from "../lib/pipelineOrchestration";
 
 interface BenchmarkResult {
   test: string;
@@ -47,16 +50,16 @@ class PerformanceBenchmarker {
     this.pipeline = getRAGPipeline();
     this.orchestrator = getPipelineOrchestrator({
       vectorDB: {
-        type: process.env.VECTOR_DB_TYPE === 'faiss' ? 'faiss' : 'pinecone',
+        type: process.env.VECTOR_DB_TYPE === "faiss" ? "faiss" : "pinecone",
         apiKey: process.env.PINECONE_API_KEY,
         indexName: process.env.PINECONE_INDEX_NAME,
         environment: process.env.PINECONE_ENVIRONMENT,
         indexPath: process.env.FAISS_INDEX_PATH,
       },
       neo4j: {
-        uri: process.env.NEO4J_URI || 'bolt://localhost:7687',
-        user: process.env.NEO4J_USER || 'neo4j',
-        password: process.env.NEO4J_PASSWORD || 'password',
+        uri: process.env.NEO4J_URI || "bolt://localhost:7687",
+        user: process.env.NEO4J_USER || "neo4j",
+        password: process.env.NEO4J_PASSWORD || "password",
       },
     });
   }
@@ -66,14 +69,16 @@ class PerformanceBenchmarker {
    */
   private createMockAudioFile(): File {
     // Create a small mock audio file
-    const blob = new Blob(['mock audio data'], { type: 'audio/mpeg' });
-    return new File([blob], 'benchmark-test.mp3', { type: 'audio/mpeg' });
+    const blob = new Blob(["mock audio data"], { type: "audio/mpeg" });
+    return new File([blob], "benchmark-test.mp3", { type: "audio/mpeg" });
   }
 
   /**
    * Calculate statistics from latency array
    */
-  private calculateLatencyStats(latencies: number[]): BenchmarkResult['latency'] {
+  private calculateLatencyStats(
+    latencies: number[],
+  ): BenchmarkResult["latency"] {
     const sorted = [...latencies].sort((a, b) => a - b);
     const mean = latencies.reduce((sum, l) => sum + l, 0) / latencies.length;
     const median = sorted[Math.floor(sorted.length / 2)];
@@ -88,8 +93,12 @@ class PerformanceBenchmarker {
   /**
    * Benchmark mood analysis inference latency
    */
-  async benchmarkInferenceLatency(config: BenchmarkConfig): Promise<BenchmarkResult> {
-    console.log(`⚡ Benchmarking inference latency (${config.samples} samples)...`);
+  async benchmarkInferenceLatency(
+    config: BenchmarkConfig,
+  ): Promise<BenchmarkResult> {
+    console.log(
+      `⚡ Benchmarking inference latency (${config.samples} samples)...`,
+    );
 
     const latencies: number[] = [];
 
@@ -125,13 +134,15 @@ class PerformanceBenchmarker {
     const meetsTarget = stats.mean < 200;
 
     console.log(`✅ Inference latency benchmark complete`);
-    console.log(`   Mean: ${stats.mean.toFixed(2)}ms ${meetsTarget ? '✅' : '❌'} (target: <200ms)`);
+    console.log(
+      `   Mean: ${stats.mean.toFixed(2)}ms ${meetsTarget ? "✅" : "❌"} (target: <200ms)`,
+    );
     console.log(`   Median: ${stats.median.toFixed(2)}ms`);
     console.log(`   P95: ${stats.p95.toFixed(2)}ms`);
     console.log(`   P99: ${stats.p99.toFixed(2)}ms`);
 
     return {
-      test: 'inference_latency',
+      test: "inference_latency",
       latency: stats,
       timestamp: new Date().toISOString(),
     };
@@ -140,14 +151,18 @@ class PerformanceBenchmarker {
   /**
    * Benchmark batch processing throughput
    */
-  async benchmarkBatchProcessing(config: BenchmarkConfig): Promise<BenchmarkResult> {
-    console.log(`⚡ Benchmarking batch processing (${config.samples} tracks)...`);
+  async benchmarkBatchProcessing(
+    config: BenchmarkConfig,
+  ): Promise<BenchmarkResult> {
+    console.log(
+      `⚡ Benchmarking batch processing (${config.samples} tracks)...`,
+    );
 
     const tracks = Array.from({ length: config.samples }, (_, i) => ({
       file: this.createMockAudioFile(),
       metadata: {
         name: `Test Track ${i + 1}`,
-        artist: 'Test Artist',
+        artist: "Test Artist",
       },
     }));
 
@@ -167,10 +182,12 @@ class PerformanceBenchmarker {
       console.log(`✅ Batch processing benchmark complete`);
       console.log(`   Total time: ${(totalTime / 1000).toFixed(2)}s`);
       console.log(`   Throughput: ${throughput.toFixed(2)} tracks/sec`);
-      console.log(`   Time per track: ${timePerTrack.toFixed(2)}ms ${meetsTarget ? '✅' : '❌'} (target: <5000ms)`);
+      console.log(
+        `   Time per track: ${timePerTrack.toFixed(2)}ms ${meetsTarget ? "✅" : "❌"} (target: <5000ms)`,
+      );
 
       return {
-        test: 'batch_processing',
+        test: "batch_processing",
         latency: {
           mean: timePerTrack,
           median: timePerTrack,
@@ -183,7 +200,7 @@ class PerformanceBenchmarker {
         timestamp: new Date().toISOString(),
       };
     } catch (error) {
-      console.error('❌ Batch processing benchmark failed:', error);
+      console.error("❌ Batch processing benchmark failed:", error);
       throw error;
     }
   }
@@ -191,7 +208,9 @@ class PerformanceBenchmarker {
   /**
    * Benchmark memory usage
    */
-  async benchmarkMemoryUsage(config: BenchmarkConfig): Promise<BenchmarkResult> {
+  async benchmarkMemoryUsage(
+    config: BenchmarkConfig,
+  ): Promise<BenchmarkResult> {
     console.log(`⚡ Benchmarking memory usage...`);
 
     // Note: Memory usage measurement requires Node.js
@@ -208,7 +227,7 @@ class PerformanceBenchmarker {
     console.log(`   Memory delta: ${(memoryDelta / 1024 / 1024).toFixed(2)}MB`);
 
     return {
-      test: 'memory_usage',
+      test: "memory_usage",
       latency: {
         mean: 0,
         median: 0,
@@ -226,8 +245,8 @@ class PerformanceBenchmarker {
    * Run all benchmarks
    */
   async runAllBenchmarks(config: BenchmarkConfig): Promise<BenchmarkResult[]> {
-    console.log('🎯 RAG System Performance Benchmarks');
-    console.log('====================================\n');
+    console.log("🎯 RAG System Performance Benchmarks");
+    console.log("====================================\n");
 
     const results: BenchmarkResult[] = [];
 
@@ -236,7 +255,7 @@ class PerformanceBenchmarker {
       const latencyResult = await this.benchmarkInferenceLatency(config);
       results.push(latencyResult);
     } catch (error) {
-      console.error('❌ Inference latency benchmark failed:', error);
+      console.error("❌ Inference latency benchmark failed:", error);
     }
 
     // Benchmark 2: Batch processing
@@ -247,7 +266,7 @@ class PerformanceBenchmarker {
       });
       results.push(batchResult);
     } catch (error) {
-      console.error('❌ Batch processing benchmark failed:', error);
+      console.error("❌ Batch processing benchmark failed:", error);
     }
 
     // Benchmark 3: Memory usage
@@ -255,7 +274,7 @@ class PerformanceBenchmarker {
       const memoryResult = await this.benchmarkMemoryUsage(config);
       results.push(memoryResult);
     } catch (error) {
-      console.error('❌ Memory usage benchmark failed:', error);
+      console.error("❌ Memory usage benchmark failed:", error);
     }
 
     return results;
@@ -264,8 +283,11 @@ class PerformanceBenchmarker {
   /**
    * Save benchmark results to file
    */
-  async saveResults(results: BenchmarkResult[], outputPath: string): Promise<void> {
-    const fs = await import('fs/promises');
+  async saveResults(
+    results: BenchmarkResult[],
+    outputPath: string,
+  ): Promise<void> {
+    const fs = await import("fs/promises");
     await fs.writeFile(outputPath, JSON.stringify(results, null, 2));
     console.log(`\n💾 Results saved to: ${outputPath}`);
   }
@@ -285,15 +307,15 @@ class PerformanceBenchmarker {
 async function main() {
   const args = process.argv.slice(2);
   const config: BenchmarkConfig = {
-    samples: args.includes('--samples')
-      ? parseInt(args[args.indexOf('--samples') + 1])
+    samples: args.includes("--samples")
+      ? parseInt(args[args.indexOf("--samples") + 1])
       : 100,
-    warmupSamples: args.includes('--warmup')
-      ? parseInt(args[args.indexOf('--warmup') + 1])
+    warmupSamples: args.includes("--warmup")
+      ? parseInt(args[args.indexOf("--warmup") + 1])
       : 10,
-    outputPath: args.includes('--output')
-      ? args[args.indexOf('--output') + 1]
-      : './benchmarks/results.json',
+    outputPath: args.includes("--output")
+      ? args[args.indexOf("--output") + 1]
+      : "./benchmarks/results.json",
   };
 
   const benchmarker = new PerformanceBenchmarker();
@@ -302,9 +324,9 @@ async function main() {
     const results = await benchmarker.runAllBenchmarks(config);
     await benchmarker.saveResults(results, config.outputPath);
 
-    console.log('\n✅ All benchmarks complete!\n');
+    console.log("\n✅ All benchmarks complete!\n");
   } catch (error) {
-    console.error('❌ Benchmarking failed:', error);
+    console.error("❌ Benchmarking failed:", error);
     process.exit(1);
   } finally {
     await benchmarker.cleanup();

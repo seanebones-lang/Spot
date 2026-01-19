@@ -3,11 +3,13 @@
 ## Quick Push
 
 Simply run:
+
 ```bash
 npm run push
 ```
 
 Or directly:
+
 ```bash
 ./scripts/push.sh
 ```
@@ -15,6 +17,7 @@ Or directly:
 ## What It Does
 
 The push script automatically:
+
 1. ✅ Checks if there are commits to push
 2. ✅ Tries SSH authentication (seamless if configured)
 3. ✅ Falls back to GitHub CLI (if installed)
@@ -24,12 +27,14 @@ The push script automatically:
 ## Setup (One-Time)
 
 ### Option 1: GitHub CLI (Recommended - Easiest)
+
 ```bash
 brew install gh
 gh auth login
 ```
 
 ### Option 2: SSH Key (Most Seamless)
+
 ```bash
 # Generate SSH key (if you don't have one)
 ssh-keygen -t ed25519 -C "your_email@example.com"
@@ -45,6 +50,7 @@ ssh -T git@github.com
 ```
 
 ### Option 3: Personal Access Token
+
 ```bash
 # 1. Go to: https://github.com/settings/tokens
 # 2. Generate new token (classic)
@@ -56,6 +62,7 @@ ssh -T git@github.com
 ## Usage
 
 After setup, just run:
+
 ```bash
 npm run push
 ```

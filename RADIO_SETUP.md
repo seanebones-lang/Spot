@@ -13,11 +13,13 @@ The radio feature streams audio-only content from YouTube videos containing full
 The streaming backend requires `yt-dlp` (or `youtube-dl` as fallback) to extract audio from YouTube videos.
 
 #### macOS
+
 ```bash
 brew install yt-dlp
 ```
 
 #### Linux
+
 ```bash
 pip install yt-dlp
 # or
@@ -25,12 +27,14 @@ sudo apt-get install yt-dlp
 ```
 
 #### Windows
+
 ```bash
 pip install yt-dlp
 # or download from https://github.com/yt-dlp/yt-dlp/releases
 ```
 
 #### Verify Installation
+
 ```bash
 yt-dlp --version
 ```
@@ -79,6 +83,7 @@ Stations are configured in `/app/api/radio/stream/[station]/route.ts`:
 This means `yt-dlp` is not installed or not in your system PATH.
 
 **Solution:**
+
 1. Install yt-dlp (see Prerequisites above)
 2. Verify it's accessible: `which yt-dlp` (macOS/Linux) or `where yt-dlp` (Windows)
 3. Restart your Next.js dev server
@@ -92,6 +97,7 @@ This means `yt-dlp` is not installed or not in your system PATH.
 ### Stream Quality Issues
 
 The backend uses `bestaudio` format selection. If quality is poor:
+
 - Check your internet connection
 - YouTube may be throttling the stream
 - Try a different station

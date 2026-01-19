@@ -1,4 +1,5 @@
 # UI Component System - Quick Start Guide
+
 **Date:** January 14, 2026
 
 ---
@@ -8,10 +9,10 @@
 Import and use components from `@/components`:
 
 ```tsx
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-import Card from '@/components/Card';
-import FormField from '@/components/FormField';
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Card from "@/components/Card";
+import FormField from "@/components/FormField";
 ```
 
 ---
@@ -19,6 +20,7 @@ import FormField from '@/components/FormField';
 ## 📦 **QUICK EXAMPLES**
 
 ### Button
+
 ```tsx
 // Primary action
 <Button variant="primary" size="md">Get Started</Button>
@@ -34,27 +36,29 @@ import FormField from '@/components/FormField';
 ```
 
 ### Input
+
 ```tsx
 // Basic input
 <Input type="email" label="Email" placeholder="your@email.com" required />
 
 // With validation
-<Input 
-  type="password" 
+<Input
+  type="password"
   label="Password"
   error="Must be at least 8 characters"
   showSuccessIcon
 />
 
 // With helper text
-<Input 
-  type="text" 
+<Input
+  type="text"
   label="Username"
   helperText="Must be unique"
 />
 ```
 
 ### Card
+
 ```tsx
 // Basic card
 <Card variant="default" hover>
@@ -75,17 +79,18 @@ import FormField from '@/components/FormField';
 ```
 
 ### Form
+
 ```tsx
 // Complete form with validation
 <form onSubmit={handleSubmit}>
   <FormField label="Email" required error={emailError}>
     <Input type="email" placeholder="your@email.com" />
   </FormField>
-  
+
   <FormField label="Password" required error={passwordError}>
     <Input type="password" />
   </FormField>
-  
+
   <Button type="submit" variant="primary" loading={isSubmitting}>
     Sign Up
   </Button>
@@ -100,18 +105,18 @@ Use Tailwind classes that reference design tokens:
 
 ```tsx
 // Colors
-className="bg-spotify-green text-black"
-className="bg-spotify-dark-gray text-white"
-className="text-spotify-text-gray"
+className = "bg-spotify-green text-black";
+className = "bg-spotify-dark-gray text-white";
+className = "text-spotify-text-gray";
 
 // Spacing (4px base unit)
-className="p-4" // 16px padding
-className="gap-2" // 8px gap
-className="mb-6" // 24px margin-bottom
+className = "p-4"; // 16px padding
+className = "gap-2"; // 8px gap
+className = "mb-6"; // 24px margin-bottom
 
 // Border radius
-className="rounded-lg" // 8px (cards)
-className="rounded-full" // pill (buttons)
+className = "rounded-lg"; // 8px (cards)
+className = "rounded-full"; // pill (buttons)
 ```
 
 ---
