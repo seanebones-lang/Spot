@@ -1,0 +1,36 @@
+{
+  "models": [
+    {
+      "title": "Eleven",
+      "provider": "openrouter",
+      "model": "next-eleven",
+      "apiKey": "${env:API_KEY}",
+      "contextLength": 128000
+    },
+    {
+      "title": "Eleven MCP",
+      "provider": "custom",
+      "model": "eleven-mcp",
+      "apiBase": "http://localhost:3000/mcp",
+      "contextLength": 128000,
+      "systemMessage": "You are Eleven MCP. Always prefix responses with [Eleven MCP]. Use swarms for complex tasks. Prefix every prompt with 'Eleven MCP:'."
+    }
+  ],
+  "rules": [
+    "Always use /refactor for code smells",
+    "Always use /swarm for multi-file changes",
+    "Always prefix with 'Eleven MCP:' in prompts",
+    "Report tool failures immediately",
+    "Provide actionable plans, not just code"
+  ],
+  "tabAutocompleteModel": {
+    "title": "Eleven",
+    "provider": "openrouter",
+    "model": "next-eleven"
+  },
+  "allowAnonymousTelemetry": false,
+  "embeddingsProvider": {
+    "provider": "openai",
+    "model": "text-embedding-3-small"
+  }
+}
