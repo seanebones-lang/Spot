@@ -74,12 +74,12 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   /**
    * Left icon (appears inside input on the left)
    */
-  iconLeft?: React.ComponentType<{ size?: number; className?: string }>;
+  iconLeft?: React.ComponentType<any>;
   
   /**
    * Right icon (appears inside input on the right)
    */
-  iconRight?: React.ComponentType<{ size?: number; className?: string }>;
+  iconRight?: React.ComponentType<any>;
   
   /**
    * Click handler for right icon
