@@ -70,7 +70,16 @@ export async function POST(request: NextRequest) {
           failedLoginAttempts: true,
         },
       })
-    );
+    ) as {
+      id: string;
+      email: string;
+      name: string;
+      passwordHash: string;
+      isActive: boolean;
+      role: string;
+      lockedUntil: Date | null;
+      failedLoginAttempts: number;
+    } | null;
 
     // Use generic error message to prevent email enumeration
     if (!user) {
