@@ -29,6 +29,7 @@
     "deploy:railway": "bash scripts/deploy.sh railway",
     "deploy:mcp": "node tools/deploy-mcp.js",
     "prepare": "husky install || true",
+    "postinstall": "prisma generate",
     "test:mcp": "node tools/tester-mcp.js",
     "ml": "node tools/ml-mcp.js",
     "mobile": "node tools/mobile-mcp.js",
