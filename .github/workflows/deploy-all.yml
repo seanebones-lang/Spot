@@ -6,9 +6,31 @@ on:
       - main
       - fix-all-complete-v1
   workflow_dispatch:
+  workflow_call:
 
 jobs:
+  # Pre-deployment validation
+  validate:
+    name: Pre-Deployment Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run lint
+      - run: npm test -- --watchAll=false
+        continue-on-error: true
+      - run: npm run build
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: 1
+
   deploy-railway:
+    needs: validate
     name: Deploy to Railway
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
@@ -58,6 +80,7 @@ jobs:
 
   deploy-vercel:
     name: Deploy to Vercel
+    needs: validate
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
     steps:

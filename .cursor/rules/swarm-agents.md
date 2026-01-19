@@ -209,6 +209,65 @@
 - GDPR compliance
 - Accessibility standards
 
+### 26. GitHub Agent
+**Domain**: GitHub Actions, Workflows, PRs, Issues, Automation
+**Responsibilities**:
+- GitHub Actions workflow optimization
+- CI/CD pipeline design
+- Pull request automation
+- Issue management
+- Branch protection rules
+- Workflow debugging
+- GitHub API integration
+- Release automation
+
+### 27. Deployment Agent
+**Domain**: Railway, Vercel, AWS, Container Deployments
+**Responsibilities**:
+- Deployment pipeline optimization
+- Multi-platform deployment (Railway + Vercel)
+- Environment configuration
+- Rollback strategies
+- Deployment verification
+- Health checks
+- Blue-green deployments
+- Canary releases
+
+### 28. Extension Agent
+**Domain**: VS Code Extensions, Dev Tools, Editor Configuration
+**Responsibilities**:
+- VS Code extension recommendations
+- Editor configuration optimization
+- Dev container setup
+- Code formatting tools
+- Linter configuration
+- Editor productivity enhancements
+- Extension compatibility
+
+### 29. CI/CD Agent
+**Domain**: Continuous Integration, Continuous Deployment, Automation
+**Responsibilities**:
+- Pipeline orchestration
+- Test automation
+- Build validation
+- Deployment gates
+- Quality gates
+- Automated testing
+- Code quality checks
+- Pre-deployment validation
+
+### 30. Validation Agent
+**Domain**: Pre-deployment Checks, Error Prevention, Quality Assurance
+**Responsibilities**:
+- Pre-commit validation
+- Pre-push checks
+- Build verification
+- Type checking
+- Lint validation
+- Test execution
+- Security scanning
+- Dependency checking
+
 ## Swarm Orchestration
 
 When `/swarm` is used, multiple agents work in parallel:
