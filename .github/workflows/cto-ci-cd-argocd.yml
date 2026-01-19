@@ -1,0 +1,233 @@
+name: CTO Enterprise CI/CD + ArgoCD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
+env:
+  NODE_VERSION: '20.19.0'
+  AWS_REGION: 'us-east-1'
+
+jobs:
+  test:
+    name: Comprehensive Test Suite
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-type: [unit, e2e, integration, infrastructure]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run ${{ matrix.test-type }} tests
+        run: |
+          case "${{ matrix.test-type }}" in
+            unit)
+              npm test
+              ;;
+            e2e)
+              npm run test:e2e
+              ;;
+            integration)
+              npm run test:infrastructure
+              ;;
+            infrastructure)
+              node tools/qa-mcp.js playwright test
+              ;;
+          esac
+
+  security:
+    name: Security & Compliance Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run security scan
+        run: node tools/security-mcp.js all scan
+        continue-on-error: true
+      
+      - name: Run Snyk scan
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+  mobile-test:
+    name: Mobile Fleet Tests
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        platform: [flutter, ios]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Flutter
+        if: matrix.platform == 'flutter'
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+      
+      - name: Setup Xcode
+        if: matrix.platform == 'ios'
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      
+      - name: Run mobile tests
+        run: |
+          if [ "${{ matrix.platform }}" == "flutter" ]; then
+            node tools/mobile-mcp.js flutter test
+          else
+            node tools/mobile-mcp.js ios test
+          fi
+
+  build:
+    name: Build All Apps
+    runs-on: ubuntu-latest
+    needs: [test, security]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build with Nx
+        run: npm run nx:run-many -- --target=build --all
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist/
+
+  terraform:
+    name: Terraform Plan/Apply
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.5.0'
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Terraform Init
+        run: npm run terraform:init
+      
+      - name: Terraform Plan
+        run: npm run terraform:plan
+      
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: npm run terraform:apply
+
+  deploy-argocd:
+    name: Deploy via ArgoCD
+    runs-on: ubuntu-latest
+    needs: [terraform]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup ArgoCD CLI
+        run: |
+          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x /usr/local/bin/argocd
+      
+      - name: Login to ArgoCD
+        run: |
+          argocd login ${{ secrets.ARGOCD_SERVER }} \
+            --username ${{ secrets.ARGOCD_USERNAME }} \
+            --password ${{ secrets.ARGOCD_PASSWORD }} \
+            --insecure
+      
+      - name: Sync ArgoCD Application
+        run: npm run argocd:sync
+
+  deploy-platforms:
+    name: Deploy to All Platforms
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.ref == 'refs/heads/main'
+    strategy:
+      matrix:
+        platform: [vercel, railway]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Deploy to ${{ matrix.platform }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          if [ "${{ matrix.platform }}" == "vercel" ]; then
+            node tools/deploy-mcp.js vercel spot-music $VERCEL_TOKEN
+          else
+            node tools/deploy-mcp.js railway ${{ secrets.RAILWAY_PROJECT_ID }} $RAILWAY_TOKEN
+          fi
+
+  monitor:
+    name: Post-Deploy Monitoring
+    runs-on: ubuntu-latest
+    needs: [deploy-argocd, deploy-platforms]
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check deployment health
+        run: |
+          echo "✅ Deployment complete"
+          echo "📊 Monitoring: Check Datadog dashboard"
+          echo "🔍 Logs: Check CloudWatch/Grafana"

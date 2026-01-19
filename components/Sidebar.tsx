@@ -98,8 +98,9 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Sidebar Container - Independent element, cannot go above TopBar */}
+      {/* Sidebar Container - Responsive for mobile */}
       <div 
+        className={`hidden md:flex ${leftSidebarCollapsed ? 'w-16' : ''}`}
         style={{
           position: 'fixed',
           left: 0,

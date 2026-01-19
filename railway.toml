@@ -20,7 +20,7 @@ restartPolicyMaxRetries = 10
 
 # Build configuration
 [build.buildCommand]
-command = "npm run build"
+command = "prisma generate && npm run build"
 
 # Environment variables (set in Railway dashboard)
 # Required:

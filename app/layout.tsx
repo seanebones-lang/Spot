@@ -13,6 +13,12 @@ export const metadata: Metadata = {
     shortcut: '/empulseheart.png',
     apple: '/empulseheart.png',
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
 };
 
 export default function RootLayout({
