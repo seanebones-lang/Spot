@@ -85,13 +85,14 @@ export default function RightSidebar() {
       >
       {rightSidebarOpen && (
         <>
-          {/* Close Button */}
+          {/* Close Button - Enhanced Visibility */}
           <button
             onClick={() => setRightSidebarOpen(false)}
-            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-spotify-text-gray hover:text-white hover:bg-spotify-light-gray rounded-full transition-colors"
+            className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-white bg-empulse-purple hover:bg-empulse-purple/90 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 z-50 shadow-lg"
+            title="Close panel"
             aria-label="Close sidebar"
           >
-            <X size={20} />
+            <X size={20} strokeWidth={2.5} />
           </button>
 
           {/* View Toggle Buttons */}

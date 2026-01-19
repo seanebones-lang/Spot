@@ -117,17 +117,25 @@ export default function Sidebar() {
           transition: isResizing ? 'none' : 'all 300ms ease-in-out'
         }}
       >
-      {/* Toggle Button */}
+      {/* Toggle Button - More Visible */}
       <button
         onClick={toggleLeftSidebar}
-        className="absolute -right-3 w-6 h-6 bg-spotify-light-gray hover:bg-spotify-light-gray/80 rounded-full flex items-center justify-center text-white shadow-lg z-10 transition-colors"
-        style={{ top: '20px' }}
+        className="absolute w-8 h-8 bg-empulse-purple hover:bg-empulse-purple/90 rounded-full flex items-center justify-center text-white shadow-2xl z-50 transition-all duration-200 hover:scale-110 active:scale-95"
+        style={{
+          right: '-16px',
+          top: '16px',
+          border: '2px solid #000000',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+        title={leftSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         aria-label={leftSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
       >
         {leftSidebarCollapsed ? (
-          <ChevronRight size={16} />
+          <ChevronRight size={18} strokeWidth={2.5} />
         ) : (
-          <ChevronLeft size={16} />
+          <ChevronLeft size={18} strokeWidth={2.5} />
         )}
       </button>
 
