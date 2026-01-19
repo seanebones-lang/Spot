@@ -6,8 +6,8 @@ FROM base AS deps
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json package-lock.json* .npmrc* ./
+RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
 # Rebuild the source code only when needed
 FROM base AS builder
