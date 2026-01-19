@@ -1,3 +1,97 @@
 {
-    "gitflow.disableOnRepo": true
+    "gitflow.disableOnRepo": true,
+    "terraform.experimentalFeatures.enable": true,
+    "terraform.validateOnSave": true,
+    "terraform.formatOnSave": true,
+    "terraform.languageServer.enableCompletion": true,
+    "terraform.indexing": {
+        "enabled": true,
+        "pathPatterns": ["/**/*.tf", "/**/*.tfvars"]
+    },
+    "terraform.linting.enabled": true,
+    "terraform.hcl2.configuration.enableTelemetry": false,
+    "vim.enabled": true,
+    "vim.useSystemClipboard": true,
+    "vim.highlightedyank.enable": true,
+    "vim.enableCommandHistory": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>", "t"],
+            "commands": ["terraform.validate"]
+        },
+        {
+            "before": ["<leader>", "p"],
+            "commands": ["terraform.plan"]
+        },
+        {
+            "before": ["<leader>", "a"],
+            "commands": ["terraform.apply"]
+        },
+        {
+            "before": ["g", "t"],
+            "commands": ["terraform.show"]
+        },
+        {
+            "before": ["K"],
+            "commands": ["terraform.hover"]
+        }
+    ],
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>", "e"],
+            "commands": [
+                {
+                    "command": "continue.focusAndEnterPrompt",
+                    "args": "@Eleven MCP refactor selection"
+                }
+            ]
+        },
+        {
+            "before": ["<leader>", "s"],
+            "commands": [
+                {
+                    "command": "continue.focusAndEnterPrompt",
+                    "args": "@Eleven MCP /swarm analyze selection"
+                }
+            ]
+        },
+        {
+            "before": ["<leader>", "d"],
+            "commands": [
+                {
+                    "command": "continue.focusAndEnterPrompt",
+                    "args": "@Eleven MCP /debug selection"
+                }
+            ]
+        }
+    ],
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true,
+        "**/.next/**": true,
+        "**/.terraform/**": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/.next": true,
+        "**/.terraform": true,
+        "**/terraform.tfstate*": true
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "[terraform]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": true
+    },
+    "[terraform-vars]": {
+        "editor.defaultFormatter": "hashicorp.terraform"
+    }
 }
