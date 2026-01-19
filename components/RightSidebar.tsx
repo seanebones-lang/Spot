@@ -73,13 +73,14 @@ export default function RightSidebar() {
     <>
       <div
         className={cn(
-          "fixed right-0 bottom-[90px] bg-spotify-dark-gray z-40 overflow-y-auto sidebar-scrollbar",
+          "fixed right-0 bg-spotify-dark-gray z-40 overflow-y-auto sidebar-scrollbar",
           rightSidebarOpen ? "translate-x-0" : "translate-x-full",
           isResizing ? "" : "transition-transform duration-300 ease-in-out"
         )}
-        style={{ 
+        style={{
           width: `${rightSidebarWidth}px`,
           top: '56px',
+          bottom: window.innerWidth < 768 ? '60px' : '90px',
           borderLeft: '1px solid #000000'
         }}
       >

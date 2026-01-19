@@ -105,14 +105,14 @@ export default function Sidebar() {
           position: 'fixed',
           left: 0,
           top: '56px',
-          bottom: '90px',
+          bottom: window.innerWidth < 768 ? '60px' : '90px',
           width: `${leftSidebarWidth}px`,
           backgroundColor: '#181818',
           zIndex: 40,
           flexShrink: 0,
           flexGrow: 0,
           borderRight: '1px solid #000000',
-          display: 'flex',
+          display: window.innerWidth < 768 ? 'none' : 'flex',
           flexDirection: 'column',
           transition: isResizing ? 'none' : 'all 300ms ease-in-out'
         }}
