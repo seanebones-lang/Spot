@@ -75,13 +75,11 @@ export default function TopBar() {
 
   return (
     <div 
-      className="fixed top-0 left-0 right-0 z-50"
+      className="fixed top-0 left-0 right-0 z-[2] bg-black"
       style={{ 
         height: '56px',
-        backgroundColor: '#000000',
         width: '100vw',
-        overflow: 'visible',
-        zIndex: 2
+        overflow: 'visible'
       }}
     >
       <div 
@@ -95,21 +93,15 @@ export default function TopBar() {
           width: '100%'
         }}
       >
-        {/* Logo - Independent element (Spotify: top=16px, left=16px, width=88px, height=24px) */}
+        {/* Logo - Exact Spotify: height=24px, hover opacity=0.7, transition=200ms */}
         <Link 
           href="/"
-          className={cn(
-            "flex items-center justify-center transition-opacity duration-200 gpu-accelerated",
-            pathname === '/' && "active"
-          )}
+          className="flex items-center justify-center transition-opacity duration-200 gpu-accelerated flex-shrink-0 flex-grow-0"
           style={{
             height: '24px',
             width: '113px',
-            position: 'static',
-            opacity: 1,
-            flexShrink: 0,
-            flexGrow: 0,
-            flexBasis: '113px'
+            flexBasis: '113px',
+            opacity: 1
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.opacity = '0.7';
@@ -117,6 +109,7 @@ export default function TopBar() {
           onMouseLeave={(e) => {
             e.currentTarget.style.opacity = '1';
           }}
+          aria-label="EmPulse Music Home"
         >
           <Image
             src="/seanfy.png"
@@ -124,11 +117,10 @@ export default function TopBar() {
             width={113}
             height={34}
             priority
+            className="object-contain inline-block"
             style={{
               width: '113px',
-              height: '24px',
-              objectFit: 'contain',
-              display: 'inline-block'
+              height: '24px'
             }}
           />
         </Link>
@@ -165,25 +157,17 @@ export default function TopBar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="transition-colors duration-200"
+                  className={cn(
+                    "transition-colors duration-200 flex-shrink-0 whitespace-nowrap",
+                    "text-[14px] leading-4 font-bold",
+                    isActive ? "text-white" : "text-spotify-text-gray hover:text-white"
+                  )}
                   style={{ 
                     fontSize: '14px',
                     fontWeight: 700,
-                    lineHeight: '16px',
-                    color: isActive ? '#FFFFFF' : '#B3B3B3',
-                    flexShrink: 0,
-                    whiteSpace: 'nowrap'
+                    lineHeight: '16px'
                   }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = '#FFFFFF';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = '#B3B3B3';
-                    }
-                  }}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {link.label}
                 </Link>
@@ -242,22 +226,13 @@ export default function TopBar() {
                   setShowSearchDropdown(false);
                 }
               }}
+              className="w-full h-10 bg-white rounded-full pl-10 pr-4 text-black text-sm leading-5 font-normal border-none outline-none font-inherit placeholder:text-[#121212] placeholder:opacity-60"
               style={{
-                width: '100%',
-                height: '40px',
-                backgroundColor: '#FFFFFF',
                 borderRadius: '500px',
-                paddingLeft: '40px',
-                paddingRight: '16px',
-                color: '#000000',
                 fontSize: '14px',
-                lineHeight: '20px',
-                fontWeight: 400,
-                border: 'none',
-                outline: 'none',
-                fontFamily: 'inherit'
+                lineHeight: '20px'
               }}
-              className="placeholder:text-[#121212] placeholder:opacity-[0.6]"
+              aria-label="Search for songs, artists, albums, or playlists"
             />
           <SearchDropdown
             query={searchQuery}
@@ -331,110 +306,58 @@ export default function TopBar() {
           </Link>
         )}
 
-        {/* Downloads Link */}
+        {/* Downloads Link - Exact Spotify: 32px × 32px, hover bg rgba(255,255,255,0.1) */}
         <Link
           href="/downloads"
-          className="flex items-center justify-center rounded-full transition-colors duration-200"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: pathname === '/downloads' ? '#FFFFFF' : '#B3B3B3',
-            backgroundColor: pathname === '/downloads' ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-          }}
+          className={cn(
+            "flex items-center justify-center rounded-full transition-colors duration-200",
+            "w-8 h-8",
+            pathname === '/downloads' 
+              ? "text-white bg-white/10" 
+              : "text-spotify-text-gray hover:text-white hover:bg-white/10"
+          )}
           title="Your Downloads"
           aria-label="Downloads"
-          onMouseEnter={(e) => {
-            if (pathname !== '/downloads') {
-              e.currentTarget.style.color = '#FFFFFF';
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (pathname !== '/downloads') {
-              e.currentTarget.style.color = '#B3B3B3';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
         >
-          <Download size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
+          <Download size={20} className="w-5 h-5" aria-hidden="true" />
         </Link>
 
-        {/* Notifications */}
+        {/* Notifications - Exact Spotify: 32px × 32px, hover bg rgba(255,255,255,0.1) */}
         <button
-          className="flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: '#B3B3B3',
-            backgroundColor: 'transparent'
-          }}
+          className="flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none w-8 h-8 text-spotify-text-gray hover:text-white hover:bg-white/10"
           title="Notifications"
           aria-label="Notifications"
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = '#FFFFFF';
-            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = '#B3B3B3';
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }}
         >
-          <Bell size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
+          <Bell size={20} className="w-5 h-5" aria-hidden="true" />
         </button>
 
-        {/* Settings Quick Access */}
+        {/* Settings Quick Access - Exact Spotify: 32px × 32px */}
         <Link
           href="/settings"
-          className="flex items-center justify-center rounded-full transition-colors duration-200"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: pathname?.startsWith('/settings') ? '#FFFFFF' : '#B3B3B3',
-            backgroundColor: pathname?.startsWith('/settings') ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-          }}
+          className={cn(
+            "flex items-center justify-center rounded-full transition-colors duration-200 w-8 h-8",
+            pathname?.startsWith('/settings')
+              ? "text-white bg-white/10"
+              : "text-spotify-text-gray hover:text-white hover:bg-white/10"
+          )}
           title="Settings"
           aria-label="Settings"
-          onMouseEnter={(e) => {
-            if (!pathname?.startsWith('/settings')) {
-              e.currentTarget.style.color = '#FFFFFF';
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!pathname?.startsWith('/settings')) {
-              e.currentTarget.style.color = '#B3B3B3';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
         >
-          <Settings size={20} style={{ width: '20px', height: '20px', opacity: 1 }} aria-hidden="true" />
+          <Settings size={20} className="w-5 h-5" aria-hidden="true" />
         </Link>
 
-        {/* Keyboard Shortcuts Button */}
+        {/* Keyboard Shortcuts Button - Exact Spotify: 32px × 32px */}
         <button
           data-tour="keyboard-shortcuts"
           onClick={() => setShortcutsOpen(true)}
-          className="flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: shortcutsOpen ? '#FFFFFF' : '#B3B3B3',
-            backgroundColor: shortcutsOpen ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-          }}
+          className={cn(
+            "flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none w-8 h-8",
+            shortcutsOpen
+              ? "text-white bg-white/10"
+              : "text-spotify-text-gray hover:text-white hover:bg-white/10"
+          )}
           title="Keyboard Shortcuts (Ctrl+/)"
           aria-label="Keyboard Shortcuts"
-          onMouseEnter={(e) => {
-            if (!shortcutsOpen) {
-              e.currentTarget.style.color = '#FFFFFF';
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!shortcutsOpen) {
-              e.currentTarget.style.color = '#B3B3B3';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
         >
           <svg 
             width="20" 
@@ -523,35 +446,22 @@ export default function TopBar() {
           <span className="hidden sm:inline" style={{ opacity: 1 }}>Affirmations</span>
         </Link>
 
-        {/* Right Sidebar Toggle */}
+        {/* Right Sidebar Toggle - Exact Spotify: 32px × 32px */}
         <button
           onClick={toggleRightSidebar}
-          className="flex items-center justify-center rounded-full transition-colors duration-200"
-          style={{
-            width: '32px',
-            height: '32px',
-            color: rightSidebarOpen ? '#FFFFFF' : '#B3B3B3',
-            backgroundColor: rightSidebarOpen ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-          }}
+          className={cn(
+            "flex items-center justify-center rounded-full transition-colors duration-200 w-8 h-8",
+            rightSidebarOpen
+              ? "text-white bg-white/10"
+              : "text-spotify-text-gray hover:text-white hover:bg-white/10"
+          )}
           aria-label={rightSidebarOpen ? "Close right sidebar" : "Open right sidebar"}
           title={rightSidebarOpen ? "Close sidebar" : "Open sidebar"}
-          onMouseEnter={(e) => {
-            if (!rightSidebarOpen) {
-              e.currentTarget.style.color = '#FFFFFF';
-              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!rightSidebarOpen) {
-              e.currentTarget.style.color = '#B3B3B3';
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }
-          }}
         >
           {rightSidebarOpen ? (
-            <X size={20} style={{ width: '20px', height: '20px', opacity: 1 }} />
+            <X size={20} className="w-5 h-5" />
           ) : (
-            <PanelRight size={20} style={{ width: '20px', height: '20px', opacity: 1 }} />
+            <PanelRight size={20} className="w-5 h-5" />
           )}
         </button>
 
