@@ -29,7 +29,14 @@
     "deploy:railway": "bash scripts/deploy.sh railway",
     "deploy:mcp": "node tools/deploy-mcp.js",
     "prepare": "husky",
-    "test:mcp": "node tools/tester-mcp.js"
+    "test:mcp": "node tools/tester-mcp.js",
+    "ml": "node tools/ml-mcp.js",
+    "mobile": "node tools/mobile-mcp.js",
+    "security": "node tools/security-mcp.js",
+    "nx:build": "nx build",
+    "nx:test": "nx test",
+    "turbo:build": "turbo build",
+    "turbo:test": "turbo test"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.971.0",
