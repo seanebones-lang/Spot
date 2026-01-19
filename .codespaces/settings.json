@@ -1,0 +1,6 @@
+{
+  "codespaces.machine": "basicLinux32gb",
+  "codespaces.prebuilds": {
+    "usecase": "embeddings"
+  }
+}

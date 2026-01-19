@@ -1,0 +1,216 @@
+name: Pre-Deployment Validation
+
+on:
+  pull_request:
+    branches: [main, fix-all-complete-v1]
+  push:
+    branches: [main, fix-all-complete-v1]
+    paths:
+      - 'app/**'
+      - 'components/**'
+      - 'lib/**'
+      - 'stores/**'
+      - 'types/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.js'
+      - 'tsconfig.json'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+  SKIP_ENV_VALIDATION: 'true'
+
+jobs:
+  # Comprehensive validation before any deployment
+  validate:
+    name: Pre-Deployment Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Verify package files
+        run: |
+          echo "Checking package.json and package-lock.json..."
+          if [ ! -f "package.json" ]; then
+            echo "❌ package.json not found"
+            exit 1
+          fi
+          if [ ! -f "package-lock.json" ]; then
+            echo "❌ package-lock.json not found"
+            exit 1
+          fi
+          echo "✅ Package files verified"
+
+      - name: Install dependencies
+        run: npm ci
+        continue-on-error: false
+
+      - name: Verify dependencies installed
+        run: |
+          if [ ! -d "node_modules" ]; then
+            echo "❌ node_modules not found"
+            exit 1
+          fi
+          echo "✅ Dependencies installed"
+
+      - name: TypeScript type check
+        run: npx tsc --noEmit
+        continue-on-error: false
+
+      - name: ESLint check
+        run: npm run lint
+        continue-on-error: false
+
+      - name: Run unit tests
+        run: npm test -- --coverage --watchAll=false
+        continue-on-error: false
+
+      - name: Check test coverage
+        run: |
+          COVERAGE=$(npm test -- --coverage --watchAll=false --json 2>/dev/null | grep -o '"total":{"lines":{"pct":[0-9.]*' | grep -o '[0-9.]*$' || echo "0")
+          echo "Test coverage: ${COVERAGE}%"
+          if (( $(echo "$COVERAGE < 30" | bc -l) )); then
+            echo "⚠️ Warning: Test coverage below 30%"
+          else
+            echo "✅ Test coverage acceptable"
+          fi
+        continue-on-error: true
+
+      - name: Verify Next.js config
+        run: |
+          if [ ! -f "next.config.js" ]; then
+            echo "❌ next.config.js not found"
+            exit 1
+          fi
+          node -e "require('./next.config.js')"
+          echo "✅ Next.js config valid"
+
+      - name: Verify TypeScript config
+        run: |
+          if [ ! -f "tsconfig.json" ]; then
+            echo "❌ tsconfig.json not found"
+            exit 1
+          fi
+          npx tsc --showConfig > /dev/null
+          echo "✅ TypeScript config valid"
+
+      - name: Check for common errors
+        run: |
+          echo "Checking for common issues..."
+          
+          # Check for console.log in production code
+          CONSOLE_LOGS=$(grep -r "console\.log" app/ components/ lib/ --include="*.ts" --include="*.tsx" 2>/dev/null | wc -l || echo "0")
+          if [ "$CONSOLE_LOGS" -gt 10 ]; then
+            echo "⚠️ Warning: Found $CONSOLE_LOGS console.log statements"
+          else
+            echo "✅ Console.log check passed"
+          fi
+          
+          # Check for TODO/FIXME
+          TODOS=$(grep -ri "TODO\|FIXME" app/ components/ lib/ --include="*.ts" --include="*.tsx" 2>/dev/null | wc -l || echo "0")
+          echo "Found $TODOS TODO/FIXME comments"
+          
+        continue-on-error: true
+
+      - name: Build application
+        run: npm run build
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: 1
+        continue-on-error: false
+
+      - name: Verify build output
+        run: |
+          if [ ! -d ".next" ]; then
+            echo "❌ Build output (.next) not found"
+            exit 1
+          fi
+          if [ ! -f ".next/standalone/server.js" ] && [ ! -f ".next/BUILD_ID" ]; then
+            echo "⚠️ Warning: Unexpected build output structure"
+          else
+            echo "✅ Build output verified"
+          fi
+        continue-on-error: true
+
+      - name: Check bundle size
+        run: |
+          if [ -f ".next/analyze/client.json" ]; then
+            echo "Bundle analysis available"
+          else
+            echo "⚠️ Bundle analysis not available (run build with ANALYZE=true)"
+          fi
+        continue-on-error: true
+
+      - name: Validate deployment configs
+        run: |
+          echo "Validating deployment configurations..."
+          
+          # Check Railway config
+          if [ -f "railway.toml" ]; then
+            echo "✅ railway.toml exists"
+          else
+            echo "⚠️ railway.toml not found"
+          fi
+          
+          # Check Vercel config
+          if [ -f "vercel.json" ]; then
+            node -e "require('./vercel.json')" 2>/dev/null && echo "✅ vercel.json valid" || echo "⚠️ vercel.json invalid"
+          else
+            echo "⚠️ vercel.json not found"
+          fi
+          
+          # Check Dockerfile
+          if [ -f "Dockerfile" ]; then
+            echo "✅ Dockerfile exists"
+          else
+            echo "⚠️ Dockerfile not found"
+          fi
+        continue-on-error: true
+
+      - name: Check for security vulnerabilities
+        run: |
+          echo "Checking for known vulnerabilities..."
+          npm audit --audit-level=high || true
+        continue-on-error: true
+
+      - name: Validate workflow files
+        run: |
+          echo "Validating GitHub Actions workflows..."
+          for workflow in .github/workflows/*.yml .github/workflows/*.yaml; do
+            if [ -f "$workflow" ]; then
+              # Basic YAML syntax check
+              python3 -c "import yaml; yaml.safe_load(open('$workflow'))" 2>/dev/null && echo "✅ $workflow valid" || echo "⚠️ $workflow invalid"
+            fi
+          done
+        continue-on-error: true
+
+      - name: Validation summary
+        if: always()
+        run: |
+          echo "## Pre-Deployment Validation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Checks Performed:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ TypeScript type checking" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ ESLint validation" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Unit tests" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Build verification" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Configuration validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "🎉 **All validation checks passed!** Ready for deployment." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Validation failed!** Fix errors before deploying." >> $GITHUB_STEP_SUMMARY
+          fi

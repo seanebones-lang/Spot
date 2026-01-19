@@ -79,10 +79,30 @@ export class AudiophileAudioPipeline {
     
     this.audioElement = audioElement;
     
-    // Create AudioContext with high sample rate for audiophile quality
+    // Create AudioContext with optimal sample rate for audiophile quality
+    // Use the highest supported sample rate (up to 192kHz for true audiophile)
+    // Fallback to 96kHz, then 48kHz, then browser default
+    const preferredSampleRates = [192000, 96000, 48000];
+    let sampleRate = 44100; // Default
+    
+    // Try to use highest supported rate
+    for (const rate of preferredSampleRates) {
+      try {
+        const testContext = new (window.AudioContext || (window as any).webkitAudioContext)({
+          sampleRate: rate
+        });
+        sampleRate = rate;
+        testContext.close();
+        break;
+      } catch (e) {
+        // Rate not supported, try next
+        continue;
+      }
+    }
+    
     this.audioContext = new AudioContext({
-      sampleRate: 96000, // High sample rate for quality
-      latencyHint: 'interactive' // Low latency
+      sampleRate: sampleRate, // Optimal sample rate for FLAC lossless
+      latencyHint: 'interactive' // Low latency for responsive playback
     });
     
     // Resume if suspended (autoplay restrictions)
@@ -104,10 +124,13 @@ export class AudiophileAudioPipeline {
       return;
     }
     
-    // Create analyser node for visualization (2048 FFT for high resolution)
+    // Create analyser node for visualization (4096 FFT for maximum resolution)
+    // Higher FFT = better frequency resolution for audiophile analysis
     this.analyser = this.audioContext.createAnalyser();
-    this.analyser.fftSize = 2048;
+    this.analyser.fftSize = 4096; // Maximum resolution for spectrum analysis
     this.analyser.smoothingTimeConstant = 0.8; // Smooth visualizations
+    this.analyser.minDecibels = -90; // Extended dynamic range
+    this.analyser.maxDecibels = -10; // Prevent clipping in visualization
     
     // Initialize frequency data buffers
     const bufferLength = this.analyser.frequencyBinCount;
@@ -117,13 +140,14 @@ export class AudiophileAudioPipeline {
     // Create 10-band equalizer
     this.createEQChain();
     
-    // Create dynamics compressor for normalization
+    // Create dynamics compressor for normalization (optional, can be disabled for pure audiophile mode)
+    // For lossless FLAC, we want minimal processing - compressor is subtle
     this.compressor = this.audioContext.createDynamicsCompressor();
-    this.compressor.threshold.value = -24;
-    this.compressor.knee.value = 30;
-    this.compressor.ratio.value = 12;
-    this.compressor.attack.value = 0.003;
-    this.compressor.release.value = 0.25;
+    this.compressor.threshold.value = -30; // Lower threshold for subtle compression
+    this.compressor.knee.value = 10; // Narrower knee for more transparent compression
+    this.compressor.ratio.value = 4; // Lower ratio for less aggressive compression
+    this.compressor.attack.value = 0.001; // Faster attack for transparency
+    this.compressor.release.value = 0.1; // Faster release for natural sound
     
     // Create master gain node
     this.gain = this.audioContext.createGain();

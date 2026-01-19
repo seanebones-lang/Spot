@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "hashicorp.terraform",
+    "hashicorp.hcl",
+    "vscodevim.vim",
+    "ms-vscode.vscode-typescript-next",
+    "ms-vscode.vscode-json",
+    "ms-azuretools.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss"
+  ],
+  "unwantedRecommendations": []
+}

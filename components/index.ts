@@ -57,3 +57,9 @@ export type {
   ModalFooterProps,
   ModalHeaderProps
 } from './Modal';
+
+// Audio Components
+export { default as Equalizer } from './Equalizer';
+export { default as AudioVisualizer } from './AudioVisualizer';
+export { default as AudiophileVisualizer } from './AudiophileVisualizer';
+export type { VisualizerType, VisualizerColorScheme } from './AudioVisualizer';
