@@ -51,9 +51,9 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     }
 
     const fromEmail =
-      options.from || process.env.EMAIL_FROM || "noreply@empulsemusic.com";
+      options.from || process.env.EMAIL_FROM || "noreply@spotmusic.com";
     const fromName =
-      options.fromName || process.env.EMAIL_FROM_NAME || "EmPulse Music";
+      options.fromName || process.env.EMAIL_FROM_NAME || "Spot Music";
 
     const result = await client.emails.send({
       from: `${fromName} <${fromEmail}>`,
@@ -107,13 +107,13 @@ export async function sendVerificationEmail(
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .button { display: inline-block; padding: 12px 24px; background-color: #7209B7; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+        .button { display: inline-block; padding: 12px 24px; background-color: #1DB954; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
         .footer { margin-top: 30px; font-size: 12px; color: #666; }
       </style>
     </head>
     <body>
       <div class="container">
-        <h1>Welcome to EmPulse Music!</h1>
+        <h1>Welcome to Spot Music!</h1>
         <p>Thank you for signing up. Please verify your email address to activate your account.</p>
         <a href="${verificationUrl}" class="button">Verify Email Address</a>
         <p>Or copy and paste this link into your browser:</p>
@@ -129,7 +129,7 @@ export async function sendVerificationEmail(
 
   return sendEmail({
     to: email,
-    subject: "Verify your EmPulse Music account",
+    subject: "Verify your Spot Music account",
     html,
   });
 }
@@ -156,7 +156,7 @@ export async function sendPasswordResetEmail(
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .button { display: inline-block; padding: 12px 24px; background-color: #7209B7; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+        .button { display: inline-block; padding: 12px 24px; background-color: #1DB954; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
         .footer { margin-top: 30px; font-size: 12px; color: #666; }
         .warning { background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0; }
       </style>
@@ -164,7 +164,7 @@ export async function sendPasswordResetEmail(
     <body>
       <div class="container">
         <h1>Reset Your Password</h1>
-        <p>You requested to reset your password for your EmPulse Music account.</p>
+        <p>You requested to reset your password for your Spot Music account.</p>
         <a href="${resetUrl}" class="button">Reset Password</a>
         <p>Or copy and paste this link into your browser:</p>
         <p><a href="${resetUrl}">${resetUrl}</a></p>
@@ -181,7 +181,7 @@ export async function sendPasswordResetEmail(
 
   return sendEmail({
     to: email,
-    subject: "Reset your EmPulse Music password",
+    subject: "Reset your Spot Music password",
     html,
   });
 }
@@ -209,11 +209,11 @@ export async function sendArtistApplicationConfirmation(
       <div class="container">
         <h1>Artist Application Received</h1>
         <p>Hello ${artistName},</p>
-        <p>Thank you for submitting your artist application to EmPulse Music!</p>
+        <p>Thank you for submitting your artist application to Spot Music!</p>
         <p>We've received your application (ID: ${applicationId}) and our team will review it shortly.</p>
         <p>You'll receive an email notification once your application has been reviewed.</p>
         <div class="footer">
-          <p>Questions? Contact us at support@empulsemusic.com</p>
+          <p>Questions? Contact us at support@spotmusic.com</p>
         </div>
       </div>
     </body>
@@ -222,7 +222,7 @@ export async function sendArtistApplicationConfirmation(
 
   return sendEmail({
     to: email,
-    subject: "Your EmPulse Music Artist Application",
+    subject: "Your Spot Music Artist Application",
     html,
   });
 }

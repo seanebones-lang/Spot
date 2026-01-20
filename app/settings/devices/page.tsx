@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Smartphone, Monitor, Watch, Speaker, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { logger } from "@/lib/logger";
 
 interface Device {
   id: string;
@@ -55,7 +56,7 @@ export default function DevicesSettingsPage() {
 
   const handleTransferPlayback = (deviceId: string) => {
     // In production, transfer playback to device
-    console.log("Transfer playback to device:", deviceId);
+    logger.debug("Transfer playback to device", { deviceId });
   };
 
   return (
@@ -117,7 +118,7 @@ export default function DevicesSettingsPage() {
                 justifyContent: "space-between",
                 gap: "16px",
                 transition: "all 200ms ease-out",
-                border: device.isActive ? "2px solid #7209B7" : "none",
+                border: device.isActive ? "2px solid #1DB954" : "none",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "#282828";
@@ -149,7 +150,7 @@ export default function DevicesSettingsPage() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: device.isActive ? "#7209B7" : "#282828",
+                    backgroundColor: device.isActive ? "#1DB954" : "#282828",
                     flexShrink: 0,
                   }}
                 >
@@ -195,7 +196,7 @@ export default function DevicesSettingsPage() {
                         style={{
                           width: "20px",
                           height: "20px",
-                          color: "#7209B7",
+                          color: "#1DB954",
                           flexShrink: 0,
                         }}
                       />
@@ -316,7 +317,7 @@ export default function DevicesSettingsPage() {
                 width: "48px",
                 height: "24px",
                 borderRadius: "12px",
-                backgroundColor: "#7209B7",
+                backgroundColor: "#1DB954",
                 position: "relative",
                 border: "none",
                 cursor: "pointer",

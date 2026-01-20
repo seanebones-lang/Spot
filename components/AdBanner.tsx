@@ -130,7 +130,7 @@ export default function AdBanner({
               style={{
                 fontSize: "11px",
                 letterSpacing: "0.1em",
-                color: "#7209B7",
+                color: "#1DB954",
               }}
             >
               Public Service Announcement

@@ -7,16 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "spotify-green": "#7209B7", // Changed to Empulse Purple
+        "spotify-green": "#1DB954", // Spotify Green
         "spotify-black": "#000000",
         "spotify-dark": "#121212",
         "spotify-dark-gray": "#181818",
         "spotify-light-gray": "#282828",
         "spotify-text": "#FFFFFF",
         "spotify-text-gray": "#B3B3B3",
-        "empulse-red": "#E63946",
-        "empulse-blue": "#457B9D",
-        "empulse-purple": "#7209B7",
       },
       fontFamily: {
         circular: [

@@ -65,13 +65,13 @@ export default function JournalPage() {
       >
         <div>
           <h1
-            className="text-4xl font-bold mb-2 bg-gradient-to-r from-empulse-purple to-empulse-blue bg-clip-text text-transparent"
+            className="text-4xl font-bold mb-2 bg-gradient-to-r from-spotify-green to-spotify-green bg-clip-text text-transparent"
             style={{
               fontSize: "32px",
               lineHeight: "36px",
               fontWeight: 700,
               marginBottom: "8px",
-              background: "linear-gradient(90deg, #7209B7 0%, #457B9D 100%)",
+              background: "linear-gradient(90deg, #1DB954 0%, #1ed760 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -95,7 +95,7 @@ export default function JournalPage() {
             onClick={() => setIsCreating(true)}
             className="btn-primary"
             style={{
-              backgroundColor: "#7209B7",
+              backgroundColor: "#1DB954",
               color: "#000000",
               fontWeight: 700,
               padding: "12px 24px",
@@ -107,11 +107,11 @@ export default function JournalPage() {
               transition: "all 200ms ease-out",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#8a1dd0";
+              e.currentTarget.style.backgroundColor = "#1ed760";
               e.currentTarget.style.transform = "scale(1.05)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#7209B7";
+              e.currentTarget.style.backgroundColor = "#1DB954";
               e.currentTarget.style.transform = "scale(1)";
             }}
           >
@@ -164,7 +164,7 @@ export default function JournalPage() {
               resize: "vertical",
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = "#7209B7";
+              e.currentTarget.style.borderColor = "#1DB954";
               e.currentTarget.style.borderWidth = "2px";
             }}
             onBlur={(e) => {
@@ -284,11 +284,11 @@ export default function JournalPage() {
               >
                 <BookOpen
                   size={20}
-                  className="text-empulse-purple"
+                  className="text-spotify-green"
                   style={{
                     width: "20px",
                     height: "20px",
-                    color: "#7209B7",
+                    color: "#1DB954",
                     flexShrink: 0,
                   }}
                 />
@@ -326,11 +326,11 @@ export default function JournalPage() {
               </div>
               {entry.shared && (
                 <span
-                  className="px-2 py-1 bg-empulse-blue/20 text-empulse-blue rounded text-xs"
+                  className="px-2 py-1 bg-spotify-green/20 text-spotify-green rounded text-xs"
                   style={{
                     padding: "4px 8px",
                     backgroundColor: "rgba(69, 123, 157, 0.2)",
-                    color: "#457B9D",
+                    color: "#1ed760",
                     borderRadius: "4px",
                     fontSize: "11px",
                     lineHeight: "16px",
@@ -366,11 +366,11 @@ export default function JournalPage() {
                 {entry.feelings.map((feeling) => (
                   <span
                     key={feeling}
-                    className="px-2 py-1 bg-empulse-purple/20 text-empulse-purple rounded text-xs"
+                    className="px-2 py-1 bg-spotify-green/20 text-spotify-green rounded text-xs"
                     style={{
                       padding: "4px 8px",
                       backgroundColor: "rgba(114, 9, 183, 0.2)",
-                      color: "#7209B7",
+                      color: "#1DB954",
                       borderRadius: "4px",
                       fontSize: "11px",
                       lineHeight: "16px",

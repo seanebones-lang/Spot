@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { logger } from "@/lib/logger";
 
 export default function Error({
   error,
@@ -10,7 +11,10 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error);
+    logger.error("Error page caught error", error, {
+      digest: error.digest,
+      stack: error.stack,
+    });
   }, [error]);
 
   return (

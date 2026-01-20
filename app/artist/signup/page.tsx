@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useArtistSignupStore } from "@/stores/artistSignupStore";
+import { logger } from "@/lib/logger";
 import {
   getUserFriendlyError,
   formatErrorWithRecovery,
@@ -208,7 +209,9 @@ export default function ArtistSignupPage() {
       setApprovalStatus("pending");
       setCurrentStep(7);
     } catch (error) {
-      console.error("Signup submission error:", error);
+      logger.error("Signup submission error", error as Error, {
+        step: currentStep,
+      });
       // Use user-friendly error message
       const { message } = formatErrorWithRecovery(error);
       setSubmitError(message);

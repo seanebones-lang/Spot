@@ -1,4 +1,3 @@
-import { MoodTags } from "./mood";
 
 // Legal metadata for royalty and rights management
 export interface Contributor {
@@ -60,7 +59,6 @@ export interface Track {
   duration: number; // in milliseconds
   audioUrl: string;
   coverArt: string;
-  moodTags: MoodTags;
   format?: "WAV" | "FLAC" | "MP3" | "M4A" | "MP4";
   quality?: "lossless" | "high" | "standard" | "data-saver";
   releaseDate?: string;

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePlayerStore } from "@/stores/playerStore";
+import { logger } from "@/lib/logger";
 import { mockData } from "@/lib/data";
 import { Track } from "@/types/track";
 import PlayButton from "@/components/PlayButton";
@@ -40,7 +41,7 @@ export default function HomePage() {
       }
     } catch (err) {
       // localStorage might not be available (e.g., in incognito mode)
-      console.warn("localStorage not available, skipping onboarding check");
+      logger.warn("localStorage not available, skipping onboarding check");
     }
   }, []);
 
@@ -49,11 +50,9 @@ export default function HomePage() {
       e.preventDefault();
       e.stopPropagation();
     }
-    console.log("🎵 handlePlayTrack called:", track.name, track.audioUrl);
-    console.log("🎵 Track data:", {
-      id: track.id,
-      name: track.name,
-      audioUrl: track.audioUrl,
+    logger.debug("handlePlayTrack called", {
+      trackName: track.name,
+      trackId: track.id,
     });
 
     try {
@@ -65,16 +64,19 @@ export default function HomePage() {
 
       // Set as current track first
       setCurrentTrack(track);
-      console.log("✅ Track set in store:", track.name);
+      logger.debug("Track set in store", { trackName: track.name });
 
       // Add to recently played
       addToRecentlyPlayed(track);
 
       // Then set playing - Player component will handle loading
       setIsPlaying(true);
-      console.log("✅ Playing set to true");
+      logger.debug("Playing set to true");
     } catch (error) {
-      console.error("❌ Error in handlePlayTrack:", error);
+      logger.error("Error in handlePlayTrack", error as Error, {
+        trackId: track.id,
+        trackName: track.name,
+      });
       setError("Failed to play track. Please try again.");
     }
   };
@@ -206,7 +208,7 @@ export default function HomePage() {
                       style={{
                         top: "8px",
                         right: "8px",
-                        backgroundColor: "#7209B7",
+                        backgroundColor: "#1DB954",
                         borderRadius: "50%",
                         padding: "4px",
                         zIndex: 1,
@@ -492,7 +494,7 @@ export default function HomePage() {
                       style={{
                         top: "8px",
                         right: "8px",
-                        backgroundColor: "#7209B7",
+                        backgroundColor: "#1DB954",
                         borderRadius: "50%",
                         padding: "4px",
                         zIndex: 1,
@@ -528,7 +530,7 @@ export default function HomePage() {
                     lineHeight: "20px",
                     fontWeight: 600,
                     color:
-                      currentTrack?.id === track.id ? "#7209B7" : "#FFFFFF",
+                      currentTrack?.id === track.id ? "#1DB954" : "#FFFFFF",
                     marginBottom: "4px",
                   }}
                 >
@@ -793,7 +795,7 @@ export default function HomePage() {
                     borderRadius: "4px",
                     marginBottom: "12px",
                     background:
-                      "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+                      "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

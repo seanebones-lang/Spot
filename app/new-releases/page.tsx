@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { mockData } from "@/lib/data";
+import { logger } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 import { Album } from "@/types/album";
 
@@ -58,16 +59,14 @@ export default function NewReleasesPage() {
               )
               .reverse(); // Newest first
 
-            console.log(
-              "📥 [New Releases] Loaded",
-              published.length,
-              "published releases",
-            );
+            logger.info("Loaded published releases", {
+              count: published.length,
+            });
             setPublishedReleases(published);
           }
         }
       } catch (e) {
-        console.error("Error loading published releases:", e);
+        logger.error("Error loading published releases", e as Error);
       }
     };
 
@@ -234,7 +233,7 @@ export default function NewReleasesPage() {
                     className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
                     style={{
                       background:
-                        "linear-gradient(135deg, #7209B7 0%, #181818 100%)",
+                        "linear-gradient(135deg, #1DB954 0%, #181818 100%)",
                       borderRadius: "4px",
                     }}
                   >
@@ -339,7 +338,7 @@ export default function NewReleasesPage() {
                     className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
                     style={{
                       background:
-                        "linear-gradient(135deg, #7209B7 0%, #181818 100%)",
+                        "linear-gradient(135deg, #1DB954 0%, #181818 100%)",
                       borderRadius: "4px",
                     }}
                   >

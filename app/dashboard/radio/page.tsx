@@ -231,9 +231,9 @@ export default function RadioDashboardPage() {
         </div>
 
         <div
-          className="bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg p-6 text-white"
+          className="bg-gradient-to-br from-spotify-green to-spotify-green rounded-lg p-6 text-white"
           style={{
-            background: "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+            background: "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
             borderRadius: "8px",
             padding: "24px",
             color: "#FFFFFF",

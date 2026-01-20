@@ -1,5 +1,5 @@
 /**
- * Share utility functions for EmPulse Music
+ * Share utility functions for Spot Music
  * Supports Web Share API and fallback to clipboard
  */
 
@@ -18,7 +18,7 @@ export async function shareContent(options: ShareOptions): Promise<boolean> {
 
   const shareData: ShareData = {
     title,
-    text: text || `Check out this ${type} on EmPulse Music`,
+    text: text || `Check out this ${type} on Spot Music`,
     url,
   };
 
@@ -57,7 +57,7 @@ export function generateShareUrl(
   const baseUrl =
     typeof window !== "undefined"
       ? window.location.origin
-      : "https://empulse.music";
+      : "https://spot.music";
   return `${baseUrl}/${type}/${id}`;
 }
 
@@ -86,7 +86,7 @@ export function generateEmbedCode(
   const baseUrl =
     typeof window !== "undefined"
       ? window.location.origin
-      : "https://empulse.music";
+      : "https://spot.music";
   const url = `${baseUrl}/${type}/${id}`;
 
   return `<iframe src="${url}?embed=true" width="${width}" height="${height}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;

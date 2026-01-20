@@ -97,7 +97,7 @@ export default function InterviewsPage() {
                   style={{
                     width: "16px",
                     height: "16px",
-                    color: "#7209B7",
+                    color: "#1DB954",
                     flexShrink: 0,
                   }}
                 />

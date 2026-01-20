@@ -53,7 +53,7 @@ const tiers = [
     price: "$14.99",
     period: "month",
     icon: Mic2,
-    color: "bg-empulse-purple",
+    color: "bg-spotify-green",
     features: [
       "Everything in Premium",
       "Upload unlimited tracks",

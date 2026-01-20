@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDropzone } from "react-dropzone";
+import { logger } from "@/lib/logger";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import {
   Upload,
   FileAudio,
@@ -15,21 +17,7 @@ import {
   Music,
 } from "lucide-react";
 import Link from "next/link";
-import { MoodState } from "@/types/mood";
 import { Contributor, Publisher } from "@/types/track";
-import MoodSelector from "@/components/mood/MoodSelector";
-import FeelingChips from "@/components/mood/FeelingChips";
-import VibeSlider from "@/components/mood/VibeSlider";
-import GenreSelector from "@/components/mood/GenreSelector";
-import { getRAGPipeline } from "@/lib/aiMoodAnalysis";
-
-interface AIMoodSuggestion {
-  mood: MoodState;
-  feelings: string[];
-  vibe: number;
-  genres: string[];
-  confidence: number;
-}
 
 type ReleaseType = "single" | "ep" | "lp";
 
@@ -39,8 +27,6 @@ interface TrackData {
   trackName: string;
   isrc: string;
   trackNumber: number;
-  moodTags?: AIMoodSuggestion | null;
-  aiSuggestions?: AIMoodSuggestion | null;
   hasAdjusted?: boolean;
   accuracyCertified?: boolean;
 }
@@ -110,16 +96,6 @@ export default function UploadPage() {
     agreesToIndemnify: false,
   });
 
-  // AI Mood Suggestions
-  const [aiSuggestions, setAiSuggestions] = useState<AIMoodSuggestion | null>(
-    null,
-  );
-  const [artistMoodTags, setArtistMoodTags] = useState<AIMoodSuggestion | null>(
-    null,
-  );
-  const [hasAdjusted, setHasAdjusted] = useState(false);
-  const [accuracyCertified, setAccuracyCertified] = useState(false);
-  const [isAnalyzingMood, setIsAnalyzingMood] = useState(false);
 
   // Submission state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -142,40 +118,6 @@ export default function UploadPage() {
         const file = acceptedFiles[0];
         setUploadedFile(file);
 
-        // Run RAG mood analysis pipeline with loading state
-        setIsAnalyzingMood(true);
-        try {
-          const ragPipeline = getRAGPipeline();
-          const moodSuggestion = await ragPipeline.analyzeMood(file);
-
-          setAiSuggestions(moodSuggestion);
-          setArtistMoodTags({
-            mood: moodSuggestion.mood,
-            feelings: moodSuggestion.feelings,
-            vibe: moodSuggestion.vibe,
-            genres: moodSuggestion.genres,
-            confidence: moodSuggestion.confidence,
-          });
-        } catch (error) {
-          console.error("Error in RAG mood analysis:", error);
-          // Fallback to default values
-          setAiSuggestions({
-            mood: "Content",
-            feelings: [],
-            vibe: 50,
-            genres: [],
-            confidence: 0.5,
-          });
-          setArtistMoodTags({
-            mood: "Content",
-            feelings: [],
-            vibe: 50,
-            genres: [],
-            confidence: 0.5,
-          });
-        } finally {
-          setIsAnalyzingMood(false);
-        }
       }
     },
   });
@@ -339,40 +281,6 @@ export default function UploadPage() {
     0,
   );
 
-  const handleMoodChange = (field: keyof AIMoodSuggestion, value: any) => {
-    if (artistMoodTags) {
-      const updated = { ...artistMoodTags, [field]: value };
-      setArtistMoodTags(updated);
-      if (aiSuggestions) {
-        const hasChanges =
-          updated.mood !== aiSuggestions.mood ||
-          JSON.stringify(updated.feelings.sort()) !==
-            JSON.stringify(aiSuggestions.feelings.sort()) ||
-          Math.abs(updated.vibe - aiSuggestions.vibe) > 5 ||
-          JSON.stringify(updated.genres.sort()) !==
-            JSON.stringify(aiSuggestions.genres.sort());
-        setHasAdjusted(hasChanges || true);
-      }
-    }
-  };
-
-  const handleToggleFeeling = (feeling: string) => {
-    if (artistMoodTags) {
-      const feelings = artistMoodTags.feelings.includes(feeling)
-        ? artistMoodTags.feelings.filter((f) => f !== feeling)
-        : [...artistMoodTags.feelings, feeling];
-      handleMoodChange("feelings", feelings);
-    }
-  };
-
-  const handleToggleGenre = (genre: string) => {
-    if (artistMoodTags) {
-      const genres = artistMoodTags.genres.includes(genre)
-        ? artistMoodTags.genres.filter((g) => g !== genre)
-        : [...artistMoodTags.genres, genre];
-      handleMoodChange("genres", genres);
-    }
-  };
 
   const canProceed = () => {
     if (step === 0) return releaseType !== null;
@@ -402,9 +310,6 @@ export default function UploadPage() {
     }
     if (step === 4) {
       return Object.values(legalWarranties).every((v) => v === true);
-    }
-    if (step === 5) {
-      return hasAdjusted && accuracyCertified && artistMoodTags !== null;
     }
     return false;
   };
@@ -459,8 +364,6 @@ export default function UploadPage() {
         publishers,
         rightsMetadata,
         legalWarranties,
-        artistMoodTags,
-        aiSuggestions,
       };
       formDataToSend.append("payload", JSON.stringify(metadataPayload));
 
@@ -523,7 +426,6 @@ export default function UploadPage() {
         // Genre, mood, and content flags
         genre: metadata.genre || "",
         subgenre: metadata.subgenre || "",
-        moodTags: artistMoodTags || null,
         explicitContent: rightsMetadata.explicitContent || false,
         // Track data for playback
         trackData:
@@ -565,7 +467,7 @@ export default function UploadPage() {
           allTracks = JSON.parse(existingTracks);
         }
       } catch (e) {
-        console.error("Error loading existing tracks:", e);
+        logger.error("Error loading existing tracks", e as Error);
       }
 
       // Add new release at the beginning
@@ -574,32 +476,27 @@ export default function UploadPage() {
 
       // Save to localStorage - multiple times to ensure it sticks
       localStorage.setItem("artist-tracks", tracksJson);
-      console.log(
-        "✅ [Upload] Saved track to localStorage:",
-        publishedRelease.name,
-      );
-      console.log(
-        "✅ [Upload] Track data:",
-        JSON.stringify(publishedRelease, null, 2),
-      );
-      console.log("✅ [Upload] Total tracks now:", allTracks.length);
+      logger.info("Saved track to localStorage", {
+        trackName: publishedRelease.name,
+        totalTracks: allTracks.length,
+      });
 
       // Immediately verify it was saved
       let verify = localStorage.getItem("artist-tracks");
-      console.log(
-        "✅ [Upload] Verification (1) - localStorage has:",
-        verify ? `${verify.length} chars` : "nothing",
-      );
+      logger.debug("Verification check", {
+        hasData: !!verify,
+        dataLength: verify?.length || 0,
+      });
 
       // Re-save to be absolutely sure (sometimes localStorage can be flaky)
       if (!verify || verify !== tracksJson) {
-        console.warn("⚠️ [Upload] Verification failed, re-saving...");
+        logger.warn("Verification failed, re-saving to localStorage");
         localStorage.setItem("artist-tracks", tracksJson);
         verify = localStorage.getItem("artist-tracks");
-        console.log(
-          "✅ [Upload] Verification (2) - localStorage has:",
-          verify ? `${verify.length} chars` : "nothing",
-        );
+        logger.debug("Re-verification check", {
+          hasData: !!verify,
+          dataLength: verify?.length || 0,
+        });
       }
 
       // Verify the structure is correct
@@ -610,24 +507,23 @@ export default function UploadPage() {
             ? parsedVerify[0]
             : null;
           if (firstTrack && firstTrack.id && firstTrack.name) {
-            console.log("✅ [Upload] Structure verified - first track:", {
-              id: firstTrack.id,
-              name: firstTrack.name,
+            logger.debug("Structure verified", {
+              trackId: firstTrack.id,
+              trackName: firstTrack.name,
             });
           } else {
-            console.error(
-              "❌ [Upload] Structure invalid - first track:",
+            logger.error("Structure invalid", new Error("Invalid track structure"), {
               firstTrack,
-            );
+            });
           }
         } catch (e) {
-          console.error("❌ [Upload] Failed to parse verification:", e);
+          logger.error("Failed to parse verification", e as Error);
         }
       }
 
       // Dispatch custom event to notify dashboard to reload
       window.dispatchEvent(new Event("tracks-updated"));
-      console.log("✅ [Upload] Dispatched tracks-updated event");
+      logger.debug("Dispatched tracks-updated event");
 
       // Success!
       setSubmitSuccess(true);
@@ -637,20 +533,18 @@ export default function UploadPage() {
         // Double-check localStorage one more time before redirect
         const finalCheck = localStorage.getItem("artist-tracks");
         if (finalCheck) {
-          console.log(
-            "✅ [Upload] Final check passed - redirecting to new releases with",
-            JSON.parse(finalCheck).length,
-            "tracks",
-          );
+          logger.debug("Final check passed", {
+            trackCount: JSON.parse(finalCheck).length,
+          });
         } else {
-          console.error(
-            "❌ [Upload] Final check FAILED - localStorage is empty!",
-          );
+          logger.error("Final check failed - localStorage is empty", new Error("localStorage empty"));
         }
         router.push("/new-releases");
       }, 500);
     } catch (error: any) {
-      console.error("Error submitting track:", error);
+      logger.error("Error submitting track", error, {
+        trackName: formData?.metadata?.trackName,
+      });
       setSubmitError(
         error.message || "An unexpected error occurred. Please try again.",
       );
@@ -659,7 +553,7 @@ export default function UploadPage() {
     }
   };
 
-  const totalSteps = step === 0 ? 1 : 7; // Step 0 is release type, then 1-6 for upload flow
+  const totalSteps = step === 0 ? 1 : 6; // Step 0 is release type, then 1-5 for upload flow
   const stepLabels =
     step === 0
       ? ["Release Type"]
@@ -851,17 +745,7 @@ export default function UploadPage() {
             </ul>
           </div>
 
-          {/* Loading state for AI mood analysis */}
-          {isAnalyzingMood && (
-            <div className="mt-6 flex items-center gap-3 p-4 bg-blue-600/20 border border-blue-600/50 rounded-lg">
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-spotify-green" />
-              <span className="text-white text-sm">
-                Analyzing track mood with AI... This may take a few seconds.
-              </span>
-            </div>
-          )}
-
-          {uploadedFile && !isAnalyzingMood && (
+          {uploadedFile && (
             <button
               onClick={() => setStep(2)}
               className="btn-primary w-full mt-6"
@@ -2128,130 +2012,16 @@ export default function UploadPage() {
               disabled={!canProceed()}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Continue to Mood Tags
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Step 5: Mandatory Mood Tag Adjustment */}
-      {step === 5 && (
-        <div className="bg-spotify-light-gray rounded-lg p-8">
-          <div className="flex items-start gap-3 mb-6 bg-red-600/20 border border-red-600/50 rounded-lg p-4">
-            <AlertCircle
-              className="text-red-500 flex-shrink-0 mt-0.5"
-              size={24}
-            />
-            <div>
-              <h3 className="font-bold text-red-500 mb-1">
-                ⚠️ REQUIRED: Mood Tag Adjustment
-              </h3>
-              <p className="text-sm text-white/80">
-                AI has pre-populated mood tags for your track. You{" "}
-                <strong>MUST</strong> review, adjust if needed, and certify
-                accuracy before submitting.
-              </p>
-            </div>
-          </div>
-
-          <h2 className="text-2xl font-bold mb-4">
-            Step 5: Adjust & Certify Mood Tags
-          </h2>
-
-          {/* AI Suggestions Display */}
-          {aiSuggestions && (
-            <div className="mb-6 bg-blue-600/20 border border-blue-600/50 rounded-lg p-4">
-              <h3 className="font-bold mb-2 flex items-center gap-2">
-                AI Suggestions (Confidence:{" "}
-                {Math.round(aiSuggestions.confidence * 100)}%)
-              </h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-spotify-text-gray">Mood:</span>{" "}
-                  <span className="font-medium">{aiSuggestions.mood}</span>
-                </div>
-                <div>
-                  <span className="text-spotify-text-gray">Vibe:</span>{" "}
-                  <span className="font-medium">{aiSuggestions.vibe}%</span>
-                </div>
-                <div>
-                  <span className="text-spotify-text-gray">Feelings:</span>{" "}
-                  <span className="font-medium">
-                    {aiSuggestions.feelings.join(", ")}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-spotify-text-gray">Genres:</span>{" "}
-                  <span className="font-medium">
-                    {aiSuggestions.genres.join(", ")}
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Artist Mood Tag Adjustment Interface */}
-          {artistMoodTags && (
-            <div>
-              <MoodSelector
-                selectedMood={artistMoodTags.mood}
-                onSelect={(mood) => handleMoodChange("mood", mood)}
-              />
-
-              <FeelingChips
-                selectedFeelings={artistMoodTags.feelings}
-                onToggle={handleToggleFeeling}
-              />
-
-              <VibeSlider
-                value={artistMoodTags.vibe}
-                onChange={(vibe) => handleMoodChange("vibe", vibe)}
-              />
-
-              <GenreSelector
-                selectedGenres={artistMoodTags.genres}
-                onToggle={handleToggleGenre}
-              />
-            </div>
-          )}
-
-          {/* Accuracy Certification */}
-          <div className="mt-6 bg-spotify-dark-gray rounded-lg p-4">
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={accuracyCertified}
-                onChange={(e) => setAccuracyCertified(e.target.checked)}
-                className="mt-1 rounded"
-              />
-              <span className="text-sm">
-                <strong className="text-white">I certify</strong> that these
-                mood tags accurately represent this track. I have reviewed the
-                AI suggestions and made necessary adjustments to ensure
-                accuracy.
-              </span>
-            </label>
-          </div>
-
-          <div className="flex gap-4 mt-6">
-            <button onClick={() => setStep(4)} className="btn-secondary">
-              Back
-            </button>
-            <button
-              onClick={() => setStep(6)}
-              disabled={!canProceed()}
-              className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
               Continue to Review
             </button>
           </div>
         </div>
       )}
 
-      {/* Step 6: Review & Submit */}
-      {step === 6 && (
+      {/* Step 5: Review & Submit */}
+      {step === 5 && (
         <div className="bg-spotify-light-gray rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Step 6: Review & Submit</h2>
+          <h2 className="text-2xl font-bold mb-4">Step 5: Review & Submit</h2>
 
           <div className="space-y-6">
             <div>
@@ -2371,35 +2141,6 @@ export default function UploadPage() {
               </div>
             </div>
 
-            {artistMoodTags && (
-              <div>
-                <h3 className="font-bold mb-2">Mood Tags (Certified)</h3>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-empulse-purple/20 text-empulse-purple rounded-full text-sm">
-                    {artistMoodTags.mood}
-                  </span>
-                  {artistMoodTags.feelings.map((feeling) => (
-                    <span
-                      key={feeling}
-                      className="px-3 py-1 bg-empulse-blue/20 text-empulse-blue rounded-full text-sm"
-                    >
-                      {feeling}
-                    </span>
-                  ))}
-                  <span className="px-3 py-1 bg-empulse-red/20 text-empulse-red rounded-full text-sm">
-                    Vibe: {artistMoodTags.vibe}%
-                  </span>
-                  {artistMoodTags.genres.map((genre) => (
-                    <span
-                      key={genre}
-                      className="px-3 py-1 bg-spotify-green/20 text-spotify-green rounded-full text-sm"
-                    >
-                      {genre}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Success Message */}
@@ -2437,7 +2178,7 @@ export default function UploadPage() {
 
           <div className="flex gap-4 mt-6">
             <button
-              onClick={() => setStep(5)}
+              onClick={() => setStep(4)}
               className="btn-secondary"
               disabled={isSubmitting || submitSuccess}
             >
@@ -2462,7 +2203,7 @@ export default function UploadPage() {
       <div className="mt-8 pt-6 border-t border-white/10 text-center">
         <Link
           href="/dashboard/artist"
-          className="text-spotify-green hover:text-[#8a1dd0] text-sm font-medium transition-colors inline-flex items-center gap-1"
+          className="text-spotify-green hover:text-[#1ed760] text-sm font-medium transition-colors inline-flex items-center gap-1"
         >
           ← Back to Artist Dashboard
         </Link>

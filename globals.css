@@ -16,14 +16,14 @@
   --color-text-disabled: #535353;
 
   /* Colors - Accent */
-  --color-accent-primary: #7209b7; /* Empulse Purple */
-  --color-accent-hover: #8a1dd0; /* Lighter purple for hover */
-  --color-accent-active: #5a0789; /* Darker purple for active */
+  --color-accent-primary: #1DB954; /* Spotify Green */
+  --color-accent-hover: #1ed760; /* Lighter green for hover */
+  --color-accent-active: #1aa34a; /* Darker green for active */
 
   /* Colors - Border */
   --color-border-default: #2a2a2a;
   --color-border-hover: #3a3a3a;
-  --color-border-focus: #7209b7; /* Empulse Purple */
+  --color-border-focus: #1DB954; /* Spotify Green */
 
   /* Legacy Color Names (for backwards compatibility) */
   --spotify-green: var(--color-accent-primary);

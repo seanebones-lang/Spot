@@ -29,7 +29,7 @@ export default function ForTheRecordPage() {
           <Newspaper
             size={64}
             className="mx-auto mb-6 text-spotify-green"
-            style={{ color: "#7209B7", marginBottom: "24px" }}
+            style={{ color: "#1DB954", marginBottom: "24px" }}
           />
           <h1
             className="text-5xl font-bold mb-4"
@@ -161,7 +161,7 @@ export default function ForTheRecordPage() {
                   <span
                     className="text-spotify-green inline-flex items-center gap-2 text-sm font-medium"
                     style={{
-                      color: "#7209B7",
+                      color: "#1DB954",
                       fontSize: "14px",
                       fontWeight: 500,
                     }}
@@ -213,7 +213,7 @@ export default function ForTheRecordPage() {
                 <Tag
                   size={20}
                   className="mb-2 text-spotify-green"
-                  style={{ color: "#7209B7", marginBottom: "8px" }}
+                  style={{ color: "#1DB954", marginBottom: "8px" }}
                 />
                 <span
                   className="text-spotify-text-gray text-sm font-medium"
@@ -268,9 +268,9 @@ export default function ForTheRecordPage() {
             </p>
             <Link
               href="/newsletters"
-              className="bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
+              className="bg-spotify-green hover:bg-[#1ed760] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
               style={{
-                backgroundColor: "#7209B7",
+                backgroundColor: "#1DB954",
                 color: "#000000",
                 fontWeight: 700,
                 padding: "12px 24px",

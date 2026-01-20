@@ -113,7 +113,7 @@ export default function BroadcastsPage() {
                   style={{
                     width: "64px",
                     height: "64px",
-                    backgroundColor: "#7209B7",
+                    backgroundColor: "#1DB954",
                     borderRadius: "50%",
                     display: "flex",
                     alignItems: "center",

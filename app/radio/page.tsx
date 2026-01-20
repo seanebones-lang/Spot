@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { Radio, Mic } from "lucide-react";
 import PlayButton from "@/components/PlayButton";
+import { logger } from "@/lib/logger";
 import { useRadioStore, RadioStation } from "@/stores/radioStore";
 import { usePlayerStore } from "@/stores/playerStore";
 import { audioPlayer } from "@/lib/player";
@@ -46,10 +47,10 @@ export default function RadioPage() {
           const data = await response.json();
           setStations(data.stations);
         } else {
-          console.error("Failed to fetch stations");
+          logger.error("Failed to fetch stations", new Error("HTTP error"));
         }
       } catch (error) {
-        console.error("Error fetching stations:", error);
+        logger.error("Error fetching stations", error as Error);
       }
     };
 
@@ -102,20 +103,20 @@ export default function RadioPage() {
 
     // Only load if it's a different station
     if (currentTrack?.id !== radioTrack.id) {
-      console.log("📻 Loading radio station:", currentStation.name);
+      logger.info("Loading radio station", { stationName: currentStation.name });
       useRadioStore.getState().setIsLoading(true);
 
       // Set up load callback with error handling
       let loadTimeout: NodeJS.Timeout | null = null;
 
       audioPlayer.setOnLoadCallback(() => {
-        console.log("✅ Radio station loaded");
+        logger.debug("Radio station loaded");
         if (loadTimeout) clearTimeout(loadTimeout);
         useRadioStore.getState().setIsLoading(false);
         // Check current playing state from store (not closure) to handle async state updates
         const currentIsPlaying = useRadioStore.getState().isPlaying;
         if (currentIsPlaying) {
-          console.log("▶️ Auto-playing radio station");
+          logger.debug("Auto-playing radio station");
           // Small delay to ensure audio is fully ready
           setTimeout(() => {
             audioPlayer.play();
@@ -125,14 +126,12 @@ export default function RadioPage() {
       });
 
       // Log stream URL for debugging
-      console.log("📡 Radio stream URL:", radioTrack.audioUrl);
+      logger.debug("Radio stream URL", { url: radioTrack.audioUrl });
 
       // Set a timeout to detect if loading is taking too long or failing silently
       loadTimeout = setTimeout(() => {
         if (!audioPlayer.isTrackLoaded()) {
-          console.warn(
-            "⚠️ Radio station taking too long to load, checking for errors...",
-          );
+          logger.warn("Radio station taking too long to load");
           useRadioStore
             .getState()
             .setError(
@@ -179,9 +178,7 @@ export default function RadioPage() {
         },
         () => {
           // When stream ends, restart with new random start (seamless loop)
-          console.log(
-            "🔄 Radio stream ended, restarting with new random start",
-          );
+          logger.debug("Radio stream ended, restarting with new random start");
           if (currentStation) {
             restartStream(currentStation, radioTrack.id);
           }
@@ -194,7 +191,7 @@ export default function RadioPage() {
       // Track is already loaded - if playing state changed, ensure playback state matches
       // This handles the case where user clicks play on an already-loaded station
       if (isPlaying && !audioPlayer.isPlaying()) {
-        console.log("▶️ Track already loaded, starting playback");
+        logger.debug("Track already loaded, starting playback");
         audioPlayer.play();
         setPlayerIsPlaying(true);
       }
@@ -224,11 +221,11 @@ export default function RadioPage() {
       isSyncingRef.current = true;
 
       if (isPlaying) {
-        console.log("▶️ Playing radio station");
+        logger.debug("Playing radio station");
         audioPlayer.play();
         setPlayerIsPlaying(true);
       } else {
-        console.log("⏸️ Pausing radio station");
+        logger.debug("Pausing radio station");
         audioPlayer.pause();
         setPlayerIsPlaying(false);
       }
@@ -365,7 +362,7 @@ export default function RadioPage() {
                     borderRadius: "8px",
                     padding: "16px",
                     transition: "background-color 200ms ease-out",
-                    border: isCurrentStation ? "1px solid #7209B7" : "none",
+                    border: isCurrentStation ? "1px solid #1DB954" : "none",
                   }}
                   onMouseEnter={(e) => {
                     if (!isCurrentStation) {
@@ -380,14 +377,14 @@ export default function RadioPage() {
                   onClick={() => handleStationClick(station)}
                 >
                   <div
-                    className="w-full aspect-square bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg mb-3 flex items-center justify-center"
+                    className="w-full aspect-square bg-gradient-to-br from-spotify-green to-spotify-green rounded-lg mb-3 flex items-center justify-center"
                     style={{
                       borderRadius: "4px",
                       aspectRatio: "1",
                       marginBottom: "12px",
                       background: isCurrentStation
-                        ? "linear-gradient(135deg, #7209B7 0%, #8a1dd0 100%)"
-                        : "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+                        ? "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)"
+                        : "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
                     }}
                   >
                     <Radio
@@ -466,10 +463,10 @@ export default function RadioPage() {
             }}
           >
             <div
-              className="w-20 h-20 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg flex items-center justify-center"
+              className="w-20 h-20 bg-gradient-to-br from-spotify-green to-spotify-green rounded-lg flex items-center justify-center"
               style={{
                 borderRadius: "8px",
-                background: "linear-gradient(135deg, #7209B7 0%, #8a1dd0 100%)",
+                background: "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
               }}
             >
               <Radio

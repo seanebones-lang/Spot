@@ -201,7 +201,7 @@ export default function ArtistPage() {
                       style={{
                         width: "4px",
                         height: "4px",
-                        backgroundColor: "#7209B7",
+                        backgroundColor: "#1DB954",
                         borderRadius: "50%",
                       }}
                     ></div>
@@ -235,7 +235,7 @@ export default function ArtistPage() {
                     lineHeight: "20px",
                     fontWeight: 400,
                     color:
-                      currentTrack?.id === track.id ? "#7209B7" : "#FFFFFF",
+                      currentTrack?.id === track.id ? "#1DB954" : "#FFFFFF",
                   }}
                 >
                   {track.name}

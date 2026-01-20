@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logger, generateCorrelationId } from "@/lib/logger";
+import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
 
 /**
  * Voice Commands API
@@ -7,7 +9,32 @@ import { NextRequest, NextResponse } from "next/server";
  */
 
 export async function POST(req: NextRequest) {
+  const correlationId = generateCorrelationId();
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(req);
+    const rateLimit = await checkRateLimit(clientId, "/api/voice/commands");
+    if (!rateLimit.allowed) {
+      logger.warn("Rate limit exceeded for voice commands", {
+        correlationId,
+        clientId,
+      });
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": "30",
+            "X-RateLimit-Remaining": String(rateLimit.remaining),
+            "X-RateLimit-Reset": String(rateLimit.resetTime),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetTime - Date.now()) / 1000),
+            ),
+          },
+        },
+      );
+    }
+
     const { audio, audioUrl } = await req.json();
 
     if (!audio && !audioUrl) {
@@ -29,7 +56,7 @@ export async function POST(req: NextRequest) {
       parameters: command.parameters,
     });
   } catch (error: any) {
-    console.error("Voice command error:", error);
+    logger.error("Voice command error", error, { correlationId });
     return NextResponse.json(
       { error: "Failed to recognize voice command", message: error.message },
       { status: 500 },

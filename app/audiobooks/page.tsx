@@ -29,7 +29,7 @@ export default function AudiobooksPage() {
         <BookOpen
           size={64}
           className="mx-auto mb-6 text-spotify-green"
-          style={{ color: "#7209B7", marginBottom: "24px" }}
+          style={{ color: "#1DB954", marginBottom: "24px" }}
         />
         <h1
           className="text-5xl font-bold mb-4"
@@ -56,9 +56,9 @@ export default function AudiobooksPage() {
         </p>
         <Link
           href="/dashboard/audiobook"
-          className="bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold py-4 px-8 rounded-full transition-colors inline-flex items-center gap-2"
+          className="bg-spotify-green hover:bg-[#1ed760] text-black font-bold py-4 px-8 rounded-full transition-colors inline-flex items-center gap-2"
           style={{
-            backgroundColor: "#7209B7",
+            backgroundColor: "#1DB954",
             color: "#000000",
             fontWeight: 700,
             padding: "16px 32px",

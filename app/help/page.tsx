@@ -25,7 +25,7 @@ const helpCategories = [
     description:
       "Manage Trial, Free, or Premium plans including Duo, Family, and Artist.",
     icon: Settings,
-    color: "from-empulse-purple to-empulse-blue",
+    color: "from-spotify-green to-spotify-green",
   },
   {
     id: "payment",
@@ -275,9 +275,9 @@ export default function HelpPage() {
             fans!
           </p>
           <button
-            className="bg-spotify-green hover:bg-[#8a1dd0] text-black px-8 py-4 rounded-full font-bold text-lg transition-colors"
+            className="bg-spotify-green hover:bg-[#1ed760] text-black px-8 py-4 rounded-full font-bold text-lg transition-colors"
             style={{
-              backgroundColor: "#7209B7",
+              backgroundColor: "#1DB954",
               color: "#000000",
               padding: "16px 32px",
               borderRadius: "500px",
@@ -290,11 +290,11 @@ export default function HelpPage() {
               cursor: "pointer",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#8a1dd0";
+              e.currentTarget.style.backgroundColor = "#1ed760";
               e.currentTarget.style.transform = "scale(1.05)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#7209B7";
+              e.currentTarget.style.backgroundColor = "#1DB954";
               e.currentTarget.style.transform = "scale(1)";
             }}
           >
@@ -354,7 +354,7 @@ export default function HelpPage() {
                 <span
                   className="text-spotify-green group-hover:translate-x-1 transition-transform"
                   style={{
-                    color: "#7209B7",
+                    color: "#1DB954",
                     fontSize: "16px",
                     lineHeight: "24px",
                     transition: "transform 200ms ease-out",
@@ -423,9 +423,9 @@ export default function HelpPage() {
         </div>
 
         {/* AI Assistant CTA */}
-        <div className="mt-16 bg-gradient-to-r from-empulse-purple/20 to-empulse-blue/20 rounded-lg p-8 border border-white/10">
+        <div className="mt-16 bg-gradient-to-r from-spotify-green/20 to-spotify-green/20 rounded-lg p-8 border border-white/10">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-gradient-to-br from-spotify-green to-spotify-green rounded-full flex items-center justify-center">
               <span className="text-2xl">✨</span>
             </div>
             <div>

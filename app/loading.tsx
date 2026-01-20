@@ -3,7 +3,7 @@ export default function Loading() {
     <div className="flex items-center justify-center min-h-screen bg-spotify-dark">
       <div className="text-center">
         <div className="w-16 h-16 border-4 border-spotify-green border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-spotify-text-gray">Loading EmPulse Music...</p>
+        <p className="text-spotify-text-gray">Loading Spot Music...</p>
       </div>
     </div>
   );

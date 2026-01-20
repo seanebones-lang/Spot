@@ -226,7 +226,7 @@ export default function WellnessPage() {
             ].map((org) => (
               <button
                 key={org}
-                className="bg-empulse-purple hover:bg-empulse-purple/80 text-white px-4 py-3 rounded-lg text-left transition-colors"
+                className="bg-spotify-green hover:bg-spotify-green/80 text-white px-4 py-3 rounded-lg text-left transition-colors"
               >
                 <div className="font-semibold">{org}</div>
                 <div className="text-sm opacity-80 mt-1">Donate →</div>

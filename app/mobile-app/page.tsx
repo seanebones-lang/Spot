@@ -89,7 +89,7 @@ export default function MobileAppPage() {
                 <feature.icon
                   size={32}
                   className="mb-4 text-spotify-green"
-                  style={{ color: "#7209B7", marginBottom: "16px" }}
+                  style={{ color: "#1DB954", marginBottom: "16px" }}
                 />
                 <h3
                   className="text-xl font-bold mb-2"
@@ -238,7 +238,7 @@ export default function MobileAppPage() {
                   <CheckCircle2
                     size={20}
                     className="text-spotify-green flex-shrink-0"
-                    style={{ color: "#7209B7" }}
+                    style={{ color: "#1DB954" }}
                   />
                   <span
                     className="text-spotify-text-gray"

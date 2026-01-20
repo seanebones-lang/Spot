@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { Clock, X, Search, Music, User, List, Disc } from "lucide-react";
 import { useSearchStore } from "@/stores/searchStore";
 import { useRouter } from "next/navigation";
@@ -135,7 +135,7 @@ export default function SearchDropdown({
       case "artist":
         return <User size={16} className="text-spotify-blue" />;
       case "playlist":
-        return <List size={16} className="text-empulse-purple" />;
+        return <List size={16} className="text-spotify-green" />;
       case "album":
         return <Disc size={16} className="text-orange-500" />;
       default:
@@ -279,4 +279,6 @@ export default function SearchDropdown({
       )}
     </div>
   );
-}
+});
+
+export default SearchDropdown;

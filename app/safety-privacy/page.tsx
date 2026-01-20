@@ -318,7 +318,7 @@ export default function SafetyPrivacyPage() {
                   <p
                     className="text-spotify-green text-sm font-medium"
                     style={{
-                      color: "#7209B7",
+                      color: "#1DB954",
                       fontSize: "14px",
                       fontWeight: 500,
                     }}
@@ -370,9 +370,9 @@ export default function SafetyPrivacyPage() {
             </p>
             <Link
               href="/support"
-              className="bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
+              className="bg-spotify-green hover:bg-[#1ed760] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
               style={{
-                backgroundColor: "#7209B7",
+                backgroundColor: "#1DB954",
                 color: "#000000",
                 fontWeight: 700,
                 padding: "12px 24px",

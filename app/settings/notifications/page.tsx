@@ -80,7 +80,7 @@ export default function NotificationsSettingsPage() {
                   width: "20px",
                   height: "20px",
                   cursor: "pointer",
-                  accentColor: "#7209B7",
+                  accentColor: "#1DB954",
                 }}
               />
             </label>
@@ -113,7 +113,7 @@ export default function NotificationsSettingsPage() {
                   width: "20px",
                   height: "20px",
                   cursor: "pointer",
-                  accentColor: "#7209B7",
+                  accentColor: "#1DB954",
                 }}
               />
             </label>

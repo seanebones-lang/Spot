@@ -52,7 +52,7 @@ export default function PopularByCountryPage() {
           <Globe
             size={64}
             className="mx-auto mb-6 text-spotify-green"
-            style={{ color: "#7209B7", marginBottom: "24px" }}
+            style={{ color: "#1DB954", marginBottom: "24px" }}
           />
           <h1
             className="text-5xl font-bold mb-4"
@@ -118,7 +118,7 @@ export default function PopularByCountryPage() {
                       style={{
                         padding: "4px 12px",
                         backgroundColor: "rgba(114, 9, 183, 0.2)",
-                        color: "#7209B7",
+                        color: "#1DB954",
                         borderRadius: "9999px",
                         fontSize: "12px",
                       }}
@@ -152,7 +152,7 @@ export default function PopularByCountryPage() {
             <TrendingUp
               size={48}
               className="mx-auto mb-4 text-spotify-green"
-              style={{ color: "#7209B7", marginBottom: "16px" }}
+              style={{ color: "#1DB954", marginBottom: "16px" }}
             />
             <h2
               className="text-3xl font-bold mb-4"
@@ -180,9 +180,9 @@ export default function PopularByCountryPage() {
             </p>
             <Link
               href="/trending"
-              className="bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
+              className="bg-spotify-green hover:bg-[#1ed760] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
               style={{
-                backgroundColor: "#7209B7",
+                backgroundColor: "#1DB954",
                 color: "#000000",
                 fontWeight: 700,
                 padding: "12px 24px",

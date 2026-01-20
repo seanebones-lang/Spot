@@ -1,6 +1,6 @@
-# EmPulse Music
+# Spot Music
 
-## Pixel-Perfect Spotify Clone with Mood-Based Selection & Wellness Integration
+## Pixel-Perfect Spotify Clone - Music Streaming Platform
 
 **Status**: 🟢 **In Development**  
 **Last Updated**: January 2026
@@ -44,7 +44,7 @@ npm start
 ### Core Features
 
 - ✅ Pixel-perfect Spotify UI replication (100% parity verified)
-- ✅ Mood-based music selection (4 dimensions: Mood, Feeling, Vibe, Genre)
+- ✅ Standard music streaming (playlists, search, tracks, albums)
 - ✅ Wellness integration (check-ins, journaling, affirmations, points)
 - ✅ Custom audio player with lossless support (WAV, FLAC)
 - ✅ Queue management with drag-and-drop
@@ -151,5 +151,5 @@ This is a private project. For questions or issues, contact the development team
 
 ---
 
-**Project**: EmPulse Music  
+**Project**: Spot Music  
 **Status**: 🟢 In Development

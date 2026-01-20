@@ -4,6 +4,8 @@ import { logger, generateCorrelationId } from "@/lib/logger";
 import { getRAGPipeline } from "@/lib/aiMoodAnalysis";
 import { getKnowledgeGraph } from "@/lib/knowledgeGraph";
 import { getEmbeddingCache } from "@/lib/embeddingCache";
+import { getEnv } from "@/lib/env";
+import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
 
 /**
  * Pipeline Health Check Endpoint
@@ -16,6 +18,29 @@ export async function GET(request: NextRequest) {
   const startTime = Date.now();
 
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(request);
+    const rateLimit = await checkRateLimit(clientId, "/api/health/pipeline");
+    if (!rateLimit.allowed) {
+      logger.warn("Rate limit exceeded for pipeline health check", {
+        correlationId,
+        clientId,
+      });
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": "10",
+            "X-RateLimit-Remaining": String(rateLimit.remaining),
+            "X-RateLimit-Reset": String(rateLimit.resetTime),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetTime - Date.now()) / 1000),
+            ),
+          },
+        },
+      );
+    }
     // Get health report for pipeline components
     // Note: This requires components to be initialized
     // In production, components should be initialized at startup
@@ -36,8 +61,8 @@ export async function GET(request: NextRequest) {
     try {
       // Note: Knowledge graph needs credentials to initialize
       // For health check, we check if it's configured but don't initialize unnecessarily
-      const graphUri = process.env.NEO4J_URI;
-      if (graphUri) {
+      const env = getEnv();
+      if (env.NEO4J_URI) {
         // Would check driver if available, but don't create new connection
         // This is a lightweight check
       }

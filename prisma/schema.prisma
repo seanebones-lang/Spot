@@ -48,6 +48,7 @@ model User {
   @@index([email])
   @@index([createdAt])
   @@index([isActive])
+  @@index([lastLoginAt]) // For active user queries
   @@map("users")
 }
 
@@ -185,6 +186,8 @@ model Track {
   @@index([createdAt])
   @@index([releaseDate])
   @@index([name]) // For search - fulltext search would require PostgreSQL extensions
+  @@index([genre]) // For genre filtering
+  @@index([subgenre]) // For subgenre filtering
   @@map("tracks")
 }
 
@@ -323,6 +326,7 @@ model Playlist {
   @@index([userId])
   @@index([isPublic])
   @@index([createdAt])
+  @@index([updatedAt]) // For recently updated playlists
   @@map("playlists")
 }
 

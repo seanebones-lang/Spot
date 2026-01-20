@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -28,7 +28,6 @@ const navItems = [
   { icon: Home, label: "Home", href: "/" },
   { icon: Search, label: "Search", href: "/search" },
   { icon: Library, label: "Your Library", href: "/collection" },
-  { icon: Heart, label: "Mood", href: "/mood" },
   { icon: Radio, label: "Radio", href: "/radio" },
 ];
 
@@ -431,7 +430,7 @@ export default function Sidebar() {
                           style={{
                             width: "14px",
                             height: "14px",
-                            color: isPinned ? "#7209B7" : "inherit",
+                            color: isPinned ? "#1DB954" : "inherit",
                           }}
                         />
                       </button>
@@ -449,7 +448,7 @@ export default function Sidebar() {
           {leftSidebarWidth > 100 && (
             <div className="px-3 pb-4 mt-auto">
               <div className="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-spotify-light-gray/50 transition-colors cursor-pointer">
-                <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full"></div>
+                <div className="w-8 h-8 bg-gradient-to-br from-spotify-green to-spotify-green/80 rounded-full"></div>
                 <span className="text-sm font-medium">User</span>
               </div>
             </div>
@@ -475,4 +474,6 @@ export default function Sidebar() {
       )}
     </>
   );
-}
+});
+
+export default Sidebar;

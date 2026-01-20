@@ -95,7 +95,7 @@ export default function FriendsActivity() {
               href={`/track/${activity.track.id}`}
               className="flex items-center gap-2 p-2 rounded hover:bg-white/10 transition-colors group"
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-empulse-purple to-empulse-blue flex-shrink-0 flex items-center justify-center text-xs font-bold">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-spotify-green to-spotify-green flex-shrink-0 flex items-center justify-center text-xs font-bold">
                 {activity.name.charAt(0)}
               </div>
               <div className="flex-1 min-w-0">

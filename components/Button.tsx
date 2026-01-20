@@ -126,8 +126,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const variantStyles = {
       primary: {
         base: "bg-spotify-green text-black",
-        hover: "hover:bg-[#8a1dd0] hover:scale-[1.02]",
-        active: "active:bg-[#5a0789] active:scale-[0.98]",
+        hover: "hover:bg-[#1ed760] hover:scale-[1.02]",
+        active: "active:bg-[#1aa34a] active:scale-[0.98]",
         disabled:
           "disabled:bg-spotify-green/50 disabled:text-black/50 disabled:cursor-not-allowed disabled:hover:scale-100",
         focus:

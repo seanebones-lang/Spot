@@ -154,7 +154,7 @@ export default function AboutAdsPage() {
                 <feature.icon
                   size={32}
                   className="mb-4 text-spotify-green"
-                  style={{ color: "#7209B7", marginBottom: "16px" }}
+                  style={{ color: "#1DB954", marginBottom: "16px" }}
                 />
                 <h3
                   className="text-xl font-bold mb-2"
@@ -275,7 +275,7 @@ export default function AboutAdsPage() {
                     href={option.link}
                     className="text-spotify-green hover:underline text-sm font-medium"
                     style={{
-                      color: "#7209B7",
+                      color: "#1DB954",
                       fontSize: "14px",
                       fontWeight: 500,
                     }}
@@ -327,7 +327,7 @@ export default function AboutAdsPage() {
               href="/advertising"
               className="text-spotify-green hover:underline font-medium"
               style={{
-                color: "#7209B7",
+                color: "#1DB954",
                 fontWeight: 500,
               }}
             >

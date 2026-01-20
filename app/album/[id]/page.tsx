@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { mockData } from "@/lib/data";
+import { logger } from "@/lib/logger";
 import PlayButton from "@/components/PlayButton";
 import { usePlayerStore } from "@/stores/playerStore";
 import { formatDuration } from "@/lib/utils";
@@ -76,7 +77,7 @@ export default function AlbumPage() {
         }
       }
     } catch (e) {
-      console.error("Error loading uploaded album:", e);
+      logger.error("Error loading uploaded album", e as Error, { albumId: id });
     }
 
     setLoading(false);
@@ -148,7 +149,7 @@ export default function AlbumPage() {
               borderRadius: "4px",
               boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5)",
               flexShrink: 0,
-              background: "linear-gradient(135deg, #7209B7 0%, #181818 100%)",
+              background: "linear-gradient(135deg, #1DB954 0%, #181818 100%)",
             }}
           >
             <span className="text-6xl" style={{ fontSize: "64px" }}>
@@ -308,7 +309,7 @@ export default function AlbumPage() {
                       style={{
                         width: "4px",
                         height: "4px",
-                        backgroundColor: "#7209B7",
+                        backgroundColor: "#1DB954",
                         borderRadius: "50%",
                       }}
                     ></div>
@@ -325,7 +326,7 @@ export default function AlbumPage() {
                     lineHeight: "20px",
                     fontWeight: 400,
                     color:
-                      currentTrack?.id === track.id ? "#7209B7" : "#FFFFFF",
+                      currentTrack?.id === track.id ? "#1DB954" : "#FFFFFF",
                   }}
                 >
                   {track.name}

@@ -170,9 +170,9 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onDismiss }) => {
       iconColor: "text-black",
     },
     info: {
-      bg: "bg-empulse-blue",
+      bg: "bg-spotify-green",
       text: "text-white",
-      border: "border-empulse-blue",
+      border: "border-spotify-green",
       icon: Info,
       iconColor: "text-white",
     },

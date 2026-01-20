@@ -57,7 +57,7 @@ export default function NewslettersPage() {
               style={{
                 width: "24px",
                 height: "24px",
-                color: "#7209B7",
+                color: "#1DB954",
                 flexShrink: 0,
                 marginTop: "4px",
               }}
@@ -91,7 +91,7 @@ export default function NewslettersPage() {
                 onClick={() => setSubscribed(!subscribed)}
                 className={`rounded-full font-medium transition-colors ${
                   subscribed
-                    ? "bg-spotify-green text-black hover:bg-[#8a1dd0]"
+                    ? "bg-spotify-green text-black hover:bg-[#1ed760]"
                     : "bg-white text-black hover:bg-[#f5f5f5]"
                 }`}
                 style={{
@@ -102,7 +102,7 @@ export default function NewslettersPage() {
                   fontWeight: 700,
                   letterSpacing: "0.05em",
                   transition: "all 200ms ease-out",
-                  backgroundColor: subscribed ? "#7209B7" : "#FFFFFF",
+                  backgroundColor: subscribed ? "#1DB954" : "#FFFFFF",
                   color: "#000000",
                   border: "none",
                   cursor: "pointer",
@@ -112,13 +112,13 @@ export default function NewslettersPage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = subscribed
-                    ? "#8a1dd0"
+                    ? "#1ed760"
                     : "#f5f5f5";
                   e.currentTarget.style.transform = "scale(1.05)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = subscribed
-                    ? "#7209B7"
+                    ? "#1DB954"
                     : "#FFFFFF";
                   e.currentTarget.style.transform = "scale(1)";
                 }}

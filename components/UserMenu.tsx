@@ -150,7 +150,7 @@ export default function UserMenu({
           onClick={() => setLoginModalOpen(true)}
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200",
-            "bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold text-sm",
+            "bg-spotify-green hover:bg-[#1ed760] text-black font-bold text-sm",
           )}
         >
           <LogIn size={16} />
@@ -180,7 +180,7 @@ export default function UserMenu({
         aria-haspopup="true"
       >
         {/* Avatar */}
-        <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0">
+        <div className="w-8 h-8 bg-gradient-to-br from-spotify-green to-spotify-green rounded-full flex items-center justify-center flex-shrink-0">
           <span className="text-white text-xs font-medium">
             {userName.charAt(0).toUpperCase()}
           </span>
@@ -212,7 +212,7 @@ export default function UserMenu({
           {/* User Info Header */}
           <div className="px-4 py-3 border-b border-white/10">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 bg-gradient-to-br from-spotify-green to-spotify-green rounded-full flex items-center justify-center flex-shrink-0">
                 <span className="text-white text-sm font-medium">
                   {userName.charAt(0).toUpperCase()}
                 </span>
@@ -270,7 +270,7 @@ export default function UserMenu({
                             ? "bg-spotify-light-gray text-spotify-text-gray"
                             : subscriptionTier === "Premium"
                               ? "bg-spotify-green text-black"
-                              : "bg-empulse-purple text-white",
+                              : "bg-spotify-green text-white",
                         )}
                       >
                         {item.badge}

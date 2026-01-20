@@ -185,7 +185,7 @@ export default function DownloadsPage() {
                       style={{
                         width: "20px",
                         height: "20px",
-                        color: "#7209B7",
+                        color: "#1DB954",
                         flexShrink: 0,
                       }}
                     />
@@ -258,7 +258,7 @@ export default function DownloadsPage() {
                           className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
                           style={{
                             background:
-                              "linear-gradient(135deg, #7209B7 0%, #181818 100%)",
+                              "linear-gradient(135deg, #1DB954 0%, #181818 100%)",
                             borderRadius: "4px",
                           }}
                         >
@@ -368,7 +368,7 @@ export default function DownloadsPage() {
                           className="w-full h-full bg-gradient-to-br from-spotify-green to-spotify-dark-gray flex items-center justify-center"
                           style={{
                             background:
-                              "linear-gradient(135deg, #7209B7 0%, #181818 100%)",
+                              "linear-gradient(135deg, #1DB954 0%, #181818 100%)",
                             borderRadius: "4px",
                           }}
                         >

@@ -478,7 +478,7 @@ export default function PlaylistPage() {
                         style={{
                           width: "4px",
                           height: "4px",
-                          backgroundColor: "#7209B7",
+                          backgroundColor: "#1DB954",
                           borderRadius: "50%",
                         }}
                       ></div>
@@ -517,7 +517,7 @@ export default function PlaylistPage() {
                         lineHeight: "20px",
                         fontWeight: 400,
                         color:
-                          currentTrack?.id === track.id ? "#7209B7" : "#FFFFFF",
+                          currentTrack?.id === track.id ? "#1DB954" : "#FFFFFF",
                       }}
                     >
                       {track.name}
@@ -575,7 +575,7 @@ export default function PlaylistPage() {
                       style={{
                         width: "16px",
                         height: "16px",
-                        color: isLiked ? "#7209B7" : "#B3B3B3",
+                        color: isLiked ? "#1DB954" : "#B3B3B3",
                       }}
                     />
                   </button>
@@ -622,13 +622,13 @@ export default function PlaylistPage() {
           <div className="mt-6">
             <h3 className="text-lg font-bold mb-3">Mood Tags</h3>
             <div className="flex flex-wrap gap-2">
-              <span className="px-3 py-1 bg-empulse-purple/20 text-empulse-purple rounded-full text-sm">
+              <span className="px-3 py-1 bg-spotify-green/20 text-spotify-green rounded-full text-sm">
                 {playlist.moodTags.mood}
               </span>
               {playlist.moodTags.feelings.map((feeling) => (
                 <span
                   key={feeling}
-                  className="px-3 py-1 bg-empulse-blue/20 text-empulse-blue rounded-full text-sm"
+                  className="px-3 py-1 bg-spotify-green/20 text-spotify-green rounded-full text-sm"
                 >
                   {feeling}
                 </span>

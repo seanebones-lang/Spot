@@ -35,7 +35,7 @@ export default function ImportMusicPage() {
           <Upload
             size={64}
             className="mx-auto mb-6 text-spotify-green"
-            style={{ color: "#7209B7", marginBottom: "24px" }}
+            style={{ color: "#1DB954", marginBottom: "24px" }}
           />
           <h1
             className="text-5xl font-bold mb-4"
@@ -107,7 +107,7 @@ export default function ImportMusicPage() {
                 <link.icon
                   size={40}
                   className="mb-4 text-spotify-green"
-                  style={{ color: "#7209B7", marginBottom: "16px" }}
+                  style={{ color: "#1DB954", marginBottom: "16px" }}
                 />
                 <h3
                   className="text-2xl font-bold mb-3"
@@ -136,7 +136,7 @@ export default function ImportMusicPage() {
                 <span
                   className="text-spotify-green font-medium inline-flex items-center gap-2"
                   style={{
-                    color: "#7209B7",
+                    color: "#1DB954",
                     fontWeight: 500,
                   }}
                 >
@@ -189,7 +189,7 @@ export default function ImportMusicPage() {
                   <CheckCircle2
                     size={20}
                     className="text-spotify-green flex-shrink-0"
-                    style={{ color: "#7209B7" }}
+                    style={{ color: "#1DB954" }}
                   />
                   <span
                     className="text-spotify-text-gray"
@@ -247,9 +247,9 @@ export default function ImportMusicPage() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/upload"
-                className="bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold py-3 px-6 rounded-full transition-colors inline-flex items-center gap-2"
+                className="bg-spotify-green hover:bg-[#1ed760] text-black font-bold py-3 px-6 rounded-full transition-colors inline-flex items-center gap-2"
                 style={{
-                  backgroundColor: "#7209B7",
+                  backgroundColor: "#1DB954",
                   color: "#000000",
                   fontWeight: 700,
                   padding: "12px 24px",
@@ -264,8 +264,8 @@ export default function ImportMusicPage() {
                 href="/help/upload-guidelines"
                 className="bg-transparent border-2 border-spotify-green text-spotify-green hover:bg-spotify-green/10 font-bold py-3 px-6 rounded-full transition-colors"
                 style={{
-                  borderColor: "#7209B7",
-                  color: "#7209B7",
+                  borderColor: "#1DB954",
+                  color: "#1DB954",
                   fontWeight: 700,
                   padding: "12px 24px",
                   borderRadius: "9999px",

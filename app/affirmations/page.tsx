@@ -135,7 +135,7 @@ export default function AffirmationsPage() {
                 height: "24px",
                 borderRadius: "12px",
                 appearance: "none",
-                backgroundColor: dailyReminder ? "#7209B7" : "#282828",
+                backgroundColor: dailyReminder ? "#1DB954" : "#282828",
                 cursor: "pointer",
                 transition: "background-color 200ms ease-out",
                 position: "relative",
@@ -171,7 +171,7 @@ export default function AffirmationsPage() {
             onClick={() => setSelectedCategory(null)}
             className={`rounded-full font-medium transition-all ${
               selectedCategory === null
-                ? "bg-spotify-green text-black hover:bg-[#8a1dd0]"
+                ? "bg-spotify-green text-black hover:bg-[#1ed760]"
                 : "bg-spotify-light-gray text-white hover:bg-spotify-dark-gray"
             }`}
             style={{
@@ -183,21 +183,21 @@ export default function AffirmationsPage() {
               letterSpacing: "0.05em",
               transition: "all 200ms ease-out",
               backgroundColor:
-                selectedCategory === null ? "#7209B7" : "#282828",
+                selectedCategory === null ? "#1DB954" : "#282828",
               color: selectedCategory === null ? "#000000" : "#FFFFFF",
               border: "none",
               cursor: "pointer",
             }}
             onMouseEnter={(e) => {
               if (selectedCategory === null) {
-                e.currentTarget.style.backgroundColor = "#8a1dd0";
+                e.currentTarget.style.backgroundColor = "#1ed760";
               } else {
                 e.currentTarget.style.backgroundColor = "#3e3e3e";
               }
             }}
             onMouseLeave={(e) => {
               if (selectedCategory === null) {
-                e.currentTarget.style.backgroundColor = "#7209B7";
+                e.currentTarget.style.backgroundColor = "#1DB954";
               } else {
                 e.currentTarget.style.backgroundColor = "#282828";
               }
@@ -288,11 +288,11 @@ export default function AffirmationsPage() {
                 }}
               >
                 <span
-                  className="px-3 py-1 bg-empulse-purple/20 text-empulse-purple rounded-full text-xs font-medium"
+                  className="px-3 py-1 bg-spotify-green/20 text-spotify-green rounded-full text-xs font-medium"
                   style={{
                     padding: "4px 12px",
                     backgroundColor: "rgba(114, 9, 183, 0.2)",
-                    color: "#7209B7",
+                    color: "#1DB954",
                     borderRadius: "500px",
                     fontSize: "11px",
                     lineHeight: "16px",
@@ -371,7 +371,7 @@ export default function AffirmationsPage() {
                       display: "flex",
                       alignItems: "center",
                       gap: "8px",
-                      color: "#7209B7",
+                      color: "#1DB954",
                       fontSize: "14px",
                       lineHeight: "20px",
                       backgroundColor: "transparent",

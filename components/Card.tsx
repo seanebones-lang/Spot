@@ -152,8 +152,8 @@ const CardRoot = React.forwardRef<HTMLDivElement, CardProps>(
         hover: hover && "hover:border-white/20 hover:bg-white/5",
       },
       gradient: {
-        base: "bg-gradient-to-r from-empulse-purple/20 to-empulse-blue/20 border border-empulse-purple/30",
-        hover: hover && "hover:from-empulse-purple/30 hover:to-empulse-blue/30",
+        base: "bg-gradient-to-r from-spotify-green/20 to-spotify-green/20 border border-spotify-green/30",
+        hover: hover && "hover:from-spotify-green/30 hover:to-spotify-green/30",
       },
     };
 

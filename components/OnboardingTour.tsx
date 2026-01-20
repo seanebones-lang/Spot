@@ -32,7 +32,7 @@ const tourSteps: TourStep[] = [
     title: "Daily Mood Check-in",
     description:
       "Track your mood daily and earn points. Build streaks to unlock rewards and badges.",
-    icon: <Heart size={24} className="text-empulse-purple" />,
+    icon: <Heart size={24} className="text-spotify-green" />,
     target: '[data-tour="check-in"]',
     position: "bottom",
   },
@@ -41,7 +41,7 @@ const tourSteps: TourStep[] = [
     title: "Mood-Based Music Discovery",
     description:
       "Find music that matches your current mood. Our 4-dimensional mood system helps you discover perfect tracks.",
-    icon: <Music size={24} className="text-empulse-blue" />,
+    icon: <Music size={24} className="text-spotify-green" />,
     target: '[data-tour="mood-matcher"]',
     position: "bottom",
   },
@@ -50,7 +50,7 @@ const tourSteps: TourStep[] = [
     title: "Earn Points & Rewards",
     description:
       "Complete daily check-ins, listen to music, and build streaks to earn points. Redeem them for rewards!",
-    icon: <Award size={24} className="text-empulse-blue" />,
+    icon: <Award size={24} className="text-spotify-green" />,
     target: '[data-tour="points"]',
     position: "left",
   },
@@ -190,7 +190,7 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
             <div className="mb-6">
               <Sparkles
                 size={48}
-                className="text-empulse-purple mx-auto mb-4"
+                className="text-spotify-green mx-auto mb-4"
               />
               <h2 className="text-3xl font-bold mb-2">
                 Welcome to EmPulse Music! 🎵
@@ -204,7 +204,7 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
               <div className="flex items-start gap-3">
                 <Heart
                   size={20}
-                  className="text-empulse-purple flex-shrink-0 mt-0.5"
+                  className="text-spotify-green flex-shrink-0 mt-0.5"
                 />
                 <div>
                   <div className="font-medium mb-1">Track your mood daily</div>
@@ -216,7 +216,7 @@ export default function OnboardingTour({ onComplete }: OnboardingTourProps) {
               <div className="flex items-start gap-3">
                 <Music
                   size={20}
-                  className="text-empulse-blue flex-shrink-0 mt-0.5"
+                  className="text-spotify-green flex-shrink-0 mt-0.5"
                 />
                 <div>
                   <div className="font-medium mb-1">Mood-based discovery</div>

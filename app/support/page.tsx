@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Minimize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { logger } from "@/lib/logger";
 
 export default function SupportPage() {
   const [messages, setMessages] = useState<
@@ -76,7 +77,7 @@ export default function SupportPage() {
         },
       ]);
     } catch (error) {
-      console.error("Error sending message:", error);
+      logger.error("Error sending message", error as Error);
       setMessages((prev) => [
         ...prev,
         {
@@ -128,11 +129,11 @@ export default function SupportPage() {
           }}
         >
           <div
-            className="w-10 h-10 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center"
+            className="w-10 h-10 bg-gradient-to-br from-spotify-green to-spotify-green rounded-full flex items-center justify-center"
             style={{
               width: "40px",
               height: "40px",
-              background: "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+              background: "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
               borderRadius: "50%",
               display: "flex",
               alignItems: "center",
@@ -232,12 +233,12 @@ export default function SupportPage() {
           >
             {message.role === "assistant" && (
               <div
-                className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0 mt-1"
+                className="w-8 h-8 bg-gradient-to-br from-spotify-green to-spotify-green rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 style={{
                   width: "32px",
                   height: "32px",
                   background:
-                    "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+                    "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
                   borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
@@ -268,7 +269,7 @@ export default function SupportPage() {
                 borderRadius: "8px",
                 padding: "12px 16px",
                 backgroundColor:
-                  message.role === "user" ? "#7209B7" : "#181818",
+                  message.role === "user" ? "#1DB954" : "#181818",
                 color: message.role === "user" ? "#000000" : "#FFFFFF",
               }}
             >
@@ -334,7 +335,7 @@ export default function SupportPage() {
 
         {isLoading && (
           <div className="flex gap-4 justify-start">
-            <div className="w-8 h-8 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-8 h-8 bg-gradient-to-br from-spotify-green to-spotify-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
               <Bot className="w-5 h-5 text-white" />
             </div>
             <div className="bg-spotify-light-gray rounded-lg px-4 py-3">
@@ -409,7 +410,7 @@ export default function SupportPage() {
             }}
             disabled={isLoading}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = "#7209B7";
+              e.currentTarget.style.borderColor = "#1DB954";
               e.currentTarget.style.borderWidth = "2px";
               e.currentTarget.style.borderStyle = "solid";
             }}
@@ -422,13 +423,13 @@ export default function SupportPage() {
             type="submit"
             disabled={!input.trim() || isLoading}
             className={cn(
-              "w-12 h-12 bg-spotify-green hover:bg-[#8a1dd0] rounded-full flex items-center justify-center transition-colors",
+              "w-12 h-12 bg-spotify-green hover:bg-[#1ed760] rounded-full flex items-center justify-center transition-colors",
               (!input.trim() || isLoading) && "opacity-50 cursor-not-allowed",
             )}
             style={{
               width: "48px",
               height: "48px",
-              backgroundColor: "#7209B7",
+              backgroundColor: "#1DB954",
               borderRadius: "50%",
               display: "flex",
               alignItems: "center",
@@ -441,12 +442,12 @@ export default function SupportPage() {
             aria-label="Send message"
             onMouseEnter={(e) => {
               if (input.trim() && !isLoading) {
-                e.currentTarget.style.backgroundColor = "#8a1dd0";
+                e.currentTarget.style.backgroundColor = "#1ed760";
                 e.currentTarget.style.transform = "scale(1.05)";
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#7209B7";
+              e.currentTarget.style.backgroundColor = "#1DB954";
               e.currentTarget.style.transform = "scale(1)";
             }}
           >

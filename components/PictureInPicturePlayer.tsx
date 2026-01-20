@@ -68,7 +68,7 @@ export default function PictureInPicturePlayer() {
 
       const title = pipWindow.document.createElement("div");
       title.style.cssText = "font-weight: bold;";
-      title.textContent = "EmPulse Music";
+      title.textContent = "Spot Music";
 
       const closeBtn = pipWindow.document.createElement("button");
       closeBtn.id = "close-pip";
@@ -137,7 +137,7 @@ export default function PictureInPicturePlayer() {
       // Shuffle button
       const shuffleBtn = pipWindow.document.createElement("button");
       shuffleBtn.id = "shuffle";
-      shuffleBtn.style.cssText = `background: transparent; border: none; color: ${shuffle ? "#7209B7" : "#b3b3b3"}; cursor: pointer; padding: 4px;`;
+      shuffleBtn.style.cssText = `background: transparent; border: none; color: ${shuffle ? "#1DB954" : "#b3b3b3"}; cursor: pointer; padding: 4px;`;
       shuffleBtn.setAttribute(
         "aria-label",
         shuffle ? "Shuffle on" : "Shuffle off",
@@ -157,7 +157,7 @@ export default function PictureInPicturePlayer() {
       const playPauseBtn = pipWindow.document.createElement("button");
       playPauseBtn.id = "play-pause";
       playPauseBtn.style.cssText =
-        "background: #7209B7; border: none; color: black; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;";
+        "background: #1DB954; border: none; color: black; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;";
       playPauseBtn.textContent = isPlaying ? "⏸" : "▶";
       playPauseBtn.setAttribute("aria-label", isPlaying ? "Pause" : "Play");
 
@@ -172,7 +172,7 @@ export default function PictureInPicturePlayer() {
       // Repeat button
       const repeatBtn = pipWindow.document.createElement("button");
       repeatBtn.id = "repeat";
-      repeatBtn.style.cssText = `background: transparent; border: none; color: ${repeat !== "off" ? "#7209B7" : "#b3b3b3"}; cursor: pointer; padding: 4px; font-size: 16px;`;
+      repeatBtn.style.cssText = `background: transparent; border: none; color: ${repeat !== "off" ? "#1DB954" : "#b3b3b3"}; cursor: pointer; padding: 4px; font-size: 16px;`;
       repeatBtn.textContent = "🔁";
       repeatBtn.setAttribute("aria-label", `Repeat ${repeat}`);
 

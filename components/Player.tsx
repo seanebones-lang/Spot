@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { Shuffle, SkipBack, SkipForward, Repeat, List } from "lucide-react";
 import { usePlayerStore } from "@/stores/playerStore";
 import { audioPlayer } from "@/lib/player";
@@ -13,8 +13,9 @@ import FullScreenPlayer from "./FullScreenPlayer";
 import ImageWithFallback from "./ImageWithFallback";
 import { formatDuration } from "@/lib/utils";
 import { Maximize2 } from "lucide-react";
+import { logger } from "@/lib/logger";
 
-export default function Player() {
+const Player = memo(function Player() {
   const {
     currentTrack,
     isPlaying,
@@ -36,17 +37,16 @@ export default function Player() {
 
   useEffect(() => {
     if (currentTrack) {
-      console.log(
-        "🎧 Player: Loading track:",
-        currentTrack.name,
-        currentTrack.audioUrl,
-      );
+      logger.debug("Player: Loading track", {
+        trackName: currentTrack.name,
+        audioUrl: currentTrack.audioUrl,
+      });
       const wasPlaying = isPlaying;
 
       // Set up load callback to auto-play if was playing
       audioPlayer.setOnLoadCallback(() => {
         if (wasPlaying) {
-          console.log("✅ Track loaded, resuming playback");
+          logger.debug("Track loaded, resuming playback");
           audioPlayer.play();
           setIsPlaying(true);
         }
@@ -70,7 +70,7 @@ export default function Player() {
       // Reset progress when loading new track
       setProgress(0);
     } else {
-      console.log("⚠️ Player: No currentTrack set");
+      logger.debug("Player: No currentTrack set");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTrack?.id, repeat]); // Only depend on track ID to avoid re-loading
@@ -79,12 +79,12 @@ export default function Player() {
     // Skip if no track loaded
     if (!currentTrack) return;
 
-    console.log("🎮 Player: isPlaying changed to:", isPlaying);
+    logger.debug("Player: isPlaying changed", { isPlaying });
     if (isPlaying) {
-      console.log("▶️ Player: Starting playback");
+      logger.debug("Player: Starting playback");
       audioPlayer.play();
     } else {
-      console.log("⏸️ Player: Pausing playback");
+      logger.debug("Player: Pausing playback");
       audioPlayer.pause();
     }
   }, [isPlaying, currentTrack]);
@@ -250,7 +250,7 @@ export default function Player() {
                 backgroundColor: "transparent",
                 border: "none",
                 cursor: currentTrack ? "pointer" : "not-allowed",
-                color: shuffle ? "#7209B7" : "#B3B3B3",
+                color: shuffle ? "#1DB954" : "#B3B3B3",
                 transition: "color 200ms ease-out",
                 opacity: currentTrack ? 1 : 0.5,
                 padding: "4px",
@@ -352,7 +352,7 @@ export default function Player() {
                 backgroundColor: "transparent",
                 border: "none",
                 cursor: currentTrack ? "pointer" : "not-allowed",
-                color: repeat !== "off" ? "#7209B7" : "#B3B3B3",
+                color: repeat !== "off" ? "#1DB954" : "#B3B3B3",
                 transition: "color 200ms ease-out",
                 opacity: currentTrack ? 1 : 0.5,
                 padding: "4px",
@@ -460,4 +460,6 @@ export default function Player() {
       />
     </div>
   );
-}
+});
+
+export default Player;

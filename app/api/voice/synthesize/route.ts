@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logger, generateCorrelationId } from "@/lib/logger";
+import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
 
 /**
  * Voice Synthesis API
@@ -7,7 +9,32 @@ import { NextRequest, NextResponse } from "next/server";
  */
 
 export async function POST(req: NextRequest) {
+  const correlationId = generateCorrelationId();
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(req);
+    const rateLimit = await checkRateLimit(clientId, "/api/voice/synthesize");
+    if (!rateLimit.allowed) {
+      logger.warn("Rate limit exceeded for voice synthesis", {
+        correlationId,
+        clientId,
+      });
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": "20",
+            "X-RateLimit-Remaining": String(rateLimit.remaining),
+            "X-RateLimit-Reset": String(rateLimit.resetTime),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetTime - Date.now()) / 1000),
+            ),
+          },
+        },
+      );
+    }
+
     const { text, voiceId, speed = 1.0 } = await req.json();
 
     if (!text) {
@@ -29,7 +56,7 @@ export async function POST(req: NextRequest) {
       duration: estimateDuration(text),
     });
   } catch (error: any) {
-    console.error("Voice synthesis error:", error);
+    logger.error("Voice synthesis error", error, { correlationId, voiceId });
     return NextResponse.json(
       { error: "Failed to synthesize voice", message: error.message },
       { status: 500 },

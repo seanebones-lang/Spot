@@ -108,12 +108,12 @@ export default function FriendsPage() {
               }}
             >
               <div
-                className="w-12 h-12 bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-full flex items-center justify-center flex-shrink-0"
+                className="w-12 h-12 bg-gradient-to-br from-spotify-green to-spotify-green rounded-full flex items-center justify-center flex-shrink-0"
                 style={{
                   width: "48px",
                   height: "48px",
                   background:
-                    "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+                    "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
                   borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",

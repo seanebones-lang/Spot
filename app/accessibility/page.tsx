@@ -174,7 +174,7 @@ export default function AccessibilityPage() {
                 <feature.icon
                   size={32}
                   className="mb-4 text-spotify-green"
-                  style={{ color: "#7209B7", marginBottom: "16px" }}
+                  style={{ color: "#1DB954", marginBottom: "16px" }}
                 />
                 <h3
                   className="text-xl font-bold mb-2"
@@ -312,9 +312,9 @@ export default function AccessibilityPage() {
             </p>
             <Link
               href="/support"
-              className="bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
+              className="bg-spotify-green hover:bg-[#1ed760] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
               style={{
-                backgroundColor: "#7209B7",
+                backgroundColor: "#1DB954",
                 color: "#000000",
                 fontWeight: 700,
                 padding: "12px 24px",

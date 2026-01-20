@@ -4,6 +4,7 @@ import { promisify } from "util";
 import { exec } from "child_process";
 import { logger, generateCorrelationId } from "@/lib/logger";
 import { withTimeout } from "@/lib/timeout";
+import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
 
 const execAsync = promisify(exec);
 
@@ -81,6 +82,30 @@ export async function GET(
   const startTime = Date.now();
 
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(request);
+    const rateLimit = await checkRateLimit(clientId, "/api/radio/stream");
+    if (!rateLimit.allowed) {
+      logger.warn("Rate limit exceeded for radio stream", {
+        correlationId,
+        clientId,
+      });
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": "20",
+            "X-RateLimit-Remaining": String(rateLimit.remaining),
+            "X-RateLimit-Reset": String(rateLimit.resetTime),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetTime - Date.now()) / 1000),
+            ),
+          },
+        },
+      );
+    }
+
     const params = await context.params;
     const stationId = params.station as StationId;
 

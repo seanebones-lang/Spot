@@ -74,9 +74,9 @@ export default function RewardsPage() {
         }}
       >
         <div
-          className="bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg p-6 text-white"
+          className="bg-gradient-to-br from-spotify-green to-spotify-green rounded-lg p-6 text-white"
           style={{
-            background: "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+            background: "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
             borderRadius: "8px",
             padding: "24px",
             color: "#FFFFFF",
@@ -371,7 +371,7 @@ export default function RewardsPage() {
                   style={{
                     width: "32px",
                     height: "32px",
-                    color: "#7209B7",
+                    color: "#1DB954",
                     marginBottom: "12px",
                   }}
                 />
@@ -411,7 +411,7 @@ export default function RewardsPage() {
                     disabled={!canAfford}
                     className={`rounded-full text-sm font-medium transition-colors ${
                       canAfford
-                        ? "bg-spotify-green text-black hover:bg-[#8a1dd0]"
+                        ? "bg-spotify-green text-black hover:bg-[#1ed760]"
                         : "bg-spotify-dark-gray text-spotify-text-gray cursor-not-allowed"
                     }`}
                     style={{
@@ -422,19 +422,19 @@ export default function RewardsPage() {
                       fontWeight: 700,
                       letterSpacing: "0.05em",
                       transition: "all 200ms ease-out",
-                      backgroundColor: canAfford ? "#7209B7" : "#282828",
+                      backgroundColor: canAfford ? "#1DB954" : "#282828",
                       color: canAfford ? "#000000" : "#B3B3B3",
                       border: "none",
                       cursor: canAfford ? "pointer" : "not-allowed",
                     }}
                     onMouseEnter={(e) => {
                       if (canAfford) {
-                        e.currentTarget.style.backgroundColor = "#8a1dd0";
+                        e.currentTarget.style.backgroundColor = "#1ed760";
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (canAfford) {
-                        e.currentTarget.style.backgroundColor = "#7209B7";
+                        e.currentTarget.style.backgroundColor = "#1DB954";
                       }
                     }}
                   >

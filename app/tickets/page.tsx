@@ -148,7 +148,7 @@ export default function TicketsPage() {
                 <div
                   className="text-spotify-green font-medium"
                   style={{
-                    color: "#7209B7",
+                    color: "#1DB954",
                     fontWeight: 600,
                   }}
                 >
@@ -156,10 +156,10 @@ export default function TicketsPage() {
                 </div>
               </div>
               <button
-                className="w-full bg-spotify-green hover:bg-[#8a1dd0] text-black py-2 rounded-full font-medium transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-spotify-green hover:bg-[#1ed760] text-black py-2 rounded-full font-medium transition-colors flex items-center justify-center gap-2"
                 style={{
                   width: "100%",
-                  backgroundColor: "#7209B7",
+                  backgroundColor: "#1DB954",
                   color: "#000000",
                   padding: "12px 24px",
                   borderRadius: "500px",
@@ -176,11 +176,11 @@ export default function TicketsPage() {
                   gap: "8px",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#8a1dd0";
+                  e.currentTarget.style.backgroundColor = "#1ed760";
                   e.currentTarget.style.transform = "scale(1.02)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#7209B7";
+                  e.currentTarget.style.backgroundColor = "#1DB954";
                   e.currentTarget.style.transform = "scale(1)";
                 }}
               >

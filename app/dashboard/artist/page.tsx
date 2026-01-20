@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { logger } from "@/lib/logger";
 import {
   TrendingUp,
   DollarSign,
@@ -76,17 +77,15 @@ export default function ArtistDashboardPage() {
         if (savedTracks) {
           const parsed = JSON.parse(savedTracks);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            console.log(
-              "📥 Initialized tracks from localStorage:",
-              parsed.length,
-              "tracks",
-            );
+            logger.info("Initialized tracks from localStorage", {
+              count: parsed.length,
+            });
             return parsed;
           }
         }
       }
     } catch (e) {
-      console.error("Error loading initial tracks:", e);
+      logger.error("Error loading initial tracks", e as Error);
     }
     return mockTracks;
   });
@@ -104,60 +103,50 @@ export default function ArtistDashboardPage() {
       if (typeof window === "undefined") return;
 
       const savedTracks = localStorage.getItem("artist-tracks");
-      console.log(
-        "📥 [Dashboard] Loading tracks from localStorage:",
-        savedTracks ? `found (${savedTracks.length} chars)` : "not found",
-      );
+      logger.debug("Loading tracks from localStorage", {
+        found: !!savedTracks,
+        dataLength: savedTracks?.length || 0,
+      });
 
       if (savedTracks) {
         const parsed = JSON.parse(savedTracks);
-        console.log("📥 [Dashboard] Parsed tracks:", parsed);
+        logger.debug("Parsed tracks from localStorage", {
+          count: Array.isArray(parsed) ? parsed.length : 0,
+        });
 
         if (Array.isArray(parsed) && parsed.length > 0) {
           // Filter out any invalid tracks and ensure required fields
           const validTracks = parsed.filter((t) => {
             const isValid = t && t.id && t.name;
             if (!isValid) {
-              console.warn("⚠️ [Dashboard] Invalid track filtered out:", t);
+              logger.warn("Invalid track filtered out", { track: t });
             }
             return isValid;
           });
-          console.log(
-            `✅ [Dashboard] Loaded ${validTracks.length} valid tracks from ${parsed.length} total:`,
-            validTracks.map((t) => ({
-              id: t.id,
-              name: t.name,
-              status: t.status,
-            })),
-          );
+          logger.info("Loaded valid tracks", {
+            validCount: validTracks.length,
+            totalCount: parsed.length,
+          });
 
           if (validTracks.length > 0) {
-            console.log(
-              "✅ [Dashboard] Setting tracks state with:",
-              validTracks.length,
-              "tracks",
-            );
+            logger.debug("Setting tracks state", {
+              count: validTracks.length,
+            });
             setTracks(validTracks);
           } else {
-            console.log(
-              "⚠️ [Dashboard] No valid tracks found after filtering, using mockTracks",
-            );
+            logger.warn("No valid tracks found after filtering, using mockTracks");
             setTracks(mockTracks);
           }
         } else {
-          console.log(
-            "⚠️ [Dashboard] Parsed tracks is empty or not array, using mockTracks",
-          );
+          logger.warn("Parsed tracks is empty or not array, using mockTracks");
           setTracks(mockTracks);
         }
       } else {
-        console.log(
-          "⚠️ [Dashboard] No tracks found in localStorage, using mockTracks",
-        );
+        logger.warn("No tracks found in localStorage, using mockTracks");
         setTracks(mockTracks);
       }
     } catch (e) {
-      console.error("❌ [Dashboard] Error loading tracks:", e);
+      logger.error("Error loading tracks", e as Error);
       setTracks(mockTracks);
     }
   };
@@ -248,10 +237,10 @@ export default function ArtistDashboardPage() {
         const result = await response.json();
         setMoodValidation(result);
       } else {
-        console.error("Validation failed");
+        logger.error("Validation failed", new Error("Mood validation failed"));
       }
     } catch (error) {
-      console.error("Error validating mood:", error);
+      logger.error("Error validating mood", error as Error);
     } finally {
       setIsValidatingMood(false);
     }
@@ -330,11 +319,11 @@ export default function ArtistDashboardPage() {
           {/* Dev/Test Button - Remove in production */}
           <button
             onClick={() => setApprovalStatus("approved")}
-            className="mt-4 px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#8a1dd0] transition-colors"
+            className="mt-4 px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#1ed760] transition-colors"
             style={{
               marginTop: "16px",
               padding: "8px 16px",
-              backgroundColor: "#7209B7",
+              backgroundColor: "#1DB954",
               color: "#000000",
               borderRadius: "500px",
               fontSize: "14px",
@@ -385,7 +374,7 @@ export default function ArtistDashboardPage() {
           onClick={() => router.push("/upload")}
           className="btn-primary flex items-center gap-2"
           style={{
-            backgroundColor: "#7209B7",
+            backgroundColor: "#1DB954",
             color: "#000000",
             fontWeight: 700,
             padding: "12px 24px",
@@ -405,7 +394,7 @@ export default function ArtistDashboardPage() {
               moodSettings.feelings.length > 0 &&
               moodSettings.genres.length > 0
             ) {
-              e.currentTarget.style.backgroundColor = "#8a1dd0";
+              e.currentTarget.style.backgroundColor = "#1ed760";
               e.currentTarget.style.transform = "scale(1.05)";
             }
           }}
@@ -415,7 +404,7 @@ export default function ArtistDashboardPage() {
               moodSettings.feelings.length > 0 &&
               moodSettings.genres.length > 0
             ) {
-              e.currentTarget.style.backgroundColor = "#7209B7";
+              e.currentTarget.style.backgroundColor = "#1DB954";
               e.currentTarget.style.transform = "scale(1)";
             }
           }}
@@ -482,10 +471,10 @@ export default function ArtistDashboardPage() {
               <button
                 onClick={validateMoodSettings}
                 disabled={isValidatingMood}
-                className="flex items-center gap-2 px-4 py-2 bg-empulse-purple text-white rounded-full font-bold hover:bg-opacity-80 transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2 bg-spotify-green text-white rounded-full font-bold hover:bg-opacity-80 transition-colors disabled:opacity-50"
                 style={{
                   padding: "8px 16px",
-                  backgroundColor: "#7209B7",
+                  backgroundColor: "#1DB954",
                   color: "#FFFFFF",
                   borderRadius: "500px",
                   fontSize: "14px",
@@ -516,7 +505,7 @@ export default function ArtistDashboardPage() {
               padding: "16px",
               borderRadius: "8px",
               marginBottom: "24px",
-              border: `2px solid ${moodValidation.approved ? "#7209B7" : "#FFA500"}`,
+              border: `2px solid ${moodValidation.approved ? "#1DB954" : "#FFA500"}`,
             }}
           >
             <div className="flex items-start gap-3">
@@ -537,7 +526,7 @@ export default function ArtistDashboardPage() {
                   style={{
                     fontSize: "14px",
                     fontWeight: 700,
-                    color: moodValidation.approved ? "#7209B7" : "#FFA500",
+                    color: moodValidation.approved ? "#1DB954" : "#FFA500",
                     marginBottom: "8px",
                   }}
                 >
@@ -595,10 +584,10 @@ export default function ArtistDashboardPage() {
                           setMoodValidation(null);
                         }
                       }}
-                      className="text-sm text-empulse-purple hover:text-empulse-purple/80 underline"
+                      className="text-sm text-spotify-green hover:text-spotify-green/80 underline"
                       style={{
                         fontSize: "13px",
-                        color: "#7209B7",
+                        color: "#1DB954",
                         textDecoration: "underline",
                         cursor: "pointer",
                       }}
@@ -629,10 +618,10 @@ export default function ArtistDashboardPage() {
                 setMoodSettings(defaultSettings);
                 saveMoodSettings(defaultSettings);
               }}
-              className="px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#8a1dd0] transition-colors"
+              className="px-4 py-2 bg-spotify-green text-black rounded-full font-bold hover:bg-[#1ed760] transition-colors"
               style={{
                 padding: "8px 16px",
-                backgroundColor: "#7209B7",
+                backgroundColor: "#1DB954",
                 color: "#000000",
                 borderRadius: "500px",
                 fontSize: "14px",
@@ -692,9 +681,9 @@ export default function ArtistDashboardPage() {
         }}
       >
         <div
-          className="bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg p-6 text-white"
+          className="bg-gradient-to-br from-spotify-green to-spotify-green rounded-lg p-6 text-white"
           style={{
-            background: "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+            background: "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
             borderRadius: "8px",
             padding: "24px",
             color: "#FFFFFF",
@@ -858,7 +847,7 @@ export default function ArtistDashboardPage() {
               width: "44px",
               height: "24px",
               borderRadius: "12px",
-              backgroundColor: autoRefresh ? "#7209B7" : "#727272",
+              backgroundColor: autoRefresh ? "#1DB954" : "#727272",
               transition: "background-color 200ms ease-out",
               cursor: "pointer",
               flexShrink: 0,
@@ -930,8 +919,7 @@ export default function ArtistDashboardPage() {
                   "artist-tracks",
                   JSON.stringify(allTracks),
                 );
-                console.log("🧪 [TEST] Added test track:", testTrack);
-                console.log("🧪 [TEST] Total tracks:", allTracks.length);
+                logger.debug("Added test track", { testTrack, totalTracks: allTracks.length });
                 window.dispatchEvent(new Event("tracks-updated"));
                 loadTracks();
               }}
@@ -941,11 +929,10 @@ export default function ArtistDashboardPage() {
             </button>
             <button
               onClick={() => {
-                console.log(
-                  "🧪 [TEST] Current localStorage:",
-                  localStorage.getItem("artist-tracks"),
-                );
-                console.log("🧪 [TEST] Current tracks state:", tracks);
+                logger.debug("Test: Current localStorage and tracks state", {
+                  localStorage: localStorage.getItem("artist-tracks"),
+                  tracksCount: tracks.length,
+                });
                 loadTracks();
               }}
               className="mt-2 ml-2 px-4 py-2 bg-green-600 hover:bg-green-700 rounded text-white text-sm"
@@ -1089,7 +1076,7 @@ export default function ArtistDashboardPage() {
             onClick={() => router.push("/upload")}
             className="btn-primary"
             style={{
-              backgroundColor: "#7209B7",
+              backgroundColor: "#1DB954",
               color: "#000000",
               fontWeight: 700,
               padding: "12px 24px",
@@ -1101,11 +1088,11 @@ export default function ArtistDashboardPage() {
               transition: "all 200ms ease-out",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#8a1dd0";
+              e.currentTarget.style.backgroundColor = "#1ed760";
               e.currentTarget.style.transform = "scale(1.05)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#7209B7";
+              e.currentTarget.style.backgroundColor = "#1DB954";
               e.currentTarget.style.transform = "scale(1)";
             }}
           >

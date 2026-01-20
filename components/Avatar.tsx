@@ -40,7 +40,7 @@ export default function Avatar({
         "text-white font-bold",
         sizeClass,
         border && "border-4 border-spotify-green",
-        glow && "hover:shadow-[0_0_20px_#7209B7]",
+        glow && "hover:shadow-[0_0_20px_#1DB954]",
         "transition-all duration-300",
         className,
       )}

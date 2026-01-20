@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logger, generateCorrelationId } from "@/lib/logger";
+import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
 
 /**
  * GTA V Radio Station Metadata
@@ -65,6 +66,30 @@ export async function GET(request: NextRequest) {
   const startTime = Date.now();
 
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(request);
+    const rateLimit = await checkRateLimit(clientId, "/api/radio/stations");
+    if (!rateLimit.allowed) {
+      logger.warn("Rate limit exceeded for radio stations", {
+        correlationId,
+        clientId,
+      });
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": "30",
+            "X-RateLimit-Remaining": String(rateLimit.remaining),
+            "X-RateLimit-Reset": String(rateLimit.resetTime),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetTime - Date.now()) / 1000),
+            ),
+          },
+        },
+      );
+    }
+
     const response = NextResponse.json({
       stations: STATIONS,
       count: STATIONS.length,

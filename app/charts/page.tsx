@@ -270,7 +270,7 @@ export default function ChartsPage() {
                 {track.change === "up" && (
                   <span
                     className="text-spotify-green"
-                    style={{ color: "#7209B7" }}
+                    style={{ color: "#1DB954" }}
                   >
                     ↑
                   </span>

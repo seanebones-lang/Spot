@@ -121,7 +121,7 @@ export default function CheckInPage() {
               cursor: "pointer",
               WebkitAppearance: "none",
               appearance: "none",
-              background: `linear-gradient(to right, #7209B7 0%, #7209B7 ${tiredEnergetic}%, #282828 ${tiredEnergetic}%, #282828 100%)`,
+              background: `linear-gradient(to right, #1DB954 0%, #1DB954 ${tiredEnergetic}%, #282828 ${tiredEnergetic}%, #282828 100%)`,
             }}
           />
         </div>
@@ -154,7 +154,7 @@ export default function CheckInPage() {
               cursor: "pointer",
               WebkitAppearance: "none",
               appearance: "none",
-              background: `linear-gradient(to right, #7209B7 0%, #7209B7 ${lonelyConnected}%, #282828 ${lonelyConnected}%, #282828 100%)`,
+              background: `linear-gradient(to right, #1DB954 0%, #1DB954 ${lonelyConnected}%, #282828 ${lonelyConnected}%, #282828 100%)`,
             }}
           />
         </div>
@@ -187,7 +187,7 @@ export default function CheckInPage() {
               cursor: "pointer",
               WebkitAppearance: "none",
               appearance: "none",
-              background: `linear-gradient(to right, #7209B7 0%, #7209B7 ${stressedRelaxed}%, #282828 ${stressedRelaxed}%, #282828 100%)`,
+              background: `linear-gradient(to right, #1DB954 0%, #1DB954 ${stressedRelaxed}%, #282828 ${stressedRelaxed}%, #282828 100%)`,
             }}
           />
         </div>
@@ -222,7 +222,7 @@ export default function CheckInPage() {
               }}
               className={`rounded-full font-medium transition-all ${
                 selectedFeelings.includes(feeling)
-                  ? "bg-spotify-green text-black hover:bg-[#8a1dd0]"
+                  ? "bg-spotify-green text-black hover:bg-[#1ed760]"
                   : "bg-spotify-light-gray text-white hover:bg-spotify-dark-gray"
               }`}
               style={{
@@ -234,7 +234,7 @@ export default function CheckInPage() {
                 letterSpacing: "0.05em",
                 transition: "all 200ms ease-out",
                 backgroundColor: selectedFeelings.includes(feeling)
-                  ? "#7209B7"
+                  ? "#1DB954"
                   : "#282828",
                 color: selectedFeelings.includes(feeling)
                   ? "#000000"
@@ -244,14 +244,14 @@ export default function CheckInPage() {
               }}
               onMouseEnter={(e) => {
                 if (selectedFeelings.includes(feeling)) {
-                  e.currentTarget.style.backgroundColor = "#8a1dd0";
+                  e.currentTarget.style.backgroundColor = "#1ed760";
                 } else {
                   e.currentTarget.style.backgroundColor = "#3e3e3e";
                 }
               }}
               onMouseLeave={(e) => {
                 if (selectedFeelings.includes(feeling)) {
-                  e.currentTarget.style.backgroundColor = "#7209B7";
+                  e.currentTarget.style.backgroundColor = "#1DB954";
                 } else {
                   e.currentTarget.style.backgroundColor = "#282828";
                 }
@@ -297,7 +297,7 @@ export default function CheckInPage() {
             resize: "vertical",
           }}
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = "#7209B7";
+            e.currentTarget.style.borderColor = "#1DB954";
             e.currentTarget.style.borderWidth = "2px";
           }}
           onBlur={(e) => {
@@ -320,9 +320,9 @@ export default function CheckInPage() {
 
       {/* Points Preview - Exact Spotify Style */}
       <div
-        className="bg-gradient-to-r from-empulse-purple to-empulse-blue rounded-lg p-4 mb-8 text-white"
+        className="bg-gradient-to-r from-spotify-green to-spotify-green rounded-lg p-4 mb-8 text-white"
         style={{
-          background: "linear-gradient(135deg, #7209B7 0%, #457B9D 100%)",
+          background: "linear-gradient(135deg, #1DB954 0%, #1ed760 100%)",
           borderRadius: "8px",
           padding: "16px",
           marginBottom: "32px",
@@ -392,10 +392,10 @@ export default function CheckInPage() {
       {/* Complete Button - Exact Spotify Style */}
       <button
         onClick={handleComplete}
-        className="w-full bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold py-4 rounded-full text-lg transition-colors"
+        className="w-full bg-spotify-green hover:bg-[#1ed760] text-black font-bold py-4 rounded-full text-lg transition-colors"
         style={{
           width: "100%",
-          backgroundColor: "#7209B7",
+          backgroundColor: "#1DB954",
           color: "#000000",
           fontWeight: 700,
           padding: "16px 32px",
@@ -408,11 +408,11 @@ export default function CheckInPage() {
           transform: "scale(1)",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "#8a1dd0";
+          e.currentTarget.style.backgroundColor = "#1ed760";
           e.currentTarget.style.transform = "scale(1.02)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "#7209B7";
+          e.currentTarget.style.backgroundColor = "#1DB954";
           e.currentTarget.style.transform = "scale(1)";
         }}
       >

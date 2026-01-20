@@ -42,10 +42,16 @@ export const RATE_LIMITS: Record<string, RateLimitConfig> = {
   "/api/auth/register": { windowMs: 60 * 60 * 1000, maxRequests: 3 }, // 3 per hour
   "/api/auth/forgot-password": { windowMs: 60 * 60 * 1000, maxRequests: 5 }, // 5 per hour
   "/api/auth/reset-password": { windowMs: 60 * 60 * 1000, maxRequests: 5 }, // 5 per hour
-  "/api/chat": { windowMs: 60 * 60 * 1000, maxRequests: 20 }, // 20 per hour
+  "/api/chat": { windowMs: 60 * 1000, maxRequests: 20 }, // 20 per minute
   "/api/tracks/submit": { windowMs: 24 * 60 * 60 * 1000, maxRequests: 10 }, // 10 per day
   "/api/artist/signup": { windowMs: 24 * 60 * 60 * 1000, maxRequests: 5 }, // 5 per day
   "/api/mood/validate": { windowMs: 60 * 1000, maxRequests: 30 }, // 30 per minute
+  "/api/health/pipeline": { windowMs: 60 * 1000, maxRequests: 10 }, // 10 per minute
+  "/api/radio/stations": { windowMs: 60 * 1000, maxRequests: 30 }, // 30 per minute
+  "/api/radio/stream": { windowMs: 60 * 1000, maxRequests: 20 }, // 20 per minute
+  "/api/neural/brainwaves": { windowMs: 60 * 1000, maxRequests: 10 }, // 10 per minute
+  "/api/voice/synthesize": { windowMs: 60 * 1000, maxRequests: 20 }, // 20 per minute
+  "/api/voice/commands": { windowMs: 60 * 1000, maxRequests: 30 }, // 30 per minute
   default: { windowMs: 60 * 1000, maxRequests: 100 }, // 100 per minute for general APIs
 };
 

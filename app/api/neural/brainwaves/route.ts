@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logger, generateCorrelationId } from "@/lib/logger";
+import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
 
 /**
  * Neuralink Brainwave API
@@ -15,7 +17,32 @@ interface BrainwaveData {
 }
 
 export async function POST(req: NextRequest) {
+  const correlationId = generateCorrelationId();
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(req);
+    const rateLimit = await checkRateLimit(clientId, "/api/neural/brainwaves");
+    if (!rateLimit.allowed) {
+      logger.warn("Rate limit exceeded for brainwave analysis", {
+        correlationId,
+        clientId,
+      });
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": "10",
+            "X-RateLimit-Remaining": String(rateLimit.remaining),
+            "X-RateLimit-Reset": String(rateLimit.resetTime),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetTime - Date.now()) / 1000),
+            ),
+          },
+        },
+      );
+    }
+
     const brainwaveData: BrainwaveData = await req.json();
 
     // Analyze brainwave patterns
@@ -30,7 +57,7 @@ export async function POST(req: NextRequest) {
       timestamp: new Date().toISOString(),
     });
   } catch (error: any) {
-    console.error("Brainwave analysis error:", error);
+    logger.error("Brainwave analysis error", error, { correlationId });
     return NextResponse.json(
       { error: "Failed to analyze brainwaves", message: error.message },
       { status: 500 },

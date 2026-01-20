@@ -36,7 +36,7 @@ export default function AdvertisingPage() {
           <Megaphone
             size={64}
             className="mx-auto mb-6 text-spotify-green"
-            style={{ color: "#7209B7", marginBottom: "24px" }}
+            style={{ color: "#1DB954", marginBottom: "24px" }}
           />
           <h1
             className="text-5xl font-bold mb-4"
@@ -125,7 +125,7 @@ export default function AdvertisingPage() {
                   <feature.icon
                     size={32}
                     className="mb-4 text-spotify-green"
-                    style={{ color: "#7209B7", marginBottom: "16px" }}
+                    style={{ color: "#1DB954", marginBottom: "16px" }}
                   />
                   <h3
                     className="text-xl font-bold mb-2"
@@ -272,7 +272,7 @@ export default function AdvertisingPage() {
                   <CheckCircle2
                     size={20}
                     className="text-spotify-green flex-shrink-0"
-                    style={{ color: "#7209B7" }}
+                    style={{ color: "#1DB954" }}
                   />
                   <span
                     className="text-white"
@@ -327,9 +327,9 @@ export default function AdvertisingPage() {
             </p>
             <Link
               href="/support"
-              className="bg-spotify-green hover:bg-[#8a1dd0] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
+              className="bg-spotify-green hover:bg-[#1ed760] text-black font-bold py-3 px-6 rounded-full transition-colors inline-block"
               style={{
-                backgroundColor: "#7209B7",
+                backgroundColor: "#1DB954",
                 color: "#000000",
                 fontWeight: 700,
                 padding: "12px 24px",
