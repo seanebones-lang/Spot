@@ -240,6 +240,8 @@ const Player = memo(function Player() {
           >
             <button
               onClick={() => setShuffle(!shuffle)}
+              aria-label={shuffle ? "Disable shuffle" : "Enable shuffle"}
+              aria-pressed={shuffle}
               disabled={!currentTrack}
               aria-label={shuffle ? "Shuffle on" : "Shuffle off"}
               aria-pressed={shuffle}
@@ -273,6 +275,7 @@ const Player = memo(function Player() {
             </button>
             <button
               onClick={playPrevious}
+              aria-label="Previous track"
               disabled={!currentTrack}
               aria-label="Previous track"
               className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -302,11 +305,14 @@ const Player = memo(function Player() {
             <PlayButton
               isPlaying={isPlaying}
               onClick={handlePlayPause}
+              aria-label={isPlaying ? "Pause" : "Play"}
+              aria-pressed={isPlaying}
               size="md"
               disabled={!currentTrack}
             />
             <button
               onClick={playNext}
+              aria-label="Next track"
               disabled={!currentTrack}
               aria-label="Next track"
               className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -396,6 +402,8 @@ const Player = memo(function Player() {
         >
           <button
             onClick={() => setIsQueueOpen(true)}
+            aria-label="Open queue"
+            aria-expanded={isQueueOpen}
             disabled={!currentTrack}
             className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
@@ -425,6 +433,7 @@ const Player = memo(function Player() {
           {currentTrack && (
             <button
               onClick={() => setIsFullScreen(true)}
+              aria-label="Open fullscreen player"
               className="text-spotify-text-gray hover:text-white transition-colors"
               style={{
                 backgroundColor: "transparent",

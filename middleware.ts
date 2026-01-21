@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isOriginAllowed } from "@/lib/env";
-import { generateCorrelationId } from "@/lib/logger";
+import { generateCorrelationId, logger } from "@/lib/logger";
 import { getCsrfToken, validateCsrfToken } from "@/lib/csrf";
+import { generateCSPNonces, buildCSPHeader } from "@/lib/csp";
 
 /**
  * Next.js Middleware
@@ -69,7 +70,9 @@ export async function middleware(request: NextRequest) {
         response.headers.set("X-CSRF-Token", csrfToken);
       } catch (error) {
         // If token generation fails, continue (won't affect GET requests)
-        console.error("Failed to generate CSRF token in middleware:", error);
+        logger.error("Failed to generate CSRF token in middleware", error as Error, {
+          correlationId,
+        });
       }
     } else if (request.cookies.get("csrf-token")) {
       // Include existing token in response header
@@ -130,20 +133,16 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  // Content Security Policy
-  // Removed 'unsafe-eval' for security - Next.js 15 does not require it
-  // 'unsafe-inline' kept for styles (Tailwind) but should be replaced with nonces in future
-  const csp = [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'", // Removed unsafe-eval - XSS protection
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: https:",
-    "font-src 'self' data:",
-    "connect-src 'self' https://api.x.ai",
-    "media-src 'self' blob:",
-    "frame-ancestors 'none'",
-  ].join("; ");
-
+  // Content Security Policy with nonces
+  // Generate nonces for script and style tags
+  const { scriptNonce, styleNonce } = generateCSPNonces();
+  
+  // Store nonces in response headers for use in pages/components
+  response.headers.set("X-CSP-Script-Nonce", scriptNonce);
+  response.headers.set("X-CSP-Style-Nonce", styleNonce);
+  
+  // Build CSP header with nonces (removed unsafe-inline for scripts)
+  const csp = buildCSPHeader(scriptNonce, styleNonce);
   response.headers.set("Content-Security-Policy", csp);
 
   return response;

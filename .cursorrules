@@ -1,0 +1,72 @@
+---
+# Cursor Rules for Eleven Agentic MCP
+default_model: claude-3.5-sonnet
+always_prefix: "@Eleven "
+mcp_enabled: true
+---
+
+# Eleven Agentic System Rules
+
+## Model Configuration
+- Default Model: Claude 3.5 Sonnet
+- Always prefix queries with `@Eleven` for agentic mode
+- MCP enabled for parallel agent orchestration
+
+## Command Prefixes
+When user message starts with:
+- `/refactor` → Detailed refactor plan (analysis + steps + diffs)
+- `/orchestrate` → Multi-agent decomposition (planner/coder/tester)
+- `/debug` → Bug/error root cause + fix (stack trace focus)
+- `/review` → Comprehensive code review (best practices/quality)
+- `/explain` → Step-by-step code explanation
+- `/optimize` → Performance bottlenecks + optimizations
+- `/execute` → Run prior tool calls (JSON auto-exec)
+- `/swarm` → Run multiple agents parallel (comprehensive)
+- `/agent [name]` → Single agent invocation (security, performance, testing, etc.)
+- `/composer` → Multi-file Composer edits (parallel file changes)
+- `/multi-edit` → Parallel file changes (alias for /composer)
+- `/inline` → Cmd+I inline agent edit (highlight code → edit)
+- `/rules` → Manage .cursorrules (add/remove rules)
+- `/mcp-config` → Edit .cursor/mcp.json configuration
+- `/mcp-status` → Check MCP logs/status (agents online)
+- `/hydrate` → Fix hydration mismatches (auto-add useEffect guards)
+- `/index` → Repo-wide index/search (semantic search)
+- `/trace` → Agent execution traces (debug traces)
+
+## Agent Commands
+- `/agent security` → Security analysis (vulns/OWASP/compliance)
+- `/agent performance` → Performance analysis (bottlenecks/speed/resource)
+- `/agent testing` → Testing agent (tests/coverage/Jest/Vitest)
+- `/agent docs` → Documentation agent (README/API/JSDoc)
+- `/agent migrate` → Migration agent (upgrades/breaking changes)
+- `/agent deps` → Dependency agent (NPM/Yarn/conflicts)
+- `/agent bugs` → Bug hunter agent (debug/root cause/fixes)
+- `/agent a11y` → Accessibility agent (WCAG/ARIA/screen reader)
+- `/agent swarm` → Parallel all-agents analysis
+- `/agent composer` → Multi-file orchestration (Composer agent)
+- `/agent deploy` → Deployment automation (Vercel/Railway/AWS)
+- `/agent ml` → ML training/deployment (Ollama/Jupyter/W&B)
+- `/agent mobile` → Mobile app testing (Flutter/Swift/iOS/Android)
+- `/agent infra` → Infrastructure-as-code (Terraform/ArgoCD)
+- `/agent qa` → QA automation (Playwright/Cypress/Vitest)
+
+## Workflow
+1. User prefixes with command → Triggers agentic mode
+2. Agent analyzes and recommends fixes
+3. Use `/execute` to auto-run tool outputs
+4. Chaining: `/debug → /swarm → /execute`
+5. Inline edits: Highlight code → Cmd+I → `/inline [edit]`
+6. Composer: `/composer file1.tsx + file2.tsx [prompt]`
+7. Rules: `/rules add "always-eleven"` or `/rules remove "rule"`
+8. MCP Status: `/mcp-status` to check agent health
+
+## File Scope
+- Default repo: seanebones-lang/Spot:main
+- All agents target this repo unless specified
+
+## No Action Mode
+- Add "take no action" → Audit only, no file changes
+
+## Priority
+- Commands > Normal chat
+- @Eleven prefix ensures agentic routing

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -9,6 +10,16 @@ import GlobalErrorHandler from "@/components/GlobalErrorHandler";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { SessionProvider } from "@/components/providers/SessionProvider";
 import { WebVitals } from "@/components/WebVitals";
+import Skeleton from "@/components/Skeleton";
+
+// Dynamic imports for heavy components (code splitting)
+const HeavyAnalytics = dynamic(() => import("@vercel/analytics/react"), {
+  ssr: false,
+});
+
+const HeavySpeedInsights = dynamic(() => import("@vercel/speed-insights/next"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: "Spot Music - Your Music Streaming Platform",
@@ -66,8 +77,8 @@ export default function RootLayout({
               </ErrorBoundary>
             </GlobalErrorHandler>
             <WebVitals />
-            <Analytics />
-            <SpeedInsights />
+            <HeavyAnalytics />
+            <HeavySpeedInsights />
           </QueryProvider>
         </SessionProvider>
       </body>
