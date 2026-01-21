@@ -32,6 +32,21 @@ When user message starts with:
 - `/hydrate` → Fix hydration mismatches (auto-add useEffect guards)
 - `/index` → Repo-wide index/search (semantic search)
 - `/trace` → Agent execution traces (debug traces)
+- `/vision` → Analyze images/code screenshots (extract UI to React)
+- `/screenshot` → Capture + agent analyze (accessibility audit)
+- `/terminal` → Run shell in Composer (safe commands)
+- `/shell` → Agentic shell execution
+- `/deploy` → Vercel/Netlify auto-deploy
+- `/pr` → GitHub PR creation/diff review
+- `/branch` → Git branch management
+- `/chat` → New sidebar chat
+- `/sidebar` → Pin MCP sidebar
+- `/tab` → Tab-complete agent snippets
+- `/apply` → Auto-apply selected diff
+- `/diff` → Git-style diff viewer
+- `/reset` → Clear Composer state
+- `/pin` → Pin agent response
+- `/voice` → Voice-to-code MCP (experimental)
 
 ## Agent Commands
 - `/agent security` → Security analysis (vulns/OWASP/compliance)
@@ -49,6 +64,8 @@ When user message starts with:
 - `/agent mobile` → Mobile app testing (Flutter/Swift/iOS/Android)
 - `/agent infra` → Infrastructure-as-code (Terraform/ArgoCD)
 - `/agent qa` → QA automation (Playwright/Cypress/Vitest)
+- `/agent vision` → Vision/image analysis agent
+- `/agent spotify-specialist` → Spotify API specialist (validate scopes, no secrets)
 
 ## Workflow
 1. User prefixes with command → Triggers agentic mode
@@ -59,6 +76,11 @@ When user message starts with:
 6. Composer: `/composer file1.tsx + file2.tsx [prompt]`
 7. Rules: `/rules add "always-eleven"` or `/rules remove "rule"`
 8. MCP Status: `/mcp-status` to check agent health
+9. Vision: `/vision screenshot.png` → Extract UI to React
+10. Terminal: `/terminal npm test --watch`
+11. Deploy: `/deploy vercel --prod`
+12. PR: `/pr feat/player "Add Spotify player"`
+13. Voice: `/voice "add playlist feature"` (experimental)
 
 ## File Scope
 - Default repo: seanebones-lang/Spot:main

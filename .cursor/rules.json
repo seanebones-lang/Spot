@@ -1,0 +1,43 @@
+{
+  "spotify_mode": {
+    "prefix": "@Eleven /agent spotify-specialist",
+    "rules": [
+      "always-validate-spotify-scopes",
+      "no-client-secrets",
+      "use-env-vars-for-tokens",
+      "validate-api-responses"
+    ]
+  },
+  "default_agent": {
+    "prefix": "@Eleven",
+    "model": "claude-3.5-sonnet",
+    "mcp_enabled": true
+  },
+  "vision_mode": {
+    "prefix": "@Eleven /vision",
+    "rules": [
+      "extract-ui-to-react",
+      "preserve-accessibility",
+      "use-shadcn-components",
+      "follow-spotify-design-system"
+    ]
+  },
+  "deploy_mode": {
+    "prefix": "@Eleven /deploy",
+    "rules": [
+      "auto-detect-env-vars",
+      "validate-build-before-deploy",
+      "run-tests-before-deploy",
+      "check-secrets-before-deploy"
+    ]
+  },
+  "pr_mode": {
+    "prefix": "@Eleven /pr",
+    "rules": [
+      "auto-generate-pr-description",
+      "include-test-coverage",
+      "add-screenshots-for-ui-changes",
+      "validate-conventional-commits"
+    ]
+  }
+}
