@@ -1,16 +1,19 @@
 # UI Component System - Implementation Guide
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**Date:** January 14, 2026  
-**Status:** Production Ready ✅
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **Date:** January 14, 2026  
+> > > > > > > **Status:** Production Ready ✅
 
 ---
 
 ## 🎯 **QUICK START**
 
 ### Import Components:
+
 <<<<<<< HEAD
 
 ```tsx
@@ -24,16 +27,19 @@ import FormField from "@/components/FormField";
 ### Basic Usage:
 
 =======
+
 ```tsx
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-import Card from '@/components/Card';
-import Modal from '@/components/Modal';
-import FormField from '@/components/FormField';
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Card from "@/components/Card";
+import Modal from "@/components/Modal";
+import FormField from "@/components/FormField";
 ```
 
 ### Basic Usage:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 // Button
 <Button variant="primary" size="md">Click Me</Button>
@@ -63,11 +69,13 @@ import FormField from '@/components/FormField';
 ## 📦 **COMPONENT REFERENCE**
 
 ### 1. **Button**
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**File:** `components/Button.tsx`
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **File:** `components/Button.tsx`
 
 **Variants:** `primary` | `secondary` | `tertiary` | `ghost` | `danger`  
 **Sizes:** `sm` | `md` | `lg`
@@ -76,7 +84,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `variant?: ButtonVariant` - Visual style
 - `size?: ButtonSize` - Button size
 - `loading?: boolean` - Show loading spinner
@@ -89,7 +99,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 <Button variant="primary" icon={Play} loading={isLoading}>
   Play Now
@@ -99,11 +111,13 @@ import FormField from '@/components/FormField';
 ---
 
 ### 2. **Input**
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**File:** `components/Input.tsx`
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **File:** `components/Input.tsx`
 
 **Variants:** `default` | `ghost`  
 **Sizes:** `sm` | `md` | `lg`
@@ -112,7 +126,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `type?: string` - Input type (text, email, password, etc.)
 - `label?: string` - Label text
 - `helperText?: string` - Helper text below input
@@ -127,25 +143,26 @@ import FormField from '@/components/FormField';
 **Example:**
 <<<<<<< HEAD
 
-```tsx
+````tsx
 <Input
   type="email"
   label="Email"
 =======
 ```tsx
-<Input 
-  type="email" 
-  label="Email" 
+<Input
+  type="email"
+  label="Email"
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   placeholder="your@email.com"
   error={emailError}
   required
 />
-```
+````
 
 ---
 
 ### 3. **FormField**
+
 <<<<<<< HEAD
 
 **File:** `components/FormField.tsx`
@@ -156,7 +173,9 @@ import FormField from '@/components/FormField';
 **File:** `components/FormField.tsx`
 
 **Props:**
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `label?: string` - Label text
 - `helperText?: string` - Helper text
 - `error?: string` - Error message
@@ -169,7 +188,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 <FormField label="Username" required error={usernameError}>
   <Input type="text" placeholder="Choose a username" />
@@ -179,11 +200,13 @@ import FormField from '@/components/FormField';
 ---
 
 ### 4. **Card**
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**File:** `components/Card.tsx`
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **File:** `components/Card.tsx`
 
 **Variants:** `default` | `elevated` | `outline` | `gradient`  
 **Sizes:** `sm` | `md` | `lg`  
@@ -193,7 +216,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `variant?: CardVariant` - Visual style
 - `size?: CardSize` - Card size (padding)
 - `hover?: boolean` - Enable hover effect
@@ -207,7 +232,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `Card.Image` - Image with size/aspect ratio
 - `Card.Header` - Header section
 - `Card.Title` - Bold title text
@@ -220,7 +247,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 <Card as="link" href="/album/123" variant="default" hover>
   <Card.Image src="/album.jpg" alt="Album" size="md" />
@@ -234,11 +263,13 @@ import FormField from '@/components/FormField';
 ---
 
 ### 5. **Modal**
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**File:** `components/Modal.tsx`
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **File:** `components/Modal.tsx`
 
 **Sizes:** `sm` | `md` | `lg` | `xl` | `fullscreen`
 
@@ -246,7 +277,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `isOpen: boolean` - Whether modal is open
 - `onClose: () => void` - Close handler
 - `title?: string` - Modal title
@@ -263,7 +296,9 @@ import FormField from '@/components/FormField';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `Modal.Header` - Custom header section
 - `Modal.Body` - Body content section
 - `Modal.Footer` - Footer with action buttons
@@ -271,15 +306,15 @@ import FormField from '@/components/FormField';
 **Example:**
 <<<<<<< HEAD
 
-```tsx
+````tsx
 <Modal
   isOpen={isOpen}
   onClose={() => setIsOpen(false)}
 =======
 ```tsx
-<Modal 
-  isOpen={isOpen} 
-  onClose={() => setIsOpen(false)} 
+<Modal
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   title="Edit Playlist"
   size="md"
@@ -296,13 +331,14 @@ import FormField from '@/components/FormField';
     </Button>
   </Modal.Footer>
 </Modal>
-```
+````
 
 ---
 
 ## 🎨 **DESIGN TOKENS**
 
 ### Colors (Tailwind Classes):
+
 <<<<<<< HEAD
 
 ```tsx
@@ -344,7 +380,7 @@ className = "rounded-full"; // 9999px (buttons)
 
 ### Transitions:
 
-```tsx
+````tsx
 className = "transition-all duration-200 ease-in-out";
 =======
 ```tsx
@@ -363,26 +399,29 @@ className="text-black" // For green buttons
 className="bg-empulse-red" // #E63946
 className="bg-empulse-blue" // #457B9D
 className="bg-empulse-purple" // #7209B7
-```
+````
 
 ### Spacing (4px base unit):
+
 ```tsx
-className="p-1" // 4px
-className="p-2" // 8px
-className="p-3" // 12px
-className="p-4" // 16px
-className="p-6" // 24px
-className="p-8" // 32px
+className = "p-1"; // 4px
+className = "p-2"; // 8px
+className = "p-3"; // 12px
+className = "p-4"; // 16px
+className = "p-6"; // 24px
+className = "p-8"; // 32px
 ```
 
 ### Border Radius:
+
 ```tsx
-className="rounded-lg" // 8px (cards)
-className="rounded-xl" // 12px (modals)
-className="rounded-full" // 9999px (buttons)
+className = "rounded-lg"; // 8px (cards)
+className = "rounded-xl"; // 12px (modals)
+className = "rounded-full"; // 9999px (buttons)
 ```
 
 ### Transitions:
+
 ```tsx
 className="transition-all duration-200 ease-in-out"
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
@@ -395,13 +434,16 @@ className="transition-all duration-200 ease-in-out"
 ## ✅ **BEST PRACTICES**
 
 ### 1. **Always Use Components**
+
 <<<<<<< HEAD
 
 ❌ Don't:
 
 =======
 ❌ Don't:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 <button className="bg-spotify-green text-black px-6 py-2 rounded-full">
   Click Me
@@ -422,13 +464,19 @@ className="transition-all duration-200 ease-in-out"
 ❌ Don't:
 
 =======
+
 ```tsx
-<Button variant="primary" size="md">Click Me</Button>
+<Button variant="primary" size="md">
+  Click Me
+</Button>
 ```
 
 ### 2. **Provide Labels for Inputs**
+
 ❌ Don't:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 <input type="email" placeholder="Email" />
 ```
@@ -437,52 +485,61 @@ className="transition-all duration-200 ease-in-out"
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 <Input type="email" label="Email" placeholder="your@email.com" required />
 ```
 
 ### 3. **Handle Validation**
+
 <<<<<<< HEAD
 
 ✅ Do:
 
-```tsx
+````tsx
 <Input
   type="password"
 =======
 ✅ Do:
 ```tsx
-<Input 
-  type="password" 
+<Input
+  type="password"
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   label="Password"
   error={passwordError}
   helperText="Must be at least 8 characters"
 />
-```
+````
 
 ### 4. **Use Semantic HTML**
+
 <<<<<<< HEAD
 
 ✅ Components handle semantic HTML automatically:
 
 =======
 ✅ Components handle semantic HTML automatically:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Button uses `<button>` element
 - Input uses `<input>` with proper `<label>`
 - Card can render as `<div>`, `<Link>`, or `<button>`
 - Modal uses `role="dialog"` and ARIA attributes
 
 ### 5. **Accessibility First**
+
 <<<<<<< HEAD
 
 ✅ All components include:
 
 =======
 ✅ All components include:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Proper ARIA attributes
 - Keyboard navigation support
 - Focus indicators
@@ -494,10 +551,13 @@ className="transition-all duration-200 ease-in-out"
 ## 🔄 **MIGRATION CHECKLIST**
 
 ### Before Migration:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - [ ] Review existing components to identify patterns
 - [ ] Identify all button implementations
 - [ ] Identify all input/form implementations
@@ -505,10 +565,13 @@ className="transition-all duration-200 ease-in-out"
 - [ ] Identify all modal/dialog implementations
 
 ### Migration Steps:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 1. **Replace Buttons:**
    - Find all `<button>` elements with custom classes
    - Replace with `<Button>` component
@@ -531,10 +594,13 @@ className="transition-all duration-200 ease-in-out"
    - Use subcomponents for structure
 
 ### After Migration:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - [ ] Test all interactive elements
 - [ ] Verify keyboard navigation
 - [ ] Test screen reader compatibility
@@ -547,16 +613,20 @@ className="transition-all duration-200 ease-in-out"
 ## 📚 **DOCUMENTATION FILES**
 
 ### Component Documentation:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Complete Reference:** `components/UI_COMPONENT_SYSTEM.md`
 - **Quick Start:** `components/QUICK_START.md`
 - **Accessibility Report:** `components/BUTTON_ACCESSIBILITY.md`
 - **This Guide:** `components/IMPLEMENTATION_GUIDE.md`
 
 ### Design Tokens:
+
 <<<<<<< HEAD
 
 - **Token Definitions:** `design-tokens.json`
@@ -564,10 +634,13 @@ className="transition-all duration-200 ease-in-out"
 ### Examples:
 
 =======
+
 - **Token Definitions:** `design-tokens.json`
 
 ### Examples:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Button Examples:** `components/Button.examples.tsx`
 
 ---
@@ -575,23 +648,29 @@ className="transition-all duration-200 ease-in-out"
 ## 🎓 **LEARNING RESOURCES**
 
 ### Component Examples:
+
 <<<<<<< HEAD
 
 All components include JSDoc comments with examples. Check component files:
 
 =======
 All components include JSDoc comments with examples. Check component files:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `components/Button.tsx` - Button component with examples
 - `components/Input.tsx` - Input component with examples
 - `components/Card.tsx` - Card component with examples
 - `components/Modal.tsx` - Modal component with examples
 
 ### Design System References:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Spotify Design:** Reference for design patterns
 - **WCAG 2.2 Guidelines:** https://www.w3.org/WAI/WCAG22/quickref/
 - **Tailwind CSS:** https://tailwindcss.com/docs
@@ -605,7 +684,7 @@ All components include JSDoc comments with examples. Check component files:
 **1. Import Errors:**
 <<<<<<< HEAD
 
-```tsx
+````tsx
 // ✅ Correct
 import Button from "@/components/Button";
 
@@ -619,7 +698,7 @@ import Button from '@/components/Button';
 // ❌ Incorrect
 import { Button } from '@/components/Button';
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-```
+````
 
 **2. Type Errors:**
 All components are fully typed. Check prop types in component files.
@@ -628,7 +707,9 @@ All components are fully typed. Check prop types in component files.
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Use component props instead of custom `className` when possible
 - Check `design-tokens.json` for available values
 - Use Tailwind classes for custom styling
@@ -637,7 +718,9 @@ All components are fully typed. Check prop types in component files.
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Always provide `label` prop for Input components
 - Use semantic HTML elements (components handle this automatically)
 - Check focus indicators are visible
@@ -647,20 +730,26 @@ All components are fully typed. Check prop types in component files.
 ## 🚀 **NEXT STEPS**
 
 ### Recommended Actions:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 1. **Start Migration:** Begin replacing existing components with new system
 2. **Test Thoroughly:** Test all interactive elements and accessibility
 3. **Document Patterns:** Document common patterns in your codebase
 4. **Share Knowledge:** Share this guide with your team
 
 ### Future Enhancements:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Create additional components (Select, Checkbox, Radio, Badge)
 - Build component showcase page
 - Add Storybook for visual testing
@@ -671,20 +760,26 @@ All components are fully typed. Check prop types in component files.
 ## 📞 **SUPPORT**
 
 ### Need Help?
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 1. Check component files for inline JSDoc comments
 2. Review `UI_COMPONENT_SYSTEM.md` for complete reference
 3. Check `design-tokens.json` for design values
 4. Review examples in `Button.examples.tsx`
 
 ### Reporting Issues:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Component bugs: Check component implementation
 - Design inconsistencies: Verify `design-tokens.json` values
 - Accessibility issues: Review `BUTTON_ACCESSIBILITY.md` patterns

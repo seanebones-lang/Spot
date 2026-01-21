@@ -62,21 +62,25 @@
 ### Manual Steps (if needed)
 
 1. **Review Build Output**
+
    ```bash
    npm run build
    ```
 
 2. **Review Test Results**
+
    ```bash
    npm test
    ```
 
 3. **Run E2E Tests**
+
    ```bash
    npm run test:e2e
    ```
 
 4. **Deploy to Vercel**
+
    ```bash
    npx vercel --prod --yes
    ```

@@ -3,9 +3,9 @@
  * Eliminates N+1 queries, implements pagination, and adds caching
  */
 
-import prisma from './db';
-import { Redis } from '@upstash/redis';
-import { logger } from './logger';
+import prisma from "./db";
+import { Redis } from "@upstash/redis";
+import { logger } from "./logger";
 
 const redis = Redis.fromEnv();
 
@@ -16,7 +16,7 @@ const redis = Redis.fromEnv();
 export async function cachedQuery<T>(
   key: string,
   queryFn: () => Promise<T>,
-  ttlSeconds: number = 300
+  ttlSeconds: number = 300,
 ): Promise<T> {
   try {
     // Try to get from cache
@@ -49,7 +49,7 @@ export async function cachedQuery<T>(
 export async function getTracksWithPagination(
   userId: string,
   page: number = 1,
-  limit: number = 50
+  limit: number = 50,
 ) {
   const skip = (page - 1) * limit;
 
@@ -67,7 +67,7 @@ export async function getTracksWithPagination(
       },
       skip,
       take: limit,
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
     }),
     prisma.track.count({ where: { userId } }),
   ]);
@@ -91,7 +91,7 @@ export async function getTracksWithPagination(
 export async function getPlaylistWithTracks(
   playlistId: string,
   page: number = 1,
-  limit: number = 50
+  limit: number = 50,
 ) {
   const skip = (page - 1) * limit;
 
@@ -125,7 +125,7 @@ export async function getPlaylistWithTracks(
 
   return {
     ...playlist,
-    tracks: playlist.tracks.map(pt => pt.track),
+    tracks: playlist.tracks.map((pt) => pt.track),
     pagination: {
       page,
       limit,
@@ -201,7 +201,7 @@ export async function getArtistWithStats(artistId: string) {
 export async function getTracksWithCursorPagination(
   userId: string,
   cursor?: string,
-  limit: number = 50
+  limit: number = 50,
 ) {
   const whereClause: any = { userId };
 
@@ -214,13 +214,15 @@ export async function getTracksWithCursorPagination(
     include: {
       artist: { select: { id: true, name: true } },
     },
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
     take: limit + 1, // Fetch one extra to determine if more pages exist
   });
 
   const hasMore = tracks.length > limit;
   const data = tracks.slice(0, limit);
-  const nextCursor = hasMore ? data[data.length - 1]?.createdAt.toISOString() : null;
+  const nextCursor = hasMore
+    ? data[data.length - 1]?.createdAt.toISOString()
+    : null;
 
   return {
     data,
@@ -247,7 +249,7 @@ export async function getTrackSummaries(userId: string, limit: number = 100) {
       // Exclude: full schema, unused fields
     },
     take: limit,
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
   });
 }
 
@@ -258,11 +260,11 @@ export async function getTrackSummaries(userId: string, limit: number = 100) {
 export async function invalidateCache(keys: string[]) {
   try {
     if (keys.length > 0) {
-      await Promise.all(keys.map(key => redis.del(key)));
+      await Promise.all(keys.map((key) => redis.del(key)));
       logger.info(`Cache invalidated: ${keys.length} keys`);
     }
   } catch (error) {
-    logger.warn('Cache invalidation failed:', error);
+    logger.warn("Cache invalidation failed:", error);
   }
 }
 
@@ -270,10 +272,7 @@ export async function invalidateCache(keys: string[]) {
  * Invalidate user's playlist cache on changes
  */
 export async function invalidatePlaylistCache(userId: string) {
-  const patterns = [
-    `playlists:${userId}:*`,
-    `playlist-tracks:${userId}:*`,
-  ];
+  const patterns = [`playlists:${userId}:*`, `playlist-tracks:${userId}:*`];
   // Note: Redis doesn't support pattern deletion efficiently
   // In production, consider using tagged cache or separate cache layer
 }
@@ -284,7 +283,7 @@ export async function invalidatePlaylistCache(userId: string) {
  */
 export function withQueryLogging<T extends (...args: any[]) => Promise<any>>(
   fn: T,
-  threshold: number = 100 // ms
+  threshold: number = 100, // ms
 ): T {
   return (async (...args: any[]) => {
     const start = Date.now();

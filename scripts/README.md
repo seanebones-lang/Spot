@@ -19,6 +19,7 @@ npm run scrape:soundcloud
 ```
 
 **Features**:
+
 - Basic genre scraping
 - CC license filtering
 - SQLite storage
@@ -33,6 +34,7 @@ npm run scrape:comprehensive
 ```
 
 **Features**:
+
 - 60+ genres
 - 35+ moods
 - 25+ styles
@@ -42,12 +44,14 @@ npm run scrape:comprehensive
 - Progress logging
 
 **Requirements**:
+
 ```bash
 npm install puppeteer better-sqlite3
 npm install -D @types/better-sqlite3 tsx
 ```
 
 **Configuration**:
+
 ```env
 ALLOW_SOUNDCLOUD_SCRAPING=true  # Required to enable
 ```
@@ -55,6 +59,7 @@ ALLOW_SOUNDCLOUD_SCRAPING=true  # Required to enable
 ## Output
 
 Both scripts create:
+
 - `data/music.db` - SQLite database
 - `data/tracks.json` - JSON export (comprehensive only)
 - `data/tracks.csv` - CSV export (comprehensive only)
@@ -84,13 +89,13 @@ CREATE TABLE tracks (
 After scraping, you can query the database:
 
 ```typescript
-import Database from 'better-sqlite3';
-const db = new Database('data/music.db');
+import Database from "better-sqlite3";
+const db = new Database("data/music.db");
 
 // Get tracks by mood
 const tracks = db
-  .prepare('SELECT * FROM tracks WHERE json_each(mood) LIKE ?')
-  .all('%happy%');
+  .prepare("SELECT * FROM tracks WHERE json_each(mood) LIKE ?")
+  .all("%happy%");
 ```
 
 ## ⚠️ Remember

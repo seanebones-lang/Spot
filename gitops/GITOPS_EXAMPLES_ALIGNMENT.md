@@ -11,22 +11,27 @@ Our implementation follows all three GitOps patterns, providing a production-rea
 ## Example 1: Kubernetes Cluster Management with Flux ✅
 
 ### Pattern Overview
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**From Best Practices**: Lightweight, CNCF-graduated tool (v2.3+) for pull-based Kubernetes GitOps with Helm charts, Kustomize, and SOPS support.
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **From Best Practices**: Lightweight, CNCF-graduated tool (v2.3+) for pull-based Kubernetes GitOps with Helm charts, Kustomize, and SOPS support.
 
 ### Our Implementation
 
 #### 1. Repository Structure ✅
+
 <<<<<<< HEAD
 
 **Example Pattern**:
 
 =======
 **Example Pattern**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```
 ├── bootstrap/
 │   └── flux.yaml   Flux installation manifest
@@ -41,7 +46,9 @@ Our implementation follows all three GitOps patterns, providing a production-rea
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```
 gitops/
 ├── bootstrap/
@@ -61,13 +68,16 @@ gitops/
 ```
 
 #### 2. Flux Bootstrap ✅
+
 <<<<<<< HEAD
 
 **Example Command**:
 
 =======
 **Example Command**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```bash
 flux bootstrap github --owner=NextElevenDev --repository=gitops-repo --branch=main --path=clusters/prod
 ```
@@ -76,19 +86,24 @@ flux bootstrap github --owner=NextElevenDev --repository=gitops-repo --branch=ma
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - File: `gitops/bootstrap/flux.yaml`
 - Configuration: GitRepository polls every 1 minute, Kustomization reconciles every 5 minutes
 - Path: `./clusters/prod` (matches example structure)
 
 #### 3. Deployment Manifest ✅
+
 <<<<<<< HEAD
 
 **Example nginx-deployment.yaml**:
 
 =======
 **Example nginx-deployment.yaml**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -114,12 +129,11 @@ spec:
 
 **Our empulse-music-deployment.yaml** (same pattern):
 
-=======
-      - name: nginx
-        image: nginx:1.25   # Current stable as of Dec 2025
-        ports:
-        - containerPort: 80
-```
+======= - name: nginx
+image: nginx:1.25 # Current stable as of Dec 2025
+ports: - containerPort: 80
+
+````
 
 **Our empulse-music-deployment.yaml** (same pattern):
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
@@ -148,15 +162,14 @@ spec:
           image: ghcr.io/nexteleven/empulse-music:latest
           ports:
             - containerPort: 3000 # Next.js port
-```
+````
 
 **Enhanced Features** (beyond example):
 
-=======
-      - name: empulse-music
-        image: ghcr.io/nexteleven/empulse-music:latest
-        ports:
-        - containerPort: 3000     # Next.js port
+======= - name: empulse-music
+image: ghcr.io/nexteleven/empulse-music:latest
+ports: - containerPort: 3000 # Next.js port
+
 ```
 
 **Enhanced Features** (beyond example):
@@ -224,9 +237,11 @@ spec:
 **Example Pattern**:
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```
-├── main.tf   Terraform config
+
+├── main.tf Terraform config
 ├── gitops/
-│   └── argo-app.yaml   Argo CD Application manifest
+│ └── argo-app.yaml Argo CD Application manifest
+
 ```
 
 **Our Structure** (infra separate from apps):
@@ -235,17 +250,19 @@ spec:
 =======
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```
+
 gitops/
-├── terraform/                    ✅ Infrastructure provisioning
-│   ├── main.tf                   ✅ Terraform config (like example)
-│   ├── variables.tf
-│   ├── outputs.tf
-│   └── README.md
-├── clusters/                     ✅ Application manifests (GitOps)
-│   └── prod/
-│       └── apps/
-│           └── empulse-music-deployment.yaml
-```
+├── terraform/ ✅ Infrastructure provisioning
+│ ├── main.tf ✅ Terraform config (like example)
+│ ├── variables.tf
+│ ├── outputs.tf
+│ └── README.md
+├── clusters/ ✅ Application manifests (GitOps)
+│ └── prod/
+│ └── apps/
+│ └── empulse-music-deployment.yaml
+
+````
 
 **Note**: We use Flux instead of Argo CD (both are valid GitOps tools). Flux is simpler and better suited for our Kubernetes-centric setup.
 
@@ -268,13 +285,15 @@ module "eks" {
   cluster_version = "1.31"
   subnet_ids      = ["subnet-abc", "subnet-def"]
 }
-```
+````
 
 **Our Implementation** (`gitops/terraform/main.tf`):
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```hcl
 provider "aws" {
   region = var.aws_region  # ✅ Same pattern
@@ -292,13 +311,16 @@ module "eks" {
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Complete VPC module (networking, NAT gateways, DNS)
 - ✅ EKS managed node groups with auto-scaling
 - ✅ Cluster addons (CoreDNS, kube-proxy, VPC-CNI, EBS CSI driver)
 - ✅ Outputs for Flux bootstrap
 
 #### 3. Workflow ✅
+
 <<<<<<< HEAD
 
 **Example**: Commit changes to Git; GitOps tool syncs via webhooks.
@@ -309,13 +331,16 @@ module "eks" {
 **Example**: Commit changes to Git; GitOps tool syncs via webhooks.
 
 **Our Implementation**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 1. **Terraform** provisions AWS EKS cluster (`terraform apply`)
 2. **Flux** bootstraps to the cluster (`flux bootstrap github`)
 3. **GitOps** manages all Kubernetes manifests (deployments, services, ingress)
 4. **GitHub Actions** automates image builds and manifest updates
 
 #### 4. Real-World Use ✅
+
 <<<<<<< HEAD
 
 **Example**: Intuit and Adobe use Terraform + GitOps for hybrid clouds. 2025 enhancements include HashiCorp Vault integration.
@@ -326,7 +351,9 @@ module "eks" {
 **Example**: Intuit and Adobe use Terraform + GitOps for hybrid clouds. 2025 enhancements include HashiCorp Vault integration.
 
 **Our Implementation**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Terraform for AWS resources (EKS, VPC, networking)
 - ✅ GitOps (Flux) for Kubernetes application management
 - ✅ SOPS integration for secrets (similar to Vault pattern)
@@ -339,15 +366,18 @@ module "eks" {
 ## Example 3: CI/CD Pipeline with GitHub Actions and GitOps ✅
 
 ### Pattern Overview
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**From Best Practices**: GitHub Actions drives GitOps for simpler setups, especially serverless. Enhanced in 2025 with better matrix jobs and reusable workflows.
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **From Best Practices**: GitHub Actions drives GitOps for simpler setups, especially serverless. Enhanced in 2025 with better matrix jobs and reusable workflows.
 
 ### Our Implementation
 
 #### 1. Repo Setup ✅
+
 <<<<<<< HEAD
 
 **Example Pattern**: Monorepo with `.github/workflows/` for CI/CD.
@@ -358,7 +388,9 @@ module "eks" {
 **Example Pattern**: Monorepo with `.github/workflows/` for CI/CD.
 
 **Our Structure**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```
 .github/
 └── workflows/
@@ -366,13 +398,16 @@ module "eks" {
 ```
 
 #### 2. Workflow YAML ✅
+
 <<<<<<< HEAD
 
 **Example Workflow**:
 
 =======
 **Example Workflow**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```yaml
 name: GitOps Deploy
 on:
@@ -414,15 +449,13 @@ jobs:
 
 **Enhanced Features**:
 
-=======
-    - uses: actions/checkout@v4
-    - name: Install Dependencies
-      run: npm ci
-    - name: Build and Deploy
-      uses: vercel/actions@v3   # Updated Dec 2025
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-```
+======= - uses: actions/checkout@v4 - name: Install Dependencies
+run: npm ci - name: Build and Deploy
+uses: vercel/actions@v3 # Updated Dec 2025
+with:
+vercel-token: ${{ secrets.VERCEL_TOKEN }}
+
+````
 
 **Our Implementation** (`.github/workflows/gitops-deploy.yml`):
 ```yaml
@@ -441,10 +474,12 @@ jobs:
       run: npm run build
     - name: Build and push Docker image
       # Builds and pushes to GHCR (instead of Vercel)
-```
+````
 
 **Enhanced Features**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Multi-stage deployment (build → staging → production)
 - ✅ Image tagging with branch, SHA, and latest
 - ✅ Automatic manifest updates (GitOps pattern)
@@ -453,6 +488,7 @@ jobs:
 - ✅ Docker layer caching (GitHub Actions cache)
 
 #### 3. GitOps Twist ✅
+
 <<<<<<< HEAD
 
 **Example Pattern**: Use separate "config" branch for manifests; merge PRs trigger reconciles via Actions.
@@ -463,7 +499,9 @@ jobs:
 **Example Pattern**: Use separate "config" branch for manifests; merge PRs trigger reconciles via Actions.
 
 **Our Implementation**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Same repo approach (simpler for monorepo)
 - ✅ Actions updates deployment manifests directly
 - ✅ Flux detects Git changes (within 1 minute)
@@ -473,13 +511,16 @@ jobs:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 1. Code push → GitHub Actions builds Docker image
 2. Actions updates `gitops/clusters/*/apps/empulse-music-deployment.yaml` with new image tag
 3. Actions commits and pushes manifest change
 4. Flux detects change → reconciles → deploys
 
 #### 4. Automation ✅
+
 <<<<<<< HEAD
 
 **Example**: Integrate with tools like Crossplane for provider-agnostic infra.
@@ -490,7 +531,9 @@ jobs:
 **Example**: Integrate with tools like Crossplane for provider-agnostic infra.
 
 **Our Implementation**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Full automation: build → push → update Git → deploy
 - ✅ Zero-downtime rolling updates
 - ✅ Environment separation (staging automatic, prod manual approval)
@@ -498,6 +541,7 @@ jobs:
 - ✅ Terraform integration ready (infrastructure as code)
 
 #### 5. Real-World Use ✅
+
 <<<<<<< HEAD
 
 **Example**: Startups like Vercel use this for rapid iterations. 2025 features add AI-assisted workflow generation.
@@ -508,7 +552,9 @@ jobs:
 **Example**: Startups like Vercel use this for rapid iterations. 2025 features add AI-assisted workflow generation.
 
 **Our Implementation**:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Optimized for frontend-heavy Next.js applications
 - ✅ Fast iteration cycles (automated testing, building, deploying)
 - ✅ Minimal tool overhead (GitHub Actions + Flux only)
@@ -530,40 +576,47 @@ jobs:
 ### 📋 Recommended Next Steps
 
 1. **Git Signing** - ⚠️ **Mandatory in 2025 enterprise standards**
+   <<<<<<< HEAD
+
+=======
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+```bash
+# GPG signing
+git config --global user.signingkey <GPG_KEY_ID>
+git config --global commit.gpgsign true
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-   ```bash
-   # GPG signing
-   git config --global user.signingkey <GPG_KEY_ID>
-   git config --global commit.gpgsign true
-<<<<<<< HEAD
 
-=======
-   
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-   # Or SSH signing (newer, simpler)
-   git config --global gpg.format ssh
-   git config --global user.signingkey ~/.ssh/id_ed25519.pub
-   git config --global commit.gpgsign true
-   ```
+# Or SSH signing (newer, simpler)
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global commit.gpgsign true
+```
 
 2. **Image Digests** - Consider using image digests instead of tags for production:
+   <<<<<<< HEAD
+
+=======
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+```yaml
+# Instead of: image: ghcr.io/nexteleven/empulse-music:latest
+# Use: image: ghcr.io/nexteleven/empulse-music@sha256:abc123...
+```
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-   ```yaml
-   # Instead of: image: ghcr.io/nexteleven/empulse-music:latest
-   # Use: image: ghcr.io/nexteleven/empulse-music@sha256:abc123...
-   ```
-<<<<<<< HEAD
 
-=======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-   - **Benefit**: Immutable image references (tag can change, digest cannot)
-   - **Implementation**: Update GitHub Actions to extract and use digest
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+- **Benefit**: Immutable image references (tag can change, digest cannot)
+- **Implementation**: Update GitHub Actions to extract and use digest
 
 3. **OPA Integration** - For policy-as-code enforcement:
    - Resource limits enforcement
@@ -581,12 +634,12 @@ jobs:
 ## Quick Comparison Table
 
 <<<<<<< HEAD
-| Aspect             | Example 1 (Flux) | Example 2 (Argo CD + Terraform) | Example 3 (GitHub Actions) | Our Implementation  |
+| Aspect | Example 1 (Flux) | Example 2 (Argo CD + Terraform) | Example 3 (GitHub Actions) | Our Implementation |
 | ------------------ | ---------------- | ------------------------------- | -------------------------- | ------------------- |
-| **GitOps Tool**    | Flux v2.3+       | Argo CD v2.11                   | GitHub Actions             | ✅ Flux v2.3+       |
-| **Infrastructure** | Kubernetes only  | Terraform + Argo CD             | Serverless (Vercel)        | ✅ Terraform + Flux |
-| **CI/CD**          | Manual/Webhooks  | Argo CD sync                    | GitHub Actions             | ✅ GitHub Actions   |
-| **Best For**       | K8s-centric apps | Complex multi-repo              | Frontend/serverless        | ✅ K8s + Next.js    |
+| **GitOps Tool** | Flux v2.3+ | Argo CD v2.11 | GitHub Actions | ✅ Flux v2.3+ |
+| **Infrastructure** | Kubernetes only | Terraform + Argo CD | Serverless (Vercel) | ✅ Terraform + Flux |
+| **CI/CD** | Manual/Webhooks | Argo CD sync | GitHub Actions | ✅ GitHub Actions |
+| **Best For** | K8s-centric apps | Complex multi-repo | Frontend/serverless | ✅ K8s + Next.js |
 
 **Our Choice**: Flux + Terraform + GitHub Actions combines the best of all three examples:
 
@@ -599,7 +652,9 @@ jobs:
 | **Best For** | K8s-centric apps | Complex multi-repo | Frontend/serverless | ✅ K8s + Next.js |
 
 **Our Choice**: Flux + Terraform + GitHub Actions combines the best of all three examples:
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Simple Flux for Kubernetes management (Example 1)
 - ✅ Terraform for infrastructure (Example 2)
 - ✅ GitHub Actions for CI/CD automation (Example 3)

@@ -15,7 +15,9 @@
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Example 1: Kubernetes Cluster Management with Flux - Detailed comparison
 - ✅ Example 2: Infrastructure as Code with Terraform - Implementation mapping
 - ✅ Example 3: CI/CD Pipeline with GitHub Actions - Workflow alignment
@@ -26,7 +28,9 @@
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Repository structure matches example patterns
 - Deployment manifests follow nginx example pattern
 - Terraform configuration matches best practices
@@ -40,7 +44,9 @@
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Executive summary with status overview
 - Core tenets compliance table
 - Implementation alignment verification
@@ -65,7 +71,9 @@
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Added references to new documentation files in "Additional Resources" section
 - Updated documentation file list with:
   - `GITOPS_EXAMPLES_ALIGNMENT.md` - Alignment with three core examples
@@ -76,39 +84,48 @@
 ## Verification Results
 
 ### ✅ Example 1: Kubernetes with Flux
+
 <<<<<<< HEAD
 
 **Status**: Fully implemented and aligned
 
 =======
 **Status**: Fully implemented and aligned
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Repository structure: ✅ Matches pattern
 - Flux bootstrap: ✅ Configured correctly
 - Deployment manifests: ✅ Follow nginx example pattern
 - Automation: ✅ 1m Git polling, 5m reconciliation
 
 ### ✅ Example 2: Infrastructure as Code with Terraform
+
 <<<<<<< HEAD
 
 **Status**: Fully implemented (using Flux instead of Argo CD)
 
 =======
 **Status**: Fully implemented (using Flux instead of Argo CD)
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Terraform config: ✅ Matches example pattern
 - EKS module: ✅ Version 20.2.0 (latest 2025)
 - Kubernetes version: ✅ 1.31 (latest stable)
 - Workflow: ✅ Terraform provisions, Flux manages apps
 
 ### ✅ Example 3: CI/CD with GitHub Actions
+
 <<<<<<< HEAD
 
 **Status**: Fully implemented and aligned
 
 =======
 **Status**: Fully implemented and aligned
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Workflow structure: ✅ Matches example pattern
 - Build process: ✅ Docker builds and pushes to GHCR
 - Git updates: ✅ Automatic manifest updates
@@ -157,13 +174,17 @@ gitops/
 ## Next Steps
 
 ### Immediate (High Priority)
+
 <<<<<<< HEAD
 
 1. **Enable Git Signing** - Mandatory for 2025 enterprise standards
 
 =======
+
 1. **Enable Git Signing** - Mandatory for 2025 enterprise standards
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+   > > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
    ```bash
    git config --global commit.gpgsign true
    ```
@@ -171,21 +192,22 @@ gitops/
 2. **Enable Branch Protection** - Require PR reviews and signed commits
 
 ### Short-term (Medium Priority)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-3. **Image Digests for Production** - Update GitHub Actions to use digests instead of tags
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e 3. **Image Digests for Production** - Update GitHub Actions to use digests instead of tags
 
 4. **Review Security Configurations** - Ensure all secrets use SOPS
 
 ### Long-term (Optional)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-5. **OPA Integration** - Policy-as-code enforcement
-6. **Multi-Cluster Setup** - If scaling geographically
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e 5. **OPA Integration** - Policy-as-code enforcement 6. **Multi-Cluster Setup** - If scaling geographically
 
 ---
 

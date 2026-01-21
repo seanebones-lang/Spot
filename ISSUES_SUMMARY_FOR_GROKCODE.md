@@ -11,16 +11,19 @@
 ### 1. **Site-Wide Unresponsiveness - All Buttons Non-Functional**
 
 **Root Cause:** Hydration mismatch in `OnboardingTour` component
+
 - Component accessed `localStorage` during SSR, causing React 19 hydration failure
 - React 19's strict hydration checks prevented event handlers from attaching
 - Result: All buttons, links, and interactions became unresponsive
 
 **Files Affected:**
+
 - `app/page.tsx`
 - `components/OnboardingTour.tsx`
 - `app/layout.tsx`
 
 **Fix Applied:**
+
 - Added `isMounted` state check before accessing `localStorage`
 - Only render `OnboardingTour` after client-side mount
 - Added `suppressHydrationWarning` to `<html>` and `<body>` tags
@@ -34,17 +37,20 @@
 ### 2. **Node.js Version Incompatibility - Server Won't Start**
 
 **Root Cause:** Node.js v25.3.0 (unstable/nightly) incompatible with Next.js 15
+
 - Next.js 15's internal semver check failed: `TypeError: _semver.default.satisfies is not a function`
 - Error in `node_modules/next/dist/bin/next` due to Node 25 module system changes
 - Prisma 7.0.0 also requires Node >= 20.19
 
 **Error Message:**
+
 ```
 TypeError: _semver.default.satisfies is not a function
     at Object.<anonymous> (/Users/nexteleven/Desktop/spot/Spot/node_modules/next/dist/bin/next:24:22)
 ```
 
 **Fix Applied:**
+
 1. Installed NVM (v0.39.7)
 2. Installed Node.js 20.19.0 (Prisma requires 20.19+)
 3. Set Node 20.19.0 as default
@@ -64,6 +70,7 @@ TypeError: _semver.default.satisfies is not a function
 ## Technical Details
 
 ### Environment
+
 - **OS:** macOS (darwin 25.3.0)
 - **Node.js:** v20.19.0 (was v25.3.0)
 - **npm:** v10.8.2
@@ -72,12 +79,14 @@ TypeError: _semver.default.satisfies is not a function
 - **Prisma:** 7.2.0
 
 ### Dependencies Issue
+
 - Prisma 7.0.0 requires Node >= 20.19 (initially tried 20.18.0, had to upgrade to 20.19.0)
 - Next.js 15 requires Node >= 18.18.0 or >= 20.0.0 LTS (recommended)
 
 ### Code Changes Summary
 
 #### `app/page.tsx`
+
 ```typescript
 // Added isMounted state to prevent SSR localStorage access
 const [isMounted, setIsMounted] = useState(false);
@@ -99,21 +108,25 @@ useEffect(() => {
 ```
 
 #### `components/OnboardingTour.tsx`
+
 - Added `isMounted` state check
 - Only check `localStorage` after mount
 - Added ESC key bypass
 - Added click-outside-to-close functionality
 
 #### `app/layout.tsx`
+
 - Added `suppressHydrationWarning` to `<html>` and `<body>`
 - Integrated `GlobalErrorHandler` component
 
 #### `components/GlobalErrorHandler.tsx` (NEW)
+
 - Catches unhandled JavaScript errors
 - Catches unhandled promise rejections
 - Logs errors without blocking the app
 
 #### `package.json`
+
 - Added `engines` field to lock Node version for deployments
 
 ---
@@ -149,12 +162,14 @@ useEffect(() => {
 ## Current Status
 
 ✅ **All Critical Issues Resolved:**
+
 1. Site responsiveness fixed (hydration mismatch resolved)
 2. Server starts successfully (Node 20.19.0)
 3. All dependencies installed correctly
 4. Server running on http://localhost:3001
 
 **Next Steps:**
+
 - Monitor production for any remaining hydration issues
 - Add E2E tests for button interactions
 - Consider error tracking service integration

@@ -71,7 +71,9 @@ All infrastructure and application configurations are stored as YAML manifests:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Deployment**: 3 replicas in prod, 2 in staging with rolling updates
 - **Service**: ClusterIP service for internal communication
 - **Ingress**: TLS-enabled ingress for production (Let's Encrypt)
@@ -83,7 +85,9 @@ Flux configuration (`bootstrap/flux.yaml` - Updated per 2025 best practices):
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```yaml
 spec:
   interval: 1m0s      # GitRepository: Polls Git every minute
@@ -103,7 +107,9 @@ Flux automatically:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Polls the Git repository every **1 minute** (GitRepository)
 - Reconciles changes every **5 minutes** (Kustomization - 2025 best practice)
 - Detects changes in manifests
@@ -122,7 +128,9 @@ Implemented in manifests:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Non-root containers (runAsUser: 1001)
 - ✅ Dropped capabilities (securityContext)
 - ✅ Resource limits to prevent resource exhaustion
@@ -134,7 +142,9 @@ Additional security implemented:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ **SOPS for secrets** - See `secrets/` directory for encrypted secrets management
 - ✅ **Git signing ready** - GPG or SSH signing (mandatory in 2025 enterprise standards)
 - ✅ **Branch protection** - Recommended for main branch
@@ -148,7 +158,9 @@ Additional security implemented:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Flux metrics scraping (`flux_kustomization_condition`, `flux_gitrepository_condition`)
 - ✅ Application metrics (EmPulse Music pods, deployments, services)
 - ✅ Kubernetes cluster metrics (nodes, pods, services)
@@ -158,7 +170,9 @@ Additional security implemented:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - FluxReconciliationFailed (critical) - When Kustomization fails
 - FluxGitRepositorySyncFailed (warning) - When Git sync fails
 - DeploymentNotReady (warning) - When replicas aren't ready
@@ -170,7 +184,9 @@ Additional security implemented:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Flux GitOps Dashboard (ID: 15584)
 - Kubernetes Cluster Monitoring (ID: 7249)
 - Custom EmPulse Music dashboard
@@ -196,7 +212,9 @@ Following **Example 3** from GitOps best practices:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Automated staging deployments (automatic)
 - ✅ Production deployments with manual approval
 - ✅ Slack notifications on failure (optional)
@@ -269,7 +287,9 @@ Separate infrastructure provisioning from application deployments:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Terraform** provisions AWS EKS cluster (VPC, networking, nodes)
 - **Flux** manages all Kubernetes application manifests
 
@@ -277,7 +297,9 @@ Separate infrastructure provisioning from application deployments:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```bash
 cd gitops/terraform
 terraform init
@@ -293,7 +315,9 @@ Automated builds and deployments via `.github/workflows/gitops-deploy.yml`:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Build Docker images and push to GHCR
 - Update Git manifests automatically
 - Staging (automatic) and Production (manual approval) deployments
@@ -338,10 +362,13 @@ This installs Flux and configures it to watch the specified Git repository path.
 ## Next Steps (Updated Checklist)
 
 ### ✅ Completed
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 1. ✅ **CI/CD Pipeline**: GitHub Actions workflow (`.github/workflows/gitops-deploy.yml`)
 2. ✅ **Secrets Management**: SOPS configuration (`secrets/`)
 3. ✅ **Monitoring**: Prometheus configuration with alerts (`monitoring/`)
@@ -362,16 +389,16 @@ This installs Flux and configures it to watch the specified Git repository path.
 ## Compliance with GitOps Principles
 
 <<<<<<< HEAD
-| Principle                  | Implementation                                                    | Status         |
+| Principle | Implementation | Status |
 | -------------------------- | ----------------------------------------------------------------- | -------------- |
-| **Declarative Configs**    | YAML manifests in Git                                             | ✅ Complete    |
-| **Pull-Based**             | Flux polls Git every 1m, reconciles every 5m (2025 best practice) | ✅ Complete    |
-| **Observability**          | Prometheus + Grafana with Flux metrics and alerts                 | ✅ Complete    |
-| **Rollbacks**              | Git history + `git revert`                                        | ✅ Complete    |
-| **Security**               | SOPS, non-root, limits, TLS, signed commits ready                 | ✅ Implemented |
-| **Multi-Env**              | Prod + Staging with Kustomize                                     | ✅ Complete    |
-| **CI/CD Integration**      | GitHub Actions with GitOps (Example 3)                            | ✅ Complete    |
-| **Infrastructure as Code** | Terraform for AWS EKS (Example 2)                                 | ✅ Complete    |
+| **Declarative Configs** | YAML manifests in Git | ✅ Complete |
+| **Pull-Based** | Flux polls Git every 1m, reconciles every 5m (2025 best practice) | ✅ Complete |
+| **Observability** | Prometheus + Grafana with Flux metrics and alerts | ✅ Complete |
+| **Rollbacks** | Git history + `git revert` | ✅ Complete |
+| **Security** | SOPS, non-root, limits, TLS, signed commits ready | ✅ Implemented |
+| **Multi-Env** | Prod + Staging with Kustomize | ✅ Complete |
+| **CI/CD Integration** | GitHub Actions with GitOps (Example 3) | ✅ Complete |
+| **Infrastructure as Code** | Terraform for AWS EKS (Example 2) | ✅ Complete |
 =======
 | Principle | Implementation | Status |
 |-----------|---------------|--------|
@@ -383,7 +410,8 @@ This installs Flux and configures it to watch the specified Git repository path.
 | **Multi-Env** | Prod + Staging with Kustomize | ✅ Complete |
 | **CI/CD Integration** | GitHub Actions with GitOps (Example 3) | ✅ Complete |
 | **Infrastructure as Code** | Terraform for AWS EKS (Example 2) | ✅ Complete |
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 ## References
 

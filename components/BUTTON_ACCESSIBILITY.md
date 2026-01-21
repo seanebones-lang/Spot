@@ -1,11 +1,13 @@
 # Button Component - Accessibility Compliance Report
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**Date:** January 14, 2026  
-**Component:** `components/Button.tsx`  
-**Standard:** WCAG 2.2 AA Compliance
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **Date:** January 14, 2026  
+> > > > > > > **Component:** `components/Button.tsx`  
+> > > > > > > **Standard:** WCAG 2.2 AA Compliance
 
 ---
 
@@ -14,20 +16,26 @@
 ### 1. **Color Contrast Ratios (WCAG 2.2 AA: Minimum 4.5:1 for normal text, 3:1 for large text)**
 
 #### Primary Button (Green Background, Black Text)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Background:** `#1DB954` (Spotify Green)
 - **Text:** `#000000` (Black)
 - **Contrast Ratio:** ~8.59:1 ✅ **PASSES** (exceeds 4.5:1 requirement)
 - **Status:** WCAG 2.2 AA Compliant
 
 #### Secondary Button (Transparent Background, Green Text/Border)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Background:** Transparent
 - **Text/Border:** `#1DB954` (Spotify Green)
 - **Base Background:** `#121212` (Dark background)
@@ -35,20 +43,26 @@
 - **Status:** WCAG 2.2 AA Compliant
 
 #### Tertiary Button (Gray Background, White Text)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Background:** `#282828` (Spotify Light Gray)
 - **Text:** `#FFFFFF` (White)
 - **Contrast Ratio:** ~12.63:1 ✅ **PASSES** (exceeds 4.5:1 requirement)
 - **Status:** WCAG 2.2 AA Compliant
 
 #### Ghost Button (Transparent Background, White Text)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Background:** Transparent
 - **Text:** `#FFFFFF` (White)
 - **Base Background:** `#121212` (Dark background)
@@ -56,10 +70,13 @@
 - **Status:** WCAG 2.2 AA Compliant
 
 #### Danger Button (Red Background, White Text)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Background:** `#E63946` (EmPulse Red)
 - **Text:** `#FFFFFF` (White)
 - **Contrast Ratio:** ~5.74:1 ✅ **PASSES** (exceeds 4.5:1 requirement)
@@ -117,7 +134,9 @@ When `loading={true}`:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Visual Indicator:** ✅ Spinner icon replaces left icon
 - **ARIA Busy:** ✅ `aria-busy="true"` indicates processing state
 - **Text Opacity:** ✅ Button text opacity reduced to 70% (visual indication)
@@ -129,16 +148,16 @@ When `loading={true}`:
 ## 📋 **ACCESSIBILITY CHECKLIST**
 
 <<<<<<< HEAD
-| Requirement                                | Status  | Notes                           |
+| Requirement | Status | Notes |
 | ------------------------------------------ | ------- | ------------------------------- |
 | Minimum 4.5:1 contrast ratio (normal text) | ✅ PASS | All variants exceed requirement |
-| Minimum 3:1 contrast ratio (large text)    | ✅ PASS | All variants exceed requirement |
-| Visible focus indicators                   | ✅ PASS | 2px ring with 4px offset        |
-| Keyboard accessible                        | ✅ PASS | Native button element           |
-| ARIA labels for states                     | ✅ PASS | aria-busy, aria-disabled        |
-| Semantic HTML                              | ✅ PASS | Native `<button>` element       |
-| Screen reader support                      | ✅ PASS | Icons marked aria-hidden        |
-| Disabled state clearly indicated           | ✅ PASS | Opacity + cursor changes        |
+| Minimum 3:1 contrast ratio (large text) | ✅ PASS | All variants exceed requirement |
+| Visible focus indicators | ✅ PASS | 2px ring with 4px offset |
+| Keyboard accessible | ✅ PASS | Native button element |
+| ARIA labels for states | ✅ PASS | aria-busy, aria-disabled |
+| Semantic HTML | ✅ PASS | Native `<button>` element |
+| Screen reader support | ✅ PASS | Icons marked aria-hidden |
+| Disabled state clearly indicated | ✅ PASS | Opacity + cursor changes |
 =======
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -150,7 +169,8 @@ When `loading={true}`:
 | Semantic HTML | ✅ PASS | Native `<button>` element |
 | Screen reader support | ✅ PASS | Icons marked aria-hidden |
 | Disabled state clearly indicated | ✅ PASS | Opacity + cursor changes |
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 ---
 
@@ -162,7 +182,9 @@ All button variants meet or exceed WCAG 2.2 AA accessibility standards:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Color contrast ratios (all > 4.5:1)
 - ✅ Focus indicators (visible on all variants)
 - ✅ Keyboard navigation (full support)

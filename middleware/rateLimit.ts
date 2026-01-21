@@ -4,10 +4,10 @@
  * Protects against brute-force attacks on sensitive endpoints
  */
 
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
-import { NextRequest, NextResponse } from 'next/server';
-import { logger } from '@/lib/logger';
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
+import { NextRequest, NextResponse } from "next/server";
+import { logger } from "@/lib/logger";
 
 // Initialize Redis connection
 const redis = Redis.fromEnv();
@@ -20,41 +20,41 @@ const redis = Redis.fromEnv();
 // Login attempts: 5 per 15 minutes (prevents brute-force)
 export const loginRateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(5, '15 m'),
+  limiter: Ratelimit.slidingWindow(5, "15 m"),
   analytics: true,
-  prefix: 'ratelimit:login',
+  prefix: "ratelimit:login",
 });
 
 // Password reset requests: 3 per hour (prevents email flooding)
 export const passwordResetRateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(3, '1 h'),
+  limiter: Ratelimit.slidingWindow(3, "1 h"),
   analytics: true,
-  prefix: 'ratelimit:password-reset',
+  prefix: "ratelimit:password-reset",
 });
 
 // Registration: 10 per hour (prevents account creation spam)
 export const registerRateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(10, '1 h'),
+  limiter: Ratelimit.slidingWindow(10, "1 h"),
   analytics: true,
-  prefix: 'ratelimit:register',
+  prefix: "ratelimit:register",
 });
 
 // Email verification resend: 5 per hour (prevents email spam)
 export const emailVerificationRateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(5, '1 h'),
+  limiter: Ratelimit.slidingWindow(5, "1 h"),
   analytics: true,
-  prefix: 'ratelimit:email-verification',
+  prefix: "ratelimit:email-verification",
 });
 
 // API requests (general): 100 per hour (per user quota)
 export const apiRateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(100, '1 h'),
+  limiter: Ratelimit.slidingWindow(100, "1 h"),
   analytics: true,
-  prefix: 'ratelimit:api',
+  prefix: "ratelimit:api",
 });
 
 /**
@@ -64,24 +64,25 @@ export const apiRateLimiter = new Ratelimit({
 export function getIdentifier(request: NextRequest): string {
   // Try to extract user ID from JWT token
   try {
-    const authHeader = request.headers.get('Authorization');
-    if (authHeader?.startsWith('Bearer ')) {
+    const authHeader = request.headers.get("Authorization");
+    if (authHeader?.startsWith("Bearer ")) {
       const token = authHeader.substring(7);
-      const [, payloadB64] = token.split('.');
-      const payload = JSON.parse(Buffer.from(payloadB64, 'base64').toString());
+      const [, payloadB64] = token.split(".");
+      const payload = JSON.parse(Buffer.from(payloadB64, "base64").toString());
       if (payload.sub || payload.userId) {
         return `user:${payload.sub || payload.userId}`;
       }
     }
   } catch (error) {
-    logger.debug('Failed to extract user ID from token');
+    logger.debug("Failed to extract user ID from token");
   }
 
   // Fallback to IP address
-  const ip = request.headers.get('x-forwarded-for') ||
-             request.headers.get('x-real-ip') ||
-             request.ip ||
-             'unknown';
+  const ip =
+    request.headers.get("x-forwarded-for") ||
+    request.headers.get("x-real-ip") ||
+    request.ip ||
+    "unknown";
   return `ip:${ip}`;
 }
 
@@ -99,7 +100,7 @@ export async function checkLoginRateLimit(identifier: string) {
       retryAfter: result.retryAfter,
     };
   } catch (error) {
-    logger.error('Rate limit check failed:', error);
+    logger.error("Rate limit check failed:", error);
     // Fail open: if Redis fails, allow request (don't block users)
     return { success: true, remaining: 1, reset: 0, retryAfter: 0 };
   }
@@ -118,7 +119,7 @@ export async function checkPasswordResetRateLimit(identifier: string) {
       retryAfter: result.retryAfter,
     };
   } catch (error) {
-    logger.error('Rate limit check failed:', error);
+    logger.error("Rate limit check failed:", error);
     return { success: true, remaining: 1, reset: 0, retryAfter: 0 };
   }
 }
@@ -136,7 +137,7 @@ export async function checkRegisterRateLimit(identifier: string) {
       retryAfter: result.retryAfter,
     };
   } catch (error) {
-    logger.error('Rate limit check failed:', error);
+    logger.error("Rate limit check failed:", error);
     return { success: true, remaining: 1, reset: 0, retryAfter: 0 };
   }
 }
@@ -154,7 +155,7 @@ export async function checkEmailVerificationRateLimit(identifier: string) {
       retryAfter: result.retryAfter,
     };
   } catch (error) {
-    logger.error('Rate limit check failed:', error);
+    logger.error("Rate limit check failed:", error);
     return { success: true, remaining: 1, reset: 0, retryAfter: 0 };
   }
 }
@@ -172,7 +173,7 @@ export async function checkApiRateLimit(identifier: string) {
       retryAfter: result.retryAfter,
     };
   } catch (error) {
-    logger.error('Rate limit check failed:', error);
+    logger.error("Rate limit check failed:", error);
     return { success: true, remaining: 1, reset: 0, retryAfter: 0 };
   }
 }
@@ -184,19 +185,23 @@ export async function checkApiRateLimit(identifier: string) {
 export async function withRateLimit(
   request: NextRequest,
   handler: (req: NextRequest) => Promise<NextResponse>,
-  rateLimiter: ReturnType<typeof Ratelimit['slidingWindow']>,
+  rateLimiter: ReturnType<(typeof Ratelimit)["slidingWindow"]>,
   options?: {
     keyPrefix?: string;
     onLimitExceeded?: (remaining: number) => void;
-  }
+  },
 ): Promise<NextResponse> {
   const identifier = getIdentifier(request);
 
   try {
-    const { success, remaining, reset, retryAfter } = await rateLimiter.limit(identifier);
+    const { success, remaining, reset, retryAfter } =
+      await rateLimiter.limit(identifier);
 
     if (!success) {
-      logger.warn(`Rate limit exceeded for ${identifier}`, { remaining, reset });
+      logger.warn(`Rate limit exceeded for ${identifier}`, {
+        remaining,
+        reset,
+      });
 
       // Call optional callback
       options?.onLimitExceeded?.(remaining);
@@ -204,19 +209,19 @@ export async function withRateLimit(
       // Return 429 Too Many Requests
       return new NextResponse(
         JSON.stringify({
-          error: 'Too Many Requests',
-          message: 'Rate limit exceeded. Please try again later.',
+          error: "Too Many Requests",
+          message: "Rate limit exceeded. Please try again later.",
           retryAfter,
         }),
         {
           status: 429,
           headers: {
-            'Retry-After': String(Math.ceil(retryAfter / 1000)),
-            'X-RateLimit-Limit': '5',
-            'X-RateLimit-Remaining': String(Math.max(0, remaining)),
-            'X-RateLimit-Reset': String(reset),
+            "Retry-After": String(Math.ceil(retryAfter / 1000)),
+            "X-RateLimit-Limit": "5",
+            "X-RateLimit-Remaining": String(Math.max(0, remaining)),
+            "X-RateLimit-Reset": String(reset),
           },
-        }
+        },
       );
     }
 
@@ -224,13 +229,13 @@ export async function withRateLimit(
     const response = await handler(request);
 
     // Add rate limit headers to response
-    response.headers.set('X-RateLimit-Limit', '5');
-    response.headers.set('X-RateLimit-Remaining', String(remaining));
-    response.headers.set('X-RateLimit-Reset', String(reset));
+    response.headers.set("X-RateLimit-Limit", "5");
+    response.headers.set("X-RateLimit-Remaining", String(remaining));
+    response.headers.set("X-RateLimit-Reset", String(reset));
 
     return response;
   } catch (error) {
-    logger.error('Rate limit middleware error:', error);
+    logger.error("Rate limit middleware error:", error);
     // Fail open on Redis errors; don't block users
     return handler(request);
   }
@@ -243,7 +248,7 @@ export async function withRateLimit(
 export async function checkAccountLockout(
   email: string,
   maxAttempts: number = 10,
-  lockoutDuration: number = 30 * 60 * 1000 // 30 minutes
+  lockoutDuration: number = 30 * 60 * 1000, // 30 minutes
 ): Promise<{ locked: boolean; remainingTime?: number }> {
   try {
     const lockoutKey = `lockout:${email}`;
@@ -258,7 +263,7 @@ export async function checkAccountLockout(
 
     return { locked: false };
   } catch (error) {
-    logger.error('Account lockout check failed:', error);
+    logger.error("Account lockout check failed:", error);
     return { locked: false };
   }
 }
@@ -269,7 +274,7 @@ export async function checkAccountLockout(
 export async function incrementFailedLoginAttempt(
   email: string,
   maxAttempts: number = 10,
-  lockoutDuration: number = 30 * 60 * 1000
+  lockoutDuration: number = 30 * 60 * 1000,
 ): Promise<number> {
   try {
     const attemptsKey = `failed-login:${email}`;
@@ -284,13 +289,17 @@ export async function incrementFailedLoginAttempt(
     // Lock account if max attempts exceeded
     if (attempts >= maxAttempts) {
       const lockoutTime = Date.now() + lockoutDuration;
-      await redis.set(lockoutKey, lockoutTime, { ex: Math.ceil(lockoutDuration / 1000) });
-      logger.warn(`Account locked due to failed login attempts: ${email}`, { attempts });
+      await redis.set(lockoutKey, lockoutTime, {
+        ex: Math.ceil(lockoutDuration / 1000),
+      });
+      logger.warn(`Account locked due to failed login attempts: ${email}`, {
+        attempts,
+      });
     }
 
     return attempts;
   } catch (error) {
-    logger.error('Failed to increment login attempt counter:', error);
+    logger.error("Failed to increment login attempt counter:", error);
     return 0;
   }
 }
@@ -303,6 +312,6 @@ export async function clearFailedLoginAttempts(email: string): Promise<void> {
     const attemptsKey = `failed-login:${email}`;
     await redis.del(attemptsKey);
   } catch (error) {
-    logger.error('Failed to clear login attempts:', error);
+    logger.error("Failed to clear login attempts:", error);
   }
 }

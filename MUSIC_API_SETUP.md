@@ -14,6 +14,7 @@ EmPulse Music uses **Jamendo API** for legal, royalty-free music tracks. All tra
    - Get your API key (free tier: 200 requests/day)
 
 2. **Configure Environment**:
+
    ```bash
    cp .env.example .env
    # Add your Jamendo API key
@@ -40,8 +41,8 @@ EmPulse Music uses **Jamendo API** for legal, royalty-free music tracks. All tra
 
 ```tsx
 // app/mood/[mood]/page.tsx
-import { Suspense } from 'react';
-import { use } from 'react';
+import { Suspense } from "react";
+import { use } from "react";
 
 async function getMoodTracks(mood: string) {
   const res = await fetch(`/api/tracks/mood/${mood}?limit=50`);
@@ -61,6 +62,7 @@ function MoodTracks({ mood }: { mood: string }) {
 ### Legal Warning
 
 **SoundCloud's Terms of Service PROHIBIT web scraping:**
+
 - Section 5.2: "You agree not to... use any automated system... to access the Service"
 - Violation may result in:
   - IP ban
@@ -70,18 +72,21 @@ function MoodTracks({ mood }: { mood: string }) {
 ### If You Must Use (Educational Only)
 
 1. **Enable Scraping** (NOT RECOMMENDED):
+
    ```bash
    # In .env
    ALLOW_SOUNDCLOUD_SCRAPING=true
    ```
 
 2. **Install Dependencies**:
+
    ```bash
    npm install puppeteer better-sqlite3
    npm install -D @types/better-sqlite3 tsx
    ```
 
 3. **Run Scraper**:
+
    ```bash
    npm run scrape:soundcloud
    ```
@@ -149,10 +154,10 @@ cp app/mood/[mood]/page.example.tsx app/mood/[mood]/page.tsx
 
 ```tsx
 // app/page.tsx
-import { getTracksByMood } from '@/lib/music-apis/jamendo';
+import { getTracksByMood } from "@/lib/music-apis/jamendo";
 
 // In component
-const happyTracks = await getTracksByMood('happy', 10);
+const happyTracks = await getTracksByMood("happy", 10);
 ```
 
 ## 📝 Attribution

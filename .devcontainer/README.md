@@ -28,7 +28,9 @@ Edit `devcontainer.json` to:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Add more VS Code extensions
 - Change port forwarding
 - Modify environment variables
@@ -38,7 +40,9 @@ Edit `post-create.sh` to:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Add custom setup commands
 - Install additional dependencies
 - Configure tools

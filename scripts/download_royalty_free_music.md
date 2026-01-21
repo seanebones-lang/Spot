@@ -24,8 +24,10 @@
    - CC-BY license
 
 ## Recommendation:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-Use **Pixabay Music API** - it's the easiest to automate and has good mood tagging.
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > Use **Pixabay Music API** - it's the easiest to automate and has good mood tagging.

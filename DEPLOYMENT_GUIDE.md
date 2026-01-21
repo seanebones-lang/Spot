@@ -32,22 +32,26 @@ UPSTASH_REDIS_REST_TOKEN=your_redis_token
 ## Vercel Deployment
 
 ### 1. Connect Repository
+
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
 2. Click "Add New Project"
 3. Import your GitHub repository
 
 ### 2. Configure Environment Variables
+
 1. Go to Project Settings → Environment Variables
 2. Add all required variables from `.env.local.example`
 3. Set for Production, Preview, and Development
 
 ### 3. Configure Build Settings
+
 - Framework Preset: Next.js
 - Build Command: `npm run build`
 - Output Directory: `.next`
 - Install Command: `npm install`
 
 ### 4. Deploy
+
 1. Click "Deploy"
 2. Wait for build to complete
 3. Update Spotify redirect URI to production URL
@@ -94,6 +98,7 @@ CMD ["node", "server.js"]
 ```
 
 Build and run:
+
 ```bash
 docker build -t spot-music .
 docker run -p 3000:3000 --env-file .env.local spot-music
@@ -102,6 +107,7 @@ docker run -p 3000:3000 --env-file .env.local spot-music
 ## Post-Deployment
 
 ### 1. Verify Deployment
+
 - [ ] Homepage loads
 - [ ] Search works
 - [ ] Spotify login works
@@ -109,11 +115,13 @@ docker run -p 3000:3000 --env-file .env.local spot-music
 - [ ] Service worker active
 
 ### 2. Monitor Performance
+
 - Check Vercel Analytics dashboard
 - Review Web Vitals
 - Monitor error rates
 
 ### 3. Set Up Monitoring
+
 - Configure Sentry (if using)
 - Set up uptime monitoring
 - Configure alerts
@@ -121,16 +129,19 @@ docker run -p 3000:3000 --env-file .env.local spot-music
 ## Troubleshooting
 
 ### Build Fails
+
 - Check Node.js version (requires 20.x)
 - Verify all dependencies installed
 - Check for TypeScript errors
 
 ### OAuth Not Working
+
 - Verify redirect URI in Spotify dashboard
 - Check `NEXTAUTH_URL` matches production URL
 - Ensure `NEXTAUTH_SECRET` is set
 
 ### API Errors
+
 - Check Spotify API credentials
 - Verify rate limits not exceeded
 - Check network connectivity

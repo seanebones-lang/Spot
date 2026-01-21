@@ -4,10 +4,10 @@
  * Complies with California Consumer Privacy Act (CCPA §1798.100-1798.150)
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { authenticateUser } from '@/lib/auth';
-import prisma from '@/lib/db';
-import { logger, generateCorrelationId } from '@/lib/logger';
+import { NextRequest, NextResponse } from "next/server";
+import { authenticateUser } from "@/lib/auth";
+import prisma from "@/lib/db";
+import { logger, generateCorrelationId } from "@/lib/logger";
 
 export async function GET(request: NextRequest) {
   const correlationId = generateCorrelationId();
@@ -15,10 +15,7 @@ export async function GET(request: NextRequest) {
   try {
     const userId = await authenticateUser(request);
     if (!userId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Get user's privacy preferences
@@ -33,10 +30,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     // Return current privacy preferences
@@ -56,17 +50,19 @@ export async function GET(request: NextRequest) {
           newsletters: true,
         },
       },
-      lastUpdated: user.consentLog?.['lastUpdated'] || new Date().toISOString(),
+      lastUpdated: user.consentLog?.["lastUpdated"] || new Date().toISOString(),
       ccpaCompliance: {
-        consumerRight: 'Do Not Sell My Personal Information',
+        consumerRight: "Do Not Sell My Personal Information",
         effectiveDate: new Date().toISOString(),
       },
     });
   } catch (error) {
-    logger.error('Failed to fetch privacy preferences', error, { correlationId });
+    logger.error("Failed to fetch privacy preferences", error, {
+      correlationId,
+    });
     return NextResponse.json(
-      { error: 'Failed to fetch privacy preferences' },
-      { status: 500 }
+      { error: "Failed to fetch privacy preferences" },
+      { status: 500 },
     );
   }
 }
@@ -78,10 +74,7 @@ export async function PATCH(request: NextRequest) {
   try {
     const userId = await authenticateUser(request);
     if (!userId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const body = await request.json();
@@ -90,8 +83,8 @@ export async function PATCH(request: NextRequest) {
     // Validate input
     if (!dataCollection && !dataSales && !communications) {
       return NextResponse.json(
-        { error: 'At least one preference category must be specified' },
-        { status: 400 }
+        { error: "At least one preference category must be specified" },
+        { status: 400 },
       );
     }
 
@@ -112,11 +105,11 @@ export async function PATCH(request: NextRequest) {
       ...user?.consentLog,
       lastUpdated: new Date().toISOString(),
       history: [
-        ...(user?.consentLog?.['history'] || []),
+        ...(user?.consentLog?.["history"] || []),
         {
           timestamp: new Date().toISOString(),
           changes: newPreferences,
-          ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
+          ipAddress: request.headers.get("x-forwarded-for") || "unknown",
         },
       ],
     };
@@ -130,7 +123,7 @@ export async function PATCH(request: NextRequest) {
       },
     });
 
-    logger.info('CCPA privacy preferences updated', {
+    logger.info("CCPA privacy preferences updated", {
       correlationId,
       userId,
       preferences: newPreferences,
@@ -139,7 +132,7 @@ export async function PATCH(request: NextRequest) {
 
     // If user opts out of data sale, trigger compliance action
     if (dataSales?.allowSaleOfPersonalInfo === false) {
-      logger.info('User opted out of data sale (CCPA)', {
+      logger.info("User opted out of data sale (CCPA)", {
         correlationId,
         userId,
         effectiveDate: new Date().toISOString(),
@@ -151,7 +144,7 @@ export async function PATCH(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: 'Privacy preferences updated successfully',
+      message: "Privacy preferences updated successfully",
       preferences: newPreferences,
       ccpaCompliance: {
         optOut: dataSales?.allowSaleOfPersonalInfo === false,
@@ -161,14 +154,14 @@ export async function PATCH(request: NextRequest) {
     });
   } catch (error) {
     const duration = Date.now() - startTime;
-    logger.error('Failed to update privacy preferences', error, {
+    logger.error("Failed to update privacy preferences", error, {
       correlationId,
       duration,
     });
 
     return NextResponse.json(
-      { error: 'Failed to update privacy preferences' },
-      { status: 500 }
+      { error: "Failed to update privacy preferences" },
+      { status: 500 },
     );
   }
 }
@@ -191,13 +184,13 @@ export async function POST(request: NextRequest) {
 
       if (!email) {
         return NextResponse.json(
-          { error: 'Email required for unauthenticated opt-out' },
-          { status: 400 }
+          { error: "Email required for unauthenticated opt-out" },
+          { status: 400 },
         );
       }
 
       // Log opt-out request for processing
-      logger.info('CCPA opt-out request (unauthenticated)', {
+      logger.info("CCPA opt-out request (unauthenticated)", {
         correlationId,
         email,
         timestamp: new Date().toISOString(),
@@ -205,7 +198,8 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({
         success: true,
-        message: 'Opt-out request recorded. Confirmation will be sent to your email.',
+        message:
+          "Opt-out request recorded. Confirmation will be sent to your email.",
       });
     }
 
@@ -221,7 +215,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    logger.info('CCPA opt-out confirmed', {
+    logger.info("CCPA opt-out confirmed", {
       correlationId,
       userId,
       timestamp: new Date().toISOString(),
@@ -229,14 +223,15 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: 'You have been opted out of the sale of your personal information',
+      message:
+        "You have been opted out of the sale of your personal information",
       effectiveDate: new Date().toISOString(),
     });
   } catch (error) {
-    logger.error('CCPA opt-out failed', error, { correlationId });
+    logger.error("CCPA opt-out failed", error, { correlationId });
     return NextResponse.json(
-      { error: 'Failed to process opt-out request' },
-      { status: 500 }
+      { error: "Failed to process opt-out request" },
+      { status: 500 },
     );
   }
 }

@@ -25,11 +25,11 @@ This RAG (Retrieval-Augmented Generation) and Graph/Pipeline system implements A
 
 3. **Similarity Matching Engine** (`lib/similarityMatching.ts`)
    - Hybrid similarity matching (vector + graph + feature + collaborative)
-<<<<<<< HEAD
+     <<<<<<< HEAD
+   - > # 90% recall/precision target
    - > 90% recall/precision target
-=======
-   - >90% recall/precision target
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+     >
+     > > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
    - Mood-based track recommendations
 
 4. **Pipeline Orchestration** (`lib/pipelineOrchestration.ts`)
@@ -279,19 +279,25 @@ const batchResults = await orchestrator.batchProcess([
 ## Pipeline Stages
 
 ### 1. Data Ingestion
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Validate file format (MP3, WAV, FLAC, M4A, MP4)
 - Validate file size (max 500MB)
 - Validate metadata (name, artist required)
 
 ### 2. Feature Extraction
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Extract audio features using Web Audio API
 - Temporal features: tempo, beat strength, duration
 - Spectral features: centroid, rolloff, flux, zero crossing rate
@@ -301,10 +307,13 @@ const batchResults = await orchestrator.batchProcess([
 - Timbre features: brightness, roughness
 
 ### 3. Mood Analysis (RAG)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Generate embeddings from audio features
 - Retrieve similar tracks from vector database
 - Predict mood using trained classifier
@@ -312,36 +321,48 @@ const batchResults = await orchestrator.batchProcess([
 - Predict feelings, vibe, and genres
 
 ### 4. Vector DB Indexing
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Store embeddings in Pinecone/FAISS
 - Index metadata for retrieval
 
 ### 5. Graph Update
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Create/update track node in Neo4j
 - Create mood, genre, feeling relationships
 - Create artist and album relationships
 
 ### 6. Similarity Computation
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Find similar tracks via graph traversal
 - Calculate similarity relationships
 - Store similarity edges in graph
 
 ### 7. Validation
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Validate accuracy (>90% target)
 - Validate latency (<200ms target)
 - Validate all stages completed
@@ -357,34 +378,43 @@ const batchResults = await orchestrator.batchProcess([
 ## Evaluation Metrics
 
 ### Mood Classification Metrics
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Accuracy**: Percentage of correct mood predictions
 - **Confidence**: Average confidence score (0-1)
 - **Precision**: True positives / (True positives + False positives)
 - **Recall**: True positives / (True positives + False negatives)
-<<<<<<< HEAD
+  <<<<<<< HEAD
 - **F1 Score**: 2 _ (Precision _ Recall) / (Precision + Recall)
 
 ### Similarity Matching Metrics
 
 =======
-- **F1 Score**: 2 * (Precision * Recall) / (Precision + Recall)
+
+- **F1 Score**: 2 _ (Precision _ Recall) / (Precision + Recall)
 
 ### Similarity Matching Metrics
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Recall@10**: Percentage of relevant tracks in top 10
 - **Precision@10**: Percentage of top 10 that are relevant
 - **NDCG@10**: Normalized Discounted Cumulative Gain at rank 10
 - **MAP@10**: Mean Average Precision at rank 10
 
 ### Pipeline Performance Metrics
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Stage Duration**: Time for each pipeline stage
 - **Total Duration**: End-to-end pipeline execution time
 - **Success Rate**: Percentage of successful pipeline runs
@@ -404,10 +434,13 @@ The RAG pipeline is integrated into the upload page (`app/upload/page.tsx`):
 ## Current Implementation Status
 
 ### ✅ Production-Ready Features
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Audio feature extraction (Web Audio API)
 - Rule-based mood classification
 - Pinecone vector database integration
@@ -443,6 +476,7 @@ The RAG pipeline is integrated into the upload page (`app/upload/page.tsx`):
 ## Implementation Notes
 
 ### Mood Classification
+
 <<<<<<< HEAD
 
 Currently uses rule-based scoring based on audio features (tempo, brightness, harmony, etc.). This works well for MVP but ML models will improve accuracy in future releases.
@@ -457,49 +491,63 @@ Embeddings are currently normalized audio features (26 dimensions). Future imple
 Currently uses rule-based scoring based on audio features (tempo, brightness, harmony, etc.). This works well for MVP but ML models will improve accuracy in future releases.
 
 ### Embeddings
+
 Embeddings are currently normalized audio features (26 dimensions). Future implementation will use trained embedding models (e.g., fine-tuned BERT variants) for semantic understanding.
 
 ### Vector Database
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-Pinecone is fully supported and production-ready. FAISS implementation is stubbed and returns empty results - use Pinecone for production deployments.
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > Pinecone is fully supported and production-ready. FAISS implementation is stubbed and returns empty results - use Pinecone for production deployments.
 
 ## Troubleshooting
 
 ### High Latency (>200ms)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Reduce embedding dimensions
 - Optimize feature extraction
 - Use faster vector database (FAISS vs Pinecone)
 - Cache frequently accessed embeddings
 
 ### Low Accuracy (<90%)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Improve feature extraction
 - Fine-tune mood classification model
 - Increase training data
 - Adjust similarity weights
 
 ### Vector Database Errors
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Check API keys and credentials
 - Verify index exists and is accessible
 - Check network connectivity
 - Review rate limits
 
 ### Neo4j Connection Issues
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Verify URI, user, and password
 - Check Neo4j server is running
 - Review firewall settings
@@ -511,8 +559,7 @@ Pinecone is fully supported and production-ready. FAISS implementation is stubbe
 - [Neo4j Cypher Manual](https://neo4j.com/docs/cypher-manual/)
 - [FAISS Documentation](https://github.com/facebookresearch/faiss)
 - [RAG Paper](https://arxiv.org/abs/2005.11401)
-<<<<<<< HEAD
+  <<<<<<< HEAD
+- # [Audio Feature Extraction](https://librosa.org/doc/latest/feature.html)
 - [Audio Feature Extraction](https://librosa.org/doc/latest/feature.html)
-=======
-- [Audio Feature Extraction](https://librosa.org/doc/latest/feature.html)
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+  > > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e

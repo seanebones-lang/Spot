@@ -27,7 +27,10 @@ interface SearchResponse {
   offset: number;
 }
 
-async function searchSpotify(query: string, limit: number = 20): Promise<SearchResponse> {
+async function searchSpotify(
+  query: string,
+  limit: number = 20,
+): Promise<SearchResponse> {
   if (!query.trim()) {
     return { tracks: [], total: 0, limit, offset: 0 };
   }
@@ -38,7 +41,7 @@ async function searchSpotify(query: string, limit: number = 20): Promise<SearchR
   });
 
   const response = await fetch(`/api/spotify/search?${params}`);
-  
+
   if (!response.ok) {
     throw new Error("Failed to search tracks");
   }

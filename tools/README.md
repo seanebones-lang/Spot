@@ -5,6 +5,7 @@ This directory contains custom MCP (Multi-Chat Protocol) tools for agent orchest
 ## Available Tools
 
 ### ✅ qa-mcp.js
+
 **QA Automation Tool** - Playwright, Cypress, Vitest, Load Testing
 
 ```bash
@@ -13,7 +14,7 @@ node tools/qa-mcp.js [framework] [action] [target]
 
 # Frameworks
 - playwright: Playwright E2E testing
-- cypress: Cypress E2E testing  
+- cypress: Cypress E2E testing
 - vitest: Vitest unit/integration testing
 - load: Load/performance testing (k6)
 
@@ -32,6 +33,7 @@ npm run qa load test
 ```
 
 ### ✅ soundcloud-mcp.js
+
 **SoundCloud Integration Tool** - Download SoundCloud tracks
 
 ```bash

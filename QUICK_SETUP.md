@@ -55,7 +55,7 @@ npm start
 ### Using VirtualizedTrackList
 
 ```tsx
-import { VirtualizedTrackList } from '@/components/VirtualizedTrackList';
+import { VirtualizedTrackList } from "@/components/VirtualizedTrackList";
 
 // In your component
 <VirtualizedTrackList
@@ -64,7 +64,7 @@ import { VirtualizedTrackList } from '@/components/VirtualizedTrackList';
   height={600}
   currentTrackId={currentTrack?.id}
   isPlaying={isPlaying}
-/>
+/>;
 ```
 
 ### Using Optimized Images
@@ -95,11 +95,11 @@ import ImageWithFallback from '@/components/ImageWithFallback';
 ### Using React 19 Suspense
 
 ```tsx
-import { Suspense } from 'react';
-import { use } from 'react';
+import { Suspense } from "react";
+import { use } from "react";
 
 async function fetchData() {
-  const res = await fetch('/api/data', { next: { revalidate: 3600 } });
+  const res = await fetch("/api/data", { next: { revalidate: 3600 } });
   return res.json();
 }
 

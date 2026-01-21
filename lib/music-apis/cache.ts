@@ -17,7 +17,7 @@ const cache = new Map<string, CacheEntry<any>>();
  */
 export function getCached<T>(key: string): T | null {
   const entry = cache.get(key);
-  
+
   if (!entry) {
     return null;
   }
@@ -33,7 +33,11 @@ export function getCached<T>(key: string): T | null {
 /**
  * Set cache entry
  */
-export function setCached<T>(key: string, data: T, duration: number = CACHE_DURATION): void {
+export function setCached<T>(
+  key: string,
+  data: T,
+  duration: number = CACHE_DURATION,
+): void {
   const now = Date.now();
   cache.set(key, {
     data,
@@ -59,6 +63,10 @@ export function clearAllCache(): void {
 /**
  * Generate cache key for mood/genre queries
  */
-export function getCacheKey(type: 'mood' | 'genre', value: string, limit: number): string {
+export function getCacheKey(
+  type: "mood" | "genre",
+  value: string,
+  limit: number,
+): string {
   return `music:${type}:${value}:${limit}`;
 }

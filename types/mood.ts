@@ -1,4 +1,10 @@
-export type MoodState = 'Melancholic' | 'Nostalgic' | 'Reflective' | 'Content' | 'Joyful' | 'Euphoric';
+export type MoodState =
+  | "Melancholic"
+  | "Nostalgic"
+  | "Reflective"
+  | "Content"
+  | "Joyful"
+  | "Euphoric";
 
 export interface MoodTags {
   mood: MoodState;

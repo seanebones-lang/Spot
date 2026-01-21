@@ -5,10 +5,13 @@ Comprehensive end-to-end tests for EmPulse Music Spotify UI recreation, verifyin
 ## Test Coverage
 
 ### ✅ UI Components (`ui-components.spec.ts`)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **QueuePanel**: Slide-in animation from bottom, smooth transitions
 - **ProgressBar**: Hover indicator, click/drag seek functionality
 - **Drag and Drop**: Queue reordering with visual feedback
@@ -20,10 +23,13 @@ Comprehensive end-to-end tests for EmPulse Music Spotify UI recreation, verifyin
 - **Sidebar**: Resize handles, collapse/expand animations
 
 ### ✅ Player Functionality (`player.spec.ts`)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Play/Pause Controls**: Track playback controls
 - **Volume Control**: Slider interactions
 - **Shuffle & Repeat**: Toggle functionality
@@ -31,10 +37,13 @@ Comprehensive end-to-end tests for EmPulse Music Spotify UI recreation, verifyin
 - **Player UI**: Track info display, progress bar
 
 ### ✅ Navigation (`navigation.spec.ts`)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Sidebar Navigation**: Home, Search, Library routes
 - **Active States**: Route highlighting
 - **Browser Navigation**: Back/forward button support
@@ -42,10 +51,13 @@ Comprehensive end-to-end tests for EmPulse Music Spotify UI recreation, verifyin
 - **Breadcrumbs**: Navigation breadcrumb trails
 
 ### ✅ Responsive Design (`responsive.spec.ts`)
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Desktop View** (>1024px): Full sidebar, layout adaption
 - **Tablet View** (768-1024px): Adaptive layout
 - **Mobile View** (<768px): Collapsed sidebar, touch interactions
@@ -173,7 +185,9 @@ Reports include:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Test results (passed/failed/skipped)
 - Screenshots on failure
 - Video recordings on failure
@@ -219,10 +233,10 @@ test.describe('Feature Name', () => {
   test('should do something', async ({ page }) => {
     // Arrange
     const element = page.locator('selector');
-    
+
     // Act
     await element.click();
-    
+
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     // Assert
     await expect(element).toBeVisible();

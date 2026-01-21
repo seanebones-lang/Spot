@@ -48,25 +48,29 @@
 ### Immediate Actions
 
 1. **Verify Build**
+
    ```bash
    npm run build
    ```
 
 2. **Run Tests**
+
    ```bash
    npm test
    ```
 
 3. **E2E Tests** (Step 9)
+
    ```bash
    npm run test:e2e
    ```
 
 4. **Deploy** (Step 10)
+
    ```bash
    # Vercel
    npx vercel --prod --yes
-   
+
    # Railway
    railway login
    railway up --detach

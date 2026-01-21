@@ -52,27 +52,36 @@ import { Button, Input, Card, Modal, FormField } from '@/components';
 ## 📚 **Documentation**
 
 ### Getting Started:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **[Quick Start Guide](./QUICK_START.md)** - Fast reference for common patterns
 - **[Implementation Guide](./IMPLEMENTATION_GUIDE.md)** - Complete implementation guide
 - **[Full Component Reference](./UI_COMPONENT_SYSTEM.md)** - Detailed API documentation
 
 ### Design & Accessibility:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **[Accessibility Report](./BUTTON_ACCESSIBILITY.md)** - WCAG 2.2 AA compliance verification
 - **[Design Tokens](../design-tokens.json)** - Complete design token definitions
 
 ### Examples:
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **[Button Examples](./Button.examples.tsx)** - 11 practical usage examples
 
 ---
@@ -120,48 +129,63 @@ import { Button, Input, Card, Modal } from '@/components';
 ## 📖 **Component Details**
 
 ### Button Component
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Variants:** primary, secondary, tertiary, ghost, danger
 - **Sizes:** sm (32px), md (40px), lg (48px)
 - **Features:** Loading state, icon support, full-width option
 - **File:** `Button.tsx`
 
 ### Input Component
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Variants:** default, ghost
 - **Sizes:** sm (36px), md (40px), lg (48px)
 - **Features:** Validation states, labels, helper text, icons
 - **File:** `Input.tsx`
 
 ### FormField Component
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Features:** Label, input, helper text, error coordination
 - **File:** `FormField.tsx`
 
 ### Card Component
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Variants:** default, elevated, outline, gradient
 - **Sizes:** sm (12px padding), md (16px), lg (24px)
 - **Features:** Image support, subcomponents, hover effects
 - **File:** `Card.tsx`
 
 ### Modal Component
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **Sizes:** sm (448px), md (672px), lg (896px), xl (1152px), fullscreen
 - **Features:** Keyboard support, focus trap, body scroll lock
 - **File:** `Modal.tsx`
@@ -201,7 +225,9 @@ All components are:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Fully typed (TypeScript)
 - ✅ Linter error-free
 - ✅ Accessibility verified (WCAG 2.2 AA)
@@ -237,16 +263,19 @@ import { Button } from "@/components/Button";
 **Type Errors:**
 
 =======
+
 ```tsx
 // ✅ Correct
-import Button from '@/components/Button';
+import Button from "@/components/Button";
 
-// ❌ Incorrect  
-import { Button } from '@/components/Button';
+// ❌ Incorrect
+import { Button } from "@/components/Button";
 ```
 
 **Type Errors:**
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Check component prop types in component files
 - All components are fully typed
 
@@ -254,7 +283,9 @@ import { Button } from '@/components/Button';
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Use component props instead of custom `className`
 - Reference `design-tokens.json` for available values
 
@@ -284,7 +315,9 @@ For questions or issues:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 1. Check component files for inline JSDoc comments
 2. Review documentation files in this directory
 3. Check `design-tokens.json` for design values

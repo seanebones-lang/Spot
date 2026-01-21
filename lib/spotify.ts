@@ -19,7 +19,7 @@ function getSpotifyClient(): SpotifyWebApi {
 
     if (!clientId || !clientSecret) {
       throw new Error(
-        "SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET must be set in environment variables"
+        "SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET must be set in environment variables",
       );
     }
 
@@ -56,7 +56,7 @@ export async function getClientAccessToken(): Promise<string> {
  */
 export async function searchTracks(
   query: string,
-  limit: number = 20
+  limit: number = 20,
 ): Promise<SpotifyApi.SearchResponse> {
   const client = getSpotifyClient();
   const token = await getClientAccessToken();
@@ -77,7 +77,9 @@ export async function searchTracks(
 /**
  * Get track by ID
  */
-export async function getTrack(trackId: string): Promise<SpotifyApi.SingleTrackResponse> {
+export async function getTrack(
+  trackId: string,
+): Promise<SpotifyApi.SingleTrackResponse> {
   const client = getSpotifyClient();
   const token = await getClientAccessToken();
   client.setAccessToken(token);
@@ -96,7 +98,7 @@ export async function getTrack(trackId: string): Promise<SpotifyApi.SingleTrackR
  * For user-specific endpoints (playlists, saved tracks, etc.)
  */
 export function getSpotifyClientWithUserToken(
-  accessToken: string
+  accessToken: string,
 ): SpotifyWebApi {
   const client = getSpotifyClient();
   client.setAccessToken(accessToken);

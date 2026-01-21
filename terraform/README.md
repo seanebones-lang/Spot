@@ -144,7 +144,9 @@ Creates:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - VPC with public/private/database subnets across 3 AZs
 - Internet Gateway and NAT Gateways
 - Route tables and associations
@@ -156,7 +158,9 @@ Creates:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ECS Fargate cluster
 - Application Load Balancer
 - ECS service with auto-scaling
@@ -169,7 +173,9 @@ Creates:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - PostgreSQL 15.4 database instance
 - DB subnet group
 - Parameter group with performance settings

@@ -11,7 +11,7 @@ const searchSchema = z.object({
 /**
  * Spotify Search API Route
  * GET /api/spotify/search?q=query&limit=20
- * 
+ *
  * Returns search results from Spotify Web API
  * Uses client credentials flow (no user auth required for search)
  */
@@ -32,20 +32,21 @@ export async function GET(req: NextRequest) {
     const results = await searchTracks(validated.q, validated.limit);
 
     // Transform to our Track format
-    const tracks = results.tracks?.items.map((item) => ({
-      id: item.id,
-      name: item.name,
-      artist: item.artists[0]?.name || "Unknown Artist",
-      artistId: item.artists[0]?.id || "",
-      album: item.album?.name || "",
-      albumId: item.album?.id || "",
-      duration: item.duration_ms,
-      audioUrl: item.preview_url || "",
-      coverArt: item.album?.images[0]?.url || "",
-      uri: item.uri,
-      explicit: item.explicit || false,
-      popularity: item.popularity || 0,
-    })) || [];
+    const tracks =
+      results.tracks?.items.map((item) => ({
+        id: item.id,
+        name: item.name,
+        artist: item.artists[0]?.name || "Unknown Artist",
+        artistId: item.artists[0]?.id || "",
+        album: item.album?.name || "",
+        albumId: item.album?.id || "",
+        duration: item.duration_ms,
+        audioUrl: item.preview_url || "",
+        coverArt: item.album?.images[0]?.url || "",
+        uri: item.uri,
+        explicit: item.explicit || false,
+        popularity: item.popularity || 0,
+      })) || [];
 
     return NextResponse.json({
       tracks,
@@ -57,14 +58,14 @@ export async function GET(req: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: "Invalid search parameters", details: error.errors },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     logger.error("Spotify search error", error, { correlationId, query });
     return NextResponse.json(
       { error: "Failed to search tracks. Please try again." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

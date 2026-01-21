@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { MoodState } from '@/types/mood';
+import { create } from "zustand";
+import { MoodState } from "@/types/mood";
 
 interface MoodStateType {
   selectedMood: MoodState | null;
@@ -20,12 +20,12 @@ export const useMoodStore = create<MoodStateType>((set) => ({
   vibe: 50,
   selectedGenres: [],
   filteredPlaylists: [],
-  
+
   setMood: (mood) => set({ selectedMood: mood }),
   setFeelings: (feelings) => set({ selectedFeelings: feelings }),
   setVibe: (vibe) => set({ vibe }),
   setGenres: (genres) => set({ selectedGenres: genres }),
-  
+
   filterPlaylists: () => {
     // This will be implemented with the mood matching algorithm
     set({ filteredPlaylists: [] });

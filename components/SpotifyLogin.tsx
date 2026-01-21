@@ -19,7 +19,9 @@ export function SpotifyLogin() {
   if (session) {
     return (
       <div className="flex items-center gap-2 text-white">
-        <span className="text-sm">Signed in as {session.user?.name || session.user?.email}</span>
+        <span className="text-sm">
+          Signed in as {session.user?.name || session.user?.email}
+        </span>
       </div>
     );
   }

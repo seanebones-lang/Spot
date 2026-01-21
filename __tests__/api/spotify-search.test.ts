@@ -21,7 +21,11 @@ describe("Spotify Search API", () => {
             id: "1",
             name: "Test Track",
             artists: [{ name: "Test Artist", id: "artist1" }],
-            album: { name: "Test Album", id: "album1", images: [{ url: "image.jpg" }] },
+            album: {
+              name: "Test Album",
+              id: "album1",
+              images: [{ url: "image.jpg" }],
+            },
             duration_ms: 180000,
             uri: "spotify:track:1",
             explicit: false,
@@ -36,7 +40,7 @@ describe("Spotify Search API", () => {
     vi.mocked(searchTracks).mockResolvedValue(mockTracks as any);
 
     const request = new NextRequest(
-      new URL("http://localhost:3001/api/spotify/search?q=test&limit=20")
+      new URL("http://localhost:3001/api/spotify/search?q=test&limit=20"),
     );
 
     const response = await GET(request);
@@ -50,7 +54,7 @@ describe("Spotify Search API", () => {
 
   it("should return 400 for invalid query", async () => {
     const request = new NextRequest(
-      new URL("http://localhost:3001/api/spotify/search?q=")
+      new URL("http://localhost:3001/api/spotify/search?q="),
     );
 
     const response = await GET(request);
@@ -64,7 +68,7 @@ describe("Spotify Search API", () => {
     vi.mocked(searchTracks).mockRejectedValue(new Error("API Error"));
 
     const request = new NextRequest(
-      new URL("http://localhost:3001/api/spotify/search?q=test")
+      new URL("http://localhost:3001/api/spotify/search?q=test"),
     );
 
     const response = await GET(request);

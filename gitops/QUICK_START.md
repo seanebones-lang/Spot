@@ -82,7 +82,9 @@ flux reconcile source git flux-system
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - Push to `main` → CI builds image → Updates Git manifest → Flux reconciles automatically
 
 ### Rollback
@@ -191,7 +193,9 @@ GitHub Actions workflow (`.github/workflows/gitops-deploy.yml`) is ready:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - ✅ Automated Docker builds
 - ✅ Staging deployment (automatic)
 - ✅ Production deployment (manual approval)
@@ -201,7 +205,9 @@ GitHub Actions workflow (`.github/workflows/gitops-deploy.yml`) is ready:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `GITHUB_TOKEN` (automatically provided)
 - `SLACK_WEBHOOK_URL` (optional, for notifications)
 

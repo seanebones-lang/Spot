@@ -7,11 +7,13 @@
 ### Terms of Service Violation
 
 Section 5.2 of SoundCloud's Terms of Service states:
+
 > "You agree not to... use any automated system (including, without limitation, robots, spiders, offline readers, scrapers) to access the Service"
 
 ### Consequences of Violation
 
 If you use the scraper scripts, you risk:
+
 - ⚠️ **Permanent IP ban** from SoundCloud
 - ⚠️ **Legal action** and potential lawsuits
 - ⚠️ **Account termination** if you have a SoundCloud account
@@ -51,7 +53,7 @@ JAMENDO_API_KEY=your_api_key_here
 
 ```typescript
 // Legal, safe, reliable
-const tracks = await getTracksByMood('happy', 50);
+const tracks = await getTracksByMood("happy", 50);
 // Returns 50 happy tracks from Jamendo
 ```
 
@@ -100,21 +102,22 @@ npm run scrape:comprehensive
 
 ## 📊 Comparison
 
-| Feature | Jamendo API | SoundCloud Scraper |
-|---------|-------------|-------------------|
-| Legal | ✅ Yes | ❌ No (ToS violation) |
-| Risk | ✅ None | ⚠️ IP ban, legal action |
-| Reliability | ✅ High | ⚠️ May break |
-| Catalog Size | ✅ 100k+ tracks | ⚠️ Limited to CC only |
-| Setup | ✅ Easy (API key) | ⚠️ Complex (scraping) |
-| Maintenance | ✅ None needed | ⚠️ Frequent updates |
-| Cost | ✅ Free | ⚠️ Legal risk |
+| Feature      | Jamendo API       | SoundCloud Scraper      |
+| ------------ | ----------------- | ----------------------- |
+| Legal        | ✅ Yes            | ❌ No (ToS violation)   |
+| Risk         | ✅ None           | ⚠️ IP ban, legal action |
+| Reliability  | ✅ High           | ⚠️ May break            |
+| Catalog Size | ✅ 100k+ tracks   | ⚠️ Limited to CC only   |
+| Setup        | ✅ Easy (API key) | ⚠️ Complex (scraping)   |
+| Maintenance  | ✅ None needed    | ⚠️ Frequent updates     |
+| Cost         | ✅ Free           | ⚠️ Legal risk           |
 
 ## 🎯 Recommendation
 
 **DO NOT USE THE SCRAPER**
 
 Instead:
+
 1. ✅ Get Jamendo API key (free)
 2. ✅ Use existing API integration
 3. ✅ Enjoy legal, reliable access to 100k+ tracks

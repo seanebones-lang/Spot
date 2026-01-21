@@ -1,7 +1,7 @@
 /**
  * Audio Context Manager
  * Prevents memory leaks by properly managing AudioContext lifecycle
- * 
+ *
  * Issue: Multiple AudioContext instances can cause memory leaks
  * Solution: Singleton pattern with proper cleanup
  */
@@ -28,18 +28,19 @@ export class AudioContextManager {
    */
   getContext(): AudioContext {
     if (!this.audioContext) {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContextClass =
+        window.AudioContext || (window as any).webkitAudioContext;
       this.audioContext = new AudioContextClass({
         sampleRate: 44100, // Optimal for music
-        latencyHint: 'interactive', // Low latency for UI responsiveness
+        latencyHint: "interactive", // Low latency for UI responsiveness
       });
-      console.log('[AudioContextManager] Created new AudioContext');
+      console.log("[AudioContextManager] Created new AudioContext");
     }
 
     // Resume if suspended (browser autoplay restrictions)
-    if (this.audioContext.state === 'suspended') {
+    if (this.audioContext.state === "suspended") {
       this.audioContext.resume().catch((error) => {
-        console.error('[AudioContextManager] Failed to resume context:', error);
+        console.error("[AudioContextManager] Failed to resume context:", error);
       });
     }
 
@@ -53,11 +54,11 @@ export class AudioContextManager {
    */
   release(): void {
     this.referenceCount--;
-    
+
     if (this.referenceCount <= 0 && this.audioContext) {
-      console.log('[AudioContextManager] Closing AudioContext (no references)');
+      console.log("[AudioContextManager] Closing AudioContext (no references)");
       this.audioContext.close().catch((error) => {
-        console.error('[AudioContextManager] Failed to close context:', error);
+        console.error("[AudioContextManager] Failed to close context:", error);
       });
       this.audioContext = null;
       this.referenceCount = 0;
@@ -69,9 +70,9 @@ export class AudioContextManager {
    */
   destroy(): void {
     if (this.audioContext) {
-      console.log('[AudioContextManager] Force closing AudioContext');
+      console.log("[AudioContextManager] Force closing AudioContext");
       this.audioContext.close().catch((error) => {
-        console.error('[AudioContextManager] Failed to close context:', error);
+        console.error("[AudioContextManager] Failed to close context:", error);
       });
       this.audioContext = null;
       this.referenceCount = 0;
@@ -89,7 +90,7 @@ export class AudioContextManager {
    * Resume suspended context
    */
   async resume(): Promise<void> {
-    if (this.audioContext && this.audioContext.state === 'suspended') {
+    if (this.audioContext && this.audioContext.state === "suspended") {
       await this.audioContext.resume();
     }
   }

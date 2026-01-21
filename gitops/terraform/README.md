@@ -8,7 +8,9 @@ This Terraform setup provisions:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - **AWS EKS Cluster**: Kubernetes 1.31 (latest as of Dec 2025)
 - **VPC**: Multi-AZ VPC with public and private subnets
 - **Node Groups**: EKS managed node groups with auto-scaling
@@ -79,18 +81,19 @@ Once Terraform creates the infrastructure, Flux will manage all application depl
 ## Variables
 
 <<<<<<< HEAD
-| Variable       | Description      | Default           |
+| Variable | Description | Default |
 | -------------- | ---------------- | ----------------- |
-| `aws_region`   | AWS region       | `us-west-2`       |
+| `aws_region` | AWS region | `us-west-2` |
 | `cluster_name` | EKS cluster name | `nexteleven-prod` |
-| `environment`  | Environment name | `prod`            |
+| `environment` | Environment name | `prod` |
 =======
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `aws_region` | AWS region | `us-west-2` |
 | `cluster_name` | EKS cluster name | `nexteleven-prod` |
 | `environment` | Environment name | `prod` |
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 ## Outputs
 
@@ -98,7 +101,9 @@ After applying, Terraform outputs:
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 - `cluster_id`: EKS cluster ID
 - `cluster_endpoint`: Kubernetes API endpoint
 - `kubeconfig_command`: Command to configure kubectl

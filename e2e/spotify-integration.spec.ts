@@ -53,7 +53,7 @@ test.describe("Spotify Integration", () => {
     // Should show empty state or no results message
     const emptyState = page.getByText(/no results found/i);
     const hasEmptyState = await emptyState.isVisible().catch(() => false);
-    
+
     // Either empty state or still loading/searching
     expect(hasEmptyState || true).toBe(true);
   });

@@ -1,9 +1,11 @@
 # UI Component System - Quick Start Guide
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
-**Date:** January 14, 2026
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+> > > > > > > **Date:** January 14, 2026
 
 ---
 
@@ -30,10 +32,13 @@ import FormField from '@/components/FormField';
 ## 📦 **QUICK EXAMPLES**
 
 ### Button
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 // Primary action
 <Button variant="primary" size="md">Get Started</Button>
@@ -49,10 +54,13 @@ import FormField from '@/components/FormField';
 ```
 
 ### Input
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 // Basic input
 <Input type="email" label="Email" placeholder="your@email.com" required />
@@ -62,8 +70,8 @@ import FormField from '@/components/FormField';
 <Input
   type="password"
 =======
-<Input 
-  type="password" 
+<Input
+  type="password"
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   label="Password"
   error="Must be at least 8 characters"
@@ -75,8 +83,8 @@ import FormField from '@/components/FormField';
 <Input
   type="text"
 =======
-<Input 
-  type="text" 
+<Input
+  type="text"
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   label="Username"
   helperText="Must be unique"
@@ -84,10 +92,13 @@ import FormField from '@/components/FormField';
 ```
 
 ### Card
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 // Basic card
 <Card variant="default" hover>
@@ -108,10 +119,13 @@ import FormField from '@/components/FormField';
 ```
 
 ### Form
+
 <<<<<<< HEAD
 
 =======
->>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
+> > > > > > > 460cde8a4456665eaca40b34f2a2a146c789ce1e
+
 ```tsx
 // Complete form with validation
 <form onSubmit={handleSubmit}>
@@ -125,11 +139,11 @@ import FormField from '@/components/FormField';
   </FormField>
 
 =======
-  
+
   <FormField label="Password" required error={passwordError}>
     <Input type="password" />
   </FormField>
-  
+
 >>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   <Button type="submit" variant="primary" loading={isSubmitting}>
     Sign Up
