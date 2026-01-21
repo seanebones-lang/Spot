@@ -5,22 +5,10 @@ interface CheckInState {
   lastCheckIn: string | null; // ISO date string
   streak: number;
   todaysCheckIn: {
-    mood?: {
-      tired?: number;
-      energetic?: number;
-      lonely?: number;
-      connected?: number;
-    };
     feelings?: string[];
     journalEntry?: string;
   } | null;
   checkIn: (
-    mood?: {
-      tired?: number;
-      energetic?: number;
-      lonely?: number;
-      connected?: number;
-    },
     feelings?: string[],
     journalEntry?: string,
   ) => void;
@@ -47,7 +35,7 @@ export const useCheckInStore = create<CheckInState>()(
       streak: 0,
       todaysCheckIn: null,
 
-      checkIn: (mood, feelings, journalEntry) => {
+      checkIn: (feelings, journalEntry) => {
         const today = new Date().toISOString();
         const { lastCheckIn, streak } = get();
 
@@ -66,7 +54,7 @@ export const useCheckInStore = create<CheckInState>()(
         set({
           lastCheckIn: today,
           streak: newStreak,
-          todaysCheckIn: { mood, feelings, journalEntry },
+          todaysCheckIn: { feelings, journalEntry },
         });
       },
 

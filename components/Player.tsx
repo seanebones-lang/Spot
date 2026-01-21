@@ -240,11 +240,9 @@ const Player = memo(function Player() {
           >
             <button
               onClick={() => setShuffle(!shuffle)}
-              aria-label={shuffle ? "Disable shuffle" : "Enable shuffle"}
-              aria-pressed={shuffle}
-              disabled={!currentTrack}
               aria-label={shuffle ? "Shuffle on" : "Shuffle off"}
               aria-pressed={shuffle}
+              disabled={!currentTrack}
               className={`text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                 shuffle ? "text-spotify-green" : ""
               }`}
@@ -277,7 +275,6 @@ const Player = memo(function Player() {
               onClick={playPrevious}
               aria-label="Previous track"
               disabled={!currentTrack}
-              aria-label="Previous track"
               className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 backgroundColor: "transparent",
@@ -314,7 +311,6 @@ const Player = memo(function Player() {
               onClick={playNext}
               aria-label="Next track"
               disabled={!currentTrack}
-              aria-label="Next track"
               className="text-spotify-text-gray hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 backgroundColor: "transparent",

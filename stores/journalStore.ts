@@ -5,12 +5,6 @@ interface JournalEntry {
   id: string;
   date: string;
   text: string;
-  moodTags?: {
-    tired?: number;
-    energetic?: number;
-    lonely?: number;
-    connected?: number;
-  };
   feelings?: string[];
   associatedMusic?: string[]; // Track IDs
   shared: boolean;

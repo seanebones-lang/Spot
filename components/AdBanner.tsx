@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 
 interface AdBannerProps {
   type?: "banner" | "interstitial" | "psa";
-  mood?: string;
   className?: string;
   onClose?: () => void;
   onAdClick?: () => void;
@@ -14,7 +13,6 @@ interface AdBannerProps {
 
 export default function AdBanner({
   type = "banner",
-  mood,
   className,
   onClose,
   onAdClick,
@@ -27,7 +25,7 @@ export default function AdBanner({
   } | null>(null);
 
   useEffect(() => {
-    // In production, fetch contextual ad based on mood/context
+    // In production, fetch contextual ad based on context
     // For now, use mock wellness-focused ads
     if (type === "psa") {
       setAdContent({
@@ -35,12 +33,6 @@ export default function AdBanner({
         description:
           "If you or someone you know is struggling, help is available 24/7.",
         cta: "Get Help Now",
-      });
-    } else if (mood) {
-      setAdContent({
-        title: "Wellness Resources",
-        description: `Discover tools to support your ${mood} mood journey.`,
-        cta: "Explore Wellness",
       });
     } else {
       setAdContent({
@@ -50,7 +42,7 @@ export default function AdBanner({
         cta: "Upgrade Now",
       });
     }
-  }, [type, mood]);
+  }, [type]);
 
   if (!adContent) return null;
 
