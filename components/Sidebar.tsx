@@ -31,7 +31,7 @@ const navItems = [
   { icon: Radio, label: "Radio", href: "/radio" },
 ];
 
-export default function Sidebar() {
+const Sidebar = memo(function Sidebar() {
   const pathname = usePathname();
   const { streak, lastCheckIn } = useCheckInStore();
   const { totalPoints } = usePointsStore();

@@ -22,7 +22,7 @@ interface SearchDropdownProps {
   onSelect: (query: string) => void;
 }
 
-export default function SearchDropdown({
+const SearchDropdown = memo(function SearchDropdown({
   query,
   isOpen,
   onClose,
