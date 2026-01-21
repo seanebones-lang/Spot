@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 "use client";
 
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
+=======
+'use client';
+
+import { useEffect, useState } from 'react';
+import { X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface KeyboardShortcut {
   category: string;
@@ -14,6 +22,7 @@ interface KeyboardShortcut {
 
 const shortcuts: KeyboardShortcut[] = [
   {
+<<<<<<< HEAD
     category: "Playback",
     shortcuts: [
       { keys: ["Space"], description: "Play/Pause" },
@@ -44,6 +53,38 @@ const shortcuts: KeyboardShortcut[] = [
       { keys: ["Ctrl", "P"], description: "Open queue" },
       { keys: ["Ctrl", "B"], description: "Toggle right sidebar" },
       { keys: ["Ctrl", "Shift", "B"], description: "Toggle left sidebar" },
+=======
+    category: 'Playback',
+    shortcuts: [
+      { keys: ['Space'], description: 'Play/Pause' },
+      { keys: ['←'], description: 'Seek backward 10s' },
+      { keys: ['→'], description: 'Seek forward 10s' },
+      { keys: ['Ctrl', '←'], description: 'Previous track' },
+      { keys: ['Ctrl', '→'], description: 'Next track' },
+      { keys: ['Ctrl', '↑'], description: 'Volume up' },
+      { keys: ['Ctrl', '↓'], description: 'Volume down' },
+      { keys: ['M'], description: 'Mute/Unmute' },
+      { keys: ['S'], description: 'Shuffle' },
+      { keys: ['R'], description: 'Repeat' },
+      { keys: ['L'], description: 'Like/Unlike track' },
+    ],
+  },
+  {
+    category: 'Navigation',
+    shortcuts: [
+      { keys: ['Ctrl', 'K'], description: 'Search' },
+      { keys: ['Alt', '←'], description: 'Back' },
+      { keys: ['Alt', '→'], description: 'Forward' },
+      { keys: ['Ctrl', '/'], description: 'Show keyboard shortcuts' },
+    ],
+  },
+  {
+    category: 'Player',
+    shortcuts: [
+      { keys: ['Ctrl', 'P'], description: 'Open queue' },
+      { keys: ['Ctrl', 'B'], description: 'Toggle right sidebar' },
+      { keys: ['Ctrl', 'Shift', 'B'], description: 'Toggle left sidebar' },
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     ],
   },
 ];
@@ -53,6 +94,7 @@ interface KeyboardShortcutsPanelProps {
   onClose: () => void;
 }
 
+<<<<<<< HEAD
 export default function KeyboardShortcutsPanel({
   isOpen,
   onClose,
@@ -64,13 +106,25 @@ export default function KeyboardShortcutsPanel({
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
+=======
+export default function KeyboardShortcutsPanel({ isOpen, onClose }: KeyboardShortcutsPanelProps) {
+  const [activeCategory, setActiveCategory] = useState(shortcuts[0]?.category || '');
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         onClose();
       }
     };
 
     const handleShortcutKey = (e: KeyboardEvent) => {
       // Ctrl+/ or Cmd+/ to open shortcuts panel
+<<<<<<< HEAD
       if ((e.ctrlKey || e.metaKey) && e.key === "/") {
+=======
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         e.preventDefault();
         if (!isOpen) {
           // This would be handled by parent component
@@ -80,12 +134,21 @@ export default function KeyboardShortcutsPanel({
       }
     };
 
+<<<<<<< HEAD
     document.addEventListener("keydown", handleEscape);
     document.addEventListener("keydown", handleShortcutKey);
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
       document.removeEventListener("keydown", handleShortcutKey);
+=======
+    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleShortcutKey);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('keydown', handleShortcutKey);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     };
   }, [isOpen, onClose]);
 
@@ -124,9 +187,13 @@ export default function KeyboardShortcutsPanel({
                           </span>
                         ))}
                       </div>
+<<<<<<< HEAD
                       <p className="text-sm text-spotify-text-gray">
                         {shortcut.description}
                       </p>
+=======
+                      <p className="text-sm text-spotify-text-gray">{shortcut.description}</p>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                     </div>
                   ))}
                 </div>

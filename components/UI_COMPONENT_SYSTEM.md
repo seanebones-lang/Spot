@@ -1,5 +1,8 @@
 # UI Component System - Complete Reference
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 **Date:** January 14, 2026  
 **Version:** 1.0.0  
 **Status:** Production Ready
@@ -15,7 +18,10 @@ This document provides a complete reference for the standardized UI component sy
 ## 🎨 **DESIGN PRINCIPLES**
 
 ### Core Principles:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 1. **Pixel-Perfect Spotify Replication** - Exact visual matching (<1% difference)
 2. **Accessibility First** - WCAG 2.2 AA compliance minimum
 3. **Consistent Design Tokens** - Single source of truth for all styles
@@ -23,7 +29,10 @@ This document provides a complete reference for the standardized UI component sy
 5. **Performance Optimized** - Minimal re-renders, efficient styling
 
 ### Design Tokens:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - **Colors:** Spotify palette (#1DB954 green, #121212 dark) + EmPulse accents
 - **Typography:** Circular font family (Spotify's font)
 - **Spacing:** 4px base unit (4px, 8px, 12px, 16px, 24px, 32px)
@@ -39,7 +48,10 @@ This document provides a complete reference for the standardized UI component sy
 **File:** `components/Button.tsx`
 
 #### Variants:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `primary` - Spotify Green background, black text (default)
 - `secondary` - Transparent background, green border and text
 - `tertiary` - Dark gray background, white text
@@ -47,13 +59,19 @@ This document provides a complete reference for the standardized UI component sy
 - `danger` - EmPulse Red background, white text
 
 #### Sizes:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `sm` - 32px height, 14px text, medium weight
 - `md` - 40px height, 14px text, bold (default)
 - `lg` - 48px height, 16px text, bold
 
 #### Features:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - ✅ Loading state with spinner
 - ✅ Left/right icon support (lucide-react)
 - ✅ Full-width option
@@ -62,7 +80,10 @@ This document provides a complete reference for the standardized UI component sy
 - ✅ WCAG 2.2 AA compliant
 
 #### Usage:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 import Button from '@/components/Button';
 import { Play } from 'lucide-react';
@@ -83,7 +104,10 @@ import { Play } from 'lucide-react';
 ```
 
 #### Accessibility:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - **Contrast Ratios:** All variants exceed 4.5:1 (WCAG AA)
 - **Focus Indicators:** 2px ring with 4px offset
 - **Keyboard Support:** Native button element (Enter/Space)
@@ -96,18 +120,27 @@ import { Play } from 'lucide-react';
 **File:** `components/Input.tsx`
 
 #### Variants:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `default` - Dark gray background (#181818)
 - `ghost` - Transparent background
 
 #### Sizes:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `sm` - 36px height
 - `md` - 40px height (default)
 - `lg` - 48px height
 
 #### Features:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - ✅ Built-in label support
 - ✅ Helper text display
 - ✅ Error state (red border + icon + message)
@@ -118,21 +151,34 @@ import { Play } from 'lucide-react';
 - ✅ WCAG 2.2 AA compliant
 
 #### Usage:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 import Input from '@/components/Input';
 import { Mail, Lock } from 'lucide-react';
 
 // Basic input
+<<<<<<< HEAD
 <Input
   type="email"
   label="Email"
+=======
+<Input 
+  type="email" 
+  label="Email" 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   placeholder="your@email.com"
   required
 />
 
 // With validation
+<<<<<<< HEAD
 <Input
+=======
+<Input 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   type="password"
   label="Password"
   iconLeft={Lock}
@@ -140,7 +186,11 @@ import { Mail, Lock } from 'lucide-react';
 />
 
 // With success state
+<<<<<<< HEAD
 <Input
+=======
+<Input 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   type="email"
   label="Email"
   helperText="We'll never share your email"
@@ -149,7 +199,10 @@ import { Mail, Lock } from 'lucide-react';
 ```
 
 #### Accessibility:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - **Label Association:** Automatic `htmlFor`/`id` linking
 - **Error Messages:** `aria-invalid` + `aria-describedby`
 - **Focus Indicators:** 2px green ring with 20% opacity
@@ -162,12 +215,16 @@ import { Mail, Lock } from 'lucide-react';
 **File:** `components/FormField.tsx`
 
 #### Features:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - ✅ Wrapper for consistent form layout
 - ✅ Label, input, helper text, and error message coordination
 - ✅ Proper ID association for accessibility
 
 #### Usage:
+<<<<<<< HEAD
 
 ```tsx
 import FormField from "@/components/FormField";
@@ -176,11 +233,24 @@ import Input from "@/components/Input";
 <FormField
   label="Username"
   required
+=======
+```tsx
+import FormField from '@/components/FormField';
+import Input from '@/components/Input';
+
+<FormField 
+  label="Username" 
+  required 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   helperText="Must be unique"
   error={usernameError}
 >
   <Input type="text" placeholder="Choose a username" />
+<<<<<<< HEAD
 </FormField>;
+=======
+</FormField>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```
 
 ---
@@ -190,26 +260,38 @@ import Input from "@/components/Input";
 **File:** `components/Card.tsx`
 
 #### Variants:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `default` - Light gray background (#282828)
 - `elevated` - Dark gray background (#181818)
 - `outline` - Transparent with border
 - `gradient` - EmPulse Purple/Blue gradient
 
 #### Sizes:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `sm` - 12px padding
 - `md` - 16px padding (default)
 - `lg` - 24px padding
 
 #### Render Types:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `div` - Static card (default)
 - `link` - Next.js Link (requires `href`)
 - `button` - Button element (requires `onClick`)
 
 #### Features:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - ✅ Hover effects (background color change)
 - ✅ Image support (Card.Image component)
 - ✅ Subcomponents: Header, Title, Description, Body, Footer, Actions
@@ -217,7 +299,10 @@ import Input from "@/components/Input";
 - ✅ Active state (scale down on click)
 
 #### Usage:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 import Card from '@/components/Card';
 
@@ -253,7 +338,10 @@ import Card from '@/components/Card';
 ```
 
 #### Subcomponents:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `Card.Image` - Image with size/aspect ratio options
 - `Card.Header` - Header section
 - `Card.Title` - Bold title text
@@ -269,7 +357,10 @@ import Card from '@/components/Card';
 **File:** `design-tokens.json`
 
 ### Available Token Categories:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 1. **Colors** - Spotify + EmPulse palette
 2. **Typography** - Font family, sizes, weights
 3. **Spacing** - 4px base unit scale
@@ -280,6 +371,7 @@ import Card from '@/components/Card';
 8. **Transitions** - Duration (200ms), easing (ease-in-out)
 
 ### Usage:
+<<<<<<< HEAD
 
 ```tsx
 // Colors from Tailwind config
@@ -291,6 +383,18 @@ className = "text-spotify-text-gray";
 className = "p-4"; // 16px padding
 className = "gap-2"; // 8px gap
 className = "mb-6"; // 24px margin-bottom
+=======
+```tsx
+// Colors from Tailwind config
+className="bg-spotify-green text-black"
+className="bg-spotify-dark-gray text-white"
+className="text-spotify-text-gray"
+
+// Spacing from Tailwind
+className="p-4" // 16px padding
+className="gap-2" // 8px gap
+className="mb-6" // 24px margin-bottom
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```
 
 ---
@@ -298,7 +402,10 @@ className = "mb-6"; // 24px margin-bottom
 ## 📚 **BEST PRACTICES**
 
 ### 1. **Component Selection**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - **Primary Actions:** Use `Button variant="primary"`
 - **Secondary Actions:** Use `Button variant="secondary"`
 - **Destructive Actions:** Use `Button variant="danger"`
@@ -306,26 +413,39 @@ className = "mb-6"; // 24px margin-bottom
 - **Content Containers:** Use `Card` for grouped content
 
 ### 2. **Accessibility**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Always provide `label` prop for `Input` components
 - Use `required` prop to show required field indicator
 - Provide `error` messages for validation feedback
 - Use semantic HTML (`Card` subcomponents use proper heading levels)
 
 ### 3. **Styling**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Prefer component props over custom `className` when possible
 - Use design tokens from `design-tokens.json` via Tailwind
 - Maintain consistent spacing (4px base unit)
 - Use transitions for interactive elements (200ms standard)
 
 ### 4. **TypeScript**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - All components are fully typed
 - Use TypeScript props for type safety
 - Import types when extending components:
   ```tsx
+<<<<<<< HEAD
   import type { ButtonProps } from "@/components/Button";
+=======
+  import type { ButtonProps } from '@/components/Button';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ```
 
 ---
@@ -346,7 +466,10 @@ All components meet WCAG 2.2 AA standards:
 ## 🚀 **MIGRATION GUIDE**
 
 ### Migrating Existing Buttons:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 // Before
 <button className="bg-spotify-green text-black px-6 py-2 rounded-full">
@@ -358,25 +481,40 @@ All components meet WCAG 2.2 AA standards:
 ```
 
 ### Migrating Existing Inputs:
+<<<<<<< HEAD
 
 ```tsx
 // Before
 <label className="block mb-2">Email</label>
 <input
+=======
+```tsx
+// Before
+<label className="block mb-2">Email</label>
+<input 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   type="email"
   className="w-full bg-spotify-dark-gray rounded-lg px-4 py-2 text-white"
 />
 
 // After
+<<<<<<< HEAD
 <Input
   type="email"
+=======
+<Input 
+  type="email" 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   label="Email"
   placeholder="your@email.com"
 />
 ```
 
 ### Migrating Existing Cards:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 // Before
 <div className="bg-spotify-light-gray rounded-lg p-4 hover:bg-spotify-light-gray/80">
@@ -409,12 +547,18 @@ All components meet WCAG 2.2 AA standards:
 ## 🎓 **LEARNING RESOURCES**
 
 ### Component Examples:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Button examples: `components/Button.examples.tsx`
 - All examples are fully functional and can be imported directly
 
 ### Design System:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Spotify Design Guidelines (Reference)
 - WCAG 2.2 Guidelines: https://www.w3.org/WAI/WCAG22/quickref/
 
@@ -423,7 +567,10 @@ All components meet WCAG 2.2 AA standards:
 ## 📝 **CHANGELOG**
 
 ### Version 1.0.0 (January 14, 2026)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - ✅ Created Button component with 5 variants, 3 sizes
 - ✅ Created Input component with 2 variants, 3 sizes, validation
 - ✅ Created FormField wrapper component
@@ -437,13 +584,19 @@ All components meet WCAG 2.2 AA standards:
 ## 🐛 **SUPPORT & CONTRIBUTING**
 
 ### Reporting Issues:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Component bugs: Check component files for inline comments
 - Design token issues: Verify values in `design-tokens.json`
 - Accessibility issues: Review `BUTTON_ACCESSIBILITY.md` for patterns
 
 ### Contributing:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Follow existing component patterns
 - Maintain WCAG 2.2 AA compliance
 - Update design tokens when adding new values

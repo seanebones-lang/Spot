@@ -48,7 +48,10 @@ model User {
   @@index([email])
   @@index([createdAt])
   @@index([isActive])
+<<<<<<< HEAD
   @@index([lastLoginAt]) // For active user queries
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   @@map("users")
 }
 
@@ -186,8 +189,11 @@ model Track {
   @@index([createdAt])
   @@index([releaseDate])
   @@index([name]) // For search - fulltext search would require PostgreSQL extensions
+<<<<<<< HEAD
   @@index([genre]) // For genre filtering
   @@index([subgenre]) // For subgenre filtering
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   @@map("tracks")
 }
 
@@ -326,7 +332,10 @@ model Playlist {
   @@index([userId])
   @@index([isPublic])
   @@index([createdAt])
+<<<<<<< HEAD
   @@index([updatedAt]) // For recently updated playlists
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   @@map("playlists")
 }
 

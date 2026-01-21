@@ -26,6 +26,7 @@ const DEFAULT_RETRY_OPTIONS: Required<RetryOptions> = {
  */
 function isRetryableError(error: Error, retryableErrors: string[]): boolean {
   // Always retry on network/timeout errors
+<<<<<<< HEAD
   const networkErrors = [
     "ECONNRESET",
     "ETIMEDOUT",
@@ -36,12 +37,20 @@ function isRetryableError(error: Error, retryableErrors: string[]): boolean {
   if (
     networkErrors.some((e) => error.message.includes(e) || error.name === e)
   ) {
+=======
+  const networkErrors = ['ECONNRESET', 'ETIMEDOUT', 'ENOTFOUND', 'ECONNREFUSED', 'timeout'];
+  if (networkErrors.some(e => error.message.includes(e) || error.name === e)) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return true;
   }
 
   // Retry on specific error messages
   if (retryableErrors.length > 0) {
+<<<<<<< HEAD
     return retryableErrors.some((pattern) => error.message.includes(pattern));
+=======
+    return retryableErrors.some(pattern => error.message.includes(pattern));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 
   // Default: don't retry
@@ -55,7 +64,11 @@ function calculateDelay(
   attempt: number,
   initialDelayMs: number,
   maxDelayMs: number,
+<<<<<<< HEAD
   backoffMultiplier: number,
+=======
+  backoffMultiplier: number
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ): number {
   const delay = initialDelayMs * Math.pow(backoffMultiplier, attempt);
   return Math.min(delay, maxDelayMs);
@@ -65,7 +78,11 @@ function calculateDelay(
  * Sleep for specified milliseconds
  */
 function sleep(ms: number): Promise<void> {
+<<<<<<< HEAD
   return new Promise((resolve) => setTimeout(resolve, ms));
+=======
+  return new Promise(resolve => setTimeout(resolve, ms));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }
 
 /**
@@ -73,7 +90,11 @@ function sleep(ms: number): Promise<void> {
  */
 export async function withRetry<T>(
   fn: () => Promise<T>,
+<<<<<<< HEAD
   options: RetryOptions = {},
+=======
+  options: RetryOptions = {}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ): Promise<T> {
   const opts = { ...DEFAULT_RETRY_OPTIONS, ...options };
   let lastError: Error | null = null;
@@ -99,7 +120,11 @@ export async function withRetry<T>(
         attempt,
         opts.initialDelayMs,
         opts.maxDelayMs,
+<<<<<<< HEAD
         opts.backoffMultiplier,
+=======
+        opts.backoffMultiplier
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
 
       // Call retry callback
@@ -111,7 +136,11 @@ export async function withRetry<T>(
   }
 
   // All retries exhausted
+<<<<<<< HEAD
   throw lastError || new Error("Retry failed: unknown error");
+=======
+  throw lastError || new Error('Retry failed: unknown error');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }
 
 /**
@@ -120,20 +149,37 @@ export async function withRetry<T>(
 export async function withRetryAndTimeout<T>(
   fn: () => Promise<T>,
   timeoutMs: number,
+<<<<<<< HEAD
   options: RetryOptions = {},
 ): Promise<T> {
   const { withTimeout } = await import("./timeout");
 
   return withRetry(() => withTimeout(fn(), timeoutMs), options);
+=======
+  options: RetryOptions = {}
+): Promise<T> {
+  const { withTimeout } = await import('./timeout');
+
+  return withRetry(
+    () => withTimeout(fn(), timeoutMs),
+    options
+  );
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }
 
 /**
  * Circuit breaker state
  */
 export enum CircuitState {
+<<<<<<< HEAD
   CLOSED = "closed", // Normal operation
   OPEN = "open", // Failing, reject requests
   HALF_OPEN = "half_open", // Testing if recovered
+=======
+  CLOSED = 'closed',    // Normal operation
+  OPEN = 'open',        // Failing, reject requests
+  HALF_OPEN = 'half_open', // Testing if recovered
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }
 
 /**
@@ -151,7 +197,11 @@ export class CircuitBreaker {
       successThreshold?: number;
       timeoutMs?: number;
       resetTimeoutMs?: number;
+<<<<<<< HEAD
     } = {},
+=======
+    } = {}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ) {
     this.options = {
       failureThreshold: 5,
@@ -177,7 +227,11 @@ export class CircuitBreaker {
 
     // Reject if circuit is open
     if (this.state === CircuitState.OPEN) {
+<<<<<<< HEAD
       throw new Error("Circuit breaker is OPEN - service unavailable");
+=======
+      throw new Error('Circuit breaker is OPEN - service unavailable');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     }
 
     // Execute function

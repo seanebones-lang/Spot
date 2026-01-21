@@ -1,17 +1,28 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState, useRef, useEffect } from "react";
 import { Volume2, VolumeX } from "lucide-react";
+=======
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface VolumeControlProps {
   volume: number; // 0-100
   onVolumeChange: (volume: number) => void;
 }
 
+<<<<<<< HEAD
 export default function VolumeControl({
   volume,
   onVolumeChange,
 }: VolumeControlProps) {
+=======
+export default function VolumeControl({ volume, onVolumeChange }: VolumeControlProps) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const [isDragging, setIsDragging] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
 
@@ -53,10 +64,14 @@ export default function VolumeControl({
       if (barRef.current) {
         const rect = barRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
+<<<<<<< HEAD
         const volumePercent = Math.max(
           0,
           Math.min(100, (x / rect.width) * 100),
         );
+=======
+        const volumePercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         onVolumeChange(volumePercent);
       }
     };
@@ -66,10 +81,14 @@ export default function VolumeControl({
       if (barRef.current && e.touches.length > 0) {
         const rect = barRef.current.getBoundingClientRect();
         const x = e.touches[0].clientX - rect.left;
+<<<<<<< HEAD
         const volumePercent = Math.max(
           0,
           Math.min(100, (x / rect.width) * 100),
         );
+=======
+        const volumePercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         onVolumeChange(volumePercent);
       }
     };
@@ -82,6 +101,7 @@ export default function VolumeControl({
       setIsDragging(false);
     };
 
+<<<<<<< HEAD
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("touchmove", handleTouchMove, { passive: false });
@@ -94,6 +114,20 @@ export default function VolumeControl({
       document.removeEventListener("touchmove", handleTouchMove);
       document.removeEventListener("touchend", handleTouchEnd);
       document.removeEventListener("touchcancel", handleTouchEnd);
+=======
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchcancel', handleTouchEnd);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchcancel', handleTouchEnd);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     };
   }, [isDragging, onVolumeChange]);
 
@@ -101,7 +135,11 @@ export default function VolumeControl({
     <div className="flex items-center gap-2 w-32">
       <button
         onClick={handleMute}
+<<<<<<< HEAD
         aria-label={volume === 0 ? "Unmute" : "Mute"}
+=======
+        aria-label={volume === 0 ? 'Unmute' : 'Mute'}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         aria-pressed={volume === 0}
         className="text-spotify-text-gray hover:text-white transition-colors"
       >
@@ -121,7 +159,11 @@ export default function VolumeControl({
           handleSeek(e);
         }}
         onTouchStart={handleTouchStart}
+<<<<<<< HEAD
         style={{ touchAction: "none" }}
+=======
+        style={{ touchAction: 'none' }}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       >
         <div
           className="h-full bg-white rounded-full transition-all group-hover:bg-spotify-green"

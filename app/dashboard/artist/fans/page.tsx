@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 "use client";
+=======
+'use client';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 export default function ArtistFansPage() {
   return (
@@ -7,9 +11,13 @@ export default function ArtistFansPage() {
       <div className="max-w-4xl">
         <div className="bg-spotify-light-gray rounded-lg p-6">
           <h2 className="text-xl font-bold mb-4">Your Fans</h2>
+<<<<<<< HEAD
           <p className="text-spotify-text-gray">
             Analytics and insights about your fan base coming soon
           </p>
+=======
+          <p className="text-spotify-text-gray">Analytics and insights about your fan base coming soon</p>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         </div>
       </div>
     </div>

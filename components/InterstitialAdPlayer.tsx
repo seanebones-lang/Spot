@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState, useEffect, useRef } from "react";
 import { X, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePlayerStore } from "@/stores/playerStore";
+=======
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import { X, Volume2, VolumeX } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { usePlayerStore } from '@/stores/playerStore';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface InterstitialAdPlayerProps {
   isOpen: boolean;
@@ -26,7 +35,11 @@ export default function InterstitialAdPlayer({
   onClose,
   onSkip,
   adContent,
+<<<<<<< HEAD
   onAdClick,
+=======
+  onAdClick
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }: InterstitialAdPlayerProps) {
   const [timeRemaining, setTimeRemaining] = useState(adContent?.duration || 15);
   const [canSkip, setCanSkip] = useState(false);
@@ -36,12 +49,21 @@ export default function InterstitialAdPlayer({
 
   // Default ad content if none provided
   const defaultAd: NonNullable<typeof adContent> = {
+<<<<<<< HEAD
     title: "Upgrade to Premium",
     description: "Enjoy ad-free listening and lossless audio quality.",
     cta: "Upgrade Now",
     duration: 15,
     skipable: true,
     skipAfter: 5,
+=======
+    title: 'Upgrade to Premium',
+    description: 'Enjoy ad-free listening and lossless audio quality.',
+    cta: 'Upgrade Now',
+    duration: 15,
+    skipable: true,
+    skipAfter: 5
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   };
 
   const ad = adContent || defaultAd;
@@ -96,11 +118,19 @@ export default function InterstitialAdPlayer({
   };
 
   return (
+<<<<<<< HEAD
     <div
       className="fixed inset-0 bg-black/95 z-[200] flex items-center justify-center"
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.95)",
         backdropFilter: "blur(8px)",
+=======
+    <div 
+      className="fixed inset-0 bg-black/95 z-[200] flex items-center justify-center"
+      style={{ 
+        backgroundColor: 'rgba(0, 0, 0, 0.95)',
+        backdropFilter: 'blur(8px)'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       }}
     >
       {/* Close/Mute Controls */}
@@ -109,12 +139,21 @@ export default function InterstitialAdPlayer({
         <button
           onClick={() => setIsMuted(!isMuted)}
           className="text-spotify-text-gray hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
+<<<<<<< HEAD
           aria-label={isMuted ? "Unmute ad" : "Mute ad"}
         >
           {isMuted ? (
             <VolumeX size={20} style={{ width: "20px", height: "20px" }} />
           ) : (
             <Volume2 size={20} style={{ width: "20px", height: "20px" }} />
+=======
+          aria-label={isMuted ? 'Unmute ad' : 'Mute ad'}
+        >
+          {isMuted ? (
+            <VolumeX size={20} style={{ width: '20px', height: '20px' }} />
+          ) : (
+            <Volume2 size={20} style={{ width: '20px', height: '20px' }} />
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           )}
         </button>
 
@@ -132,12 +171,17 @@ export default function InterstitialAdPlayer({
             className="text-spotify-text-gray hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
             aria-label="Close ad"
           >
+<<<<<<< HEAD
             <X size={20} style={{ width: "20px", height: "20px" }} />
+=======
+            <X size={20} style={{ width: '20px', height: '20px' }} />
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </button>
         )}
       </div>
 
       {/* Ad Content */}
+<<<<<<< HEAD
       <div
         className="bg-spotify-dark-gray rounded-lg max-w-2xl w-full mx-4 overflow-hidden"
         style={{
@@ -149,12 +193,30 @@ export default function InterstitialAdPlayer({
         <div
           className="h-1 bg-spotify-light-gray"
           style={{ backgroundColor: "#282828" }}
+=======
+      <div 
+        className="bg-spotify-dark-gray rounded-lg max-w-2xl w-full mx-4 overflow-hidden"
+        style={{ 
+          borderRadius: '8px',
+          backgroundColor: '#181818'
+        }}
+      >
+        {/* Progress Bar */}
+        <div 
+          className="h-1 bg-spotify-light-gray"
+          style={{ backgroundColor: '#282828' }}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         >
           <div
             className="h-full bg-spotify-green transition-all duration-1000"
             style={{
+<<<<<<< HEAD
               width: `${(((ad.duration || 15) - timeRemaining) / (ad.duration || 15)) * 100}%`,
               backgroundColor: "#1DB954",
+=======
+              width: `${((ad.duration || 15) - timeRemaining) / (ad.duration || 15) * 100}%`,
+              backgroundColor: '#7209B7'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           />
         </div>
@@ -174,32 +236,59 @@ export default function InterstitialAdPlayer({
 
             {/* Content */}
             <div className="flex-1 text-center md:text-left">
+<<<<<<< HEAD
               <div
                 className="text-xs font-bold text-spotify-text-gray mb-2 uppercase tracking-wider"
                 style={{
                   fontSize: "11px",
                   letterSpacing: "0.1em",
                   color: "#B3B3B3",
+=======
+              <div 
+                className="text-xs font-bold text-spotify-text-gray mb-2 uppercase tracking-wider"
+                style={{ 
+                  fontSize: '11px',
+                  letterSpacing: '0.1em',
+                  color: '#B3B3B3'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 Advertisement
               </div>
+<<<<<<< HEAD
               <h3
                 className="text-2xl font-bold text-white mb-3"
                 style={{
                   fontSize: "24px",
                   lineHeight: "28px",
                   fontWeight: 700,
+=======
+              <h3 
+                className="text-2xl font-bold text-white mb-3"
+                style={{ 
+                  fontSize: '24px',
+                  lineHeight: '28px',
+                  fontWeight: 700
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 {ad.title}
               </h3>
+<<<<<<< HEAD
               <p
                 className="text-spotify-text-gray mb-6"
                 style={{
                   fontSize: "14px",
                   lineHeight: "20px",
                   color: "#B3B3B3",
+=======
+              <p 
+                className="text-spotify-text-gray mb-6"
+                style={{ 
+                  fontSize: '14px',
+                  lineHeight: '20px',
+                  color: '#B3B3B3'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 {ad.description}
@@ -208,10 +297,17 @@ export default function InterstitialAdPlayer({
                 onClick={onAdClick || onClose}
                 className="bg-spotify-green hover:bg-[#1ED760] text-black px-8 py-3 rounded-full font-semibold transition-colors"
                 style={{
+<<<<<<< HEAD
                   borderRadius: "500px",
                   fontSize: "14px",
                   fontWeight: 700,
                   letterSpacing: "0.1em",
+=======
+                  borderRadius: '500px',
+                  fontSize: '14px',
+                  fontWeight: 700,
+                  letterSpacing: '0.1em'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 {ad.cta}
@@ -222,9 +318,15 @@ export default function InterstitialAdPlayer({
           {/* Time Remaining */}
           {!canSkip && (
             <div className="mt-6 text-center">
+<<<<<<< HEAD
               <span
                 className="text-xs text-spotify-text-gray"
                 style={{ fontSize: "11px", color: "#B3B3B3" }}
+=======
+              <span 
+                className="text-xs text-spotify-text-gray"
+                style={{ fontSize: '11px', color: '#B3B3B3' }}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               >
                 Ad will continue in {timeRemaining}s
               </span>

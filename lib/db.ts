@@ -4,9 +4,15 @@
  * Use this for all database operations
  */
 
+<<<<<<< HEAD
 import { PrismaClient } from "@prisma/client";
 import { logger } from "./logger";
 import { withTimeout, TIMEOUTS } from "./timeout";
+=======
+import { PrismaClient } from '@prisma/client';
+import { logger } from './logger';
+import { withTimeout, TIMEOUTS } from './timeout';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 // Prisma Client singleton - Edge runtime compatible with binary engine
 // Prevents multiple instances during hot reload in development
@@ -24,6 +30,7 @@ function getPrismaClient(): PrismaClient {
 
   const client = new PrismaClient({
     log:
+<<<<<<< HEAD
       process.env.NODE_ENV === "development"
         ? ["query", "warn", "error"]
         : ["warn", "error"],
@@ -32,6 +39,16 @@ function getPrismaClient(): PrismaClient {
 
   // Cache in global for development hot reload
   if (process.env.NODE_ENV !== "production") {
+=======
+      process.env.NODE_ENV === 'development'
+        ? ['query', 'warn', 'error']
+        : ['warn', 'error'],
+    errorFormat: 'pretty',
+  });
+
+  // Cache in global for development hot reload
+  if (process.env.NODE_ENV !== 'production') {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     globalThis.prisma = client;
   }
 
@@ -45,7 +62,11 @@ export const prisma = new Proxy({} as PrismaClient, {
   get(_target, prop) {
     const client = getPrismaClient();
     const value = (client as any)[prop];
+<<<<<<< HEAD
     return typeof value === "function" ? value.bind(client) : value;
+=======
+    return typeof value === 'function' ? value.bind(client) : value;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   },
   set(_target, prop, value) {
     const client = getPrismaClient();
@@ -60,6 +81,7 @@ export const prisma = new Proxy({} as PrismaClient, {
  */
 export async function dbQueryWithTimeout<T>(
   query: Promise<T>,
+<<<<<<< HEAD
   timeoutMs: number = TIMEOUTS.DATABASE_QUERY,
 ): Promise<T> {
   return withTimeout(query, timeoutMs, "Database query timeout");
@@ -71,6 +93,19 @@ if (typeof window === "undefined") {
     const client = getPrismaClient();
     client.$on("error" as never, (e: unknown) => {
       logger.error("Prisma database error", e);
+=======
+  timeoutMs: number = TIMEOUTS.DATABASE_QUERY
+): Promise<T> {
+  return withTimeout(query, timeoutMs, 'Database query timeout');
+}
+
+// Handle connection errors gracefully (only at runtime, not during build)
+if (typeof window === 'undefined') {
+  try {
+    const client = getPrismaClient();
+    client.$on('error' as never, (e: unknown) => {
+      logger.error('Prisma database error', e);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     });
   } catch (e) {
     // Ignore during build - client not needed until runtime
@@ -78,7 +113,11 @@ if (typeof window === "undefined") {
 }
 
 // Graceful shutdown (only at runtime)
+<<<<<<< HEAD
 if (typeof window === "undefined") {
+=======
+if (typeof window === 'undefined') {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   async function disconnect() {
     try {
       const client = getPrismaClient();
@@ -88,8 +127,13 @@ if (typeof window === "undefined") {
     }
   }
 
+<<<<<<< HEAD
   process.on("SIGTERM", disconnect);
   process.on("SIGINT", disconnect);
+=======
+  process.on('SIGTERM', disconnect);
+  process.on('SIGINT', disconnect);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }
 
 export default prisma;

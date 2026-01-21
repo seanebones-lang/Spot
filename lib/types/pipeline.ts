@@ -116,14 +116,22 @@ export interface AnalyserNode {
  */
 export interface PipelineHealthStatus {
   component: string;
+<<<<<<< HEAD
   status: "healthy" | "degraded" | "unhealthy";
+=======
+  status: 'healthy' | 'degraded' | 'unhealthy';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   latency?: number;
   error?: string;
   timestamp: number;
 }
 
 export interface SystemHealthReport {
+<<<<<<< HEAD
   overall: "healthy" | "degraded" | "unhealthy";
+=======
+  overall: 'healthy' | 'degraded' | 'unhealthy';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   components: PipelineHealthStatus[];
   timestamp: number;
 }

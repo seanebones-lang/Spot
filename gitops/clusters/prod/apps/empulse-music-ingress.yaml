@@ -17,6 +17,7 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
+<<<<<<< HEAD
     - hosts:
         - music.empulse.com
         - www.music.empulse.com
@@ -42,3 +43,30 @@ spec:
                 name: empulse-music
                 port:
                   number: 80
+=======
+  - hosts:
+    - music.empulse.com
+    - www.music.empulse.com
+    secretName: empulse-music-tls
+  rules:
+  - host: music.empulse.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: empulse-music
+            port:
+              number: 80
+  - host: www.music.empulse.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: empulse-music
+            port:
+              number: 80
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e

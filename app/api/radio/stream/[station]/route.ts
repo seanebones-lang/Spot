@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "child_process";
 import { promisify } from "util";
@@ -5,6 +6,14 @@ import { exec } from "child_process";
 import { logger, generateCorrelationId } from "@/lib/logger";
 import { withTimeout } from "@/lib/timeout";
 import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { spawn } from 'child_process';
+import { promisify } from 'util';
+import { exec } from 'child_process';
+import { logger, generateCorrelationId } from '@/lib/logger';
+import { withTimeout } from '@/lib/timeout';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 const execAsync = promisify(exec);
 
@@ -13,6 +22,7 @@ const execAsync = promisify(exec);
  * Maps station IDs to YouTube video IDs and metadata
  */
 const STATIONS = {
+<<<<<<< HEAD
   "radio-los-santos": {
     videoId: "C3_FSXZtRe8",
     name: "Radio Los Santos",
@@ -48,6 +58,43 @@ const STATIONS = {
     name: "Blaine County Talk Radio",
     duration: 3600, // 1 hour
     genre: "Talk/Conspiracy",
+=======
+  'radio-los-santos': {
+    videoId: 'C3_FSXZtRe8',
+    name: 'Radio Los Santos',
+    duration: 7200, // 2 hours in seconds
+    genre: 'Modern Hip-Hop',
+  },
+  'non-stop-pop': {
+    videoId: 'Fjp0wu3lEHk',
+    name: 'Non-Stop-Pop FM',
+    duration: 7200,
+    genre: 'Pop Hits',
+  },
+  'west-coast-classics': {
+    videoId: 'z0Wf3IuZnf0',
+    name: 'West Coast Classics',
+    duration: 7200,
+    genre: 'Old-School Rap',
+  },
+  'los-santos-rock-radio': {
+    videoId: 'fZPV-9GlM-c',
+    name: 'Los Santos Rock Radio',
+    duration: 7200,
+    genre: 'Classic Rock',
+  },
+  'blonded-los-santos': {
+    videoId: '-tVumJBaTWY',
+    name: 'blonded Los Santos 97.8 FM',
+    duration: 5400, // 1.5 hours
+    genre: 'R&B/Eclectic',
+  },
+  'blaine-county-talk': {
+    videoId: 'HS1IG2uy1VE',
+    name: 'Blaine County Talk Radio',
+    duration: 3600, // 1 hour
+    genre: 'Talk/Conspiracy',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   },
 } as const;
 
@@ -58,11 +105,19 @@ type StationId = keyof typeof STATIONS;
  */
 async function checkYtDlpAvailable(): Promise<boolean> {
   try {
+<<<<<<< HEAD
     await execAsync("yt-dlp --version");
     return true;
   } catch {
     try {
       await execAsync("youtube-dl --version");
+=======
+    await execAsync('yt-dlp --version');
+    return true;
+  } catch {
+    try {
+      await execAsync('youtube-dl --version');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       return true;
     } catch {
       return false;
@@ -76,6 +131,7 @@ async function checkYtDlpAvailable(): Promise<boolean> {
  */
 export async function GET(
   request: NextRequest,
+<<<<<<< HEAD
   context: { params: Promise<{ station: string }> },
 ) {
   const correlationId = generateCorrelationId();
@@ -123,6 +179,34 @@ export async function GET(
     if (!stationConfig) {
       logger.warn("Station not found", { correlationId, stationId });
       return NextResponse.json({ error: "Station not found" }, { status: 404 });
+=======
+  context: { params: Promise<{ station: string }> }
+) {
+  const correlationId = generateCorrelationId();
+  const startTime = Date.now();
+  
+  try {
+    const params = await context.params;
+    const stationId = params.station as StationId;
+    
+    // Validate station ID against whitelist (prevent command injection)
+    if (!stationId || typeof stationId !== 'string') {
+      logger.warn('Invalid station ID format', { correlationId, stationId });
+      return NextResponse.json(
+        { error: 'Invalid station ID' },
+        { status: 400 }
+      );
+    }
+    
+    const stationConfig = STATIONS[stationId];
+
+    if (!stationConfig) {
+      logger.warn('Station not found', { correlationId, stationId });
+      return NextResponse.json(
+        { error: 'Station not found' },
+        { status: 404 }
+      );
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     }
 
     // Check if yt-dlp is available (with timeout)
@@ -131,16 +215,26 @@ export async function GET(
       ytDlpAvailable = await withTimeout(
         checkYtDlpAvailable(),
         5000, // 5 second timeout
+<<<<<<< HEAD
         "yt-dlp check timeout",
       );
     } catch (error) {
       logger.warn("yt-dlp availability check failed", { correlationId, error });
     }
 
+=======
+        'yt-dlp check timeout'
+      );
+    } catch (error) {
+      logger.warn('yt-dlp availability check failed', { correlationId, error });
+    }
+    
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     if (!ytDlpAvailable) {
       // Try to use python3 -m yt_dlp as fallback (common in Docker/container environments)
       try {
         await withTimeout(
+<<<<<<< HEAD
           execAsync("python3 -m yt_dlp --version"),
           5000,
           "Python yt-dlp check timeout",
@@ -155,12 +249,28 @@ export async function GET(
             hint: "Install with: brew install yt-dlp (macOS) or pip install yt-dlp",
           },
           { status: 503 },
+=======
+          execAsync('python3 -m yt_dlp --version'),
+          5000,
+          'Python yt-dlp check timeout'
+        );
+        // If this works, we'll use python3 -m yt_dlp in the spawn command
+      } catch {
+        logger.error('yt-dlp not available', { correlationId });
+        return NextResponse.json(
+          { 
+            error: 'Streaming service unavailable. Please ensure yt-dlp is installed.',
+            hint: 'Install with: brew install yt-dlp (macOS) or pip install yt-dlp'
+          },
+          { status: 503 }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         );
       }
     }
 
     // Get start time from query params (for random mid-stream start)
     const searchParams = request.nextUrl.searchParams;
+<<<<<<< HEAD
     const startTimeParam = parseInt(searchParams.get("start") || "0", 10);
     const randomStart = searchParams.get("random") === "true";
 
@@ -169,6 +279,16 @@ export async function GET(
 
     // Calculate actual start time
     const actualStart = randomStart
+=======
+    const startTimeParam = parseInt(searchParams.get('start') || '0', 10);
+    const randomStart = searchParams.get('random') === 'true';
+    
+    // Validate and sanitize start time
+    const startTime = isNaN(startTimeParam) ? 0 : Math.max(0, startTimeParam);
+    
+    // Calculate actual start time
+    const actualStart = randomStart 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       ? Math.floor(Math.random() * stationConfig.duration)
       : Math.max(0, Math.min(startTime, stationConfig.duration - 60)); // Ensure we don't start too close to end
 
@@ -178,6 +298,7 @@ export async function GET(
     // Format: bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio
     // We'll pipe directly to response for streaming
     // Try multiple methods to find yt-dlp
+<<<<<<< HEAD
     let ytDlpCommand = "yt-dlp";
     let args: string[] = [];
 
@@ -211,6 +332,35 @@ export async function GET(
       "30", // 30 second socket timeout
       "-o",
       "-", // Output to stdout
+=======
+    let ytDlpCommand = 'yt-dlp';
+    let args: string[] = [];
+    
+    // Check if we can use python3 -m yt_dlp (common in Docker)
+    try {
+      await execAsync('python3 -m yt_dlp --version');
+      ytDlpCommand = 'python3';
+      args = ['-m', 'yt_dlp'];
+    } catch {
+      // Fall back to direct yt-dlp command
+      ytDlpCommand = process.platform === 'win32' ? 'yt-dlp.exe' : 'yt-dlp';
+    }
+    
+    // Build yt-dlp command for audio-only streaming
+    // Sanitize videoId to prevent command injection
+    const sanitizedVideoId = stationConfig.videoId.replace(/[^a-zA-Z0-9_-]/g, '');
+    const sanitizedYoutubeUrl = `https://www.youtube.com/watch?v=${sanitizedVideoId}`;
+    
+    args = [
+      ...args,
+      '-f', 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio/best',
+      '--no-playlist',
+      '--no-warnings',
+      '--quiet',
+      '--no-check-certificate',
+      '--socket-timeout', '30', // 30 second socket timeout
+      '-o', '-', // Output to stdout
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       sanitizedYoutubeUrl,
     ];
 
@@ -218,22 +368,34 @@ export async function GET(
     // Set process timeout (kill after 5 minutes of inactivity)
     const PROCESS_TIMEOUT = 5 * 60 * 1000; // 5 minutes
     let processTimeout: NodeJS.Timeout;
+<<<<<<< HEAD
 
     const ytDlpProcess = spawn(ytDlpCommand, args, {
       stdio: ["ignore", "pipe", "pipe"],
+=======
+    
+    const ytDlpProcess = spawn(ytDlpCommand, args, {
+      stdio: ['ignore', 'pipe', 'pipe'],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     });
 
     // Reset timeout on data
     const resetTimeout = () => {
       if (processTimeout) clearTimeout(processTimeout);
       processTimeout = setTimeout(() => {
+<<<<<<< HEAD
         logger.warn("yt-dlp process timeout", { correlationId, stationId });
         ytDlpProcess.kill("SIGTERM");
+=======
+        logger.warn('yt-dlp process timeout', { correlationId, stationId });
+        ytDlpProcess.kill('SIGTERM');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       }, PROCESS_TIMEOUT);
     };
     resetTimeout();
 
     // Handle errors
+<<<<<<< HEAD
     ytDlpProcess.stderr?.on("data", (data) => {
       resetTimeout();
       const error = data.toString();
@@ -249,6 +411,20 @@ export async function GET(
         correlationId,
         stationId,
       });
+=======
+    ytDlpProcess.stderr?.on('data', (data) => {
+      resetTimeout();
+      const error = data.toString();
+      // Filter out non-critical warnings
+      if (!error.includes('WARNING') && !error.includes('DeprecationWarning')) {
+        logger.warn('yt-dlp stderr', { correlationId, error });
+      }
+    });
+
+    ytDlpProcess.on('error', (error) => {
+      clearTimeout(processTimeout);
+      logger.error('Failed to spawn yt-dlp', error, { correlationId, stationId });
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     });
 
     // Create a response stream
@@ -257,23 +433,37 @@ export async function GET(
         // If we need to seek, we'll need to use ffmpeg to handle the seek
         // For now, we'll stream from the beginning and let the client handle seeking
         // In a production setup, you'd pipe through ffmpeg: ffmpeg -ss ${start} -i pipe:0 -f mp3 pipe:1
+<<<<<<< HEAD
 
         ytDlpProcess.stdout?.on("data", (chunk) => {
+=======
+        
+        ytDlpProcess.stdout?.on('data', (chunk) => {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           resetTimeout();
           try {
             controller.enqueue(new Uint8Array(chunk));
           } catch (error) {
             clearTimeout(processTimeout);
+<<<<<<< HEAD
             logger.error("Stream error", error, { correlationId });
+=======
+            logger.error('Stream error', error, { correlationId });
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             controller.error(error);
           }
         });
 
+<<<<<<< HEAD
         ytDlpProcess.stdout?.on("end", () => {
+=======
+        ytDlpProcess.stdout?.on('end', () => {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           clearTimeout(processTimeout);
           controller.close();
         });
 
+<<<<<<< HEAD
         ytDlpProcess.on("close", (code) => {
           clearTimeout(processTimeout);
           if (code !== 0 && code !== null) {
@@ -281,6 +471,13 @@ export async function GET(
             controller.error(
               new Error(`Stream process exited with code ${code}`),
             );
+=======
+        ytDlpProcess.on('close', (code) => {
+          clearTimeout(processTimeout);
+          if (code !== 0 && code !== null) {
+            logger.warn('yt-dlp process exited', { correlationId, code });
+            controller.error(new Error(`Stream process exited with code ${code}`));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           } else {
             controller.close();
           }
@@ -288,13 +485,19 @@ export async function GET(
       },
       cancel() {
         clearTimeout(processTimeout);
+<<<<<<< HEAD
         ytDlpProcess.kill("SIGTERM");
         logger.info("Stream cancelled", { correlationId, stationId });
+=======
+        ytDlpProcess.kill('SIGTERM');
+        logger.info('Stream cancelled', { correlationId, stationId });
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       },
     });
 
     // Set appropriate headers for audio streaming
     const headers = new Headers();
+<<<<<<< HEAD
     headers.set("Content-Type", "audio/mpeg");
     headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
     headers.set("Pragma", "no-cache");
@@ -309,10 +512,23 @@ export async function GET(
       duration: Date.now() - startTime,
     });
 
+=======
+    headers.set('Content-Type', 'audio/mpeg');
+    headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    headers.set('Pragma', 'no-cache');
+    headers.set('Expires', '0');
+    headers.set('Accept-Ranges', 'bytes');
+    // CORS is handled by middleware, but set headers for streaming
+    // Note: CORS validation happens in middleware.ts
+
+    logger.info('Radio stream started', { correlationId, stationId, duration: Date.now() - startTime });
+    
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return new NextResponse(stream, {
       status: 200,
       headers,
     });
+<<<<<<< HEAD
   } catch (error) {
     const duration = Date.now() - startTime;
     logger.error("Radio stream error", error, { correlationId, duration });
@@ -325,6 +541,15 @@ export async function GET(
             : undefined,
       },
       { status: 500 },
+=======
+
+  } catch (error) {
+    const duration = Date.now() - startTime;
+    logger.error('Radio stream error', error, { correlationId, duration });
+    return NextResponse.json(
+      { error: 'Failed to start stream', details: process.env.NODE_ENV === 'development' && error instanceof Error ? error.message : undefined },
+      { status: 500 }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     );
   }
 }
@@ -333,6 +558,7 @@ export async function GET(
  * Handle OPTIONS for CORS preflight
  */
 export async function OPTIONS(request: NextRequest) {
+<<<<<<< HEAD
   const origin = request.headers.get("origin");
   return new NextResponse(null, {
     status: 200,
@@ -342,6 +568,17 @@ export async function OPTIONS(request: NextRequest) {
       "Access-Control-Allow-Headers": "Content-Type, Range",
       "Access-Control-Expose-Headers": "Content-Length, Content-Range",
       "Access-Control-Allow-Credentials": "true",
+=======
+  const origin = request.headers.get('origin');
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': origin || '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Range',
+      'Access-Control-Expose-Headers': 'Content-Length, Content-Range',
+      'Access-Control-Allow-Credentials': 'true',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
   });
 }

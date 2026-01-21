@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState } from "react";
 import { usePlayerStore } from "@/stores/playerStore";
 import { cn } from "@/lib/utils";
+=======
+'use client';
+
+import { useState } from 'react';
+import { usePlayerStore } from '@/stores/playerStore';
+import { cn } from '@/lib/utils';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 export default function PlaybackSettingsPage() {
   const {
@@ -17,6 +25,7 @@ export default function PlaybackSettingsPage() {
   } = usePlayerStore();
 
   return (
+<<<<<<< HEAD
     <div
       className="min-h-screen bg-spotify-dark text-white p-8"
       style={{
@@ -34,10 +43,30 @@ export default function PlaybackSettingsPage() {
           fontWeight: 700,
           color: "#FFFFFF",
           marginBottom: "32px",
+=======
+    <div 
+      className="min-h-screen bg-spotify-dark text-white p-8"
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#121212',
+        padding: '32px',
+        color: '#FFFFFF'
+      }}
+    >
+      <h1 
+        className="text-4xl font-bold mb-8"
+        style={{
+          fontSize: '32px',
+          lineHeight: '36px',
+          fontWeight: 700,
+          color: '#FFFFFF',
+          marginBottom: '32px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         }}
       >
         Playback
       </h1>
+<<<<<<< HEAD
       <div
         className="max-w-2xl space-y-6"
         style={{
@@ -62,10 +91,37 @@ export default function PlaybackSettingsPage() {
               fontWeight: 700,
               color: "#FFFFFF",
               marginBottom: "16px",
+=======
+      <div 
+        className="max-w-2xl space-y-6"
+        style={{
+          maxWidth: '672px',
+          gap: '24px'
+        }}
+      >
+        {/* Audio Quality - Exact Spotify Style */}
+        <div 
+          className="bg-spotify-light-gray rounded-lg p-6"
+          style={{
+            backgroundColor: '#181818',
+            borderRadius: '8px',
+            padding: '24px'
+          }}
+        >
+          <h2 
+            className="text-xl font-bold mb-4"
+            style={{
+              fontSize: '20px',
+              lineHeight: '28px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              marginBottom: '16px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             Audio Quality
           </h2>
+<<<<<<< HEAD
           <select
             className="w-full bg-spotify-dark-gray text-white px-4 py-2 rounded"
             style={{
@@ -112,10 +168,52 @@ export default function PlaybackSettingsPage() {
           >
             Higher quality uses more data. Lossless requires Premium
             subscription.
+=======
+          <select 
+            className="w-full bg-spotify-dark-gray text-white px-4 py-2 rounded"
+            style={{
+              width: '100%',
+              backgroundColor: '#282828',
+              color: '#FFFFFF',
+              padding: '12px 16px',
+              borderRadius: '4px',
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 400,
+              border: '1px solid transparent',
+              fontFamily: 'inherit',
+              cursor: 'pointer',
+              transition: 'border-color 200ms ease-out'
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = '#7209B7';
+              e.currentTarget.style.borderWidth = '2px';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.borderWidth = '1px';
+            }}
+          >
+            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>Normal (160 kbps)</option>
+            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>High (320 kbps)</option>
+            <option style={{ backgroundColor: '#282828', color: '#FFFFFF' }}>Very High (Lossless)</option>
+          </select>
+          <p 
+            className="text-sm text-spotify-text-gray mt-2"
+            style={{
+              fontSize: '13px',
+              lineHeight: '16px',
+              color: '#B3B3B3',
+              marginTop: '8px'
+            }}
+          >
+            Higher quality uses more data. Lossless requires Premium subscription.
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </p>
         </div>
 
         {/* Crossfade - Exact Spotify Style */}
+<<<<<<< HEAD
         <div
           className="bg-spotify-light-gray rounded-lg p-6"
           style={{
@@ -143,10 +241,40 @@ export default function PlaybackSettingsPage() {
                   fontWeight: 700,
                   color: "#FFFFFF",
                   marginBottom: "4px",
+=======
+        <div 
+          className="bg-spotify-light-gray rounded-lg p-6"
+          style={{
+            backgroundColor: '#181818',
+            borderRadius: '8px',
+            padding: '24px'
+          }}
+        >
+          <div 
+            className="flex items-center justify-between mb-4"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '16px',
+              gap: '16px'
+            }}
+          >
+            <div>
+              <h2 
+                className="text-xl font-bold"
+                style={{
+                  fontSize: '20px',
+                  lineHeight: '28px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 Crossfade
               </h2>
+<<<<<<< HEAD
               <p
                 className="text-sm text-spotify-text-gray mt-1"
                 style={{
@@ -158,12 +286,25 @@ export default function PlaybackSettingsPage() {
               >
                 Overlap the end of the current song with the beginning of the
                 next one
+=======
+              <p 
+                className="text-sm text-spotify-text-gray mt-1"
+                style={{
+                  fontSize: '13px',
+                  lineHeight: '16px',
+                  color: '#B3B3B3',
+                  marginTop: '4px'
+                }}
+              >
+                Overlap the end of the current song with the beginning of the next one
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               </p>
             </div>
             <button
               onClick={() => setCrossfade(!crossfade)}
               className={cn(
                 "w-12 h-6 rounded-full transition-colors relative cursor-pointer",
+<<<<<<< HEAD
                 crossfade ? "bg-spotify-green" : "bg-spotify-text-gray",
               )}
               style={{
@@ -191,12 +332,48 @@ export default function PlaybackSettingsPage() {
                   top: "2px",
                   transform: crossfade ? "translateX(24px)" : "translateX(2px)",
                   transition: "transform 200ms ease-out",
+=======
+                crossfade ? "bg-spotify-green" : "bg-spotify-text-gray"
+              )}
+              style={{
+                width: '48px',
+                height: '24px',
+                borderRadius: '12px',
+                backgroundColor: crossfade ? '#7209B7' : '#B3B3B3',
+                position: 'relative',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 200ms ease-out'
+              }}
+            >
+              <div 
+                className={cn(
+                  "w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform",
+                  crossfade ? "translate-x-6" : "translate-x-0.5"
+                )}
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '50%',
+                  position: 'absolute',
+                  top: '2px',
+                  transform: crossfade ? 'translateX(24px)' : 'translateX(2px)',
+                  transition: 'transform 200ms ease-out'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               />
             </button>
           </div>
           {crossfade && (
+<<<<<<< HEAD
             <div className="mt-4" style={{ marginTop: "16px" }}>
+=======
+            <div 
+              className="mt-4"
+              style={{ marginTop: '16px' }}
+            >
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               <input
                 type="range"
                 min="0"
@@ -205,6 +382,7 @@ export default function PlaybackSettingsPage() {
                 onChange={(e) => setCrossfadeDuration(Number(e.target.value))}
                 className="w-full"
                 style={{
+<<<<<<< HEAD
                   width: "100%",
                   height: "8px",
                   backgroundColor: "#282828",
@@ -224,6 +402,27 @@ export default function PlaybackSettingsPage() {
                   lineHeight: "16px",
                   color: "#B3B3B3",
                   marginTop: "8px",
+=======
+                  width: '100%',
+                  height: '8px',
+                  backgroundColor: '#282828',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  WebkitAppearance: 'none',
+                  appearance: 'none',
+                  background: `linear-gradient(to right, #7209B7 0%, #7209B7 ${(crossfadeDuration / 12) * 100}%, #282828 ${(crossfadeDuration / 12) * 100}%, #282828 100%)`
+                }}
+              />
+              <div 
+                className="flex justify-between text-xs text-spotify-text-gray mt-2"
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  fontSize: '11px',
+                  lineHeight: '16px',
+                  color: '#B3B3B3',
+                  marginTop: '8px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 <span>0s</span>
@@ -235,6 +434,7 @@ export default function PlaybackSettingsPage() {
         </div>
 
         {/* Gapless Playback - Exact Spotify Style */}
+<<<<<<< HEAD
         <div
           className="bg-spotify-light-gray rounded-lg p-6"
           style={{
@@ -261,10 +461,39 @@ export default function PlaybackSettingsPage() {
                   fontWeight: 700,
                   color: "#FFFFFF",
                   marginBottom: "4px",
+=======
+        <div 
+          className="bg-spotify-light-gray rounded-lg p-6"
+          style={{
+            backgroundColor: '#181818',
+            borderRadius: '8px',
+            padding: '24px'
+          }}
+        >
+          <div 
+            className="flex items-center justify-between"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '16px'
+            }}
+          >
+            <div>
+              <h2 
+                className="text-xl font-bold"
+                style={{
+                  fontSize: '20px',
+                  lineHeight: '28px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 Gapless Playback
               </h2>
+<<<<<<< HEAD
               <p
                 className="text-sm text-spotify-text-gray mt-1"
                 style={{
@@ -272,6 +501,15 @@ export default function PlaybackSettingsPage() {
                   lineHeight: "16px",
                   color: "#B3B3B3",
                   marginTop: "4px",
+=======
+              <p 
+                className="text-sm text-spotify-text-gray mt-1"
+                style={{
+                  fontSize: '13px',
+                  lineHeight: '16px',
+                  color: '#B3B3B3',
+                  marginTop: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 Automatically continue playing songs without gaps
@@ -281,6 +519,7 @@ export default function PlaybackSettingsPage() {
               onClick={() => setGaplessPlayback(!gaplessPlayback)}
               className={cn(
                 "w-12 h-6 rounded-full transition-colors relative cursor-pointer",
+<<<<<<< HEAD
                 gaplessPlayback ? "bg-spotify-green" : "bg-spotify-text-gray",
               )}
               style={{
@@ -310,6 +549,35 @@ export default function PlaybackSettingsPage() {
                     ? "translateX(24px)"
                     : "translateX(2px)",
                   transition: "transform 200ms ease-out",
+=======
+                gaplessPlayback ? "bg-spotify-green" : "bg-spotify-text-gray"
+              )}
+              style={{
+                width: '48px',
+                height: '24px',
+                borderRadius: '12px',
+                backgroundColor: gaplessPlayback ? '#7209B7' : '#B3B3B3',
+                position: 'relative',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 200ms ease-out'
+              }}
+            >
+              <div 
+                className={cn(
+                  "w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform",
+                  gaplessPlayback ? "translate-x-6" : "translate-x-0.5"
+                )}
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '50%',
+                  position: 'absolute',
+                  top: '2px',
+                  transform: gaplessPlayback ? 'translateX(24px)' : 'translateX(2px)',
+                  transition: 'transform 200ms ease-out'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               />
             </button>
@@ -317,6 +585,7 @@ export default function PlaybackSettingsPage() {
         </div>
 
         {/* Normalize Volume - Exact Spotify Style */}
+<<<<<<< HEAD
         <div
           className="bg-spotify-light-gray rounded-lg p-6"
           style={{
@@ -343,10 +612,39 @@ export default function PlaybackSettingsPage() {
                   fontWeight: 700,
                   color: "#FFFFFF",
                   marginBottom: "4px",
+=======
+        <div 
+          className="bg-spotify-light-gray rounded-lg p-6"
+          style={{
+            backgroundColor: '#181818',
+            borderRadius: '8px',
+            padding: '24px'
+          }}
+        >
+          <div 
+            className="flex items-center justify-between"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '16px'
+            }}
+          >
+            <div>
+              <h2 
+                className="text-xl font-bold"
+                style={{
+                  fontSize: '20px',
+                  lineHeight: '28px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 Normalize Volume
               </h2>
+<<<<<<< HEAD
               <p
                 className="text-sm text-spotify-text-gray mt-1"
                 style={{
@@ -354,6 +652,15 @@ export default function PlaybackSettingsPage() {
                   lineHeight: "16px",
                   color: "#B3B3B3",
                   marginTop: "4px",
+=======
+              <p 
+                className="text-sm text-spotify-text-gray mt-1"
+                style={{
+                  fontSize: '13px',
+                  lineHeight: '16px',
+                  color: '#B3B3B3',
+                  marginTop: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 Set the same volume level for all tracks
@@ -363,6 +670,7 @@ export default function PlaybackSettingsPage() {
               onClick={() => setNormalizeVolume(!normalizeVolume)}
               className={cn(
                 "w-12 h-6 rounded-full transition-colors relative cursor-pointer",
+<<<<<<< HEAD
                 normalizeVolume ? "bg-spotify-green" : "bg-spotify-text-gray",
               )}
               style={{
@@ -392,6 +700,35 @@ export default function PlaybackSettingsPage() {
                     ? "translateX(24px)"
                     : "translateX(2px)",
                   transition: "transform 200ms ease-out",
+=======
+                normalizeVolume ? "bg-spotify-green" : "bg-spotify-text-gray"
+              )}
+              style={{
+                width: '48px',
+                height: '24px',
+                borderRadius: '12px',
+                backgroundColor: normalizeVolume ? '#7209B7' : '#B3B3B3',
+                position: 'relative',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 200ms ease-out'
+              }}
+            >
+              <div 
+                className={cn(
+                  "w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform",
+                  normalizeVolume ? "translate-x-6" : "translate-x-0.5"
+                )}
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '50%',
+                  position: 'absolute',
+                  top: '2px',
+                  transform: normalizeVolume ? 'translateX(24px)' : 'translateX(2px)',
+                  transition: 'transform 200ms ease-out'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               />
             </button>
@@ -399,6 +736,7 @@ export default function PlaybackSettingsPage() {
         </div>
 
         {/* Explicit Content - Exact Spotify Style */}
+<<<<<<< HEAD
         <div
           className="bg-spotify-light-gray rounded-lg p-6"
           style={{
@@ -425,10 +763,39 @@ export default function PlaybackSettingsPage() {
                   fontWeight: 700,
                   color: "#FFFFFF",
                   marginBottom: "4px",
+=======
+        <div 
+          className="bg-spotify-light-gray rounded-lg p-6"
+          style={{
+            backgroundColor: '#181818',
+            borderRadius: '8px',
+            padding: '24px'
+          }}
+        >
+          <div 
+            className="flex items-center justify-between"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '16px'
+            }}
+          >
+            <div>
+              <h2 
+                className="text-xl font-bold"
+                style={{
+                  fontSize: '20px',
+                  lineHeight: '28px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 Allow Explicit Content
               </h2>
+<<<<<<< HEAD
               <p
                 className="text-sm text-spotify-text-gray mt-1"
                 style={{
@@ -436,6 +803,15 @@ export default function PlaybackSettingsPage() {
                   lineHeight: "16px",
                   color: "#B3B3B3",
                   marginTop: "4px",
+=======
+              <p 
+                className="text-sm text-spotify-text-gray mt-1"
+                style={{
+                  fontSize: '13px',
+                  lineHeight: '16px',
+                  color: '#B3B3B3',
+                  marginTop: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 Play songs with explicit content warnings
@@ -443,6 +819,7 @@ export default function PlaybackSettingsPage() {
             </div>
             <button
               className={cn(
+<<<<<<< HEAD
                 "w-12 h-6 rounded-full transition-colors relative bg-spotify-green cursor-pointer",
               )}
               style={{
@@ -467,6 +844,32 @@ export default function PlaybackSettingsPage() {
                   top: "2px",
                   transform: "translateX(24px)",
                   transition: "transform 200ms ease-out",
+=======
+                "w-12 h-6 rounded-full transition-colors relative bg-spotify-green cursor-pointer"
+              )}
+              style={{
+                width: '48px',
+                height: '24px',
+                borderRadius: '12px',
+                backgroundColor: '#7209B7',
+                position: 'relative',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 200ms ease-out'
+              }}
+            >
+              <div 
+                className="w-5 h-5 bg-white rounded-full absolute top-0.5 translate-x-6 transition-transform"
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '50%',
+                  position: 'absolute',
+                  top: '2px',
+                  transform: 'translateX(24px)',
+                  transition: 'transform 200ms ease-out'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               />
             </button>

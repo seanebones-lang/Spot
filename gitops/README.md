@@ -117,7 +117,11 @@ kind: Deployment
 metadata:
   name: empulse-music
 spec:
+<<<<<<< HEAD
   replicas: 3 # 3 replicas (like nginx example)
+=======
+  replicas: 3                    # 3 replicas (like nginx example)
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   selector:
     matchLabels:
       app: empulse-music
@@ -127,6 +131,7 @@ spec:
         app: empulse-music
     spec:
       containers:
+<<<<<<< HEAD
         - name: empulse-music
           image: ghcr.io/nexteleven/empulse-music:latest
           ports:
@@ -135,6 +140,15 @@ spec:
 
 **Features:**
 
+=======
+      - name: empulse-music
+        image: ghcr.io/nexteleven/empulse-music:latest
+        ports:
+        - containerPort: 3000     # Next.js default port
+```
+
+**Features:**
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Flux reconciles every 5 minutes (per 2025 best practices)
 - Automatic scaling via Kustomize overlays for dev/staging/prod
 - Health checks with healthChecks in Kustomization
@@ -150,7 +164,10 @@ Separate infrastructure provisioning from application deployments:
 - **Flux**: Manages all Kubernetes application manifests
 
 **Quick Start:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 cd gitops/terraform
 terraform init
@@ -159,7 +176,10 @@ terraform apply
 ```
 
 **After cluster creation**, bootstrap Flux:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 flux bootstrap github \
   --owner=NextElevenDev \
@@ -191,7 +211,10 @@ jobs:
 ```
 
 **Workflow:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 1. **Build**: CI builds Docker image → pushes to GHCR
 2. **Update Git**: Actions updates deployment manifest with new image tag
 3. **Flux Reconciliation**: Flux detects change (within 5 minutes) → applies automatically
@@ -212,7 +235,10 @@ The GitHub Actions workflow (`.github/workflows/gitops-deploy.yml`) automates th
 5. **Zero-Downtime**: Rolling update ensures no service interruption
 
 **Intervals:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Flux GitRepository: Polls every **1 minute**
 - Flux Kustomization: Reconciles every **5 minutes** (updated per 2025 best practices)
 
@@ -251,7 +277,11 @@ Flux will automatically reconcile and rollback the deployment to the previous st
 ### Production Cluster (`clusters/prod/`)
 
 - **Replicas**: 3
+<<<<<<< HEAD
 - **Resources**:
+=======
+- **Resources**: 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   - Requests: 100m CPU, 256Mi memory
   - Limits: 500m CPU, 512Mi memory
 - **Ingress**: Configured with TLS (Let's Encrypt)
@@ -270,13 +300,19 @@ Following enterprise security standards for GitOps:
 ### 1. Branch Protection & Signed Commits
 
 **Mandatory in 2025 enterprise standards:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - ✅ Enable branch protection on `main` branch (require PR reviews)
 - ✅ **Git signing**: Use GPG or SSH keys for commits (mandatory for production)
 - ✅ Require status checks before merging
 
 **Setup Git signing:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 # GPG signing
 git config --global user.signingkey <GPG_KEY_ID>
@@ -305,14 +341,20 @@ sops secrets/prod/empulse-music-secrets.yaml
 ### 3. Policy as Code with OPA
 
 Integrate Open Policy Agent for policy enforcement:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Resource limits enforcement
 - Image registry whitelist
 - Namespace restrictions
 - Security context requirements
 
 **Setup** (example):
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/master/deploy/gatekeeper.yaml
 ```
@@ -355,7 +397,10 @@ watch flux get kustomizations
 **Complete monitoring setup** following GitOps observability principles:
 
 **Metrics Tracked:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - ✅ Flux reconciliation status (`flux_kustomization_condition`)
 - ✅ Sync duration (`flux_kustomization_reconcile_duration_seconds`)
 - ✅ Application health (deployment replicas, pod status)
@@ -363,7 +408,10 @@ watch flux get kustomizations
 - ✅ Error rates and crash loops
 
 **Quick Start:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 # Apply Prometheus configuration
 kubectl apply -f monitoring/prometheus-config.yaml
@@ -374,13 +422,19 @@ kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 ```
 
 **Grafana Dashboards:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Flux GitOps Dashboard (ID: 15584)
 - Kubernetes Cluster Monitoring (ID: 7249)
 - Custom EmPulse Music dashboard
 
 **Alerting Rules Included:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - FluxReconciliationFailed (critical)
 - DeploymentNotReady (warning)
 - PodCrashLooping (warning)
@@ -466,6 +520,7 @@ flux get kustomizations empulse-music -n flux-system --watch
 
 ## Compliance with GitOps Principles
 
+<<<<<<< HEAD
 | Principle                  | Implementation                               | Status      |
 | -------------------------- | -------------------------------------------- | ----------- |
 | **Declarative Configs**    | YAML manifests in Git                        | ✅ Complete |
@@ -476,6 +531,18 @@ flux get kustomizations empulse-music -n flux-system --watch
 | **Multi-Env**              | Prod + Staging with Kustomize                | ✅ Complete |
 | **CI/CD Integration**      | GitHub Actions with GitOps                   | ✅ Complete |
 | **Infrastructure as Code** | Terraform for AWS EKS                        | ✅ Complete |
+=======
+| Principle | Implementation | Status |
+|-----------|---------------|--------|
+| **Declarative Configs** | YAML manifests in Git | ✅ Complete |
+| **Pull-Based** | Flux polls Git every 1m, reconciles every 5m | ✅ Complete |
+| **Observability** | Prometheus + Grafana with Flux metrics | ✅ Complete |
+| **Rollbacks** | Git history + `git revert` | ✅ Complete |
+| **Security** | SOPS, signed commits, OPA-ready | ✅ Complete |
+| **Multi-Env** | Prod + Staging with Kustomize | ✅ Complete |
+| **CI/CD Integration** | GitHub Actions with GitOps | ✅ Complete |
+| **Infrastructure as Code** | Terraform for AWS EKS | ✅ Complete |
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 ## Recommendations for NextEleven
 
@@ -492,7 +559,10 @@ Based on 2025 GitOps best practices:
 ## Additional Resources
 
 ### Documentation Files
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `GITOPS_SETUP.md` - Detailed setup guide
 - `GITOPS_EXAMPLES_ALIGNMENT.md` - **NEW**: Alignment with three core GitOps examples (2025)
 - `IMPLEMENTATION_STATUS.md` - **NEW**: Implementation status and compliance checklist
@@ -502,7 +572,10 @@ Based on 2025 GitOps best practices:
 - `monitoring/README.md` - Prometheus/Grafana setup
 
 ### Example Files
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `.github/workflows/gitops-deploy.yml` - GitHub Actions CI/CD pipeline
 - `bootstrap/flux.yaml` - Flux bootstrap configuration (2025 best practices)
 - `monitoring/prometheus-config.yaml` - Complete Prometheus scraping config

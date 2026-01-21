@@ -4,7 +4,11 @@
   "name": "EmPulse Music Design Tokens",
   "source": "Spotify.com Reverse Engineering - January 16, 2026",
   "status": "draft",
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "colors": {
     "spotify": {
       "background": {
@@ -144,7 +148,11 @@
       }
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "typography": {
     "fontFamily": {
       "primary": {
@@ -278,6 +286,7 @@
       }
     }
   },
+<<<<<<< HEAD
 
   "spacing": {
     "scale": {
@@ -327,6 +336,21 @@
         "type": "dimension",
         "status": "needs-verification"
       }
+=======
+  
+  "spacing": {
+    "scale": {
+      "0": { "value": "0px", "type": "dimension" },
+      "1": { "value": "4px", "type": "dimension", "status": "needs-verification" },
+      "2": { "value": "8px", "type": "dimension", "status": "needs-verification" },
+      "3": { "value": "12px", "type": "dimension", "status": "needs-verification" },
+      "4": { "value": "16px", "type": "dimension", "status": "needs-verification" },
+      "5": { "value": "20px", "type": "dimension", "status": "needs-verification" },
+      "6": { "value": "24px", "type": "dimension", "status": "needs-verification" },
+      "8": { "value": "32px", "type": "dimension", "status": "needs-verification" },
+      "10": { "value": "40px", "type": "dimension", "status": "needs-verification" },
+      "12": { "value": "48px", "type": "dimension", "status": "needs-verification" }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "component": {
       "sidebar": {
@@ -359,7 +383,11 @@
       }
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "borderRadius": {
     "small": {
       "value": "4px",
@@ -394,7 +422,11 @@
       "status": "needs-extraction"
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "shadows": {
     "card": {
       "value": "0 4px 12px rgba(0, 0, 0, 0.25)",
@@ -418,7 +450,11 @@
       "note": "Used for card hover states - creates lift effect"
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "transitions": {
     "duration": {
       "fast": {
@@ -453,7 +489,11 @@
       }
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "buttons": {
     "variants": {
       "primary": {
@@ -605,7 +645,11 @@
       }
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "inputs": {
     "variants": {
       "default": {
@@ -839,7 +883,11 @@
       }
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "cards": {
     "variants": {
       "default": {
@@ -991,7 +1039,11 @@
       }
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "modals": {
     "sizes": {
       "small": {
@@ -1128,7 +1180,11 @@
       "status": "verified"
     }
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   "sidebar": {
     "resizable": {
       "divider": {

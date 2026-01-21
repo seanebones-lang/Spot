@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * Input Sanitization Utilities
  * Prevents XSS and injection attacks
  */
@@ -134,10 +135,47 @@ export function sanitizeJson<T>(input: unknown): T | null {
     return input as T;
   } catch {
     return null;
+=======
+ * XSS Sanitization Utility
+ * Prevents XSS attacks in user-generated content (journal entries, affirmations, etc.)
+ * 
+ * Note: For production, use DOMPurify library for comprehensive sanitization
+ * This is a basic implementation for common XSS vectors
+ */
+
+/**
+ * Basic HTML sanitization - removes script tags and dangerous attributes
+ * For production, use: npm install dompurify @types/dompurify
+ */
+export function sanitizeHTML(html: string): string {
+  if (typeof window === 'undefined') {
+    // Server-side: basic string replacement
+    return html
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/javascript:/gi, '')
+      .replace(/on\w+\s*=/gi, '');
+  }
+
+  // Client-side: use DOMPurify if available, otherwise basic sanitization
+  try {
+    // Try to use DOMPurify if installed
+    const DOMPurify = require('dompurify');
+    return DOMPurify.sanitize(html, {
+      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+      ALLOWED_ATTR: [],
+    });
+  } catch (e) {
+    // Fallback to basic sanitization
+    return html
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/javascript:/gi, '')
+      .replace(/on\w+\s*=/gi, '');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 }
 
 /**
+<<<<<<< HEAD
  * Validate and sanitize URL
  */
 export function isValidUrl(url: string): boolean {
@@ -169,4 +207,38 @@ export function sanitizeObjectKeys<T extends Record<string, any>>(obj: T): T {
     }
   }
   return sanitized;
+=======
+ * Sanitize plain text - escapes HTML entities
+ */
+export function sanitizeText(text: string): string {
+  if (typeof text !== 'string') {
+    return '';
+  }
+
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+/**
+ * Sanitize user input for display
+ * Use this for journal entries, comments, etc.
+ */
+export function sanitizeUserInput(input: string, allowHTML: boolean = false): string {
+  if (!input || typeof input !== 'string') {
+    return '';
+  }
+
+  if (allowHTML) {
+    return sanitizeHTML(input);
+  }
+
+  return sanitizeText(input);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }

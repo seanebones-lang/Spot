@@ -47,7 +47,11 @@ export class MetricsCollector {
    * Get metrics for a specific stage
    */
   getStageMetrics(stage: string): PipelineMetrics[] {
+<<<<<<< HEAD
     return this.metrics.filter((m) => m.stage === stage);
+=======
+    return this.metrics.filter(m => m.stage === stage);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 
   /**
@@ -55,7 +59,11 @@ export class MetricsCollector {
    */
   getAggregateMetrics(stage?: string): AggregateMetrics[] {
     const stageMetrics = stage
+<<<<<<< HEAD
       ? this.metrics.filter((m) => m.stage === stage)
+=======
+      ? this.metrics.filter(m => m.stage === stage)
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       : this.metrics;
 
     const stageGroups = new Map<string, PipelineMetrics[]>();
@@ -69,16 +77,25 @@ export class MetricsCollector {
     const aggregates: AggregateMetrics[] = [];
 
     for (const [stageName, metrics] of stageGroups.entries()) {
+<<<<<<< HEAD
       const durations = metrics.map((m) => m.duration);
       const successCount = metrics.filter((m) => m.success).length;
+=======
+      const durations = metrics.map(m => m.duration);
+      const successCount = metrics.filter(m => m.success).length;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       const failureCount = metrics.length - successCount;
 
       aggregates.push({
         stage: stageName,
         count: metrics.length,
         totalDuration: durations.reduce((sum, d) => sum + d, 0),
+<<<<<<< HEAD
         avgDuration:
           durations.reduce((sum, d) => sum + d, 0) / durations.length,
+=======
+        avgDuration: durations.reduce((sum, d) => sum + d, 0) / durations.length,
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         minDuration: Math.min(...durations),
         maxDuration: Math.max(...durations),
         successCount,
@@ -133,7 +150,11 @@ export function getMetricsCollector(): MetricsCollector {
 /**
  * Record pipeline stage metric (convenience function)
  */
+<<<<<<< HEAD
 export function recordMetric(metric: Omit<PipelineMetrics, "timestamp">): void {
+=======
+export function recordMetric(metric: Omit<PipelineMetrics, 'timestamp'>): void {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   getMetricsCollector().record({
     ...metric,
     success: !metric.error,

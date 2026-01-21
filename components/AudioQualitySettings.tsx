@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState, useEffect, useCallback, memo } from "react";
 import { Settings, Info } from "lucide-react";
 import { audioPlayer } from "@/lib/player";
 import { cn } from "@/lib/utils";
+=======
+'use client';
+
+import { useState, useEffect, useCallback, memo } from 'react';
+import { Settings, Info } from 'lucide-react';
+import { audioPlayer } from '@/lib/player';
+import { cn } from '@/lib/utils';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface AudioQualitySettingsProps {
   className?: string;
@@ -14,10 +23,14 @@ interface AudioQualitySettingsProps {
  * Audio Quality Settings Panel
  * Configure sample rate, bit depth, and audio processing for audiophile playback
  */
+<<<<<<< HEAD
 function AudioQualitySettings({
   className,
   compact = false,
 }: AudioQualitySettingsProps) {
+=======
+function AudioQualitySettings({ className, compact = false }: AudioQualitySettingsProps) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const [isOpen, setIsOpen] = useState(false);
   const [sampleRate, setSampleRate] = useState<number>(44100);
   const [bitDepth, setBitDepth] = useState<number>(16);
@@ -37,7 +50,11 @@ function AudioQualitySettings({
     setSampleRate(rate);
     // Note: Sample rate change requires reinitializing audio context
     // This would need to be handled in the audio pipeline
+<<<<<<< HEAD
     console.log("Sample rate change requested:", rate);
+=======
+    console.log('Sample rate change requested:', rate);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }, []);
 
   const handleCompressorToggle = useCallback((enabled: boolean) => {
@@ -46,7 +63,11 @@ function AudioQualitySettings({
     const pipeline = audioPlayer.getAudioPipeline();
     if (pipeline) {
       // This would need a method to toggle compressor
+<<<<<<< HEAD
       console.log("Compressor toggle:", enabled);
+=======
+      console.log('Compressor toggle:', enabled);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     }
   }, []);
 
@@ -57,7 +78,11 @@ function AudioQualitySettings({
         className={cn(
           "p-2 rounded-lg hover:bg-white/10 transition-colors",
           "text-spotify-text-gray hover:text-white",
+<<<<<<< HEAD
           className,
+=======
+          className
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         )}
         aria-label="Audio quality settings"
         title="Audio Quality"
@@ -68,6 +93,7 @@ function AudioQualitySettings({
   }
 
   return (
+<<<<<<< HEAD
     <div
       className={cn(
         "bg-[#181818] rounded-lg border border-[#282828]",
@@ -75,6 +101,13 @@ function AudioQualitySettings({
         className,
       )}
     >
+=======
+    <div className={cn(
+      "bg-[#181818] rounded-lg border border-[#282828]",
+      compact ? "p-4" : "p-6",
+      className
+    )}>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-bold text-white flex items-center gap-2">
           <Settings size={20} />
@@ -93,12 +126,17 @@ function AudioQualitySettings({
       {/* Current Status */}
       <div className="mb-6 p-4 bg-[#282828] rounded-lg">
         <div className="flex items-center justify-between mb-2">
+<<<<<<< HEAD
           <span className="text-sm text-spotify-text-gray">
             Current Sample Rate
           </span>
           <span className="text-sm font-bold text-spotify-green">
             {sampleRate} Hz
           </span>
+=======
+          <span className="text-sm text-spotify-text-gray">Current Sample Rate</span>
+          <span className="text-sm font-bold text-spotify-green">{sampleRate} Hz</span>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-spotify-text-gray">Audio Format</span>
@@ -108,8 +146,13 @@ function AudioQualitySettings({
           <div className="flex items-start gap-2 text-xs text-spotify-text-gray">
             <Info size={14} className="mt-0.5 flex-shrink-0" />
             <span>
+<<<<<<< HEAD
               Higher sample rates provide better audio quality but require more
               processing power. FLAC files support up to 192kHz sample rate.
+=======
+              Higher sample rates provide better audio quality but require more processing power.
+              FLAC files support up to 192kHz sample rate.
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             </span>
           </div>
         </div>
@@ -148,13 +191,21 @@ function AudioQualitySettings({
             onClick={() => handleCompressorToggle(!enableCompressor)}
             className={cn(
               "relative w-12 h-6 rounded-full transition-colors",
+<<<<<<< HEAD
               enableCompressor ? "bg-spotify-green" : "bg-[#404040]",
+=======
+              enableCompressor ? "bg-spotify-green" : "bg-[#404040]"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             )}
           >
             <div
               className={cn(
                 "absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform",
+<<<<<<< HEAD
                 enableCompressor ? "translate-x-6" : "translate-x-0",
+=======
+                enableCompressor ? "translate-x-6" : "translate-x-0"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               )}
             />
           </button>
@@ -171,13 +222,21 @@ function AudioQualitySettings({
             onClick={() => setEnableNormalization(!enableNormalization)}
             className={cn(
               "relative w-12 h-6 rounded-full transition-colors",
+<<<<<<< HEAD
               enableNormalization ? "bg-spotify-green" : "bg-[#404040]",
+=======
+              enableNormalization ? "bg-spotify-green" : "bg-[#404040]"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             )}
           >
             <div
               className={cn(
                 "absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform",
+<<<<<<< HEAD
                 enableNormalization ? "translate-x-6" : "translate-x-0",
+=======
+                enableNormalization ? "translate-x-6" : "translate-x-0"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               )}
             />
           </button>
@@ -186,9 +245,13 @@ function AudioQualitySettings({
 
       {/* Quality Info */}
       <div className="mt-6 p-4 bg-gradient-to-r from-spotify-green/10 to-spotify-blue/10 rounded-lg border border-spotify-green/20">
+<<<<<<< HEAD
         <h4 className="text-sm font-bold text-white mb-2">
           Audiophile Features
         </h4>
+=======
+        <h4 className="text-sm font-bold text-white mb-2">Audiophile Features</h4>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         <ul className="text-xs text-spotify-text-gray space-y-1">
           <li>✓ FLAC Lossless Audio Support</li>
           <li>✓ High-Resolution Sample Rates (up to 192kHz)</li>

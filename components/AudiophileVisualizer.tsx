@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useEffect, useRef, useState, useCallback, memo } from "react";
@@ -12,6 +13,16 @@ import {
 import { audioPlayer } from "@/lib/player";
 import { cn } from "@/lib/utils";
 import { Settings, Palette, Zap } from "lucide-react";
+=======
+'use client';
+
+import { useEffect, useRef, useState, useCallback, memo } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { ShaderMaterial, Vector2, DataTexture, RedFormat, FloatType } from 'three';
+import { audioPlayer } from '@/lib/player';
+import { cn } from '@/lib/utils';
+import { Settings, Palette, Zap } from 'lucide-react';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 // Vertex Shader - Handles geometry and UV coordinates
 const vertexShader = `
@@ -263,6 +274,7 @@ void main() {
 `;
 
 // Shader Material Component
+<<<<<<< HEAD
 function VisualizerMaterial({
   audioData,
   sensitivity,
@@ -270,6 +282,15 @@ function VisualizerMaterial({
   colorSecondary,
   colorAccent,
   visualizerType,
+=======
+function VisualizerMaterial({ 
+  audioData, 
+  sensitivity, 
+  colorPrimary, 
+  colorSecondary, 
+  colorAccent,
+  visualizerType 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }: {
   audioData: Float32Array;
   sensitivity: number;
@@ -292,11 +313,19 @@ function VisualizerMaterial({
         audioData.length,
         1,
         RedFormat,
+<<<<<<< HEAD
         FloatType,
       );
       texture.needsUpdate = true;
       textureRef.current = texture;
 
+=======
+        FloatType
+      );
+      texture.needsUpdate = true;
+      textureRef.current = texture;
+      
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       // Update material uniform
       if (materialRef.current.uniforms) {
         materialRef.current.uniforms.uAudioData.value = texture;
@@ -308,12 +337,20 @@ function VisualizerMaterial({
   useFrame((state) => {
     if (materialRef.current) {
       timeRef.current += state.clock.getDelta();
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       if (materialRef.current.uniforms) {
         materialRef.current.uniforms.uTime.value = timeRef.current;
         materialRef.current.uniforms.uResolution.value = new Vector2(
           state.size.width,
+<<<<<<< HEAD
           state.size.height,
+=======
+          state.size.height
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         );
         if (textureRef.current) {
           materialRef.current.uniforms.uAudioData.value = textureRef.current;
@@ -357,6 +394,7 @@ function VisualizerPlane(props: any) {
   );
 }
 
+<<<<<<< HEAD
 export type VisualizerType =
   | "spectrum"
   | "waveform"
@@ -370,6 +408,10 @@ export type VisualizerColorScheme =
   | "ocean"
   | "neon"
   | "monochrome";
+=======
+export type VisualizerType = 'spectrum' | 'waveform' | 'circular' | 'bars' | 'particles';
+export type VisualizerColorScheme = 'spotify' | 'rainbow' | 'fire' | 'ocean' | 'neon' | 'monochrome';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface ColorScheme {
   primary: [number, number, number];
@@ -426,8 +468,13 @@ interface AudiophileVisualizerProps {
  * 4K-capable, GPU-accelerated audio visualization
  */
 function AudiophileVisualizer({
+<<<<<<< HEAD
   type = "spectrum",
   colorScheme = "spotify",
+=======
+  type = 'spectrum',
+  colorScheme = 'spotify',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   sensitivity = 0.7,
   className,
   width = 1920,
@@ -436,6 +483,7 @@ function AudiophileVisualizer({
   pixelRatio = 2, // 2x for retina/4K
 }: AudiophileVisualizerProps) {
   const [currentType, setCurrentType] = useState<VisualizerType>(type);
+<<<<<<< HEAD
   const [currentColorScheme, setCurrentColorScheme] =
     useState<VisualizerColorScheme>(colorScheme);
   const [currentSensitivity, setCurrentSensitivity] = useState(sensitivity);
@@ -453,6 +501,16 @@ function AudiophileVisualizer({
     "bars",
     "particles",
   ].indexOf(currentType);
+=======
+  const [currentColorScheme, setCurrentColorScheme] = useState<VisualizerColorScheme>(colorScheme);
+  const [currentSensitivity, setCurrentSensitivity] = useState(sensitivity);
+  const [showSettings, setShowSettings] = useState(false);
+  const [audioData, setAudioData] = useState<Float32Array>(new Float32Array(2048));
+  const animationFrameRef = useRef<number | null>(null);
+
+  const colors = COLOR_SCHEMES[currentColorScheme];
+  const visualizerTypeIndex = ['spectrum', 'waveform', 'circular', 'bars', 'particles'].indexOf(currentType);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
   // Get audio data and update texture - Enhanced for 4K with more samples
   const updateAudioData = useCallback(() => {
@@ -465,6 +523,7 @@ function AudiophileVisualizer({
     // Get both frequency and time-domain data for comprehensive visualization
     const frequencyData = pipeline.getFrequencyData();
     const timeDomainData = pipeline.getTimeDomainData();
+<<<<<<< HEAD
 
     if (frequencyData.length > 0 || timeDomainData.length > 0) {
       // Use up to 2048 samples for 4K resolution
@@ -476,11 +535,27 @@ function AudiophileVisualizer({
 
       const floatData = new Float32Array(maxSamples);
 
+=======
+    
+    if (frequencyData.length > 0 || timeDomainData.length > 0) {
+      // Use up to 2048 samples for 4K resolution
+      // Prefer time-domain data for waveform, frequency data for spectrum
+      const sourceData = currentType === 'waveform' ? timeDomainData : frequencyData;
+      const maxSamples = 2048;
+      const sampleCount = Math.min(sourceData.length, maxSamples);
+      
+      const floatData = new Float32Array(maxSamples);
+      
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       // Convert and normalize to 0-1 range
       for (let i = 0; i < sampleCount; i++) {
         floatData[i] = sourceData[i] / 255.0;
       }
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       // Interpolate/extend data if we have fewer samples than needed
       if (sampleCount < maxSamples && sampleCount > 0) {
         const step = sampleCount / maxSamples;
@@ -489,7 +564,11 @@ function AudiophileVisualizer({
           floatData[i] = floatData[sourceIndex];
         }
       }
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       setAudioData(floatData);
     }
   }, [currentType]);
@@ -500,9 +579,15 @@ function AudiophileVisualizer({
       updateAudioData();
       animationFrameRef.current = requestAnimationFrame(animate);
     };
+<<<<<<< HEAD
 
     animationFrameRef.current = requestAnimationFrame(animate);
 
+=======
+    
+    animationFrameRef.current = requestAnimationFrame(animate);
+    
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -517,10 +602,17 @@ function AudiophileVisualizer({
         gl={{
           antialias: true,
           alpha: false,
+<<<<<<< HEAD
           powerPreference: "high-performance",
         }}
         dpr={pixelRatio} // Device pixel ratio for 4K
         style={{ width: "100%", height: "100%" }}
+=======
+          powerPreference: 'high-performance',
+        }}
+        dpr={pixelRatio} // Device pixel ratio for 4K
+        style={{ width: '100%', height: '100%' }}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       >
         <VisualizerPlane>
           <VisualizerMaterial
@@ -547,19 +639,27 @@ function AudiophileVisualizer({
           {showSettings && (
             <div className="absolute top-12 right-2 bg-[#181818] border border-[#282828] rounded-lg p-4 min-w-[200px] z-10">
               <div className="mb-4">
+<<<<<<< HEAD
                 <label
                   htmlFor="visualizer-type"
                   className="block text-sm text-spotify-text-gray mb-2"
                 >
                   Type
                 </label>
+=======
+                <label htmlFor="visualizer-type" className="block text-sm text-spotify-text-gray mb-2">Type</label>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 <select
                   id="visualizer-type"
                   aria-label="Visualizer type"
                   value={currentType}
+<<<<<<< HEAD
                   onChange={(e) =>
                     setCurrentType(e.target.value as VisualizerType)
                   }
+=======
+                  onChange={(e) => setCurrentType(e.target.value as VisualizerType)}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   className="w-full bg-[#282828] text-white rounded px-3 py-2 border border-[#404040] focus:outline-none focus:border-spotify-green"
                 >
                   <option value="spectrum">Spectrum</option>
@@ -571,21 +671,29 @@ function AudiophileVisualizer({
               </div>
 
               <div className="mb-4">
+<<<<<<< HEAD
                 <label
                   htmlFor="visualizer-color-scheme"
                   className="block text-sm text-spotify-text-gray mb-2"
                 >
                   Color Scheme
                 </label>
+=======
+                <label htmlFor="visualizer-color-scheme" className="block text-sm text-spotify-text-gray mb-2">Color Scheme</label>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 <select
                   id="visualizer-color-scheme"
                   aria-label="Color scheme"
                   value={currentColorScheme}
+<<<<<<< HEAD
                   onChange={(e) =>
                     setCurrentColorScheme(
                       e.target.value as VisualizerColorScheme,
                     )
                   }
+=======
+                  onChange={(e) => setCurrentColorScheme(e.target.value as VisualizerColorScheme)}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   className="w-full bg-[#282828] text-white rounded px-3 py-2 border border-[#404040] focus:outline-none focus:border-spotify-green"
                 >
                   {Object.keys(COLOR_SCHEMES).map((scheme) => (
@@ -597,10 +705,14 @@ function AudiophileVisualizer({
               </div>
 
               <div>
+<<<<<<< HEAD
                 <label
                   htmlFor="visualizer-sensitivity"
                   className="block text-sm text-spotify-text-gray mb-2"
                 >
+=======
+                <label htmlFor="visualizer-sensitivity" className="block text-sm text-spotify-text-gray mb-2">
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   Sensitivity: {Math.round(currentSensitivity * 100)}%
                 </label>
                 <input
@@ -611,15 +723,20 @@ function AudiophileVisualizer({
                   max="1"
                   step="0.01"
                   value={currentSensitivity}
+<<<<<<< HEAD
                   onChange={(e) =>
                     setCurrentSensitivity(parseFloat(e.target.value))
                   }
+=======
+                  onChange={(e) => setCurrentSensitivity(parseFloat(e.target.value))}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   className="w-full"
                 />
               </div>
 
               <div className="mt-4 pt-4 border-t border-[#404040]">
                 <div className="text-xs text-spotify-text-gray">
+<<<<<<< HEAD
                   <div>
                     Resolution: {width}×{height}
                   </div>
@@ -627,6 +744,11 @@ function AudiophileVisualizer({
                   <div>
                     Effective: {width * pixelRatio}×{height * pixelRatio}
                   </div>
+=======
+                  <div>Resolution: {width}×{height}</div>
+                  <div>Pixel Ratio: {pixelRatio}x</div>
+                  <div>Effective: {width * pixelRatio}×{height * pixelRatio}</div>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 </div>
               </div>
             </div>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useEffect, useState } from "react";
@@ -23,16 +24,37 @@ const AudiophileVisualizer = dynamic(() => import("./AudiophileVisualizer"), {
     </div>
   ),
 });
+=======
+'use client';
+
+import { useEffect, useState } from 'react';
+import { X, Maximize2, Sliders, Music2 } from 'lucide-react';
+import { usePlayerStore } from '@/stores/playerStore';
+import { audioPlayer } from '@/lib/player';
+import PlayButton from './PlayButton';
+import ProgressBar from './ProgressBar';
+import VolumeControl from './VolumeControl';
+import AudioVisualizer from './AudioVisualizer';
+import AudiophileVisualizer from './AudiophileVisualizer';
+import Equalizer from './Equalizer';
+import AudioQualityBadge from './AudioQualityBadge';
+import { formatDuration } from '@/lib/utils';
+import { cn } from '@/lib/utils';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface FullScreenPlayerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+<<<<<<< HEAD
 export default function FullScreenPlayer({
   isOpen,
   onClose,
 }: FullScreenPlayerProps) {
+=======
+export default function FullScreenPlayer({ isOpen, onClose }: FullScreenPlayerProps) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const {
     currentTrack,
     isPlaying,
@@ -44,6 +66,7 @@ export default function FullScreenPlayer({
   } = usePlayerStore();
 
   const [showEQ, setShowEQ] = useState(false);
+<<<<<<< HEAD
   const [visualizerType, setVisualizerType] = useState<
     "spectrum" | "waveform" | "circular" | "bars" | "particles"
   >("spectrum");
@@ -59,6 +82,19 @@ export default function FullScreenPlayer({
     }
     return () => {
       document.body.style.overflow = "";
+=======
+  const [visualizerType, setVisualizerType] = useState<'spectrum' | 'waveform' | 'circular' | 'bars' | 'particles'>('spectrum');
+  const [visualizerColorScheme, setVisualizerColorScheme] = useState<'spotify' | 'rainbow' | 'fire' | 'ocean' | 'neon' | 'monochrome'>('spotify');
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     };
   }, [isOpen]);
 
@@ -85,18 +121,28 @@ export default function FullScreenPlayer({
           onClick={() => setShowEQ(!showEQ)}
           className={cn(
             "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+<<<<<<< HEAD
             showEQ
               ? "bg-spotify-green text-black"
               : "bg-white/10 text-white hover:bg-white/20",
+=======
+            showEQ 
+              ? "bg-spotify-green text-black" 
+              : "bg-white/10 text-white hover:bg-white/20"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           )}
         >
           <Sliders size={16} className="inline mr-2" />
           EQ
         </button>
         <div className="flex items-center gap-1 bg-white/10 rounded-lg p-1">
+<<<<<<< HEAD
           {(
             ["spectrum", "waveform", "circular", "bars", "particles"] as const
           ).map((mode) => (
+=======
+          {(['spectrum', 'waveform', 'circular', 'bars', 'particles'] as const).map((mode) => (
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             <button
               key={mode}
               onClick={() => setVisualizerType(mode)}
@@ -104,7 +150,11 @@ export default function FullScreenPlayer({
                 "px-3 py-1 rounded text-xs font-medium transition-colors",
                 visualizerType === mode
                   ? "bg-spotify-green text-black"
+<<<<<<< HEAD
                   : "text-white hover:bg-white/20",
+=======
+                  : "text-white hover:bg-white/20"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               )}
             >
               {mode.charAt(0).toUpperCase() + mode.slice(1)}
@@ -118,7 +168,11 @@ export default function FullScreenPlayer({
         {!showEQ && audioPipeline ? (
           // GLSL Shader Visualizer View (4K capable)
           <div className="w-full max-w-6xl h-full max-h-[600px]">
+<<<<<<< HEAD
             <AudiophileVisualizer
+=======
+            <AudiophileVisualizer 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               type={visualizerType}
               colorScheme={visualizerColorScheme}
               width={1920}
@@ -154,9 +208,13 @@ export default function FullScreenPlayer({
       {/* Track Info */}
       <div className="px-12 pb-8 text-center min-h-[200px]">
         <h2 className="text-4xl font-bold mb-2">{currentTrack.name}</h2>
+<<<<<<< HEAD
         <p className="text-xl text-spotify-text-gray mb-4">
           {currentTrack.artist}
         </p>
+=======
+        <p className="text-xl text-spotify-text-gray mb-4">{currentTrack.artist}</p>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
         {/* Progress Bar */}
         <div className="mb-6">
@@ -174,7 +232,14 @@ export default function FullScreenPlayer({
         {/* Controls */}
         <div className="flex items-center justify-center gap-6 mb-6">
           <div className="w-32">
+<<<<<<< HEAD
             <VolumeControl volume={volume} onVolumeChange={setVolume} />
+=======
+            <VolumeControl
+              volume={volume}
+              onVolumeChange={setVolume}
+            />
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </div>
           <PlayButton
             isPlaying={isPlaying}

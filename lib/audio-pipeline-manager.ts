@@ -1,19 +1,29 @@
 /**
  * Audio Pipeline Manager
  * Manages multiple audio pipeline instances for different contexts (stations, tracks, etc.)
+<<<<<<< HEAD
  *
+=======
+ * 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
  * Strategy:
  * - Single shared pipeline for regular tracks (default, efficient)
  * - Optional per-station pipelines for radio (if isolation needed)
  * - Automatic cleanup and resource management
  */
 
+<<<<<<< HEAD
 import { AudiophileAudioPipeline, getAudioPipeline } from "./audio-pipeline";
 
 export type PipelineContext =
   | "shared"
   | `station-${string}`
   | `track-${string}`;
+=======
+import { AudiophileAudioPipeline, getAudioPipeline } from './audio-pipeline';
+
+export type PipelineContext = 'shared' | `station-${string}` | `track-${string}`;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 class AudioPipelineManager {
   private pipelines: Map<PipelineContext, AudiophileAudioPipeline> = new Map();
@@ -26,9 +36,13 @@ class AudioPipelineManager {
    */
   setPerStationPipelines(enabled: boolean): void {
     this.usePerStationPipelines = enabled;
+<<<<<<< HEAD
     console.log(
       `📊 Per-station pipelines: ${enabled ? "enabled" : "disabled"}`,
     );
+=======
+    console.log(`📊 Per-station pipelines: ${enabled ? 'enabled' : 'disabled'}`);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 
   /**
@@ -36,6 +50,7 @@ class AudioPipelineManager {
    * @param context - Pipeline context identifier
    * @param createIfMissing - Create new pipeline if it doesn't exist
    */
+<<<<<<< HEAD
   getPipeline(
     context: PipelineContext = "shared",
     createIfMissing: boolean = true,
@@ -56,6 +71,25 @@ class AudioPipelineManager {
           this.pipelines.set("shared", getAudioPipeline());
         }
         return this.pipelines.get("shared")!;
+=======
+  getPipeline(context: PipelineContext = 'shared', createIfMissing: boolean = true): AudiophileAudioPipeline {
+    // For regular tracks, always use shared pipeline
+    if (context === 'shared' || context.startsWith('track-')) {
+      if (!this.pipelines.has('shared')) {
+        this.pipelines.set('shared', getAudioPipeline());
+      }
+      return this.pipelines.get('shared')!;
+    }
+
+    // For stations, check if per-station pipelines are enabled
+    if (context.startsWith('station-')) {
+      if (!this.usePerStationPipelines) {
+        // Use shared pipeline for stations too
+        if (!this.pipelines.has('shared')) {
+          this.pipelines.set('shared', getAudioPipeline());
+        }
+        return this.pipelines.get('shared')!;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       }
 
       // Use per-station pipeline
@@ -67,14 +101,22 @@ class AudioPipelineManager {
           console.log(`📻 Created pipeline for station: ${context}`);
         } else {
           // Fallback to shared if not creating
+<<<<<<< HEAD
           return this.getPipeline("shared", true);
+=======
+          return this.getPipeline('shared', true);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         }
       }
       return this.pipelines.get(context)!;
     }
 
     // Default to shared
+<<<<<<< HEAD
     return this.getPipeline("shared", createIfMissing);
+=======
+    return this.getPipeline('shared', createIfMissing);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 
   /**
@@ -108,9 +150,15 @@ class AudioPipelineManager {
    */
   async cleanupAllExceptShared(): Promise<void> {
     const contextsToCleanup: PipelineContext[] = [];
+<<<<<<< HEAD
 
     for (const context of this.pipelines.keys()) {
       if (context !== "shared") {
+=======
+    
+    for (const context of this.pipelines.keys()) {
+      if (context !== 'shared') {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         contextsToCleanup.push(context);
       }
     }
@@ -125,13 +173,21 @@ class AudioPipelineManager {
    */
   async cleanupAll(): Promise<void> {
     const cleanupPromises: Promise<void>[] = [];
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     for (const [context, pipeline] of this.pipelines.entries()) {
       cleanupPromises.push(
         pipeline.cleanup().then(() => {
           this.pipelines.delete(context);
           console.log(`🧹 Cleaned up pipeline: ${context}`);
+<<<<<<< HEAD
         }),
+=======
+        })
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
     }
 
@@ -180,5 +236,9 @@ export function getStationPipeline(stationId: string): AudiophileAudioPipeline {
  */
 export function getSharedPipeline(): AudiophileAudioPipeline {
   const manager = getAudioPipelineManager();
+<<<<<<< HEAD
   return manager.getPipeline("shared");
+=======
+  return manager.getPipeline('shared');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }

@@ -79,7 +79,10 @@ flux reconcile source git flux-system
 4. Or force immediate reconciliation: `flux reconcile kustomization flux-system --with-source`
 
 **Note**: With GitHub Actions CI/CD (`.github/workflows/gitops-deploy.yml`), deployments are automated:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Push to `main` → CI builds image → Updates Git manifest → Flux reconciles automatically
 
 ### Rollback
@@ -185,14 +188,20 @@ kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 ### 5. CI/CD Pipeline
 
 GitHub Actions workflow (`.github/workflows/gitops-deploy.yml`) is ready:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - ✅ Automated Docker builds
 - ✅ Staging deployment (automatic)
 - ✅ Production deployment (manual approval)
 - ✅ Slack notifications on failure
 
 **Configure GitHub Secrets**:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - `GITHUB_TOKEN` (automatically provided)
 - `SLACK_WEBHOOK_URL` (optional, for notifications)
 

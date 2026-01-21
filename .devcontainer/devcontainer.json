@@ -1,7 +1,11 @@
 {
   "name": "EmPulse Music - Next.js Development",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   // Features to add to the dev container
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},

@@ -10,10 +10,17 @@ metadata:
 spec:
   type: ClusterIP
   ports:
+<<<<<<< HEAD
     - port: 80
       targetPort: http
       protocol: TCP
       name: http
+=======
+  - port: 80
+    targetPort: http
+    protocol: TCP
+    name: http
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   selector:
     app: empulse-music
   sessionAffinity: ClientIP

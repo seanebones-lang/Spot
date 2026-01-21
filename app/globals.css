@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 :root {
+<<<<<<< HEAD
   --font-circular:
     "Circular", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+=======
+  --font-circular: 'Circular', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }
 
 * {
@@ -19,10 +23,16 @@ html {
 }
 
 body {
+<<<<<<< HEAD
   font-family:
     var(--font-circular), "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   background-color: #121212;
   color: #ffffff;
+=======
+  font-family: var(--font-circular), 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  background-color: #121212;
+  color: #FFFFFF;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -109,12 +119,20 @@ body {
     @apply bg-spotify-green text-white rounded-full px-6 py-2 font-bold hover:scale-105 transition-transform;
     will-change: transform;
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   .btn-secondary {
     @apply bg-transparent border border-white/30 text-white rounded-full px-6 py-2 font-bold hover:border-white transition-colors;
     will-change: border-color;
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   .card-hover {
     @apply transition-transform hover:scale-105 cursor-pointer;
     will-change: transform;

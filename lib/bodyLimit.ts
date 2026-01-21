@@ -12,14 +12,22 @@ const MAX_FORM_DATA_SIZE = 100 * 1024 * 1024; // 100MB (for file uploads)
 export function validateBodySize(
   contentLength: string | null,
   contentType: string | null,
+<<<<<<< HEAD
   maxSize: number = MAX_JSON_BODY_SIZE,
+=======
+  maxSize: number = MAX_JSON_BODY_SIZE
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ): { valid: boolean; error?: string } {
   if (!contentLength) {
     return { valid: true }; // No content length header, let it proceed
   }
 
   const size = parseInt(contentLength, 10);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   if (isNaN(size)) {
     return { valid: true }; // Invalid content length, let it proceed
   }
@@ -44,12 +52,20 @@ export function getMaxBodySize(contentType: string | null): number {
   }
 
   // Form data can be larger (for file uploads)
+<<<<<<< HEAD
   if (contentType.includes("multipart/form-data")) {
+=======
+  if (contentType.includes('multipart/form-data')) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return MAX_FORM_DATA_SIZE;
   }
 
   // JSON bodies are limited to 1MB
+<<<<<<< HEAD
   if (contentType.includes("application/json")) {
+=======
+  if (contentType.includes('application/json')) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return MAX_JSON_BODY_SIZE;
   }
 
@@ -59,12 +75,18 @@ export function getMaxBodySize(contentType: string | null): number {
 /**
  * Middleware helper to validate body size before parsing
  */
+<<<<<<< HEAD
 export function checkBodySize(request: Request): {
   valid: boolean;
   error?: string;
 } {
   const contentLength = request.headers.get("content-length");
   const contentType = request.headers.get("content-type");
+=======
+export function checkBodySize(request: Request): { valid: boolean; error?: string } {
+  const contentLength = request.headers.get('content-length');
+  const contentType = request.headers.get('content-type');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const maxSize = getMaxBodySize(contentType);
 
   return validateBodySize(contentLength, contentType, maxSize);

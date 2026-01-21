@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from "next/server";
 import { logger, generateCorrelationId } from "@/lib/logger";
 import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { logger, generateCorrelationId } from '@/lib/logger';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 /**
  * GTA V Radio Station Metadata
@@ -8,6 +13,7 @@ import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
  */
 const STATIONS = [
   {
+<<<<<<< HEAD
     id: "radio-los-santos",
     name: "Radio Los Santos",
     genre: "Modern Hip-Hop",
@@ -53,6 +59,53 @@ const STATIONS = [
     genre: "Talk/Conspiracy",
     description: "Pure talk, no music—callers, rants",
     videoId: "HS1IG2uy1VE",
+=======
+    id: 'radio-los-santos',
+    name: 'Radio Los Santos',
+    genre: 'Modern Hip-Hop',
+    description: 'FlyLo FM-style banter, ads like Ammu-Nation',
+    videoId: 'C3_FSXZtRe8',
+    duration: 7200,
+  },
+  {
+    id: 'non-stop-pop',
+    name: 'Non-Stop-Pop FM',
+    genre: 'Pop Hits',
+    description: 'Cara Delevingne DJ, ego-boost commercials',
+    videoId: 'Fjp0wu3lEHk',
+    duration: 7200,
+  },
+  {
+    id: 'west-coast-classics',
+    name: 'West Coast Classics',
+    genre: 'Old-School Rap',
+    description: 'DJ Pooh vibes, gangsta ads',
+    videoId: 'z0Wf3IuZnf0',
+    duration: 7200,
+  },
+  {
+    id: 'los-santos-rock-radio',
+    name: 'Los Santos Rock Radio',
+    genre: 'Classic Rock',
+    description: 'Kenny Loggins hosting, Pißwasser jingles',
+    videoId: 'fZPV-9GlM-c',
+    duration: 7200,
+  },
+  {
+    id: 'blonded-los-santos',
+    name: 'blonded Los Santos 97.8 FM',
+    genre: 'R&B/Eclectic',
+    description: 'Frank Ocean curated, chill ads',
+    videoId: '-tVumJBaTWY',
+    duration: 5400,
+  },
+  {
+    id: 'blaine-county-talk',
+    name: 'Blaine County Talk Radio',
+    genre: 'Talk/Conspiracy',
+    description: 'Pure talk, no music—callers, rants',
+    videoId: 'HS1IG2uy1VE',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     duration: 3600,
   },
 ];
@@ -64,6 +117,7 @@ const STATIONS = [
 export async function GET(request: NextRequest) {
   const correlationId = generateCorrelationId();
   const startTime = Date.now();
+<<<<<<< HEAD
 
   try {
     // Rate limiting
@@ -90,10 +144,15 @@ export async function GET(request: NextRequest) {
       );
     }
 
+=======
+  
+  try {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     const response = NextResponse.json({
       stations: STATIONS,
       count: STATIONS.length,
     });
+<<<<<<< HEAD
 
     // CORS is handled by middleware.ts
     const duration = Date.now() - startTime;
@@ -109,6 +168,20 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       { error: "Failed to retrieve stations" },
       { status: 500 },
+=======
+    
+    // CORS is handled by middleware.ts
+    const duration = Date.now() - startTime;
+    logger.info('Radio stations list requested', { correlationId, duration });
+    
+    return response;
+  } catch (error) {
+    const duration = Date.now() - startTime;
+    logger.error('Error getting radio stations', error, { correlationId, duration });
+    return NextResponse.json(
+      { error: 'Failed to retrieve stations' },
+      { status: 500 }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     );
   }
 }

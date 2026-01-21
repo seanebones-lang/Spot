@@ -7,6 +7,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-2",
     "duration": 210638,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-1.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -14,6 +15,19 @@
       "feelings": ["Nostalgic", "Stressed", "Insecure"],
       "vibe": 10,
       "genres": ["Electronic"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Nostalgic",
+        "Stressed",
+        "Insecure"
+      ],
+      "vibe": 10,
+      "genres": [
+        "Electronic"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -27,6 +41,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-3",
     "duration": 257468,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-2.mp3",
     "coverArt": "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=1000&h=1000&fit=crop&q=80",
     "moodTags": {
@@ -34,6 +49,18 @@
       "feelings": ["Stressed"],
       "vibe": 12,
       "genres": ["Funk", "Folk"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Stressed"
+      ],
+      "vibe": 12,
+      "genres": [
+        "Funk",
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -47,6 +74,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-4",
     "duration": 295621,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-3.mp3",
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -54,6 +82,17 @@
       "feelings": ["Overwhelmed"],
       "vibe": 10,
       "genres": ["Rock"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Overwhelmed"
+      ],
+      "vibe": 10,
+      "genres": [
+        "Rock"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -67,6 +106,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-5",
     "duration": 252094,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-4.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -74,6 +114,20 @@
       "feelings": ["Overwhelmed", "Tired", "Lonely"],
       "vibe": 33,
       "genres": ["Metal", "Pop"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Overwhelmed",
+        "Tired",
+        "Lonely"
+      ],
+      "vibe": 33,
+      "genres": [
+        "Metal",
+        "Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -87,6 +141,7 @@
     "album": "Evening Glow Album",
     "albumId": "album-6",
     "duration": 207570,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-5.mp3",
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -94,6 +149,19 @@
       "feelings": ["Stressed", "Overwhelmed", "Nostalgic"],
       "vibe": 30,
       "genres": ["Rock"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Stressed",
+        "Overwhelmed",
+        "Nostalgic"
+      ],
+      "vibe": 30,
+      "genres": [
+        "Rock"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -107,6 +175,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-7",
     "duration": 172556,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-6.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -114,6 +183,20 @@
       "feelings": ["Nostalgic", "Insecure", "Reflective"],
       "vibe": 27,
       "genres": ["Rock", "Indie"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Nostalgic",
+        "Insecure",
+        "Reflective"
+      ],
+      "vibe": 27,
+      "genres": [
+        "Rock",
+        "Indie"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -127,6 +210,7 @@
     "album": "Neon Signs Album",
     "albumId": "album-8",
     "duration": 158211,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-7.mp3",
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -134,6 +218,20 @@
       "feelings": ["Reflective", "Nostalgic", "Overwhelmed"],
       "vibe": 12,
       "genres": ["K-Pop", "Reggae"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Reflective",
+        "Nostalgic",
+        "Overwhelmed"
+      ],
+      "vibe": 12,
+      "genres": [
+        "K-Pop",
+        "Reggae"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -147,6 +245,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-9",
     "duration": 299734,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-8.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -154,6 +253,18 @@
       "feelings": ["Tired", "Lonely"],
       "vibe": 24,
       "genres": ["House"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Tired",
+        "Lonely"
+      ],
+      "vibe": 24,
+      "genres": [
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -167,6 +278,7 @@
     "album": "City Lights Album",
     "albumId": "album-10",
     "duration": 173270,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-9.mp3",
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -174,6 +286,20 @@
       "feelings": ["Insecure", "Overwhelmed", "Nostalgic"],
       "vibe": 16,
       "genres": ["Latin", "K-Pop"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Insecure",
+        "Overwhelmed",
+        "Nostalgic"
+      ],
+      "vibe": 16,
+      "genres": [
+        "Latin",
+        "K-Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -187,6 +313,7 @@
     "album": "Starlight Album",
     "albumId": "album-11",
     "duration": 184572,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-10.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -194,6 +321,19 @@
       "feelings": ["Lonely", "Stressed", "Frustrated"],
       "vibe": 11,
       "genres": ["Ambient"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Lonely",
+        "Stressed",
+        "Frustrated"
+      ],
+      "vibe": 11,
+      "genres": [
+        "Ambient"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -207,6 +347,7 @@
     "album": "Desert Highway Album",
     "albumId": "album-12",
     "duration": 229596,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-11.mp3",
     "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -214,6 +355,19 @@
       "feelings": ["Insecure", "Nostalgic", "Lonely"],
       "vibe": 31,
       "genres": ["Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Insecure",
+        "Nostalgic",
+        "Lonely"
+      ],
+      "vibe": 31,
+      "genres": [
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -227,6 +381,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-13",
     "duration": 176245,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-12.mp3",
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -234,6 +389,20 @@
       "feelings": ["Frustrated", "Stressed", "Reflective"],
       "vibe": 27,
       "genres": ["Disco", "Classical"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Frustrated",
+        "Stressed",
+        "Reflective"
+      ],
+      "vibe": 27,
+      "genres": [
+        "Disco",
+        "Classical"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -247,6 +416,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-14",
     "duration": 230495,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-13.mp3",
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -254,6 +424,18 @@
       "feelings": ["Insecure", "Tired"],
       "vibe": 30,
       "genres": ["Metal"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Insecure",
+        "Tired"
+      ],
+      "vibe": 30,
+      "genres": [
+        "Metal"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -267,6 +449,7 @@
     "album": "Mountain View Album",
     "albumId": "album-15",
     "duration": 242154,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-14.mp3",
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -274,6 +457,17 @@
       "feelings": ["Overwhelmed"],
       "vibe": 33,
       "genres": ["Disco"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Overwhelmed"
+      ],
+      "vibe": 33,
+      "genres": [
+        "Disco"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -287,6 +481,7 @@
     "album": "Desert Highway Album",
     "albumId": "album-16",
     "duration": 257857,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-15.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -294,6 +489,18 @@
       "feelings": ["Anxious"],
       "vibe": 10,
       "genres": ["Folk", "R&B"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Anxious"
+      ],
+      "vibe": 10,
+      "genres": [
+        "Folk",
+        "R&B"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -307,6 +514,7 @@
     "album": "City Lights Album",
     "albumId": "album-17",
     "duration": 251297,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-16.mp3",
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -314,6 +522,18 @@
       "feelings": ["Stressed", "Tired"],
       "vibe": 22,
       "genres": ["World"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Stressed",
+        "Tired"
+      ],
+      "vibe": 22,
+      "genres": [
+        "World"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -327,6 +547,7 @@
     "album": "Evening Glow Album",
     "albumId": "album-18",
     "duration": 226052,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-17.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -334,6 +555,19 @@
       "feelings": ["Anxious", "Overwhelmed"],
       "vibe": 23,
       "genres": ["Metal", "Afrobeats"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Anxious",
+        "Overwhelmed"
+      ],
+      "vibe": 23,
+      "genres": [
+        "Metal",
+        "Afrobeats"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -347,6 +581,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-19",
     "duration": 272233,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-18.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -354,6 +589,17 @@
       "feelings": ["Overwhelmed"],
       "vibe": 13,
       "genres": ["Afrobeats"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Overwhelmed"
+      ],
+      "vibe": 13,
+      "genres": [
+        "Afrobeats"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -367,6 +613,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-20",
     "duration": 153372,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-19.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -374,6 +621,20 @@
       "feelings": ["Lonely", "Reflective", "Insecure"],
       "vibe": 34,
       "genres": ["Ambient", "Soul"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Lonely",
+        "Reflective",
+        "Insecure"
+      ],
+      "vibe": 34,
+      "genres": [
+        "Ambient",
+        "Soul"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -387,6 +648,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-21",
     "duration": 296672,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-20.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -394,6 +656,17 @@
       "feelings": ["Stressed"],
       "vibe": 32,
       "genres": ["Metal"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Stressed"
+      ],
+      "vibe": 32,
+      "genres": [
+        "Metal"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -407,6 +680,7 @@
     "album": "Starlight Album",
     "albumId": "album-22",
     "duration": 248917,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-21.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -414,6 +688,18 @@
       "feelings": ["Reflective"],
       "vibe": 29,
       "genres": ["Disco", "Ambient"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 29,
+      "genres": [
+        "Disco",
+        "Ambient"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -427,6 +713,7 @@
     "album": "Morning Dew Album",
     "albumId": "album-23",
     "duration": 299173,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-22.mp3",
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -434,6 +721,19 @@
       "feelings": ["Grateful", "Nostalgic", "Content"],
       "vibe": 26,
       "genres": ["Pop"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Grateful",
+        "Nostalgic",
+        "Content"
+      ],
+      "vibe": 26,
+      "genres": [
+        "Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -447,6 +747,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-24",
     "duration": 211955,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-23.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -454,6 +755,19 @@
       "feelings": ["Grateful", "Nostalgic", "Content"],
       "vibe": 33,
       "genres": ["Classical"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Grateful",
+        "Nostalgic",
+        "Content"
+      ],
+      "vibe": 33,
+      "genres": [
+        "Classical"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -467,6 +781,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-25",
     "duration": 160111,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-24.mp3",
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -474,6 +789,19 @@
       "feelings": ["Grateful", "Content", "Reflective"],
       "vibe": 33,
       "genres": ["Trap"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Grateful",
+        "Content",
+        "Reflective"
+      ],
+      "vibe": 33,
+      "genres": [
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -487,6 +815,7 @@
     "album": "Forest Path Album",
     "albumId": "album-26",
     "duration": 270559,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-25.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -494,6 +823,20 @@
       "feelings": ["Grateful", "Reflective", "Content"],
       "vibe": 24,
       "genres": ["Folk", "Classical"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Grateful",
+        "Reflective",
+        "Content"
+      ],
+      "vibe": 24,
+      "genres": [
+        "Folk",
+        "Classical"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -507,6 +850,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-27",
     "duration": 293726,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-26.mp3",
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -514,6 +858,17 @@
       "feelings": ["Nostalgic"],
       "vibe": 20,
       "genres": ["Trap"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic"
+      ],
+      "vibe": 20,
+      "genres": [
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -527,6 +882,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-28",
     "duration": 202688,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-27.mp3",
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -534,6 +890,18 @@
       "feelings": ["Content"],
       "vibe": 28,
       "genres": ["Latin", "Jazz"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Content"
+      ],
+      "vibe": 28,
+      "genres": [
+        "Latin",
+        "Jazz"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -547,6 +915,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-29",
     "duration": 295690,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-28.mp3",
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -554,6 +923,18 @@
       "feelings": ["Content"],
       "vibe": 20,
       "genres": ["Folk", "Classical"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Content"
+      ],
+      "vibe": 20,
+      "genres": [
+        "Folk",
+        "Classical"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -567,6 +948,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-30",
     "duration": 169038,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-29.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -574,6 +956,17 @@
       "feelings": ["Content"],
       "vibe": 20,
       "genres": ["Folk"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Content"
+      ],
+      "vibe": 20,
+      "genres": [
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -587,6 +980,7 @@
     "album": "Golden Hour Album",
     "albumId": "album-1",
     "duration": 298375,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-30.mp3",
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -594,6 +988,18 @@
       "feelings": ["Reflective"],
       "vibe": 16,
       "genres": ["Folk", "R&B"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 16,
+      "genres": [
+        "Folk",
+        "R&B"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -607,6 +1013,7 @@
     "album": "Evening Glow Album",
     "albumId": "album-2",
     "duration": 155720,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-31.mp3",
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -614,6 +1021,17 @@
       "feelings": ["Reflective"],
       "vibe": 27,
       "genres": ["Folk"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 27,
+      "genres": [
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -627,6 +1045,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-3",
     "duration": 260246,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-32.mp3",
     "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -634,6 +1053,19 @@
       "feelings": ["Nostalgic", "Grateful"],
       "vibe": 36,
       "genres": ["Classical", "Folk"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic",
+        "Grateful"
+      ],
+      "vibe": 36,
+      "genres": [
+        "Classical",
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -647,6 +1079,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-4",
     "duration": 245207,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-33.mp3",
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -654,6 +1087,20 @@
       "feelings": ["Content", "Reflective", "Nostalgic"],
       "vibe": 15,
       "genres": ["Trap", "Jazz"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Content",
+        "Reflective",
+        "Nostalgic"
+      ],
+      "vibe": 15,
+      "genres": [
+        "Trap",
+        "Jazz"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -667,6 +1114,7 @@
     "album": "Thunderstorm Album",
     "albumId": "album-5",
     "duration": 185056,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-34.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -674,6 +1122,19 @@
       "feelings": ["Nostalgic", "Reflective", "Grateful"],
       "vibe": 18,
       "genres": ["Trap"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic",
+        "Reflective",
+        "Grateful"
+      ],
+      "vibe": 18,
+      "genres": [
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -687,6 +1148,7 @@
     "album": "Neon Signs Album",
     "albumId": "album-6",
     "duration": 289642,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-35.mp3",
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -694,6 +1156,17 @@
       "feelings": ["Content"],
       "vibe": 22,
       "genres": ["Techno"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Content"
+      ],
+      "vibe": 22,
+      "genres": [
+        "Techno"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -707,6 +1180,7 @@
     "album": "Neon Signs Album",
     "albumId": "album-7",
     "duration": 181921,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-36.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -714,6 +1188,17 @@
       "feelings": ["Nostalgic"],
       "vibe": 17,
       "genres": ["Metal"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic"
+      ],
+      "vibe": 17,
+      "genres": [
+        "Metal"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -727,6 +1212,7 @@
     "album": "Golden Hour Album",
     "albumId": "album-8",
     "duration": 230087,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-37.mp3",
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -734,6 +1220,18 @@
       "feelings": ["Grateful", "Reflective"],
       "vibe": 25,
       "genres": ["Jazz"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Grateful",
+        "Reflective"
+      ],
+      "vibe": 25,
+      "genres": [
+        "Jazz"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -747,6 +1245,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-9",
     "duration": 183428,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-38.mp3",
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -754,6 +1253,18 @@
       "feelings": ["Nostalgic"],
       "vibe": 35,
       "genres": ["World", "Pop"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic"
+      ],
+      "vibe": 35,
+      "genres": [
+        "World",
+        "Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -767,6 +1278,7 @@
     "album": "Mountain View Album",
     "albumId": "album-10",
     "duration": 174167,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-39.mp3",
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -774,6 +1286,19 @@
       "feelings": ["Reflective", "Nostalgic", "Content"],
       "vibe": 19,
       "genres": ["Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Reflective",
+        "Nostalgic",
+        "Content"
+      ],
+      "vibe": 19,
+      "genres": [
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -787,6 +1312,7 @@
     "album": "Forest Path Album",
     "albumId": "album-11",
     "duration": 249290,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-40.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -794,6 +1320,18 @@
       "feelings": ["Nostalgic", "Content"],
       "vibe": 33,
       "genres": ["Reggae"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic",
+        "Content"
+      ],
+      "vibe": 33,
+      "genres": [
+        "Reggae"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -807,6 +1345,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-12",
     "duration": 240396,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-41.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -814,6 +1353,19 @@
       "feelings": ["Content", "Reflective"],
       "vibe": 20,
       "genres": ["K-Pop", "Jazz"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content",
+        "Reflective"
+      ],
+      "vibe": 20,
+      "genres": [
+        "K-Pop",
+        "Jazz"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -827,6 +1379,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-13",
     "duration": 159909,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-42.mp3",
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -834,6 +1387,18 @@
       "feelings": ["Thoughtful", "Content"],
       "vibe": 31,
       "genres": ["Funk"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Thoughtful",
+        "Content"
+      ],
+      "vibe": 31,
+      "genres": [
+        "Funk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -847,6 +1412,7 @@
     "album": "Golden Hour Album",
     "albumId": "album-14",
     "duration": 216758,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-43.mp3",
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -854,6 +1420,19 @@
       "feelings": ["Content", "Relaxed", "Thoughtful"],
       "vibe": 30,
       "genres": ["Disco"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content",
+        "Relaxed",
+        "Thoughtful"
+      ],
+      "vibe": 30,
+      "genres": [
+        "Disco"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -867,6 +1446,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-15",
     "duration": 279290,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-44.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -874,6 +1454,20 @@
       "feelings": ["Content", "Reflective", "Relaxed"],
       "vibe": 23,
       "genres": ["R&B", "K-Pop"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content",
+        "Reflective",
+        "Relaxed"
+      ],
+      "vibe": 23,
+      "genres": [
+        "R&B",
+        "K-Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -887,6 +1481,7 @@
     "album": "Desert Highway Album",
     "albumId": "album-16",
     "duration": 229626,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-45.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -894,6 +1489,17 @@
       "feelings": ["Reflective"],
       "vibe": 43,
       "genres": ["House"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 43,
+      "genres": [
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -907,6 +1513,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-17",
     "duration": 287323,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-46.mp3",
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -914,6 +1521,18 @@
       "feelings": ["Content"],
       "vibe": 29,
       "genres": ["Country", "Reggae"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content"
+      ],
+      "vibe": 29,
+      "genres": [
+        "Country",
+        "Reggae"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -927,6 +1546,7 @@
     "album": "Electric Soul Album",
     "albumId": "album-18",
     "duration": 249310,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-47.mp3",
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -934,6 +1554,20 @@
       "feelings": ["Content", "Thoughtful", "Relaxed"],
       "vibe": 28,
       "genres": ["Rock", "Trap"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content",
+        "Thoughtful",
+        "Relaxed"
+      ],
+      "vibe": 28,
+      "genres": [
+        "Rock",
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -947,6 +1581,7 @@
     "album": "Mountain View Album",
     "albumId": "album-19",
     "duration": 154098,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-48.mp3",
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -954,6 +1589,18 @@
       "feelings": ["Thoughtful"],
       "vibe": 28,
       "genres": ["Reggae", "House"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Thoughtful"
+      ],
+      "vibe": 28,
+      "genres": [
+        "Reggae",
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -967,6 +1614,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-20",
     "duration": 217798,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-49.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -974,6 +1622,20 @@
       "feelings": ["Content", "Reflective", "Relaxed"],
       "vibe": 41,
       "genres": ["Metal", "Country"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content",
+        "Reflective",
+        "Relaxed"
+      ],
+      "vibe": 41,
+      "genres": [
+        "Metal",
+        "Country"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -987,6 +1649,7 @@
     "album": "Mountain View Album",
     "albumId": "album-21",
     "duration": 211782,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-50.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -994,6 +1657,17 @@
       "feelings": ["Reflective"],
       "vibe": 25,
       "genres": ["Metal"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 25,
+      "genres": [
+        "Metal"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -1007,6 +1681,7 @@
     "album": "Morning Dew Album",
     "albumId": "album-22",
     "duration": 160343,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-51.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1014,6 +1689,20 @@
       "feelings": ["Relaxed", "Content", "Reflective"],
       "vibe": 39,
       "genres": ["Metal", "Trap"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed",
+        "Content",
+        "Reflective"
+      ],
+      "vibe": 39,
+      "genres": [
+        "Metal",
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -1027,6 +1716,7 @@
     "album": "Forest Path Album",
     "albumId": "album-23",
     "duration": 166348,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-52.mp3",
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1034,6 +1724,19 @@
       "feelings": ["Relaxed", "Reflective", "Content"],
       "vibe": 31,
       "genres": ["Disco"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed",
+        "Reflective",
+        "Content"
+      ],
+      "vibe": 31,
+      "genres": [
+        "Disco"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -1047,6 +1750,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-24",
     "duration": 172683,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-53.mp3",
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1054,6 +1758,17 @@
       "feelings": ["Thoughtful"],
       "vibe": 38,
       "genres": ["Ambient"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Thoughtful"
+      ],
+      "vibe": 38,
+      "genres": [
+        "Ambient"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -1067,6 +1782,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-25",
     "duration": 292453,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-54.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1074,6 +1790,20 @@
       "feelings": ["Relaxed", "Thoughtful", "Reflective"],
       "vibe": 36,
       "genres": ["K-Pop", "Pop"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed",
+        "Thoughtful",
+        "Reflective"
+      ],
+      "vibe": 36,
+      "genres": [
+        "K-Pop",
+        "Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -1087,6 +1817,7 @@
     "album": "Golden Hour Album",
     "albumId": "album-26",
     "duration": 259924,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-55.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1094,6 +1825,18 @@
       "feelings": ["Thoughtful"],
       "vibe": 27,
       "genres": ["K-Pop", "Latin"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Thoughtful"
+      ],
+      "vibe": 27,
+      "genres": [
+        "K-Pop",
+        "Latin"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -1107,6 +1850,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-27",
     "duration": 188417,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-56.mp3",
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1114,6 +1858,17 @@
       "feelings": ["Thoughtful"],
       "vibe": 28,
       "genres": ["House"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Thoughtful"
+      ],
+      "vibe": 28,
+      "genres": [
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -1127,6 +1882,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-28",
     "duration": 227897,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-57.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1134,6 +1890,18 @@
       "feelings": ["Reflective"],
       "vibe": 39,
       "genres": ["Country", "Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 39,
+      "genres": [
+        "Country",
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -1147,6 +1915,7 @@
     "album": "Desert Highway Album",
     "albumId": "album-29",
     "duration": 289347,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-58.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1154,6 +1923,18 @@
       "feelings": ["Thoughtful"],
       "vibe": 25,
       "genres": ["Afrobeats", "Classical"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Thoughtful"
+      ],
+      "vibe": 25,
+      "genres": [
+        "Afrobeats",
+        "Classical"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -1167,6 +1948,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-30",
     "duration": 288683,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-59.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1174,6 +1956,17 @@
       "feelings": ["Content"],
       "vibe": 38,
       "genres": ["Ambient"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content"
+      ],
+      "vibe": 38,
+      "genres": [
+        "Ambient"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -1187,6 +1980,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-1",
     "duration": 157050,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-60.mp3",
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1194,6 +1988,20 @@
       "feelings": ["Relaxed", "Content", "Thoughtful"],
       "vibe": 24,
       "genres": ["Latin", "Funk"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed",
+        "Content",
+        "Thoughtful"
+      ],
+      "vibe": 24,
+      "genres": [
+        "Latin",
+        "Funk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -1207,6 +2015,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-2",
     "duration": 156186,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-61.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1214,6 +2023,19 @@
       "feelings": ["Proud", "Great", "Confident"],
       "vibe": 51,
       "genres": ["Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Proud",
+        "Great",
+        "Confident"
+      ],
+      "vibe": 51,
+      "genres": [
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1227,6 +2049,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-3",
     "duration": 293481,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-62.mp3",
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1234,6 +2057,17 @@
       "feelings": ["Proud"],
       "vibe": 54,
       "genres": ["Trap"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Proud"
+      ],
+      "vibe": 54,
+      "genres": [
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -1247,6 +2081,7 @@
     "album": "City Lights Album",
     "albumId": "album-4",
     "duration": 180471,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-63.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1254,6 +2089,18 @@
       "feelings": ["Excited"],
       "vibe": 64,
       "genres": ["Classical", "Afrobeats"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 64,
+      "genres": [
+        "Classical",
+        "Afrobeats"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1267,6 +2114,7 @@
     "album": "Mountain View Album",
     "albumId": "album-5",
     "duration": 202052,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-64.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1274,6 +2122,18 @@
       "feelings": ["Excited"],
       "vibe": 57,
       "genres": ["Indie", "Folk"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 57,
+      "genres": [
+        "Indie",
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -1287,6 +2147,7 @@
     "album": "City Lights Album",
     "albumId": "album-6",
     "duration": 290852,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-65.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1294,6 +2155,19 @@
       "feelings": ["Confident", "Relaxed"],
       "vibe": 47,
       "genres": ["Country", "Reggae"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Confident",
+        "Relaxed"
+      ],
+      "vibe": 47,
+      "genres": [
+        "Country",
+        "Reggae"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -1307,6 +2181,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-7",
     "duration": 195233,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-66.mp3",
     "coverArt": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1314,6 +2189,20 @@
       "feelings": ["Excited", "Relaxed", "Confident"],
       "vibe": 47,
       "genres": ["R&B", "Afrobeats"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Excited",
+        "Relaxed",
+        "Confident"
+      ],
+      "vibe": 47,
+      "genres": [
+        "R&B",
+        "Afrobeats"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -1327,6 +2216,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-8",
     "duration": 291401,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-67.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1334,6 +2224,19 @@
       "feelings": ["Relaxed", "Great"],
       "vibe": 64,
       "genres": ["Electronic", "Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed",
+        "Great"
+      ],
+      "vibe": 64,
+      "genres": [
+        "Electronic",
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -1347,6 +2250,7 @@
     "album": "Desert Highway Album",
     "albumId": "album-9",
     "duration": 179373,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-68.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1354,6 +2258,19 @@
       "feelings": ["Relaxed", "Confident", "Proud"],
       "vibe": 64,
       "genres": ["Rock"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed",
+        "Confident",
+        "Proud"
+      ],
+      "vibe": 64,
+      "genres": [
+        "Rock"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1367,6 +2284,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-10",
     "duration": 271235,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-69.mp3",
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1374,6 +2292,19 @@
       "feelings": ["Excited", "Relaxed", "Confident"],
       "vibe": 46,
       "genres": ["Punk"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Excited",
+        "Relaxed",
+        "Confident"
+      ],
+      "vibe": 46,
+      "genres": [
+        "Punk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -1387,6 +2318,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-11",
     "duration": 289950,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-70.mp3",
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1394,6 +2326,19 @@
       "feelings": ["Great", "Relaxed"],
       "vibe": 50,
       "genres": ["Classical", "K-Pop"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Great",
+        "Relaxed"
+      ],
+      "vibe": 50,
+      "genres": [
+        "Classical",
+        "K-Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -1407,6 +2352,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-12",
     "duration": 183568,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-71.mp3",
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1414,6 +2360,17 @@
       "feelings": ["Confident"],
       "vibe": 51,
       "genres": ["Punk"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Confident"
+      ],
+      "vibe": 51,
+      "genres": [
+        "Punk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -1427,6 +2384,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-13",
     "duration": 276796,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-72.mp3",
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1434,6 +2392,19 @@
       "feelings": ["Relaxed", "Proud"],
       "vibe": 57,
       "genres": ["Electronic", "Jazz"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed",
+        "Proud"
+      ],
+      "vibe": 57,
+      "genres": [
+        "Electronic",
+        "Jazz"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1447,6 +2418,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-14",
     "duration": 224936,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-73.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1454,6 +2426,20 @@
       "feelings": ["Relaxed", "Proud", "Confident"],
       "vibe": 56,
       "genres": ["Latin", "Country"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed",
+        "Proud",
+        "Confident"
+      ],
+      "vibe": 56,
+      "genres": [
+        "Latin",
+        "Country"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -1467,6 +2453,7 @@
     "album": "Mountain View Album",
     "albumId": "album-15",
     "duration": 176023,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-74.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1474,6 +2461,19 @@
       "feelings": ["Relaxed", "Proud", "Great"],
       "vibe": 62,
       "genres": ["Rock"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed",
+        "Proud",
+        "Great"
+      ],
+      "vibe": 62,
+      "genres": [
+        "Rock"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -1487,6 +2487,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-16",
     "duration": 227543,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-75.mp3",
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1494,6 +2495,19 @@
       "feelings": ["Proud", "Excited", "Great"],
       "vibe": 59,
       "genres": ["Trap"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Proud",
+        "Excited",
+        "Great"
+      ],
+      "vibe": 59,
+      "genres": [
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -1507,6 +2521,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-17",
     "duration": 175808,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-76.mp3",
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1514,6 +2529,18 @@
       "feelings": ["Proud"],
       "vibe": 53,
       "genres": ["Jazz", "Trap"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Proud"
+      ],
+      "vibe": 53,
+      "genres": [
+        "Jazz",
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -1527,6 +2554,7 @@
     "album": "Evening Glow Album",
     "albumId": "album-18",
     "duration": 213229,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-77.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1534,6 +2562,17 @@
       "feelings": ["Relaxed"],
       "vibe": 54,
       "genres": ["Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed"
+      ],
+      "vibe": 54,
+      "genres": [
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1547,6 +2586,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-19",
     "duration": 287253,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-78.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1554,6 +2594,20 @@
       "feelings": ["Great", "Confident", "Relaxed"],
       "vibe": 53,
       "genres": ["Blues", "Pop"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Great",
+        "Confident",
+        "Relaxed"
+      ],
+      "vibe": 53,
+      "genres": [
+        "Blues",
+        "Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -1567,6 +2621,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-20",
     "duration": 206629,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-79.mp3",
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1574,6 +2629,19 @@
       "feelings": ["Relaxed", "Excited", "Proud"],
       "vibe": 49,
       "genres": ["Country"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Relaxed",
+        "Excited",
+        "Proud"
+      ],
+      "vibe": 49,
+      "genres": [
+        "Country"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1587,6 +2655,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-21",
     "duration": 270096,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-80.mp3",
     "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1594,6 +2663,19 @@
       "feelings": ["Great", "Excited"],
       "vibe": 53,
       "genres": ["Jazz", "Country"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Great",
+        "Excited"
+      ],
+      "vibe": 53,
+      "genres": [
+        "Jazz",
+        "Country"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1607,6 +2689,7 @@
     "album": "Thunderstorm Album",
     "albumId": "album-22",
     "duration": 279948,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-81.mp3",
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1614,6 +2697,18 @@
       "feelings": ["Excited", "Relaxed"],
       "vibe": 79,
       "genres": ["House"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Excited",
+        "Relaxed"
+      ],
+      "vibe": 79,
+      "genres": [
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -1627,6 +2722,7 @@
     "album": "Golden Hour Album",
     "albumId": "album-23",
     "duration": 255374,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-82.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1634,6 +2730,17 @@
       "feelings": ["Relaxed"],
       "vibe": 72,
       "genres": ["Techno"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed"
+      ],
+      "vibe": 72,
+      "genres": [
+        "Techno"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -1647,6 +2754,7 @@
     "album": "Spring Bloom Album",
     "albumId": "album-24",
     "duration": 157600,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-83.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1654,6 +2762,17 @@
       "feelings": ["Confident"],
       "vibe": 69,
       "genres": ["Reggae"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Confident"
+      ],
+      "vibe": 69,
+      "genres": [
+        "Reggae"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -1667,6 +2786,7 @@
     "album": "Forest Path Album",
     "albumId": "album-25",
     "duration": 214404,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-84.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1674,6 +2794,19 @@
       "feelings": ["Relaxed", "Proud"],
       "vibe": 69,
       "genres": ["Country", "Blues"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed",
+        "Proud"
+      ],
+      "vibe": 69,
+      "genres": [
+        "Country",
+        "Blues"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -1687,6 +2820,7 @@
     "album": "City Lights Album",
     "albumId": "album-26",
     "duration": 184745,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-85.mp3",
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1694,6 +2828,18 @@
       "feelings": ["Optimistic"],
       "vibe": 82,
       "genres": ["R&B", "Metal"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Optimistic"
+      ],
+      "vibe": 82,
+      "genres": [
+        "R&B",
+        "Metal"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -1707,6 +2853,7 @@
     "album": "Summer Heat Album",
     "albumId": "album-27",
     "duration": 233366,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-86.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1714,6 +2861,19 @@
       "feelings": ["Relaxed", "Excited", "Proud"],
       "vibe": 75,
       "genres": ["Disco"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed",
+        "Excited",
+        "Proud"
+      ],
+      "vibe": 75,
+      "genres": [
+        "Disco"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -1727,6 +2887,7 @@
     "album": "City Lights Album",
     "albumId": "album-28",
     "duration": 197923,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-87.mp3",
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1734,6 +2895,19 @@
       "feelings": ["Relaxed", "Proud"],
       "vibe": 67,
       "genres": ["Blues", "Afrobeats"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed",
+        "Proud"
+      ],
+      "vibe": 67,
+      "genres": [
+        "Blues",
+        "Afrobeats"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -1747,6 +2921,7 @@
     "album": "Spring Bloom Album",
     "albumId": "album-29",
     "duration": 217391,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-88.mp3",
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1754,6 +2929,18 @@
       "feelings": ["Excited"],
       "vibe": 75,
       "genres": ["Jazz", "World"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 75,
+      "genres": [
+        "Jazz",
+        "World"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -1767,6 +2954,7 @@
     "album": "Morning Dew Album",
     "albumId": "album-30",
     "duration": 269240,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-89.mp3",
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1774,6 +2962,17 @@
       "feelings": ["Great"],
       "vibe": 83,
       "genres": ["R&B"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Great"
+      ],
+      "vibe": 83,
+      "genres": [
+        "R&B"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -1787,6 +2986,7 @@
     "album": "Mountain View Album",
     "albumId": "album-1",
     "duration": 264605,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-90.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1794,6 +2994,17 @@
       "feelings": ["Confident"],
       "vibe": 79,
       "genres": ["Afrobeats"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Confident"
+      ],
+      "vibe": 79,
+      "genres": [
+        "Afrobeats"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -1807,6 +3018,7 @@
     "album": "Desert Highway Album",
     "albumId": "album-2",
     "duration": 277329,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-91.mp3",
     "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1814,6 +3026,20 @@
       "feelings": ["Relaxed", "Excited", "Great"],
       "vibe": 80,
       "genres": ["Reggae", "Blues"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed",
+        "Excited",
+        "Great"
+      ],
+      "vibe": 80,
+      "genres": [
+        "Reggae",
+        "Blues"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -1827,6 +3053,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-3",
     "duration": 232081,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-92.mp3",
     "coverArt": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1834,6 +3061,18 @@
       "feelings": ["Relaxed", "Excited"],
       "vibe": 85,
       "genres": ["Latin"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed",
+        "Excited"
+      ],
+      "vibe": 85,
+      "genres": [
+        "Latin"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -1847,6 +3086,7 @@
     "album": "Mountain View Album",
     "albumId": "album-4",
     "duration": 181468,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-93.mp3",
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1854,6 +3094,18 @@
       "feelings": ["Great"],
       "vibe": 76,
       "genres": ["Latin", "House"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Great"
+      ],
+      "vibe": 76,
+      "genres": [
+        "Latin",
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -1867,6 +3119,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-5",
     "duration": 162328,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-94.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1874,6 +3127,20 @@
       "feelings": ["Optimistic", "Excited", "Great"],
       "vibe": 77,
       "genres": ["R&B", "Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Optimistic",
+        "Excited",
+        "Great"
+      ],
+      "vibe": 77,
+      "genres": [
+        "R&B",
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1887,6 +3154,7 @@
     "album": "Morning Dew Album",
     "albumId": "album-6",
     "duration": 293861,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-95.mp3",
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1894,6 +3162,18 @@
       "feelings": ["Confident", "Optimistic"],
       "vibe": 69,
       "genres": ["House"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Confident",
+        "Optimistic"
+      ],
+      "vibe": 69,
+      "genres": [
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -1907,6 +3187,7 @@
     "album": "Mountain View Album",
     "albumId": "album-7",
     "duration": 231563,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-96.mp3",
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1914,6 +3195,20 @@
       "feelings": ["Great", "Excited", "Grateful"],
       "vibe": 78,
       "genres": ["Trap", "Folk"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Great",
+        "Excited",
+        "Grateful"
+      ],
+      "vibe": 78,
+      "genres": [
+        "Trap",
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -1927,6 +3222,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-8",
     "duration": 169090,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-97.mp3",
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1934,6 +3230,18 @@
       "feelings": ["Optimistic"],
       "vibe": 84,
       "genres": ["Metal", "Country"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Optimistic"
+      ],
+      "vibe": 84,
+      "genres": [
+        "Metal",
+        "Country"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -1947,6 +3255,7 @@
     "album": "Forest Path Album",
     "albumId": "album-9",
     "duration": 202848,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-98.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1954,6 +3263,18 @@
       "feelings": ["Relaxed", "Grateful"],
       "vibe": 84,
       "genres": ["House"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed",
+        "Grateful"
+      ],
+      "vibe": 84,
+      "genres": [
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -1967,6 +3288,7 @@
     "album": "Morning Dew Album",
     "albumId": "album-10",
     "duration": 293830,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-99.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1974,6 +3296,18 @@
       "feelings": ["Grateful", "Relaxed"],
       "vibe": 83,
       "genres": ["R&B"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Grateful",
+        "Relaxed"
+      ],
+      "vibe": 83,
+      "genres": [
+        "R&B"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -1987,6 +3321,7 @@
     "album": "Spring Bloom Album",
     "albumId": "album-11",
     "duration": 246508,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-100.mp3",
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -1994,6 +3329,20 @@
       "feelings": ["Proud", "Excited", "Relaxed"],
       "vibe": 84,
       "genres": ["House", "Soul"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Proud",
+        "Excited",
+        "Relaxed"
+      ],
+      "vibe": 84,
+      "genres": [
+        "House",
+        "Soul"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -2007,6 +3356,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-12",
     "duration": 267221,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-101.mp3",
     "coverArt": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2014,6 +3364,18 @@
       "feelings": ["Excited"],
       "vibe": 99,
       "genres": ["Disco", "Reggae"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 99,
+      "genres": [
+        "Disco",
+        "Reggae"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -2027,6 +3389,7 @@
     "album": "Spring Bloom Album",
     "albumId": "album-13",
     "duration": 297674,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-102.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2034,6 +3397,17 @@
       "feelings": ["Great"],
       "vibe": 88,
       "genres": ["House"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Great"
+      ],
+      "vibe": 88,
+      "genres": [
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2047,6 +3421,7 @@
     "album": "Evening Glow Album",
     "albumId": "album-14",
     "duration": 166618,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-103.mp3",
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2054,6 +3429,18 @@
       "feelings": ["Great"],
       "vibe": 85,
       "genres": ["Rock", "K-Pop"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Great"
+      ],
+      "vibe": 85,
+      "genres": [
+        "Rock",
+        "K-Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -2067,6 +3454,7 @@
     "album": "Mountain View Album",
     "albumId": "album-15",
     "duration": 176960,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-104.mp3",
     "coverArt": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2074,6 +3462,18 @@
       "feelings": ["Excited", "Proud"],
       "vibe": 99,
       "genres": ["Trap"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited",
+        "Proud"
+      ],
+      "vibe": 99,
+      "genres": [
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2087,6 +3487,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-16",
     "duration": 233602,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-105.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2094,6 +3495,17 @@
       "feelings": ["Proud"],
       "vibe": 94,
       "genres": ["Soul"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud"
+      ],
+      "vibe": 94,
+      "genres": [
+        "Soul"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -2107,6 +3519,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-17",
     "duration": 161085,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-106.mp3",
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2114,6 +3527,18 @@
       "feelings": ["Optimistic", "Great"],
       "vibe": 90,
       "genres": ["Rock"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic",
+        "Great"
+      ],
+      "vibe": 90,
+      "genres": [
+        "Rock"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -2127,6 +3552,7 @@
     "album": "Morning Dew Album",
     "albumId": "album-18",
     "duration": 221433,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-107.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2134,6 +3560,19 @@
       "feelings": ["Proud", "Optimistic"],
       "vibe": 91,
       "genres": ["Rock", "Folk"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud",
+        "Optimistic"
+      ],
+      "vibe": 91,
+      "genres": [
+        "Rock",
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -2147,6 +3586,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-19",
     "duration": 160208,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-108.mp3",
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2154,6 +3594,18 @@
       "feelings": ["Proud", "Optimistic"],
       "vibe": 85,
       "genres": ["Afrobeats"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud",
+        "Optimistic"
+      ],
+      "vibe": 85,
+      "genres": [
+        "Afrobeats"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -2167,6 +3619,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-20",
     "duration": 249452,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-109.mp3",
     "coverArt": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2174,6 +3627,20 @@
       "feelings": ["Optimistic", "Excited", "Proud"],
       "vibe": 87,
       "genres": ["Folk", "Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic",
+        "Excited",
+        "Proud"
+      ],
+      "vibe": 87,
+      "genres": [
+        "Folk",
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -2187,6 +3654,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-21",
     "duration": 212957,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-110.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2194,6 +3662,20 @@
       "feelings": ["Excited", "Great", "Proud"],
       "vibe": 86,
       "genres": ["Electronic", "Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited",
+        "Great",
+        "Proud"
+      ],
+      "vibe": 86,
+      "genres": [
+        "Electronic",
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2207,6 +3689,7 @@
     "album": "Electric Soul Album",
     "albumId": "album-22",
     "duration": 291275,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-111.mp3",
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2214,6 +3697,17 @@
       "feelings": ["Excited"],
       "vibe": 88,
       "genres": ["R&B"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 88,
+      "genres": [
+        "R&B"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "high",
@@ -2227,6 +3721,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-23",
     "duration": 262450,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-112.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2234,6 +3729,19 @@
       "feelings": ["Excited", "Proud"],
       "vibe": 92,
       "genres": ["Rock", "Soul"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited",
+        "Proud"
+      ],
+      "vibe": 92,
+      "genres": [
+        "Rock",
+        "Soul"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -2247,6 +3755,7 @@
     "album": "Summer Heat Album",
     "albumId": "album-24",
     "duration": 235054,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-113.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2254,6 +3763,18 @@
       "feelings": ["Excited", "Proud"],
       "vibe": 96,
       "genres": ["Indie"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited",
+        "Proud"
+      ],
+      "vibe": 96,
+      "genres": [
+        "Indie"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2267,6 +3788,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-25",
     "duration": 275152,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-114.mp3",
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2274,6 +3796,19 @@
       "feelings": ["Excited", "Optimistic"],
       "vibe": 95,
       "genres": ["House", "Techno"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited",
+        "Optimistic"
+      ],
+      "vibe": 95,
+      "genres": [
+        "House",
+        "Techno"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -2287,6 +3822,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-26",
     "duration": 263998,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-115.mp3",
     "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2294,6 +3830,18 @@
       "feelings": ["Optimistic"],
       "vibe": 96,
       "genres": ["Funk", "Country"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic"
+      ],
+      "vibe": 96,
+      "genres": [
+        "Funk",
+        "Country"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -2307,6 +3855,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-27",
     "duration": 168657,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-116.mp3",
     "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2314,6 +3863,19 @@
       "feelings": ["Excited", "Optimistic", "Proud"],
       "vibe": 88,
       "genres": ["Pop"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited",
+        "Optimistic",
+        "Proud"
+      ],
+      "vibe": 88,
+      "genres": [
+        "Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2327,6 +3889,7 @@
     "album": "Silent Streets Album",
     "albumId": "album-28",
     "duration": 258424,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-117.mp3",
     "coverArt": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2334,6 +3897,20 @@
       "feelings": ["Great", "Optimistic", "Excited"],
       "vibe": 92,
       "genres": ["Pop", "Soul"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Great",
+        "Optimistic",
+        "Excited"
+      ],
+      "vibe": 92,
+      "genres": [
+        "Pop",
+        "Soul"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -2347,6 +3924,7 @@
     "album": "Sunset Drive Album",
     "albumId": "album-29",
     "duration": 297314,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-118.mp3",
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2354,6 +3932,18 @@
       "feelings": ["Excited"],
       "vibe": 90,
       "genres": ["World", "Folk"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 90,
+      "genres": [
+        "World",
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2367,6 +3957,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-30",
     "duration": 204877,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-119.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2374,6 +3965,19 @@
       "feelings": ["Proud", "Excited", "Optimistic"],
       "vibe": 99,
       "genres": ["Techno"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud",
+        "Excited",
+        "Optimistic"
+      ],
+      "vibe": 99,
+      "genres": [
+        "Techno"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2387,6 +3991,7 @@
     "album": "Thunderstorm Album",
     "albumId": "album-1",
     "duration": 170957,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-120.mp3",
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2394,6 +3999,19 @@
       "feelings": ["Excited", "Proud", "Optimistic"],
       "vibe": 94,
       "genres": ["K-Pop"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited",
+        "Proud",
+        "Optimistic"
+      ],
+      "vibe": 94,
+      "genres": [
+        "K-Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -2407,6 +4025,7 @@
     "album": "Golden Hour Album",
     "albumId": "album-2",
     "duration": 243122,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-121.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2414,6 +4033,18 @@
       "feelings": ["Great"],
       "vibe": 78,
       "genres": ["R&B", "World"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Great"
+      ],
+      "vibe": 78,
+      "genres": [
+        "R&B",
+        "World"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2427,6 +4058,7 @@
     "album": "Neon Signs Album",
     "albumId": "album-3",
     "duration": 203303,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-122.mp3",
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2434,6 +4066,18 @@
       "feelings": ["Excited"],
       "vibe": 52,
       "genres": ["Metal", "House"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 52,
+      "genres": [
+        "Metal",
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -2447,6 +4091,7 @@
     "album": "Morning Dew Album",
     "albumId": "album-4",
     "duration": 204085,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-123.mp3",
     "coverArt": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2454,6 +4099,20 @@
       "feelings": ["Stressed", "Nostalgic", "Insecure"],
       "vibe": 29,
       "genres": ["Country", "Jazz"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Stressed",
+        "Nostalgic",
+        "Insecure"
+      ],
+      "vibe": 29,
+      "genres": [
+        "Country",
+        "Jazz"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -2467,6 +4126,7 @@
     "album": "Mountain View Album",
     "albumId": "album-5",
     "duration": 274011,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-124.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2474,6 +4134,17 @@
       "feelings": ["Proud"],
       "vibe": 46,
       "genres": ["Jazz"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Proud"
+      ],
+      "vibe": 46,
+      "genres": [
+        "Jazz"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -2487,6 +4158,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-6",
     "duration": 191439,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-125.mp3",
     "coverArt": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2494,6 +4166,18 @@
       "feelings": ["Insecure"],
       "vibe": 30,
       "genres": ["Classical", "Latin"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Insecure"
+      ],
+      "vibe": 30,
+      "genres": [
+        "Classical",
+        "Latin"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -2507,6 +4191,7 @@
     "album": "Thunderstorm Album",
     "albumId": "album-7",
     "duration": 299509,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-126.mp3",
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2514,6 +4199,19 @@
       "feelings": ["Content", "Thoughtful", "Relaxed"],
       "vibe": 26,
       "genres": ["Electronic"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Content",
+        "Thoughtful",
+        "Relaxed"
+      ],
+      "vibe": 26,
+      "genres": [
+        "Electronic"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -2527,6 +4225,7 @@
     "album": "Thunderstorm Album",
     "albumId": "album-8",
     "duration": 272333,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-127.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2534,6 +4233,18 @@
       "feelings": ["Great", "Excited"],
       "vibe": 66,
       "genres": ["Hip-Hop"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Great",
+        "Excited"
+      ],
+      "vibe": 66,
+      "genres": [
+        "Hip-Hop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2547,6 +4258,7 @@
     "album": "Golden Hour Album",
     "albumId": "album-9",
     "duration": 257624,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-128.mp3",
     "coverArt": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2554,6 +4266,19 @@
       "feelings": ["Reflective", "Relaxed", "Thoughtful"],
       "vibe": 30,
       "genres": ["House"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Reflective",
+        "Relaxed",
+        "Thoughtful"
+      ],
+      "vibe": 30,
+      "genres": [
+        "House"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2567,6 +4292,7 @@
     "album": "Neon Signs Album",
     "albumId": "album-10",
     "duration": 244881,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-129.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2574,6 +4300,19 @@
       "feelings": ["Grateful", "Nostalgic", "Content"],
       "vibe": 15,
       "genres": ["Funk"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Grateful",
+        "Nostalgic",
+        "Content"
+      ],
+      "vibe": 15,
+      "genres": [
+        "Funk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -2587,6 +4326,7 @@
     "album": "Summer Heat Album",
     "albumId": "album-11",
     "duration": 161768,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-130.mp3",
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2594,6 +4334,17 @@
       "feelings": ["Great"],
       "vibe": 84,
       "genres": ["Jazz"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Great"
+      ],
+      "vibe": 84,
+      "genres": [
+        "Jazz"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2607,6 +4358,7 @@
     "album": "Electric Soul Album",
     "albumId": "album-12",
     "duration": 252320,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-131.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2614,6 +4366,17 @@
       "feelings": ["Thoughtful"],
       "vibe": 41,
       "genres": ["K-Pop"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Thoughtful"
+      ],
+      "vibe": 41,
+      "genres": [
+        "K-Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "lossless",
@@ -2627,6 +4390,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-13",
     "duration": 205887,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-132.mp3",
     "coverArt": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2634,6 +4398,20 @@
       "feelings": ["Reflective", "Tired", "Lonely"],
       "vibe": 14,
       "genres": ["Trap", "Blues"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Reflective",
+        "Tired",
+        "Lonely"
+      ],
+      "vibe": 14,
+      "genres": [
+        "Trap",
+        "Blues"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "WAV",
     "quality": "standard",
@@ -2647,6 +4425,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-14",
     "duration": 261370,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-133.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2654,6 +4433,20 @@
       "feelings": ["Excited", "Great", "Optimistic"],
       "vibe": 85,
       "genres": ["Ambient", "Reggae"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Excited",
+        "Great",
+        "Optimistic"
+      ],
+      "vibe": 85,
+      "genres": [
+        "Ambient",
+        "Reggae"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
@@ -2667,6 +4460,7 @@
     "album": "Starlight Album",
     "albumId": "album-15",
     "duration": 239052,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-134.mp3",
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2674,6 +4468,20 @@
       "feelings": ["Great", "Optimistic", "Proud"],
       "vibe": 87,
       "genres": ["Folk", "Punk"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Great",
+        "Optimistic",
+        "Proud"
+      ],
+      "vibe": 87,
+      "genres": [
+        "Folk",
+        "Punk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2687,6 +4495,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-16",
     "duration": 233473,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-135.mp3",
     "coverArt": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2694,6 +4503,20 @@
       "feelings": ["Proud", "Optimistic", "Excited"],
       "vibe": 88,
       "genres": ["R&B", "Indie"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud",
+        "Optimistic",
+        "Excited"
+      ],
+      "vibe": 88,
+      "genres": [
+        "R&B",
+        "Indie"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -2707,6 +4530,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-17",
     "duration": 293755,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-136.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2714,6 +4538,19 @@
       "feelings": ["Optimistic", "Excited"],
       "vibe": 99,
       "genres": ["Latin", "Trap"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Optimistic",
+        "Excited"
+      ],
+      "vibe": 99,
+      "genres": [
+        "Latin",
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2727,6 +4564,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-18",
     "duration": 175168,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-137.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2734,6 +4572,17 @@
       "feelings": ["Grateful"],
       "vibe": 23,
       "genres": ["Reggae"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Grateful"
+      ],
+      "vibe": 23,
+      "genres": [
+        "Reggae"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -2747,6 +4596,7 @@
     "album": "Morning Dew Album",
     "albumId": "album-19",
     "duration": 279193,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-138.mp3",
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2754,6 +4604,19 @@
       "feelings": ["Excited", "Great", "Confident"],
       "vibe": 71,
       "genres": ["Trap"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Excited",
+        "Great",
+        "Confident"
+      ],
+      "vibe": 71,
+      "genres": [
+        "Trap"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -2767,6 +4630,7 @@
     "album": "Starlight Album",
     "albumId": "album-20",
     "duration": 197689,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-139.mp3",
     "coverArt": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2774,6 +4638,19 @@
       "feelings": ["Confident", "Proud", "Excited"],
       "vibe": 58,
       "genres": ["World"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Confident",
+        "Proud",
+        "Excited"
+      ],
+      "vibe": 58,
+      "genres": [
+        "World"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2787,6 +4664,7 @@
     "album": "Ocean Breeze Album",
     "albumId": "album-21",
     "duration": 263119,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-140.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2794,6 +4672,18 @@
       "feelings": ["Reflective"],
       "vibe": 25,
       "genres": ["Hip-Hop", "Metal"]
+=======
+    "moodTags": {
+      "mood": "Melancholic",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 25,
+      "genres": [
+        "Hip-Hop",
+        "Metal"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2807,6 +4697,7 @@
     "album": "Spring Bloom Album",
     "albumId": "album-22",
     "duration": 193718,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-141.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2814,6 +4705,18 @@
       "feelings": ["Excited"],
       "vibe": 52,
       "genres": ["K-Pop", "Pop"]
+=======
+    "moodTags": {
+      "mood": "Content",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 52,
+      "genres": [
+        "K-Pop",
+        "Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -2827,6 +4730,7 @@
     "album": "Electric Soul Album",
     "albumId": "album-23",
     "duration": 187768,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-142.mp3",
     "coverArt": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2834,6 +4738,17 @@
       "feelings": ["Reflective"],
       "vibe": 34,
       "genres": ["Metal"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Reflective"
+      ],
+      "vibe": 34,
+      "genres": [
+        "Metal"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "high",
@@ -2847,6 +4762,7 @@
     "album": "Thunderstorm Album",
     "albumId": "album-24",
     "duration": 232874,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-143.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2854,6 +4770,18 @@
       "feelings": ["Proud", "Great"],
       "vibe": 99,
       "genres": ["K-Pop"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Proud",
+        "Great"
+      ],
+      "vibe": 99,
+      "genres": [
+        "K-Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -2867,6 +4795,7 @@
     "album": "Afternoon Rain Album",
     "albumId": "album-25",
     "duration": 189086,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-144.mp3",
     "coverArt": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2874,6 +4803,18 @@
       "feelings": ["Grateful", "Excited"],
       "vibe": 83,
       "genres": ["K-Pop"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Grateful",
+        "Excited"
+      ],
+      "vibe": 83,
+      "genres": [
+        "K-Pop"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "lossless",
@@ -2887,6 +4828,7 @@
     "album": "Winter Chill Album",
     "albumId": "album-26",
     "duration": 289169,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-145.mp3",
     "coverArt": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2894,6 +4836,19 @@
       "feelings": ["Excited", "Great"],
       "vibe": 98,
       "genres": ["Jazz", "Metal"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited",
+        "Great"
+      ],
+      "vibe": 98,
+      "genres": [
+        "Jazz",
+        "Metal"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -2907,6 +4862,7 @@
     "album": "Starlight Album",
     "albumId": "album-27",
     "duration": 247624,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-146.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2914,6 +4870,19 @@
       "feelings": ["Relaxed", "Content", "Thoughtful"],
       "vibe": 36,
       "genres": ["Latin"]
+=======
+    "moodTags": {
+      "mood": "Reflective",
+      "feelings": [
+        "Relaxed",
+        "Content",
+        "Thoughtful"
+      ],
+      "vibe": 36,
+      "genres": [
+        "Latin"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -2927,6 +4896,7 @@
     "album": "Spring Bloom Album",
     "albumId": "album-28",
     "duration": 193956,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-147.mp3",
     "coverArt": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2934,6 +4904,20 @@
       "feelings": ["Relaxed", "Proud", "Optimistic"],
       "vibe": 74,
       "genres": ["Punk", "Ambient"]
+=======
+    "moodTags": {
+      "mood": "Joyful",
+      "feelings": [
+        "Relaxed",
+        "Proud",
+        "Optimistic"
+      ],
+      "vibe": 74,
+      "genres": [
+        "Punk",
+        "Ambient"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "standard",
@@ -2947,6 +4931,7 @@
     "album": "Starlight Album",
     "albumId": "album-29",
     "duration": 234063,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-148.mp3",
     "coverArt": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2954,6 +4939,19 @@
       "feelings": ["Great", "Excited", "Proud"],
       "vibe": 99,
       "genres": ["Country"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Great",
+        "Excited",
+        "Proud"
+      ],
+      "vibe": 99,
+      "genres": [
+        "Country"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "lossless",
@@ -2967,6 +4965,7 @@
     "album": "Midnight Dreams Album",
     "albumId": "album-30",
     "duration": 222195,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-149.mp3",
     "coverArt": "https://images.unsplash.com/photo-1461784180009-21121b2f2044?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2974,6 +4973,20 @@
       "feelings": ["Nostalgic", "Content", "Reflective"],
       "vibe": 18,
       "genres": ["Afrobeats", "R&B"]
+=======
+    "moodTags": {
+      "mood": "Nostalgic",
+      "feelings": [
+        "Nostalgic",
+        "Content",
+        "Reflective"
+      ],
+      "vibe": 18,
+      "genres": [
+        "Afrobeats",
+        "R&B"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "MP3",
     "quality": "high",
@@ -2987,6 +5000,7 @@
     "album": "Urban Nights Album",
     "albumId": "album-1",
     "duration": 279416,
+<<<<<<< HEAD
     "audioUrl": "/audio/track-150.mp3",
     "coverArt": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80",
     "moodTags": {
@@ -2994,9 +5008,25 @@
       "feelings": ["Excited"],
       "vibe": 87,
       "genres": ["Soul", "Folk"]
+=======
+    "moodTags": {
+      "mood": "Euphoric",
+      "feelings": [
+        "Excited"
+      ],
+      "vibe": 87,
+      "genres": [
+        "Soul",
+        "Folk"
+      ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     "format": "FLAC",
     "quality": "standard",
     "releaseDate": "2024-06-22"
   }
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e

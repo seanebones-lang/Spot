@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import Link from "next/link";
+=======
+import Link from 'next/link';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 export default function NotFound() {
   return (

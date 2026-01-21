@@ -6,7 +6,10 @@
 ## Test Coverage
 
 ### ✅ All Buttons
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Player controls (Play, Pause, Next, Previous, Shuffle, Repeat)
 - Navigation buttons
 - Modal trigger buttons
@@ -20,7 +23,10 @@
 - All interactive buttons across all pages
 
 ### ✅ All Links
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Sidebar navigation links
 - Top bar navigation links
 - Breadcrumb links
@@ -33,7 +39,10 @@
 - External links
 
 ### ✅ All Pages
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Home (/)
 - Search (/search)
 - Library/Collection (/collection)
@@ -48,11 +57,18 @@
 - Settings (/settings)
 - Profile (/profile)
 - Help (/help)
+<<<<<<< HEAD
 - Legal pages (/legal/\*)
 - All other routes
 
 ### ✅ All Movable Elements
 
+=======
+- Legal pages (/legal/*)
+- All other routes
+
+### ✅ All Movable Elements
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Progress bar (draggable, clickable)
 - Volume slider (draggable, clickable)
 - Queue item drag & drop
@@ -61,7 +77,10 @@
 - Vertical scroll containers
 
 ### ✅ All Clickable Elements
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - Track cards
 - Album cards
 - Artist cards
@@ -116,31 +135,46 @@
 ## Running Tests
 
 ### Run All Tests
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 npm run test:e2e
 ```
 
 ### Run Comprehensive Tests Only
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 npx playwright test comprehensive-interactions
 ```
 
 ### Run with UI
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 npm run test:e2e:ui
 ```
 
 ### Run in Headed Mode
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 npm run test:e2e:headed
 ```
 
 ### Run Specific Test File
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```bash
 npx playwright test player
 npx playwright test navigation
@@ -150,7 +184,10 @@ npx playwright test ui-components
 ## Test Statistics
 
 ### Expected Test Count
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - **comprehensive-interactions.spec.ts:** ~50+ tests
 - **player.spec.ts:** ~10 tests
 - **navigation.spec.ts:** ~10 tests
@@ -159,7 +196,10 @@ npx playwright test ui-components
 - **Total:** ~100+ tests
 
 ### Coverage Areas
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 1. ✅ Player controls (10 tests)
 2. ✅ Navigation (15 tests)
 3. ✅ Page loading (20 tests)
@@ -172,7 +212,10 @@ npx playwright test ui-components
 ## Test Verification Checklist
 
 ### Player Controls
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - [x] Play button works
 - [x] Pause button works
 - [x] Next track button works
@@ -186,7 +229,10 @@ npx playwright test ui-components
 - [x] Equalizer button works
 
 ### Navigation
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - [x] Home link navigates
 - [x] Search link navigates
 - [x] Library link navigates
@@ -195,7 +241,10 @@ npx playwright test ui-components
 - [x] Browser back/forward works
 
 ### Pages
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - [x] All main pages load
 - [x] All pages have interactive elements
 - [x] All pages have navigation
@@ -203,7 +252,10 @@ npx playwright test ui-components
 - [x] No 404 errors
 
 ### Interactive Elements
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - [x] All buttons are clickable
 - [x] All links navigate correctly
 - [x] Context menus work
@@ -212,7 +264,10 @@ npx playwright test ui-components
 - [x] Forms submit correctly
 
 ### Movable Elements
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - [x] Progress bar is draggable
 - [x] Volume slider is draggable
 - [x] Queue items can be reordered
@@ -222,7 +277,10 @@ npx playwright test ui-components
 ## Success Criteria
 
 ✅ **100 of 100 tests passing**
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - All buttons functional
 - All links working
 - All pages loading
@@ -235,7 +293,10 @@ npx playwright test ui-components
 ## Maintenance
 
 ### When to Update Tests
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - New pages added
 - New buttons added
 - New interactive elements added
@@ -243,7 +304,10 @@ npx playwright test ui-components
 - Component structure changed
 
 ### Test Maintenance Checklist
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - [ ] Update test selectors if components change
 - [ ] Add tests for new features
 - [ ] Remove tests for deprecated features
@@ -253,7 +317,10 @@ npx playwright test ui-components
 ## Debugging
 
 ### If Tests Fail
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 1. Check if dev server is running
 2. Verify selectors are correct
 3. Check for timing issues (increase timeouts)
@@ -263,7 +330,10 @@ npx playwright test ui-components
 7. Use `--debug` mode for step-by-step debugging
 
 ### Common Issues
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - **Timeout errors:** Increase wait times
 - **Selector not found:** Update selectors
 - **Race conditions:** Add explicit waits

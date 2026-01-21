@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useParams } from "next/navigation";
@@ -10,24 +11,48 @@ import { formatDuration } from "@/lib/utils";
 import Link from "next/link";
 import { Album } from "@/types/album";
 import { Track } from "@/types/track";
+=======
+'use client';
+
+import { useParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { mockData } from '@/lib/data';
+import PlayButton from '@/components/PlayButton';
+import { usePlayerStore } from '@/stores/playerStore';
+import { formatDuration } from '@/lib/utils';
+import Link from 'next/link';
+import { Album } from '@/types/album';
+import { Track } from '@/types/track';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 export default function AlbumPage() {
   const params = useParams();
   const id = params.id as string;
+<<<<<<< HEAD
   const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying } =
     usePlayerStore();
+=======
+  const { setCurrentTrack, setIsPlaying, currentTrack, isPlaying } = usePlayerStore();
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const [album, setAlbum] = useState<Album | null>(null);
   const [albumTracks, setAlbumTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // First check mockData
+<<<<<<< HEAD
     const mockAlbum = mockData.getAlbums().find((a) => a.id === id);
     if (mockAlbum) {
       const tracks = mockData.getTracks();
       const mockAlbumTracks = tracks.filter((t) =>
         mockAlbum.tracks.some((tr) => tr.id === t.id),
       );
+=======
+    const mockAlbum = mockData.getAlbums().find(a => a.id === id);
+    if (mockAlbum) {
+      const tracks = mockData.getTracks();
+      const mockAlbumTracks = tracks.filter(t => mockAlbum.tracks.some(tr => tr.id === t.id));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       setAlbum(mockAlbum);
       setAlbumTracks(mockAlbumTracks);
       setLoading(false);
@@ -36,6 +61,7 @@ export default function AlbumPage() {
 
     // Then check localStorage for uploaded releases
     try {
+<<<<<<< HEAD
       if (typeof window !== "undefined") {
         const savedTracks = localStorage.getItem("artist-tracks");
         if (savedTracks) {
@@ -44,10 +70,19 @@ export default function AlbumPage() {
             (r: any) => r.id === id && r.status === "published",
           );
 
+=======
+      if (typeof window !== 'undefined') {
+        const savedTracks = localStorage.getItem('artist-tracks');
+        if (savedTracks) {
+          const uploadedReleases = JSON.parse(savedTracks);
+          const uploadedRelease = uploadedReleases.find((r: any) => r.id === id && r.status === 'published');
+          
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           if (uploadedRelease) {
             // Convert to Album format
             const convertedAlbum: Album = {
               id: uploadedRelease.id,
+<<<<<<< HEAD
               name:
                 uploadedRelease.releaseType === "single"
                   ? uploadedRelease.name
@@ -69,6 +104,25 @@ export default function AlbumPage() {
             // Use trackData if available, otherwise create minimal tracks
             const convertedTracks: Track[] = uploadedRelease.trackData || [];
 
+=======
+              name: uploadedRelease.releaseType === 'single' ? uploadedRelease.name : (uploadedRelease.album || uploadedRelease.name),
+              artist: {
+                id: `artist-${uploadedRelease.id}`,
+                name: uploadedRelease.artistName || 'Unknown Artist',
+                image: '',
+                followers: 0,
+                verified: false,
+              },
+              coverArt: uploadedRelease.coverArtUrl || '',
+              tracks: uploadedRelease.trackData || [],
+              releaseDate: uploadedRelease.uploadDate || new Date().toISOString(),
+              totalDuration: 0,
+            };
+            
+            // Use trackData if available, otherwise create minimal tracks
+            const convertedTracks: Track[] = uploadedRelease.trackData || [];
+            
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             setAlbum(convertedAlbum);
             setAlbumTracks(convertedTracks);
             setLoading(false);
@@ -77,7 +131,11 @@ export default function AlbumPage() {
         }
       }
     } catch (e) {
+<<<<<<< HEAD
       logger.error("Error loading uploaded album", e as Error, { albumId: id });
+=======
+      console.error('Error loading uploaded album:', e);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     }
 
     setLoading(false);
@@ -108,6 +166,7 @@ export default function AlbumPage() {
   };
 
   return (
+<<<<<<< HEAD
     <div
       className="min-h-full"
       style={{
@@ -125,6 +184,25 @@ export default function AlbumPage() {
           position: "relative",
           background: "linear-gradient(rgb(83, 83, 83) 0%, transparent 100%)",
           minHeight: "547px",
+=======
+    <div 
+      className="min-h-full"
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#121212'
+      }}
+    >
+      {/* Header - Exact Spotify Style with Gradient Background */}
+      <div 
+        className="p-8 pb-4 flex items-end gap-6 relative"
+        style={{
+          padding: '32px',
+          paddingBottom: '16px',
+          gap: '24px',
+          position: 'relative',
+          background: 'linear-gradient(rgb(83, 83, 83) 0%, transparent 100%)',
+          minHeight: '547px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         }}
       >
         {album.coverArt ? (
@@ -133,6 +211,7 @@ export default function AlbumPage() {
             alt={album.name}
             className="w-60 h-60 object-cover rounded shadow-2xl"
             style={{
+<<<<<<< HEAD
               width: "232px",
               height: "232px",
               borderRadius: "4px",
@@ -168,10 +247,46 @@ export default function AlbumPage() {
               marginBottom: "8px",
               textTransform: "uppercase",
               letterSpacing: "0.1em",
+=======
+              width: '232px',
+              height: '232px',
+              borderRadius: '4px',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+              flexShrink: 0
+            }}
+          />
+        ) : (
+          <div 
+            className="w-60 h-60 bg-gradient-to-br from-spotify-green to-spotify-dark-gray rounded shadow-2xl flex items-center justify-center"
+            style={{
+              width: '232px',
+              height: '232px',
+              borderRadius: '4px',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+              flexShrink: 0,
+              background: 'linear-gradient(135deg, #7209B7 0%, #181818 100%)'
+            }}
+          >
+            <span className="text-6xl" style={{ fontSize: '64px' }}>💿</span>
+          </div>
+        )}
+        <div className="flex-1" style={{ minWidth: 0 }}>
+          <div 
+            className="text-sm font-medium mb-2"
+            style={{
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 400,
+              color: '#FFFFFF',
+              marginBottom: '8px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             Album
           </div>
+<<<<<<< HEAD
           <h1
             className="text-6xl font-bold mb-4"
             style={{
@@ -180,10 +295,21 @@ export default function AlbumPage() {
               fontWeight: 900,
               color: "#FFFFFF",
               marginBottom: "16px",
+=======
+          <h1 
+            className="text-6xl font-bold mb-4"
+            style={{
+              fontSize: '72px',
+              lineHeight: '80px',
+              fontWeight: 900,
+              color: '#FFFFFF',
+              marginBottom: '16px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             {album.name}
           </h1>
+<<<<<<< HEAD
           <Link
             href={`/artist/${album.artist.id}`}
             className="text-white hover:underline font-medium mb-2 block"
@@ -218,6 +344,38 @@ export default function AlbumPage() {
               gap: "8px",
               width: "687px",
               transition: "all",
+=======
+          <Link 
+            href={`/artist/${album.artist.id}`} 
+            className="text-white hover:underline font-medium mb-2 block"
+            style={{
+              fontSize: '14px',
+              lineHeight: '20px',
+              fontWeight: 400,
+              color: '#FFFFFF',
+              marginBottom: '8px',
+              textDecoration: 'none'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+            onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
+          >
+            {album.artist.name}
+          </Link>
+          <div 
+            className="flex items-center"
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
+              fontSize: '13px',
+              fontWeight: 400,
+              lineHeight: '18px',
+              height: '18px',
+              color: '#FFFFFF',
+              gap: '8px',
+              width: '687px',
+              transition: 'all'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             <span>{new Date(album.releaseDate).getFullYear()}</span>
@@ -239,6 +397,7 @@ export default function AlbumPage() {
       </div>
 
       {/* Track List - Exact Spotify Style */}
+<<<<<<< HEAD
       <div
         className="px-8 pb-8"
         style={{
@@ -268,6 +427,37 @@ export default function AlbumPage() {
             }}
           >
             <div style={{ width: "32px", textAlign: "center" }}>#</div>
+=======
+      <div 
+        className="px-8 pb-8"
+        style={{
+          padding: '0 32px 32px 32px'
+        }}
+      >
+        <div 
+          className="bg-spotify-dark/30 backdrop-blur-sm rounded-lg overflow-hidden"
+          style={{
+            backgroundColor: 'rgba(18, 18, 18, 0.6)',
+            backdropFilter: 'blur(4px)',
+            borderRadius: '8px'
+          }}
+        >
+          <div 
+            className="grid grid-cols-[auto_1fr_auto] gap-4 px-4 py-2 text-sm text-spotify-text-gray border-b border-white/10"
+            style={{
+              gap: '16px',
+              padding: '8px 16px',
+              fontSize: '11px',
+              lineHeight: '16px',
+              fontWeight: 400,
+              color: '#B3B3B3',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
+          >
+            <div style={{ width: '32px', textAlign: 'center' }}>#</div>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             <div>TITLE</div>
             <div className="text-right">⏱</div>
           </div>
@@ -280,6 +470,7 @@ export default function AlbumPage() {
               }}
               className="grid grid-cols-[auto_1fr_auto] gap-4 px-4 py-2 hover:bg-white/10 group items-center cursor-pointer"
               style={{
+<<<<<<< HEAD
                 gap: "16px",
                 padding: "12px 16px",
                 transition: "background-color 200ms ease-out",
@@ -300,10 +491,32 @@ export default function AlbumPage() {
                   lineHeight: "20px",
                   color: "#B3B3B3",
                   transition: "color 200ms ease-out",
+=======
+                gap: '16px',
+                padding: '12px 16px',
+                transition: 'background-color 200ms ease-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
+            >
+              <div 
+                className="w-4 text-center text-spotify-text-gray group-hover:text-white"
+                style={{
+                  width: '32px',
+                  fontSize: '14px',
+                  lineHeight: '20px',
+                  color: '#B3B3B3',
+                  transition: 'color 200ms ease-out'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 {currentTrack?.id === track.id && isPlaying ? (
                   <div className="w-4 h-4 flex items-center justify-center">
+<<<<<<< HEAD
                     <div
                       className="w-1 h-1 bg-spotify-green rounded-full"
                       style={{
@@ -311,6 +524,15 @@ export default function AlbumPage() {
                         height: "4px",
                         backgroundColor: "#1DB954",
                         borderRadius: "50%",
+=======
+                    <div 
+                      className="w-1 h-1 bg-spotify-green rounded-full"
+                      style={{
+                        width: '4px',
+                        height: '4px',
+                        backgroundColor: '#7209B7',
+                        borderRadius: '50%'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                       }}
                     ></div>
                   </div>
@@ -319,6 +541,7 @@ export default function AlbumPage() {
                 )}
               </div>
               <div className="min-w-0">
+<<<<<<< HEAD
                 <div
                   className={`font-medium truncate ${currentTrack?.id === track.id ? "text-spotify-green" : "text-white"}`}
                   style={{
@@ -327,17 +550,35 @@ export default function AlbumPage() {
                     fontWeight: 400,
                     color:
                       currentTrack?.id === track.id ? "#1DB954" : "#FFFFFF",
+=======
+                <div 
+                  className={`font-medium truncate ${currentTrack?.id === track.id ? 'text-spotify-green' : 'text-white'}`}
+                  style={{
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    fontWeight: 400,
+                    color: currentTrack?.id === track.id ? '#7209B7' : '#FFFFFF'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   }}
                 >
                   {track.name}
                 </div>
               </div>
+<<<<<<< HEAD
               <div
                 className="text-sm text-spotify-text-gray text-right"
                 style={{
                   fontSize: "14px",
                   lineHeight: "20px",
                   color: "#B3B3B3",
+=======
+              <div 
+                className="text-sm text-spotify-text-gray text-right"
+                style={{
+                  fontSize: '14px',
+                  lineHeight: '20px',
+                  color: '#B3B3B3'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 }}
               >
                 {formatDuration(track.duration)}

@@ -1,11 +1,16 @@
 /**
  * Similarity Matching Algorithm for Mood-Based Track Recommendations
+<<<<<<< HEAD
  *
+=======
+ * 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
  * This module implements hybrid similarity matching combining:
  * - Vector similarity (cosine similarity on embeddings)
  * - Graph-based similarity (Neo4j path traversals)
  * - Feature-based similarity (audio features)
  * - Collaborative filtering (user behavior)
+<<<<<<< HEAD
  *
  * Target: >90% recall/precision for mood-based recommendations
  */
@@ -15,6 +20,17 @@ import { MoodTags, MoodState } from "@/types/mood";
 import { AudioFeatures } from "./aiMoodAnalysis";
 import { Neo4jKnowledgeGraph } from "./knowledgeGraph";
 import { DEFAULT_LIMITS, SIMILARITY_THRESHOLDS } from "./pipelineConfig";
+=======
+ * 
+ * Target: >90% recall/precision for mood-based recommendations
+ */
+
+import { Track } from '@/types/track';
+import { MoodTags, MoodState } from '@/types/mood';
+import { AudioFeatures } from './aiMoodAnalysis';
+import { Neo4jKnowledgeGraph } from './knowledgeGraph';
+import { DEFAULT_LIMITS, SIMILARITY_THRESHOLDS } from './pipelineConfig';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 /**
  * Similarity Match Result
@@ -43,7 +59,11 @@ export class SimilarityMatchingEngine {
 
   constructor(
     knowledgeGraph?: Neo4jKnowledgeGraph,
+<<<<<<< HEAD
     weights?: Partial<SimilarityWeights>,
+=======
+    weights?: Partial<SimilarityWeights>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ) {
     this.knowledgeGraph = knowledgeGraph || null;
     this.weights = {
@@ -60,7 +80,11 @@ export class SimilarityMatchingEngine {
    */
   async findSimilarTracks(
     sourceTrack: Track,
+<<<<<<< HEAD
     options: SimilarityMatchOptions = {},
+=======
+    options: SimilarityMatchOptions = {}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ): Promise<SimilarityMatch[]> {
     const {
       limit = DEFAULT_LIMITS.MAX_SIMILAR_TRACKS,
@@ -98,7 +122,11 @@ export class SimilarityMatchingEngine {
       collaborativeMatches = await this.findCollaborativeSimilar(
         sourceTrack,
         userId,
+<<<<<<< HEAD
         limit * 2,
+=======
+        limit * 2
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
     }
 
@@ -114,7 +142,11 @@ export class SimilarityMatchingEngine {
     for (const match of combinedMatches.slice(0, limit * 3)) {
       const similarity = await this.calculateDetailedSimilarity(
         sourceTrack,
+<<<<<<< HEAD
         match.track,
+=======
+        match.track
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
 
       if (similarity.overallSimilarity >= minSimilarity) {
@@ -132,7 +164,11 @@ export class SimilarityMatchingEngine {
    * Find similar tracks using vector similarity
    */
   private async findVectorSimilar(
+<<<<<<< HEAD
     sourceTrack: Track,
+=======
+    sourceTrack: Track
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ): Promise<Array<{ track: Track; similarity: number }>> {
     // In production, query vector database with track embedding
     // For now, return empty array (will be populated by vector DB integration)
@@ -144,7 +180,11 @@ export class SimilarityMatchingEngine {
    */
   private async findGraphSimilar(
     sourceTrack: Track,
+<<<<<<< HEAD
     limit: number,
+=======
+    limit: number
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ): Promise<Array<{ track: Track; similarity: number }>> {
     if (!this.knowledgeGraph) {
       return [];
@@ -153,7 +193,11 @@ export class SimilarityMatchingEngine {
     try {
       const similarTracks = await this.knowledgeGraph.findSimilarTracks(
         sourceTrack.id,
+<<<<<<< HEAD
         { limit, minSimilarity: 0.5, includeMoodMatches: true },
+=======
+        { limit, minSimilarity: 0.5, includeMoodMatches: true }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
 
       return similarTracks.map(({ track, similarity }) => ({
@@ -161,7 +205,11 @@ export class SimilarityMatchingEngine {
         similarity,
       }));
     } catch (error) {
+<<<<<<< HEAD
       console.error("Error in graph similarity search:", error);
+=======
+      console.error('Error in graph similarity search:', error);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       return [];
     }
   }
@@ -171,7 +219,11 @@ export class SimilarityMatchingEngine {
    */
   private async findFeatureSimilar(
     sourceTrack: Track,
+<<<<<<< HEAD
     limit: number,
+=======
+    limit: number
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ): Promise<Array<{ track: Track; similarity: number }>> {
     // In production, compare audio features with database of features
     // For now, use mock data or query from database
@@ -184,13 +236,18 @@ export class SimilarityMatchingEngine {
   private async findCollaborativeSimilar(
     sourceTrack: Track,
     userId: string,
+<<<<<<< HEAD
     limit: number,
+=======
+    limit: number
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ): Promise<Array<{ track: Track; similarity: number }>> {
     if (!this.knowledgeGraph) {
       return [];
     }
 
     try {
+<<<<<<< HEAD
       const recommendations =
         await this.knowledgeGraph.getPersonalizedRecommendations(userId, {
           limit,
@@ -198,11 +255,23 @@ export class SimilarityMatchingEngine {
         });
 
       return recommendations.map((track) => ({
+=======
+      const recommendations = await this.knowledgeGraph.getPersonalizedRecommendations(
+        userId,
+        { limit, useCollaborativeFiltering: true }
+      );
+
+      return recommendations.map(track => ({
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         track,
         similarity: SIMILARITY_THRESHOLDS.SIMILARITY_THRESHOLD, // Default collaborative similarity
       }));
     } catch (error) {
+<<<<<<< HEAD
       console.error("Error in collaborative similarity search:", error);
+=======
+      console.error('Error in collaborative similarity search:', error);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       return [];
     }
   }
@@ -216,10 +285,14 @@ export class SimilarityMatchingEngine {
     feature: Array<{ track: Track; similarity: number }>;
     collaborative: Array<{ track: Track; similarity: number }>;
   }): Array<{ track: Track; similarities: Record<string, number> }> {
+<<<<<<< HEAD
     const trackMap = new Map<
       string,
       { track: Track; similarities: Record<string, number> }
     >();
+=======
+    const trackMap = new Map<string, { track: Track; similarities: Record<string, number> }>();
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
     // Add vector matches
     for (const match of sources.vector) {
@@ -281,7 +354,11 @@ export class SimilarityMatchingEngine {
    */
   async calculateDetailedSimilarity(
     track1: Track,
+<<<<<<< HEAD
     track2: Track,
+=======
+    track2: Track
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ): Promise<SimilarityMatch> {
     // Vector similarity (if available)
     const vectorSimilarity = 0; // Would be calculated from embeddings
@@ -292,10 +369,17 @@ export class SimilarityMatchingEngine {
       try {
         graphSimilarity = await this.knowledgeGraph.calculateTrackSimilarity(
           track1.id,
+<<<<<<< HEAD
           track2.id,
         );
       } catch (error) {
         console.error("Error calculating graph similarity:", error);
+=======
+          track2.id
+        );
+      } catch (error) {
+        console.error('Error calculating graph similarity:', error);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       }
     }
 
@@ -306,10 +390,14 @@ export class SimilarityMatchingEngine {
     const collaborativeSimilarity = 0;
 
     // Mood tag breakdown
+<<<<<<< HEAD
     const breakdown = this.calculateMoodTagBreakdown(
       track1.moodTags,
       track2.moodTags,
     );
+=======
+    const breakdown = this.calculateMoodTagBreakdown(track1.moodTags, track2.moodTags);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
     // Weighted overall similarity
     const overallSimilarity =
@@ -336,12 +424,21 @@ export class SimilarityMatchingEngine {
     // Simplified feature similarity based on mood tags
     // In production, use actual audio features
     const moodMatch = track1.moodTags.mood === track2.moodTags.mood ? 1.0 : 0.0;
+<<<<<<< HEAD
 
     const vibeDiff = Math.abs(track1.moodTags.vibe - track2.moodTags.vibe);
     const vibeMatch = 1 - vibeDiff / 100; // Normalize to 0-1
 
     const genreIntersection = track1.moodTags.genres.filter((g) =>
       track2.moodTags.genres.includes(g),
+=======
+    
+    const vibeDiff = Math.abs(track1.moodTags.vibe - track2.moodTags.vibe);
+    const vibeMatch = 1 - vibeDiff / 100; // Normalize to 0-1
+
+    const genreIntersection = track1.moodTags.genres.filter(g =>
+      track2.moodTags.genres.includes(g)
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     ).length;
     const genreUnion = new Set([
       ...track1.moodTags.genres,
@@ -349,15 +446,24 @@ export class SimilarityMatchingEngine {
     ]).size;
     const genreMatch = genreUnion > 0 ? genreIntersection / genreUnion : 0;
 
+<<<<<<< HEAD
     const feelingIntersection = track1.moodTags.feelings.filter((f) =>
       track2.moodTags.feelings.includes(f),
+=======
+    const feelingIntersection = track1.moodTags.feelings.filter(f =>
+      track2.moodTags.feelings.includes(f)
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     ).length;
     const feelingUnion = new Set([
       ...track1.moodTags.feelings,
       ...track2.moodTags.feelings,
     ]).size;
+<<<<<<< HEAD
     const feelingMatch =
       feelingUnion > 0 ? feelingIntersection / feelingUnion : 0;
+=======
+    const feelingMatch = feelingUnion > 0 ? feelingIntersection / feelingUnion : 0;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
     // Weighted combination
     return (
@@ -373,13 +479,19 @@ export class SimilarityMatchingEngine {
    */
   private calculateMoodTagBreakdown(
     tags1: MoodTags,
+<<<<<<< HEAD
     tags2: MoodTags,
   ): SimilarityMatch["breakdown"] {
+=======
+    tags2: MoodTags
+  ): SimilarityMatch['breakdown'] {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     const moodMatch = tags1.mood === tags2.mood ? 1.0 : 0.0;
 
     const vibeDiff = Math.abs(tags1.vibe - tags2.vibe);
     const vibeMatch = 1 - vibeDiff / 100;
 
+<<<<<<< HEAD
     const genreIntersection = tags1.genres.filter((g) =>
       tags2.genres.includes(g),
     ).length;
@@ -392,6 +504,15 @@ export class SimilarityMatchingEngine {
     const feelingUnion = new Set([...tags1.feelings, ...tags2.feelings]).size;
     const feelingMatch =
       feelingUnion > 0 ? feelingIntersection / feelingUnion : 0;
+=======
+    const genreIntersection = tags1.genres.filter(g => tags2.genres.includes(g)).length;
+    const genreUnion = new Set([...tags1.genres, ...tags2.genres]).size;
+    const genreMatch = genreUnion > 0 ? genreIntersection / genreUnion : 0;
+
+    const feelingIntersection = tags1.feelings.filter(f => tags2.feelings.includes(f)).length;
+    const feelingUnion = new Set([...tags1.feelings, ...tags2.feelings]).size;
+    const feelingMatch = feelingUnion > 0 ? feelingIntersection / feelingUnion : 0;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
     return {
       moodMatch,
@@ -411,7 +532,11 @@ export class SimilarityMatchingEngine {
       feelings?: string[];
       genres?: string[];
     },
+<<<<<<< HEAD
     options: { limit?: number } = {},
+=======
+    options: { limit?: number } = {}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ): Promise<Track[]> {
     if (!this.knowledgeGraph) {
       return [];
@@ -421,26 +546,43 @@ export class SimilarityMatchingEngine {
 
     try {
       const tracks = await this.knowledgeGraph.findTracksByMood(
+<<<<<<< HEAD
         moodCriteria.mood || "Content",
+=======
+        moodCriteria.mood || 'Content',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         {
           limit,
           includeFeelings: moodCriteria.feelings,
           vibeRange: moodCriteria.vibeRange,
+<<<<<<< HEAD
         },
+=======
+        }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
 
       // Filter by additional criteria
       let filtered = tracks;
 
       if (moodCriteria.genres && moodCriteria.genres.length > 0) {
+<<<<<<< HEAD
         filtered = filtered.filter((track) =>
           moodCriteria.genres!.some((g) => track.moodTags?.genres?.includes(g)),
+=======
+        filtered = filtered.filter(track =>
+          moodCriteria.genres!.some(g => track.moodTags?.genres?.includes(g))
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         );
       }
 
       return filtered.slice(0, limit);
     } catch (error) {
+<<<<<<< HEAD
       console.error("Error finding mood matches:", error);
+=======
+      console.error('Error finding mood matches:', error);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       return [];
     }
   }
@@ -476,6 +618,7 @@ let matchingEngineInstance: SimilarityMatchingEngine | null = null;
 
 export function getSimilarityMatchingEngine(
   knowledgeGraph?: Neo4jKnowledgeGraph,
+<<<<<<< HEAD
   weights?: Partial<SimilarityWeights>,
 ): SimilarityMatchingEngine {
   if (!matchingEngineInstance) {
@@ -486,3 +629,12 @@ export function getSimilarityMatchingEngine(
   }
   return matchingEngineInstance;
 }
+=======
+  weights?: Partial<SimilarityWeights>
+): SimilarityMatchingEngine {
+  if (!matchingEngineInstance) {
+    matchingEngineInstance = new SimilarityMatchingEngine(knowledgeGraph, weights);
+  }
+  return matchingEngineInstance;
+}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e

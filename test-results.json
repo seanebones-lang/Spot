@@ -13,8 +13,19 @@
     "metadata": {},
     "preserveOutput": "always",
     "reporter": [
+<<<<<<< HEAD
       ["html", null],
       ["list", null],
+=======
+      [
+        "html",
+        null
+      ],
+      [
+        "list",
+        null
+      ],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       [
         "json",
         {
@@ -37,7 +48,13 @@
         "name": "chromium",
         "testDir": "/Users/nexteleven/Desktop/spot/Spot/e2e",
         "testIgnore": [],
+<<<<<<< HEAD
         "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+=======
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         "timeout": 30000
       },
       {
@@ -49,7 +66,13 @@
         "name": "firefox",
         "testDir": "/Users/nexteleven/Desktop/spot/Spot/e2e",
         "testIgnore": [],
+<<<<<<< HEAD
         "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+=======
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         "timeout": 30000
       },
       {
@@ -61,7 +84,13 @@
         "name": "webkit",
         "testDir": "/Users/nexteleven/Desktop/spot/Spot/e2e",
         "testIgnore": [],
+<<<<<<< HEAD
         "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+=======
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         "timeout": 30000
       },
       {
@@ -73,7 +102,13 @@
         "name": "Mobile Chrome",
         "testDir": "/Users/nexteleven/Desktop/spot/Spot/e2e",
         "testIgnore": [],
+<<<<<<< HEAD
         "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+=======
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         "timeout": 30000
       },
       {
@@ -85,7 +120,13 @@
         "name": "Mobile Safari",
         "testDir": "/Users/nexteleven/Desktop/spot/Spot/e2e",
         "testIgnore": [],
+<<<<<<< HEAD
         "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+=======
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         "timeout": 30000
       }
     ],
@@ -117,4 +158,8 @@
     "unexpected": 0,
     "flaky": 0
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e

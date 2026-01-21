@@ -2,6 +2,7 @@
  * CSRF Protection
  * Implements double-submit cookie pattern for CSRF protection
  * Generates and validates CSRF tokens
+<<<<<<< HEAD
  *
  * Uses Web Crypto API for Edge Runtime compatibility
  */
@@ -12,6 +13,18 @@ import { logger } from "./logger";
 
 const CSRF_TOKEN_COOKIE = "csrf-token";
 const CSRF_TOKEN_HEADER = "X-CSRF-Token";
+=======
+ * 
+ * Uses Web Crypto API for Edge Runtime compatibility
+ */
+
+import { cookies } from 'next/headers';
+import { NextRequest } from 'next/server';
+import { logger } from './logger';
+
+const CSRF_TOKEN_COOKIE = 'csrf-token';
+const CSRF_TOKEN_HEADER = 'X-CSRF-Token';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 const CSRF_TOKEN_LENGTH = 32; // 32 bytes = 64 hex characters
 
 /**
@@ -29,8 +42,13 @@ function getRandomBytes(length: number): Uint8Array {
  */
 function toHex(arr: Uint8Array): string {
   return Array.from(arr)
+<<<<<<< HEAD
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
+=======
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }
 
 /**
@@ -53,9 +71,15 @@ export async function getCsrfToken(): Promise<string> {
     token = generateCsrfToken();
     cookieStore.set(CSRF_TOKEN_COOKIE, token, {
       httpOnly: false, // Must be readable by JavaScript for header
+<<<<<<< HEAD
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
+=======
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       maxAge: 60 * 60 * 24, // 24 hours
     });
   }
@@ -69,7 +93,11 @@ export async function getCsrfToken(): Promise<string> {
 export function validateCsrfToken(request: NextRequest): boolean {
   // Skip CSRF check for GET, HEAD, OPTIONS requests (read-only)
   const method = request.method.toUpperCase();
+<<<<<<< HEAD
   if (["GET", "HEAD", "OPTIONS"].includes(method)) {
+=======
+  if (['GET', 'HEAD', 'OPTIONS'].includes(method)) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return true;
   }
 
@@ -81,7 +109,11 @@ export function validateCsrfToken(request: NextRequest): boolean {
 
   // Both tokens must exist and match
   if (!headerToken || !cookieToken) {
+<<<<<<< HEAD
     logger.warn("CSRF token missing", {
+=======
+    logger.warn('CSRF token missing', {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       hasHeaderToken: !!headerToken,
       hasCookieToken: !!cookieToken,
       path: request.nextUrl.pathname,
@@ -90,7 +122,11 @@ export function validateCsrfToken(request: NextRequest): boolean {
   }
 
   if (headerToken !== cookieToken) {
+<<<<<<< HEAD
     logger.warn("CSRF token mismatch", {
+=======
+    logger.warn('CSRF token mismatch', {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       path: request.nextUrl.pathname,
     });
     return false;
@@ -98,7 +134,11 @@ export function validateCsrfToken(request: NextRequest): boolean {
 
   // Validate token format (64 hex characters)
   if (!/^[a-f0-9]{64}$/i.test(headerToken)) {
+<<<<<<< HEAD
     logger.warn("Invalid CSRF token format", {
+=======
+    logger.warn('Invalid CSRF token format', {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       path: request.nextUrl.pathname,
     });
     return false;
@@ -113,7 +153,11 @@ export function validateCsrfToken(request: NextRequest): boolean {
  */
 export function requireCsrfToken(request: NextRequest): void {
   if (!validateCsrfToken(request)) {
+<<<<<<< HEAD
     throw new Error("CSRF token validation failed");
+=======
+    throw new Error('CSRF token validation failed');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 }
 

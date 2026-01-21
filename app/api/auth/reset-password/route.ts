@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
 import { logger, generateCorrelationId } from "@/lib/logger";
 import { hashPassword, validatePasswordStrength } from "@/lib/password";
 import { revokeAllRefreshTokens } from "@/lib/auth";
 import prisma from "@/lib/db";
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { checkRateLimit, getClientIdentifier } from '@/lib/rateLimit';
+import { logger, generateCorrelationId } from '@/lib/logger';
+import { hashPassword, validatePasswordStrength } from '@/lib/password';
+import { revokeAllRefreshTokens } from '@/lib/auth';
+import prisma from '@/lib/db';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 /**
  * Reset Password Endpoint
@@ -17,6 +26,7 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);
+<<<<<<< HEAD
     const rateLimit = await checkRateLimit(
       clientId,
       "/api/auth/reset-password",
@@ -39,12 +49,29 @@ export async function POST(request: NextRequest) {
             ),
           },
         },
+=======
+    const rateLimit = await checkRateLimit(clientId, '/api/auth/reset-password');
+    if (!rateLimit.allowed) {
+      logger.warn('Rate limit exceeded for reset password', { correlationId, clientId });
+      return NextResponse.json(
+        { error: 'Too many requests. Please wait a moment and try again.' },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': '5',
+            'X-RateLimit-Remaining': String(rateLimit.remaining),
+            'X-RateLimit-Reset': String(rateLimit.resetTime),
+            'Retry-After': String(Math.ceil((rateLimit.resetTime - Date.now()) / 1000)),
+          },
+        }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
     }
 
     const body = await request.json();
     const { token, password } = body;
 
+<<<<<<< HEAD
     if (!token || typeof token !== "string") {
       return NextResponse.json(
         { error: "Reset token is required" },
@@ -56,6 +83,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "New password is required" },
         { status: 400 },
+=======
+    if (!token || typeof token !== 'string') {
+      return NextResponse.json(
+        { error: 'Reset token is required' },
+        { status: 400 }
+      );
+    }
+
+    if (!password || typeof password !== 'string') {
+      return NextResponse.json(
+        { error: 'New password is required' },
+        { status: 400 }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
     }
 
@@ -63,11 +103,16 @@ export async function POST(request: NextRequest) {
     const passwordValidation = validatePasswordStrength(password);
     if (!passwordValidation.valid) {
       return NextResponse.json(
+<<<<<<< HEAD
         {
           error: "Password does not meet requirements",
           details: passwordValidation.errors,
         },
         { status: 400 },
+=======
+        { error: 'Password does not meet requirements', details: passwordValidation.errors },
+        { status: 400 }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
     }
 
@@ -82,6 +127,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!user) {
+<<<<<<< HEAD
       logger.warn("Invalid or expired password reset token", { correlationId });
       return NextResponse.json(
         {
@@ -89,6 +135,12 @@ export async function POST(request: NextRequest) {
             "Invalid or expired reset token. Please request a new password reset.",
         },
         { status: 400 },
+=======
+      logger.warn('Invalid or expired password reset token', { correlationId });
+      return NextResponse.json(
+        { error: 'Invalid or expired reset token. Please request a new password reset.' },
+        { status: 400 }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
     }
 
@@ -97,6 +149,7 @@ export async function POST(request: NextRequest) {
     try {
       passwordHash = await hashPassword(password);
     } catch (error) {
+<<<<<<< HEAD
       logger.error("Password hashing failed", error, {
         correlationId,
         userId: user.id,
@@ -104,6 +157,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Failed to process password" },
         { status: 500 },
+=======
+      logger.error('Password hashing failed', error, { correlationId, userId: user.id });
+      return NextResponse.json(
+        { error: 'Failed to process password' },
+        { status: 500 }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       );
     }
 
@@ -123,6 +182,7 @@ export async function POST(request: NextRequest) {
     await revokeAllRefreshTokens(user.id);
 
     const duration = Date.now() - startTime;
+<<<<<<< HEAD
     logger.info("Password reset successful", {
       correlationId,
       userId: user.id,
@@ -141,6 +201,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { error: "Failed to reset password. Please try again." },
       { status: 500 },
+=======
+    logger.info('Password reset successful', { correlationId, userId: user.id, duration });
+
+    return NextResponse.json({
+      success: true,
+      message: 'Password has been reset successfully. Please log in with your new password.',
+    });
+
+  } catch (error) {
+    const duration = Date.now() - startTime;
+    logger.error('Reset password error', error, { correlationId, duration });
+
+    return NextResponse.json(
+      { error: 'Failed to reset password. Please try again.' },
+      { status: 500 }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     );
   }
 }

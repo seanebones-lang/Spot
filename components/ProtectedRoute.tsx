@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 "use client";
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/stores/userStore";
 import { Loader2 } from "lucide-react";
+=======
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/stores/userStore';
+import { Loader2 } from 'lucide-react';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -15,9 +24,15 @@ interface ProtectedRouteProps {
 
 /**
  * ProtectedRoute Component
+<<<<<<< HEAD
  *
  * Protects routes based on authentication and subscription status.
  *
+=======
+ * 
+ * Protects routes based on authentication and subscription status.
+ * 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
  * @param requireAuth - If true, user must be authenticated
  * @param requireArtist - If true, user must have artist subscription
  * @param requirePremium - If true, user must have premium or artist subscription
@@ -38,23 +53,34 @@ export default function ProtectedRoute({
 
     // Check authentication
     if (requireAuth && !isAuthenticated) {
+<<<<<<< HEAD
       router.push(redirectTo || "/signin");
+=======
+      router.push(redirectTo || '/signin');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       return;
     }
 
     // Check premium subscription
     if (requirePremium && user) {
+<<<<<<< HEAD
       const hasPremium =
         user.subscriptionTier === "premium" ||
         user.subscriptionTier === "artist";
       if (!hasPremium) {
         router.push(redirectTo || "/subscription");
+=======
+      const hasPremium = user.subscriptionTier === 'premium' || user.subscriptionTier === 'artist';
+      if (!hasPremium) {
+        router.push(redirectTo || '/subscription');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         return;
       }
     }
 
     // Check artist subscription
     if (requireArtist && user) {
+<<<<<<< HEAD
       const isArtist =
         user.subscriptionTier === "artist" &&
         user.artistApplication &&
@@ -74,6 +100,17 @@ export default function ProtectedRoute({
     redirectTo,
     router,
   ]);
+=======
+      const isArtist = user.subscriptionTier === 'artist' && 
+                      user.artistApplication && 
+                      user.artistApplication.approvalStatus === 'approved';
+      if (!isArtist) {
+        router.push(redirectTo || '/artist/upgrade');
+        return;
+      }
+    }
+  }, [isAuthenticated, user, isLoading, requireAuth, requireArtist, requirePremium, redirectTo, router]);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
   // Show loading state
   if (isLoading) {
@@ -90,18 +127,28 @@ export default function ProtectedRoute({
   }
 
   if (requirePremium && user) {
+<<<<<<< HEAD
     const hasPremium =
       user.subscriptionTier === "premium" || user.subscriptionTier === "artist";
+=======
+    const hasPremium = user.subscriptionTier === 'premium' || user.subscriptionTier === 'artist';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     if (!hasPremium) {
       return null; // Will redirect
     }
   }
 
   if (requireArtist && user) {
+<<<<<<< HEAD
     const isArtist =
       user.subscriptionTier === "artist" &&
       user.artistApplication &&
       user.artistApplication.approvalStatus === "approved";
+=======
+    const isArtist = user.subscriptionTier === 'artist' && 
+                    user.artistApplication && 
+                    user.artistApplication.approvalStatus === 'approved';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     if (!isArtist) {
       return null; // Will redirect
     }

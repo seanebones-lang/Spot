@@ -1,6 +1,10 @@
 /**
  * Error Message Utilities
+<<<<<<< HEAD
  *
+=======
+ * 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
  * Provides user-friendly error messages with actionable recovery steps.
  * Maps technical error codes to understandable messages.
  */
@@ -16,6 +20,7 @@ export interface ErrorRecovery {
  */
 const errorMessageMap: Record<string, string> = {
   // Authentication errors
+<<<<<<< HEAD
   EMAIL_EXISTS: "This email is already registered. Try logging in instead.",
   INVALID_EMAIL: "Please enter a valid email address.",
   UNAUTHORIZED: "Please log in to continue.",
@@ -53,6 +58,36 @@ const errorMessageMap: Record<string, string> = {
   // Generic errors
   UNKNOWN_ERROR:
     "Something went wrong. Please try again or contact support if the problem persists.",
+=======
+  'EMAIL_EXISTS': 'This email is already registered. Try logging in instead.',
+  'INVALID_EMAIL': 'Please enter a valid email address.',
+  'UNAUTHORIZED': 'Please log in to continue.',
+  'AUTH_REQUIRED': 'Please log in to submit your application.',
+  
+  // Validation errors
+  'WEAK_PASSWORD': 'Password must be at least 8 characters with uppercase, lowercase, and numbers.',
+  'INVALID_PASSWORD': 'Password must be at least 8 characters with uppercase, lowercase, and numbers.',
+  'MISSING_FIELDS': 'Please complete all required fields.',
+  'INVALID_DATA': 'Please check your information and try again.',
+  
+  // Network errors
+  'NETWORK_ERROR': 'Connection failed. Please check your internet and try again.',
+  'TIMEOUT': 'Request timed out. Please try again.',
+  'FAILED_TO_FETCH': 'Connection failed. Please check your internet and try again.',
+  
+  // Server errors
+  'SERVER_ERROR': 'Our servers are temporarily unavailable. Please try again in a few minutes.',
+  'SERVICE_UNAVAILABLE': 'Service is temporarily unavailable. Please try again later.',
+  'INTERNAL_ERROR': 'Something went wrong on our end. Please try again in a few minutes.',
+  
+  // File upload errors
+  'FILE_TOO_LARGE': 'File is too large. Maximum size is 500MB.',
+  'INVALID_FILE_TYPE': 'Invalid file type. Please upload WAV, FLAC, MP3, M4A, or MP4 files.',
+  'UPLOAD_FAILED': 'Upload failed. Please check your internet connection and try again.',
+  
+  // Generic errors
+  'UNKNOWN_ERROR': 'Something went wrong. Please try again or contact support if the problem persists.',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 };
 
 /**
@@ -60,6 +95,7 @@ const errorMessageMap: Record<string, string> = {
  */
 const errorRecoveryMap: Partial<Record<string, ErrorRecovery>> = {
   NETWORK_ERROR: {
+<<<<<<< HEAD
     message: "Connection failed",
     steps: [
       "Check your internet connection",
@@ -90,6 +126,38 @@ const errorRecoveryMap: Partial<Record<string, ErrorRecovery>> = {
       "Verify the file is under 500MB",
       "Try a different file format if possible",
       "Contact support if the problem persists",
+=======
+    message: 'Connection failed',
+    steps: [
+      'Check your internet connection',
+      'Try refreshing the page',
+      'Contact support if the problem persists'
+    ],
+  },
+  SERVER_ERROR: {
+    message: 'Our servers are temporarily unavailable',
+    steps: [
+      'Wait a few minutes and try again',
+      'Check our status page for service updates',
+      'Contact support if the problem continues'
+    ],
+  },
+  EMAIL_EXISTS: {
+    message: 'This email is already registered',
+    steps: [
+      'Try logging in with this email instead',
+      'If you forgot your password, use the password reset link',
+      'Contact support if you believe this is an error'
+    ],
+  },
+  UPLOAD_FAILED: {
+    message: 'Upload failed',
+    steps: [
+      'Check your internet connection',
+      'Verify the file is under 500MB',
+      'Try a different file format if possible',
+      'Contact support if the problem persists'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     ],
   },
 };
@@ -98,15 +166,23 @@ const errorRecoveryMap: Partial<Record<string, ErrorRecovery>> = {
  * Get user-friendly error message from error code or message
  */
 export function getUserFriendlyError(error: string | Error | unknown): string {
+<<<<<<< HEAD
   let errorCode = "";
   let errorMessage = "";
 
   if (typeof error === "string") {
+=======
+  let errorCode = '';
+  let errorMessage = '';
+  
+  if (typeof error === 'string') {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     errorMessage = error;
     errorCode = error.toUpperCase();
   } else if (error instanceof Error) {
     errorMessage = error.message;
     errorCode = error.message.toUpperCase();
+<<<<<<< HEAD
   } else if (error && typeof error === "object" && "message" in error) {
     errorMessage = String(error.message);
     errorCode = errorMessage.toUpperCase();
@@ -124,13 +200,31 @@ export function getUserFriendlyError(error: string | Error | unknown): string {
     );
   }
 
+=======
+  } else if (error && typeof error === 'object' && 'message' in error) {
+    errorMessage = String(error.message);
+    errorCode = errorMessage.toUpperCase();
+  } else {
+    return errorMessageMap.UNKNOWN_ERROR || 'Something went wrong. Please try again.';
+  }
+  
+  // Check for network errors (TypeError from fetch)
+  if (error instanceof TypeError && errorMessage.includes('fetch')) {
+    return errorMessageMap.NETWORK_ERROR || 'Connection failed. Please check your internet and try again.';
+  }
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   // Check for specific error codes
   for (const [key, message] of Object.entries(errorMessageMap)) {
     if (errorCode.includes(key) || errorMessage.includes(key)) {
       return message;
     }
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   // Return original message if no mapping found, or generic error
   return errorMessage || errorMessageMap.UNKNOWN_ERROR;
 }
@@ -138,6 +232,7 @@ export function getUserFriendlyError(error: string | Error | unknown): string {
 /**
  * Get error recovery information
  */
+<<<<<<< HEAD
 export function getErrorRecovery(
   error: string | Error | unknown,
 ): ErrorRecovery | null {
@@ -148,23 +243,46 @@ export function getErrorRecovery(
   } else if (error instanceof Error) {
     errorCode = error.message.toUpperCase();
   } else if (error && typeof error === "object" && "message" in error) {
+=======
+export function getErrorRecovery(error: string | Error | unknown): ErrorRecovery | null {
+  let errorCode = '';
+  
+  if (typeof error === 'string') {
+    errorCode = error.toUpperCase();
+  } else if (error instanceof Error) {
+    errorCode = error.message.toUpperCase();
+  } else if (error && typeof error === 'object' && 'message' in error) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     errorCode = String(error.message).toUpperCase();
   } else {
     return null;
   }
+<<<<<<< HEAD
 
   // Check for network errors
   if (error instanceof TypeError && errorCode.includes("FETCH")) {
     return errorRecoveryMap.NETWORK_ERROR || null;
   }
 
+=======
+  
+  // Check for network errors
+  if (error instanceof TypeError && errorCode.includes('FETCH')) {
+    return errorRecoveryMap.NETWORK_ERROR || null;
+  }
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   // Check for specific error types
   for (const [key, recovery] of Object.entries(errorRecoveryMap)) {
     if (errorCode.includes(key) && recovery) {
       return recovery;
     }
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   return null;
 }
 
@@ -177,7 +295,11 @@ export function formatErrorWithRecovery(error: string | Error | unknown): {
 } {
   const message = getUserFriendlyError(error);
   const recovery = getErrorRecovery(error);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   return {
     message,
     recovery: recovery || undefined,

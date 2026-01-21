@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState } from "react";
@@ -6,6 +7,16 @@ import { usePlayerStore } from "@/stores/playerStore";
 import PlayButton from "./PlayButton";
 // import ProgressBar from './ProgressBar'; // Using inline progress bar for now
 import { formatDuration, cn } from "@/lib/utils";
+=======
+'use client';
+
+import { useState } from 'react';
+import { Play, Pause, SkipBack, SkipForward, Timer } from 'lucide-react';
+import { usePlayerStore } from '@/stores/playerStore';
+import PlayButton from './PlayButton';
+// import ProgressBar from './ProgressBar'; // Using inline progress bar for now
+import { formatDuration, cn } from '@/lib/utils';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface PodcastPlayerProps {
   episode: {
@@ -43,18 +54,26 @@ export default function PodcastPlayer({
       {/* Episode Info */}
       <div className="flex items-start gap-4">
         {episode.coverArt && (
+<<<<<<< HEAD
           <img
             src={episode.coverArt}
             alt={episode.title}
             className="w-32 h-32 rounded-lg object-cover"
           />
+=======
+          <img src={episode.coverArt} alt={episode.title} className="w-32 h-32 rounded-lg object-cover" />
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         )}
         <div className="flex-1">
           <h3 className="text-xl font-bold mb-1">{episode.title}</h3>
           {episode.description && (
+<<<<<<< HEAD
             <p className="text-sm text-spotify-text-gray line-clamp-3">
               {episode.description}
             </p>
+=======
+            <p className="text-sm text-spotify-text-gray line-clamp-3">{episode.description}</p>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           )}
         </div>
       </div>
@@ -103,7 +122,11 @@ export default function PodcastPlayer({
                     "px-2 py-1 rounded text-xs font-medium transition-colors",
                     playbackSpeed === speed
                       ? "bg-white text-black"
+<<<<<<< HEAD
                       : "bg-spotify-dark-gray text-spotify-text-gray hover:text-white",
+=======
+                      : "bg-spotify-dark-gray text-spotify-text-gray hover:text-white"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   )}
                 >
                   {speed}x
@@ -120,7 +143,11 @@ export default function PodcastPlayer({
                 "px-3 py-1 rounded-full text-xs font-medium transition-colors",
                 skipSilence
                   ? "bg-white text-black"
+<<<<<<< HEAD
                   : "bg-spotify-dark-gray text-spotify-text-gray hover:text-white",
+=======
+                  : "bg-spotify-dark-gray text-spotify-text-gray hover:text-white"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               )}
             >
               Skip Silence
@@ -134,7 +161,11 @@ export default function PodcastPlayer({
               className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-spotify-dark-gray text-spotify-text-gray hover:text-white transition-colors"
             >
               <Timer size={14} />
+<<<<<<< HEAD
               {sleepTimer ? `${sleepTimer}m` : "Sleep"}
+=======
+              {sleepTimer ? `${sleepTimer}m` : 'Sleep'}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             </button>
             {showSleepTimer && (
               <div className="absolute right-0 bottom-full mb-2 bg-spotify-dark-gray rounded-lg shadow-lg p-2 min-w-32">

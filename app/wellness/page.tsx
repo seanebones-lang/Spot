@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import {
@@ -28,12 +29,39 @@ export default function WellnessPage() {
           fontWeight: 700,
           color: "#FFFFFF",
           marginBottom: "32px",
+=======
+'use client';
+
+import { Phone, MessageCircle, BookOpen, ExternalLink, AlertCircle } from 'lucide-react';
+
+export default function WellnessPage() {
+  return (
+    <div 
+      className="p-8 max-w-4xl mx-auto"
+      style={{
+        padding: '32px',
+        maxWidth: '896px',
+        backgroundColor: '#121212',
+        minHeight: '100vh',
+        color: '#FFFFFF'
+      }}
+    >
+      <h1 
+        className="text-4xl font-bold mb-8"
+        style={{
+          fontSize: '32px',
+          lineHeight: '36px',
+          fontWeight: 700,
+          color: '#FFFFFF',
+          marginBottom: '32px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         }}
       >
         Mental Health Resource Hub
       </h1>
 
       {/* Disclaimer - Exact Spotify Style */}
+<<<<<<< HEAD
       <div
         className="bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-4 mb-8 flex items-start gap-3"
         style={{
@@ -64,10 +92,43 @@ export default function WellnessPage() {
               fontWeight: 700,
               color: "#F59E0B",
               marginBottom: "4px",
+=======
+      <div 
+        className="bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-4 mb-8 flex items-start gap-3"
+        style={{
+          backgroundColor: 'rgba(217, 119, 6, 0.2)',
+          border: '1px solid rgba(217, 119, 6, 0.5)',
+          borderRadius: '8px',
+          padding: '16px',
+          marginBottom: '32px',
+          gap: '12px'
+        }}
+      >
+        <AlertCircle 
+          className="text-yellow-500 flex-shrink-0 mt-0.5"
+          size={24}
+          style={{
+            width: '24px',
+            height: '24px',
+            color: '#F59E0B',
+            flexShrink: 0
+          }}
+        />
+        <div>
+          <h3 
+            className="font-bold text-yellow-500 mb-1"
+            style={{
+              fontSize: '16px',
+              lineHeight: '24px',
+              fontWeight: 700,
+              color: '#F59E0B',
+              marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             Important Disclaimer
           </h3>
+<<<<<<< HEAD
           <p
             className="text-sm text-white/80"
             style={{
@@ -79,6 +140,17 @@ export default function WellnessPage() {
             EmPulse Music is not a substitute for professional mental health
             care. If you&apos;re experiencing a mental health crisis, please
             contact a qualified professional or emergency services immediately.
+=======
+          <p 
+            className="text-sm text-white/80"
+            style={{
+              fontSize: '14px',
+              lineHeight: '20px',
+              color: 'rgba(255, 255, 255, 0.8)'
+            }}
+          >
+            EmPulse Music is not a substitute for professional mental health care. If you&apos;re experiencing a mental health crisis, please contact a qualified professional or emergency services immediately.
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </p>
         </div>
       </div>
@@ -92,6 +164,7 @@ export default function WellnessPage() {
         <div className="grid md:grid-cols-2 gap-4">
           <div className="bg-spotify-light-gray rounded-lg p-6">
             <h3 className="font-bold mb-2">988 Suicide & Crisis Lifeline</h3>
+<<<<<<< HEAD
             <p className="text-sm text-spotify-text-gray mb-4">
               Free, 24/7 crisis support
             </p>
@@ -99,11 +172,16 @@ export default function WellnessPage() {
               href="tel:988"
               className="text-spotify-green hover:underline flex items-center gap-2"
             >
+=======
+            <p className="text-sm text-spotify-text-gray mb-4">Free, 24/7 crisis support</p>
+            <a href="tel:988" className="text-spotify-green hover:underline flex items-center gap-2">
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               Call 988 <ExternalLink size={16} />
             </a>
           </div>
           <div className="bg-spotify-light-gray rounded-lg p-6">
             <h3 className="font-bold mb-2">Crisis Text Line</h3>
+<<<<<<< HEAD
             <p className="text-sm text-spotify-text-gray mb-4">
               Text for immediate support
             </p>
@@ -111,6 +189,10 @@ export default function WellnessPage() {
               href="sms:741741"
               className="text-spotify-green hover:underline flex items-center gap-2"
             >
+=======
+            <p className="text-sm text-spotify-text-gray mb-4">Text for immediate support</p>
+            <a href="sms:741741" className="text-spotify-green hover:underline flex items-center gap-2">
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               Text HOME to 741741 <ExternalLink size={16} />
             </a>
           </div>
@@ -149,18 +231,26 @@ export default function WellnessPage() {
             <p className="text-sm text-spotify-text-gray mb-4">
               Learn about common mental health conditions and treatments
             </p>
+<<<<<<< HEAD
             <button className="text-spotify-green hover:underline">
               Learn More →
             </button>
+=======
+            <button className="text-spotify-green hover:underline">Learn More →</button>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </div>
           <div className="bg-spotify-light-gray rounded-lg p-6">
             <h3 className="font-bold mb-2">Self-Care Strategies</h3>
             <p className="text-sm text-spotify-text-gray mb-4">
               Practical tips for managing stress and improving wellbeing
             </p>
+<<<<<<< HEAD
             <button className="text-spotify-green hover:underline">
               Explore →
             </button>
+=======
+            <button className="text-spotify-green hover:underline">Explore →</button>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </div>
         </div>
       </section>
@@ -172,9 +262,15 @@ export default function WellnessPage() {
           <div className="bg-spotify-light-gray rounded-lg p-6 text-center">
             <h3 className="font-bold mb-2">Habits</h3>
             <p className="text-xs text-spotify-text-gray mb-2">by NextEleven</p>
+<<<<<<< HEAD
             <a
               href="https://testflight.apple.com/join/aHJvusVF"
               target="_blank"
+=======
+            <a 
+              href="https://testflight.apple.com/join/aHJvusVF" 
+              target="_blank" 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               rel="noopener noreferrer"
               className="text-spotify-green hover:underline text-sm flex items-center justify-center gap-1"
             >
@@ -184,9 +280,15 @@ export default function WellnessPage() {
           <div className="bg-spotify-light-gray rounded-lg p-6 text-center">
             <h3 className="font-bold mb-2">DreamWeave PRO</h3>
             <p className="text-xs text-spotify-text-gray mb-2">by NextEleven</p>
+<<<<<<< HEAD
             <a
               href="https://testflight.apple.com/join/h64KN6wa"
               target="_blank"
+=======
+            <a 
+              href="https://testflight.apple.com/join/h64KN6wa" 
+              target="_blank" 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               rel="noopener noreferrer"
               className="text-spotify-green hover:underline text-sm flex items-center justify-center gap-1"
             >
@@ -196,9 +298,15 @@ export default function WellnessPage() {
           <div className="bg-spotify-light-gray rounded-lg p-6 text-center">
             <h3 className="font-bold mb-2">If/Then/Reset</h3>
             <p className="text-xs text-spotify-text-gray mb-2">by NextEleven</p>
+<<<<<<< HEAD
             <a
               href="https://apps.apple.com/us/app/if-then-reset-mental-wellness/id6755074789"
               target="_blank"
+=======
+            <a 
+              href="https://apps.apple.com/us/app/if-then-reset-mental-wellness/id6755074789" 
+              target="_blank" 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               rel="noopener noreferrer"
               className="text-spotify-green hover:underline text-sm flex items-center justify-center gap-1"
             >
@@ -210,6 +318,7 @@ export default function WellnessPage() {
 
       {/* Donations */}
       <section className="mb-8">
+<<<<<<< HEAD
         <h2 className="text-2xl font-bold mb-4">
           Support Mental Health Organizations
         </h2>
@@ -227,6 +336,18 @@ export default function WellnessPage() {
               <button
                 key={org}
                 className="bg-spotify-green hover:bg-spotify-green/80 text-white px-4 py-3 rounded-lg text-left transition-colors"
+=======
+        <h2 className="text-2xl font-bold mb-4">Support Mental Health Organizations</h2>
+        <div className="bg-spotify-light-gray rounded-lg p-6">
+          <p className="text-spotify-text-gray mb-4">
+            Donate to organizations working to improve mental health access and support
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            {['National Alliance on Mental Illness', 'Mental Health America', 'Active Minds'].map((org) => (
+              <button
+                key={org}
+                className="bg-empulse-purple hover:bg-empulse-purple/80 text-white px-4 py-3 rounded-lg text-left transition-colors"
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               >
                 <div className="font-semibold">{org}</div>
                 <div className="text-sm opacity-80 mt-1">Donate →</div>

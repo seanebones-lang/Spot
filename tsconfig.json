@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+<<<<<<< HEAD
     "lib": ["dom", "es2022"],
+=======
+    "lib": ["dom", "dom.iterable", "esnext"],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+<<<<<<< HEAD
     "forceConsistentCasingInFileNames": true,
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -14,7 +21,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+<<<<<<< HEAD
     "types": ["vitest/globals", "@types/node"],
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     "plugins": [
       {
         "name": "next"
@@ -22,11 +32,15 @@
     ],
     "paths": {
       "@/*": ["./*"]
+<<<<<<< HEAD
     },
     "noImplicitAny": false,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true
+=======
+    }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

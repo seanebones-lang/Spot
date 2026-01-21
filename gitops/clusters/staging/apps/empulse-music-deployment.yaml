@@ -25,6 +25,7 @@ spec:
         environment: staging
     spec:
       containers:
+<<<<<<< HEAD
         - name: empulse-music
           image: ghcr.io/nexteleven/empulse-music:staging
           imagePullPolicy: Always
@@ -73,3 +74,53 @@ spec:
         fsGroup: 1001
       imagePullSecrets:
         - name: ghcr-secret
+=======
+      - name: empulse-music
+        image: ghcr.io/nexteleven/empulse-music:staging
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "staging"
+        - name: PORT
+          value: "3000"
+        - name: HOSTNAME
+          value: "0.0.0.0"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1001
+          capabilities:
+            drop:
+            - ALL
+      securityContext:
+        fsGroup: 1001
+      imagePullSecrets:
+      - name: ghcr-secret
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e

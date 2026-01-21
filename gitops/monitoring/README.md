@@ -5,7 +5,10 @@ This directory contains Prometheus and Grafana configurations for monitoring Git
 ## Overview
 
 Following GitOps principles, we integrate Prometheus and Grafana for:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 - **Flux reconciliation status** and sync duration
 - **Application health** (deployments, pods, services)
 - **Resource utilization** (CPU, memory, network)

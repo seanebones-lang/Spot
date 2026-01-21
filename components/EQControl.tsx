@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState, useEffect } from "react";
 import { audioPlayer } from "@/lib/player";
+=======
+'use client';
+
+import { useState, useEffect } from 'react';
+import { audioPlayer } from '@/lib/player';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface EQControlProps {
   className?: string;
@@ -12,6 +19,7 @@ interface EQControlProps {
  * 10-Band Parametric EQ Control
  * Visual equalizer with adjustable sliders for each frequency band
  */
+<<<<<<< HEAD
 export default function EQControl({
   className = "",
   showPresets = true,
@@ -34,6 +42,16 @@ export default function EQControl({
   const [eqGains, setEqGains] = useState<number[]>(new Array(10).fill(0));
   const [selectedPreset, setSelectedPreset] = useState<string>("flat");
 
+=======
+export default function EQControl({ className = '', showPresets = true }: EQControlProps) {
+  // EQ frequencies (ISO standard)
+  const frequencies = [31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
+  const frequencyLabels = ['31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k'];
+  
+  const [eqGains, setEqGains] = useState<number[]>(new Array(10).fill(0));
+  const [selectedPreset, setSelectedPreset] = useState<string>('flat');
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   // EQ presets
   const presets = {
     flat: new Array(10).fill(0),
@@ -44,7 +62,11 @@ export default function EQControl({
     rock: [4, 3, 2, 0, -1, 0, 2, 3, 3, 2],
     classical: [0, 0, 0, 1, 2, 2, 1, 0, 0, 0],
   };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   // Load current EQ settings
   useEffect(() => {
     const currentGains = audioPlayer.getEQBands();
@@ -52,11 +74,16 @@ export default function EQControl({
       setEqGains(currentGains);
     }
   }, []);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const handleBandChange = (index: number, gain: number) => {
     const newGains = [...eqGains];
     newGains[index] = gain;
     setEqGains(newGains);
+<<<<<<< HEAD
 
     // Apply to audio pipeline
     audioPlayer.setEQBand(index, gain);
@@ -66,15 +93,33 @@ export default function EQControl({
   const applyPreset = (presetName: string) => {
     const presetGains =
       presets[presetName as keyof typeof presets] || presets.flat;
+=======
+    
+    // Apply to audio pipeline
+    audioPlayer.setEQBand(index, gain);
+    setSelectedPreset('custom');
+  };
+  
+  const applyPreset = (presetName: string) => {
+    const presetGains = presets[presetName as keyof typeof presets] || presets.flat;
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     setEqGains(presetGains);
     audioPlayer.setEQBands(presetGains);
     setSelectedPreset(presetName);
   };
+<<<<<<< HEAD
 
   const reset = () => {
     applyPreset("flat");
   };
 
+=======
+  
+  const reset = () => {
+    applyPreset('flat');
+  };
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   return (
     <div className={`bg-spotify-light-gray rounded-lg p-6 ${className}`}>
       <div className="flex items-center justify-between mb-6">
@@ -104,7 +149,11 @@ export default function EQControl({
           </div>
         )}
       </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       {/* EQ Bands */}
       <div className="flex items-end justify-between gap-3 h-64 px-2">
         {frequencies.map((freq, index) => {
@@ -113,12 +162,18 @@ export default function EQControl({
           const percentage = (normalizedGain / 24) * 100;
           const isPositive = gain > 0;
           const isNegative = gain < 0;
+<<<<<<< HEAD
 
           return (
             <div
               key={freq}
               className="flex-1 flex flex-col items-center gap-3 min-w-0"
             >
+=======
+          
+          return (
+            <div key={freq} className="flex-1 flex flex-col items-center gap-3 min-w-0">
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               {/* EQ Slider Container */}
               <div className="relative w-full h-56 flex flex-col justify-center items-center">
                 {/* Vertical scale labels */}
@@ -127,16 +182,25 @@ export default function EQControl({
                   <span>0</span>
                   <span>-12</span>
                 </div>
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 {/* Visual track background */}
                 <div className="relative w-2 h-full bg-spotify-text-gray/20 rounded-full">
                   {/* Center line */}
                   <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white/30 transform -translate-y-1/2" />
+<<<<<<< HEAD
 
+=======
+                  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   {/* Gain indicator bar */}
                   {gain !== 0 && (
                     <div
                       className={`absolute left-0 right-0 rounded-full transition-all duration-150 ${
+<<<<<<< HEAD
                         gain > 0
                           ? "bg-spotify-green top-1/2"
                           : "bg-red-500/70 bottom-1/2"
@@ -149,16 +213,39 @@ export default function EQControl({
                     />
                   )}
 
+=======
+                        gain > 0 
+                          ? 'bg-spotify-green top-1/2' 
+                          : 'bg-red-500/70 bottom-1/2'
+                      }`}
+                      style={{
+                        height: `${Math.abs(gain / 12) * 50}%`,
+                        transform: gain > 0 
+                          ? 'translateY(-100%)' 
+                          : 'translateY(0)',
+                      }}
+                    />
+                  )}
+                  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   {/* Slider thumb position indicator */}
                   <div
                     className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white rounded-full border-2 border-spotify-green shadow-lg z-10 transition-all duration-150 cursor-grab active:cursor-grabbing"
                     style={{
                       top: `${100 - percentage}%`,
+<<<<<<< HEAD
                       marginTop: "-12px",
                     }}
                   />
                 </div>
 
+=======
+                      marginTop: '-12px',
+                    }}
+                  />
+                </div>
+                
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 {/* Interactive slider input (invisible overlay) */}
                 <input
                   type="range"
@@ -166,6 +253,7 @@ export default function EQControl({
                   max="12"
                   step="0.5"
                   value={gain}
+<<<<<<< HEAD
                   onChange={(e) =>
                     handleBandChange(index, parseFloat(e.target.value))
                   }
@@ -187,13 +275,33 @@ export default function EQControl({
                     >
                       {gain > 0 ? "+" : ""}
                       {gain.toFixed(1)}dB
+=======
+                  onChange={(e) => handleBandChange(index, parseFloat(e.target.value))}
+                  className="absolute inset-0 w-full h-full cursor-pointer z-20 opacity-0"
+                  style={{
+                    transform: 'rotate(-90deg)',
+                    transformOrigin: 'center',
+                  }}
+                  aria-label={`EQ band ${frequencyLabels[index]} Hz`}
+                />
+                
+                {/* Current value display */}
+                <div className="absolute -top-6 text-xs text-white font-medium pointer-events-none whitespace-nowrap">
+                  {gain !== 0 ? (
+                    <span className={gain > 0 ? 'text-spotify-green' : 'text-red-400'}>
+                      {gain > 0 ? '+' : ''}{gain.toFixed(1)}dB
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                     </span>
                   ) : (
                     <span className="text-spotify-text-gray">0dB</span>
                   )}
                 </div>
               </div>
+<<<<<<< HEAD
 
+=======
+              
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               {/* Frequency label */}
               <div className="text-xs text-spotify-text-gray font-medium">
                 {frequencyLabels[index]}

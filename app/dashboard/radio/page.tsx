@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState } from "react";
@@ -41,6 +42,18 @@ const mockStations = [
     listeners: 0,
     earnings: 0,
   },
+=======
+'use client';
+
+import { useState } from 'react';
+import { TrendingUp, DollarSign, Radio as RadioIcon, Eye, EyeOff, BarChart3, AlertCircle, Users } from 'lucide-react';
+
+// Mock station data
+const mockStations = [
+  { id: '1', name: 'Indie Rock Radio', genre: 'Alternative', uploadDate: '2024-01-10', status: 'published', listeners: 1250, earnings: 5.00 },
+  { id: '2', name: 'Electronic Vibes', genre: 'Electronic', uploadDate: '2024-01-12', status: 'published', listeners: 890, earnings: 3.56 },
+  { id: '3', name: 'Jazz Lounge (Draft)', genre: 'Jazz', uploadDate: '2024-01-14', status: 'unpublished', listeners: 0, earnings: 0 },
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ];
 
 export default function RadioDashboardPage() {
@@ -48,6 +61,7 @@ export default function RadioDashboardPage() {
   const [autoRefresh, setAutoRefresh] = useState(true);
 
   const togglePublish = (stationId: string) => {
+<<<<<<< HEAD
     const updatedStations = stations.map((station) =>
       station.id === stationId
         ? {
@@ -56,10 +70,17 @@ export default function RadioDashboardPage() {
               station.status === "published" ? "unpublished" : "published",
           }
         : station,
+=======
+    const updatedStations = stations.map(station => 
+      station.id === stationId 
+        ? { ...station, status: station.status === 'published' ? 'unpublished' : 'published' }
+        : station
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     );
     setStations(updatedStations);
   };
 
+<<<<<<< HEAD
   const totalListeners = stations.reduce(
     (sum, station) => sum + station.listeners,
     0,
@@ -97,6 +118,39 @@ export default function RadioDashboardPage() {
             lineHeight: "36px",
             fontWeight: 700,
             color: "#FFFFFF",
+=======
+  const totalListeners = stations.reduce((sum, station) => sum + station.listeners, 0);
+  const totalEarnings = stations.reduce((sum, station) => sum + station.earnings, 0);
+  const publishedStations = stations.filter(s => s.status === 'published');
+
+  return (
+    <div 
+      className="p-8"
+      style={{
+        padding: '32px',
+        backgroundColor: '#121212',
+        minHeight: '100vh',
+        color: '#FFFFFF'
+      }}
+    >
+      <div 
+        className="flex items-center justify-between mb-8"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '32px',
+          gap: '16px'
+        }}
+      >
+        <h1 
+          className="text-4xl font-bold"
+          style={{
+            fontSize: '32px',
+            lineHeight: '36px',
+            fontWeight: 700,
+            color: '#FFFFFF'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           }}
         >
           Radio Station Dashboard
@@ -104,6 +158,7 @@ export default function RadioDashboardPage() {
       </div>
 
       {/* Legal Requirements Notice */}
+<<<<<<< HEAD
       <div
         className="bg-blue-600/20 border border-blue-600/50 rounded-lg p-6 mb-8"
         style={{
@@ -129,10 +184,34 @@ export default function RadioDashboardPage() {
                 fontWeight: 700,
                 color: "#FFFFFF",
                 marginBottom: "8px",
+=======
+      <div 
+        className="bg-blue-600/20 border border-blue-600/50 rounded-lg p-6 mb-8"
+        style={{
+          backgroundColor: 'rgba(13, 115, 236, 0.2)',
+          border: '1px solid rgba(13, 115, 236, 0.5)',
+          borderRadius: '8px',
+          padding: '24px',
+          marginBottom: '32px'
+        }}
+      >
+        <div className="flex items-start gap-3">
+          <AlertCircle size={24} className="text-blue-400 flex-shrink-0" style={{ color: '#60A5FA' }} />
+          <div>
+            <h3 
+              className="text-lg font-bold mb-2"
+              style={{
+                fontSize: '18px',
+                lineHeight: '24px',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                marginBottom: '8px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               }}
             >
               Legal Requirements for Radio Stations
             </h3>
+<<<<<<< HEAD
             <ul
               className="text-sm text-spotify-text-gray space-y-1 list-disc list-inside"
               style={{
@@ -172,12 +251,32 @@ export default function RadioDashboardPage() {
                 Live stream or automated playlist rights verification required
                 before going live
               </li>
+=======
+            <ul 
+              className="text-sm text-spotify-text-gray space-y-1 list-disc list-inside"
+              style={{
+                fontSize: '14px',
+                lineHeight: '20px',
+                color: '#B3B3B3',
+                listStyle: 'disc',
+                paddingLeft: '20px'
+              }}
+            >
+              <li>You must have proper <strong>broadcasting licenses</strong> and rights to stream music content</li>
+              <li>Music licensing through <strong>Performance Rights Organizations (PROs)</strong> like ASCAP, BMI, SESAC required</li>
+              <li>Digital performance rights secured for online streaming distribution</li>
+              <li>Station identification and branding must not infringe on existing trademarks</li>
+              <li>Compliance with FCC regulations (if applicable) and international broadcasting laws</li>
+              <li>Proper metadata and station information (call letters, format, location) must be accurate</li>
+              <li>Live stream or automated playlist rights verification required before going live</li>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             </ul>
           </div>
         </div>
       </div>
 
       {/* Statistics Cards */}
+<<<<<<< HEAD
       <div
         className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8"
         style={{
@@ -203,10 +302,38 @@ export default function RadioDashboardPage() {
               lineHeight: "16px",
               color: "rgba(255, 255, 255, 0.8)",
               marginBottom: "4px",
+=======
+      <div 
+        className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '16px',
+          marginBottom: '32px'
+        }}
+      >
+        <div 
+          className="bg-gradient-to-br from-orange-500 to-red-500 rounded-lg p-6 text-white"
+          style={{
+            background: 'linear-gradient(135deg, #F97316 0%, #EF4444 100%)',
+            borderRadius: '8px',
+            padding: '24px',
+            color: '#FFFFFF'
+          }}
+        >
+          <div 
+            className="text-sm opacity-80 mb-1"
+            style={{
+              fontSize: '13px',
+              lineHeight: '16px',
+              color: 'rgba(255, 255, 255, 0.8)',
+              marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             Total Stations
           </div>
+<<<<<<< HEAD
           <div
             className="text-3xl font-bold"
             style={{
@@ -214,22 +341,41 @@ export default function RadioDashboardPage() {
               lineHeight: "36px",
               fontWeight: 700,
               color: "#FFFFFF",
+=======
+          <div 
+            className="text-3xl font-bold"
+            style={{
+              fontSize: '32px',
+              lineHeight: '36px',
+              fontWeight: 700,
+              color: '#FFFFFF'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             {stations.length}
           </div>
+<<<<<<< HEAD
           <div
             className="text-xs opacity-60 mt-1"
             style={{
               fontSize: "12px",
               opacity: 0.6,
               marginTop: "4px",
+=======
+          <div 
+            className="text-xs opacity-60 mt-1"
+            style={{
+              fontSize: '12px',
+              opacity: 0.6,
+              marginTop: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             {publishedStations.length} live
           </div>
         </div>
 
+<<<<<<< HEAD
         <div
           className="bg-gradient-to-br from-spotify-green to-spotify-green rounded-lg p-6 text-white"
           style={{
@@ -246,10 +392,29 @@ export default function RadioDashboardPage() {
               lineHeight: "16px",
               color: "rgba(255, 255, 255, 0.8)",
               marginBottom: "4px",
+=======
+        <div 
+          className="bg-gradient-to-br from-empulse-purple to-empulse-blue rounded-lg p-6 text-white"
+          style={{
+            background: 'linear-gradient(135deg, #7209B7 0%, #457B9D 100%)',
+            borderRadius: '8px',
+            padding: '24px',
+            color: '#FFFFFF'
+          }}
+        >
+          <div 
+            className="text-sm opacity-80 mb-1"
+            style={{
+              fontSize: '13px',
+              lineHeight: '16px',
+              color: 'rgba(255, 255, 255, 0.8)',
+              marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             Total Listeners
           </div>
+<<<<<<< HEAD
           <div
             className="text-3xl font-bold flex items-center gap-2"
             style={{
@@ -263,10 +428,26 @@ export default function RadioDashboardPage() {
             }}
           >
             <Users size={24} style={{ width: "24px", height: "24px" }} />
+=======
+          <div 
+            className="text-3xl font-bold flex items-center gap-2"
+            style={{
+              fontSize: '32px',
+              lineHeight: '36px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <Users size={24} style={{ width: '24px', height: '24px' }} />
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             {totalListeners.toLocaleString()}
           </div>
         </div>
 
+<<<<<<< HEAD
         <div
           className="bg-gradient-to-br from-green-500 to-teal-500 rounded-lg p-6 text-white"
           style={{
@@ -283,10 +464,29 @@ export default function RadioDashboardPage() {
               lineHeight: "16px",
               color: "rgba(255, 255, 255, 0.8)",
               marginBottom: "4px",
+=======
+        <div 
+          className="bg-gradient-to-br from-green-500 to-teal-500 rounded-lg p-6 text-white"
+          style={{
+            background: 'linear-gradient(135deg, #22C55E 0%, #14B8A6 100%)',
+            borderRadius: '8px',
+            padding: '24px',
+            color: '#FFFFFF'
+          }}
+        >
+          <div 
+            className="text-sm opacity-80 mb-1"
+            style={{
+              fontSize: '13px',
+              lineHeight: '16px',
+              color: 'rgba(255, 255, 255, 0.8)',
+              marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             Total Earnings
           </div>
+<<<<<<< HEAD
           <div
             className="text-3xl font-bold flex items-center gap-2"
             style={{
@@ -320,10 +520,46 @@ export default function RadioDashboardPage() {
               lineHeight: "16px",
               color: "rgba(255, 255, 255, 0.8)",
               marginBottom: "4px",
+=======
+          <div 
+            className="text-3xl font-bold flex items-center gap-2"
+            style={{
+              fontSize: '32px',
+              lineHeight: '36px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <DollarSign size={24} style={{ width: '24px', height: '24px' }} />
+            ${totalEarnings.toFixed(2)}
+          </div>
+        </div>
+
+        <div 
+          className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg p-6 text-white"
+          style={{
+            background: 'linear-gradient(135deg, #A855F7 0%, #EC4899 100%)',
+            borderRadius: '8px',
+            padding: '24px',
+            color: '#FFFFFF'
+          }}
+        >
+          <div 
+            className="text-sm opacity-80 mb-1"
+            style={{
+              fontSize: '13px',
+              lineHeight: '16px',
+              color: 'rgba(255, 255, 255, 0.8)',
+              marginBottom: '4px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             Avg. Listeners/Station
           </div>
+<<<<<<< HEAD
           <div
             className="text-3xl font-bold"
             style={{
@@ -338,11 +574,24 @@ export default function RadioDashboardPage() {
                   totalListeners / publishedStations.length,
                 ).toLocaleString()
               : "0"}
+=======
+          <div 
+            className="text-3xl font-bold"
+            style={{
+              fontSize: '32px',
+              lineHeight: '36px',
+              fontWeight: 700,
+              color: '#FFFFFF'
+            }}
+          >
+            {publishedStations.length > 0 ? Math.round(totalListeners / publishedStations.length).toLocaleString() : '0'}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </div>
         </div>
       </div>
 
       {/* Upload Section - Feature Coming Soon */}
+<<<<<<< HEAD
       <div
         className="bg-spotify-light-gray rounded-lg p-6 mb-8"
         style={{
@@ -360,10 +609,30 @@ export default function RadioDashboardPage() {
             fontWeight: 700,
             color: "#FFFFFF",
             marginBottom: "16px",
+=======
+      <div 
+        className="bg-spotify-light-gray rounded-lg p-6 mb-8"
+        style={{
+          backgroundColor: '#181818',
+          borderRadius: '8px',
+          padding: '24px',
+          marginBottom: '32px'
+        }}
+      >
+        <h2 
+          className="text-2xl font-bold mb-4"
+          style={{
+            fontSize: '24px',
+            lineHeight: '28px',
+            fontWeight: 700,
+            color: '#FFFFFF',
+            marginBottom: '16px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           }}
         >
           Create New Radio Station
         </h2>
+<<<<<<< HEAD
         <div
           className="bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-6 text-center"
           style={{
@@ -392,10 +661,41 @@ export default function RadioDashboardPage() {
               fontWeight: 700,
               color: "#FFFFFF",
               marginBottom: "8px",
+=======
+        <div 
+          className="bg-yellow-600/20 border border-yellow-600/50 rounded-lg p-6 text-center"
+          style={{
+            backgroundColor: 'rgba(234, 179, 8, 0.2)',
+            border: '1px solid rgba(234, 179, 8, 0.5)',
+            borderRadius: '8px',
+            padding: '24px',
+            textAlign: 'center'
+          }}
+        >
+          <RadioIcon 
+            size={48} 
+            className="mx-auto mb-4 text-yellow-400"
+            style={{
+              width: '48px',
+              height: '48px',
+              color: '#FACC15',
+              margin: '0 auto 16px'
+            }}
+          />
+          <h3 
+            className="text-xl font-bold mb-2 text-white"
+            style={{
+              fontSize: '20px',
+              lineHeight: '24px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              marginBottom: '8px'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             }}
           >
             Feature Coming Soon
           </h3>
+<<<<<<< HEAD
           <p
             className="text-spotify-text-gray"
             style={{
@@ -407,6 +707,17 @@ export default function RadioDashboardPage() {
             Radio station creation is currently under development. We&apos;re
             ensuring all broadcasting licenses, music rights, and legal
             compliance requirements are properly verified before launch.
+=======
+          <p 
+            className="text-spotify-text-gray"
+            style={{
+              fontSize: '14px',
+              lineHeight: '20px',
+              color: '#B3B3B3'
+            }}
+          >
+            Radio station creation is currently under development. We&apos;re ensuring all broadcasting licenses, music rights, and legal compliance requirements are properly verified before launch.
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </p>
         </div>
       </div>
@@ -430,6 +741,7 @@ export default function RadioDashboardPage() {
             </thead>
             <tbody>
               {stations.map((station) => (
+<<<<<<< HEAD
                 <tr
                   key={station.id}
                   className="border-b border-white/10 hover:bg-white/5 transition-colors"
@@ -460,11 +772,31 @@ export default function RadioDashboardPage() {
                   <td className="py-3 text-right font-medium">
                     ${station.earnings.toFixed(2)}
                   </td>
+=======
+                <tr key={station.id} className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                  <td className="py-3">
+                    <div className="font-medium">{station.name}</div>
+                  </td>
+                  <td className="py-3 text-spotify-text-gray">{station.genre}</td>
+                  <td className="py-3 text-spotify-text-gray">{new Date(station.uploadDate).toLocaleDateString()}</td>
+                  <td className="py-3">
+                    <span className={`px-2 py-1 rounded text-xs ${
+                      station.status === 'published'
+                        ? 'bg-green-600/20 text-green-400'
+                        : 'bg-yellow-600/20 text-yellow-400'
+                    }`}>
+                      {station.status === 'published' ? 'Live' : 'Offline'}
+                    </span>
+                  </td>
+                  <td className="py-3 text-right font-medium">{station.listeners.toLocaleString()}</td>
+                  <td className="py-3 text-right font-medium">${station.earnings.toFixed(2)}</td>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                   <td className="py-3">
                     <div className="flex items-center justify-center gap-2">
                       <button
                         onClick={() => togglePublish(station.id)}
                         className={`p-2 rounded hover:bg-white/10 transition-colors ${
+<<<<<<< HEAD
                           station.status === "published"
                             ? "text-yellow-400"
                             : "text-green-400"
@@ -482,6 +814,15 @@ export default function RadioDashboardPage() {
                         )}
                       </button>
                       <button
+=======
+                          station.status === 'published' ? 'text-yellow-400' : 'text-green-400'
+                        }`}
+                        title={station.status === 'published' ? 'Take Offline' : 'Go Live'}
+                      >
+                        {station.status === 'published' ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                      <button 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                         className="p-2 rounded hover:bg-white/10 transition-colors text-spotify-text-gray hover:text-white"
                         title="View Analytics"
                         aria-label="View station analytics"
@@ -503,6 +844,7 @@ export default function RadioDashboardPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between p-4 bg-spotify-dark-gray rounded-lg">
             <div>
+<<<<<<< HEAD
               <div className="text-sm text-spotify-text-gray">
                 Revenue Model
               </div>
@@ -520,11 +862,24 @@ export default function RadioDashboardPage() {
               <div className="text-xs text-spotify-text-gray mt-1">
                 Note: Must pay PRO royalties (ASCAP/BMI/SESAC) and SoundExchange
                 fees before profit
+=======
+              <div className="text-sm text-spotify-text-gray">Revenue Model</div>
+              <div className="text-2xl font-bold">Advertising + Subscriptions</div>
+              <div className="text-xs text-spotify-text-gray mt-1">
+                Ad revenue from audio spots, sponsorships, and brand partnerships
+              </div>
+              <div className="text-xs text-spotify-text-gray mt-1">
+                Plus subscription revenue from premium memberships (ad-free, exclusive content)
+              </div>
+              <div className="text-xs text-spotify-text-gray mt-1">
+                Note: Must pay PRO royalties (ASCAP/BMI/SESAC) and SoundExchange fees before profit
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               </div>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div className="p-4 bg-spotify-dark-gray rounded-lg">
+<<<<<<< HEAD
               <div className="text-sm text-spotify-text-gray mb-1">
                 Pending Payment
               </div>
@@ -545,6 +900,18 @@ export default function RadioDashboardPage() {
               <div className="text-xl font-bold">
                 ${totalEarnings.toFixed(2)}
               </div>
+=======
+              <div className="text-sm text-spotify-text-gray mb-1">Pending Payment</div>
+              <div className="text-xl font-bold">$0.00</div>
+            </div>
+            <div className="p-4 bg-spotify-dark-gray rounded-lg">
+              <div className="text-sm text-spotify-text-gray mb-1">This Month</div>
+              <div className="text-xl font-bold">${totalEarnings.toFixed(2)}</div>
+            </div>
+            <div className="p-4 bg-spotify-dark-gray rounded-lg">
+              <div className="text-sm text-spotify-text-gray mb-1">Lifetime</div>
+              <div className="text-xl font-bold">${totalEarnings.toFixed(2)}</div>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             </div>
           </div>
         </div>

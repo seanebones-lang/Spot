@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState, useRef, useEffect } from "react";
 import { formatDuration } from "@/lib/utils";
+=======
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import { formatDuration } from '@/lib/utils';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface ProgressBarProps {
   progress: number; // 0-100
@@ -10,12 +17,16 @@ interface ProgressBarProps {
   onSeek: (position: number) => void;
 }
 
+<<<<<<< HEAD
 export default function ProgressBar({
   progress,
   duration,
   currentTime,
   onSeek,
 }: ProgressBarProps) {
+=======
+export default function ProgressBar({ progress, duration, currentTime, onSeek }: ProgressBarProps) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const [isDragging, setIsDragging] = useState(false);
   const [hoverProgress, setHoverProgress] = useState<number | null>(null);
   const [dragProgress, setDragProgress] = useState<number | null>(null);
@@ -54,10 +65,14 @@ export default function ProgressBar({
     if (barRef.current) {
       const rect = barRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
+<<<<<<< HEAD
       const progressPercent = Math.max(
         0,
         Math.min(100, (x / rect.width) * 100),
       );
+=======
+      const progressPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       const newPosition = (progressPercent / 100) * duration;
       onSeek(newPosition);
     }
@@ -67,10 +82,14 @@ export default function ProgressBar({
     if (barRef.current) {
       const rect = barRef.current.getBoundingClientRect();
       const x = touch.clientX - rect.left;
+<<<<<<< HEAD
       const progressPercent = Math.max(
         0,
         Math.min(100, (x / rect.width) * 100),
       );
+=======
+      const progressPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       const newPosition = (progressPercent / 100) * duration;
       onSeek(newPosition);
     }
@@ -87,10 +106,14 @@ export default function ProgressBar({
       if (barRef.current) {
         const rect = barRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
+<<<<<<< HEAD
         const progressPercent = Math.max(
           0,
           Math.min(100, (x / rect.width) * 100),
         );
+=======
+        const progressPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         setDragProgress(progressPercent);
         const newPosition = (progressPercent / 100) * duration;
         onSeek(newPosition);
@@ -102,10 +125,14 @@ export default function ProgressBar({
       if (barRef.current && e.touches.length > 0) {
         const rect = barRef.current.getBoundingClientRect();
         const x = e.touches[0].clientX - rect.left;
+<<<<<<< HEAD
         const progressPercent = Math.max(
           0,
           Math.min(100, (x / rect.width) * 100),
         );
+=======
+        const progressPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         setDragProgress(progressPercent);
         const newPosition = (progressPercent / 100) * duration;
         onSeek(newPosition);
@@ -122,6 +149,7 @@ export default function ProgressBar({
       setDragProgress(null);
     };
 
+<<<<<<< HEAD
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("touchmove", handleTouchMove, { passive: false });
@@ -134,6 +162,20 @@ export default function ProgressBar({
       document.removeEventListener("touchmove", handleTouchMove);
       document.removeEventListener("touchend", handleTouchEnd);
       document.removeEventListener("touchcancel", handleTouchEnd);
+=======
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchcancel', handleTouchEnd);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchcancel', handleTouchEnd);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     };
   }, [isDragging, duration, onSeek]);
 
@@ -155,6 +197,7 @@ export default function ProgressBar({
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseLeave}
         onTouchStart={handleTouchStart}
+<<<<<<< HEAD
         style={{ touchAction: "none" }}
       >
         <div
@@ -187,13 +230,44 @@ export default function ProgressBar({
                 e.currentTarget.style.opacity = "1";
                 e.currentTarget.style.transform =
                   "translate(-50%, -50%) scale(1.1)";
+=======
+        style={{ touchAction: 'none' }}
+      >
+        <div
+          className="h-full bg-white rounded-full transition-all group-hover:bg-spotify-green"
+          style={{ 
+            width: `${isDragging && dragProgress !== null ? dragProgress : progress}%`,
+            transition: isDragging ? 'none' : 'width 100ms ease-out, background-color 200ms ease-out',
+            willChange: isDragging ? 'width' : 'auto'
+          }}
+        />
+        {((hoverProgress !== null && !isDragging) || (dragProgress !== null && isDragging)) && (
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg"
+            style={{ 
+              left: `clamp(0px, calc(${(dragProgress !== null ? dragProgress : hoverProgress || 0)}% - 6px), calc(100% - 12px))`,
+              opacity: isDragging ? 1 : 0.8,
+              transform: isDragging ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%) scale(1)',
+              transition: isDragging ? 'left 0ms, opacity 0ms, transform 150ms cubic-bezier(0.3, 0, 0.1, 1)' : 'left 50ms ease-out, opacity 200ms ease-out, transform 200ms cubic-bezier(0.3, 0, 0.1, 1)',
+              willChange: isDragging ? 'left, transform' : 'opacity, transform'
+            }}
+            onMouseEnter={(e) => {
+              if (!isDragging) {
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.1)';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               }
             }}
             onMouseLeave={(e) => {
               if (!isDragging) {
+<<<<<<< HEAD
                 e.currentTarget.style.opacity = "0.8";
                 e.currentTarget.style.transform =
                   "translate(-50%, -50%) scale(1)";
+=======
+                e.currentTarget.style.opacity = '0.8';
+                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               }
             }}
           />

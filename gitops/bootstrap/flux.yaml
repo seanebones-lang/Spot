@@ -5,7 +5,11 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
+<<<<<<< HEAD
   interval: 1m0s # Poll Git every 1 minute (as of Flux v2.3+)
+=======
+  interval: 1m0s  # Poll Git every 1 minute (as of Flux v2.3+)
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   ref:
     branch: main
   secretRef:
@@ -19,6 +23,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
+<<<<<<< HEAD
   interval: 5m0s # Reconcile every 5 minutes (updated per 2025 best practices)
   path: ./clusters/prod
   prune: true # Automatically remove resources not in Git
@@ -26,6 +31,15 @@ spec:
     kind: GitRepository
     name: flux-system
   validation: client # Client-side validation before applying
+=======
+  interval: 5m0s  # Reconcile every 5 minutes (updated per 2025 best practices)
+  path: ./clusters/prod
+  prune: true      # Automatically remove resources not in Git
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  validation: client  # Client-side validation before applying
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment

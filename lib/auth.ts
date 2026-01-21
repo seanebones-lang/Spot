@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import { NextRequest } from "next/server";
 import { verify, sign } from "jsonwebtoken";
 import { randomBytes } from "crypto";
 import { getEnv } from "@/lib/env";
 import { logger } from "@/lib/logger";
 import prisma from "@/lib/db";
+=======
+import { NextRequest } from 'next/server';
+import { verify, sign } from 'jsonwebtoken';
+import { randomBytes } from 'crypto';
+import { getEnv } from '@/lib/env';
+import { logger } from '@/lib/logger';
+import prisma from '@/lib/db';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 /**
  * Authentication utilities
@@ -22,9 +31,13 @@ export interface AuthUser {
 function getJwtSecret(): string {
   const env = getEnv();
   if (!env.JWT_SECRET) {
+<<<<<<< HEAD
     throw new Error(
       "JWT_SECRET is not configured. This is required for authentication.",
     );
+=======
+    throw new Error('JWT_SECRET is not configured. This is required for authentication.');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
   return env.JWT_SECRET;
 }
@@ -35,8 +48,13 @@ function getJwtSecret(): string {
  */
 export function verifyToken(request: NextRequest): AuthUser | null {
   try {
+<<<<<<< HEAD
     const authHeader = request.headers.get("authorization");
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
+=======
+    const authHeader = request.headers.get('authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       return null;
     }
 
@@ -46,7 +64,11 @@ export function verifyToken(request: NextRequest): AuthUser | null {
     const decoded = verify(token, secret) as AuthUser;
     return decoded;
   } catch (error) {
+<<<<<<< HEAD
     logger.debug("Token verification failed", { error });
+=======
+    logger.debug('Token verification failed', { error });
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return null;
   }
 }
@@ -58,7 +80,11 @@ export function verifyToken(request: NextRequest): AuthUser | null {
 export function requireAuth(request: NextRequest): AuthUser {
   const user = verifyToken(request);
   if (!user) {
+<<<<<<< HEAD
     throw new Error("Unauthorized");
+=======
+    throw new Error('Unauthorized');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
   return user;
 }
@@ -66,6 +92,7 @@ export function requireAuth(request: NextRequest): AuthUser {
 /**
  * Require specific role
  */
+<<<<<<< HEAD
 export function requireRole(
   request: NextRequest,
   allowedRoles: string[],
@@ -73,6 +100,12 @@ export function requireRole(
   const user = requireAuth(request);
   if (!allowedRoles.includes(user.role)) {
     throw new Error("Forbidden: Insufficient permissions");
+=======
+export function requireRole(request: NextRequest, allowedRoles: string[]): AuthUser {
+  const user = requireAuth(request);
+  if (!allowedRoles.includes(user.role)) {
+    throw new Error('Forbidden: Insufficient permissions');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
   return user;
 }
@@ -81,7 +114,11 @@ export function requireRole(
  * Token pair for authentication
  */
 export interface TokenPair {
+<<<<<<< HEAD
   accessToken: string; // Short-lived (15 minutes)
+=======
+  accessToken: string;  // Short-lived (15 minutes)
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   refreshToken: string; // Long-lived (30 days), stored in database
 }
 
@@ -90,17 +127,26 @@ export interface TokenPair {
  */
 export async function generateTokenPair(
   user: AuthUser,
+<<<<<<< HEAD
   request: NextRequest,
 ): Promise<TokenPair> {
   const env = getEnv();
   if (!env.JWT_SECRET) {
     throw new Error("JWT_SECRET is not configured");
+=======
+  request: NextRequest
+): Promise<TokenPair> {
+  const env = getEnv();
+  if (!env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is not configured');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 
   // Generate short-lived access token (15 minutes)
   const accessToken = sign(
     { userId: user.userId, email: user.email, role: user.role },
     env.JWT_SECRET,
+<<<<<<< HEAD
     { expiresIn: "15m" },
   );
 
@@ -113,6 +159,19 @@ export async function generateTokenPair(
     request.headers.get("x-real-ip") ||
     "unknown";
   const userAgent = request.headers.get("user-agent") || "unknown";
+=======
+    { expiresIn: '15m' }
+  );
+
+  // Generate refresh token (random, stored in DB)
+  const refreshToken = randomBytes(32).toString('hex');
+
+  // Get client info
+  const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] ||
+                    request.headers.get('x-real-ip') ||
+                    'unknown';
+  const userAgent = request.headers.get('user-agent') || 'unknown';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
   // Store refresh token in database with expiration (30 days)
   await prisma.refreshToken.create({
@@ -177,6 +236,7 @@ export async function verifyRefreshToken(token: string): Promise<AuthUser> {
   });
 
   if (!tokenRecord) {
+<<<<<<< HEAD
     throw new Error("Invalid refresh token");
   }
 
@@ -190,6 +250,21 @@ export async function verifyRefreshToken(token: string): Promise<AuthUser> {
 
   if (!tokenRecord.user.isActive) {
     throw new Error("User account is not active");
+=======
+    throw new Error('Invalid refresh token');
+  }
+
+  if (tokenRecord.revokedAt) {
+    throw new Error('Refresh token has been revoked');
+  }
+
+  if (tokenRecord.expiresAt < new Date()) {
+    throw new Error('Refresh token has expired');
+  }
+
+  if (!tokenRecord.user.isActive) {
+    throw new Error('User account is not active');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 
   return {

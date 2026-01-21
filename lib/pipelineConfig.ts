@@ -87,9 +87,13 @@ export function getConfig() {
     vectorDB: VECTOR_DB_CONFIG,
     neo4j: {
       ...NEO4J_CONFIG,
+<<<<<<< HEAD
       poolSize: parseInt(
         process.env.NEO4J_POOL_SIZE || String(NEO4J_CONFIG.DEFAULT_POOL_SIZE),
       ),
+=======
+      poolSize: parseInt(process.env.NEO4J_POOL_SIZE || String(NEO4J_CONFIG.DEFAULT_POOL_SIZE)),
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     features: FEATURE_EXTRACTION_CONFIG,
   };

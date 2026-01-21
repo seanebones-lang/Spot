@@ -5,16 +5,28 @@ metadata:
   namespace: argocd
 spec:
   project: default
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   source:
     repoURL: https://github.com/seanebones-lang/Spot.git
     targetRevision: main
     path: gitops/overlays/production
+<<<<<<< HEAD
 
   destination:
     server: https://kubernetes.default.svc
     namespace: spot-production
 
+=======
+    
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: spot-production
+    
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   syncPolicy:
     automated:
       prune: true
@@ -23,5 +35,9 @@ spec:
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
       - PruneLast=true
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   revisionHistoryLimit: 10

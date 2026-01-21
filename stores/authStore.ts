@@ -1,13 +1,23 @@
+<<<<<<< HEAD
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { createSafeStorage } from "@/lib/safeStorage";
+=======
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { createSafeStorage } from '@/lib/safeStorage';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 export interface User {
   id: string;
   email: string;
   name: string;
   avatar?: string;
+<<<<<<< HEAD
   role: "user" | "artist" | "admin";
+=======
+  role: 'user' | 'artist' | 'admin';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   artistApproved?: boolean;
   createdAt: string;
 }
@@ -33,17 +43,25 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: false,
 
+<<<<<<< HEAD
       setUser: (user) =>
         set({
           user,
           isAuthenticated: !!user,
         }),
+=======
+      setUser: (user) => set({ 
+        user, 
+        isAuthenticated: !!user 
+      }),
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
       setToken: (token) => set({ token }),
 
       login: async (email: string, password: string) => {
         set({ isLoading: true });
         try {
+<<<<<<< HEAD
           const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
           const endpoint = apiUrl
             ? `${apiUrl}/api/auth/login`
@@ -51,12 +69,23 @@ export const useAuthStore = create<AuthState>()(
           const response = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+=======
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+          const endpoint = apiUrl ? `${apiUrl}/api/auth/login` : '/api/auth/login';
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             body: JSON.stringify({ email, password }),
           });
 
           if (!response.ok) {
             const error = await response.json();
+<<<<<<< HEAD
             throw new Error(error.error || "Login failed");
+=======
+            throw new Error(error.error || 'Login failed');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           }
 
           const data = await response.json();
@@ -75,15 +104,25 @@ export const useAuthStore = create<AuthState>()(
       register: async (email: string, password: string, name: string) => {
         set({ isLoading: true });
         try {
+<<<<<<< HEAD
           const response = await fetch("/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+=======
+          const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             body: JSON.stringify({ email, password, name }),
           });
 
           if (!response.ok) {
             const error = await response.json();
+<<<<<<< HEAD
             throw new Error(error.error || "Registration failed");
+=======
+            throw new Error(error.error || 'Registration failed');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           }
 
           const data = await response.json();
@@ -115,11 +154,19 @@ export const useAuthStore = create<AuthState>()(
         }
 
         try {
+<<<<<<< HEAD
           const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
           const endpoint = apiUrl ? `${apiUrl}/api/auth/me` : "/api/auth/me";
           const response = await fetch(endpoint, {
             headers: {
               Authorization: `Bearer ${token}`,
+=======
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+          const endpoint = apiUrl ? `${apiUrl}/api/auth/me` : '/api/auth/me';
+          const response = await fetch(endpoint, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             },
           });
 
@@ -134,18 +181,30 @@ export const useAuthStore = create<AuthState>()(
             get().logout();
           }
         } catch (error) {
+<<<<<<< HEAD
           console.error("Auth check failed:", error);
+=======
+          console.error('Auth check failed:', error);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           get().logout();
         }
       },
     }),
     {
+<<<<<<< HEAD
       name: "auth-storage",
+=======
+      name: 'auth-storage',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       storage: createJSONStorage(() => {
         try {
           return createSafeStorage();
         } catch (error) {
+<<<<<<< HEAD
           console.error("Failed to create storage:", error);
+=======
+          console.error('Failed to create storage:', error);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           return sessionStorage;
         }
       }),
@@ -154,6 +213,11 @@ export const useAuthStore = create<AuthState>()(
         token: state.token,
         isAuthenticated: state.isAuthenticated,
       }),
+<<<<<<< HEAD
     },
   ),
+=======
+    }
+  )
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 );

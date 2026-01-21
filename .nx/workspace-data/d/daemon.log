@@ -1,0 +1,12 @@
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.033Z - Started listening on: /private/var/folders/m1/vqb7phnj23n3dky4nw_kg35h0000gn/T/43beeb6cfff8ab36c14b/d.sock
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.035Z - [WATCHER]: Subscribed to changes within: /Users/nexteleven/Spot (native)
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.041Z - Established a connection. Number of open connections: 1
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.042Z - Established a connection. Number of open connections: 2
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.042Z - Closed a connection. Number of open connections: 1
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.043Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.044Z - Done responding to the client Shutdown initiated
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.044Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 1.
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.044Z - [WATCHER]: Stopping the watcher for /Users/nexteleven/Spot (sources)
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.044Z - Closed a connection. Number of open connections: 0
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.045Z - [WATCHER]: Stopping the watcher for /Users/nexteleven/Spot (outputs)
+[NX v20.8.4 Daemon Server] - 2026-01-19T20:29:54.045Z - Server stopped because: "Request to shutdown"

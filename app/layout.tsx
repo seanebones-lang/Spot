@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import "./globals.css";
@@ -32,10 +33,31 @@ export const metadata: Metadata = {
   },
   viewport: {
     width: "device-width",
+=======
+import type { Metadata } from 'next';
+import './globals.css';
+import KeyboardShortcutsProvider from '@/components/KeyboardShortcutsProvider';
+import LayoutContent from '@/components/LayoutContent';
+import ErrorBoundary from '@/components/ErrorBoundary';
+import GlobalErrorHandler from '@/components/GlobalErrorHandler';
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration';
+
+export const metadata: Metadata = {
+  title: 'EmPulse Music - Revolutionary Mood-Based Music Discovery',
+  description: 'Discover music that matches your mood. Revolutionary mood-based music streaming with wellness integration',
+  icons: {
+    icon: '/empulseheart.png',
+    shortcut: '/empulseheart.png',
+    apple: '/empulseheart.png',
+  },
+  viewport: {
+    width: 'device-width',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     initialScale: 1,
     maximumScale: 5,
     userScalable: true,
   },
+<<<<<<< HEAD
   manifest: "/manifest.json",
   themeColor: "#1DB954",
   appleWebApp: {
@@ -53,6 +75,8 @@ export const metadata: Metadata = {
     title: "Spot Music",
     description: "Listen to millions of songs.",
   },
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 };
 
 export default function RootLayout({
@@ -63,6 +87,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+<<<<<<< HEAD
         <link rel="preconnect" href="https://api.spotify.com" />
         <link rel="dns-prefetch" href="https://i.scdn.co" />
       </head>
@@ -81,6 +106,25 @@ export default function RootLayout({
             <HeavySpeedInsights />
           </QueryProvider>
         </SessionProvider>
+=======
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#7209B7" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="EmPulse Music" />
+      </head>
+      <body suppressHydrationWarning>
+        <ServiceWorkerRegistration />
+        <GlobalErrorHandler>
+          <ErrorBoundary>
+            <KeyboardShortcutsProvider>
+              <LayoutContent>
+                {children}
+              </LayoutContent>
+            </KeyboardShortcutsProvider>
+          </ErrorBoundary>
+        </GlobalErrorHandler>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       </body>
     </html>
   );

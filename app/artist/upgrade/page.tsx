@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState, useEffect } from "react";
@@ -5,6 +6,15 @@ import { useRouter } from "next/navigation";
 import { useUserStore } from "@/stores/userStore";
 import Button from "@/components/Button";
 import { Check, X, Music, Crown, AlertCircle } from "lucide-react";
+=======
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/stores/userStore';
+import Button from '@/components/Button';
+import { Check, X, Music, Crown, AlertCircle } from 'lucide-react';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 export default function ArtistUpgradePage() {
   const router = useRouter();
@@ -14,8 +24,13 @@ export default function ArtistUpgradePage() {
   useEffect(() => {
     // Redirect if not approved
     const artistApp = user?.artistApplication;
+<<<<<<< HEAD
     if (!artistApp || artistApp.approvalStatus !== "approved") {
       router.push("/artist/verification/pending");
+=======
+    if (!artistApp || artistApp.approvalStatus !== 'approved') {
+      router.push('/artist/verification/pending');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     }
   }, [user, router]);
 
@@ -24,12 +39,17 @@ export default function ArtistUpgradePage() {
   }
 
   const artistApplication = user.artistApplication;
+<<<<<<< HEAD
   if (!artistApplication || artistApplication.approvalStatus !== "approved") {
+=======
+  if (!artistApplication || artistApplication.approvalStatus !== 'approved') {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return null;
   }
 
   const handleUpgrade = async () => {
     setIsProcessing(true);
+<<<<<<< HEAD
 
     // Update subscription tier to artist
     updateSubscriptionTier("artist");
@@ -43,6 +63,21 @@ export default function ArtistUpgradePage() {
 
   const handleStayFree = () => {
     router.push("/");
+=======
+    
+    // Update subscription tier to artist
+    updateSubscriptionTier('artist');
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    setIsProcessing(false);
+    router.push('/dashboard/artist');
+  };
+
+  const handleStayFree = () => {
+    router.push('/');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   };
 
   return (
@@ -55,9 +90,14 @@ export default function ArtistUpgradePage() {
           </div>
           <h1 className="text-4xl font-bold mb-4">Upgrade to Artist Account</h1>
           <p className="text-spotify-text-gray text-lg max-w-2xl mx-auto">
+<<<<<<< HEAD
             Your artist application has been approved! Upgrade now to access
             exclusive artist features, or continue using your current plan
             without artist features.
+=======
+            Your artist application has been approved! Upgrade now to access exclusive artist features, 
+            or continue using your current plan without artist features.
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </p>
         </div>
 
@@ -71,6 +111,7 @@ export default function ArtistUpgradePage() {
                 {user.subscriptionTier}
               </span>
             </div>
+<<<<<<< HEAD
 
             <div className="space-y-4 mb-8">
               <div className="flex items-start gap-3">
@@ -124,6 +165,33 @@ export default function ArtistUpgradePage() {
                 <span className="text-spotify-text-gray line-through">
                   Analytics & insights
                 </span>
+=======
+            
+            <div className="space-y-4 mb-8">
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-spotify-text-gray">Access to music library</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-spotify-text-gray">Playlists and collections</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-spotify-text-gray">Social features</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <X size={20} className="text-empulse-red flex-shrink-0 mt-0.5" />
+                <span className="text-spotify-text-gray line-through">Upload tracks</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <X size={20} className="text-empulse-red flex-shrink-0 mt-0.5" />
+                <span className="text-spotify-text-gray line-through">Artist dashboard</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <X size={20} className="text-empulse-red flex-shrink-0 mt-0.5" />
+                <span className="text-spotify-text-gray line-through">Analytics & insights</span>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               </div>
             </div>
 
@@ -144,11 +212,16 @@ export default function ArtistUpgradePage() {
                 Recommended
               </span>
             </div>
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">Artist Account</h2>
               <Crown size={24} className="text-spotify-green" />
             </div>
+<<<<<<< HEAD
 
             <div className="space-y-4 mb-8">
               <div className="flex items-start gap-3">
@@ -213,6 +286,37 @@ export default function ArtistUpgradePage() {
                 <span className="text-white font-medium">
                   Collaboration features
                 </span>
+=======
+            
+            <div className="space-y-4 mb-8">
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-white font-medium">Everything in {user.subscriptionTier} plan</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-white font-medium">Upload unlimited tracks</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-white font-medium">Full artist dashboard</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-white font-medium">Advanced analytics & insights</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-white font-medium">Fan engagement tools</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-white font-medium">Revenue tracking & payouts</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check size={20} className="text-spotify-green flex-shrink-0 mt-0.5" />
+                <span className="text-white font-medium">Collaboration features</span>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               </div>
             </div>
 
@@ -232,6 +336,7 @@ export default function ArtistUpgradePage() {
         {/* Info Box */}
         <div className="bg-spotify-dark-gray rounded-lg p-6">
           <div className="flex items-start gap-4">
+<<<<<<< HEAD
             <AlertCircle
               size={24}
               className="text-spotify-green flex-shrink-0 mt-0.5"
@@ -252,6 +357,19 @@ export default function ArtistUpgradePage() {
                     key={type}
                     className="px-3 py-1 bg-spotify-green/20 text-spotify-green rounded-full text-sm capitalize"
                   >
+=======
+            <AlertCircle size={24} className="text-spotify-green flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-bold text-white mb-2">Your Approval Status</h3>
+              <p className="text-sm text-spotify-text-gray mb-4">
+                Your artist/management application has been approved. You can upgrade to an Artist account at any time 
+                to access all artist features. Your current {user.subscriptionTier} plan will remain active if you choose 
+                not to upgrade now.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {artistApplication.types.map(type => (
+                  <span key={type} className="px-3 py-1 bg-spotify-green/20 text-spotify-green rounded-full text-sm capitalize">
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                     {type}
                   </span>
                 ))}

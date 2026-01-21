@@ -1,4 +1,13 @@
 {
+<<<<<<< HEAD
   "*.{ts,tsx,js,jsx}": ["eslint --fix"],
   "*.{md,yml,yaml}": ["prettier --write"]
+=======
+  "*.{ts,tsx,js,jsx}": [
+    "eslint --fix"
+  ],
+  "*.{json,md,yml,yaml}": [
+    "eslint --fix --max-warnings=0"
+  ]
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }

@@ -1,5 +1,8 @@
 # UI Component System - Quick Start Guide
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 **Date:** January 14, 2026
 
 ---
@@ -9,10 +12,17 @@
 Import and use components from `@/components`:
 
 ```tsx
+<<<<<<< HEAD
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Card from "@/components/Card";
 import FormField from "@/components/FormField";
+=======
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import Card from '@/components/Card';
+import FormField from '@/components/FormField';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```
 
 ---
@@ -20,7 +30,10 @@ import FormField from "@/components/FormField";
 ## 📦 **QUICK EXAMPLES**
 
 ### Button
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 // Primary action
 <Button variant="primary" size="md">Get Started</Button>
@@ -36,29 +49,45 @@ import FormField from "@/components/FormField";
 ```
 
 ### Input
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 // Basic input
 <Input type="email" label="Email" placeholder="your@email.com" required />
 
 // With validation
+<<<<<<< HEAD
 <Input
   type="password"
+=======
+<Input 
+  type="password" 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   label="Password"
   error="Must be at least 8 characters"
   showSuccessIcon
 />
 
 // With helper text
+<<<<<<< HEAD
 <Input
   type="text"
+=======
+<Input 
+  type="text" 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   label="Username"
   helperText="Must be unique"
 />
 ```
 
 ### Card
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 // Basic card
 <Card variant="default" hover>
@@ -79,18 +108,29 @@ import FormField from "@/components/FormField";
 ```
 
 ### Form
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```tsx
 // Complete form with validation
 <form onSubmit={handleSubmit}>
   <FormField label="Email" required error={emailError}>
     <Input type="email" placeholder="your@email.com" />
   </FormField>
+<<<<<<< HEAD
 
   <FormField label="Password" required error={passwordError}>
     <Input type="password" />
   </FormField>
 
+=======
+  
+  <FormField label="Password" required error={passwordError}>
+    <Input type="password" />
+  </FormField>
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   <Button type="submit" variant="primary" loading={isSubmitting}>
     Sign Up
   </Button>
@@ -105,6 +145,7 @@ Use Tailwind classes that reference design tokens:
 
 ```tsx
 // Colors
+<<<<<<< HEAD
 className = "bg-spotify-green text-black";
 className = "bg-spotify-dark-gray text-white";
 className = "text-spotify-text-gray";
@@ -117,6 +158,20 @@ className = "mb-6"; // 24px margin-bottom
 // Border radius
 className = "rounded-lg"; // 8px (cards)
 className = "rounded-full"; // pill (buttons)
+=======
+className="bg-spotify-green text-black"
+className="bg-spotify-dark-gray text-white"
+className="text-spotify-text-gray"
+
+// Spacing (4px base unit)
+className="p-4" // 16px padding
+className="gap-2" // 8px gap
+className="mb-6" // 24px margin-bottom
+
+// Border radius
+className="rounded-lg" // 8px (cards)
+className="rounded-full" // pill (buttons)
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 ```
 
 ---

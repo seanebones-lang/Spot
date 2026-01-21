@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { createSafeStorage } from "@/lib/safeStorage";
+=======
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { createSafeStorage } from '@/lib/safeStorage';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 export interface RadioStation {
   id: string;
@@ -44,6 +50,7 @@ export const useRadioStore = create<RadioState>()(
       startTime: 0,
 
       setStations: (stations) => set({ stations }),
+<<<<<<< HEAD
 
       setCurrentStation: (station) => {
         // Generate random start time when switching stations
@@ -51,6 +58,15 @@ export const useRadioStore = create<RadioState>()(
           ? Math.floor(Math.random() * station.duration)
           : 0;
         set({
+=======
+      
+      setCurrentStation: (station) => {
+        // Generate random start time when switching stations
+        const randomStart = station 
+          ? Math.floor(Math.random() * station.duration)
+          : 0;
+        set({ 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           currentStation: station,
           startTime: randomStart,
           error: null,
@@ -58,6 +74,7 @@ export const useRadioStore = create<RadioState>()(
       },
 
       setIsPlaying: (isPlaying) => set({ isPlaying }),
+<<<<<<< HEAD
 
       setIsLoading: (isLoading) => set({ isLoading }),
 
@@ -66,6 +83,15 @@ export const useRadioStore = create<RadioState>()(
       setVolume: (volume) =>
         set({ volume: Math.max(0, Math.min(100, volume)) }),
 
+=======
+      
+      setIsLoading: (isLoading) => set({ isLoading }),
+      
+      setError: (error) => set({ error }),
+      
+      setVolume: (volume) => set({ volume: Math.max(0, Math.min(100, volume)) }),
+      
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       setStartTime: (time) => set({ startTime: time }),
 
       playStation: (station) => {
@@ -96,12 +122,20 @@ export const useRadioStore = create<RadioState>()(
       },
     }),
     {
+<<<<<<< HEAD
       name: "radio-storage",
+=======
+      name: 'radio-storage',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       storage: createJSONStorage(() => {
         try {
           return createSafeStorage();
         } catch (error) {
+<<<<<<< HEAD
           console.error("Failed to create storage:", error);
+=======
+          console.error('Failed to create storage:', error);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           return sessionStorage;
         }
       }),
@@ -110,6 +144,11 @@ export const useRadioStore = create<RadioState>()(
         volume: state.volume,
         startTime: state.startTime,
       }),
+<<<<<<< HEAD
     },
   ),
+=======
+    }
+  )
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 );

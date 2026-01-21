@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState, useEffect } from "react";
 import { X, Upload, Lock, Globe, Users } from "lucide-react";
 import { Playlist } from "@/types/playlist";
 import { cn } from "@/lib/utils";
+=======
+'use client';
+
+import { useState, useEffect } from 'react';
+import { X, Upload, Lock, Globe, Users } from 'lucide-react';
+import { Playlist } from '@/types/playlist';
+import { cn } from '@/lib/utils';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface PlaylistEditModalProps {
   playlist: Playlist;
@@ -12,6 +21,7 @@ interface PlaylistEditModalProps {
   onSave: (updates: Partial<Playlist>) => void;
 }
 
+<<<<<<< HEAD
 type PrivacyOption = "public" | "private" | "unlisted";
 
 export default function PlaylistEditModal({
@@ -24,13 +34,27 @@ export default function PlaylistEditModal({
   const [description, setDescription] = useState(playlist.description || "");
   const [privacy, setPrivacy] = useState<PrivacyOption>("public");
   const [coverArt, setCoverArt] = useState<string | null>(playlist.coverArt);
+=======
+type PrivacyOption = 'public' | 'private' | 'unlisted';
+
+export default function PlaylistEditModal({ playlist, isOpen, onClose, onSave }: PlaylistEditModalProps) {
+  const [name, setName] = useState(playlist.name);
+  const [description, setDescription] = useState(playlist.description || '');
+  const [privacy, setPrivacy] = useState<PrivacyOption>('public');
+  const [coverArt, setCoverArt] = useState<string | null>(playlist.coverArt || null);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setName(playlist.name);
+<<<<<<< HEAD
       setDescription(playlist.description || "");
       setCoverArt(playlist.coverArt);
+=======
+      setDescription(playlist.description || '');
+      setCoverArt(playlist.coverArt || null);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       // In production, get actual privacy setting from playlist
     }
   }, [isOpen, playlist]);
@@ -80,11 +104,15 @@ export default function PlaylistEditModal({
           <div className="flex items-center gap-6">
             <div className="relative w-40 h-40 rounded-lg overflow-hidden bg-spotify-light-gray flex-shrink-0">
               {coverArt ? (
+<<<<<<< HEAD
                 <img
                   src={coverArt}
                   alt={name}
                   className="w-full h-full object-cover"
                 />
+=======
+                <img src={coverArt} alt={name} className="w-full h-full object-cover" />
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-spotify-text-gray">
                   <Upload size={32} />
@@ -102,12 +130,19 @@ export default function PlaylistEditModal({
               </label>
             </div>
             <div className="flex-1">
+<<<<<<< HEAD
               <label className="block text-sm font-medium mb-2">
                 Cover Art
               </label>
               <label className="inline-block px-4 py-2 bg-spotify-light-gray hover:bg-spotify-light-gray/80 rounded-full text-sm cursor-pointer transition-colors">
                 <Upload size={16} className="inline mr-2" />
                 {isUploading ? "Uploading..." : "Choose Image"}
+=======
+              <label className="block text-sm font-medium mb-2">Cover Art</label>
+              <label className="inline-block px-4 py-2 bg-spotify-light-gray hover:bg-spotify-light-gray/80 rounded-full text-sm cursor-pointer transition-colors">
+                <Upload size={16} className="inline mr-2" />
+                {isUploading ? 'Uploading...' : 'Choose Image'}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 <input
                   type="file"
                   accept="image/*"
@@ -133,16 +168,24 @@ export default function PlaylistEditModal({
               placeholder="My Playlist"
               maxLength={100}
             />
+<<<<<<< HEAD
             <p className="text-xs text-spotify-text-gray mt-1">
               {name.length}/100
             </p>
+=======
+            <p className="text-xs text-spotify-text-gray mt-1">{name.length}/100</p>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </div>
 
           {/* Description */}
           <div>
+<<<<<<< HEAD
             <label className="block text-sm font-medium mb-2">
               Description
             </label>
+=======
+            <label className="block text-sm font-medium mb-2">Description</label>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -150,9 +193,13 @@ export default function PlaylistEditModal({
               placeholder="Add an optional description"
               maxLength={300}
             />
+<<<<<<< HEAD
             <p className="text-xs text-spotify-text-gray mt-1">
               {description.length}/300
             </p>
+=======
+            <p className="text-xs text-spotify-text-gray mt-1">{description.length}/300</p>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
           </div>
 
           {/* Privacy Settings */}
@@ -164,6 +211,7 @@ export default function PlaylistEditModal({
                   type="radio"
                   name="privacy"
                   value="public"
+<<<<<<< HEAD
                   checked={privacy === "public"}
                   onChange={(e) => setPrivacy(e.target.value as PrivacyOption)}
                   className="sr-only"
@@ -179,13 +227,28 @@ export default function PlaylistEditModal({
                   {privacy === "public" && (
                     <div className="w-3 h-3 bg-spotify-green rounded-full" />
                   )}
+=======
+                  checked={privacy === 'public'}
+                  onChange={(e) => setPrivacy(e.target.value as PrivacyOption)}
+                  className="sr-only"
+                />
+                <div className={cn(
+                  "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                  privacy === 'public' ? "border-spotify-green" : "border-spotify-text-gray"
+                )}>
+                  {privacy === 'public' && <div className="w-3 h-3 bg-spotify-green rounded-full" />}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 </div>
                 <Globe size={20} className="text-spotify-text-gray" />
                 <div>
                   <div className="font-medium">Public</div>
+<<<<<<< HEAD
                   <div className="text-sm text-spotify-text-gray">
                     Anyone can find and play this playlist
                   </div>
+=======
+                  <div className="text-sm text-spotify-text-gray">Anyone can find and play this playlist</div>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 </div>
               </label>
 
@@ -194,6 +257,7 @@ export default function PlaylistEditModal({
                   type="radio"
                   name="privacy"
                   value="unlisted"
+<<<<<<< HEAD
                   checked={privacy === "unlisted"}
                   onChange={(e) => setPrivacy(e.target.value as PrivacyOption)}
                   className="sr-only"
@@ -209,13 +273,28 @@ export default function PlaylistEditModal({
                   {privacy === "unlisted" && (
                     <div className="w-3 h-3 bg-spotify-green rounded-full" />
                   )}
+=======
+                  checked={privacy === 'unlisted'}
+                  onChange={(e) => setPrivacy(e.target.value as PrivacyOption)}
+                  className="sr-only"
+                />
+                <div className={cn(
+                  "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                  privacy === 'unlisted' ? "border-spotify-green" : "border-spotify-text-gray"
+                )}>
+                  {privacy === 'unlisted' && <div className="w-3 h-3 bg-spotify-green rounded-full" />}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 </div>
                 <Users size={20} className="text-spotify-text-gray" />
                 <div>
                   <div className="font-medium">Unlisted</div>
+<<<<<<< HEAD
                   <div className="text-sm text-spotify-text-gray">
                     Only people with the link can play
                   </div>
+=======
+                  <div className="text-sm text-spotify-text-gray">Only people with the link can play</div>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 </div>
               </label>
 
@@ -224,6 +303,7 @@ export default function PlaylistEditModal({
                   type="radio"
                   name="privacy"
                   value="private"
+<<<<<<< HEAD
                   checked={privacy === "private"}
                   onChange={(e) => setPrivacy(e.target.value as PrivacyOption)}
                   className="sr-only"
@@ -239,13 +319,28 @@ export default function PlaylistEditModal({
                   {privacy === "private" && (
                     <div className="w-3 h-3 bg-spotify-green rounded-full" />
                   )}
+=======
+                  checked={privacy === 'private'}
+                  onChange={(e) => setPrivacy(e.target.value as PrivacyOption)}
+                  className="sr-only"
+                />
+                <div className={cn(
+                  "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                  privacy === 'private' ? "border-spotify-green" : "border-spotify-text-gray"
+                )}>
+                  {privacy === 'private' && <div className="w-3 h-3 bg-spotify-green rounded-full" />}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 </div>
                 <Lock size={20} className="text-spotify-text-gray" />
                 <div>
                   <div className="font-medium">Private</div>
+<<<<<<< HEAD
                   <div className="text-sm text-spotify-text-gray">
                     Only you can access this playlist
                   </div>
+=======
+                  <div className="text-sm text-spotify-text-gray">Only you can access this playlist</div>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 </div>
               </label>
             </div>

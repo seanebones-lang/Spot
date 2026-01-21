@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useEffect, useState } from "react";
@@ -5,6 +6,15 @@ import Link from "next/link";
 import { useUIStore } from "@/stores/uiStore";
 import { cn } from "@/lib/utils";
 import PlayButton from "./PlayButton";
+=======
+'use client';
+
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useUIStore } from '@/stores/uiStore';
+import { cn } from '@/lib/utils';
+import PlayButton from './PlayButton';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 interface FriendActivity {
   id: string;
@@ -22,6 +32,7 @@ interface FriendActivity {
 // Mock friend activity data
 const mockFriendActivity: FriendActivity[] = [
   {
+<<<<<<< HEAD
     id: "1",
     name: "Alex Johnson",
     track: {
@@ -29,10 +40,20 @@ const mockFriendActivity: FriendActivity[] = [
       name: "Midnight Vibes",
       artist: "DJ Smooth",
       coverArt: "/api/placeholder/40/40",
+=======
+    id: '1',
+    name: 'Alex Johnson',
+    track: {
+      id: 'track1',
+      name: 'Midnight Vibes',
+      artist: 'DJ Smooth',
+      coverArt: '/api/placeholder/40/40',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     timestamp: 120, // 2 minutes ago
   },
   {
+<<<<<<< HEAD
     id: "2",
     name: "Sarah Chen",
     track: {
@@ -40,6 +61,15 @@ const mockFriendActivity: FriendActivity[] = [
       name: "Electric Dreams",
       artist: "Neon Waves",
       coverArt: "/api/placeholder/40/40",
+=======
+    id: '2',
+    name: 'Sarah Chen',
+    track: {
+      id: 'track2',
+      name: 'Electric Dreams',
+      artist: 'Neon Waves',
+      coverArt: '/api/placeholder/40/40',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     timestamp: 450, // 7.5 minutes ago
   },
@@ -47,26 +77,41 @@ const mockFriendActivity: FriendActivity[] = [
 
 export default function FriendsActivity() {
   const { leftSidebarWidth } = useUIStore();
+<<<<<<< HEAD
   const [activities, setActivities] =
     useState<FriendActivity[]>(mockFriendActivity);
+=======
+  const [activities, setActivities] = useState<FriendActivity[]>(mockFriendActivity);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
   // In production, this would poll or use WebSocket for real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
       // Simulate real-time updates
+<<<<<<< HEAD
       setActivities((prev) =>
         prev.map((activity) => ({
           ...activity,
           timestamp: activity.timestamp + 1,
         })),
       );
+=======
+      setActivities(prev => prev.map(activity => ({
+        ...activity,
+        timestamp: activity.timestamp + 1,
+      })));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
   const formatTimestamp = (seconds: number) => {
+<<<<<<< HEAD
     if (seconds < 60) return "just now";
+=======
+    if (seconds < 60) return 'just now';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     const minutes = Math.floor(seconds / 60);
     if (minutes < 60) return `${minutes}m ago`;
     const hours = Math.floor(minutes / 60);
@@ -95,7 +140,11 @@ export default function FriendsActivity() {
               href={`/track/${activity.track.id}`}
               className="flex items-center gap-2 p-2 rounded hover:bg-white/10 transition-colors group"
             >
+<<<<<<< HEAD
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-spotify-green to-spotify-green flex-shrink-0 flex items-center justify-center text-xs font-bold">
+=======
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-empulse-purple to-empulse-blue flex-shrink-0 flex items-center justify-center text-xs font-bold">
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                 {activity.name.charAt(0)}
               </div>
               <div className="flex-1 min-w-0">

@@ -3,13 +3,19 @@
  * Mock helpers and test utilities for RAG/pipeline system
  */
 
+<<<<<<< HEAD
 import { AIMoodSuggestion } from "@/types/mood";
 import { Track } from "@/types/track";
+=======
+import { AIMoodSuggestion } from '@/types/mood';
+import { Track } from '@/types/track';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 /**
  * Mock audio file for testing
  */
 export function createMockAudioFile(
+<<<<<<< HEAD
   name: string = "test-audio.mp3",
   size: number = 1024 * 1024, // 1MB
   type: string = "audio/mpeg",
@@ -22,6 +28,20 @@ export function createMockAudioFile(
   Object.defineProperty(file, "size", { value: size });
   Object.defineProperty(file, "type", { value: type });
 
+=======
+  name: string = 'test-audio.mp3',
+  size: number = 1024 * 1024, // 1MB
+  type: string = 'audio/mpeg'
+): File {
+  // Create a mock File object
+  const blob = new Blob(['mock audio data'], { type });
+  const file = new File([blob], name, { type });
+  
+  // Mock File properties
+  Object.defineProperty(file, 'size', { value: size });
+  Object.defineProperty(file, 'type', { value: type });
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   return file;
 }
 
@@ -51,6 +71,7 @@ export function createMockAudioFeatures(): any {
  * Mock mood suggestion for testing
  */
 export function createMockMoodSuggestion(
+<<<<<<< HEAD
   overrides: Partial<AIMoodSuggestion> = {},
 ): AIMoodSuggestion {
   return {
@@ -58,6 +79,15 @@ export function createMockMoodSuggestion(
     feelings: ["Calm", "Focused"],
     vibe: 60,
     genres: ["Pop", "Electronic"],
+=======
+  overrides: Partial<AIMoodSuggestion> = {}
+): AIMoodSuggestion {
+  return {
+    mood: 'Content',
+    feelings: ['Calm', 'Focused'],
+    vibe: 60,
+    genres: ['Pop', 'Electronic'],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     confidence: 0.85,
     embedding: new Array(768).fill(0).map(() => Math.random() * 2 - 1),
     ...overrides,
@@ -69,6 +99,7 @@ export function createMockMoodSuggestion(
  */
 export function createMockTrack(overrides: Partial<Track> = {}): Track {
   return {
+<<<<<<< HEAD
     id: "test-track-1",
     name: "Test Track",
     artist: "Test Artist",
@@ -81,6 +112,20 @@ export function createMockTrack(overrides: Partial<Track> = {}): Track {
       feelings: ["Calm", "Focused"],
       vibe: 60,
       genres: ["Pop", "Electronic"],
+=======
+    id: 'test-track-1',
+    name: 'Test Track',
+    artist: 'Test Artist',
+    artistId: 'test-artist-1',
+    album: 'Test Album',
+    albumId: 'test-album-1',
+    duration: 180,
+    moodTags: {
+      mood: 'Content',
+      feelings: ['Calm', 'Focused'],
+      vibe: 60,
+      genres: ['Pop', 'Electronic'],
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     },
     ...overrides,
   } as Track;
@@ -90,8 +135,12 @@ export function createMockTrack(overrides: Partial<Track> = {}): Track {
  * Mock Pinecone vector DB for testing
  */
 export class MockPineconeVectorDB {
+<<<<<<< HEAD
   private embeddings: Map<string, { embedding: number[]; metadata: any }> =
     new Map();
+=======
+  private embeddings: Map<string, { embedding: number[]; metadata: any }> = new Map();
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
   async initialize(): Promise<void> {
     // Mock initialization
@@ -99,6 +148,7 @@ export class MockPineconeVectorDB {
 
   async similaritySearch(
     embedding: number[],
+<<<<<<< HEAD
     options: { topK: number },
   ): Promise<Array<{ trackId: string; similarity: number; moodTags?: any }>> {
     // Mock similarity search - return random similar tracks
@@ -129,6 +179,30 @@ export class MockPineconeVectorDB {
     embedding: number[],
     metadata: any,
   ): Promise<void> {
+=======
+    options: { topK: number }
+  ): Promise<Array<{ trackId: string; similarity: number; moodTags?: any }>> {
+    // Mock similarity search - return random similar tracks
+    const results: Array<{ trackId: string; similarity: number; moodTags?: any }> = [];
+    
+    for (let i = 0; i < Math.min(options.topK, this.embeddings.size); i++) {
+      results.push({
+        trackId: `track-${i}`,
+        similarity: 0.8 - (i * 0.1), // Decreasing similarity
+        moodTags: {
+          mood: 'Content',
+          feelings: ['Calm'],
+          vibe: 60,
+          genres: ['Pop'],
+        },
+      });
+    }
+    
+    return results;
+  }
+
+  async upsert(trackId: string, embedding: number[], metadata: any): Promise<void> {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     this.embeddings.set(trackId, { embedding, metadata });
   }
 
@@ -162,11 +236,19 @@ export class MockNeo4jKnowledgeGraph {
 
   async findSimilarTracks(
     trackId: string,
+<<<<<<< HEAD
     options: { limit?: number; minSimilarity?: number } = {},
   ): Promise<Array<{ track: Track; similarity: number }>> {
     const limit = options.limit || 10;
     const results: Array<{ track: Track; similarity: number }> = [];
 
+=======
+    options: { limit?: number; minSimilarity?: number } = {}
+  ): Promise<Array<{ track: Track; similarity: number }>> {
+    const limit = options.limit || 10;
+    const results: Array<{ track: Track; similarity: number }> = [];
+    
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     for (const [id, track] of this.tracks.entries()) {
       if (id !== trackId && results.length < limit) {
         results.push({
@@ -175,7 +257,11 @@ export class MockNeo4jKnowledgeGraph {
         });
       }
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return results;
   }
 
@@ -204,7 +290,11 @@ export class MockMetricsCollector {
   }
 
   getStageMetrics(stage: string): any[] {
+<<<<<<< HEAD
     return this.metrics.filter((m) => m.stage === stage);
+=======
+    return this.metrics.filter(m => m.stage === stage);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 
   clear(): void {
@@ -216,7 +306,11 @@ export class MockMetricsCollector {
  * Wait for async operations (for testing)
  */
 export function wait(ms: number): Promise<void> {
+<<<<<<< HEAD
   return new Promise((resolve) => setTimeout(resolve, ms));
+=======
+  return new Promise(resolve => setTimeout(resolve, ms));
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 }
 
 /**
@@ -224,6 +318,7 @@ export function wait(ms: number): Promise<void> {
  */
 export function assertValidEmbedding(embedding: number[] | undefined): void {
   if (!embedding) {
+<<<<<<< HEAD
     throw new Error("Embedding is undefined");
   }
   if (!Array.isArray(embedding)) {
@@ -234,6 +329,18 @@ export function assertValidEmbedding(embedding: number[] | undefined): void {
   }
   if (embedding.some((v) => !isFinite(v))) {
     throw new Error("Embedding contains NaN or Infinity");
+=======
+    throw new Error('Embedding is undefined');
+  }
+  if (!Array.isArray(embedding)) {
+    throw new Error('Embedding must be an array');
+  }
+  if (embedding.length === 0) {
+    throw new Error('Embedding is empty');
+  }
+  if (embedding.some(v => !isFinite(v))) {
+    throw new Error('Embedding contains NaN or Infinity');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 }
 
@@ -242,6 +349,7 @@ export function assertValidEmbedding(embedding: number[] | undefined): void {
  */
 export function assertValidMoodSuggestion(suggestion: AIMoodSuggestion): void {
   if (!suggestion) {
+<<<<<<< HEAD
     throw new Error("Mood suggestion is undefined");
   }
   if (!suggestion.mood) {
@@ -266,5 +374,23 @@ export function assertValidMoodSuggestion(suggestion: AIMoodSuggestion): void {
     suggestion.confidence > 1
   ) {
     throw new Error("Confidence must be a number between 0 and 1");
+=======
+    throw new Error('Mood suggestion is undefined');
+  }
+  if (!suggestion.mood) {
+    throw new Error('Mood is missing');
+  }
+  if (!Array.isArray(suggestion.feelings)) {
+    throw new Error('Feelings must be an array');
+  }
+  if (typeof suggestion.vibe !== 'number' || suggestion.vibe < 0 || suggestion.vibe > 100) {
+    throw new Error('Vibe must be a number between 0 and 100');
+  }
+  if (!Array.isArray(suggestion.genres)) {
+    throw new Error('Genres must be an array');
+  }
+  if (typeof suggestion.confidence !== 'number' || suggestion.confidence < 0 || suggestion.confidence > 1) {
+    throw new Error('Confidence must be a number between 0 and 1');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }
 }

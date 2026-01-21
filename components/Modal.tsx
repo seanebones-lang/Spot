@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -8,6 +9,18 @@ import Button from "./Button";
 /**
  * Modal Component - Standardized modal/dialog with overlay, header, body, and footer
  *
+=======
+'use client';
+
+import React, { useEffect, useRef } from 'react';
+import { X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import Button from './Button';
+
+/**
+ * Modal Component - Standardized modal/dialog with overlay, header, body, and footer
+ * 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
  * Design System Specifications:
  * - Sizes: sm (400px), md (600px), lg (800px), xl (1000px), fullscreen
  * - Overlay: Dark backdrop with blur (rgba(0, 0, 0, 0.5))
@@ -16,11 +29,19 @@ import Button from "./Button";
  * - Keyboard: ESC key closes modal
  * - Focus: Traps focus within modal, returns to trigger on close
  * - Accessibility: WCAG 2.2 AA compliant
+<<<<<<< HEAD
  *
  * @example
  * ```tsx
  * <Modal
  *   isOpen={isOpen}
+=======
+ * 
+ * @example
+ * ```tsx
+ * <Modal 
+ *   isOpen={isOpen} 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
  *   onClose={handleClose}
  *   title="Edit Playlist"
  * >
@@ -35,74 +56,126 @@ import Button from "./Button";
  * ```
  */
 
+<<<<<<< HEAD
 export type ModalSize = "sm" | "md" | "lg" | "xl" | "fullscreen";
+=======
+export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'fullscreen';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 export interface ModalProps {
   /**
    * Whether modal is open
    */
   isOpen: boolean;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Callback when modal should close (ESC key, overlay click, or close button)
    */
   onClose: () => void;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Modal title (shown in header)
    */
   title?: string;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Modal size
    * @default 'md'
    */
   size?: ModalSize;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Show close button in header
    * @default true
    */
   showCloseButton?: boolean;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Close modal when clicking overlay/backdrop
    * @default true
    */
   closeOnOverlayClick?: boolean;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Close modal when pressing ESC key
    * @default true
    */
   closeOnEscape?: boolean;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Prevent body scroll when modal is open
    * @default true
    */
   preventBodyScroll?: boolean;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Custom header content (overrides title)
    */
   header?: React.ReactNode;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Custom footer content
    */
   footer?: React.ReactNode;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Modal content (children)
    */
   children: React.ReactNode;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Container className
    */
   className?: string;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   /**
    * Overlay className
    */
@@ -116,7 +189,11 @@ const ModalRoot: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   title,
+<<<<<<< HEAD
   size = "md",
+=======
+  size = 'md',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   showCloseButton = true,
   closeOnOverlayClick = true,
   closeOnEscape = true,
@@ -132,11 +209,19 @@ const ModalRoot: React.FC<ModalProps> = ({
 
   // Size configurations
   const sizeConfig = {
+<<<<<<< HEAD
     sm: "max-w-md",
     md: "max-w-2xl",
     lg: "max-w-4xl",
     xl: "max-w-6xl",
     fullscreen: "max-w-full max-h-full m-4",
+=======
+    sm: 'max-w-md',
+    md: 'max-w-2xl',
+    lg: 'max-w-4xl',
+    xl: 'max-w-6xl',
+    fullscreen: 'max-w-full max-h-full m-4',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   };
 
   // Prevent body scroll when modal is open
@@ -144,6 +229,7 @@ const ModalRoot: React.FC<ModalProps> = ({
     if (isOpen && preventBodyScroll) {
       // Save current scroll position
       const scrollY = window.scrollY;
+<<<<<<< HEAD
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = "100%";
@@ -152,6 +238,16 @@ const ModalRoot: React.FC<ModalProps> = ({
         document.body.style.position = "";
         document.body.style.top = "";
         document.body.style.width = "";
+=======
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         window.scrollTo(0, scrollY);
       };
     }
@@ -162,13 +258,22 @@ const ModalRoot: React.FC<ModalProps> = ({
     if (!isOpen || !closeOnEscape) return;
 
     const handleEscape = (e: KeyboardEvent) => {
+<<<<<<< HEAD
       if (e.key === "Escape") {
+=======
+      if (e.key === 'Escape') {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         onClose();
       }
     };
 
+<<<<<<< HEAD
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
+=======
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   }, [isOpen, closeOnEscape, onClose]);
 
   // Focus trap and management
@@ -204,6 +309,7 @@ const ModalRoot: React.FC<ModalProps> = ({
   return (
     <div
       className={cn(
+<<<<<<< HEAD
         "fixed inset-0 z-[100] flex items-center justify-center p-4",
         "bg-black/50 backdrop-blur-sm",
         "transition-opacity duration-200 ease-out",
@@ -211,15 +317,29 @@ const ModalRoot: React.FC<ModalProps> = ({
       )}
       style={{
         transition: "opacity 200ms cubic-bezier(0.3, 0, 0.1, 1)",
+=======
+        'fixed inset-0 z-[100] flex items-center justify-center p-4',
+        'bg-black/50 backdrop-blur-sm',
+        'transition-opacity duration-200 ease-out',
+        overlayClassName
+      )}
+      style={{
+        transition: 'opacity 200ms cubic-bezier(0.3, 0, 0.1, 1)'
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       }}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
+<<<<<<< HEAD
       aria-labelledby={title ? "modal-title" : undefined}
+=======
+      aria-labelledby={title ? 'modal-title' : undefined}
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     >
       <div
         ref={modalRef}
         className={cn(
+<<<<<<< HEAD
           "bg-spotify-dark-gray rounded-xl",
           "w-full max-h-[90vh]",
           "flex flex-col",
@@ -233,6 +353,20 @@ const ModalRoot: React.FC<ModalProps> = ({
             "transform 200ms cubic-bezier(0.3, 0, 0.1, 1), opacity 200ms cubic-bezier(0.3, 0, 0.1, 1)",
           transform: "scale(1)",
           opacity: 1,
+=======
+          'bg-spotify-dark-gray rounded-xl',
+          'w-full max-h-[90vh]',
+          'flex flex-col',
+          'shadow-2xl',
+          'transition-all duration-200 ease-out',
+          sizeConfig[size],
+          className
+        )}
+        style={{
+          transition: 'transform 200ms cubic-bezier(0.3, 0, 0.1, 1), opacity 200ms cubic-bezier(0.3, 0, 0.1, 1)',
+          transform: 'scale(1)',
+          opacity: 1
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         }}
         onClick={(e) => e.stopPropagation()}
         tabIndex={-1}
@@ -245,7 +379,11 @@ const ModalRoot: React.FC<ModalProps> = ({
             ) : (
               <>
                 {title && (
+<<<<<<< HEAD
                   <h2
+=======
+                  <h2 
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
                     id="modal-title"
                     className="text-2xl font-bold text-white"
                   >
@@ -267,7 +405,13 @@ const ModalRoot: React.FC<ModalProps> = ({
         )}
 
         {/* Body */}
+<<<<<<< HEAD
         <div className="flex-1 overflow-y-auto p-6">{children}</div>
+=======
+        <div className="flex-1 overflow-y-auto p-6">
+          {children}
+        </div>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
         {/* Footer */}
         {footer && (
@@ -289,7 +433,15 @@ export interface ModalBodyProps {
 }
 
 const ModalBody: React.FC<ModalBodyProps> = ({ children, className }) => {
+<<<<<<< HEAD
   return <div className={cn("", className)}>{children}</div>;
+=======
+  return (
+    <div className={cn('', className)}>
+      {children}
+    </div>
+  );
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 };
 
 /**
@@ -302,7 +454,11 @@ export interface ModalFooterProps {
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ children, className }) => {
   return (
+<<<<<<< HEAD
     <div className={cn("flex items-center justify-end gap-3", className)}>
+=======
+    <div className={cn('flex items-center justify-end gap-3', className)}>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       {children}
     </div>
   );
@@ -318,7 +474,11 @@ export interface ModalHeaderProps {
 
 const ModalHeader: React.FC<ModalHeaderProps> = ({ children, className }) => {
   return (
+<<<<<<< HEAD
     <div className={cn("flex items-center justify-between", className)}>
+=======
+    <div className={cn('flex items-center justify-between', className)}>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
       {children}
     </div>
   );

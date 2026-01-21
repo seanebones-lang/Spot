@@ -4,9 +4,15 @@
  * Handles transactional emails: verification, password reset, notifications
  */
 
+<<<<<<< HEAD
 import { Resend } from "resend";
 import { logger } from "./logger";
 import { getEnv } from "./env";
+=======
+import { Resend } from 'resend';
+import { logger } from './logger';
+import { getEnv } from './env';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
 // Initialize Resend client
 let resendClient: Resend | null = null;
@@ -18,9 +24,13 @@ function getResendClient(): Resend | null {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
+<<<<<<< HEAD
     logger.warn(
       "RESEND_API_KEY not configured. Email functionality will be disabled.",
     );
+=======
+    logger.warn('RESEND_API_KEY not configured. Email functionality will be disabled.');
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return null;
   }
 
@@ -43,6 +53,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
   try {
     const client = getResendClient();
     if (!client) {
+<<<<<<< HEAD
       logger.warn("Email service not configured. Email not sent.", {
         to: options.to,
         subject: options.subject,
@@ -54,6 +65,14 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
       options.from || process.env.EMAIL_FROM || "noreply@spotmusic.com";
     const fromName =
       options.fromName || process.env.EMAIL_FROM_NAME || "Spot Music";
+=======
+      logger.warn('Email service not configured. Email not sent.', { to: options.to, subject: options.subject });
+      return false;
+    }
+
+    const fromEmail = options.from || process.env.EMAIL_FROM || 'noreply@empulsemusic.com';
+    const fromName = options.fromName || process.env.EMAIL_FROM_NAME || 'EmPulse Music';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
 
     const result = await client.emails.send({
       from: `${fromName} <${fromEmail}>`,
@@ -63,6 +82,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     });
 
     if (result.error) {
+<<<<<<< HEAD
       logger.error("Email sending failed", result.error, {
         to: options.to,
         subject: options.subject,
@@ -81,6 +101,17 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
       to: options.to,
       subject: options.subject,
     });
+=======
+      logger.error('Email sending failed', result.error, { to: options.to, subject: options.subject });
+      return false;
+    }
+
+    logger.info('Email sent successfully', { to: options.to, subject: options.subject, id: result.data?.id });
+    return true;
+
+  } catch (error) {
+    logger.error('Email sending error', error, { to: options.to, subject: options.subject });
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     return false;
   }
 }
@@ -88,6 +119,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
 /**
  * Send email verification email
  */
+<<<<<<< HEAD
 export async function sendVerificationEmail(
   email: string,
   verificationToken: string,
@@ -97,6 +129,11 @@ export async function sendVerificationEmail(
     env.NEXT_PUBLIC_API_URL ||
     process.env.NEXT_PUBLIC_APP_URL ||
     "http://localhost:3001";
+=======
+export async function sendVerificationEmail(email: string, verificationToken: string): Promise<boolean> {
+  const env = getEnv();
+  const appUrl = env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const verificationUrl = `${appUrl}/api/auth/verify?token=${verificationToken}`;
 
   const html = `
@@ -107,13 +144,21 @@ export async function sendVerificationEmail(
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+<<<<<<< HEAD
         .button { display: inline-block; padding: 12px 24px; background-color: #1DB954; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+=======
+        .button { display: inline-block; padding: 12px 24px; background-color: #7209B7; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         .footer { margin-top: 30px; font-size: 12px; color: #666; }
       </style>
     </head>
     <body>
       <div class="container">
+<<<<<<< HEAD
         <h1>Welcome to Spot Music!</h1>
+=======
+        <h1>Welcome to EmPulse Music!</h1>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         <p>Thank you for signing up. Please verify your email address to activate your account.</p>
         <a href="${verificationUrl}" class="button">Verify Email Address</a>
         <p>Or copy and paste this link into your browser:</p>
@@ -129,7 +174,11 @@ export async function sendVerificationEmail(
 
   return sendEmail({
     to: email,
+<<<<<<< HEAD
     subject: "Verify your Spot Music account",
+=======
+    subject: 'Verify your EmPulse Music account',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     html,
   });
 }
@@ -137,6 +186,7 @@ export async function sendVerificationEmail(
 /**
  * Send password reset email
  */
+<<<<<<< HEAD
 export async function sendPasswordResetEmail(
   email: string,
   resetToken: string,
@@ -146,6 +196,11 @@ export async function sendPasswordResetEmail(
     env.NEXT_PUBLIC_API_URL ||
     process.env.NEXT_PUBLIC_APP_URL ||
     "http://localhost:3001";
+=======
+export async function sendPasswordResetEmail(email: string, resetToken: string): Promise<boolean> {
+  const env = getEnv();
+  const appUrl = env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const resetUrl = `${appUrl}/reset-password?token=${resetToken}`;
 
   const html = `
@@ -156,7 +211,11 @@ export async function sendPasswordResetEmail(
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+<<<<<<< HEAD
         .button { display: inline-block; padding: 12px 24px; background-color: #1DB954; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+=======
+        .button { display: inline-block; padding: 12px 24px; background-color: #7209B7; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         .footer { margin-top: 30px; font-size: 12px; color: #666; }
         .warning { background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0; }
       </style>
@@ -164,7 +223,11 @@ export async function sendPasswordResetEmail(
     <body>
       <div class="container">
         <h1>Reset Your Password</h1>
+<<<<<<< HEAD
         <p>You requested to reset your password for your Spot Music account.</p>
+=======
+        <p>You requested to reset your password for your EmPulse Music account.</p>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         <a href="${resetUrl}" class="button">Reset Password</a>
         <p>Or copy and paste this link into your browser:</p>
         <p><a href="${resetUrl}">${resetUrl}</a></p>
@@ -181,7 +244,11 @@ export async function sendPasswordResetEmail(
 
   return sendEmail({
     to: email,
+<<<<<<< HEAD
     subject: "Reset your Spot Music password",
+=======
+    subject: 'Reset your EmPulse Music password',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     html,
   });
 }
@@ -189,11 +256,15 @@ export async function sendPasswordResetEmail(
 /**
  * Send artist application confirmation email
  */
+<<<<<<< HEAD
 export async function sendArtistApplicationConfirmation(
   email: string,
   artistName: string,
   applicationId: string,
 ): Promise<boolean> {
+=======
+export async function sendArtistApplicationConfirmation(email: string, artistName: string, applicationId: string): Promise<boolean> {
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
   const html = `
     <!DOCTYPE html>
     <html>
@@ -209,11 +280,19 @@ export async function sendArtistApplicationConfirmation(
       <div class="container">
         <h1>Artist Application Received</h1>
         <p>Hello ${artistName},</p>
+<<<<<<< HEAD
         <p>Thank you for submitting your artist application to Spot Music!</p>
         <p>We've received your application (ID: ${applicationId}) and our team will review it shortly.</p>
         <p>You'll receive an email notification once your application has been reviewed.</p>
         <div class="footer">
           <p>Questions? Contact us at support@spotmusic.com</p>
+=======
+        <p>Thank you for submitting your artist application to EmPulse Music!</p>
+        <p>We've received your application (ID: ${applicationId}) and our team will review it shortly.</p>
+        <p>You'll receive an email notification once your application has been reviewed.</p>
+        <div class="footer">
+          <p>Questions? Contact us at support@empulsemusic.com</p>
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
         </div>
       </div>
     </body>
@@ -222,7 +301,11 @@ export async function sendArtistApplicationConfirmation(
 
   return sendEmail({
     to: email,
+<<<<<<< HEAD
     subject: "Your Spot Music Artist Application",
+=======
+    subject: 'Your EmPulse Music Artist Application',
+>>>>>>> 460cde8a4456665eaca40b34f2a2a146c789ce1e
     html,
   });
 }
